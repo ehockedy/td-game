@@ -16,7 +16,7 @@ exports.requestListener = function (req, res) {
     // TODO sanatize against directory navigation e.g. ..?
 
     if (url == '/') url = "/index.html"
-    console.log(root_dir)
+
     // Check if requested file does not exist
     if (!fs.existsSync(root_dir + url)) {
         console.log(`ERROR: Invalid file ${root_dir + url}\n`)
