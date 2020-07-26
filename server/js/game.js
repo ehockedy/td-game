@@ -17,12 +17,12 @@ movePlayer = function (id, x, y) {
   state["players"][0][id]["y"] += y;
 };
 
-exports.updateGameState = function() {
+updateGameState = function() {
   movePlayer("player1", 2, 2)
   return state;
 }
 
-exports.getGameState = function () {
+getGameState = function () {
   return state;
 }
 
@@ -217,24 +217,29 @@ class GameMap {
       this.makeMove(move)
       this.move_history.push(move)
     }
+    return this.map
   }
 
 }
 
-var map = new GameMap(26, 36)
-map.generateMap()
-map.printMap()
+// var map = new GameMap(26, 36)
+// map.generateMap()
+// map.printMap()
 
-distribution = map.evaluatePathDistribution()
-use_percent = distribution[4]/(map.width*map.height)
+// distribution = map.evaluatePathDistribution()
+// use_percent = distribution[4]/(map.width*map.height)
 
-if ( use_percent < 0.1 ) {
-  console.log("Sparse")
-} else if (use_percent < 0.2) {
-  console.log("Medium")
-} else {
-  console.log("Dense")
+// if ( use_percent < 0.1 ) {
+//   console.log("Sparse")
+// } else if (use_percent < 0.2) {
+//   console.log("Medium")
+// } else {
+//   console.log("Dense")
+// }
+
+
+module.exports = {
+  GameMap: GameMap,
+  getGameState,
+  updateGameState
 }
-
-
-exports.GameMap

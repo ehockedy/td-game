@@ -9,7 +9,8 @@ networking.setRootDir(__dirname) // Set the location to get files from
 // See https://socket.io/docs/emit-cheatsheet/ for list of words that should not be used
 const MSG_TYPES = {
   CONNECT: "start",
-  SERVER_UPDATE: "server update",
+  SERVER_UPDATE_GAME_STATE: "server update game state",
+  SERVER_UPDATE_GAME_BOARD: "server update game board", //  Make this some kind of init?
   CLIENT_UPDATE: "client update"
 }
 
@@ -31,7 +32,7 @@ live_sockets = []
 function updateGameAndSend() {
   new_state = game.updateGameState()
   live_sockets.forEach(function(item, index) {
-    item.emit(MSG_TYPES.SERVER_UPDATE, new_state)
+    item.emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
   });
 }
 
@@ -39,6 +40,12 @@ web_sockets_server.on('connection', (socket) => {
   // save the connection
   console.log("New connection")
   live_sockets.push(socket)
+
+  // Send game board
+  live_sockets.forEach(function(item, index) {
+    var map = new game.GameMap(26, 36)
+    item.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, map.generateMap())
+  });
 
   socket.on(MSG_TYPES.CONNECT, (data) => {
     console.log("Client started game\n")

@@ -1,7 +1,12 @@
 var state = {}
+var board
 
 function setState(new_state) {
     state = new_state
 }
 
-export {setState, state}
+function setBoard(new_board) {
+    board = new_board
+}
+
+export {setState, setBoard}
