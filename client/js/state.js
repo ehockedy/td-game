@@ -9,4 +9,4 @@ function setBoard(new_board) {
     board = new_board
 }
 
-export {setState, setBoard}
+export {state, board, setState, setBoard}

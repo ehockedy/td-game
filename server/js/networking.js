@@ -35,22 +35,28 @@ exports.requestListener = function (req, res) {
 
     // Get file extension and use that to specify content type for response
     filetype = url.split(".").pop()
-    content_type = ""
+    MIME_type = ""
     switch (filetype) {
         case "js":
-            content_type = "text/javascript"
+            MIME_type = "text/javascript"
             break;
         case "css":
-            content_type = "text/css"
+            MIME_type = "text/css"
             break;
         case "html":
-            content_type = "text/html"
+            MIME_type = "text/html"
+            break;
+        case "map":
+            MIME_type = "text/map"
+            break;
+        case "png":
+            MIME_type = "image/png"
             break;
         default:
             break;
     }
 
-    if (content_type == "") {
+    if (MIME_type == "") {
         console.log("ERROR: File type " + filetype + " not supported\n")
         res.writeHead(404);
         res.end("File type not supported");
@@ -60,7 +66,7 @@ exports.requestListener = function (req, res) {
     console.log("Sending requested file\n")
     fs.promises.readFile(root_dir + url)
         .then(contents => {
-            res.setHeader("Content-Type", content_type);
+            res.setHeader("Content-Type", MIME_type);
             res.writeHead(200);
             res.end(contents);
         })
