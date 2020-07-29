@@ -10,42 +10,7 @@
     <script src="client/js/networking.js" type="module"></script>
     <script src="client/js/renderer.js" type="module"></script>
 
-    <script type="text/javascript">
-      //Aliases
-      let loader = PIXI.Loader.shared,
-          resources = PIXI.Loader.shared.resources,
-          Sprite = PIXI.Sprite,
-          Rectangle = PIXI.Rectangle;
+    <!-- TODO ave an actual "start game" instead of including a bunch of scripts that run when included-->
 
-      //Create a Pixi Application
-      let app = new PIXI.Application({width: 256, height: 256});
-
-      //Add the canvas that Pixi automatically created for you to the HTML document
-      document.body.appendChild(app.view);
-
-      //load an image and run the `setup` function when it's done
-      loader
-        .add("client/img/map_spritesheet.png")
-        .load(setup);
-
-      //This `setup` function will run when the image has loaded
-      function setup() {
-        // A texture is a WebGL-ready image
-        // Keep things in a texture cache to make rendering fast and efficient
-        let texture = resources["client/img/map_spritesheet.png"].texture
-        
-        // Box to select sprite from sprite sheet with
-        let rectangle = new Rectangle(0, 0, 32, 32);
-        texture.frame = rectangle
-
-        let sprite = new Sprite(texture);
-
-        sprite.x = 0
-        sprite.y = 0
-
-        //Add the cat to the stage
-        app.stage.addChild(sprite);
-      }
-    </script>
   </body>
 </html>

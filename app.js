@@ -43,8 +43,9 @@ web_sockets_server.on('connection', (socket) => {
 
   // Send game board
   live_sockets.forEach(function(item, index) {
-    var map = new game.GameMap(26, 36)
+    var map = new game.GameMap(24, 30)
     item.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, map.generateMap())
+    map.printMap()
   });
 
   socket.on(MSG_TYPES.CONNECT, (data) => {
