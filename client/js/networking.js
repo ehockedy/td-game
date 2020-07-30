@@ -13,7 +13,6 @@ const MSG_TYPES = {
     CLIENT_UPDATE: "client update"
 }
 
-//console.log(MSG_TYPES.CONNECT)
 const socket = io();
 
 // Send message to server to start game

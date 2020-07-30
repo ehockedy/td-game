@@ -25,34 +25,37 @@ http_server.listen(8000, () => {
 const web_sockets_server = io(http_server)
 
 // Keep track of current connections
-live_sockets = []
+var live_sockets = {}
 
 // Main processing loop
 // Updates the game state and sends the update to all connected clients
 function updateGameAndSend() {
   new_state = game.updateGameState()
-  live_sockets.forEach(function(item, index) {
-    item.emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
-  });
+  for (host in live_sockets) {
+    live_sockets[host].emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
+  }
 }
 
-web_sockets_server.on('connection', (socket) => {
-  // save the connection
-  console.log("New connection")
-  live_sockets.push(socket)
+var map = new game.GameMap(24, 30)
+map.generateMap()
+map.printMap()
 
-  // Send game board
-  live_sockets.forEach(function(item, index) {
-    var map = new game.GameMap(24, 30)
-    item.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, map.generateMap())
-    map.printMap()
-  });
+web_sockets_server.on('connection', (socket) => {
+  let client_addr = socket["handshake"]["address"]
+  console.log("Client " + client_addr + " connected")
+
+  if (!(client_addr in live_sockets)) {
+    console.log("New connection")
+  }
+  live_sockets[client_addr] = socket
 
   socket.on(MSG_TYPES.CONNECT, (data) => {
     console.log("Client started game\n")
     setInterval(updateGameAndSend, 50);
   });
+  socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, map.map)
 });
+
 
 
 // TODO
