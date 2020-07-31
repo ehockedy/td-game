@@ -1,6 +1,6 @@
 const http = require('http')
 const io = require('socket.io');
-const game = require('./server/js/game.js')
+const game = require('./server/js/map.js')
 const networking = require('./server/js/networking.js')
 networking.setRootDir(__dirname) // Set the location to get files from
 

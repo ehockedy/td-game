@@ -1,6 +1,3 @@
-//const { DEFAULT_MIN_VERSION } = require("tls");
-//const { maxHeaderSize } = require("http");
-
 var state = {
   "players": [
     {
@@ -221,21 +218,6 @@ class GameMap {
   }
 
 }
-
-// var map = new GameMap(26, 36)
-// map.generateMap()
-// map.printMap()
-
-// distribution = map.evaluatePathDistribution()
-// use_percent = distribution[4]/(map.width*map.height)
-
-// if ( use_percent < 0.1 ) {
-//   console.log("Sparse")
-// } else if (use_percent < 0.2) {
-//   console.log("Medium")
-// } else {
-//   console.log("Dense")
-// }
 
 
 module.exports = {
