@@ -36,9 +36,11 @@ function updateGameAndSend() {
   }
 }
 
-var map = new game.GameMap(24, 30)
+var map = new game.GameMap(26, 36)
 map.generateMap()
 map.printMap()
+map.calculatePath(7)
+
 
 web_sockets_server.on('connection', (socket) => {
   let client_addr = socket["handshake"]["address"]

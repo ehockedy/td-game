@@ -23,6 +23,11 @@ getGameState = function () {
   return state;
 }
 
+// Helper functions
+function mod(a, x) {
+  // JS % is actually remainder function, so implement own modulus function
+  return a - (x * Math.floor(a/x));
+}
 
 class GameMap {
   constructor(rows, cols) {
@@ -33,6 +38,9 @@ class GameMap {
     // Current position for drawing map
     this.row = Math.floor(Math.random() * this.height/2) + Math.floor(this.height/4);
     this.col = 0
+
+    this.row_start = this.row
+    this.col_start = this.col
 
     // Recored the moves take so can backtrace if get stuck
     this.move_history = []
@@ -48,6 +56,7 @@ class GameMap {
     this.col++
     this.map[this.row][this.col] = 1
 
+    this.path = []
   }
 
   getValidDirs() {
@@ -215,6 +224,160 @@ class GameMap {
       this.move_history.push(move)
     }
     return this.map
+  }
+
+  //TODO test cases:
+  // - no negative numbers
+  // - no duplicate coords
+  // - number steps is subGridSize+1 * number of subgrids
+  calculatePath(subGridSize) {
+    // Given the map, calculate the path through the map the enemies will take
+    // Splits each map grid square into a subgrid of size given by the parameter
+    // Each enemy can then take steps equal to its speed to determine where it will be in the next frame
+
+    // If even number sub grid divisions, add 1
+    // If was even then path to travel through the subgrid would differ depending on direction
+    if (subGridSize % 2 == 0) subGridSize++
+
+    let midSubGridPos = Math.floor(subGridSize/2)
+
+    // Total length of path through subgrids
+    let pathLen = 0
+    for (var r=0; r < this.height; r++) {
+      for (var c=0; c < this.width; c++) {
+        if (this.map[r][c] == 1) pathLen++
+      }
+    }
+
+    // Start of path
+    // Format of a path position is [map grid y, map grid x, sub grid y, sub grid x]
+    for (let i=0; i < subGridSize; ++i) {
+      this.path.push([this.row_start, this.col_start, midSubGridPos, i])
+      //console.log([this.row_start, this.col_start, midSubGridPos, i])
+    }
+
+    // Algorithm
+    // Easily know square just come from - its the map grid of the last element in path
+    // Also know that the direction and orientation of first path of current grid will be same as
+    // second path of previous grid
+
+    //console.log(this.path)
+    // Iterate through all the grid squares 
+    for (let gridNum = 1; gridNum < pathLen-1; gridNum++) {
+      //console.log("Path: ", this.path)
+
+      // Get the second part of the path of the previous grid square
+      let prevSquareSecondPath = this.path.slice(this.path.length-midSubGridPos)
+      let psspLen = prevSquareSecondPath.length
+
+      // Identify the direction of travel from previous grid to current
+      let dirVectorPrevToCurr = [
+        prevSquareSecondPath[psspLen-1][2] - prevSquareSecondPath[psspLen-2][2],
+        prevSquareSecondPath[psspLen-1][3] - prevSquareSecondPath[psspLen-2][3]
+      ]
+
+      // Get coordinates of the grid square we are calculating the path for
+      let currSubGridCoord = [
+        prevSquareSecondPath[psspLen-1][0] + dirVectorPrevToCurr[0],
+        prevSquareSecondPath[psspLen-1][1] + dirVectorPrevToCurr[1]
+      ]
+
+      // Add the first part of the path through the current grid square based
+      // on the second part of the path through the previous grid square.
+      // dirVectorPrevToCurr determines whether to apply the transformation - only
+      // want to shift in the direction of the path
+      // Then use the modulus operator to shift the positions to the "other" side
+      // of the square
+      // For example:
+      // 0 0 0 0 0    0 0 0 0 0
+      // 0 0 0 0 0    0 0 0 0 0
+      // a b c d e    d e f 0 0
+      // 0 0 0 0 0    0 0 g 0 0
+      // 0 0 0 0 0    0 0 h 0 0
+      // Direction changes happed on the middle of the subgrid (c or f) - so we know that the
+      // end of the previous squares path (d e) continues into the start of the current subgrid
+      //console.log("prevSquareSecondPath: ", prevSquareSecondPath)
+      prevSquareSecondPath.forEach((value, index) => {
+        let newSquareFirstPath = [
+          currSubGridCoord[0], // Row of current subgrid
+          currSubGridCoord[1], // Column of current subgrid
+          mod((value[2] + midSubGridPos*dirVectorPrevToCurr[0]), (subGridSize)), // Row within current subgrid
+          mod((value[3] + midSubGridPos*dirVectorPrevToCurr[1]), (subGridSize))  // Column within current subgrid
+        ]
+        this.path.push(newSquareFirstPath)
+        //console.log("newSquareFirstPath: ", newSquareFirstPath)
+      })
+
+      // Add the center subgrid position
+      this.path.push([
+        currSubGridCoord[0],
+        currSubGridCoord[1],
+        midSubGridPos,
+        midSubGridPos
+      ])
+
+      //console.log("Path: ", this.path)
+
+
+      // Get coordinates of the grid square we are moving from
+      let prevSubGridCoord = [
+        prevSquareSecondPath[psspLen-1][0],
+        prevSquareSecondPath[psspLen-1][1]
+      ]
+
+      // Identify direction from current subgrid to next subgrid
+      let nextSubGridCoord
+      for (let r = -1; r <= 1; r++) {
+        for (let c = -1; c <= 1; c++) {
+          if (Math.abs(r) == Math.abs(c)) continue; // TODO probably neater way to iterate, instead of this
+          //console.log("next grid search: ",currSubGridCoord[0]+r, currSubGridCoord[1]+c)
+          //console.log("   ", this.map[currSubGridCoord[0]+r][currSubGridCoord[1]+c], prevSubGridCoord[0], prevSubGridCoord[1])
+          if (this.map[currSubGridCoord[0]+r][currSubGridCoord[1]+c] == 1 &&
+              !(prevSubGridCoord[0] == currSubGridCoord[0]+r && prevSubGridCoord[1] == currSubGridCoord[1]+c) ) {
+            nextSubGridCoord = [
+              currSubGridCoord[0]+r,
+              currSubGridCoord[1]+c
+            ]
+            //console.log("^yes")
+          }
+        }
+      }
+
+      // Identify the direction of travel from current grid to next
+      let dirVectorCurrToNext = [
+        nextSubGridCoord[0] - currSubGridCoord[0],
+        nextSubGridCoord[1] - currSubGridCoord[1]
+      ]
+
+      //console.log("dirVectorCurrToNext:" , nextSubGridCoord)
+
+      // Write second part of path - path from current subgrid to next subgrid
+      for (let nsspLen = 1; nsspLen <= midSubGridPos; nsspLen++) {
+        let newSquareSecondPath = [
+          currSubGridCoord[0],
+          currSubGridCoord[1],
+          midSubGridPos + (nsspLen*dirVectorCurrToNext[0]),
+          midSubGridPos + (nsspLen*dirVectorCurrToNext[1])
+        ]
+        this.path.push(newSquareSecondPath)
+        //console.log("newSquareSecondPath: ", newSquareSecondPath)
+      } 
+    }
+    
+    // Add final square
+    let finalSquareRow = 0
+    for (let r=0; r < this.height; r++) {
+      if (this.map[r][this.width-1] == 1) {
+        finalSquareRow = r;
+        break;
+      }
+    }
+    for (let i=0; i < subGridSize; ++i) {
+      this.path.push([finalSquareRow, this.width-1, midSubGridPos, i])
+      //console.log([this.row_start, this.col_start, midSubGridPos, i])
+    }
+
+    console.log("Path: ", this.path)
   }
 
 }
