@@ -1,28 +1,3 @@
-var state = {
-  "players": [
-    {
-      "player1": {
-        "x": 50,
-        "y": 50
-      }
-    }
-  ]
-}
-
-movePlayer = function (id, x, y) {
-  state["players"][0][id]["x"] += x;
-  state["players"][0][id]["y"] += y;
-};
-
-updateGameState = function() {
-  movePlayer("player1", 2, 2)
-  return state;
-}
-
-getGameState = function () {
-  return state;
-}
-
 // Helper functions
 function mod(a, x) {
   // JS % is actually remainder function, so implement own modulus function
@@ -329,7 +304,7 @@ class GameMap {
       let nextSubGridCoord
       for (let r = -1; r <= 1; r++) {
         for (let c = -1; c <= 1; c++) {
-          if (Math.abs(r) == Math.abs(c)) continue; // TODO probably neater way to iterate, instead of this
+          if (Math.abs(r) == Math.abs(c)) continue; // Only want horizontally and vertically adjacent squares
           //console.log("next grid search: ",currSubGridCoord[0]+r, currSubGridCoord[1]+c)
           //console.log("   ", this.map[currSubGridCoord[0]+r][currSubGridCoord[1]+c], prevSubGridCoord[0], prevSubGridCoord[1])
           if (this.map[currSubGridCoord[0]+r][currSubGridCoord[1]+c] == 1 &&
@@ -384,7 +359,5 @@ class GameMap {
 
 
 module.exports = {
-  GameMap: GameMap,
-  getGameState,
-  updateGameState
+  GameMap: GameMap
 }

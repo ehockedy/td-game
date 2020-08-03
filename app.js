@@ -1,6 +1,6 @@
 const http = require('http')
 const io = require('socket.io');
-const game = require('./server/js/map.js')
+const game = require('./server/js/game.js')
 const networking = require('./server/js/networking.js')
 networking.setRootDir(__dirname) // Set the location to get files from
 
@@ -31,16 +31,14 @@ var live_sockets = {}
 // Updates the game state and sends the update to all connected clients
 function updateGameAndSend() {
   new_state = game.updateGameState()
+  console.log(new_state)
   for (host in live_sockets) {
     live_sockets[host].emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
   }
 }
 
-var map = new game.GameMap(26, 36)
-map.generateMap()
-map.printMap()
-map.calculatePath(7)
-
+// Must do this first
+game.setUpGame(30, 24, 7)
 
 web_sockets_server.on('connection', (socket) => {
   let client_addr = socket["handshake"]["address"]
@@ -53,9 +51,9 @@ web_sockets_server.on('connection', (socket) => {
 
   socket.on(MSG_TYPES.CONNECT, (data) => {
     console.log("Client started game\n")
-    setInterval(updateGameAndSend, 50);
+    setInterval(updateGameAndSend, 50*10);
   });
-  socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, map.map)
+  socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMap())
 });
 
 

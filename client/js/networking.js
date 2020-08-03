@@ -20,6 +20,7 @@ socket.emit(MSG_TYPES.CONNECT)
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
     setState(data)
+    console.log(data)
 });
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (data) => {

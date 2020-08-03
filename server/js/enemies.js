@@ -3,15 +3,18 @@ class Enemy {
      * 
      * @param {int} hp Damage it can take until dead
      * @param {int} speed Number of ticks it takes to move through a grid square
-     * @param {int} y Row that the enemy begins in 
      */
-    constructor(hp, speed, y) {
+    constructor(hp, speed) {
         this.hp = hp;
         this.speed = speed;
-        this.y = y
-        this.x = 0 // Starts in first column
+        this.steps = 0  // How many steps taken through the map path
+        this.name = "abcde" // TODO make this random hash
     }
 
+}
+
+module.exports = {
+    Enemy: Enemy
 }
 
 /**
