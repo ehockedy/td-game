@@ -5,10 +5,13 @@ function mod(a, x) {
 }
 
 class GameMap {
-  constructor(rows, cols) {
+  constructor(rows, cols, subGridSize) {
     // Size of map
     this.height = rows
     this.width = cols
+
+    // Size of the sub grid that makes up one map square
+    this.subGridSize = subGridSize
 
     // Current position for drawing map
     this.row = Math.floor(Math.random() * this.height/2) + Math.floor(this.height/4);
@@ -205,16 +208,16 @@ class GameMap {
   // - no negative numbers
   // - no duplicate coords
   // - number steps is subGridSize+1 * number of subgrids
-  calculatePath(subGridSize) {
+  calculatePath() {
     // Given the map, calculate the path through the map the enemies will take
     // Splits each map grid square into a subgrid of size given by the parameter
     // Each enemy can then take steps equal to its speed to determine where it will be in the next frame
 
     // If even number sub grid divisions, add 1
     // If was even then path to travel through the subgrid would differ depending on direction
-    if (subGridSize % 2 == 0) subGridSize++
+    if (this.subGridSize % 2 == 0) this.subGridSize++
 
-    let midSubGridPos = Math.floor(subGridSize/2)
+    let midSubGridPos = Math.floor(this.subGridSize/2)
 
     // Total length of path through subgrids
     let pathLen = 0
@@ -226,7 +229,7 @@ class GameMap {
 
     // Start of path
     // Format of a path position is [map grid y, map grid x, sub grid y, sub grid x]
-    for (let i=0; i < subGridSize; ++i) {
+    for (let i=0; i < this.subGridSize; ++i) {
       this.path.push([this.row_start, this.col_start, midSubGridPos, i])
       //console.log([this.row_start, this.col_start, midSubGridPos, i])
     }
@@ -276,8 +279,8 @@ class GameMap {
         let newSquareFirstPath = [
           currSubGridCoord[0], // Row of current subgrid
           currSubGridCoord[1], // Column of current subgrid
-          mod((value[2] + midSubGridPos*dirVectorPrevToCurr[0]), (subGridSize)), // Row within current subgrid
-          mod((value[3] + midSubGridPos*dirVectorPrevToCurr[1]), (subGridSize))  // Column within current subgrid
+          mod((value[2] + midSubGridPos*dirVectorPrevToCurr[0]), (this.subGridSize)), // Row within current subgrid
+          mod((value[3] + midSubGridPos*dirVectorPrevToCurr[1]), (this.subGridSize))  // Column within current subgrid
         ]
         this.path.push(newSquareFirstPath)
         //console.log("newSquareFirstPath: ", newSquareFirstPath)
@@ -347,7 +350,7 @@ class GameMap {
         break;
       }
     }
-    for (let i=0; i < subGridSize; ++i) {
+    for (let i=0; i < this.subGridSize; ++i) {
       this.path.push([finalSquareRow, this.width-1, midSubGridPos, i])
       //console.log([this.row_start, this.col_start, midSubGridPos, i])
     }

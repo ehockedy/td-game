@@ -6,6 +6,14 @@ const DEFAULT_SPRITE_SIZE_Y = 32 // Height of a sprite in the map spritesheet
 //Create a Pixi Application
 let app = new PIXI.Application({ width: 30 * 32, height: 24 * 32 });
 
+// Order in which display objects are added is the order they are put in the
+// children array, which is the order they are rendered.
+let mapContainer = new PIXI.Container();
+app.stage.addChild(mapContainer)
+
+let enemyContainer = new PIXI.Container();
+app.stage.addChild(enemyContainer)
+
 //Add the canvas that Pixi automatically created for you to the HTML document
 // TODO put in a setup call
 document.body.appendChild(app.view);
@@ -36,7 +44,7 @@ function addRedEnemy() {
     animatedEnemySprite.animationSpeed = 0.2
     animatedEnemySprite.play()
     animatedEnemySprite.name = "abcde" // Unique (or at least should be) identifier
-    app.stage.addChild(animatedEnemySprite)
+    enemyContainer.addChild(animatedEnemySprite)
 }
 
 export function renderMap() {
@@ -68,7 +76,7 @@ export function renderMap() {
             map_square_sprite.x = c * MAP_SPRITE_SIZE_X
             map_square_sprite.name = "map_" + r.toString() + "_" + c.toString()
             
-            app.stage.addChild(map_square_sprite);
+            mapContainer.addChild(map_square_sprite);
         }
     }
 }
@@ -89,12 +97,27 @@ function gameLoop(delta) {
     // Called every time display is rendered
     let state = getState() // Get the state which has been updated separately from calls from the server
 
-    // Update position of any enemies that have moved
-    // TODO this should update only the enemies that have been actually moved i.e. if no update, do nothing with the enemy
+    // Update position of any enemies
+    // If enemy is not present, it has either been killed or reached the end of the path - so remove from container
+    // We do this instead of a "kill this enemy" update in case the message dooes not come through or have two
+    // server messages and one client render
+
+    // Remove any enemies not present in server update
+    for (let enemySpriteIdx = enemyContainer.children.length-1; enemySpriteIdx >= 0; enemySpriteIdx--) {
+        let found = false
+        for (let nameIdx = 0; nameIdx < state["enemies"].length; nameIdx++) {
+            found = (enemyContainer.children[enemySpriteIdx].name == state["enemies"][nameIdx].name)
+        }
+        if (!found) {
+            enemyContainer.removeChildAt(enemySpriteIdx);
+        }
+    }
+
+    // Update state of enemies present in server update
     state["enemies"].forEach((enemy, idx) => {
-        let newPos =  calculateGridPos(enemy.pathPos)
-        app.stage.getChildByName(enemy.name).x = newPos[0]
-        app.stage.getChildByName(enemy.name).y = newPos[1]
+        let newPos = calculateGridPos(enemy.pathPos)
+        enemyContainer.getChildByName(enemy.name).x = newPos[0]
+        enemyContainer.getChildByName(enemy.name).y = newPos[1]
     })
 }
 

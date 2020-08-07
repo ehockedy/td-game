@@ -3,7 +3,7 @@ const gameMap = require('./map.js')
 
 // Keep track of the enemies
 let enemies = [
-    new enemy.Enemy(10, 1)
+    new enemy.Enemy(10, 10)
 ];
 
 let map;
@@ -19,16 +19,27 @@ function moveEnemies() {
     })
 }
 
-function updateGameState() {
-    // Remove any dead enemies
-    //removeDead()
+function resolveInteractions() {
+    // Check all relevant game objects and see how they interact
+    
+    // Check if enemy reached end of path
+    for (let i = enemies.length-1; i >= 0; i--) {
+        if (enemies[i].steps > map.path.length - map.subGridSize) {
+            enemies.splice(i, 1) // Remove that enemy
+        }
+    }
+}
 
+function updateGameState() {
     // Update the state
     moveEnemies();
 
+    // See if enemy reached end, bullet hit, etc.
+    resolveInteractions();
+
     // Write the updated state
     let state = {
-        "enemies" : []
+        "enemies" : [],
     }
 
     enemies.forEach((e, idx) => {
@@ -42,10 +53,10 @@ function updateGameState() {
 }
 
 function setUpGame(mapX, mapY, subGridXY) {
-    map = new gameMap.GameMap(mapY, mapX)
+    map = new gameMap.GameMap(mapY, mapX, subGridXY)
     map.generateMap()
     map.printMap()
-    map.calculatePath(subGridXY)
+    map.calculatePath()
 }
 
 module.exports = {
