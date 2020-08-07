@@ -1,4 +1,4 @@
-var state = {}
+var state = {"enemies" : []}
 var board
 var enemies = []
 
@@ -14,4 +14,12 @@ function addEnemy(new_enemy) {
     enemies.push(new_enemy)
 }
 
-export {state, board, enemies, setState, setBoard, addEnemy}
+function getState(new_state) {
+    return state
+}
+
+function getBoard(new_board) {
+    return board
+}
+
+export {getState, getBoard, setState, setBoard, addEnemy}

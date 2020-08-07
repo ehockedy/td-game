@@ -1,4 +1,4 @@
-import { state, board, enemies } from "./state.js"
+import { getState, getBoard } from "./state.js"
 
 const DEFAULT_SPRITE_SIZE_X = 32 // Width of a sprite in the map spritesheet
 const DEFAULT_SPRITE_SIZE_Y = 32 // Height of a sprite in the map spritesheet
@@ -7,13 +7,16 @@ const DEFAULT_SPRITE_SIZE_Y = 32 // Height of a sprite in the map spritesheet
 let app = new PIXI.Application({ width: 30 * 32, height: 24 * 32 });
 
 //Add the canvas that Pixi automatically created for you to the HTML document
+// TODO put in a setup call
 document.body.appendChild(app.view);
 
 //load an image and run the `setup` function when it's done
-PIXI.Loader.shared
-    .add("client/img/map_spritesheet.png")
-    .add("client/img/enemy_spritesheet.png")
-    .load(setup);
+function startRendering() {
+    PIXI.Loader.shared
+        .add("client/img/map_spritesheet.png")
+        .add("client/img/enemy_spritesheet.png")
+        .load(setup);
+}
 
 // Sprite sheets (generated)
 let enemy_sprite_sheet = {};
@@ -29,7 +32,8 @@ function generateRedEnemySpritesheetData() {
 function addRedEnemy() {
     let animatedEnemySprite = new PIXI.AnimatedSprite(enemy_sprite_sheet["red"])
     animatedEnemySprite.loop = true
-    animatedEnemySprite.animationSpeed = 0.5
+    animatedEnemySprite.anchor.set(0.5)
+    animatedEnemySprite.animationSpeed = 0.2
     animatedEnemySprite.play()
     animatedEnemySprite.name = "abcde" // Unique (or at least should be) identifier
     app.stage.addChild(animatedEnemySprite)
@@ -39,8 +43,8 @@ export function renderMap() {
     const MAP_SPRITE_SIZE_X = DEFAULT_SPRITE_SIZE_X // Width of a sprite in the map spritesheet
     const MAP_SPRITE_SIZE_Y = DEFAULT_SPRITE_SIZE_Y // Height of a sprite in the map spritesheet
 
-    let rows = board.length
-    let cols = board[0].length
+    let rows = getBoard().length
+    let cols = getBoard()[0].length
 
     // A texture is a WebGL-ready image
     // Keep things in a texture cache to make rendering fast and efficient
@@ -57,7 +61,7 @@ export function renderMap() {
             // Default to 0 aka grass
             var map_square_sprite = new PIXI.Sprite(green_square_texture);
 
-            if (board[r][c] == 1) {
+            if (getBoard()[r][c] == 1) {
                 map_square_sprite = new PIXI.Sprite(brown_square_texture);
             }
             map_square_sprite.y = r * MAP_SPRITE_SIZE_Y
@@ -69,20 +73,29 @@ export function renderMap() {
     }
 }
 
-let x_dir = 1
-let y_dir = 1
+function calculateGridPos(pathPos) {
+    // Param: grid position array of form: [map row, map column, map square row, map square column]
+    // Return: array of position of sprite in canvas [x, y]
+    let divisionsPerSubGrid = 21 // TODO change form hard coded
+    let subGridSideLen = DEFAULT_SPRITE_SIZE_X / divisionsPerSubGrid
+    return [
+        // Map square                       Square within map square      Midway through square
+        pathPos[1]*DEFAULT_SPRITE_SIZE_X + (pathPos[3] * subGridSideLen + subGridSideLen/2),
+        pathPos[0]*DEFAULT_SPRITE_SIZE_X + (pathPos[2] * subGridSideLen + subGridSideLen/2)
+    ]
+}
+
 function gameLoop(delta) {
-    // Makes the enemy move like a DVD screensaver
+    // Called every time display is rendered
+    let state = getState() // Get the state which has been updated separately from calls from the server
 
-    app.stage.getChildByName("abcde").x += (1*x_dir)
-    app.stage.getChildByName("abcde").y += (1*y_dir)
-
-    if (app.stage.getChildByName("abcde").x == 29 * 32|| app.stage.getChildByName("abcde").x == 0) {
-        x_dir*=-1 // Reverse direction of horizontal travel
-    }
-    if (app.stage.getChildByName("abcde").y == 23 * 32 || app.stage.getChildByName("abcde").y == 0) {
-        y_dir*=-1 // Reverse direction of vertical travel
-    }
+    // Update position of any enemies that have moved
+    // TODO this should update only the enemies that have been actually moved i.e. if no update, do nothing with the enemy
+    state["enemies"].forEach((enemy, idx) => {
+        let newPos =  calculateGridPos(enemy.pathPos)
+        app.stage.getChildByName(enemy.name).x = newPos[0]
+        app.stage.getChildByName(enemy.name).y = newPos[1]
+    })
 }
 
 //This `setup` function will run when the image has loaded
@@ -101,3 +114,5 @@ function setup() {
     // Start rendering loop
     app.ticker.add(delta => gameLoop(delta))
 }
+
+export { startRendering }
