@@ -24,7 +24,7 @@ function resolveInteractions() {
     
     // Check if enemy reached end of path
     for (let i = enemies.length-1; i >= 0; i--) {
-        if (enemies[i].steps > map.path.length - map.subGridSize) {
+        if (enemies[i].steps > map.path.length - map.subGridSize/2) {
             enemies.splice(i, 1) // Remove that enemy
         }
     }
