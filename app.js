@@ -57,7 +57,7 @@ web_sockets_server.on('connection', (socket) => {
 
   socket.on(MSG_TYPES.GAME_START, (data) => {
     console.log("Client started game\n")
-    setInterval(updateGameAndSend, 50);
+    setInterval(updateGameAndSend, 50); // 20 "fps"
   });
 });
 

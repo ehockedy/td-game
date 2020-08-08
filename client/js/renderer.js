@@ -37,13 +37,20 @@ function generateRedEnemySpritesheetData() {
     }
 }
 
-function addRedEnemy() {
+/**
+ * Add enemy with stats based off the type
+ * @param {String} name Unique name of the enemy object
+ * @param {Number} type Type of enemy
+ */
+function addEnemy(name, type) {
+    // TODO have different types
     let animatedEnemySprite = new PIXI.AnimatedSprite(enemy_sprite_sheet["red"])
     animatedEnemySprite.loop = true
     animatedEnemySprite.anchor.set(0.5)
     animatedEnemySprite.animationSpeed = 0.2
     animatedEnemySprite.play()
-    animatedEnemySprite.name = "abcde" // Unique (or at least should be) identifier
+    animatedEnemySprite.name = name // Unique identifier
+    //animatedEnemySprite.onLoop = function() { console.log(animatedEnemySprite.name); };
     enemyContainer.addChild(animatedEnemySprite)
 }
 
@@ -94,6 +101,7 @@ function calculateGridPos(pathPos) {
 }
 
 function gameLoop(delta) {
+    //console.log("Loop")
     // Called every time display is rendered
     let state = getState() // Get the state which has been updated separately from calls from the server
 
@@ -103,18 +111,40 @@ function gameLoop(delta) {
     // server messages and one client render
 
     // Remove any enemies not present in server update
+    // Add any enemies present in server update and not present in container
+    // TODO could put a hash/checksum style identifier on the update list based off the (enemy) names
+    // client compares this to the previous one - if different then no need to check for changes
     for (let enemySpriteIdx = enemyContainer.children.length-1; enemySpriteIdx >= 0; enemySpriteIdx--) {
         let found = false
         for (let nameIdx = 0; nameIdx < state["enemies"].length; nameIdx++) {
+            // Whether enemy is found in enemyContainer, but not in server update
             found = (enemyContainer.children[enemySpriteIdx].name == state["enemies"][nameIdx].name)
+            if (found) break; // Think this is ok
         }
         if (!found) {
+            //console.log("REMOVING old")
             enemyContainer.removeChildAt(enemySpriteIdx);
+        }
+    }
+
+    // Add any enemies not present in container i.e. just spawned
+    for (let nameIdx = 0; nameIdx < state["enemies"].length; nameIdx++) {
+        let found = false;
+        for (let enemySpriteIdx = enemyContainer.children.length-1; enemySpriteIdx >= 0; enemySpriteIdx--) {
+            // Whether enemy if found in server update, but not in enemyContainer
+            //console.log(enemyContainer.children[enemySpriteIdx].name, state["enemies"][nameIdx].name)
+            found = (enemyContainer.children[enemySpriteIdx].name == state["enemies"][nameIdx].name)
+            if (found) break;
+        }
+        if (!found) {
+            //console.log("ADDING new")
+            addEnemy(state["enemies"][nameIdx].name)
         }
     }
 
     // Update state of enemies present in server update
     state["enemies"].forEach((enemy, idx) => {
+        // Move the enemy
         let newPos = calculateGridPos(enemy.pathPos)
         enemyContainer.getChildByName(enemy.name).x = newPos[0]
         enemyContainer.getChildByName(enemy.name).y = newPos[1]
@@ -123,6 +153,7 @@ function gameLoop(delta) {
 
 //This `setup` function will run when the image has loaded
 function setup() {
+    console.log("RENDER SETUP")
     // Sprites rendered later appear on top
     
     // Render the map once
@@ -130,9 +161,6 @@ function setup() {
 
     // Generates the data that can be reused to make multiple red enemies
     generateRedEnemySpritesheetData()
-
-    // Use sprite sheet data to make single instance of red enemy
-    addRedEnemy()
 
     // Start rendering loop
     app.ticker.add(delta => gameLoop(delta))

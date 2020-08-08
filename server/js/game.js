@@ -1,10 +1,14 @@
-const enemy = require("./enemies.js")
-const gameMap = require('./map.js')
+const enemy = require("./enemies.js");
+const gameMap = require('./map.js');
+
+const ENEMY_TYPE = {
+    RANDOM: 0,
+    RED: 1,
+    _MAX: 2
+}
 
 // Keep track of the enemies
-let enemies = [
-    new enemy.Enemy(10, 10)
-];
+let enemies = [];
 
 let map;
 
@@ -14,7 +18,6 @@ function getMap() {
 
 function moveEnemies() {
     enemies.forEach((e, idx) => {
-        console.log(e)
         e.steps += e.speed  
     })
 }
@@ -30,12 +33,38 @@ function resolveInteractions() {
     }
 }
 
+let counter = 0
+
+/**
+ * Adds an enemy based off a generation strategy
+ * Strategy is something like fixed rate, random within a distribution
+ * @param {String} distributionPattern pattern to generate enemies
+ * @param {Number} enemyType type of enemy to add. ENEMY_TYPE.RANDOM (0) will generate a random enemy
+ */
+function addEnemy(distributionPattern, enemyType) {
+    if (counter > 30) return;
+    if (distributionPattern == "random") {
+        // 10% chance to spawn new enemy
+        if (Math.random() < 0.95) return;
+    }
+    
+    let speedRangeMin = 5
+    let speedRangeMax = 15
+    // TODO create enemy types
+    let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
+    enemies.push(new enemy.Enemy(10, randomSpeed))
+    counter++
+}
+
 function updateGameState() {
-    // Update the state
+    // Update the state of existing enemies
     moveEnemies();
 
     // See if enemy reached end, bullet hit, etc.
     resolveInteractions();
+
+    // Add random enemy with a random distribution
+    addEnemy("random", ENEMY_TYPE.RANDOM);
 
     // Write the updated state
     let state = {
