@@ -1,4 +1,4 @@
-var state = {"enemies" : []}
+var state = {}
 var board
 var enemies = []
 

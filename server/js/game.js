@@ -1,5 +1,6 @@
 const enemy = require("./enemies.js");
 const gameMap = require('./map.js');
+const crypto = require('crypto');
 
 const ENEMY_TYPE = {
     RANDOM: 0,
@@ -68,15 +69,20 @@ function updateGameState() {
 
     // Write the updated state
     let state = {
-        "enemies" : [],
+        "enemies" : {
+            "hash": "",
+            "objects": []
+        }
     }
-
+    let hash = crypto.createHash("sha256")
     enemies.forEach((e, idx) => {
-        state["enemies"].push({
+        state["enemies"]["objects"].push({
             "name": e.name,
             "pathPos": map.path[e.steps]
         })
+        hash.update(e.name)
     })
+    state["enemies"]["hash"] = hash.digest("hex")
 
     return state;
 }

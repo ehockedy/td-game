@@ -23,7 +23,7 @@ socket.emit(MSG_TYPES.CONNECT)
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (data) => {
     setBoard(data)
     socket.emit(MSG_TYPES.GAME_START)
-    startRendering()
+    startRendering() // TODO sort out race condition here - sometimes renders before enemy data arrived
 });
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {

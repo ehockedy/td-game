@@ -54,6 +54,65 @@ function addEnemy(name, type) {
     enemyContainer.addChild(animatedEnemySprite)
 }
 
+let enemyStateHashPrev = ""
+function updateEnemies() {
+    // Update position of any enemies
+    // If enemy is not present, it has either been killed or reached the end of the path - so remove from container
+    // We do this instead of a "kill this enemy" update in case the message dooes not come through or have two
+    // server messages and one client render
+
+    let state = getState(); // Get the state which has been updated separately from calls from the server
+    let enemyStateObjects = state["enemies"]["objects"];
+    let enemyStateHash = state["enemies"]["hash"];
+
+    // Remove any enemies not present in server update
+    // Add any enemies present in server update and not present in container
+    // Only update if there has been a change to the enemy hash
+    if (enemyStateHash != enemyStateHashPrev) { // TODO further optimisation - hash of all added and removed enemies
+        console.log("Updating enemies")
+
+        enemyStateHashPrev = enemyStateHash
+
+        for (let enemySpriteIdx = enemyContainer.children.length-1; enemySpriteIdx >= 0; enemySpriteIdx--) {
+            let found = false
+            for (let nameIdx = 0; nameIdx < enemyStateObjects.length; nameIdx++) {
+                // Whether enemy is found in enemyContainer, but not in server update
+                found = (enemyContainer.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
+                if (found) break; // Think this is ok
+            }
+            if (!found) {
+                //console.log("REMOVING old")
+                enemyContainer.removeChildAt(enemySpriteIdx);
+            }
+        }
+
+        // Add any enemies not present in container i.e. just spawned
+        for (let nameIdx = 0; nameIdx < enemyStateObjects.length; nameIdx++) {
+            let found = false;
+            for (let enemySpriteIdx = enemyContainer.children.length-1; enemySpriteIdx >= 0; enemySpriteIdx--) {
+                // Whether enemy if found in server update, but not in enemyContainer
+                //console.log(enemyContainer.children[enemySpriteIdx].name, state["enemies"][nameIdx].name)
+                found = (enemyContainer.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
+                if (found) break;
+            }
+            if (!found) {
+                //console.log("ADDING new")
+                addEnemy(enemyStateObjects[nameIdx].name)
+            }
+        }
+    } else {
+        console.log("Not updating enemies")
+    }
+
+    // Update state of enemies present in server update
+    enemyStateObjects.forEach((enemy, idx) => {
+        // Move the enemy
+        let newPos = calculateGridPos(enemy.pathPos)
+        enemyContainer.getChildByName(enemy.name).x = newPos[0]
+        enemyContainer.getChildByName(enemy.name).y = newPos[1]
+    })
+}
+
 export function renderMap() {
     const MAP_SPRITE_SIZE_X = DEFAULT_SPRITE_SIZE_X // Width of a sprite in the map spritesheet
     const MAP_SPRITE_SIZE_Y = DEFAULT_SPRITE_SIZE_Y // Height of a sprite in the map spritesheet
@@ -101,54 +160,8 @@ function calculateGridPos(pathPos) {
 }
 
 function gameLoop(delta) {
-    //console.log("Loop")
     // Called every time display is rendered
-    let state = getState() // Get the state which has been updated separately from calls from the server
-
-    // Update position of any enemies
-    // If enemy is not present, it has either been killed or reached the end of the path - so remove from container
-    // We do this instead of a "kill this enemy" update in case the message dooes not come through or have two
-    // server messages and one client render
-
-    // Remove any enemies not present in server update
-    // Add any enemies present in server update and not present in container
-    // TODO could put a hash/checksum style identifier on the update list based off the (enemy) names
-    // client compares this to the previous one - if different then no need to check for changes
-    for (let enemySpriteIdx = enemyContainer.children.length-1; enemySpriteIdx >= 0; enemySpriteIdx--) {
-        let found = false
-        for (let nameIdx = 0; nameIdx < state["enemies"].length; nameIdx++) {
-            // Whether enemy is found in enemyContainer, but not in server update
-            found = (enemyContainer.children[enemySpriteIdx].name == state["enemies"][nameIdx].name)
-            if (found) break; // Think this is ok
-        }
-        if (!found) {
-            //console.log("REMOVING old")
-            enemyContainer.removeChildAt(enemySpriteIdx);
-        }
-    }
-
-    // Add any enemies not present in container i.e. just spawned
-    for (let nameIdx = 0; nameIdx < state["enemies"].length; nameIdx++) {
-        let found = false;
-        for (let enemySpriteIdx = enemyContainer.children.length-1; enemySpriteIdx >= 0; enemySpriteIdx--) {
-            // Whether enemy if found in server update, but not in enemyContainer
-            //console.log(enemyContainer.children[enemySpriteIdx].name, state["enemies"][nameIdx].name)
-            found = (enemyContainer.children[enemySpriteIdx].name == state["enemies"][nameIdx].name)
-            if (found) break;
-        }
-        if (!found) {
-            //console.log("ADDING new")
-            addEnemy(state["enemies"][nameIdx].name)
-        }
-    }
-
-    // Update state of enemies present in server update
-    state["enemies"].forEach((enemy, idx) => {
-        // Move the enemy
-        let newPos = calculateGridPos(enemy.pathPos)
-        enemyContainer.getChildByName(enemy.name).x = newPos[0]
-        enemyContainer.getChildByName(enemy.name).y = newPos[1]
-    })
+    updateEnemies();
 }
 
 //This `setup` function will run when the image has loaded
