@@ -1,10 +1,15 @@
-import { getState, getBoard } from "./state.js"
+import { getState, getBoard} from "./state.js"
+import { MSG_TYPES, sendMessage } from "./networking.js"
 
 const DEFAULT_SPRITE_SIZE_X = 32 // Width of a sprite in the map spritesheet
 const DEFAULT_SPRITE_SIZE_Y = 32 // Height of a sprite in the map spritesheet
 
+// TODO make these given by server
+const MAP_WIDTH = 30
+const MAP_HEIGHT = 24
+
 //Create a Pixi Application
-let app = new PIXI.Application({ width: 30 * 32, height: 24 * 32 });
+let app = new PIXI.Application({ width: MAP_WIDTH * 32, height: MAP_HEIGHT * 32 });
 
 // Order in which display objects are added is the order they are put in the
 // children array, which is the order they are rendered.
@@ -13,6 +18,12 @@ app.stage.addChild(mapContainer)
 
 let enemyContainer = new PIXI.Container();
 app.stage.addChild(enemyContainer)
+
+let towerMenuContainer = new PIXI.Container();
+app.stage.addChild(towerMenuContainer)
+
+let towerContainer = new PIXI.Container();
+app.stage.addChild(towerContainer)
 
 //Add the canvas that Pixi automatically created for you to the HTML document
 // TODO put in a setup call
@@ -23,17 +34,129 @@ function startRendering() {
     PIXI.Loader.shared
         .add("client/img/map_spritesheet.png")
         .add("client/img/enemy_spritesheet.png")
+        .add("client/img/tower_spritesheet.png")
         .load(setup);
 }
 
+let towerSpriteSheet = {};
+function generateBlueTowerSpritesheetData() {
+    let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
+    towerSpriteSheet["blue"] = []
+    towerSpriteSheet["blue"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, 0, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
+}
+
+// TODO add to an included tools file
+function randomBytes(len) {
+    let randomString = ""
+    for (let i=0; i < len; i++) {
+        randomString += Math.floor((Math.random()*16)).toString(16)
+    }
+    return randomString
+}
+
+/**
+ * Add tower with stats based off the type
+ * @param {String} name Unique name of the tower object
+ * @param {Number} type Type of tower
+ */
+function addTower(name, type, row, col) {
+    let towerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"])
+    towerSprite.loop = false
+    towerSprite.anchor.set(0.5)
+    towerSprite.animationSpeed = 0.2
+    //animatedEnemySprite.play() // Only play when shoots
+    towerSprite.name = name; // Unique identifier
+    towerSprite.interactive = true; // reponds to mouse and touch events
+    towerSprite.buttonMode = true; // hand cursor appears when hover over
+    towerSprite.gridX = col
+    towerSprite.gridY = row
+    towerSprite.x = towerSprite.gridX*DEFAULT_SPRITE_SIZE_X
+    towerSprite.y = towerSprite.gridY*DEFAULT_SPRITE_SIZE_Y
+    towerSprite
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+
+    // Set the properties because it will start by being dragged from menu
+    towerSprite.alpha = 0.5;
+    towerSprite.dragging = true;
+    towerSprite.moved = false; // Whether it has moved form the original position TODO make more sophisticated and have an out of menu check
+
+    towerContainer.addChild(towerSprite)
+}
+
+/**
+ * Interactive menu sprite for a tower
+ * When dragged, creates a new tower that can be placed on the map
+ * @param {Number} type Type of tower
+ */
+function addMenuTower(type) {
+    let towerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"]) // TODO make not animated
+    towerSprite.loop = false
+    towerSprite.anchor.set(0.5)
+    towerSprite.name = "temporary_blue_tower_1" // Unique identifier
+    towerSprite.interactive = true; // reponds to mouse and touch events
+    towerSprite.buttonMode = true; // hand cursor appears when hover over
+    towerSprite.x = (MAP_WIDTH-1)*DEFAULT_SPRITE_SIZE_X
+    towerSprite.y = 3*DEFAULT_SPRITE_SIZE_Y
+    towerSprite.on('pointerdown', function() {
+        addTower(randomBytes(20), "", 3, (MAP_WIDTH-1))
+    });
+
+    towerMenuContainer.addChild(towerSprite)
+}
+
+function onDragStart(event) {
+    // store a reference to the data
+    // the reason for this is because of multitouch
+    // we want to track the movement of this particular touch
+    this.data = event.data;
+    this.alpha = 0.5;
+    this.dragging = true;
+}
+
+function onDragEnd() {
+    if (this.moved) {  // If not moved off square of menu item, remove the sprite
+        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, [this.gridY, this.gridX, 2]) // Writes 2 to x, y in grid
+        // Server then updates the board of each client - including this one
+        this.alpha = 1;
+        this.dragging = false;
+        this.removeAllListeners();
+    } else {
+        towerContainer.removeChild(this);
+    }
+}
+
+function onDragMove(event) {
+    if (this.dragging) {
+        const newPosition = event.data.getLocalPosition(this.parent);
+        // Make it stick to map grid
+        let newGridX = Math.floor(newPosition.x/DEFAULT_SPRITE_SIZE_X)
+        let newGridY = Math.floor(newPosition.y/DEFAULT_SPRITE_SIZE_Y)
+        if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
+            (newGridX >= 0 && newGridY >= 0 ) &&
+            (newGridX < MAP_WIDTH && newGridY < MAP_HEIGHT) && 
+            (getBoard()[newGridY][newGridX] == 0)) { // Must be empty space
+            this.gridX = newGridX
+            this.gridY = newGridY
+            this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
+            this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y/2;
+            this.moved = true;
+            
+            // Send to server then all other clients - but don't actually write to the grid
+            sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, [this.gridY, this.gridX, 2])
+        }
+    }
+}
+
 // Sprite sheets (generated)
-let enemy_sprite_sheet = {};
+let enemySpriteSheet = {};
 
 function generateRedEnemySpritesheetData() {
     let texture = PIXI.Loader.shared.resources["client/img/enemy_spritesheet.png"].texture
-    enemy_sprite_sheet["red"] = []
+    enemySpriteSheet["red"] = []
     for (let i = 0; i < 6; ++i) {
-        enemy_sprite_sheet["red"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, i * DEFAULT_SPRITE_SIZE_Y, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
+        enemySpriteSheet["red"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, i * DEFAULT_SPRITE_SIZE_Y, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
     }
 }
 
@@ -44,13 +167,12 @@ function generateRedEnemySpritesheetData() {
  */
 function addEnemy(name, type) {
     // TODO have different types
-    let animatedEnemySprite = new PIXI.AnimatedSprite(enemy_sprite_sheet["red"])
+    let animatedEnemySprite = new PIXI.AnimatedSprite(enemySpriteSheet["red"])
     animatedEnemySprite.loop = true
     animatedEnemySprite.anchor.set(0.5)
     animatedEnemySprite.animationSpeed = 0.2
     animatedEnemySprite.play()
     animatedEnemySprite.name = name // Unique identifier
-    //animatedEnemySprite.onLoop = function() { console.log(animatedEnemySprite.name); };
     enemyContainer.addChild(animatedEnemySprite)
 }
 
@@ -69,8 +191,6 @@ function updateEnemies() {
     // Add any enemies present in server update and not present in container
     // Only update if there has been a change to the enemy hash
     if (enemyStateHash != enemyStateHashPrev) { // TODO further optimisation - hash of all added and removed enemies
-        console.log("Updating enemies")
-
         enemyStateHashPrev = enemyStateHash
 
         for (let enemySpriteIdx = enemyContainer.children.length-1; enemySpriteIdx >= 0; enemySpriteIdx--) {
@@ -100,8 +220,6 @@ function updateEnemies() {
                 addEnemy(enemyStateObjects[nameIdx].name)
             }
         }
-    } else {
-        console.log("Not updating enemies")
     }
 
     // Update state of enemies present in server update
@@ -147,6 +265,13 @@ export function renderMap() {
     }
 }
 
+/**
+ * Draws out a list of interactive towers that can be moved and places on the map
+ */
+function renderTowerMenu() {
+
+}
+
 function calculateGridPos(pathPos) {
     // Param: grid position array of form: [map row, map column, map square row, map square column]
     // Return: array of position of sprite in canvas [x, y]
@@ -166,16 +291,20 @@ function gameLoop(delta) {
 
 //This `setup` function will run when the image has loaded
 function setup() {
-    console.log("RENDER SETUP")
     // Sprites rendered later appear on top
     
     // Render the map once
     renderMap()
-
-    // Generates the data that can be reused to make multiple red enemies
+    
+    // Generates the data that can be reused to make multiple sprites
     generateRedEnemySpritesheetData()
+    generateBlueTowerSpritesheetData()
+
+    // Render menu
+    addMenuTower("TODO")
 
     // Start rendering loop
+    // Note that ticker FPS is fixed to monitor rate
     app.ticker.add(delta => gameLoop(delta))
 }
 

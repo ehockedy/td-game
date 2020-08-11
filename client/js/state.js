@@ -6,6 +6,17 @@ function setState(new_state) {
     state = new_state
 }
 
+function printMap() {
+    for (var i=0; i < board.length; i++) {
+        var line = ""
+        for (var j=0; j < board[i].length; j++) {
+            line += board[i][j].toString() + " "
+        }
+        console.log(line)
+    }
+    console.log("\n")
+}
+
 function setBoard(new_board) {
     board = new_board
 }
@@ -14,12 +25,12 @@ function addEnemy(new_enemy) {
     enemies.push(new_enemy)
 }
 
-function getState(new_state) {
+function getState() {
     return state
 }
 
-function getBoard(new_board) {
+function getBoard() {
     return board
 }
 
-export {getState, getBoard, setState, setBoard, addEnemy}
+export {getState, getBoard, setState, setBoard, addEnemy, printMap}

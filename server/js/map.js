@@ -37,6 +37,10 @@ class GameMap {
     this.path = []
   }
 
+  setGridValue(row, col, value) {
+    this.map[row][col] = value
+  }
+
   getValidDirs() {
     // Returns list of all the different places the path can move to
     // Move has the form [<direction>, <distance>]

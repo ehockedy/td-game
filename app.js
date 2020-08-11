@@ -12,7 +12,9 @@ const MSG_TYPES = {
   GAME_START: "game start",
   SERVER_UPDATE_GAME_STATE: "server update game state",
   SERVER_UPDATE_GAME_BOARD: "server update game board", //  Make this some kind of init?
-  CLIENT_UPDATE: "client update"
+  CLIENT_UPDATE: "client update",
+  CLIENT_UPDATE_GAME_BOARD: "client update game board",
+  CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board"
 }
 
 // First set up http server to serve index.html and its included files
@@ -52,12 +54,20 @@ web_sockets_server.on('connection', (socket) => {
 
   socket.on(MSG_TYPES.CONNECT, (data) => {
     console.log("Client initial connection")
-    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMap())
+    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure())
+    setInterval(updateGameAndSend, 50); // 20 "fps"
+    socket.emit(MSG_TYPES.GAME_START)
   });
 
-  socket.on(MSG_TYPES.GAME_START, (data) => {
-    console.log("Client started game\n")
-    setInterval(updateGameAndSend, 50); // 20 "fps"
+  socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
+    console.log("Updated board from client", data)
+    // TODO broadcast temporary position to other connected clients
+  });
+
+  socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data, callback) => {
+    console.log("Writing board change from client")
+    game.getMap().setGridValue(data[0], data[1], data[2]) // row, col, value
+    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure()) // TODO broadcast this
   });
 });
 

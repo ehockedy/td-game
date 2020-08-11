@@ -13,8 +13,12 @@ let enemies = [];
 
 let map;
 
-function getMap() {
+function getMapStructure() {
     return map.map
+}
+
+function getMap() {
+    return map
 }
 
 function moveEnemies() {
@@ -97,5 +101,6 @@ function setUpGame(mapX, mapY, subGridXY) {
 module.exports = {
     setUpGame,
     updateGameState,
-    getMap
+    getMap,
+    getMapStructure
 }

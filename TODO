@@ -1,6 +1,6 @@
+Add player tower and make it moveable within the grid
+Coordinate map size with client and server
 Client renderer optimisations:
  (based on quick observations and profiling)
- - Add hash to enemy update based on present enemy names - if the same as previous, don't bother checking for new/dead enemies
  - Profiling suggests that client is rendering 3 times as fast as server is sending, so can reduce the render rate.
-Add player tower and make it moveable within the grid
 Make player tower shoot enemy
