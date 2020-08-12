@@ -1,36 +1,40 @@
-import { getState, getBoard} from "./state.js"
+import { getState, getBoard, getGridDimsRowsCols} from "./state.js"
 import { MSG_TYPES, sendMessage } from "./networking.js"
+import { randomHexString } from "./tools.js"
 
 const DEFAULT_SPRITE_SIZE_X = 32 // Width of a sprite in the map spritesheet
 const DEFAULT_SPRITE_SIZE_Y = 32 // Height of a sprite in the map spritesheet
 
-// TODO make these given by server
-const MAP_WIDTH = 30
-const MAP_HEIGHT = 24
+let MAP_WIDTH;
+let MAP_HEIGHT;
 
-//Create a Pixi Application
-let app = new PIXI.Application({ width: MAP_WIDTH * 32, height: MAP_HEIGHT * 32 });
+// PIXI application
+let app;
 
-// Order in which display objects are added is the order they are put in the
-// children array, which is the order they are rendered.
+// Sprite containers
 let mapContainer = new PIXI.Container();
-app.stage.addChild(mapContainer)
-
 let enemyContainer = new PIXI.Container();
-app.stage.addChild(enemyContainer)
-
 let towerMenuContainer = new PIXI.Container();
-app.stage.addChild(towerMenuContainer)
-
 let towerContainer = new PIXI.Container();
-app.stage.addChild(towerContainer)
-
-//Add the canvas that Pixi automatically created for you to the HTML document
-// TODO put in a setup call
-document.body.appendChild(app.view);
 
 //load an image and run the `setup` function when it's done
 function startRendering() {
+    MAP_WIDTH = getGridDimsRowsCols()[1]
+    MAP_HEIGHT = getGridDimsRowsCols()[0]
+
+    //Create a Pixi Application
+    app = new PIXI.Application({ width: MAP_WIDTH * DEFAULT_SPRITE_SIZE_X, height: MAP_HEIGHT * DEFAULT_SPRITE_SIZE_Y });
+
+    // Order in which display objects are added is the order they are put in the
+    // children array, which is the order they are rendered.
+    app.stage.addChild(mapContainer)
+    app.stage.addChild(enemyContainer)
+    app.stage.addChild(towerMenuContainer)
+    app.stage.addChild(towerContainer)
+
+    //Add the canvas that Pixi automatically created to the HTML document
+    document.body.appendChild(app.view);
+
     PIXI.Loader.shared
         .add("client/img/map_spritesheet.png")
         .add("client/img/enemy_spritesheet.png")
@@ -43,15 +47,6 @@ function generateBlueTowerSpritesheetData() {
     let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
     towerSpriteSheet["blue"] = []
     towerSpriteSheet["blue"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, 0, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
-}
-
-// TODO add to an included tools file
-function randomBytes(len) {
-    let randomString = ""
-    for (let i=0; i < len; i++) {
-        randomString += Math.floor((Math.random()*16)).toString(16)
-    }
-    return randomString
 }
 
 /**
@@ -100,7 +95,7 @@ function addMenuTower(type) {
     towerSprite.x = (MAP_WIDTH-1)*DEFAULT_SPRITE_SIZE_X
     towerSprite.y = 3*DEFAULT_SPRITE_SIZE_Y
     towerSprite.on('pointerdown', function() {
-        addTower(randomBytes(20), "", 3, (MAP_WIDTH-1))
+        addTower(randomHexString(20), "", 3, (MAP_WIDTH-1))
     });
 
     towerMenuContainer.addChild(towerSprite)

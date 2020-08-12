@@ -1,30 +1,31 @@
+// State variables accessible for multiple parts of the client
+// They are updated as the game goes on
 var state = {}
 var board
-var enemies = []
+var mapWidth
+var mapHeight
 
+// Setters
 function setState(new_state) {
     state = new_state
-}
-
-function printMap() {
-    for (var i=0; i < board.length; i++) {
-        var line = ""
-        for (var j=0; j < board[i].length; j++) {
-            line += board[i][j].toString() + " "
-        }
-        console.log(line)
-    }
-    console.log("\n")
 }
 
 function setBoard(new_board) {
     board = new_board
 }
 
-function addEnemy(new_enemy) {
-    enemies.push(new_enemy)
+/**
+ * Sets the dimensions of the map. Does not actually change the map, 
+ * but allows the diemnsions to be accessed by other parts of the application
+ * @param {Number} rows Number of rows of the map
+ * @param {Number} cols Number of columns of the map
+ */
+function setGridDimsRowsCols(rows, cols) {
+    mapHeight = rows
+    mapWidth = cols
 }
 
+// Getters
 function getState() {
     return state
 }
@@ -33,4 +34,8 @@ function getBoard() {
     return board
 }
 
-export {getState, getBoard, setState, setBoard, addEnemy, printMap}
+function getGridDimsRowsCols() {
+    return [mapHeight, mapWidth]
+}
+
+export {getState, getBoard, getGridDimsRowsCols, setState, setBoard, setGridDimsRowsCols}

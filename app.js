@@ -40,8 +40,11 @@ function updateGameAndSend() {
   }
 }
 
+const MAP_WIDTH = 30
+const MAP_HEIGHT = 24
+
 // Must do this first
-game.setUpGame(30, 24, 21)
+game.setUpGame(MAP_WIDTH, MAP_HEIGHT, 21)
 
 web_sockets_server.on('connection', (socket) => {
   let client_addr = socket["handshake"]["address"]
