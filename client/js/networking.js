@@ -1,4 +1,4 @@
-import { setState, setBoard, setGridDimsRowsCols } from "./state.js"
+import { setState, setBoard, setGridDimsRowsCols, setSubGridDim } from "./state.js"
 import { startRendering } from "./renderer.js"
 import { printMap } from "./tools.js"
 
@@ -23,10 +23,10 @@ const socket = io();
 // Send message to server to start game
 socket.emit(MSG_TYPES.CONNECT)
 
-socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid) => {
+socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) => {
     // grid is the simple representation of the map - a 2D array or arrays
-    setGridDimsRowsCols(grid.length, grid[0].length)
-    console.log(grid.length, grid[0].length)
+    setGridDimsRowsCols(rows, cols);
+    setSubGridDim(subGridSize);
     setBoard(grid);
     printMap(grid);
 });

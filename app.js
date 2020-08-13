@@ -42,9 +42,10 @@ function updateGameAndSend() {
 
 const MAP_WIDTH = 30
 const MAP_HEIGHT = 24
+const SUBGRID_SIZE = 21 // Same as height
 
 // Must do this first
-game.setUpGame(MAP_WIDTH, MAP_HEIGHT, 21)
+game.setUpGame(MAP_WIDTH, MAP_HEIGHT, SUBGRID_SIZE)
 
 web_sockets_server.on('connection', (socket) => {
   let client_addr = socket["handshake"]["address"]
@@ -57,7 +58,7 @@ web_sockets_server.on('connection', (socket) => {
 
   socket.on(MSG_TYPES.CONNECT, (data) => {
     console.log("Client initial connection")
-    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure())
+    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure(), MAP_HEIGHT, MAP_WIDTH, SUBGRID_SIZE)
     setInterval(updateGameAndSend, 50); // 20 "fps"
     socket.emit(MSG_TYPES.GAME_START)
   });

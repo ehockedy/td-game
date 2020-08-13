@@ -1,17 +1,22 @@
 // State variables accessible for multiple parts of the client
-// They are updated as the game goes on
+// They may be updated as the game goes on
 var state = {}
 var board
 var mapWidth
 var mapHeight
+var subGridSize // Same as height
 
 // Setters
-function setState(new_state) {
+export function setState(new_state) {
     state = new_state
 }
 
-function setBoard(new_board) {
+export function setBoard(new_board) {
     board = new_board
+}
+
+export function setSubGridDim(newSubGridSize) {
+    subGridSize = newSubGridSize
 }
 
 /**
@@ -20,22 +25,24 @@ function setBoard(new_board) {
  * @param {Number} rows Number of rows of the map
  * @param {Number} cols Number of columns of the map
  */
-function setGridDimsRowsCols(rows, cols) {
+export function setGridDimsRowsCols(rows, cols) {
     mapHeight = rows
     mapWidth = cols
 }
 
 // Getters
-function getState() {
+export function getState() {
     return state
 }
 
-function getBoard() {
+export function getBoard() {
     return board
 }
 
-function getGridDimsRowsCols() {
+export function getGridDimsRowsCols() {
     return [mapHeight, mapWidth]
 }
 
-export {getState, getBoard, getGridDimsRowsCols, setState, setBoard, setGridDimsRowsCols}
+export function getSubGridDim() {
+    return subGridSize;
+}
