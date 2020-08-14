@@ -37,6 +37,7 @@ socket.on(MSG_TYPES.GAME_START, (data) => {
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
     setState(data);
+    console.log(data)
 });
 
 function sendMessage(msgType, data) {

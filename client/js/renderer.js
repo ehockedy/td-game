@@ -156,7 +156,7 @@ function onDragStart(event) {
 
 function onDragEnd() {
     if (this.moved) {  // If not moved off square of menu item, remove the sprite
-        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, [this.gridY, this.gridX, 2]) // Writes 2 to x, y in grid
+        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, [this.gridY, this.gridX, 2, this.name]) // Writes 2 to x, y in grid
         // Server then updates the board of each client - including this one
         this.alpha = 1;
         this.dragging = false;
@@ -200,6 +200,9 @@ function updateEnemies() {
     // server messages and one client render
 
     let state = getState(); // Get the state which has been updated separately from calls from the server
+    console.log(state)
+    if (state["enemies"].length == 0) return;
+
     let enemyStateObjects = state["enemies"]["objects"];
     let enemyStateHash = state["enemies"]["hash"];
 
@@ -241,6 +244,16 @@ function updateEnemies() {
     })
 }
 
+function updateTowers() {
+    let state = getState(); // Get the state which has been updated separately from calls from the server
+    let towerStateObjects = state["towers"]["objects"];
+    // Update state of towers present in server update
+    towerStateObjects.forEach((tower) => {
+        // Move the tower angle
+        towerContainer.getChildByName(tower["name"]).rotation = tower["angle"]
+    })
+}
+
 /**
  *
  * @param {Number[4]} pathPos grid position array of form: [map row, map column, map square row, map square column]
@@ -259,15 +272,16 @@ function calculateGridPos(pathPos) {
 function gameLoop(delta) {
     // Called every time display is rendered
     updateEnemies();
+    updateTowers();
 }
 
 //This `setup` function will run when the renderer has loaded
 function setup() {
     // Sprites rendered later appear on top
-    
+
     // Render the map once
     renderMap()
-    
+
     // Generates the data that can be reused to make multiple sprites
     generateRedEnemySpritesheetData()
     generateBlueTowerSpritesheetData()

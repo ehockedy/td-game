@@ -34,7 +34,7 @@ var live_sockets = {}
 // Updates the game state and sends the update to all connected clients
 function updateGameAndSend() {
   new_state = game.updateGameState()
-  console.log(new_state)
+  //console.log(new_state)
   for (host in live_sockets) {
     live_sockets[host].emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
   }
@@ -59,7 +59,8 @@ web_sockets_server.on('connection', (socket) => {
   socket.on(MSG_TYPES.CONNECT, (data) => {
     console.log("Client initial connection")
     socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure(), MAP_HEIGHT, MAP_WIDTH, SUBGRID_SIZE)
-    setInterval(updateGameAndSend, 50); // 20 "fps"
+    updateGameAndSend()
+    setInterval(updateGameAndSend, 50*1); // 20 "fps"
     socket.emit(MSG_TYPES.GAME_START)
   });
 
@@ -71,6 +72,8 @@ web_sockets_server.on('connection', (socket) => {
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data, callback) => {
     console.log("Writing board change from client")
     game.getMap().setGridValue(data[0], data[1], data[2]) // row, col, value
+    console.log("DATA", data)
+    game.addTower(data[3], data[2], "TODO", data[0], data[1])
     socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure()) // TODO broadcast this
   });
 });

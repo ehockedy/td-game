@@ -11,7 +11,8 @@ class Enemy {
         this.speed = speed;
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
-        console.log(this.name)
+        this.row = 0
+        this.col = 0
     }
 
 }

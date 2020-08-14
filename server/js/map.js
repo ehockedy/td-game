@@ -34,7 +34,8 @@ class GameMap {
     this.col++
     this.map[this.row][this.col] = 1
 
-    this.path = []
+    this.path = [] // Exact path through the sub grids that the enemeis will take
+    this.mainPath = [] // Main map grid squares that the enemy path goes through
   }
 
   setGridValue(row, col, value) {
@@ -360,6 +361,23 @@ class GameMap {
     }
 
     console.log("Path: ", this.path)
+
+    // Generate the main squares path
+    this.mainPath.push([
+      this.path[0][0],
+      this.path[0][1]
+    ]) // Main square of first sub grid square
+    for (let squareIdx=0; squareIdx < this.path.length; squareIdx++) {
+      if (this.path[squareIdx][0] != this.mainPath[this.mainPath.length-1][0] ||
+          this.path[squareIdx][1] != this.mainPath[this.mainPath.length-1][1]) {
+            this.mainPath.push([
+              this.path[squareIdx][0],
+              this.path[squareIdx][1]
+            ])
+      }
+    }
+    console.log("Main path: ", this.mainPath)
+
   }
 
 }
