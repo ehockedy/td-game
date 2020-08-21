@@ -1,6 +1,8 @@
 const enemy = require("./enemies.js");
 const tower = require("./tower.js");
+const bullet = require("./bullet.js");
 const gameMap = require('./map.js');
+const config = require('./constants.js')
 const crypto = require('crypto');
 
 const ENEMY_TYPE = {
@@ -18,6 +20,8 @@ let enemies = [];
 
 // Keep track of the towers
 let towers = []
+
+let bullets = []
 
 let map;
 
@@ -44,6 +48,7 @@ function calculateAngle(row1, col1, row2, col2) {
     return Math.atan2((row2-row1), (col2-col1))
 }
 
+
 function moveTowers() {
     // Check if an enemy is within shoot range, and turn tower if it is
     towers.forEach((tower) => {
@@ -56,6 +61,18 @@ function moveTowers() {
                 if (coord[0] == enemy.row && coord[1] == enemy.col) {
                     canHit = true;
                     tower.angle = calculateAngle(tower.row, tower.col, enemy.row, enemy.col) // TODO determine angle base off where enemy will be
+                    let newBullet = new bullet.Bullet(
+                        [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
+                        map.path[enemy.steps+enemy.speed*5],
+                        5, // dmg TODO this should be determined by type of tower, pass that through eventually
+                        10, // spd TODO same as above
+                        tower.range,
+                        tower.name)
+                    if (tower.fireTick == 0) bullets.push(newBullet)
+                    if (bullets.length == 1) {
+                        bullets[0].name = "FIRST"
+                        //break;
+                    }
                     break;
                 }
             }
@@ -66,13 +83,42 @@ function moveTowers() {
     });
 }
 
+function moveBullets() {
+    bullets.forEach((bullet) => {
+        bullet.move()
+    })
+}
+
 function resolveInteractions() {
     // Check all relevant game objects and see how they interact
+    // Check collision between enemies and bullets
+    for (let e = enemies.length-1; e >= 0; e--) {
+        for (let b = bullets.length-1; b >= 0; b--) {
+            //let dist = bullets[b].calculateDistanceFrom(enemies[e].row*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2), enemies[e].col*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2))
+            // TOD) make enemy size a thing
+            if(bullets[b].collidesWith(
+                enemies[e].row*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2), // TODO make abolute grid value a thing
+                enemies[e].col*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2),
+                Math.floor(config.SUBGRID_SIZE/2))) {
+                bullets.splice(b, 1) // Remove that bullet
+            }
+            //if (bullets[b].name == "FIRST") console.log(dist, "\n")
+        }
+    }
     
     // Check if enemy reached end of path
     for (let i = enemies.length-1; i >= 0; i--) {
         if (enemies[i].steps > map.path.length - map.subGridSize/2) {
             enemies.splice(i, 1) // Remove that enemy
+        }
+    }
+
+    for (let i = bullets.length-1; i >= 0; i--) {
+        if (Math.sqrt(
+                Math.pow(bullets[i].bulletPos[0] - bullets[i].bulletPosStart[0], 2) +
+                Math.pow(bullets[i].bulletPos[1] - bullets[i].bulletPosStart[1], 2)
+            ) > bullets[i].range) {
+            bullets.splice(i, 1) // Remove that bullet
         }
     }
 }
@@ -92,8 +138,8 @@ function addEnemy(distributionPattern, enemyType) {
         if (Math.random() < 0.95) return; //0.95) return;
     }
     
-    let speedRangeMin = 5
-    let speedRangeMax = 15
+    let speedRangeMin = 6
+    let speedRangeMax = 6
     // TODO create enemy types
     let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
     enemies.push(new enemy.Enemy(10, randomSpeed))
@@ -111,11 +157,11 @@ function updateGameState() {
     // Update the state of existing enemies
     moveEnemies();
 
+    // Move any bullets
+    moveBullets();
+
     // Decide which enemy the ower aims at (if any) and shoot
     moveTowers();
-
-    // Move any bullets
-    //moveBullets();
 
     // See if enemy reached end, bullet hit, etc.
     resolveInteractions();
@@ -131,6 +177,9 @@ function updateGameState() {
         },
         "towers" : {
             "hash": "",
+            "objects": []
+        },
+        "bullets" : {
             "objects": []
         }
     }
@@ -151,6 +200,13 @@ function updateGameState() {
             "angle": t.angle
         })
         //hash.update(t.name)
+    })
+
+    bullets.forEach((b) => {
+        state["bullets"]["objects"].push({
+            "name": b.name,
+            "bulletPos": b.bulletPos
+        })
     })
 
     return state;

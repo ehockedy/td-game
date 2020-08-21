@@ -24,7 +24,6 @@ class Bullet {
     }
 
     move() {
-        //console.log(this.x, this.y, this.xSpeed, this.ySpeed)
         this.x += this.xSpeed
         this.y += this.ySpeed
 
@@ -35,6 +34,18 @@ class Bullet {
             Math.floor(this.y % config.SUBGRID_SIZE),
             Math.floor(this.x % config.SUBGRID_SIZE),
         ]
+    }
+
+
+    collidesWith(y, x, r) {
+        // Check if the bullet collides with an object at position x, y with a hit box of a circle radius r
+        let granularity = 4 // Go down the ire path in 4 increments
+        for (let g = 0; g < granularity; g++) {
+            if (Math.sqrt(Math.pow((x - (this.xSpeed*g/granularity) - this.x),2) + Math.pow(y - (this.ySpeed*g/granularity) - this.y,2)) < r) {
+                return true;
+            }
+        }
+        return false
     }
 }
 

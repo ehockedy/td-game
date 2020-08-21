@@ -1,5 +1,3 @@
-const crypto = require('crypto');
-
 class Tower {
     /**
      * A player owned object that shoots at enemies

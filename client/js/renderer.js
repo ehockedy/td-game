@@ -17,11 +17,15 @@ let mapContainer = new PIXI.Container();
 let enemyContainer = new PIXI.Container();
 let towerMenuContainer = new PIXI.Container();
 let towerContainer = new PIXI.Container();
+let bulletContainer = new PIXI.Container();
 
 // Spritesheet data
 let enemySpriteSheet = {};
 let towerSpriteSheet = {};
+let bulletSpriteSheet = {};
 
+
+// TODO make these general use function to gerenrate animated sprite sheet data
 function generateRedEnemySpritesheetData() {
     let texture = PIXI.Loader.shared.resources["client/img/enemy_spritesheet.png"].texture
     enemySpriteSheet["red"] = []
@@ -34,6 +38,12 @@ function generateBlueTowerSpritesheetData() {
     let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
     towerSpriteSheet["blue"] = []
     towerSpriteSheet["blue"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, 0, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
+}
+
+function generateBulletSpritesheetData() {
+    let texture = PIXI.Loader.shared.resources["client/img/bullet_spritesheet.png"].texture
+    bulletSpriteSheet["simple"] = []
+    bulletSpriteSheet["simple"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, 0, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -104,8 +114,14 @@ function addMenuTower(type) {
     towerSprite.on('pointerdown', function() {
         addTower(randomHexString(20), "", 3, (MAP_WIDTH-1))
     });
-
     towerMenuContainer.addChild(towerSprite)
+}
+
+function addBullet(name, type) {
+    let bulletSprite = new PIXI.AnimatedSprite(bulletSpriteSheet["simple"]) // TODO add bullet sprite
+    bulletSprite.name = name
+    bulletSprite.anchor.set(0.5)
+    bulletContainer.addChild(bulletSprite)
 }
 
 function renderMap() {
@@ -156,7 +172,7 @@ function onDragStart(event) {
 
 function onDragEnd() {
     if (this.moved) {  // If not moved off square of menu item, remove the sprite
-        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, [this.gridY, this.gridX, 2, this.name]) // Writes 2 to x, y in grid
+        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, [this.gridY, this.gridX, 2, this.name]) // TODO make this json Writes 2 to x, y in grid
         // Server then updates the board of each client - including this one
         this.alpha = 1;
         this.dragging = false;
@@ -200,7 +216,6 @@ function updateEnemies() {
     // server messages and one client render
 
     let state = getState(); // Get the state which has been updated separately from calls from the server
-    console.log(state)
     if (state["enemies"].length == 0) return;
 
     let enemyStateObjects = state["enemies"]["objects"];
@@ -254,6 +269,20 @@ function updateTowers() {
     })
 }
 
+function updateBullets() {
+    let state = getState(); // Get the state which has been updated separately from calls from the server
+    let bulletStateObjects = state["bullets"]["objects"];
+    // Update state of bullets present in server update
+    bulletContainer.removeChildren() // This only works for bullets as they have no animation - othersiwe would have to keep track of the position in animation loop
+    bulletStateObjects.forEach((bullet) => {
+        addBullet(bullet["name"], "TODO") // New bullet
+
+        // Move bullet
+        bulletContainer.children[bulletContainer.children.length-1].y = bullet["bulletPos"][0]*DEFAULT_SPRITE_SIZE_Y + bullet["bulletPos"][2]*(DEFAULT_SPRITE_SIZE_Y/SUBGRID_SIZE)
+        bulletContainer.children[bulletContainer.children.length-1].x = bullet["bulletPos"][1]*DEFAULT_SPRITE_SIZE_X + bullet["bulletPos"][3]*(DEFAULT_SPRITE_SIZE_X/SUBGRID_SIZE)
+    })
+}
+
 /**
  *
  * @param {Number[4]} pathPos grid position array of form: [map row, map column, map square row, map square column]
@@ -273,6 +302,7 @@ function gameLoop(delta) {
     // Called every time display is rendered
     updateEnemies();
     updateTowers();
+    updateBullets();
 }
 
 //This `setup` function will run when the renderer has loaded
@@ -285,6 +315,7 @@ function setup() {
     // Generates the data that can be reused to make multiple sprites
     generateRedEnemySpritesheetData()
     generateBlueTowerSpritesheetData()
+    generateBulletSpritesheetData()
 
     // Render menu
     addMenuTower("TODO")
@@ -309,6 +340,7 @@ export function startRendering() {
     app.stage.addChild(mapContainer)
     app.stage.addChild(enemyContainer)
     app.stage.addChild(towerMenuContainer)
+    app.stage.addChild(bulletContainer)
     app.stage.addChild(towerContainer)
 
     //Add the canvas that Pixi automatically created to the HTML document
@@ -318,5 +350,6 @@ export function startRendering() {
         .add("client/img/map_spritesheet.png")
         .add("client/img/enemy_spritesheet.png")
         .add("client/img/tower_spritesheet.png")
+        .add("client/img/bullet_spritesheet.png")
         .load(setup);
 }

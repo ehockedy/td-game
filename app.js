@@ -2,6 +2,7 @@ const http = require('http')
 const io = require('socket.io');
 const game = require('./server/js/game.js')
 const networking = require('./server/js/networking.js')
+const config = require('./server/js/constants.js')
 networking.setRootDir(__dirname) // Set the location to get files from
 
 // MUST keep these synced with enum in client
@@ -40,12 +41,8 @@ function updateGameAndSend() {
   }
 }
 
-const MAP_WIDTH = 30
-const MAP_HEIGHT = 24
-const SUBGRID_SIZE = 21 // Same as height
-
 // Must do this first
-game.setUpGame(MAP_WIDTH, MAP_HEIGHT, SUBGRID_SIZE)
+game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
 
 web_sockets_server.on('connection', (socket) => {
   let client_addr = socket["handshake"]["address"]
@@ -58,9 +55,9 @@ web_sockets_server.on('connection', (socket) => {
 
   socket.on(MSG_TYPES.CONNECT, (data) => {
     console.log("Client initial connection")
-    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure(), MAP_HEIGHT, MAP_WIDTH, SUBGRID_SIZE)
+    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
     updateGameAndSend()
-    setInterval(updateGameAndSend, 50*1); // 20 "fps"
+    setInterval(updateGameAndSend, 50*0.5); // 20 "fps"
     socket.emit(MSG_TYPES.GAME_START)
   });
 
