@@ -140,7 +140,7 @@ function addEnemy(distributionPattern, enemyType) {
         // 10% chance to spawn new enemy
         if (Math.random() < 0.95) return; //0.95) return;
     }
-    
+
     let speedRangeMin = 1
     let speedRangeMax = 4
     // TODO create enemy types
@@ -197,14 +197,16 @@ function updateGameState() {
     })
     state["enemies"]["hash"] = hash.digest("hex")
 
-    //hash = crypto.createHash("sha256")
+    hash = crypto.createHash("sha256")
     towers.forEach((t, idx) => {
         state["towers"]["objects"].push({
             "name": t.name,
-            "angle": t.angle
+            "angle": t.angle,
+            "posRowCol": [t.row, t.col]
         })
-        //hash.update(t.name)
+        hash.update(t.name)
     })
+    state["towers"]["hash"] = hash.digest("hex")
 
     bullets.forEach((b) => {
         state["bullets"]["objects"].push({

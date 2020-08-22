@@ -94,17 +94,12 @@ function addTower(name, type, row, col) {
     towerSprite.buttonMode = true; // hand cursor appears when hover over
     towerSprite.gridX = col
     towerSprite.gridY = row
-    towerSprite.x = towerSprite.gridX*DEFAULT_SPRITE_SIZE_X
-    towerSprite.y = towerSprite.gridY*DEFAULT_SPRITE_SIZE_Y
+    towerSprite.x = towerSprite.gridX*DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
+    towerSprite.y = towerSprite.gridY*DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y/2;
     towerSprite
         .on('pointerup', onDragEnd)
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
-
-    // Set the properties because it will start by being dragged from menu
-    towerSprite.alpha = 0.5;
-    towerSprite.dragging = true;
-    towerSprite.moved = false; // Whether it has moved form the original position TODO make more sophisticated and have an out of menu check
 
     towerContainer.addChild(towerSprite)
 }
@@ -115,18 +110,26 @@ function addTower(name, type, row, col) {
  * @param {Number} type Type of tower
  */
 function addMenuTower(type) {
-    let towerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"]) // TODO make not animated
-    towerSprite.loop = false
-    towerSprite.anchor.set(0.5)
-    towerSprite.name = "temporary_blue_tower_1" // Unique identifier
-    towerSprite.interactive = true; // reponds to mouse and touch events
-    towerSprite.buttonMode = true; // hand cursor appears when hover over
-    towerSprite.x = (MAP_WIDTH-1)*DEFAULT_SPRITE_SIZE_X
-    towerSprite.y = 3*DEFAULT_SPRITE_SIZE_Y
-    towerSprite.on('pointerdown', function() {
-        addTower(randomHexString(20), "", 3, (MAP_WIDTH-1))
+    let menuTowerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"]) // TODO make not animated
+    menuTowerSprite.loop = false
+    //menuTowerSprite.anchor.set(0.5)
+    menuTowerSprite.name = "temporary_blue_tower_1" // Unique identifier
+    menuTowerSprite.interactive = true; // reponds to mouse and touch events
+    menuTowerSprite.buttonMode = true; // hand cursor appears when hover over
+    menuTowerSprite.x = (MAP_WIDTH-1)*DEFAULT_SPRITE_SIZE_X
+    menuTowerSprite.y = 3*DEFAULT_SPRITE_SIZE_Y
+    menuTowerSprite.on('pointerdown', function() {
+        let newTowerName = randomHexString(20)
+        addTower(newTowerName, "", 3, (MAP_WIDTH-1))
+        let towerSprite = towerContainer.getChildByName(newTowerName)
+
+        // Set the properties because it will start by being dragged from menu
+        towerSprite.alpha = 0.5;
+        towerSprite.dragging = true;
+        towerSprite.moved = false; // Whether it has moved form the original position TODO make more sophisticated and have an out of menu check
     });
-    towerMenuContainer.addChild(towerSprite)
+
+    towerMenuContainer.addChild(menuTowerSprite)
 }
 
 function addBullet(name, type) {
@@ -190,7 +193,7 @@ function onDragEnd() {
         this.dragging = false;
         this.removeAllListeners();
     } else {
-        towerContainer.removeChild(this);
+        towerContainer.removeChild(this); // TODO could remove anyway and just let the server update add it
     }
 }
 
@@ -266,7 +269,7 @@ function updateEnemies() {
     enemyStateObjects.forEach((enemy, idx) => {
         // Move the enemy
         let newPos = calculateGridPos(enemy.pathPos)
-        enemyContainer.getChildByName(enemy.name).x = newPos[0]
+        enemyContainer.getChildByName(enemy.name).x = newPos[0] // TODO use getChildByName once
         enemyContainer.getChildByName(enemy.name).y = newPos[1]
 
         // Change tint if hit by bullet
@@ -282,9 +285,31 @@ function updateEnemies() {
     })
 }
 
+let towerStateHashPrev = ""
 function updateTowers() {
     let state = getState(); // Get the state which has been updated separately from calls from the server
     let towerStateObjects = state["towers"]["objects"];
+    let towerStateHash = state["towers"]["objects"];
+
+    if (towerStateHash != towerStateHashPrev) {
+        // Identify tower not in container but in server update
+        let nameIdx = 0
+        for (nameIdx; nameIdx < towerStateObjects.length; nameIdx++) {
+            let found = false;
+            for (let towerSpriteIdx = towerContainer.children.length-1; towerSpriteIdx >= 0; towerSpriteIdx--) {
+                found = (towerContainer.children[towerSpriteIdx].name == towerStateObjects[nameIdx].name)
+                if (found) break;
+            }
+            if (!found) {
+                console.log("ADDING TOWER", towerStateObjects[nameIdx].posRowCol, towerStateObjects[nameIdx].name)
+                addTower(towerStateObjects[nameIdx].name,
+                    0,
+                    towerStateObjects[nameIdx].posRowCol[0],
+                    towerStateObjects[nameIdx].posRowCol[1])
+            }
+        }
+    }
+
     // Update state of towers present in server update
     towerStateObjects.forEach((tower) => {
         // Move the tower angle

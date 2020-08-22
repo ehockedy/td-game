@@ -28,7 +28,7 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) =>
     setGridDimsRowsCols(rows, cols);
     setSubGridDim(subGridSize);
     setBoard(grid);
-    printMap(grid);
+    //printMap(grid);
 });
 
 socket.on(MSG_TYPES.GAME_START, (data) => {
@@ -37,7 +37,7 @@ socket.on(MSG_TYPES.GAME_START, (data) => {
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
     setState(data);
-    console.log(data)
+    //console.log(data)
 });
 
 function sendMessage(msgType, data) {
