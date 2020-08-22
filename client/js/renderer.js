@@ -46,6 +46,17 @@ function generateBulletSpritesheetData() {
     bulletSpriteSheet["simple"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, 0, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
 }
 
+let identityMatrix = new PIXI.filters.ColorMatrixFilter();
+let lightenMatrix = new PIXI.filters.ColorMatrixFilter();
+lightenMatrix.matrix = [
+    2, 0, 0, 0, 0,
+    0, 2, 0, 0, 0,
+    0, 0, 2, 0, 0,
+    0, 0, 0, 1, 0
+]
+// lightenMatrix.greyscale(0.5)
+//lightenMatrix.alpha = 0.5
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Sprite creators
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,6 +74,7 @@ function addEnemy(name, type) {
     animatedEnemySprite.animationSpeed = 0.2
     animatedEnemySprite.play()
     animatedEnemySprite.name = name // Unique identifier
+    animatedEnemySprite.tintCount = 0
     enemyContainer.addChild(animatedEnemySprite)
 }
 
@@ -256,6 +268,17 @@ function updateEnemies() {
         let newPos = calculateGridPos(enemy.pathPos)
         enemyContainer.getChildByName(enemy.name).x = newPos[0]
         enemyContainer.getChildByName(enemy.name).y = newPos[1]
+
+        // Change tint if hit by bullet
+        if (enemy.isHit) {
+            enemyContainer.getChildByName(enemy.name).tint = 0xCCCCCC
+            enemyContainer.getChildByName(enemy.name).tintCount = 10 // Number of frames to tint for
+        }
+        if (enemyContainer.getChildByName(enemy.name).tintCount > 0) {
+            enemyContainer.getChildByName(enemy.name).tintCount -= 1
+        } else {
+            enemyContainer.getChildByName(enemy.name).tint = 0xFFFFFF
+        }
     })
 }
 

@@ -40,6 +40,7 @@ function moveEnemies() {
             e.row = map.path[e.steps][0]
             e.col = map.path[e.steps][1]
         }
+        e.isHit = false // reset whether hit
     })
 }
 
@@ -61,9 +62,11 @@ function moveTowers() {
                 if (coord[0] == enemy.row && coord[1] == enemy.col) {
                     canHit = true;
                     tower.angle = calculateAngle(tower.row, tower.col, enemy.row, enemy.col) // TODO determine angle base off where enemy will be
+                    let enemyFuturePos = enemy.steps+enemy.speed*5
+                    if (enemyFuturePos >= map.path.length) break;
                     let newBullet = new bullet.Bullet(
                         [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
-                        map.path[enemy.steps+enemy.speed*5],
+                        map.path[enemyFuturePos],
                         5, // dmg TODO this should be determined by type of tower, pass that through eventually
                         10, // spd TODO same as above
                         tower.range,
@@ -94,18 +97,18 @@ function resolveInteractions() {
     // Check collision between enemies and bullets
     for (let e = enemies.length-1; e >= 0; e--) {
         for (let b = bullets.length-1; b >= 0; b--) {
-            //let dist = bullets[b].calculateDistanceFrom(enemies[e].row*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2), enemies[e].col*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2))
-            // TOD) make enemy size a thing
             if(bullets[b].collidesWith(
                 enemies[e].row*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2), // TODO make abolute grid value a thing
                 enemies[e].col*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2),
                 Math.floor(config.SUBGRID_SIZE/2))) {
+                enemies[e].isHit = true
+                enemies[e].hp -= bullets[b].damage
                 bullets.splice(b, 1) // Remove that bullet
             }
             //if (bullets[b].name == "FIRST") console.log(dist, "\n")
         }
     }
-    
+
     // Check if enemy reached end of path
     for (let i = enemies.length-1; i >= 0; i--) {
         if (enemies[i].steps > map.path.length - map.subGridSize/2) {
@@ -138,8 +141,8 @@ function addEnemy(distributionPattern, enemyType) {
         if (Math.random() < 0.95) return; //0.95) return;
     }
     
-    let speedRangeMin = 6
-    let speedRangeMax = 6
+    let speedRangeMin = 1
+    let speedRangeMax = 4
     // TODO create enemy types
     let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
     enemies.push(new enemy.Enemy(10, randomSpeed))
@@ -187,7 +190,8 @@ function updateGameState() {
     enemies.forEach((e, idx) => {
         state["enemies"]["objects"].push({
             "name": e.name,
-            "pathPos": map.path[e.steps]
+            "pathPos": map.path[e.steps],
+            "isHit": e.isHit
         })
         hash.update(e.name)
     })

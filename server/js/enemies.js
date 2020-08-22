@@ -13,6 +13,9 @@ class Enemy {
         this.name = crypto.randomBytes(20).toString('hex');
         this.row = 0
         this.col = 0
+
+        // Update specific variables
+        this.isHit = false // Whether the enemy ahs been hit in that specific update
     }
 
 }
