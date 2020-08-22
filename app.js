@@ -2,8 +2,18 @@ const http = require('http')
 const io = require('socket.io');
 const game = require('./server/js/game.js')
 const networking = require('./server/js/networking.js')
+const os = require('os');
 const config = require('./server/js/constants.js')
 networking.setRootDir(__dirname) // Set the location to get files from
+
+const interfaces = os.networkInterfaces();
+let listeningAddress = ""
+for (let intfIdx=0; intfIdx < interfaces["WiFi"].length; intfIdx++) {
+  if (interfaces["WiFi"][intfIdx]["address"].split('.')[0] == "192" &&
+      interfaces["WiFi"][intfIdx]["address"].split('.')[1] == "168") {
+        listeningAddress = interfaces["WiFi"][intfIdx]["address"]
+      }
+}
 
 // MUST keep these synced with enum in client
 // Shared file did not work due to inconsistency with import/require in browser/node
@@ -22,7 +32,7 @@ const MSG_TYPES = {
 const http_server = http.createServer(networking.requestListener);
 
 http_server.listen(8000, () => {
-   console.log('HTTP server listening on *:8000');
+   console.log('HTTP server listening on ' + listeningAddress + ':8000');
 });
 
 // From then on can connect over WebSocket using socket.io client

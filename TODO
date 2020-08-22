@@ -1,6 +1,6 @@
-Add player tower and make it moveable within the grid
-Coordinate map size with client and server
 Client renderer optimisations:
  (based on quick observations and profiling)
  - Profiling suggests that client is rendering 3 times as fast as server is sending, so can reduce the render rate.
-Make player tower shoot enemy
+Add tower range indicator when moving
+Add proper tower menu
+Add start/join game buttons
