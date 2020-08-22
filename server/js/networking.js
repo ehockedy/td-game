@@ -38,6 +38,7 @@ exports.requestListener = function (req, res) {
     MIME_type = ""
     switch (filetype) {
         case "js":
+        case "map":
             MIME_type = "text/javascript"
             break;
         case "css":
@@ -45,9 +46,6 @@ exports.requestListener = function (req, res) {
             break;
         case "html":
             MIME_type = "text/html"
-            break;
-        case "map":
-            MIME_type = "text/map"
             break;
         case "png":
             MIME_type = "image/png"
