@@ -18,6 +18,10 @@ let enemyContainer = new PIXI.Container();
 let towerMenuContainer = new PIXI.Container();
 let towerContainer = new PIXI.Container();
 let bulletContainer = new PIXI.Container();
+let towerDataContainer = new PIXI.Container();
+
+// PIXI graphics
+let graphics = new PIXI.Graphics();
 
 // Spritesheet data
 let enemySpriteSheet = {};
@@ -57,6 +61,12 @@ lightenMatrix.matrix = [
 // lightenMatrix.greyscale(0.5)
 //lightenMatrix.alpha = 0.5
 
+// Tower JSON
+let towerJson
+$.getJSON("shared/json/towers.json", function(data) {
+    towerJson = data
+})
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Sprite creators
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,6 +98,7 @@ function addTower(name, type, row, col) {
     towerSprite.loop = false
     towerSprite.anchor.set(0.5)
     towerSprite.animationSpeed = 0.2
+    towerSprite.type = type
     //animatedEnemySprite.play() // Only play when shoots
     towerSprite.name = name; // Unique identifier
     towerSprite.interactive = true; // reponds to mouse and touch events
@@ -102,6 +113,20 @@ function addTower(name, type, row, col) {
         .on('pointermove', onDragMove);
 
     towerContainer.addChild(towerSprite)
+
+    // Add the area circle sprite too
+    graphics.beginFill("0xe74c3c") // Red
+    graphics.alpha = 0.5
+    graphics.drawCircle(0, 0, towerJson[towerSprite.type]["range"]*DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
+
+    let circleTexture = app.renderer.generateTexture(graphics)
+    let circleSprite = new PIXI.Sprite(circleTexture) // create a sprite from graphics canvas
+    circleSprite.x = towerSprite.x
+    circleSprite.y = towerSprite.y
+    circleSprite.name = towerSprite.name // Same name as tower
+    circleSprite.anchor.set(0.5)
+    towerDataContainer.addChild(circleSprite)
+    graphics.clear()
 }
 
 /**
@@ -120,8 +145,8 @@ function addMenuTower(type) {
     menuTowerSprite.y = 3*DEFAULT_SPRITE_SIZE_Y
     menuTowerSprite.on('pointerdown', function() {
         let newTowerName = randomHexString(20)
-        addTower(newTowerName, "", 3, (MAP_WIDTH-1))
-        let towerSprite = towerContainer.getChildByName(newTowerName)
+        addTower(newTowerName, type, 3, (MAP_WIDTH-1)) // TODO pass json string ID/name
+        let towerSprite = towerContainer.getChildByName(newTowerName) // TODO don't do this, get from above call somehow
 
         // Set the properties because it will start by being dragged from menu
         towerSprite.alpha = 0.5;
@@ -192,6 +217,9 @@ function onDragEnd() {
         this.alpha = 1;
         this.dragging = false;
         this.removeAllListeners();
+
+        // Clear the red range circle
+        towerDataContainer.getChildByName(this.name).visible = false
     } else {
         towerContainer.removeChild(this); // TODO could remove anyway and just let the server update add it
     }
@@ -212,7 +240,10 @@ function onDragMove(event) {
             this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
             this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y/2;
             this.moved = true;
-            
+
+            towerDataContainer.getChildByName(this.name).x = this.x
+            towerDataContainer.getChildByName(this.name).y = this.y
+
             // Send to server then all other clients - but don't actually write to the grid
             sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, [this.gridY, this.gridX, 2])
         }
@@ -366,7 +397,7 @@ function setup() {
     generateBulletSpritesheetData()
 
     // Render menu
-    addMenuTower("TODO")
+    addMenuTower(0) // First (and currently) only entry in towerJson array
 
     // Start rendering loop
     // Note that ticker FPS is fixed to monitor rate
@@ -388,6 +419,7 @@ export function startRendering() {
     app.stage.addChild(mapContainer)
     app.stage.addChild(enemyContainer)
     app.stage.addChild(towerMenuContainer)
+    app.stage.addChild(towerDataContainer)
     app.stage.addChild(bulletContainer)
     app.stage.addChild(towerContainer)
 

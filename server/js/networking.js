@@ -50,6 +50,9 @@ exports.requestListener = function (req, res) {
         case "png":
             MIME_type = "image/png"
             break;
+        case "json":
+            MIME_type = "application/json"
+            break;
         default:
             break;
     }
