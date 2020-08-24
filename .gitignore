@@ -1,3 +1,3 @@
-client/pixi/*
+client/include/*
 node_modules/*
 package-lock.json
