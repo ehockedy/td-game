@@ -67,6 +67,9 @@ $.getJSON("shared/json/towers.json", function(data) {
     towerJson = data
 })
 
+// Unique colour code for the user TODO let them pick
+let randomColourCode = "0x"+randomHexString(6);
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Sprite creators
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,6 +106,7 @@ function addTower(name, type, row, col) {
     towerSprite.name = name; // Unique identifier
     towerSprite.interactive = true; // reponds to mouse and touch events
     towerSprite.buttonMode = true; // hand cursor appears when hover over
+    towerSprite.tint = randomColourCode
     towerSprite.gridX = col
     towerSprite.gridY = row
     towerSprite.x = towerSprite.gridX*DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
@@ -140,6 +144,7 @@ function addMenuTower(type) {
     menuTowerSprite.loop = false
     //menuTowerSprite.anchor.set(0.5)
     menuTowerSprite.name = "temporary_blue_tower_1" // Unique identifier
+    menuTowerSprite.tint = randomColourCode
     menuTowerSprite.interactive = true; // reponds to mouse and touch events
     menuTowerSprite.buttonMode = true; // hand cursor appears when hover over
     menuTowerSprite.x = (MAP_WIDTH-1)*DEFAULT_SPRITE_SIZE_X
@@ -220,7 +225,7 @@ function onDragEnd() {
         this.off('pointerupoutside', onDragEnd)
             .off('pointermove', onDragMove)
             .off('pointerup', onDragEnd);
-        
+
         // Clear the red range circle
         towerDataContainer.getChildByName(this.name).visible = false
     } else {
