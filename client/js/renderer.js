@@ -110,7 +110,8 @@ function addTower(name, type, row, col) {
     towerSprite
         .on('pointerup', onDragEnd)
         .on('pointerupoutside', onDragEnd)
-        .on('pointermove', onDragMove);
+        .on('pointermove', onDragMove)
+        .on('click', onTowerClick);
 
     towerContainer.addChild(towerSprite)
 
@@ -216,8 +217,10 @@ function onDragEnd() {
         // Server then updates the board of each client - including this one
         this.alpha = 1;
         this.dragging = false;
-        this.removeAllListeners();
-
+        this.off('pointerupoutside', onDragEnd)
+            .off('pointermove', onDragMove)
+            .off('pointerup', onDragEnd);
+        
         // Clear the red range circle
         towerDataContainer.getChildByName(this.name).visible = false
     } else {
@@ -248,6 +251,11 @@ function onDragMove(event) {
             sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, [this.gridY, this.gridX, 2])
         }
     }
+}
+
+function onTowerClick() {
+    // Show/hide the range circle
+    towerDataContainer.getChildByName(this.name).visible = !towerDataContainer.getChildByName(this.name).visible
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
