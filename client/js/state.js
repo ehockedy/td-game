@@ -1,10 +1,11 @@
 // State variables accessible for multiple parts of the client
 // They may be updated as the game goes on
-var state = {}
-var board
-var mapWidth
-var mapHeight
-var subGridSize // Same as height
+let state = {}
+let board
+let mapWidth
+let mapHeight
+let subGridSize // Same as height
+let playerStates = [{}]
 
 // Setters
 export function setState(new_state) {

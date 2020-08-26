@@ -25,7 +25,8 @@ const MSG_TYPES = {
   SERVER_UPDATE_GAME_BOARD: "server update game board", //  Make this some kind of init?
   CLIENT_UPDATE: "client update",
   CLIENT_UPDATE_GAME_BOARD: "client update game board",
-  CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board"
+  CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",
+  NEW_GAME: "ng"
 }
 
 // First set up http server to serve index.html and its included files
@@ -63,8 +64,8 @@ web_sockets_server.on('connection', (socket) => {
   }
   live_sockets[client_addr] = socket
 
-  socket.on(MSG_TYPES.CONNECT, (data) => {
-    console.log("Client initial connection")
+  socket.on(MSG_TYPES.NEW_GAME, function() {
+    console.log("New game started")
     socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
     updateGameAndSend()
     setInterval(updateGameAndSend, 50*0.5); // 20 "fps"

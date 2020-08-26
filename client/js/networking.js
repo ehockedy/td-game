@@ -1,5 +1,6 @@
 import { setState, setBoard, setGridDimsRowsCols, setSubGridDim } from "./state.js"
-import { startRendering } from "./renderer.js"
+import { startRendering as startRenderingMenu, stopRendering as stopRenderingMenu} from "./menu_renderer.js"
+import { startRendering as startRenderingGame } from "./renderer.js"
 import { printMap } from "./tools.js"
 
 // To get client side debugging, paste "localStorage.debug = '*';" into
@@ -15,13 +16,12 @@ const MSG_TYPES = {
     SERVER_UPDATE_GAME_BOARD: "server update game board",
     CLIENT_UPDATE: "client update",
     CLIENT_UPDATE_GAME_BOARD: "client update game board",
-    CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board"
+    CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",
+    NEW_GAME: "ng"
 }
 
 const socket = io();
-
-// Send message to server to start game
-socket.emit(MSG_TYPES.CONNECT)
+startRenderingMenu();
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) => {
     // grid is the simple representation of the map - a 2D array or arrays
@@ -32,7 +32,9 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) =>
 });
 
 socket.on(MSG_TYPES.GAME_START, (data) => {
-    startRendering(); // TODO sort out race condition here - sometimes renders before enemy data arrived
+    console.log("start rendering game")
+    stopRenderingMenu()
+    startRenderingGame();
 });
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
@@ -41,7 +43,6 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
 });
 
 function sendMessage(msgType, data) {
-    // Send and changes to towers
     // TODO
     //  only send on change?
     //  only send during "player update" round
