@@ -130,6 +130,7 @@ function addTower(name, type, row, col) {
     circleSprite.y = towerSprite.y
     circleSprite.name = towerSprite.name // Same name as tower
     circleSprite.anchor.set(0.5)
+    circleSprite.visible = false
     towerDataContainer.addChild(circleSprite)
     graphics.clear()
 }
@@ -158,6 +159,7 @@ function addMenuTower(type) {
         towerSprite.alpha = 0.5;
         towerSprite.dragging = true;
         towerSprite.moved = false; // Whether it has moved form the original position TODO make more sophisticated and have an out of menu check
+        towerDataContainer.getChildByName(newTowerName).visible = true
     });
 
     towerMenuContainer.addChild(menuTowerSprite)
