@@ -1,5 +1,6 @@
-import { getGridDimsRowsCols } from "./state.js"
+import { randomHexString } from "./tools.js"
 import { MSG_TYPES, sendMessage } from "./networking.js"
+import { setGameID } from "./state.js"
 
 
 const DEFAULT_SPRITE_SIZE_X = 32 // Width of a sprite in the map spritesheet
@@ -103,7 +104,12 @@ function onButtonStopHover() {
 }
 
 function onStartButtonClick() {
-    sendMessage(MSG_TYPES.NEW_GAME)
+    let gameID = randomHexString(6)
+    let data = {
+        "gameID": gameID
+    }
+    setGameID(gameID)
+    sendMessage(MSG_TYPES.NEW_GAME, data)
 }
 
 function onJoinButtonClick() {

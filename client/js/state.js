@@ -5,6 +5,7 @@ let board
 let mapWidth
 let mapHeight
 let subGridSize // Same as height
+let gameID
 let playerStates = [{}]
 
 // Setters
@@ -18,6 +19,10 @@ export function setBoard(new_board) {
 
 export function setSubGridDim(newSubGridSize) {
     subGridSize = newSubGridSize
+}
+
+export function setGameID(id) {
+    gameID = id
 }
 
 /**
@@ -46,4 +51,8 @@ export function getGridDimsRowsCols() {
 
 export function getSubGridDim() {
     return subGridSize;
+}
+
+export function getGameID() {
+    return gameID
 }

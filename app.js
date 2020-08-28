@@ -40,49 +40,63 @@ http_server.listen(8000, () => {
 const web_sockets_server = io(http_server)
 
 // Keep track of current connections
-var live_sockets = {}
+let rooms = {}
 
 // Main processing loop
 // Updates the game state and sends the update to all connected clients
-function updateGameAndSend() {
-  new_state = game.updateGameState()
+function updateGameAndSend(room) {
+  new_state = rooms[room]["game"].updateGameState()
   //console.log(new_state)
-  for (host in live_sockets) {
-    live_sockets[host].emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
+  for (host in rooms[room]["players"]) {
+    rooms[room]["players"][host].emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
   }
 }
 
-// Must do this first
-game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
-
 web_sockets_server.on('connection', (socket) => {
-  let client_addr = socket["handshake"]["address"]
-  console.log("Client " + client_addr + " connected")
+  socket.on(MSG_TYPES.NEW_GAME, (data) => {
+    console.log(data)
 
-  if (!(client_addr in live_sockets)) {
-    console.log("New connection")
-  }
-  live_sockets[client_addr] = socket
+    let clientAddr = socket["handshake"]["address"]
+    let gameID = data["gameID"]
+    console.log("Client " + clientAddr + " connected")
 
-  socket.on(MSG_TYPES.NEW_GAME, function() {
-    console.log("New game started")
-    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
-    updateGameAndSend()
-    setInterval(updateGameAndSend, 50*0.5); // 20 "fps"
+    // Create room if does not exist
+    if (!(gameID in rooms)) {
+      console.log("New room created")
+      rooms[gameID] = {}
+      rooms[gameID]["game"] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE),
+      rooms[gameID]["players"] = {}
+      rooms[gameID]["players"][clientAddr] = socket
+    }
+
+    // Add player to that room if they are not already in
+    if (!(clientAddr in rooms[gameID]["players"])) {
+      rooms[gameID]["players"][clientAddr] = socket
+    }
+
+    console.log(rooms)
+
+    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+    updateGameAndSend(gameID)
+    setInterval(updateGameAndSend,50*0.5, gameID); // 20 "fps"
     socket.emit(MSG_TYPES.GAME_START)
   });
 
-  socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
-    console.log("Updated board from client", data)
-    // TODO broadcast temporary position to other connected clients
-  });
+  // socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
+  //   console.log("Updated board from client", data)
+  //   // TODO broadcast temporary position to other connected clients
+  // });
 
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data, callback) => {
+    let clientAddr = socket["handshake"]["address"]
+    let gameID = data["gameID"]
     console.log("Writing board change from client")
-    game.getMap().setGridValue(data[0], data[1], data[2]) // row, col, value
-    console.log("DATA", data)
-    game.addTower(data[3], data[2], "TODO", data[0], data[1])
-    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, game.getMapStructure()) // TODO broadcast this
+    rooms[gameID]["game"].map.setGridValue(data["data"][0], data["data"][1], data["data"][2]) // row, col, value
+    console.log("DATA", data["data"])
+    rooms[gameID]["game"].addTower(data["data"][3], data["data"][2], "TODO", data["data"][0], data["data"][1])
+    for (host in rooms[gameID]["players"]) {
+      socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure()) // TODO broadcast this
+    }
   });
 });
 

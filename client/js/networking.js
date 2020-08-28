@@ -1,4 +1,4 @@
-import { setState, setBoard, setGridDimsRowsCols, setSubGridDim } from "./state.js"
+import { setState, setBoard, setGridDimsRowsCols, setSubGridDim , getGameID } from "./state.js"
 import { startRendering as startRenderingMenu, stopRendering as stopRenderingMenu} from "./menu_renderer.js"
 import { startRendering as startRenderingGame } from "./renderer.js"
 import { printMap } from "./tools.js"
@@ -46,7 +46,11 @@ function sendMessage(msgType, data) {
     // TODO
     //  only send on change?
     //  only send during "player update" round
-    socket.emit(msgType, data, function (response) {
+    let msg = {
+        "gameID": getGameID(),
+        "data": data
+    }
+    socket.emit(msgType, msg, function (response) {
         return true; // Only fires if get a successful response form the server
     })
     return false;
