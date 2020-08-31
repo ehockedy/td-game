@@ -17,7 +17,8 @@ const MSG_TYPES = {
     CLIENT_UPDATE: "client update",
     CLIENT_UPDATE_GAME_BOARD: "client update game board",
     CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",
-    NEW_GAME: "ng"
+    NEW_GAME: "ng",
+    JOIN_GAME: "jg"
 }
 
 const socket = io();
@@ -43,17 +44,32 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
 });
 
 function sendMessage(msgType, data) {
-    // TODO
-    //  only send on change?
-    //  only send during "player update" round
     let msg = {
-        "gameID": getGameID(),
-        "data": data
+        "data": data,
+        "gameID": getGameID() // TODO remove this as might not be set yet
     }
-    socket.emit(msgType, msg, function (response) {
-        return true; // Only fires if get a successful response form the server
-    })
-    return false;
+
+    socket.emit(msgType, msg)
 }
 
-export { MSG_TYPES, sendMessage }
+function sendMessageGetAck(msgType, data) {
+    let msg = {
+        "data": data
+    }
+
+    return new Promise((resolve, reject) => {
+        let done = false
+        socket.emit(msgType, msg, function (response) {
+            resolve(response)
+            done = true
+        })
+        setTimeout(() => {
+            if (done) return;
+            else reject({
+                response: "timeout"
+            });
+          }, 2000); // 2s
+    })
+}
+
+export { MSG_TYPES, sendMessage, sendMessageGetAck }

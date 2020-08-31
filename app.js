@@ -26,7 +26,8 @@ const MSG_TYPES = {
   CLIENT_UPDATE: "client update",
   CLIENT_UPDATE_GAME_BOARD: "client update game board",
   CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",
-  NEW_GAME: "ng"
+  NEW_GAME: "ng",
+  JOIN_GAME: "jg"
 }
 
 // First set up http server to serve index.html and its included files
@@ -57,7 +58,7 @@ web_sockets_server.on('connection', (socket) => {
     console.log(data)
 
     let clientAddr = socket["handshake"]["address"]
-    let gameID = data["gameID"]
+    let gameID = data["data"]["gameID"]
     console.log("Client " + clientAddr + " connected")
 
     // Create room if does not exist
@@ -82,6 +83,32 @@ web_sockets_server.on('connection', (socket) => {
     socket.emit(MSG_TYPES.GAME_START)
   });
 
+  socket.on(MSG_TYPES.JOIN_GAME, (data, callback) => {
+    console.log(data)
+    let clientAddr = socket["handshake"]["address"]
+    let gameID = data["data"]["gameID"]
+    console.log("Client " + clientAddr + " attempting to join game " + gameID)
+
+    if (!(gameID in rooms)) {
+      console.log("Game does not exist")
+      callback({
+        response: "fail"
+      })
+    } else {
+      console.log("Game found")
+      rooms[gameID]["players"][clientAddr] = socket
+      callback({
+        response: "success"
+      })
+
+      // Tell new player about the map
+      socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+
+      // TODO wait for above to be done?
+      socket.emit(MSG_TYPES.GAME_START)
+    }
+  })
+
   // socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
   //   console.log("Updated board from client", data)
   //   // TODO broadcast temporary position to other connected clients
@@ -90,6 +117,7 @@ web_sockets_server.on('connection', (socket) => {
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data, callback) => {
     let clientAddr = socket["handshake"]["address"]
     let gameID = data["gameID"]
+    console.log(data)
     console.log("Writing board change from client")
     rooms[gameID]["game"].map.setGridValue(data["data"][0], data["data"][1], data["data"][2]) // row, col, value
     console.log("DATA", data["data"])

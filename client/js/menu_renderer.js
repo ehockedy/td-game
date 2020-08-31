@@ -1,5 +1,5 @@
 import { randomHexString } from "./tools.js"
-import { MSG_TYPES, sendMessage } from "./networking.js"
+import { MSG_TYPES, sendMessage, sendMessageGetAck } from "./networking.js"
 import { setGameID } from "./state.js"
 
 
@@ -27,7 +27,6 @@ let style = new PIXI.TextStyle({
     dropShadowAngle: Math.PI / 6,
     dropShadowDistance: 6,
     wordWrap: false,
-    wordWrapWidth: 440,
 })
 
 let titleStyle = new PIXI.TextStyle({
@@ -44,9 +43,21 @@ let titleStyle = new PIXI.TextStyle({
     dropShadowAngle: Math.PI / 6,
     dropShadowDistance: 6,
     wordWrap: false,
-    wordWrapWidth: 440,
 })
 
+let textBoxStyle = new PIXI.TextStyle({
+    fontFamily: 'Arial',
+    fontSize: 24,
+    fill: ['#000000'], // gradient
+    align: "center",
+    wordWrap: true,
+})
+
+let graphics = new PIXI.Graphics();
+
+// Containers
+let menuElementsContainer = new PIXI.Container();
+let joinGamePopUpContainer = new PIXI.Container();
 
 // Text setup
 function renderTitle() {
@@ -57,7 +68,7 @@ function renderTitle() {
     text.startX = text.x
     text.startY = text.y
     text.name = "title"
-    app.stage.addChild(text);
+    menuElementsContainer.addChild(text);
 }
 
 function renderStartGameButton() {
@@ -74,7 +85,7 @@ function renderStartGameButton() {
             .on("pointerover", onButtonHover)
             .on("pointerout", onButtonStopHover)
 
-    app.stage.addChild(text);
+    menuElementsContainer.addChild(text);
 }
 
 function renderJoinGameButton() {
@@ -91,7 +102,7 @@ function renderJoinGameButton() {
             .on("pointerover", onButtonHover)
             .on("pointerout", onButtonStopHover)
 
-    app.stage.addChild(text);
+    menuElementsContainer.addChild(text);
 }
 
 // Events
@@ -104,7 +115,7 @@ function onButtonStopHover() {
 }
 
 function onStartButtonClick() {
-    let gameID = randomHexString(6)
+    let gameID = randomHexString(6).toUpperCase()
     let data = {
         "gameID": gameID
     }
@@ -113,13 +124,97 @@ function onStartButtonClick() {
 }
 
 function onJoinButtonClick() {
-    sendMessage(MSG_TYPES.NEW_GAME)
+    document.addEventListener('keydown', logKey);
+    graphics.beginFill("0x7722AA")
+    graphics.drawRect(0, 0, APP_WIDTH/3, APP_HEIGHT/3)
+
+    // Pup up box
+    let rectTexture = app.renderer.generateTexture(graphics)
+    let rectSprite = new PIXI.Sprite(rectTexture) // create a sprite from graphics canvas
+    rectSprite.x = APP_WIDTH/2
+    rectSprite.y = APP_HEIGHT/2
+    rectSprite.name = "popup"
+    rectSprite.anchor.set(0.5)
+    console.log(rectSprite)
+    joinGamePopUpContainer.addChild(rectSprite)
+    graphics.clear()
+
+    // Text box
+    graphics.beginFill("0xFFFFFF")
+    graphics.drawRect(0, 0, rectSprite.width*0.8, rectSprite.height/5)
+    let textTexture = app.renderer.generateTexture(graphics)
+    let textBoxSprite = new PIXI.Sprite(textTexture) // create a sprite from graphics canvas
+    textBoxSprite.x = rectSprite.x
+    textBoxSprite.y = rectSprite.y + rectSprite.height / 6
+    textBoxSprite.name = "popupTextbox"
+    textBoxSprite.anchor.set(0.5)
+    joinGamePopUpContainer.addChild(textBoxSprite)
+    graphics.clear()
+
+    // Game code text
+    const text = new PIXI.Text("", textBoxStyle);
+    text.anchor.set(0.5);
+    text.x = textBoxSprite.x
+    text.y = textBoxSprite.y
+    text.name = "popupText"
+    joinGamePopUpContainer.addChild(text);
+
+    // Error message text
+    textBoxStyle.wordWrapWidth = rectSprite.x * 0.6
+    const infoText = new PIXI.Text("Enter code to join game", textBoxStyle);
+    infoText.anchor.set(0.5);
+    infoText.x = rectSprite.x
+    infoText.y = rectSprite.y - rectSprite.height / 6
+    infoText.name = "popupInfoText"
+    joinGamePopUpContainer.addChild(infoText);
+
+    //sendMessage(MSG_TYPES.NEW_GAME, data)
+}
+function logKey(e) {
+    const regex = RegExp('^[a-zA-z0-9]$'); // Only a single characters or number
+    if (regex.test(e.key)) {
+        if (joinGamePopUpContainer.getChildByName("popupText").text.length < 6) {
+            joinGamePopUpContainer.getChildByName("popupText").text += e.key.toUpperCase()
+        }
+    } else if (e.key == "Enter") { // Enter confirms the code and attempts to join game (if code valie and game exists)
+        if (joinGamePopUpContainer.getChildByName("popupText").text.length < 6) {
+            joinGamePopUpContainer.getChildByName("popupInfoText").text = "Error: game code must be 6 characters"
+            return
+        }
+
+        joinGamePopUpContainer.getChildByName("popupInfoText").text = "Searching for game..."
+
+        sendMessageGetAck(
+            MSG_TYPES.JOIN_GAME,
+            {
+                "gameID": joinGamePopUpContainer.getChildByName("popupText").text
+            }
+        ).then(function(resolveVal) {
+            if (resolveVal["response"] == "fail") { // Game does not exist
+                joinGamePopUpContainer.getChildByName("popupInfoText").text = "Game not found"
+            } else if (resolveVal["response"] == "success") { // Game exists
+                setGameID(joinGamePopUpContainer.getChildByName("popupText").text)
+                joinGamePopUpContainer.removeChildren() // TODO make not visible?
+                document.removeEventListener('keydown', logKey);
+            }
+        }).catch(function(rejectVal) {
+            if (rejectVal["response"] == "timeout") {
+                joinGamePopUpContainer.getChildByName("popupInfoText").text = "Error: Connection with server timed out"
+            }
+        })
+    } else if (e.key == "Backspace") {
+        joinGamePopUpContainer.getChildByName("popupText").text = joinGamePopUpContainer.getChildByName("popupText").text.slice(0, -1)
+    } else if (e.key == "Escape") {
+        // TODO make these a "close join menu" option (since used above)
+        joinGamePopUpContainer.removeChildren() // TODO make not visible?
+        document.removeEventListener('keydown', logKey);
+    }
 }
 
 let dir = 1
 function renderLoop() {
     // Make the title "bounce"
-    let title = app.stage.getChildByName("title")
+    let title = menuElementsContainer.getChildByName("title")
     const range = 10
     const speed = 1
 
@@ -149,11 +244,14 @@ export function startRendering() {
 
     //Add the canvas that Pixi automatically created to the HTML document
     document.body.appendChild(app.view);
+    app.stage.addChild(menuElementsContainer);
+    app.stage.addChild(joinGamePopUpContainer);
 
     PIXI.Loader.shared
         .load(setup);
 }
 
 export function stopRendering() {
+    app.stage.removeChildren()
     document.body.removeChild(app.view)
 }

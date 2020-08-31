@@ -1,4 +1,4 @@
-import { getState, getBoard, getGridDimsRowsCols, getSubGridDim } from "./state.js"
+import { getState, getBoard, getGridDimsRowsCols, getSubGridDim, getGameID } from "./state.js"
 import { MSG_TYPES, sendMessage } from "./networking.js"
 import { randomHexString } from "./tools.js"
 
@@ -437,6 +437,11 @@ export function startRendering() {
     app.stage.addChild(towerDataContainer)
     app.stage.addChild(bulletContainer)
     app.stage.addChild(towerContainer)
+
+    const gameIDText = new PIXI.Text(getGameID());
+    gameIDText.x = 20;
+    gameIDText.y = 20;
+    app.stage.addChild(gameIDText);
 
     //Add the canvas that Pixi automatically created to the HTML document
     document.body.appendChild(app.view);
