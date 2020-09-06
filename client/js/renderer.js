@@ -220,7 +220,13 @@ function onDragStart(event) {
 
 function onDragEnd() {
     if (this.moved) {  // If not moved off square of menu item, remove the sprite
-        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, [this.gridY, this.gridX, 2, this.name]) // TODO make this json Writes 2 to x, y in grid
+        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, {
+            "y": this.gridY,
+            "x": this.gridX,
+            "value": 2,
+            "towerName": this.name,
+            "gameID": getGameID()
+        }) // TODO make this json Writes 2 to x, y in grid
         // Server then updates the board of each client - including this one
         this.alpha = 1;
         this.dragging = false;
@@ -255,7 +261,12 @@ function onDragMove(event) {
             towerDataContainer.getChildByName(this.name).y = this.y
 
             // Send to server then all other clients - but don't actually write to the grid
-            sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, [this.gridY, this.gridX, 2])
+            sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, {
+                "y": this.gridY,
+                "x": this.gridX,
+                "value": 2,
+                "gameID": getGameID()
+            })
         }
     }
 }

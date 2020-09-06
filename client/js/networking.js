@@ -44,22 +44,13 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
 });
 
 function sendMessage(msgType, data) {
-    let msg = {
-        "data": data,
-        "gameID": getGameID() // TODO remove this as might not be set yet
-    }
-
-    socket.emit(msgType, msg)
+    socket.emit(msgType, data)
 }
 
 function sendMessageGetAck(msgType, data) {
-    let msg = {
-        "data": data
-    }
-
     return new Promise((resolve, reject) => {
         let done = false
-        socket.emit(msgType, msg, function (response) {
+        socket.emit(msgType, data, function (response) {
             resolve(response)
             done = true
         })

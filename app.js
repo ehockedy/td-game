@@ -58,7 +58,7 @@ web_sockets_server.on('connection', (socket) => {
     console.log(data)
 
     let clientAddr = socket["handshake"]["address"]
-    let gameID = data["data"]["gameID"]
+    let gameID = data["gameID"]
     console.log("Client " + clientAddr + " connected")
 
     // Create room if does not exist
@@ -114,14 +114,13 @@ web_sockets_server.on('connection', (socket) => {
   //   // TODO broadcast temporary position to other connected clients
   // });
 
-  socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data, callback) => {
+  socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data) => {
     let clientAddr = socket["handshake"]["address"]
     let gameID = data["gameID"]
-    console.log(data)
     console.log("Writing board change from client")
-    rooms[gameID]["game"].map.setGridValue(data["data"][0], data["data"][1], data["data"][2]) // row, col, value
-    console.log("DATA", data["data"])
-    rooms[gameID]["game"].addTower(data["data"][3], data["data"][2], "TODO", data["data"][0], data["data"][1])
+    rooms[gameID]["game"].map.setGridValue(data["y"], data["x"], data["value"]) // row, col, value
+    console.log("DATA", data)
+    rooms[gameID]["game"].addTower(data["towerName"], data["value"], "TODO", data["y"], data["x"])
     for (host in rooms[gameID]["players"]) {
       socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure()) // TODO broadcast this
     }

@@ -3,8 +3,6 @@ Client renderer optimisations:
  - Profiling suggests that client is rendering 3 times as fast as server is sending, so can reduce the render rate.
 Add proper tower menu
 Render moving tower on client
-Make messages between client and server structured json
- - also dont send game code by default on sendMessage*() functions
 Make keyboard come up on mobile
 Make join game box prettier
 Make other player tower colours different
