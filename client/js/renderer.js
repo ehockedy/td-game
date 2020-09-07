@@ -9,16 +9,23 @@ let MAP_WIDTH;
 let MAP_HEIGHT;
 let SUBGRID_SIZE;
 
+let TOWER_MENU_WIDTH_PX;
+let TOWER_MENU_HEIGHT_PX;
+
+let APP_WIDTH;
+let APP_HEIGHT;
+
 // PIXI application
 let app;
 
 // Sprite containers
-let mapContainer = new PIXI.Container();
-let enemyContainer = new PIXI.Container();
-let towerMenuContainer = new PIXI.Container();
-let towerContainer = new PIXI.Container();
-let bulletContainer = new PIXI.Container();
-let towerDataContainer = new PIXI.Container();
+let mapContainer = new PIXI.Container(); // The grid all the action takes place in
+let toolbarContainer = new PIXI.Container(); // Tower menu background, player stats background, etc.
+let enemyContainer = new PIXI.Container(); // All the enemies on the map
+let towerMenuContainer = new PIXI.Container(); // Interactive tower sprites in the tower menu
+let towerDataContainer = new PIXI.Container(); // Range of tower etc.
+let towerContainer = new PIXI.Container(); // All the towers on the map
+let bulletContainer = new PIXI.Container(); // All the bullets on the map
 
 // PIXI graphics
 let graphics = new PIXI.Graphics();
@@ -143,26 +150,43 @@ function addTower(name, type, row, col) {
 function addMenuTower(type) {
     let menuTowerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"]) // TODO make not animated
     menuTowerSprite.loop = false
-    //menuTowerSprite.anchor.set(0.5)
+    menuTowerSprite.anchor.set(0.5)
     menuTowerSprite.name = "temporary_blue_tower_1" // Unique identifier
     menuTowerSprite.tint = randomColourCode
     menuTowerSprite.interactive = true; // reponds to mouse and touch events
     menuTowerSprite.buttonMode = true; // hand cursor appears when hover over
-    menuTowerSprite.x = (MAP_WIDTH-1)*DEFAULT_SPRITE_SIZE_X
-    menuTowerSprite.y = 3*DEFAULT_SPRITE_SIZE_Y
-    menuTowerSprite.on('pointerdown', function() {
-        let newTowerName = randomHexString(20)
-        addTower(newTowerName, type, 3, (MAP_WIDTH-1)) // TODO pass json string ID/name
-        let towerSprite = towerContainer.getChildByName(newTowerName) // TODO don't do this, get from above call somehow
 
-        // Set the properties because it will start by being dragged from menu
-        towerSprite.alpha = 0.5;
-        towerSprite.dragging = true;
-        towerSprite.moved = false; // Whether it has moved form the original position TODO make more sophisticated and have an out of menu check
-        towerDataContainer.getChildByName(newTowerName).visible = true
-    });
+    let towersCount = towerMenuContainer.children.length
+
+    // Calcualte positon within the tower menu
+    menuTowerSprite.x = toolbarContainer.getChildByName("towerMenu").x + TOWER_MENU_WIDTH_PX / 2
+    menuTowerSprite.y = toolbarContainer.getChildByName("towerMenu").y + DEFAULT_SPRITE_SIZE_Y * 2 * (towersCount+1) // +1 so not starting at x = 0
+
+    menuTowerSprite
+        .on('pointerdown', function() {
+            let newTowerName = randomHexString(20)
+            addTower(newTowerName, type, menuTowerSprite.x, menuTowerSprite.y) // TODO pass json string ID/name
+            let towerSprite = towerContainer.getChildByName(newTowerName) // TODO don't do this, get from above call somehow
+
+            // Set the properties because it will start by being dragged from menu
+            towerSprite.alpha = 0.5;
+            towerSprite.dragging = true;
+            towerSprite.gridlocked = false // Whether to stick to the grid of DEFAULT_SPRITE_SIZE[X|Y] sized squares
+            towerDataContainer.getChildByName(newTowerName).visible = true
+        })
 
     towerMenuContainer.addChild(menuTowerSprite)
+}
+
+function addTowerMenu() {
+    graphics.beginFill("0x707070")
+    graphics.drawRect(0, 0, TOWER_MENU_WIDTH_PX, TOWER_MENU_HEIGHT_PX)
+    let towerMenuBackgroundTexture = app.renderer.generateTexture(graphics)
+    let towerMenuBackgroundSprite = new PIXI.Sprite(towerMenuBackgroundTexture) // create a sprite from graphics canvas
+    towerMenuBackgroundSprite.x = MAP_WIDTH*DEFAULT_SPRITE_SIZE_X
+    towerMenuBackgroundSprite.name = "towerMenu"
+    toolbarContainer.addChild(towerMenuBackgroundSprite)
+    graphics.clear()
 }
 
 function addBullet(name, type) {
@@ -219,14 +243,14 @@ function onDragStart(event) {
 }
 
 function onDragEnd() {
-    if (this.moved) {  // If not moved off square of menu item, remove the sprite
+    if (isPointWithinContainer(this.x, this.y, mapContainer)) {  // If not moved off menu, remove the sprite
         sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, {
             "y": this.gridY,
             "x": this.gridX,
             "value": 2,
             "towerName": this.name,
             "gameID": getGameID()
-        }) // TODO make this json Writes 2 to x, y in grid
+        }) // Writes 2 to x, y in grid
         // Server then updates the board of each client - including this one
         this.alpha = 1;
         this.dragging = false;
@@ -244,29 +268,40 @@ function onDragEnd() {
 function onDragMove(event) {
     if (this.dragging) {
         const newPosition = event.data.getLocalPosition(this.parent);
-        // Make it stick to map grid
-        let newGridX = Math.floor(newPosition.x/DEFAULT_SPRITE_SIZE_X)
-        let newGridY = Math.floor(newPosition.y/DEFAULT_SPRITE_SIZE_Y)
-        if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
-            (newGridX >= 0 && newGridY >= 0 ) &&
-            (newGridX < MAP_WIDTH && newGridY < MAP_HEIGHT) && 
-            (getBoard()[newGridY][newGridX] == 0)) { // Must be empty space
-            this.gridX = newGridX
-            this.gridY = newGridY
-            this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
-            this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y/2;
-            this.moved = true;
 
-            towerDataContainer.getChildByName(this.name).x = this.x
-            towerDataContainer.getChildByName(this.name).y = this.y
+        // Check if out of windoe - if so do not update position
+        if (newPosition.x < 0 || newPosition.y < 0 || newPosition.x > APP_WIDTH || newPosition.y > APP_HEIGHT) {
+            return;
+        }
 
-            // Send to server then all other clients - but don't actually write to the grid
-            sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, {
-                "y": this.gridY,
-                "x": this.gridX,
-                "value": 2,
-                "gameID": getGameID()
-            })
+        // Check if within the map - if so make it snap to grid
+        if (isPointWithinContainer(newPosition.x, newPosition.y, mapContainer)) {
+
+            let newGridX = Math.floor(newPosition.x/DEFAULT_SPRITE_SIZE_X)
+            let newGridY = Math.floor(newPosition.y/DEFAULT_SPRITE_SIZE_Y)
+            if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
+                getBoard()[newGridY][newGridX] == 0) { // Must be empty space
+                this.gridX = newGridX
+                this.gridY = newGridY
+                this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
+                this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y/2;
+
+                towerDataContainer.getChildByName(this.name).visible = true
+                towerDataContainer.getChildByName(this.name).x = this.x
+                towerDataContainer.getChildByName(this.name).y = this.y
+
+                // Send to server then all other clients - but don't actually write to the grid
+                sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, {
+                    "y": this.gridY,
+                    "x": this.gridX,
+                    "value": 2,
+                    "gameID": getGameID()
+                })
+            }
+        } else {
+            this.x = newPosition.x
+            this.y = newPosition.y
+            towerDataContainer.getChildByName(this.name).visible = false
         }
     }
 }
@@ -402,6 +437,16 @@ function calculateGridPos(pathPos) {
     ]
 }
 
+function isPointWithinContainer(x, y, container) {
+    let mapBounds = container.getLocalBounds()
+    return (
+        x >= mapBounds.x &&
+        y >= mapBounds.y &&
+        x < mapBounds.x + mapBounds.width &&
+        y < mapBounds.y + mapBounds.height
+    )
+}
+
 
 function gameLoop(delta) {
     // Called every time display is rendered
@@ -423,7 +468,10 @@ function setup() {
     generateBulletSpritesheetData()
 
     // Render menu
+    addTowerMenu()
     addMenuTower(0) // First (and currently) only entry in towerJson array
+    addMenuTower(0)
+    addMenuTower(0)
 
     // Start rendering loop
     // Note that ticker FPS is fixed to monitor rate
@@ -437,12 +485,22 @@ export function startRendering() {
     MAP_HEIGHT = getGridDimsRowsCols()[0]
     SUBGRID_SIZE = getSubGridDim()
 
+    TOWER_MENU_WIDTH_PX  = 3 * DEFAULT_SPRITE_SIZE_X
+    TOWER_MENU_HEIGHT_PX = MAP_HEIGHT * DEFAULT_SPRITE_SIZE_Y
+
+    APP_WIDTH = MAP_WIDTH * DEFAULT_SPRITE_SIZE_X + TOWER_MENU_WIDTH_PX
+    APP_HEIGHT = MAP_HEIGHT * DEFAULT_SPRITE_SIZE_Y
+
     //Create a Pixi Application
-    app = new PIXI.Application({ width: MAP_WIDTH * DEFAULT_SPRITE_SIZE_X, height: MAP_HEIGHT * DEFAULT_SPRITE_SIZE_Y });
+    app = new PIXI.Application({
+        width: APP_WIDTH,
+        height: APP_HEIGHT
+    });
 
     // Order in which display objects are added is the order they are put in the
     // children array, which is the order they are rendered.
     app.stage.addChild(mapContainer)
+    app.stage.addChild(toolbarContainer)
     app.stage.addChild(enemyContainer)
     app.stage.addChild(towerMenuContainer)
     app.stage.addChild(towerDataContainer)
