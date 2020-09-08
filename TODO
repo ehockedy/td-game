@@ -1,8 +1,6 @@
 Client renderer optimisations:
  (based on quick observations and profiling)
  - Profiling suggests that client is rendering 3 times as fast as server is sending, so can reduce the render rate.
-Add proper tower menu
 Render moving tower on client
-Make keyboard come up on mobile
 Make join game box prettier
 Make other player tower colours different

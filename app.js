@@ -8,12 +8,12 @@ networking.setRootDir(__dirname) // Set the location to get files from
 
 const interfaces = os.networkInterfaces();
 let listeningAddress = ""
-// for (let intfIdx=0; intfIdx < interfaces["WiFi"].length; intfIdx++) {
-//   if (interfaces["WiFi"][intfIdx]["address"].split('.')[0] == "192" &&
-//       interfaces["WiFi"][intfIdx]["address"].split('.')[1] == "168") {
-//         listeningAddress = interfaces["WiFi"][intfIdx]["address"]
-//       }
-// }
+for (let intfIdx=0; intfIdx < interfaces["WiFi"].length; intfIdx++) {
+  if (interfaces["WiFi"][intfIdx]["address"].split('.')[0] == "192" &&
+      interfaces["WiFi"][intfIdx]["address"].split('.')[1] == "168") {
+        listeningAddress = interfaces["WiFi"][intfIdx]["address"]
+      }
+}
 
 // MUST keep these synced with enum in client
 // Shared file did not work due to inconsistency with import/require in browser/node
@@ -27,7 +27,8 @@ const MSG_TYPES = {
   CLIENT_UPDATE_GAME_BOARD: "client update game board",
   CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",
   NEW_GAME: "ng",
-  JOIN_GAME: "jg"
+  JOIN_GAME: "jg",
+  CLIENT_DEBUG: "cd"
 }
 
 // First set up http server to serve index.html and its included files
@@ -86,7 +87,7 @@ web_sockets_server.on('connection', (socket) => {
   socket.on(MSG_TYPES.JOIN_GAME, (data, callback) => {
     console.log(data)
     let clientAddr = socket["handshake"]["address"]
-    let gameID = data["data"]["gameID"]
+    let gameID = data["gameID"]
     console.log("Client " + clientAddr + " attempting to join game " + gameID)
 
     if (!(gameID in rooms)) {
@@ -125,6 +126,10 @@ web_sockets_server.on('connection', (socket) => {
       socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure()) // TODO broadcast this
     }
   });
+
+  socket.on(MSG_TYPES.CLIENT_DEBUG, (data) => {
+    console.log(data)
+  })
 });
 
 

@@ -135,7 +135,8 @@ function onJoinButtonClick() {
     rectSprite.y = APP_HEIGHT/2
     rectSprite.name = "popup"
     rectSprite.anchor.set(0.5)
-    console.log(rectSprite)
+    rectSprite.interactive = true
+    rectSprite.on("tap", onCodeBoxTap)
     joinGamePopUpContainer.addChild(rectSprite)
     graphics.clear()
 
@@ -168,10 +169,20 @@ function onJoinButtonClick() {
     infoText.name = "popupInfoText"
     joinGamePopUpContainer.addChild(infoText);
 
-    //sendMessage(MSG_TYPES.NEW_GAME, data)
+    // Bring focus to the input box - if on mobile, this will bring up the browser keyboard
+    // NOTE: this only oberved to work on Android Firefox, does not work on Android Chrome
+    $('#mobileKeyboard').focus();
 }
+
+function onCodeBoxTap() {
+    $('#mobileKeyboard').blur(); // unfocus, since may already be focussed
+    $('#mobileKeyboard').focus();
+    sendMessage(MSG_TYPES.CLIENT_DEBUG, "TAPPED")
+}
+
 function logKey(e) {
     const regex = RegExp('^[a-zA-z0-9]$'); // Only a single characters or number
+    sendMessage(  MSG_TYPES.CLIENT_DEBUG,  [e.key, e.code]  )
     if (regex.test(e.key)) {
         if (joinGamePopUpContainer.getChildByName("popupText").text.length < 6) {
             joinGamePopUpContainer.getChildByName("popupText").text += e.key.toUpperCase()

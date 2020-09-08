@@ -18,7 +18,8 @@ const MSG_TYPES = {
     CLIENT_UPDATE_GAME_BOARD: "client update game board",
     CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",
     NEW_GAME: "ng",
-    JOIN_GAME: "jg"
+    JOIN_GAME: "jg",
+    CLIENT_DEBUG: "cd"
 }
 
 const socket = io();
