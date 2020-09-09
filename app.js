@@ -103,6 +103,7 @@ web_sockets_server.on('connection', (socket) => {
       })
 
       // Tell new player about the map
+      // TODO this is same msg type as L119 but different num of args
       socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
 
       // TODO wait for above to be done?
@@ -123,7 +124,8 @@ web_sockets_server.on('connection', (socket) => {
     console.log("DATA", data)
     rooms[gameID]["game"].addTower(data["towerName"], data["value"], "TODO", data["y"], data["x"])
     for (host in rooms[gameID]["players"]) {
-      socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure()) // TODO broadcast this
+      // TODO dont need the dimension args
+      rooms[gameID]["players"][host].emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
     }
   });
 

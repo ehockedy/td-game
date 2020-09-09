@@ -4,3 +4,4 @@ Client renderer optimisations:
 Render moving tower on client
 Make join game box prettier
 Make other player tower colours different
+Bug: issue where if you click on another players tower it makes it your colour - should aso disable range of other players tower too

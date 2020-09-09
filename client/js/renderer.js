@@ -247,7 +247,12 @@ function onDragEnd() {
         sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, {
             "y": this.gridY,
             "x": this.gridX,
-            "value": 2,
+            "value":  {
+                "type": "tower",
+                "owner": "TODO",
+                "colour": randomColourCode,
+                "name": this.name
+            },
             "towerName": this.name,
             "gameID": getGameID()
         }) // Writes 2 to x, y in grid
@@ -294,7 +299,12 @@ function onDragMove(event) {
                 sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, {
                     "y": this.gridY,
                     "x": this.gridX,
-                    "value": 2,
+                    "value": {
+                        "type": "tower",
+                        "owner": "TODO",
+                        "colour": randomColourCode,
+                        "name": this.name
+                    },
                     "gameID": getGameID()
                 })
             }
@@ -393,7 +403,6 @@ function updateTowers() {
                 if (found) break;
             }
             if (!found) {
-                console.log("ADDING TOWER", towerStateObjects[nameIdx].posRowCol, towerStateObjects[nameIdx].name)
                 addTower(towerStateObjects[nameIdx].name,
                     0,
                     towerStateObjects[nameIdx].posRowCol[0],
@@ -405,7 +414,10 @@ function updateTowers() {
     // Update state of towers present in server update
     towerStateObjects.forEach((tower) => {
         // Move the tower angle
+        let towerToUpdate = towerContainer.getChildByName(tower["name"])
         towerContainer.getChildByName(tower["name"]).rotation = tower["angle"]
+        //console.log(towerToUpdate.gridY, towerToUpdate.gridX, getBoard())
+        towerToUpdate.tint = getBoard()[towerToUpdate.gridY][towerToUpdate.gridX].colour
     })
 }
 
