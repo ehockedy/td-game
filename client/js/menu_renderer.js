@@ -188,7 +188,7 @@ function logKey(e) {
         }
     } else if (e.key == "Enter") { // Enter confirms the code and attempts to join game (if code valie and game exists)
         if (joinGamePopUpContainer.getChildByName("popupText").text.length < GAME_CODE_LEN) {
-            joinGamePopUpContainer.getChildByName("popupInfoText").text = "Error: game code must be " + GAME_CODE_LEN.toSing() + " characters"
+            joinGamePopUpContainer.getChildByName("popupInfoText").text = "Error: game code must be " + GAME_CODE_LEN.toString() + " characters"
             return
         }
 
