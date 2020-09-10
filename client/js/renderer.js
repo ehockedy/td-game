@@ -77,6 +77,9 @@ $.getJSON("shared/json/towers.json", function(data) {
 // Unique colour code for the user TODO let them pick
 let randomColourCode = "0x"+randomHexString(6);
 
+// Random user name TODO let them pick
+let username = randomHexString(6)
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Sprite creators
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,7 +106,7 @@ function addEnemy(name, type) {
  * @param {String} name Unique name of the tower object
  * @param {Number} type Type of tower
  */
-function addTower(name, type, row, col) {
+function addTower(name, type, owner, row, col) {
     let towerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"])
     towerSprite.loop = false
     towerSprite.anchor.set(0.5)
@@ -111,35 +114,40 @@ function addTower(name, type, row, col) {
     towerSprite.type = type
     //animatedEnemySprite.play() // Only play when shoots
     towerSprite.name = name; // Unique identifier
-    towerSprite.interactive = true; // reponds to mouse and touch events
-    towerSprite.buttonMode = true; // hand cursor appears when hover over
+    towerSprite.owner = owner;
     towerSprite.tint = randomColourCode
     towerSprite.gridX = col
     towerSprite.gridY = row
     towerSprite.x = towerSprite.gridX*DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
     towerSprite.y = towerSprite.gridY*DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y/2;
-    towerSprite
-        .on('pointerup', onDragEnd)
-        .on('pointerupoutside', onDragEnd)
-        .on('pointermove', onDragMove)
-        .on('click', onTowerClick);
+
+    if (owner == username) { // Only make the tower interactive if the user placed it
+        towerSprite.interactive = true; // reponds to mouse and touch events
+        towerSprite.buttonMode = true; // hand cursor appears when hover over
+        towerSprite
+            .on('pointerup', onDragEnd)
+            .on('pointerupoutside', onDragEnd)
+            .on('pointermove', onDragMove)
+            .on('click', onTowerClick);
+
+
+        // Add the area circle sprite too
+        graphics.beginFill("0xe74c3c") // Red
+        graphics.alpha = 0.5
+        graphics.drawCircle(0, 0, towerJson[towerSprite.type]["range"]*DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
+
+        let circleTexture = app.renderer.generateTexture(graphics)
+        let circleSprite = new PIXI.Sprite(circleTexture) // create a sprite from graphics canvas
+        circleSprite.x = towerSprite.x
+        circleSprite.y = towerSprite.y
+        circleSprite.name = towerSprite.name // Same name as tower
+        circleSprite.anchor.set(0.5)
+        circleSprite.visible = false
+        towerDataContainer.addChild(circleSprite)
+        graphics.clear()
+    }
 
     towerContainer.addChild(towerSprite)
-
-    // Add the area circle sprite too
-    graphics.beginFill("0xe74c3c") // Red
-    graphics.alpha = 0.5
-    graphics.drawCircle(0, 0, towerJson[towerSprite.type]["range"]*DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
-
-    let circleTexture = app.renderer.generateTexture(graphics)
-    let circleSprite = new PIXI.Sprite(circleTexture) // create a sprite from graphics canvas
-    circleSprite.x = towerSprite.x
-    circleSprite.y = towerSprite.y
-    circleSprite.name = towerSprite.name // Same name as tower
-    circleSprite.anchor.set(0.5)
-    circleSprite.visible = false
-    towerDataContainer.addChild(circleSprite)
-    graphics.clear()
 }
 
 /**
@@ -165,7 +173,7 @@ function addMenuTower(type) {
     menuTowerSprite
         .on('pointerdown', function() {
             let newTowerName = randomHexString(20)
-            addTower(newTowerName, type, menuTowerSprite.x, menuTowerSprite.y) // TODO pass json string ID/name
+            addTower(newTowerName, type, username, menuTowerSprite.x, menuTowerSprite.y) // TODO pass json string ID/name
             let towerSprite = towerContainer.getChildByName(newTowerName) // TODO don't do this, get from above call somehow
 
             // Set the properties because it will start by being dragged from menu
@@ -249,7 +257,7 @@ function onDragEnd() {
             "x": this.gridX,
             "value":  {
                 "type": "tower",
-                "owner": "TODO",
+                "owner": username,
                 "colour": randomColourCode,
                 "name": this.name
             },
@@ -301,7 +309,7 @@ function onDragMove(event) {
                     "x": this.gridX,
                     "value": {
                         "type": "tower",
-                        "owner": "TODO",
+                        "owner": username,
                         "colour": randomColourCode,
                         "name": this.name
                     },
@@ -391,7 +399,7 @@ let towerStateHashPrev = ""
 function updateTowers() {
     let state = getState(); // Get the state which has been updated separately from calls from the server
     let towerStateObjects = state["towers"]["objects"];
-    let towerStateHash = state["towers"]["objects"];
+    let towerStateHash = state["towers"]["hash"];
 
     if (towerStateHash != towerStateHashPrev) {
         // Identify tower not in container but in server update
@@ -405,6 +413,7 @@ function updateTowers() {
             if (!found) {
                 addTower(towerStateObjects[nameIdx].name,
                     0,
+                    towerStateObjects[nameIdx].owner,
                     towerStateObjects[nameIdx].posRowCol[0],
                     towerStateObjects[nameIdx].posRowCol[1])
             }

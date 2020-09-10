@@ -195,7 +195,8 @@ class Game {
             state["towers"]["objects"].push({
                 "name": t.name,
                 "angle": t.angle,
-                "posRowCol": [t.row, t.col]
+                "posRowCol": [t.row, t.col],
+                "owner": t.player
             })
             hash.update(t.name)
         })
