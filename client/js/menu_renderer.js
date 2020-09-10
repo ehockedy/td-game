@@ -1,10 +1,9 @@
-import { randomHexString } from "./tools.js"
+import { randomAlphaCharString } from "./tools.js"
 import { MSG_TYPES, sendMessage, sendMessageGetAck } from "./networking.js"
 import { setGameID } from "./state.js"
 
 
-const DEFAULT_SPRITE_SIZE_X = 32 // Width of a sprite in the map spritesheet
-const DEFAULT_SPRITE_SIZE_Y = 32 // Height of a sprite in the map spritesheet
+const GAME_CODE_LEN = 4 // 4 is random enough, and easy to remember
 
 let APP_WIDTH = 900
 let APP_HEIGHT = 600
@@ -115,7 +114,7 @@ function onButtonStopHover() {
 }
 
 function onStartButtonClick() {
-    let gameID = randomHexString(6).toUpperCase()
+    let gameID = randomAlphaCharString(GAME_CODE_LEN)
     let data = {
         "gameID": gameID
     }
@@ -184,12 +183,12 @@ function logKey(e) {
     const regex = RegExp('^[a-zA-z0-9]$'); // Only a single characters or number
     sendMessage(  MSG_TYPES.CLIENT_DEBUG,  [e.key, e.code]  )
     if (regex.test(e.key)) {
-        if (joinGamePopUpContainer.getChildByName("popupText").text.length < 6) {
+        if (joinGamePopUpContainer.getChildByName("popupText").text.length < GAME_CODE_LEN) {
             joinGamePopUpContainer.getChildByName("popupText").text += e.key.toUpperCase()
         }
     } else if (e.key == "Enter") { // Enter confirms the code and attempts to join game (if code valie and game exists)
-        if (joinGamePopUpContainer.getChildByName("popupText").text.length < 6) {
-            joinGamePopUpContainer.getChildByName("popupInfoText").text = "Error: game code must be 6 characters"
+        if (joinGamePopUpContainer.getChildByName("popupText").text.length < GAME_CODE_LEN) {
+            joinGamePopUpContainer.getChildByName("popupInfoText").text = "Error: game code must be " + GAME_CODE_LEN.toSing() + " characters"
             return
         }
 
