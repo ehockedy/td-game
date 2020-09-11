@@ -299,9 +299,10 @@ function onDragMove(event) {
                 this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
                 this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y/2;
 
-                towerDataContainer.getChildByName(this.name).visible = true
-                towerDataContainer.getChildByName(this.name).x = this.x
-                towerDataContainer.getChildByName(this.name).y = this.y
+                let towerToUpdate = towerContainer.getChildByName(this.name)
+                towerToUpdate.visible = true
+                towerToUpdate.x = this.x
+                towerToUpdate.y = this.y
 
                 // Send to server then all other clients - but don't actually write to the grid
                 sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, {
@@ -326,7 +327,8 @@ function onDragMove(event) {
 
 function onTowerClick() {
     // Show/hide the range circle
-    towerDataContainer.getChildByName(this.name).visible = !towerDataContainer.getChildByName(this.name).visible
+    let towerToUpdate = towerDataContainer.getChildByName(this.name)
+    towerToUpdate.visible = !towerToUpdate.visible
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -379,18 +381,19 @@ function updateEnemies() {
     enemyStateObjects.forEach((enemy, idx) => {
         // Move the enemy
         let newPos = calculateGridPos(enemy.pathPos)
-        enemyContainer.getChildByName(enemy.name).x = newPos[0] // TODO use getChildByName once
-        enemyContainer.getChildByName(enemy.name).y = newPos[1]
+        let enemyToUpdate = enemyContainer.getChildByName(enemy.name)
+        enemyToUpdate.x = newPos[0]
+        enemyToUpdate.y = newPos[1]
 
         // Change tint if hit by bullet
         if (enemy.isHit) {
-            enemyContainer.getChildByName(enemy.name).tint = 0xCCCCCC
-            enemyContainer.getChildByName(enemy.name).tintCount = 10 // Number of frames to tint for
+            enemyToUpdate.tint = 0xCCCCCC
+            enemyToUpdate.tintCount = 10 // Number of frames to tint for
         }
-        if (enemyContainer.getChildByName(enemy.name).tintCount > 0) {
-            enemyContainer.getChildByName(enemy.name).tintCount -= 1
+        if (enemyToUpdate.tintCount > 0) {
+            enemyToUpdate.tintCount -= 1
         } else {
-            enemyContainer.getChildByName(enemy.name).tint = 0xFFFFFF
+            enemyToUpdate.tint = 0xFFFFFF
         }
     })
 }
@@ -424,8 +427,7 @@ function updateTowers() {
     towerStateObjects.forEach((tower) => {
         // Move the tower angle
         let towerToUpdate = towerContainer.getChildByName(tower["name"])
-        towerContainer.getChildByName(tower["name"]).rotation = tower["angle"]
-        //console.log(towerToUpdate.gridY, towerToUpdate.gridX, getBoard())
+        towerToUpdate.rotation = tower["angle"]
         towerToUpdate.tint = getBoard()[towerToUpdate.gridY][towerToUpdate.gridX].colour
     })
 }
