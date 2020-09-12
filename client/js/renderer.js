@@ -299,10 +299,10 @@ function onDragMove(event) {
                 this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
                 this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y/2;
 
-                let towerToUpdate = towerContainer.getChildByName(this.name)
-                towerToUpdate.visible = true
-                towerToUpdate.x = this.x
-                towerToUpdate.y = this.y
+                let rangeCircleToUpdate = towerDataContainer.getChildByName(this.name)
+                rangeCircleToUpdate.visible = true
+                rangeCircleToUpdate.x = this.x
+                rangeCircleToUpdate.y = this.y
 
                 // Send to server then all other clients - but don't actually write to the grid
                 sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, {
