@@ -9,6 +9,16 @@ exports.setRootDir = function(path) {
     root_dir = path
 }
 
+function sendFile(responseToWrite, fileToRead, contentType) {
+    fs.promises.readFile(fileToRead)
+        .then(contents => {
+            responseToWrite.setHeader("Content-Type", contentType);
+            responseToWrite.writeHead(200);
+            responseToWrite.end(contents);
+        })
+}
+
+
 // Function run any time request is made to the HTTP server
 exports.requestListener = function (req, res) {
     url = req.url
@@ -65,12 +75,7 @@ exports.requestListener = function (req, res) {
     }
 
     console.log("Sending requested file\n")
-    fs.promises.readFile(root_dir + url)
-        .then(contents => {
-            res.setHeader("Content-Type", MIME_type);
-            res.writeHead(200);
-            res.end(contents);
-        })
+    sendFile(res, root_dir + url, MIME_type)
 
     return
 }
