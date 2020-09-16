@@ -166,8 +166,22 @@ function addMenuTower(type) {
 
     // Calcualte positon within the tower menu
     let towerMenuSprite = toolbarContainer.getChildByName("towerMenu")
-    menuTowerSprite.x = towerMenuSprite.x + towerMenuSprite.width / 2
-    menuTowerSprite.y = towerMenuSprite.y + DEFAULT_SPRITE_SIZE_Y * 2 * (towersCount + 1) // +1 so not starting at x = 0
+
+    let towersPerRow = 2
+    let toolbarWidth = towerMenuSprite.width
+    let towerSpriteWidth = menuTowerSprite.width
+    let spacing = (toolbarWidth - (towersPerRow*towerSpriteWidth)) / (towersPerRow + 1)
+
+    // Equally space the towers across the menu where all the spaces are equal width
+    // <space><tower><space><tower><space>
+    // |__________________________________|
+    //                  |
+    //               <toolbar>
+    // toolbar = 2*tower + 3*space
+    // space = (toolbar - 2*tower) / 3
+    // We know toolbar width and towe width, so can work out space width. THen replace 2 and 3 with n and (n+1)
+    menuTowerSprite.x = towerMenuSprite.x + (spacing + towerSpriteWidth/2) + ((spacing + towerSpriteWidth) * (towersCount % towersPerRow))
+    menuTowerSprite.y = towerMenuSprite.y + DEFAULT_SPRITE_SIZE_Y * 2 * (Math.floor(towersCount/towersPerRow) + 1) // +1 so not starting at y = 0
 
     menuTowerSprite
         .on('pointerdown', function () {
@@ -514,7 +528,7 @@ function setup() {
     generateBulletSpritesheetData()
 
     // Render menu toolbars - increases canvas size if so
-    addToolbar(app.view.width, 0, 3*DEFAULT_SPRITE_SIZE_X, MAP_HEIGHT*DEFAULT_SPRITE_SIZE_X, "towerMenu")
+    addToolbar(app.view.width, 0, 5*DEFAULT_SPRITE_SIZE_X, MAP_HEIGHT*DEFAULT_SPRITE_SIZE_X, "towerMenu")
     addToolbar(0, app.view.height, MAP_WIDTH*DEFAULT_SPRITE_SIZE_Y, 3*DEFAULT_SPRITE_SIZE_Y, "bottomToolbar")
 
     addMenuTower(0) // First (and currently) only entry in towerJson array
