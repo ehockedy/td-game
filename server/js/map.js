@@ -75,7 +75,7 @@ class GameMap {
     }
 
     // Number of rows from top and bottom that won't have path
-    var row_buffer = 2
+    var row_buffer = 1
 
     // Down moves
     var r = this.row

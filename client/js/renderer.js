@@ -9,9 +9,6 @@ let MAP_WIDTH;
 let MAP_HEIGHT;
 let SUBGRID_SIZE;
 
-let TOWER_MENU_WIDTH_PX;
-let TOWER_MENU_HEIGHT_PX;
-
 let APP_WIDTH;
 let APP_HEIGHT;
 
@@ -70,12 +67,13 @@ lightenMatrix.matrix = [
 
 // Tower JSON
 let towerJson
-$.getJSON("shared/json/towers.json", function(data) {
+$.getJSON("shared/json/towers.json", function (data) {
     towerJson = data
 })
 
 // Unique colour code for the user TODO let them pick
-let randomColourCode = "0x"+randomHexString(6);
+let randomColourCode = "0x" + randomHexString(6);
+let toolbarColourCode = "0x727272"
 
 // Random user name TODO let them pick
 let username = randomHexString(6)
@@ -118,8 +116,8 @@ function addTower(name, type, owner, row, col) {
     towerSprite.tint = randomColourCode
     towerSprite.gridX = col
     towerSprite.gridY = row
-    towerSprite.x = towerSprite.gridX*DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
-    towerSprite.y = towerSprite.gridY*DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y/2;
+    towerSprite.x = towerSprite.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
+    towerSprite.y = towerSprite.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
 
     if (owner == username) { // Only make the tower interactive if the user placed it
         towerSprite.interactive = true; // reponds to mouse and touch events
@@ -134,7 +132,7 @@ function addTower(name, type, owner, row, col) {
         // Add the area circle sprite too
         graphics.beginFill("0xe74c3c") // Red
         graphics.alpha = 0.5
-        graphics.drawCircle(0, 0, towerJson[towerSprite.type]["range"]*DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
+        graphics.drawCircle(0, 0, towerJson[towerSprite.type]["range"] * DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
 
         let circleTexture = app.renderer.generateTexture(graphics)
         let circleSprite = new PIXI.Sprite(circleTexture) // create a sprite from graphics canvas
@@ -167,11 +165,12 @@ function addMenuTower(type) {
     let towersCount = towerMenuContainer.children.length
 
     // Calcualte positon within the tower menu
-    menuTowerSprite.x = toolbarContainer.getChildByName("towerMenu").x + TOWER_MENU_WIDTH_PX / 2
-    menuTowerSprite.y = toolbarContainer.getChildByName("towerMenu").y + DEFAULT_SPRITE_SIZE_Y * 2 * (towersCount+1) // +1 so not starting at x = 0
+    let towerMenuSprite = toolbarContainer.getChildByName("towerMenu")
+    menuTowerSprite.x = towerMenuSprite.x + towerMenuSprite.width / 2
+    menuTowerSprite.y = towerMenuSprite.y + DEFAULT_SPRITE_SIZE_Y * 2 * (towersCount + 1) // +1 so not starting at x = 0
 
     menuTowerSprite
-        .on('pointerdown', function() {
+        .on('pointerdown', function () {
             let newTowerName = randomHexString(20)
             addTower(newTowerName, type, username, menuTowerSprite.x, menuTowerSprite.y) // TODO pass json string ID/name
             let towerSprite = towerContainer.getChildByName(newTowerName) // TODO don't do this, get from above call somehow
@@ -186,16 +185,40 @@ function addMenuTower(type) {
     towerMenuContainer.addChild(menuTowerSprite)
 }
 
-function addTowerMenu() {
-    graphics.beginFill("0x707070")
-    graphics.drawRect(0, 0, TOWER_MENU_WIDTH_PX, TOWER_MENU_HEIGHT_PX)
+/**
+ *
+ * @param {Number} x x coordinate
+ * @param {Number} y y coordinate
+ * @param {Number} width_px 
+ * @param {Number} height_px
+ * @param {String} name
+ * @param {String} col hex colour string. Default is grey (0x727272)
+ */
+function addToolbar(x, y, width_px, height_px, name, col=toolbarColourCode) {
+    graphics.beginFill(col)
+    graphics.drawRect(0, 0, width_px, height_px)
     let towerMenuBackgroundTexture = app.renderer.generateTexture(graphics)
     let towerMenuBackgroundSprite = new PIXI.Sprite(towerMenuBackgroundTexture) // create a sprite from graphics canvas
-    towerMenuBackgroundSprite.x = MAP_WIDTH*DEFAULT_SPRITE_SIZE_X
-    towerMenuBackgroundSprite.name = "towerMenu"
+    towerMenuBackgroundSprite.x = x
+    towerMenuBackgroundSprite.y = y
+    towerMenuBackgroundSprite.name = name
     toolbarContainer.addChild(towerMenuBackgroundSprite)
+
+    // Increase size of canvas if necessary
+    if (x + width_px > app.view.width || x < 0) {
+        app.view.width += width_px
+        app.screen.width += width_px
+        if (x < 0) app.stage.x += width_px // Shift main container (and thus everything in it)
+    }
+    if (y + height_px > app.view.height || y < 0) {
+        app.view.height += height_px
+        app.screen.height += height_px
+        if (y < 0) app.stage.y += height_px
+    }
+
     graphics.clear()
 }
+
 
 function addBullet(name, type) {
     let bulletSprite = new PIXI.AnimatedSprite(bulletSpriteSheet["simple"]) // TODO add bullet sprite
@@ -255,7 +278,7 @@ function onDragEnd() {
         sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, {
             "y": this.gridY,
             "x": this.gridX,
-            "value":  {
+            "value": {
                 "type": "tower",
                 "owner": username,
                 "colour": randomColourCode,
@@ -290,14 +313,14 @@ function onDragMove(event) {
         // Check if within the map - if so make it snap to grid
         if (isPointWithinContainer(newPosition.x, newPosition.y, mapContainer)) {
 
-            let newGridX = Math.floor(newPosition.x/DEFAULT_SPRITE_SIZE_X)
-            let newGridY = Math.floor(newPosition.y/DEFAULT_SPRITE_SIZE_Y)
+            let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
+            let newGridY = Math.floor(newPosition.y / DEFAULT_SPRITE_SIZE_Y)
             if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
                 getBoard()[newGridY][newGridX] == 0) { // Must be empty space
                 this.gridX = newGridX
                 this.gridY = newGridY
-                this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X/2;
-                this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y/2;
+                this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
+                this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
 
                 let rangeCircleToUpdate = towerDataContainer.getChildByName(this.name)
                 rangeCircleToUpdate.visible = true
@@ -354,7 +377,7 @@ function updateEnemies() {
     if (enemyStateHash != enemyStateHashPrev) { // TODO further optimisation - hash of all added and removed enemies
         enemyStateHashPrev = enemyStateHash
 
-        for (let enemySpriteIdx = enemyContainer.children.length-1; enemySpriteIdx >= 0; enemySpriteIdx--) {
+        for (let enemySpriteIdx = enemyContainer.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
             let found = false
             for (let nameIdx = 0; nameIdx < enemyStateObjects.length; nameIdx++) {
                 // Whether enemy is found in enemyContainer, but not in server update
@@ -367,7 +390,7 @@ function updateEnemies() {
         // Add any enemies not present in container i.e. just spawned
         for (let nameIdx = 0; nameIdx < enemyStateObjects.length; nameIdx++) {
             let found = false;
-            for (let enemySpriteIdx = enemyContainer.children.length-1; enemySpriteIdx >= 0; enemySpriteIdx--) {
+            for (let enemySpriteIdx = enemyContainer.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
                 // Whether enemy if found in server update, but not in enemyContainer
                 //console.log(enemyContainer.children[enemySpriteIdx].name, state["enemies"][nameIdx].name)
                 found = (enemyContainer.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
@@ -409,7 +432,7 @@ function updateTowers() {
         let nameIdx = 0
         for (nameIdx; nameIdx < towerStateObjects.length; nameIdx++) {
             let found = false;
-            for (let towerSpriteIdx = towerContainer.children.length-1; towerSpriteIdx >= 0; towerSpriteIdx--) {
+            for (let towerSpriteIdx = towerContainer.children.length - 1; towerSpriteIdx >= 0; towerSpriteIdx--) {
                 found = (towerContainer.children[towerSpriteIdx].name == towerStateObjects[nameIdx].name)
                 if (found) break;
             }
@@ -441,8 +464,8 @@ function updateBullets() {
         addBullet(bullet["name"], "TODO") // New bullet
 
         // Move bullet
-        bulletContainer.children[bulletContainer.children.length-1].y = bullet["bulletPos"][0]*DEFAULT_SPRITE_SIZE_Y + bullet["bulletPos"][2]*(DEFAULT_SPRITE_SIZE_Y/SUBGRID_SIZE)
-        bulletContainer.children[bulletContainer.children.length-1].x = bullet["bulletPos"][1]*DEFAULT_SPRITE_SIZE_X + bullet["bulletPos"][3]*(DEFAULT_SPRITE_SIZE_X/SUBGRID_SIZE)
+        bulletContainer.children[bulletContainer.children.length - 1].y = bullet["bulletPos"][0] * DEFAULT_SPRITE_SIZE_Y + bullet["bulletPos"][2] * (DEFAULT_SPRITE_SIZE_Y / SUBGRID_SIZE)
+        bulletContainer.children[bulletContainer.children.length - 1].x = bullet["bulletPos"][1] * DEFAULT_SPRITE_SIZE_X + bullet["bulletPos"][3] * (DEFAULT_SPRITE_SIZE_X / SUBGRID_SIZE)
     })
 }
 
@@ -455,8 +478,8 @@ function calculateGridPos(pathPos) {
     let subGridSideLen = DEFAULT_SPRITE_SIZE_X / SUBGRID_SIZE
     return [
         // Map square                       Square within map square      Midway through square
-        pathPos[1]*DEFAULT_SPRITE_SIZE_X + (pathPos[3] * subGridSideLen + subGridSideLen/2),
-        pathPos[0]*DEFAULT_SPRITE_SIZE_X + (pathPos[2] * subGridSideLen + subGridSideLen/2)
+        pathPos[1] * DEFAULT_SPRITE_SIZE_X + (pathPos[3] * subGridSideLen + subGridSideLen / 2),
+        pathPos[0] * DEFAULT_SPRITE_SIZE_X + (pathPos[2] * subGridSideLen + subGridSideLen / 2)
     ]
 }
 
@@ -490,8 +513,10 @@ function setup() {
     generateBlueTowerSpritesheetData()
     generateBulletSpritesheetData()
 
-    // Render menu
-    addTowerMenu()
+    // Render menu toolbars - increases canvas size if so
+    addToolbar(app.view.width, 0, 3*DEFAULT_SPRITE_SIZE_X, MAP_HEIGHT*DEFAULT_SPRITE_SIZE_X, "towerMenu")
+    addToolbar(0, app.view.height, MAP_WIDTH*DEFAULT_SPRITE_SIZE_Y, 3*DEFAULT_SPRITE_SIZE_Y, "bottomToolbar")
+
     addMenuTower(0) // First (and currently) only entry in towerJson array
     addMenuTower(0)
     addMenuTower(0)
@@ -508,10 +533,8 @@ export function startRendering() {
     MAP_HEIGHT = getGridDimsRowsCols()[0]
     SUBGRID_SIZE = getSubGridDim()
 
-    TOWER_MENU_WIDTH_PX  = 3 * DEFAULT_SPRITE_SIZE_X
-    TOWER_MENU_HEIGHT_PX = MAP_HEIGHT * DEFAULT_SPRITE_SIZE_Y
-
-    APP_WIDTH = MAP_WIDTH * DEFAULT_SPRITE_SIZE_X + TOWER_MENU_WIDTH_PX
+    // Not this is starting width/height (just the game map). Toolbars are added later which resize
+    APP_WIDTH = MAP_WIDTH * DEFAULT_SPRITE_SIZE_X
     APP_HEIGHT = MAP_HEIGHT * DEFAULT_SPRITE_SIZE_Y
 
     //Create a Pixi Application
