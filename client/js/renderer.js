@@ -18,6 +18,7 @@ let app;
 // Sprite containers
 let mapContainer = new PIXI.Container(); // The grid all the action takes place in
 let toolbarContainer = new PIXI.Container(); // Tower menu background, player stats background, etc.
+let towerToolbarContentContainer = new PIXI.Container(); // Info about the tower
 let enemyContainer = new PIXI.Container(); // All the enemies on the map
 let towerMenuContainer = new PIXI.Container(); // Interactive tower sprites in the tower menu
 let towerDataContainer = new PIXI.Container(); // Range of tower etc.
@@ -275,6 +276,56 @@ function renderMap() {
     }
 }
 
+// For a given tower type, gets the deescription info and renders it as text to the
+// tower info toolbar
+function writeTowerInfo(towerNum=0) {
+    let towerInfoMenu = toolbarContainer.getChildByName("towerInfoMenu")
+    let xMargin = 10
+
+    let defaultStyle = {
+        fontFamily: 'Arial',
+        fontSize: 20,
+        fontWeight: 'bold',
+        wordWrap: true,
+        wordWrapWidth: towerInfoMenu.width - xMargin
+    }
+    let defaultX = towerInfoMenu.x + towerInfoMenu.width/2
+    let defaultYGap = 20
+    let defaultY = towerInfoMenu.y + defaultYGap
+
+        // Title
+    let text = new PIXI.Text('Tower Info', defaultStyle);
+    text.x = Math.floor(defaultX)
+    text.y = Math.floor(defaultY)
+    text.name = "title"
+    text.anchor.set(0.5)
+    towerToolbarContentContainer.addChild(text);
+
+    let towerInfo = towerJson[towerNum]["info"]
+    for (let key in towerInfo) {
+        defaultY += defaultYGap
+
+        // Description title
+        text = new PIXI.Text(key, defaultStyle);
+        text.x = Math.floor(towerInfoMenu.x + xMargin)
+        text.y = Math.floor(defaultY)
+        text.name = key
+        text.style.fontSize = 16
+        towerToolbarContentContainer.addChild(text);
+
+        // Description content
+        text = new PIXI.Text(towerInfo[key], defaultStyle);
+        text.x = Math.floor(towerInfoMenu.x + towerInfoMenu.width - xMargin)
+        text.y = Math.floor(defaultY)
+        text.anchor.set(1, 0) // Shift right
+        text.name = key + "Value"
+        text.style.fontWeight = "normal"
+        text.style.fontSize = 16
+        towerToolbarContentContainer.addChild(text);
+
+    }
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Events
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -366,6 +417,7 @@ function onTowerClick() {
     // Show/hide the range circle
     let towerToUpdate = towerDataContainer.getChildByName(this.name)
     towerToUpdate.visible = !towerToUpdate.visible
+    writeTowerInfo(this.type)
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -528,12 +580,15 @@ function setup() {
     generateBulletSpritesheetData()
 
     // Render menu toolbars - increases canvas size if so
-    addToolbar(app.view.width, 0, 5*DEFAULT_SPRITE_SIZE_X, MAP_HEIGHT*DEFAULT_SPRITE_SIZE_X, "towerMenu")
     addToolbar(0, app.view.height, MAP_WIDTH*DEFAULT_SPRITE_SIZE_Y, 3*DEFAULT_SPRITE_SIZE_Y, "bottomToolbar")
+    addToolbar(mapContainer.width, 0, 5*DEFAULT_SPRITE_SIZE_X, app.view.height/2, "towerMenu")
+    addToolbar(mapContainer.width, app.view.height/2, 5*DEFAULT_SPRITE_SIZE_X, app.view.height/2, "towerInfoMenu", "0x757575") // little bit lighter so can see the box
+    writeTowerInfo(0)
 
     addMenuTower(0) // First (and currently) only entry in towerJson array
     addMenuTower(0)
     addMenuTower(0)
+
 
     // Start rendering loop
     // Note that ticker FPS is fixed to monitor rate
@@ -561,6 +616,7 @@ export function startRendering() {
     // children array, which is the order they are rendered.
     app.stage.addChild(mapContainer)
     app.stage.addChild(toolbarContainer)
+    app.stage.addChild(towerToolbarContentContainer)
     app.stage.addChild(enemyContainer)
     app.stage.addChild(towerMenuContainer)
     app.stage.addChild(towerDataContainer)

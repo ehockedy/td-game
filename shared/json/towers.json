@@ -2,6 +2,12 @@
     {
         "id": "0001",
         "description": "basic blue tower",
-        "range": 5
+        "range": 5,
+        "info": {
+            "Bullet type": "single",
+            "Damage": "low",
+            "Rate": "medium",
+            "Resistance": "none"
+        }
     }
 ]
