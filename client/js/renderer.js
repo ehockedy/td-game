@@ -25,6 +25,9 @@ let towerDataContainer = new PIXI.Container(); // Range of tower etc.
 let towerContainer = new PIXI.Container(); // All the towers on the map
 let bulletContainer = new PIXI.Container(); // All the bullets on the map
 
+// The element currently clicked/active
+let activeClickable
+
 // PIXI graphics
 let graphics = new PIXI.Graphics();
 
@@ -32,7 +35,6 @@ let graphics = new PIXI.Graphics();
 let enemySpriteSheet = {};
 let towerSpriteSheet = {};
 let bulletSpriteSheet = {};
-
 
 // TODO make these general use function to gerenrate animated sprite sheet data
 function generateRedEnemySpritesheetData() {
@@ -127,7 +129,8 @@ function addTower(name, type, owner, row, col) {
             .on('pointerup', onDragEnd)
             .on('pointerupoutside', onDragEnd)
             .on('pointermove', onDragMove)
-            .on('click', onTowerClick);
+            .on('click', onTowerClick)
+            .on('clickoff', onTowerUnclick); // This is a custom event triggered manually
 
 
         // Add the area circle sprite too
@@ -324,6 +327,7 @@ function writeTowerInfo(towerNum=0) {
         towerToolbarContentContainer.addChild(text);
 
     }
+    towerToolbarContentContainer.visible = false
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -414,10 +418,28 @@ function onDragMove(event) {
 }
 
 function onTowerClick() {
-    // Show/hide the range circle
-    let towerToUpdate = towerDataContainer.getChildByName(this.name)
-    towerToUpdate.visible = !towerToUpdate.visible
-    writeTowerInfo(this.type)
+    if (activeClickable == this) { // Clicked on the currently active tower
+        this.emit('clickoff');
+    } else { // Clicked on tower that is not active
+        if (typeof activeClickable != "undefined") activeClickable.emit('clickoff') // Cancel current active clickable
+        activeClickable = this // Register this as the active object
+        towerDataContainer.getChildByName(this.name).visible = true // Show the range circle
+        towerToolbarContentContainer.visible = true // Show info about the tower
+    }
+}
+
+function onTowerUnclick() {
+    towerDataContainer.getChildByName(this.name).visible = false
+    towerToolbarContentContainer.visible = false
+    activeClickable = undefined
+}
+
+function onCanvasClick(event) {
+    if (typeof activeClickable != "undefined") {
+        if (!activeClickable.containsPoint(new PIXI.Point(event.layerX, event.layerY))) {
+            activeClickable.emit('clickoff'); // clickoff event is agnostic to the type of object stored in activeClickable
+        }
+    }
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -559,7 +581,6 @@ function isPointWithinContainer(x, y, container) {
     )
 }
 
-
 function gameLoop(delta) {
     // Called every time display is rendered
     updateEnemies();
@@ -589,6 +610,7 @@ function setup() {
     addMenuTower(0)
     addMenuTower(0)
 
+    app.view.addEventListener('click', (event) => onCanvasClick(event));
 
     // Start rendering loop
     // Note that ticker FPS is fixed to monitor rate
