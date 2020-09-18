@@ -637,11 +637,11 @@ export function startRendering() {
     // Order in which display objects are added is the order they are put in the
     // children array, which is the order they are rendered.
     app.stage.addChild(mapContainer)
+    app.stage.addChild(enemyContainer)
+    app.stage.addChild(towerDataContainer)
     app.stage.addChild(toolbarContainer)
     app.stage.addChild(towerToolbarContentContainer)
-    app.stage.addChild(enemyContainer)
     app.stage.addChild(towerMenuContainer)
-    app.stage.addChild(towerDataContainer)
     app.stage.addChild(bulletContainer)
     app.stage.addChild(towerContainer)
 
