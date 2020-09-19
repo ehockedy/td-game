@@ -102,6 +102,30 @@ function addEnemy(name, type) {
     enemyContainer.addChild(animatedEnemySprite)
 }
 
+function getTowerSprite(type) {
+    let towerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"])
+    towerSprite.loop = false
+    towerSprite.anchor.set(0.5)
+    towerSprite.type = type
+    towerSprite.tint = randomColourCode
+    return towerSprite
+}
+
+function generateTowerRange(range) {
+    // Add the area circle sprite too
+    graphics.beginFill("0xe74c3c") // Red
+    graphics.alpha = 0.5
+    graphics.drawCircle(0, 0, range*DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
+
+    let circleTexture = app.renderer.generateTexture(graphics)
+    let circleSprite = new PIXI.Sprite(circleTexture) // create a sprite from graphics canvas
+
+    circleSprite.anchor.set(0.5)
+    circleSprite.visible = true
+    graphics.clear()
+    return circleSprite
+}
+
 /**
  * Add tower with stats based off the type
  * @param {String} name Unique name of the tower object
@@ -126,50 +150,82 @@ function addTower(name, type, owner, row, col) {
         towerSprite.interactive = true; // reponds to mouse and touch events
         towerSprite.buttonMode = true; // hand cursor appears when hover over
         towerSprite
-            .on('pointerup', onDragEnd)
-            .on('pointerupoutside', onDragEnd)
-            .on('pointermove', onDragMove)
             .on('click', onTowerClick)
             .on('clickoff', onTowerUnclick); // This is a custom event triggered manually
 
-
-        // Add the area circle sprite too
-        graphics.beginFill("0xe74c3c") // Red
-        graphics.alpha = 0.5
-        graphics.drawCircle(0, 0, towerJson[towerSprite.type]["range"] * DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
-
-        let circleTexture = app.renderer.generateTexture(graphics)
-        let circleSprite = new PIXI.Sprite(circleTexture) // create a sprite from graphics canvas
+        let circleSprite = generateTowerRange(towerJson[towerSprite.type]["range"])
         circleSprite.x = towerSprite.x
         circleSprite.y = towerSprite.y
         circleSprite.name = towerSprite.name // Same name as tower
-        circleSprite.anchor.set(0.5)
         circleSprite.visible = false
         towerDataContainer.addChild(circleSprite)
-        graphics.clear()
     }
 
     towerContainer.addChild(towerSprite)
 }
 
+function getTowerUpdateMsg(tower) {
+    return {
+        "y": tower.gridY,
+        "x": tower.gridX,
+        "value": {
+            "type": "tower",
+            "owner": tower.owner,
+            "colour": randomColourCode,
+            "name": tower.name
+        },
+        "towerName": tower.name,
+        "gameID": getGameID()
+    }
+}
+
+function addTempTower(baseTower) {
+    let tempTowerSprite = getTowerSprite(baseTower.type)
+    tempTowerSprite.x = baseTower.x
+    tempTowerSprite.y = baseTower.y
+    tempTowerSprite.interactive = true
+    tempTowerSprite.name = "temp"
+    tempTowerSprite.alpha = 0.5
+
+    let tempTowerRangeSprite = generateTowerRange(towerJson[baseTower.type]["range"])
+    tempTowerRangeSprite.x = baseTower.x
+    tempTowerRangeSprite.y = baseTower.y
+    tempTowerRangeSprite.name = "temp"
+    tempTowerRangeSprite.interactive = true
+    tempTowerRangeSprite.visible = false
+
+    towerContainer.addChild(tempTowerSprite)
+    towerDataContainer.addChild(tempTowerRangeSprite)
+
+    // Interaction options
+    tempTowerRangeSprite
+        .on('pointermove', onDragTower) // Moves the object bound to it
+    tempTowerSprite
+        .on('pointermove', onDragTower)
+        .on('pointermove', onPlaceTower)
+        .on('pointermove', () => {tempTowerRangeSprite.visible = true;}) // Have to register visibility on tower move, since cannot trigger events on the invisible object
+        .on('pointerup', onPlaceTowerConfirm)
+        .on('pointerupoutside', onPlaceTowerConfirm)
+}
+
 /**
  * Interactive menu sprite for a tower
  * When dragged, creates a new tower that can be placed on the map
+ * When clicked, shows information about the tower
  * @param {Number} type Type of tower
  */
 function addMenuTower(type) {
-    let menuTowerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"]) // TODO make not animated
-    menuTowerSprite.loop = false
+    let menuTowerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"])
     menuTowerSprite.anchor.set(0.5)
-    menuTowerSprite.name = "temporary_blue_tower_1" // Unique identifier
+    menuTowerSprite.name = towerJson[type]["id"] // Unique identifier
     menuTowerSprite.tint = randomColourCode
     menuTowerSprite.interactive = true; // reponds to mouse and touch events
     menuTowerSprite.buttonMode = true; // hand cursor appears when hover over
+    menuTowerSprite.type = type
 
-    let towersCount = towerMenuContainer.children.length
-
-    // Calcualte positon within the tower menu
+    // Calculate positon within the tower menu
     let towerMenuSprite = toolbarContainer.getChildByName("towerMenu")
+    let towersCount = towerMenuContainer.children.length
 
     let towersPerRow = 2
     let toolbarWidth = towerMenuSprite.width
@@ -183,22 +239,21 @@ function addMenuTower(type) {
     //               <toolbar>
     // toolbar = 2*tower + 3*space
     // space = (toolbar - 2*tower) / 3
-    // We know toolbar width and towe width, so can work out space width. THen replace 2 and 3 with n and (n+1)
+    // We know toolbar width and tower width, so can work out space width. Then replace 2 and 3 with n and (n+1)
     menuTowerSprite.x = towerMenuSprite.x + (spacing + towerSpriteWidth/2) + ((spacing + towerSpriteWidth) * (towersCount % towersPerRow))
     menuTowerSprite.y = towerMenuSprite.y + DEFAULT_SPRITE_SIZE_Y * 2 * (Math.floor(towersCount/towersPerRow) + 1) // +1 so not starting at y = 0
 
     menuTowerSprite
-        .on('pointerdown', function () {
-            let newTowerName = randomHexString(20)
-            addTower(newTowerName, type, username, menuTowerSprite.x, menuTowerSprite.y) // TODO pass json string ID/name
-            let towerSprite = towerContainer.getChildByName(newTowerName) // TODO don't do this, get from above call somehow
-
-            // Set the properties because it will start by being dragged from menu
-            towerSprite.alpha = 0.5;
-            towerSprite.dragging = true;
-            towerSprite.gridlocked = false // Whether to stick to the grid of DEFAULT_SPRITE_SIZE[X|Y] sized squares
-            towerDataContainer.getChildByName(newTowerName).visible = true
+        .on('pointerdown', () => {menuTowerSprite.readyToMove = true}) // Register that the icon has been pressed
+        .on('pointerup', () => {menuTowerSprite.readyToMove = false})
+        .on('pointermove', () => {
+            if (menuTowerSprite.readyToMove) { // If the icon is dragged once it has been pressed, create the temporary sprite that can be dragged and placed
+                addTempTower(menuTowerSprite)
+                menuTowerSprite.readyToMove = false
+            }
         })
+        .on('click', onMenuTowerClick) // Show info but not range circle
+        .on('clickoff', onMenuTowerUnclick)
 
     towerMenuContainer.addChild(menuTowerSprite)
 }
@@ -333,91 +388,45 @@ function writeTowerInfo(towerNum=0) {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Events
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-function onDragStart(event) {
-    // store a reference to the data
-    // the reason for this is because of multitouch
-    // we want to track the movement of this particular touch
-    this.data = event.data;
-    this.alpha = 0.5;
-    this.dragging = true;
-}
-
-function onDragEnd() {
-    if (isPointWithinContainer(this.x, this.y, mapContainer)) {  // If not moved off menu, remove the sprite
-        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, {
-            "y": this.gridY,
-            "x": this.gridX,
-            "value": {
-                "type": "tower",
-                "owner": username,
-                "colour": randomColourCode,
-                "name": this.name
-            },
-            "towerName": this.name,
-            "gameID": getGameID()
-        }) // Writes 2 to x, y in grid
-        // Server then updates the board of each client - including this one
-        this.alpha = 1;
-        this.dragging = false;
-        this.off('pointerupoutside', onDragEnd)
-            .off('pointermove', onDragMove)
-            .off('pointerup', onDragEnd);
-
-        // Clear the red range circle
-        towerDataContainer.getChildByName(this.name).visible = false
-    } else {
-        towerContainer.removeChild(this); // TODO could remove anyway and just let the server update add it
+function onDragTower(event) {
+    const newPosition = event.data.getLocalPosition(this.parent);
+    if (isPointWithinContainer(newPosition.x, newPosition.y, mapContainer)) {
+        // If on map, snap to grid
+        let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
+        let newGridY = Math.floor(newPosition.y / DEFAULT_SPRITE_SIZE_Y)
+        if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
+            getBoard()[newGridY][newGridX] == 0) { // Must be empty space
+            this.gridX = newGridX
+            this.gridY = newGridY
+            this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
+            this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
+        }
+    } else if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < app.view.width && newPosition.y < app.view.height) {
+        // Otherwise, update position normally
+        this.x = newPosition.x
+        this.y = newPosition.y
     }
 }
 
-function onDragMove(event) {
-    if (this.dragging) {
-        const newPosition = event.data.getLocalPosition(this.parent);
-
-        // Check if out of windoe - if so do not update position
-        if (newPosition.x < 0 || newPosition.y < 0 || newPosition.x > APP_WIDTH || newPosition.y > APP_HEIGHT) {
-            return;
-        }
-
-        // Check if within the map - if so make it snap to grid
-        if (isPointWithinContainer(newPosition.x, newPosition.y, mapContainer)) {
-
-            let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
-            let newGridY = Math.floor(newPosition.y / DEFAULT_SPRITE_SIZE_Y)
-            if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
-                getBoard()[newGridY][newGridX] == 0) { // Must be empty space
-                this.gridX = newGridX
-                this.gridY = newGridY
-                this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
-                this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
-
-                let rangeCircleToUpdate = towerDataContainer.getChildByName(this.name)
-                rangeCircleToUpdate.visible = true
-                rangeCircleToUpdate.x = this.x
-                rangeCircleToUpdate.y = this.y
-
-                // Send to server then all other clients - but don't actually write to the grid
-                sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, {
-                    "y": this.gridY,
-                    "x": this.gridX,
-                    "value": {
-                        "type": "tower",
-                        "owner": username,
-                        "colour": randomColourCode,
-                        "name": this.name
-                    },
-                    "gameID": getGameID()
-                })
-            }
-        } else {
-            this.x = newPosition.x
-            this.y = newPosition.y
-            towerDataContainer.getChildByName(this.name).visible = false
-        }
+function onPlaceTower() {
+    if (isPointWithinContainer(this.x, this.y, mapContainer)) {
+        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, getTowerUpdateMsg(this))
     }
 }
 
-function onTowerClick() {
+function onPlaceTowerConfirm() {
+    if (isPointWithinContainer(this.x, this.y, mapContainer)) {
+        let name = randomHexString(20)
+        addTower(name, this.type, username, this.gridY, this.gridX)
+        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(towerContainer.getChildByName(name)))
+    }
+
+    // Remove the temporary sprites
+    towerContainer.removeChild(this)
+    towerDataContainer.removeChild(towerDataContainer.getChildByName("temp")) // TODO this could ne nicer
+}
+
+function onTowerClick(event) {
     if (activeClickable == this) { // Clicked on the currently active tower
         this.emit('clickoff');
     } else { // Clicked on tower that is not active
@@ -428,8 +437,24 @@ function onTowerClick() {
     }
 }
 
+function onMenuTowerClick(event) {
+    if (activeClickable == this) { // Clicked on the currently active tower
+        this.emit('clickoff');
+    } else { // Clicked on tower that is not active
+        if (typeof activeClickable != "undefined") activeClickable.emit('clickoff') // Cancel current active clickable
+        activeClickable = this // Register this as the active object
+        console.log(activeClickable)
+        towerToolbarContentContainer.visible = true // Show info about the tower
+    }
+}
+
 function onTowerUnclick() {
     towerDataContainer.getChildByName(this.name).visible = false
+    towerToolbarContentContainer.visible = false
+    activeClickable = undefined
+}
+
+function onMenuTowerUnclick() {
     towerToolbarContentContainer.visible = false
     activeClickable = undefined
 }
@@ -437,6 +462,7 @@ function onTowerUnclick() {
 function onCanvasClick(event) {
     if (typeof activeClickable != "undefined") {
         if (!activeClickable.containsPoint(new PIXI.Point(event.layerX, event.layerY))) {
+
             activeClickable.emit('clickoff'); // clickoff event is agnostic to the type of object stored in activeClickable
         }
     }

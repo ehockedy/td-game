@@ -111,10 +111,10 @@ web_sockets_server.on('connection', (socket) => {
     }
   })
 
-  // socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
-  //   console.log("Updated board from client", data)
-  //   // TODO broadcast temporary position to other connected clients
-  // });
+  socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
+    console.log("Updated board from client", data)
+    // TODO broadcast temporary position to other connected clients
+  });
 
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data) => {
     let clientAddr = socket["handshake"]["address"]
