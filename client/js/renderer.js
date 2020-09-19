@@ -179,18 +179,27 @@ function getTowerUpdateMsg(tower) {
     }
 }
 
-function addTempTower(baseTower) {
-    let tempTowerSprite = getTowerSprite(baseTower.type)
-    tempTowerSprite.x = baseTower.x
-    tempTowerSprite.y = baseTower.y
+/**
+ * Interactive sprite of the tower the user has slected
+ * Once interacted with, adds a sprite to replace the one taken
+ * Can be placed on the map, or is removed otherwise
+ * @param {Number/String?} type Tower type
+ * @param {Number} x x position
+ * @param {Number} y y position
+ */
+function addTempTower(type, x, y) {
+    let name = randomHexString(6)
+    let tempTowerSprite = getTowerSprite(type)
+    tempTowerSprite.x = x
+    tempTowerSprite.y = y
     tempTowerSprite.interactive = true
-    tempTowerSprite.name = "temp"
-    tempTowerSprite.alpha = 0.5
+    tempTowerSprite.buttonMode = true;
+    tempTowerSprite.name = name
 
-    let tempTowerRangeSprite = generateTowerRange(towerJson[baseTower.type]["range"])
-    tempTowerRangeSprite.x = baseTower.x
-    tempTowerRangeSprite.y = baseTower.y
-    tempTowerRangeSprite.name = "temp"
+    let tempTowerRangeSprite = generateTowerRange(towerJson[type]["range"])
+    tempTowerRangeSprite.x = x
+    tempTowerRangeSprite.y = y
+    tempTowerRangeSprite.name = name
     tempTowerRangeSprite.interactive = true
     tempTowerRangeSprite.visible = false
 
@@ -198,38 +207,44 @@ function addTempTower(baseTower) {
     towerDataContainer.addChild(tempTowerRangeSprite)
 
     // Interaction options
-    tempTowerRangeSprite
-        .on('pointermove', onDragTower) // Moves the object bound to it
     tempTowerSprite
-        .on('pointermove', onDragTower)
-        .on('pointermove', onPlaceTower)
-        .on('pointermove', () => {tempTowerRangeSprite.visible = true;}) // Have to register visibility on tower move, since cannot trigger events on the invisible object
-        .on('pointerup', onPlaceTowerConfirm)
-        .on('pointerupoutside', onPlaceTowerConfirm)
+        .on('pointerdown', function() {
+            tempTowerRangeSprite
+                .on('pointermove', onDragTower) // Moves the object bound to it
+            tempTowerSprite
+                .on('pointermove', onDragTower)
+                .on('pointermove', onPlaceTower)
+                .on('pointermove', () => {tempTowerRangeSprite.visible = true;}) // Have to register visibility on tower move, since cannot trigger events on the invisible object
+                .on('pointerup', onPlaceTowerConfirm)
+                .on('pointerupoutside', onPlaceTowerConfirm)
+                .on('pointerup', ()=>{
+                    towerContainer.removeChild(tempTowerSprite)
+                    towerDataContainer.removeChild(tempTowerRangeSprite)
+                })
+                .on('pointerupoutside', ()=>{
+                    towerContainer.removeChild(tempTowerSprite)
+                    towerDataContainer.removeChild(tempTowerRangeSprite)
+                })
+                tempTowerSprite.alpha = 0.5
+                addTempTower(type, x, y) // Recursively add another
+                console.log(towerContainer.children.length)
+            })
+        .on('pointerup', onMenuTowerClick) // Effectively a click - click would not work in parallel to pointerdown
+        .on('clickoff', onMenuTowerUnclick)
 }
 
 /**
- * Interactive menu sprite for a tower
- * When dragged, creates a new tower that can be placed on the map
- * When clicked, shows information about the tower
+ * Adds spot for the specified tower menu icon, then adds a sprite that can be interacted with
  * @param {Number} type Type of tower
  */
 function addMenuTower(type) {
-    let menuTowerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"])
-    menuTowerSprite.anchor.set(0.5)
-    menuTowerSprite.name = towerJson[type]["id"] // Unique identifier
-    menuTowerSprite.tint = randomColourCode
-    menuTowerSprite.interactive = true; // reponds to mouse and touch events
-    menuTowerSprite.buttonMode = true; // hand cursor appears when hover over
-    menuTowerSprite.type = type
-
     // Calculate positon within the tower menu
     let towerMenuSprite = toolbarContainer.getChildByName("towerMenu")
     let towersCount = towerMenuContainer.children.length
 
     let towersPerRow = 2
     let toolbarWidth = towerMenuSprite.width
-    let towerSpriteWidth = menuTowerSprite.width
+    let towerSpriteWidth = DEFAULT_SPRITE_SIZE_X
     let spacing = (toolbarWidth - (towersPerRow*towerSpriteWidth)) / (towersPerRow + 1)
 
     // Equally space the towers across the menu where all the spaces are equal width
@@ -240,22 +255,12 @@ function addMenuTower(type) {
     // toolbar = 2*tower + 3*space
     // space = (toolbar - 2*tower) / 3
     // We know toolbar width and tower width, so can work out space width. Then replace 2 and 3 with n and (n+1)
-    menuTowerSprite.x = towerMenuSprite.x + (spacing + towerSpriteWidth/2) + ((spacing + towerSpriteWidth) * (towersCount % towersPerRow))
-    menuTowerSprite.y = towerMenuSprite.y + DEFAULT_SPRITE_SIZE_Y * 2 * (Math.floor(towersCount/towersPerRow) + 1) // +1 so not starting at y = 0
+    let x = towerMenuSprite.x + (spacing + towerSpriteWidth/2) + ((spacing + towerSpriteWidth) * (towersCount % towersPerRow))
+    let y = towerMenuSprite.y + DEFAULT_SPRITE_SIZE_Y * 2 * (Math.floor(towersCount/towersPerRow) + 1) // +1 so not starting at y = 0
 
-    menuTowerSprite
-        .on('pointerdown', () => {menuTowerSprite.readyToMove = true}) // Register that the icon has been pressed
-        .on('pointerup', () => {menuTowerSprite.readyToMove = false})
-        .on('pointermove', () => {
-            if (menuTowerSprite.readyToMove) { // If the icon is dragged once it has been pressed, create the temporary sprite that can be dragged and placed
-                addTempTower(menuTowerSprite)
-                menuTowerSprite.readyToMove = false
-            }
-        })
-        .on('click', onMenuTowerClick) // Show info but not range circle
-        .on('clickoff', onMenuTowerUnclick)
-
-    towerMenuContainer.addChild(menuTowerSprite)
+    // Add a sprite where the menu icon has been positioned
+    // When it is used (moved), put another one there
+    addTempTower(type, x, y)
 }
 
 /**
@@ -382,7 +387,7 @@ function writeTowerInfo(towerNum=0) {
         towerToolbarContentContainer.addChild(text);
 
     }
-    towerToolbarContentContainer.visible = false
+    //towerToolbarContentContainer.visible = false
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -420,10 +425,6 @@ function onPlaceTowerConfirm() {
         addTower(name, this.type, username, this.gridY, this.gridX)
         sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(towerContainer.getChildByName(name)))
     }
-
-    // Remove the temporary sprites
-    towerContainer.removeChild(this)
-    towerDataContainer.removeChild(towerDataContainer.getChildByName("temp")) // TODO this could ne nicer
 }
 
 function onTowerClick(event) {
@@ -433,7 +434,8 @@ function onTowerClick(event) {
         if (typeof activeClickable != "undefined") activeClickable.emit('clickoff') // Cancel current active clickable
         activeClickable = this // Register this as the active object
         towerDataContainer.getChildByName(this.name).visible = true // Show the range circle
-        towerToolbarContentContainer.visible = true // Show info about the tower
+        writeTowerInfo(this.type)
+        //towerToolbarContentContainer.visible = true // Show info about the tower
     }
 }
 
@@ -444,25 +446,24 @@ function onMenuTowerClick(event) {
         if (typeof activeClickable != "undefined") activeClickable.emit('clickoff') // Cancel current active clickable
         activeClickable = this // Register this as the active object
         console.log(activeClickable)
-        towerToolbarContentContainer.visible = true // Show info about the tower
+        writeTowerInfo(this.type)
     }
 }
 
 function onTowerUnclick() {
     towerDataContainer.getChildByName(this.name).visible = false
-    towerToolbarContentContainer.visible = false
+    towerToolbarContentContainer.removeChildren()
     activeClickable = undefined
 }
 
 function onMenuTowerUnclick() {
-    towerToolbarContentContainer.visible = false
+    towerToolbarContentContainer.removeChildren()
     activeClickable = undefined
 }
 
 function onCanvasClick(event) {
     if (typeof activeClickable != "undefined") {
         if (!activeClickable.containsPoint(new PIXI.Point(event.layerX, event.layerY))) {
-
             activeClickable.emit('clickoff'); // clickoff event is agnostic to the type of object stored in activeClickable
         }
     }
@@ -630,7 +631,6 @@ function setup() {
     addToolbar(0, app.view.height, MAP_WIDTH*DEFAULT_SPRITE_SIZE_Y, 3*DEFAULT_SPRITE_SIZE_Y, "bottomToolbar")
     addToolbar(mapContainer.width, 0, 5*DEFAULT_SPRITE_SIZE_X, app.view.height/2, "towerMenu")
     addToolbar(mapContainer.width, app.view.height/2, 5*DEFAULT_SPRITE_SIZE_X, app.view.height/2, "towerInfoMenu", "0x757575") // little bit lighter so can see the box
-    writeTowerInfo(0)
 
     addMenuTower(0) // First (and currently) only entry in towerJson array
     addMenuTower(0)
