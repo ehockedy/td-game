@@ -203,7 +203,7 @@ function addTempTower(type, x, y) {
     tempTowerRangeSprite.interactive = true
     tempTowerRangeSprite.visible = false
 
-    towerContainer.addChild(tempTowerSprite)
+    towerMenuContainer.addChild(tempTowerSprite)
     towerDataContainer.addChild(tempTowerRangeSprite)
 
     // Interaction options
@@ -218,16 +218,16 @@ function addTempTower(type, x, y) {
                 .on('pointerup', onPlaceTowerConfirm)
                 .on('pointerupoutside', onPlaceTowerConfirm)
                 .on('pointerup', ()=>{
-                    towerContainer.removeChild(tempTowerSprite)
+                    towerMenuContainer.removeChild(tempTowerSprite)
                     towerDataContainer.removeChild(tempTowerRangeSprite)
                 })
                 .on('pointerupoutside', ()=>{
-                    towerContainer.removeChild(tempTowerSprite)
+                    towerMenuContainer.removeChild(tempTowerSprite)
                     towerDataContainer.removeChild(tempTowerRangeSprite)
                 })
                 tempTowerSprite.alpha = 0.5
                 addTempTower(type, x, y) // Recursively add another
-                console.log(towerContainer.children.length)
+                console.log(towerMenuContainer.children.length)
             })
         .on('pointerup', onMenuTowerClick) // Effectively a click - click would not work in parallel to pointerdown
         .on('clickoff', onMenuTowerUnclick)
