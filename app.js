@@ -8,11 +8,13 @@ networking.setRootDir(__dirname) // Set the location to get files from
 
 const interfaces = os.networkInterfaces();
 let listeningAddress = ""
-for (let intfIdx=0; intfIdx < interfaces["WiFi"].length; intfIdx++) {
-  if (interfaces["WiFi"][intfIdx]["address"].split('.')[0] == "192" &&
-      interfaces["WiFi"][intfIdx]["address"].split('.')[1] == "168") {
-        listeningAddress = interfaces["WiFi"][intfIdx]["address"]
-      }
+if (interfaces.hasOwnProperty("WiFi")) {
+  for (let intfIdx=0; intfIdx < interfaces["WiFi"].length; intfIdx++) {
+    if (interfaces["WiFi"][intfIdx]["address"].split('.')[0] == "192" &&
+        interfaces["WiFi"][intfIdx]["address"].split('.')[1] == "168") {
+          listeningAddress = interfaces["WiFi"][intfIdx]["address"]
+        }
+  }
 }
 
 // MUST keep these synced with enum in client
