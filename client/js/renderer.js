@@ -155,7 +155,7 @@ function addTower(name, type, owner, row, col) {
             .on('click', onTowerClick)
             .on('clickoff', onTowerUnclick); // This is a custom event triggered manually
 
-        let circleSprite = generateTowerRange(towerJson[towerSprite.type]["range"])
+        let circleSprite = generateTowerRange(towerJson[towerSprite.type]["gameData"]["range"])
         circleSprite.x = towerSprite.x
         circleSprite.y = towerSprite.y
         circleSprite.name = towerSprite.name // Same name as tower
@@ -198,7 +198,7 @@ function addTempTower(type, x, y) {
     tempTowerSprite.buttonMode = true;
     tempTowerSprite.name = name
 
-    let tempTowerRangeSprite = generateTowerRange(towerJson[type]["range"])
+    let tempTowerRangeSprite = generateTowerRange(towerJson[type]["gameData"]["range"])
     tempTowerRangeSprite.x = x
     tempTowerRangeSprite.y = y
     tempTowerRangeSprite.name = name

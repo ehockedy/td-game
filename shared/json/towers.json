@@ -2,45 +2,77 @@
     {
         "name": "basic tower",
         "spriteSheetNum": 0,
-        "range": 5,
-        "info": {
+        "displayInfo": {
             "Ammo type": "single",
             "Damage": "low",
             "Rate": "medium",
             "Resistance": "none"
+        },
+        "gameData": {
+            "range": 5,
+            "damage": 5,
+            "rateOfFire": 5,
+            "bulletType": "simple",
+            "numberOfBullets": 1,
+            "turns": true,
+            "piercing": false
         }
     },
     {
         "name": "all direction tower",
         "spriteSheetNum": 1,
-        "range": 2,
-        "info": {
+        "displayInfo": {
             "Ammo type": "all dirs",
             "Damage": "low",
             "Rate": "medium",
             "Resistance": "none"
+        },
+        "gameData": {
+            "range": 2,
+            "damage": 5,
+            "rateOfFire": 5,
+            "bulletType": "simple",
+            "numberOfBullets": 8,
+            "turns": false,
+            "piercing": false
         }
     },
     {
         "name": "triple tower",
         "spriteSheetNum": 2,
-        "range": 5,
-        "info": {
+        "displayInfo": {
             "Ammo type": "3 simple",
             "Damage": "medium",
             "Rate": "medium",
             "Resistance": "none"
+        },
+        "gameData": {
+            "range": 5,
+            "damage": 5,
+            "rateOfFire": 5,
+            "bulletType": "simple",
+            "numberOfBullets": 3,
+            "turns": true,
+            "piercing": false
         }
     },
     {
         "name": "sniper tower",
         "spriteSheetNum": 3,
-        "range": 10,
-        "info": {
+        "displayInfo": {
             "Ammo type": "simple",
             "Damage": "high",
             "Rate": "low",
             "Resistance": "none"
+        },
+        "gameData": {
+            "range": 10,
+            "damage": 5,
+            "rateOfFire": 5,
+            "bulletType": "simple",
+            "numberOfBullets": 1,
+            "turns": true,
+            "piercing": false
         }
     }
 ]
