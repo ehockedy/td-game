@@ -45,11 +45,11 @@ function generateRedEnemySpritesheetData() {
     }
 }
 
-function generateBlueTowerSpritesheetData() {
+function generateTowerSpritesheetData() {
     let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
     for (let type in towerJson) {
         towerSpriteSheet[type] = []
-        towerSpriteSheet[type].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, 0, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y*towerJson[type]["spriteSheetNum"])))
+        towerSpriteSheet[type].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, DEFAULT_SPRITE_SIZE_Y*towerJson[type]["spriteSheetNum"], DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
     }
 }
 
@@ -623,7 +623,7 @@ function setup() {
 
     // Generates the data that can be reused to make multiple sprites
     generateRedEnemySpritesheetData()
-    generateBlueTowerSpritesheetData()
+    generateTowerSpritesheetData()
     generateBulletSpritesheetData()
 
     // Render menu toolbars - increases canvas size if so
@@ -632,8 +632,9 @@ function setup() {
     addToolbar(mapContainer.width, app.view.height/2, 5*DEFAULT_SPRITE_SIZE_X, app.view.height/2, "towerInfoMenu", "0x757575") // little bit lighter so can see the box
 
     addMenuTower(0) // First (and currently) only entry in towerJson array
-    addMenuTower(0)
-    addMenuTower(0)
+    addMenuTower(1)
+    addMenuTower(2)
+    addMenuTower(3)
 
     app.view.addEventListener('click', (event) => onCanvasClick(event));
 
