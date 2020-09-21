@@ -36,7 +36,7 @@ let enemySpriteSheet = {};
 let towerSpriteSheet = {};
 let bulletSpriteSheet = {};
 
-// TODO make these general use function to gerenrate animated sprite sheet data
+// TODO make these general use function to generate animated sprite sheet data
 function generateRedEnemySpritesheetData() {
     let texture = PIXI.Loader.shared.resources["client/img/enemy_spritesheet.png"].texture
     enemySpriteSheet["red"] = []
@@ -47,8 +47,10 @@ function generateRedEnemySpritesheetData() {
 
 function generateBlueTowerSpritesheetData() {
     let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
-    towerSpriteSheet["blue"] = []
-    towerSpriteSheet["blue"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, 0, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
+    for (let type in towerJson) {
+        towerSpriteSheet[type] = []
+        towerSpriteSheet[type].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, 0, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y*towerJson[type]["spriteSheetNum"])))
+    }
 }
 
 function generateBulletSpritesheetData() {
@@ -103,7 +105,7 @@ function addEnemy(name, type) {
 }
 
 function getTowerSprite(type) {
-    let towerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"])
+    let towerSprite = new PIXI.AnimatedSprite(towerSpriteSheet[type])
     towerSprite.loop = false
     towerSprite.anchor.set(0.5)
     towerSprite.type = type
@@ -132,7 +134,7 @@ function generateTowerRange(range) {
  * @param {Number} type Type of tower
  */
 function addTower(name, type, owner, row, col) {
-    let towerSprite = new PIXI.AnimatedSprite(towerSpriteSheet["blue"])
+    let towerSprite = new PIXI.AnimatedSprite(towerSpriteSheet[type])
     towerSprite.loop = false
     towerSprite.anchor.set(0.5)
     towerSprite.animationSpeed = 0.2
@@ -227,7 +229,6 @@ function addTempTower(type, x, y) {
                 })
                 tempTowerSprite.alpha = 0.5
                 addTempTower(type, x, y) // Recursively add another
-                console.log(towerMenuContainer.children.length)
             })
         .on('pointerup', onMenuTowerClick) // Effectively a click - click would not work in parallel to pointerdown
         .on('clickoff', onMenuTowerUnclick)
@@ -445,7 +446,6 @@ function onMenuTowerClick(event) {
     } else { // Clicked on tower that is not active
         if (typeof activeClickable != "undefined") activeClickable.emit('clickoff') // Cancel current active clickable
         activeClickable = this // Register this as the active object
-        console.log(activeClickable)
         writeTowerInfo(this.type)
     }
 }
@@ -507,7 +507,6 @@ function updateEnemies() {
             let found = false;
             for (let enemySpriteIdx = enemyContainer.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
                 // Whether enemy if found in server update, but not in enemyContainer
-                //console.log(enemyContainer.children[enemySpriteIdx].name, state["enemies"][nameIdx].name)
                 found = (enemyContainer.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
                 if (found) break;
             }
