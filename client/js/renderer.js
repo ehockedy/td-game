@@ -171,7 +171,7 @@ function getTowerUpdateMsg(tower) {
         "y": tower.gridY,
         "x": tower.gridX,
         "value": {
-            "type": "tower",
+            "type": tower.type,
             "owner": tower.owner,
             "colour": randomColourCode,
             "name": tower.name

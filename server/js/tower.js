@@ -1,3 +1,6 @@
+const fs = require('fs');
+let towerJson = JSON.parse(fs.readFileSync('shared/json/towers.json'));
+
 class Tower {
     /**
      * A player owned object that shoots at enemies
@@ -14,7 +17,7 @@ class Tower {
         this.angle = 0 // Angle in radians, 0 is East, goes clockwise
         this.rateOfFire = 10 // ticks between bullets
         this.fireTick = 0 // Ticks since last bullet
-        this.range = 5
+        this.range = towerJson[type]["gameData"]["range"]
         this.owner = player // The player who owns the tower
         this.kills = 0
         this.type = type

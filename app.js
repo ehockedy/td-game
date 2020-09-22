@@ -124,7 +124,7 @@ web_sockets_server.on('connection', (socket) => {
     console.log("Writing board change from client")
     rooms[gameID]["game"].map.setGridValue(data["y"], data["x"], data["value"]) // row, col, value
     console.log("DATA", data)
-    rooms[gameID]["game"].addTower(data["towerName"], data["value"], data["value"]["owner"], data["y"], data["x"])
+    rooms[gameID]["game"].addTower(data["towerName"], data["value"]["type"], data["value"]["owner"], data["y"], data["x"])
     for (host in rooms[gameID]["players"]) {
       // TODO dont need the dimension args
       rooms[gameID]["players"][host].emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
