@@ -23,6 +23,7 @@ class Tower {
         this.type = type
         this.shootRangePath = [] // Main grid squares that the bullets can reach that are on the path
         this.aimBehaviour // Furthest enemy, first enemy, etc.
+        this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
     }
 
     /**

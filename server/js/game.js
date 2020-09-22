@@ -56,7 +56,9 @@ class Game {
                     let enemy = this.enemies[enemyIdx]
                     if (coord[0] == enemy.row && coord[1] == enemy.col) {
                         canHit = true;
-                        tower.angle = calculateAngle(tower.row, tower.col, enemy.row, enemy.col) // TODO determine angle base off where enemy will be
+                        if (tower.turns) {
+                            tower.angle = calculateAngle(tower.row, tower.col, enemy.row, enemy.col) // TODO determine angle base off where enemy will be
+                        }
                         let enemyFuturePos = enemy.steps+enemy.speed*5
                         if (enemyFuturePos >= this.map.path.length) break;
                         let newBullet = new bullet.Bullet(
