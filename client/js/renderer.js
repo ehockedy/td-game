@@ -328,7 +328,7 @@ function renderMap() {
             // Default to 0 aka grass
             var map_square_sprite = new PIXI.Sprite(green_square_texture);
 
-            if (getBoard()[r][c] == 1) {
+            if (getBoard()[r][c]["value"] == 1) {
                 map_square_sprite = new PIXI.Sprite(brown_square_texture);
             }
             map_square_sprite.y = r * MAP_SPRITE_SIZE_Y
@@ -401,7 +401,7 @@ function onDragTower(event) {
         let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
         let newGridY = Math.floor(newPosition.y / DEFAULT_SPRITE_SIZE_Y)
         if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
-            getBoard()[newGridY][newGridX] == 0) { // Must be empty space
+            getBoard()[newGridY][newGridX]["value"] == 0) { // Must be empty space
             this.gridX = newGridX
             this.gridY = newGridY
             this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
@@ -565,7 +565,7 @@ function updateTowers() {
         // Move the tower angle
         let towerToUpdate = towerContainer.getChildByName(tower["name"])
         towerToUpdate.rotation = tower["angle"]
-        towerToUpdate.tint = getBoard()[towerToUpdate.gridY][towerToUpdate.gridX].colour
+        towerToUpdate.tint = getBoard()[towerToUpdate.gridY][towerToUpdate.gridX]["tower"].colour
     })
 }
 

@@ -25,6 +25,8 @@ class Game {
         this.towers = []
         this.bullets = []
         this.map = new gameMap.GameMap(mapY, mapX, subGridXY)
+        this.map.printMap()
+
         this.map.generateMap()
         this.map.printMap()
         this.map.calculatePath()
@@ -49,7 +51,6 @@ class Game {
     // Check if an enemy is within shoot range, and turn tower if it is
         this.towers.forEach((tower) => {
             let canHit = false;
-            //let enemyToShoot;
             for (let coordIdx=0; coordIdx < tower.shootRangePath.length; coordIdx++) {
                 let coord = tower.shootRangePath[coordIdx]
                 for (let enemyIdx=0; enemyIdx < this.enemies.length; enemyIdx++) {
@@ -69,10 +70,6 @@ class Game {
                             tower.range,
                             tower.name)
                         if (tower.fireTick == 0) this.bullets.push(newBullet)
-                        if (this.bullets.length == 1) {
-                            this.bullets[0].name = "FIRST"
-                            //break;
-                        }
                         break;
                     }
                 }
@@ -102,7 +99,6 @@ class Game {
                     this.enemies[e].hp -= this.bullets[b].damage
                     this.bullets.splice(b, 1) // Remove that bullet
                 }
-                //if (bullets[b].name == "FIRST") console.log(dist, "\n")
             }
         }
 

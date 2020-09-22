@@ -122,7 +122,7 @@ web_sockets_server.on('connection', (socket) => {
     let clientAddr = socket["handshake"]["address"]
     let gameID = data["gameID"]
     console.log("Writing board change from client")
-    rooms[gameID]["game"].map.setGridValue(data["y"], data["x"], data["value"]) // row, col, value
+    rooms[gameID]["game"].map.setGridValue(data["y"], data["x"], data["value"], "tower") // row, col, value
     console.log("DATA", data)
     rooms[gameID]["game"].addTower(data["towerName"], data["value"]["type"], data["value"]["owner"], data["y"], data["x"])
     for (host in rooms[gameID]["players"]) {

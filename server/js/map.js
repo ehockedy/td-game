@@ -24,22 +24,40 @@ class GameMap {
     this.move_history = []
 
     // initialise board
-    this.map = new Array(this.height); // Make rows
-    for(var i=0; i < this.map.length; i++) {
-      this.map[i] = new Array(this.width).fill(0) // Make columns
+    this.map = [] //new Array(this.height); // Make rows
+    for(var i=0; i < rows; i++) {
+      this.map.push([])
+      for(var j=0; j < cols; j++) {
+        this.map[i].push({
+          "value": 0,
+          "enemies": [],
+          "bullets": [],
+          "towers": null
+        }) // Make columns
+      }
     }
 
     // Set starting square to 1, and move one to the left do we don't straddle the first column
-    this.map[this.row][this.col] = 1
+    this.map[this.row][this.col] = {
+      "value": 1,
+      "enemies": [],
+      "bullets": [],
+      "towers": null
+    }
     this.col++
-    this.map[this.row][this.col] = 1
+    this.map[this.row][this.col] = {
+      "value": 1,
+      "enemies": [],
+      "bullets": [],
+      "towers": null
+    }
 
     this.path = [] // Exact path through the sub grids that the enemeis will take
     this.mainPath = [] // Main map grid squares that the enemy path goes through
   }
 
-  setGridValue(row, col, value) {
-    this.map[row][col] = value
+  setGridValue(row, col, value, property) {
+    this.map[row][col][property] = value
   }
 
   getValidDirs() {
@@ -60,7 +78,7 @@ class GameMap {
     while(c < this.width-2 && c-this.col < max_dist+right_bonus) {
       c+=2  // 2 means that corners wil be on "even" squares only THis ensures any line does hot have
             // a line parallel and touching it on the next row/column - so always space for a unit next to a path
-      if (this.map[this.row][c] == 1) break  // Stop if new path would hit an existing path
+      if (this.map[this.row][c]["value"] == 1) break  // Stop if new path would hit an existing path
       if (c-this.col < min_dist) continue // Don't want too mant short paths
       moves.push( ["r",c-this.col] )
     }
@@ -69,7 +87,7 @@ class GameMap {
     c = this.col
     while(c > 1 && this.col-c < max_dist-left_penalty) {
       c-=2
-      if (this.map[this.row][c] == 1) break
+      if (this.map[this.row][c]["value"] == 1) break
       if (this.col-c < min_dist) continue
       moves.push( ["l",this.col-c] )
     }
@@ -81,7 +99,7 @@ class GameMap {
     var r = this.row
     while(r < this.height-2-row_buffer && r-this.row < max_dist) {
       r+=2
-      if (this.map[r][this.col] == 1) break
+      if (this.map[r][this.col]["value"] == 1) break
       if (r-this.row < min_dist) continue
       moves.push( ["d",r-this.row] )
     }
@@ -90,7 +108,7 @@ class GameMap {
     r = this.row
     while(r > 1+row_buffer && this.row-r < max_dist) {
       r-=2
-      if (this.map[r][this.col] == 1) break
+      if (this.map[r][this.col]["value"] == 1) break
       if (this.row-r < min_dist) continue
       moves.push( ["u",this.row-r] )
     }
@@ -105,15 +123,15 @@ class GameMap {
     if (dir == "l" || dir == "u") { // Move "back"
       multiplier = -1
     }
-
     for (var i = 0; i < dist; i++) {
       if (dir == "l" || dir == "r") {
         this.col += multiplier
-        this.map[this.row][this.col] = 1
+        this.map[this.row][this.col]["value"] = 1
       }
+
       if (dir == "u" || dir == "d") {
         this.row += multiplier
-        this.map[this.row][this.col] = 1
+        this.map[this.row][this.col]["value"] = 1
       }
     }
   }
@@ -130,11 +148,11 @@ class GameMap {
 
     for (var i = 0; i < dist; i++) {
       if (dir == "l" || dir == "r") {
-        this.map[this.row][this.col] = 0
+        this.map[this.row][this.col]["value"] = 0
         this.col += multiplier
       }
       if (dir == "u" || dir == "d") {
-        this.map[this.row][this.col] = 0
+        this.map[this.row][this.col]["value"] = 0
         this.row += multiplier
       }
     }
@@ -151,7 +169,7 @@ class GameMap {
     // True if a square in the final column is 1
     var complete = false
     for (var r=0; r < this.height; r++) {
-      if (this.map[r][this.width-1]==1) {
+      if (this.map[r][this.width-1]["value"] == 1) {
         complete = true
       }
     }
@@ -168,7 +186,7 @@ class GameMap {
 
     for (var r=0; r < this.height; r++) {
       for (var c=0; c < this.width; c++) {
-        if (this.map[r][c] == 1) {
+        if (this.map[r][c]["value"] == 1) {
           if (r < this.width/2 && c < this.height/2) q1++
           else if (r < this.width/2 && c >= this.height/2) q2++
           else if (r >= this.width/2 && c < this.height/2) q3++
@@ -183,7 +201,7 @@ class GameMap {
     for (var i=0; i < this.map.length; i++) {
       var line = ""
       for (var j=0; j < this.map[i].length; j++) {
-        line += this.map[i][j].toString() + " "
+        line += this.map[i][j]["value"].toString() + " "
       }
       console.log(line)
     }
@@ -228,7 +246,7 @@ class GameMap {
     let pathLen = 0
     for (var r=0; r < this.height; r++) {
       for (var c=0; c < this.width; c++) {
-        if (this.map[r][c] == 1) pathLen++
+        if (this.map[r][c]["value"] == 1) pathLen++
       }
     }
 
@@ -315,7 +333,7 @@ class GameMap {
           if (Math.abs(r) == Math.abs(c)) continue; // Only want horizontally and vertically adjacent squares
           //console.log("next grid search: ",currSubGridCoord[0]+r, currSubGridCoord[1]+c)
           //console.log("   ", this.map[currSubGridCoord[0]+r][currSubGridCoord[1]+c], prevSubGridCoord[0], prevSubGridCoord[1])
-          if (this.map[currSubGridCoord[0]+r][currSubGridCoord[1]+c] == 1 &&
+          if (this.map[currSubGridCoord[0]+r][currSubGridCoord[1]+c]["value"] == 1 &&
               !(prevSubGridCoord[0] == currSubGridCoord[0]+r && prevSubGridCoord[1] == currSubGridCoord[1]+c) ) {
             nextSubGridCoord = [
               currSubGridCoord[0]+r,
@@ -350,7 +368,7 @@ class GameMap {
     // Add final square
     let finalSquareRow = 0
     for (let r=0; r < this.height; r++) {
-      if (this.map[r][this.width-1] == 1) {
+      if (this.map[r][this.width-1]["value"] == 1) {
         finalSquareRow = r;
         break;
       }
