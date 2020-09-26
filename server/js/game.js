@@ -223,7 +223,8 @@ class Game {
                 "name": t.name,
                 "angle": t.angle,
                 "posRowCol": [t.row, t.col],
-                "owner": t.player
+                "owner": t.player,
+                "type": t.type
             })
             hash.update(t.name)
         })

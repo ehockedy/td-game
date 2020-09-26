@@ -552,7 +552,7 @@ function updateTowers() {
             }
             if (!found) {
                 addTower(towerStateObjects[nameIdx].name,
-                    0,
+                    towerStateObjects[nameIdx].type,
                     towerStateObjects[nameIdx].owner,
                     towerStateObjects[nameIdx].posRowCol[0],
                     towerStateObjects[nameIdx].posRowCol[1])
