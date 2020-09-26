@@ -48,7 +48,7 @@ class Game {
                 }
                 e.isHit = false // reset whether hit
                 if (e.row != rc[0] || e.col != rc[1]) { // Check if enemy has moved into new main grid square
-                    this.map.map[rc[0]][rc[1]].enemies.splice(eIdx)
+                    this.map.map[rc[0]][rc[1]].enemies.splice(eIdx, 1)
                     this.map.addEnemy(e) // Add to new square
                 }
                 this.map.reorderEnemies(rc[0], rc[1])
@@ -157,7 +157,7 @@ class Game {
         //if (this.counter > 30) return;
         if (distributionPattern == "random") {
             // 10% chance to spawn new enemy
-            if (Math.random() < 0.95) return; //0.95) return;
+            if (Math.random() < 0.99) return; //0.95) return;
         }
 
         let speedRangeMin = 1
