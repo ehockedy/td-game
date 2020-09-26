@@ -60,6 +60,36 @@ class GameMap {
     this.map[row][col][property] = value
   }
 
+  onMainPath(row, col) {
+    let onPath = false
+    this.mainPath.forEach((rc) => {
+      if (row == rc[0] && col == rc[1]) onPath = true
+    })
+    return onPath
+  }
+
+  getEnemies(row, col) {
+    return this.map[row][col].enemies
+  }
+
+  // Add to front of list
+  addNewEnemy(enemy) {
+    this.map[this.row_start][this.col_start].enemies.unshift(enemy)
+  }
+
+  // Add enemy based on enemies row/column data - does not keep them in path order
+  addEnemy(enemy) {
+    if (this.onMainPath(enemy.row, enemy.col)) {
+      this.map[enemy.row][enemy.col].enemies.push(enemy)
+    }
+  }
+
+  reorderEnemies(row, col) {
+    if (!this.onMainPath(row, col)) return
+    this.map[row][col].enemies.sort((a, b) => {return a.steps < b.steps ? -1 : 1})
+  }
+
+  // TODO move this (and others) into a MapConstructor class
   getValidDirs() {
     // Returns list of all the different places the path can move to
     // Move has the form [<direction>, <distance>]

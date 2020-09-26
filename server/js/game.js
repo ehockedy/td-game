@@ -21,7 +21,6 @@ function calculateAngle(row1, col1, row2, col2) {
 
 class Game {
     constructor(mapX, mapY, subGridXY) {
-        this.enemies = []
         this.towers = []
         this.bullets = []
         this.map = new gameMap.GameMap(mapY, mapX, subGridXY)
@@ -37,47 +36,71 @@ class Game {
     }
 
     moveEnemies() {
-        this.enemies.forEach((e, idx) => {
-            e.steps += e.speed
-            if (e.steps < this.map.path.length) {
-                e.row = this.map.path[e.steps][0]
-                e.col = this.map.path[e.steps][1]
+        // Enemies only every appear on the path, so iterate over those squares only to find enemies
+        this.map.mainPath.forEach((rc) => {
+            let enemies = this.map.map[rc[0]][rc[1]].enemies
+            for (let eIdx = enemies.length-1; eIdx >= 0; eIdx--) {
+                let e = enemies[eIdx]
+                e.steps += e.speed
+                if (e.steps < this.map.path.length) {
+                    e.row = this.map.path[e.steps][0]
+                    e.col = this.map.path[e.steps][1]
+                }
+                e.isHit = false // reset whether hit
+                if (e.row != rc[0] || e.col != rc[1]) { // Check if enemy has moved into new main grid square
+                    this.map.map[rc[0]][rc[1]].enemies.splice(eIdx)
+                    this.map.addEnemy(e) // Add to new square
+                }
+                this.map.reorderEnemies(rc[0], rc[1])
             }
-            e.isHit = false // reset whether hit
         })
     }
 
     moveTowers() {
-    // Check if an enemy is within shoot range, and turn tower if it is
-        this.towers.forEach((tower) => {
-            let canHit = false;
-            for (let coordIdx=0; coordIdx < tower.shootRangePath.length; coordIdx++) {
-                let coord = tower.shootRangePath[coordIdx]
-                for (let enemyIdx=0; enemyIdx < this.enemies.length; enemyIdx++) {
-                    let enemy = this.enemies[enemyIdx]
-                    if (coord[0] == enemy.row && coord[1] == enemy.col) {
-                        canHit = true;
-                        if (tower.turns) {
-                            tower.angle = calculateAngle(tower.row, tower.col, enemy.row, enemy.col) // TODO determine angle base off where enemy will be
-                        }
-                        let enemyFuturePos = enemy.steps+enemy.speed*5
-                        if (enemyFuturePos >= this.map.path.length) break;
-                        let newBullet = new bullet.Bullet(
-                            [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
-                            this.map.path[enemyFuturePos],
-                            5, // dmg TODO this should be determined by type of tower, pass that through eventually
-                            10, // spd TODO same as above
-                            tower.range,
-                            tower.name)
-                        if (tower.fireTick == 0) this.bullets.push(newBullet)
+        for (let t = 0; t < this.towers.length; t++) {
+            let tower = this.towers[t]
+
+            // Get a enemy to shoot at based on tower behaviour
+            let chosenEnemy = null
+            if (tower.aimBehaviour == "last") { // Tower aims to the enemy furthest down the path
+                for (let i = tower.shootRangePath.length-1; i >= 0; i--) {
+                    let square = tower.shootRangePath[i]
+                    let enemies = this.map.getEnemies(square[0], square[1])
+                    if (enemies.length > 0) {
+                        chosenEnemy = enemies[enemies.length-1]
                         break;
                     }
                 }
-                if (canHit) break;
+            } else { // TODO if (tower.behaviour == "first") { // Tower aims at enemy earliest in the path
+                for (let i = 0; i < tower.shootRangePath.length; i++) {
+                    let square = tower.shootRangePath[i]
+                    let enemies = this.map.getEnemies(square[0], square[1])
+                    if (enemies.length > 0) {
+                        chosenEnemy = enemies[0]
+                        break;
+                    }
+                }
             }
+
+            if (chosenEnemy == null) { // No enemy to in range
+                tower.fireTick = 0 // Stop firing tick counter
+                continue
+            }
+
+            // Aim and shoot if appropriate
+            let enemyFuturePos = chosenEnemy.steps+chosenEnemy.speed*5 // Estimated future position of target TODO improve this
+            if (enemyFuturePos >= this.map.path.length) break;
+            if (tower.turns) tower.angle = calculateAngle(tower.row, tower.col, chosenEnemy.row, chosenEnemy.col) // TODO determine angle base off where enemy will be
+            if (tower.fireTick == 0) this.bullets.push(new bullet.Bullet(
+                [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
+                this.map.path[enemyFuturePos],
+                5, // dmg TODO this should be determined by type of tower, pass that through eventually
+                10, // spd TODO same as above
+                tower.range,
+                tower.name)
+            )
             tower.fireTick = (tower.fireTick + 1) % tower.rateOfFire
-            if (!canHit) tower.fireTick = 0
-        });
+        }
     }
 
     moveBullets() {
@@ -89,25 +112,30 @@ class Game {
     resolveInteractions() {
         // Check all relevant game objects and see how they interact
         // Check collision between enemies and bullets
-        for (let e = this.enemies.length-1; e >= 0; e--) {
-            for (let b = this.bullets.length-1; b >= 0; b--) {
-                if(this.bullets[b].collidesWith(
-                    this.enemies[e].row*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2), // TODO make abolute grid value a thing
-                    this.enemies[e].col*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2),
-                    Math.floor(config.SUBGRID_SIZE/2))) {
-                    this.enemies[e].isHit = true
-                    this.enemies[e].hp -= this.bullets[b].damage
-                    this.bullets.splice(b, 1) // Remove that bullet
+        this.map.mainPath.forEach((rc) => {
+            this.map.map[rc[0]][rc[1]].enemies.forEach((enemy) => {
+                for (let b = this.bullets.length-1; b >= 0; b--) {
+                    if(this.bullets[b].collidesWith(
+                        enemy.row*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2), // TODO make abolute grid value a thing
+                        enemy.col*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2),
+                        Math.floor(config.SUBGRID_SIZE/2))) {
+                        enemy.isHit = true
+                        enemy.hp -= this.bullets[b].damage
+                        this.bullets.splice(b, 1) // Remove that bullet
+                    }
                 }
-            }
-        }
+            })
+        })
 
         // Check if enemy reached end of path
-        for (let i = this.enemies.length-1; i >= 0; i--) {
-            if (this.enemies[i].steps > this.map.path.length - this.map.subGridSize/2) {
-                this.enemies.splice(i, 1) // Remove that enemy
+        this.map.mainPath.forEach((rc) => {
+            for (let i = this.map.map[rc[0]][rc[1]].enemies.length-1; i >= 0; i--) {
+                let enemy = this.map.map[rc[0]][rc[1]].enemies[i]
+                if (enemy.steps > this.map.path.length - this.map.subGridSize/2) {
+                    this.map.getEnemies(rc[0], rc[1]).splice(i, 1) // Remove that enemy
+                }
             }
-        }
+        })
 
         for (let i = this.bullets.length-1; i >= 0; i--) {
             if (Math.sqrt(
@@ -136,13 +164,11 @@ class Game {
         let speedRangeMax = 4
         // TODO create enemy types
         let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
-        this.enemies.push(new enemy.Enemy(10, randomSpeed))
-        //counter++
+        this.map.addNewEnemy(new enemy.Enemy(10, randomSpeed))
     }
 
     addTower(name, type, player, row, col) {
         let newTower = new tower.Tower(name, type, player, row, col)
-        console.log(this.map.mainPath)
         newTower.calculateShootPath(this.map.mainPath)
         this.towers.push(newTower)
     }
@@ -177,14 +203,17 @@ class Game {
                 "objects": []
             }
         }
+
         let hash = crypto.createHash("sha256")
-        this.enemies.forEach((e, idx) => {
-            state["enemies"]["objects"].push({
-                "name": e.name,
-                "pathPos": this.map.path[e.steps],
-                "isHit": e.isHit
+        this.map.mainPath.forEach((rc) => {
+            this.map.map[rc[0]][rc[1]].enemies.forEach((e) => {
+                state["enemies"]["objects"].push({
+                    "name": e.name,
+                    "pathPos": this.map.path[e.steps],
+                    "isHit": e.isHit
+                })
+                hash.update(e.name)
             })
-            hash.update(e.name)
         })
         state["enemies"]["hash"] = hash.digest("hex")
 
