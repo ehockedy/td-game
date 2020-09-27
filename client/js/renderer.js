@@ -340,9 +340,9 @@ function renderMap() {
     }
 }
 
-// For a given tower type, gets the deescription info and renders it as text to the
+// For a given tower type, gets the description info and renders it as text to the
 // tower info toolbar
-function writeTowerInfo(towerNum=0) {
+function writeTowerInfo(towerNum) {
     let towerInfoMenu = toolbarContainer.getChildByName("towerInfoMenu")
     let xMargin = 10
 
@@ -365,7 +365,7 @@ function writeTowerInfo(towerNum=0) {
     text.anchor.set(0.5)
     towerToolbarContentContainer.addChild(text);
 
-    let towerInfo = towerJson[towerNum]["info"]
+    let towerInfo = towerJson[towerNum]["displayInfo"]
     for (let key in towerInfo) {
         defaultY += defaultYGap
 

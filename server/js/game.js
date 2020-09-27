@@ -95,7 +95,7 @@ class Game {
                 [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
                 this.map.path[enemyFuturePos],
                 5, // dmg TODO this should be determined by type of tower, pass that through eventually
-                10, // spd TODO same as above
+                3, // spd TODO same as above
                 tower.range,
                 tower.name)
             )

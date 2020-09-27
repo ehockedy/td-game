@@ -3,9 +3,10 @@
         "name": "basic tower",
         "spriteSheetNum": 0,
         "displayInfo": {
-            "Ammo type": "single",
+            "Ammo": "standard",
             "Damage": "low",
             "Rate": "medium",
+            "Range": "medium",
             "Resistance": "none"
         },
         "gameData": {
@@ -22,9 +23,10 @@
         "name": "all direction tower",
         "spriteSheetNum": 1,
         "displayInfo": {
-            "Ammo type": "all dirs",
+            "Ammo": "all dirs",
             "Damage": "low",
             "Rate": "medium",
+            "Range": "short",
             "Resistance": "none"
         },
         "gameData": {
@@ -41,9 +43,10 @@
         "name": "triple tower",
         "spriteSheetNum": 2,
         "displayInfo": {
-            "Ammo type": "3 simple",
+            "Ammo": "3 standard",
             "Damage": "medium",
             "Rate": "medium",
+            "Range": "medium",
             "Resistance": "none"
         },
         "gameData": {
@@ -60,9 +63,10 @@
         "name": "sniper tower",
         "spriteSheetNum": 3,
         "displayInfo": {
-            "Ammo type": "simple",
+            "Ammo": "standard",
             "Damage": "high",
             "Rate": "low",
+            "Range": "far",
             "Resistance": "none"
         },
         "gameData": {

@@ -15,7 +15,7 @@ class Tower {
         this.row = row
         this.col = col
         this.angle = 0 // Angle in radians, 0 is East, goes clockwise
-        this.rateOfFire = 10 // ticks between bullets
+        this.rateOfFire = 50 // ticks between bullets
         this.fireTick = 0 // Ticks since last bullet
         this.range = towerJson[type]["gameData"]["range"]
         this.owner = player // The player who owns the tower
