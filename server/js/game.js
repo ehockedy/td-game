@@ -167,11 +167,12 @@ class Game {
             }
         })
 
+        // Check for bulets that have travelled too far without hitting an enemy
         for (let i = this.bullets.length-1; i >= 0; i--) {
             if (Math.sqrt(
                     Math.pow(this.bullets[i].bulletPos[0] - this.bullets[i].bulletPosStart[0], 2) +
                     Math.pow(this.bullets[i].bulletPos[1] - this.bullets[i].bulletPosStart[1], 2)
-                ) > this.bullets[i].range) {
+                ) > this.bullets[i].shootRange) {
                 this.bullets.splice(i, 1) // Remove that bullet
             }
         }
