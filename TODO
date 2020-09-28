@@ -3,6 +3,7 @@ Client renderer optimisations:
  - Profiling suggests that client is rendering 3 times as fast as server is sending, so can reduce the render rate.
 Render moving tower on client
 Make join game box prettier
-
-Current work on server optimisation
- - maybe need to revert changes off master and make branch, since work could get complex
+Place tower button
+Bullet and enemy collision animation
+Range that bullet can travel should probably be further than aim range
+    - for cases where enemy just appears then moves out of range

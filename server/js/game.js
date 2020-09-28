@@ -1,5 +1,5 @@
 const enemy = require("./enemies.js");
-const tower = require("./tower.js");
+const towerImport = require("./tower.js");
 const bullet = require("./bullet.js");
 const gameMap = require('./map.js');
 const config = require('./constants.js')
@@ -87,18 +87,47 @@ class Game {
                 continue
             }
 
-            // Aim and shoot if appropriate
-            let enemyFuturePos = chosenEnemy.steps+chosenEnemy.speed*5 // Estimated future position of target TODO improve this
-            if (enemyFuturePos >= this.map.path.length) break;
-            if (tower.turns) tower.angle = calculateAngle(tower.row, tower.col, chosenEnemy.row, chosenEnemy.col) // TODO determine angle base off where enemy will be
-            if (tower.fireTick == 0) this.bullets.push(new bullet.Bullet(
-                [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
-                this.map.path[enemyFuturePos],
-                5, // dmg TODO this should be determined by type of tower, pass that through eventually
-                3, // spd TODO same as above
-                tower.range,
-                tower.name)
-            )
+            // Aim, and shoot if appropriate
+            let colToAim = chosenEnemy.col
+            let rowToAim = chosenEnemy.row
+            if (tower.fireTick != 0) {
+                if (tower.turns) tower.angle = calculateAngle(tower.row, tower.col, rowToAim, colToAim)
+
+            } else {
+                let newBullet = new bullet.Bullet(
+                    [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
+                    this.map.path[chosenEnemy.steps],
+                    5, // dmg TODO this should be determined by type of tower, pass that through eventually
+                    5, // spd TODO same as above
+                    tower.range,
+                    tower.name)
+
+                // Iterate through enemies future positions to find one that bullet will hit
+                let ticks = 1
+                let isHit = false
+                while (chosenEnemy.steps + ticks*chosenEnemy.speed < this.map.path.length) {
+                    let currStep = this.map.path[chosenEnemy.steps + ticks*chosenEnemy.speed]
+                    newBullet.updateTargetEnemyPos(currStep)
+                    let bulletFuturePos = newBullet.positionInNTicks(ticks)
+                    if (newBullet.willCollideWith(
+                            currStep[0]*config.SUBGRID_SIZE + currStep[2], // TODO make abolute grid value a thing
+                            currStep[1]*config.SUBGRID_SIZE + currStep[3],
+                            Math.floor(config.SUBGRID_SIZE/2),
+                            bulletFuturePos[0]*config.SUBGRID_SIZE + bulletFuturePos[2],
+                            bulletFuturePos[1]*config.SUBGRID_SIZE + bulletFuturePos[3]
+                    )){
+                        isHit = true
+                        rowToAim = currStep[0]
+                        colToAim = currStep[1]
+                        break
+                    }
+                    ticks++
+                }
+
+                if (tower.turns) tower.angle = calculateAngle(tower.row, tower.col, rowToAim, colToAim)
+                if (isHit) this.bullets.push(newBullet)
+            }
+
             tower.fireTick = (tower.fireTick + 1) % tower.rateOfFire
         }
     }
@@ -168,7 +197,7 @@ class Game {
     }
 
     addTower(name, type, player, row, col) {
-        let newTower = new tower.Tower(name, type, player, row, col)
+        let newTower = new towerImport.Tower(name, type, player, row, col)
         newTower.calculateShootPath(this.map.mainPath)
         this.towers.push(newTower)
     }
