@@ -143,10 +143,11 @@ class Game {
         // Check collision between enemies and bullets
         this.map.mainPath.forEach((rc) => {
             this.map.map[rc[0]][rc[1]].enemies.forEach((enemy) => {
+                let enemyPos = this.map.path[enemy.steps]
                 for (let b = this.bullets.length-1; b >= 0; b--) {
                     if(this.bullets[b].collidesWith(
-                        enemy.row*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2), // TODO make abolute grid value a thing
-                        enemy.col*config.SUBGRID_SIZE + Math.floor(config.SUBGRID_SIZE/2),
+                        enemyPos[0]*config.SUBGRID_SIZE + enemyPos[2], // TODO make abolute grid value a thing
+                        enemyPos[1]*config.SUBGRID_SIZE + enemyPos[3],
                         Math.floor(config.SUBGRID_SIZE/2))) {
                         enemy.isHit = true
                         enemy.hp -= this.bullets[b].damage
