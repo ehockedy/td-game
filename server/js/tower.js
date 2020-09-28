@@ -32,7 +32,7 @@ class Tower {
      */
     calculateShootPath(path) {
         for (let p=0; p < path.length; p++) {
-            if (Math.sqrt(Math.pow((path[p][0] - this.row), 2) + Math.pow((path[p][1] - this.col), 2)) < this.range) {
+            if (Math.sqrt(Math.pow((path[p][0] - this.row), 2) + Math.pow((path[p][1] - this.col), 2)) <= this.range) {
                 this.shootRangePath.push(path[p])
             }
         }
