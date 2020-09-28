@@ -97,8 +97,8 @@ class Game {
                 let newBullet = new bullet.Bullet(
                     [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
                     this.map.path[chosenEnemy.steps],
-                    5, // dmg TODO this should be determined by type of tower, pass that through eventually
-                    5, // spd TODO same as above
+                    tower.damage, // dmg TODO this should be determined by type of tower, pass that through eventually
+                    tower.bulletSpeed, // spd TODO same as above
                     tower.range,
                     tower.name)
 
@@ -192,7 +192,7 @@ class Game {
         }
 
         let speedRangeMin = 1
-        let speedRangeMax = 4
+        let speedRangeMax = 3
         // TODO create enemy types
         let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
         this.map.addNewEnemy(new enemy.Enemy(10, randomSpeed))
