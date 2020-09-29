@@ -37,8 +37,11 @@ class Game {
 
     moveEnemies() {
         // Enemies only every appear on the path, so iterate over those squares only to find enemies
-        this.map.mainPath.forEach((rc) => {
+        // Iterate backwards so what we do not double move enemies that move to the next square on the path
+        for (let square = this.map.mainPath.length-1; square >= 0; square--) {
+            let rc = this.map.mainPath[square]
             let enemies = this.map.map[rc[0]][rc[1]].enemies
+            // Work backwards through enemies so can remove them easily if needed
             for (let eIdx = enemies.length-1; eIdx >= 0; eIdx--) {
                 let e = enemies[eIdx]
                 e.steps += e.speed
@@ -48,12 +51,12 @@ class Game {
                 }
                 e.isHit = false // reset whether hit
                 if (e.row != rc[0] || e.col != rc[1]) { // Check if enemy has moved into new main grid square
-                    this.map.map[rc[0]][rc[1]].enemies.splice(eIdx, 1)
+                    this.map.map[rc[0]][rc[1]].enemies.splice(eIdx, 1) // Remove from current square
                     this.map.addEnemy(e) // Add to new square
                 }
-                this.map.reorderEnemies(rc[0], rc[1])
             }
-        })
+            this.map.reorderEnemies(rc[0], rc[1])
+        }
     }
 
     moveTowers() {
