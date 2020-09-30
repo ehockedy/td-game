@@ -44,16 +44,12 @@ class Game {
             // Work backwards through enemies so can remove them easily if needed
             for (let eIdx = enemies.length-1; eIdx >= 0; eIdx--) {
                 let e = enemies[eIdx]
-                e.steps += e.speed
-                if (e.steps < this.map.path.length) {
-                    e.row = this.map.path[e.steps][0]
-                    e.col = this.map.path[e.steps][1]
-                }
-                e.isHit = false // reset whether hit
-                if (e.row != rc[0] || e.col != rc[1]) { // Check if enemy has moved into new main grid square
+                e.step() // Move based on speed
+                if (e.position[0] != rc[0] || e.position[1] != rc[1]) { // Check if enemy has moved into new main grid square
                     this.map.map[rc[0]][rc[1]].enemies.splice(eIdx, 1) // Remove from current square
                     this.map.addEnemy(e) // Add to new square
                 }
+                e.isHit = false // reset whether hit
             }
             this.map.reorderEnemies(rc[0], rc[1])
         }
@@ -226,7 +222,7 @@ class Game {
         let speedRangeMax = 3
         // TODO create enemy types
         let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
-        this.map.addNewEnemy(new enemy.Enemy(10, randomSpeed))
+        this.map.addNewEnemy(new enemy.Enemy(10, randomSpeed, this.map.path))
     }
 
     addTower(name, type, player, row, col) {
@@ -271,7 +267,7 @@ class Game {
             this.map.map[rc[0]][rc[1]].enemies.forEach((e) => {
                 state["enemies"]["objects"].push({
                     "name": e.name,
-                    "pathPos": this.map.path[e.steps],
+                    "pathPos": e.position,
                     "isHit": e.isHit
                 })
                 hash.update(e.name)
