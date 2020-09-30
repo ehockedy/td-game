@@ -96,13 +96,26 @@ class Game {
             if (tower.fireTick != 0) {
                 if (tower.turns) tower.angle = calculateAngle(tower.row, tower.col, rowToAim, colToAim)
 
+            } else if (tower.type == 1) { // All dirs short range tower
+                let angle = Math.PI/4
+                for (let bulletCounter = 0; bulletCounter < 8; bulletCounter++) {
+                    let nextBullet = new bullet.Bullet(
+                        [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
+                        [tower.row + 1, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)], // Pretend enemy is directly right of the tower
+                        tower.damage,
+                        tower.bulletSpeed,
+                        tower.shootRange,
+                        tower.name)
+                    nextBullet.rotateTarget(angle*bulletCounter)
+                    this.bullets.push(nextBullet)
+                }
             } else {
                 let newBullet = new bullet.Bullet(
                     [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
                     this.map.path[chosenEnemy.steps],
-                    tower.damage, // dmg TODO this should be determined by type of tower, pass that through eventually
-                    tower.bulletSpeed, // spd TODO same as above
-                    tower.range,
+                    tower.damage,
+                    tower.bulletSpeed,
+                    tower.shootRange,
                     tower.name)
 
                 // Iterate through enemies future positions to find one that bullet will hit
@@ -128,7 +141,22 @@ class Game {
                 }
 
                 if (tower.turns) tower.angle = calculateAngle(tower.row, tower.col, rowToAim, colToAim)
-                if (isHit) this.bullets.push(newBullet)
+                if (isHit) {
+                    this.bullets.push(newBullet)
+                    if (tower.type == 2) { // Triple bullet tower
+                        [Math.PI/8, -Math.PI/8].forEach((angle) => {
+                            let nextBullet = new bullet.Bullet(
+                                [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
+                                this.map.path[chosenEnemy.steps + ticks*chosenEnemy.speed],
+                                tower.damage,
+                                tower.bulletSpeed,
+                                tower.shootRange,
+                                tower.name)
+                            nextBullet.rotateTarget(angle)
+                            this.bullets.push(nextBullet)
+                        })
+                    }
+                }
             }
 
             tower.fireTick = (tower.fireTick + 1) % tower.rateOfFire
@@ -175,7 +203,7 @@ class Game {
             if (Math.sqrt(
                     Math.pow(this.bullets[i].bulletPos[0] - this.bullets[i].bulletPosStart[0], 2) +
                     Math.pow(this.bullets[i].bulletPos[1] - this.bullets[i].bulletPosStart[1], 2)
-                ) > this.bullets[i].shootRange) {
+                ) > this.bullets[i].range) {
                 this.bullets.splice(i, 1) // Remove that bullet
             }
         }

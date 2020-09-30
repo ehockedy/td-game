@@ -19,10 +19,12 @@ class Bullet {
         let enemyY = enemyPathPos[0]*config.SUBGRID_SIZE + enemyPathPos[2]
         let xDelta = (enemyX - this.x)
         let yDelta = (enemyY - this.y)
-        let multiplier = this.speed / Math.sqrt(Math.pow(xDelta,2) + Math.pow(yDelta,2))
+        this.distToTarget = Math.sqrt(Math.pow(xDelta,2) + Math.pow(yDelta,2))
+        let multiplier = this.speed / this.distToTarget
 
         this.xSpeed = multiplier * xDelta
         this.ySpeed = multiplier * yDelta
+        this.angleFromTower = Math.atan2(yDelta, xDelta)
     }
 
     move() {
@@ -75,6 +77,16 @@ class Bullet {
             Math.floor(y % config.SUBGRID_SIZE),
             Math.floor(x % config.SUBGRID_SIZE),
         ]
+    }
+
+    // Rotate from bullet origin where it will head 
+    rotateTarget(angle) {
+        // use parametric coordinates equations
+        let xDelta = this.distToTarget * Math.cos(this.angleFromTower+angle)
+        let yDelta = this.distToTarget * Math.sin(this.angleFromTower+angle)
+        let multiplier = this.speed / Math.sqrt(Math.pow(xDelta,2) + Math.pow(yDelta,2))
+        this.xSpeed = multiplier * xDelta
+        this.ySpeed = multiplier * yDelta
     }
 }
 
