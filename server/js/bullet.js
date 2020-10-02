@@ -30,6 +30,7 @@ class Bullet {
     }
 
     updateAngleAndSpeeds(newAngle) {
+        this.angle = newAngle
         this.xSpeed = this.speed * Math.cos(newAngle)
         this.ySpeed = this.speed * Math.sin(newAngle)
     }

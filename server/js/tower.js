@@ -37,7 +37,7 @@ class Tower {
         this.aimBehaviour = "last" // Furthest enemy, first enemy, etc.
         this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
         this.target
-        this.shootFunction = this._normalShoot
+        this.shootFunction = this._getShootBehaviour(type)
     }
 
     /**
@@ -69,9 +69,24 @@ class Tower {
     }
 
     // "Private" methods that make the tower shoot in different ways
+    _getShootBehaviour(type) {
+        let func;
+        switch (type) {
+          case 0: // Basic tower
+          case 3: // Sniper
+            func = this._normalShot;
+            break;
+          case 2: // Triple shot tower
+            func = this._tripleShot;
+            break;
+          default:
+            func = this._normalShot;
+        }
+        return func
+    }
 
     // Produce a single bullet the moves towards the target
-    _normalShoot() {
+    _normalShot() {
         let ticks = 1
         let isHit = false
         let newBullet = new bullet.Bullet(
@@ -96,6 +111,18 @@ class Tower {
             ticks++
         }
         return [newBullet]
+    }
+
+    _tripleShot() {
+        let mainBullet = this._normalShot()[0]
+        let leftBullet = this._normalShot()[0]
+        let rightBullet = this._normalShot()[0]
+
+        let angleVariation = Math.PI/8
+        leftBullet.updateAngleAndSpeeds(mainBullet.angle - angleVariation)
+        rightBullet.updateAngleAndSpeeds(mainBullet.angle + angleVariation)
+
+        return [leftBullet, mainBullet, rightBullet]
     }
 }
 
