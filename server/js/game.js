@@ -86,73 +86,11 @@ class Game {
                 continue
             }
 
-            // Aim, and shoot if appropriate
-            let colToAim = chosenEnemy.col
-            let rowToAim = chosenEnemy.row
-            if (tower.fireTick != 0) {
-                if (tower.turns) tower.angle = calculateAngle(tower.row, tower.col, rowToAim, colToAim)
+            tower.setTarget(chosenEnemy)
+            let bullet = tower.shoot()
 
-            } else if (tower.type == 1) { // All dirs short range tower
-                let angle = Math.PI/4
-                for (let bulletCounter = 0; bulletCounter < 8; bulletCounter++) {
-                    let nextBullet = new bullet.Bullet(
-                        [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
-                        [tower.row + 1, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)], // Pretend enemy is directly right of the tower
-                        tower.damage,
-                        tower.bulletSpeed,
-                        tower.shootRange,
-                        tower.name)
-                    nextBullet.rotateTarget(angle*bulletCounter)
-                    this.bullets.push(nextBullet)
-                }
-            } else {
-                let newBullet = new bullet.Bullet(
-                    [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
-                    this.map.path[chosenEnemy.steps],
-                    tower.damage,
-                    tower.bulletSpeed,
-                    tower.shootRange,
-                    tower.name)
-
-                // Iterate through enemies future positions to find one that bullet will hit
-                let ticks = 1
-                let isHit = false
-                while (chosenEnemy.steps + ticks*chosenEnemy.speed < this.map.path.length) {
-                    let currStep = this.map.path[chosenEnemy.steps + ticks*chosenEnemy.speed]
-                    newBullet.updateTargetEnemyPos(currStep)
-                    let bulletFuturePos = newBullet.positionInNTicks(ticks)
-                    if (newBullet.willCollideWith(
-                            currStep[0]*config.SUBGRID_SIZE + currStep[2], // TODO make abolute grid value a thing
-                            currStep[1]*config.SUBGRID_SIZE + currStep[3],
-                            Math.floor(config.SUBGRID_SIZE/2),
-                            bulletFuturePos[0]*config.SUBGRID_SIZE + bulletFuturePos[2],
-                            bulletFuturePos[1]*config.SUBGRID_SIZE + bulletFuturePos[3]
-                    )){
-                        isHit = true
-                        rowToAim = currStep[0]
-                        colToAim = currStep[1]
-                        break
-                    }
-                    ticks++
-                }
-
-                if (tower.turns) tower.angle = calculateAngle(tower.row, tower.col, rowToAim, colToAim)
-                if (isHit) {
-                    this.bullets.push(newBullet)
-                    if (tower.type == 2) { // Triple bullet tower
-                        [Math.PI/8, -Math.PI/8].forEach((angle) => {
-                            let nextBullet = new bullet.Bullet(
-                                [tower.row, tower.col, Math.floor(config.SUBGRID_SIZE/2), Math.floor(config.SUBGRID_SIZE/2)],
-                                this.map.path[chosenEnemy.steps + ticks*chosenEnemy.speed],
-                                tower.damage,
-                                tower.bulletSpeed,
-                                tower.shootRange,
-                                tower.name)
-                            nextBullet.rotateTarget(angle)
-                            this.bullets.push(nextBullet)
-                        })
-                    }
-                }
+            if (bullet != null) {
+                this.bullets.push(bullet)
             }
 
             tower.fireTick = (tower.fireTick + 1) % tower.rateOfFire
@@ -212,10 +150,14 @@ class Game {
      * @param {Number} enemyType type of enemy to add. ENEMY_TYPE.RANDOM (0) will generate a random enemy
      */
     addEnemy(distributionPattern, enemyType) {
+        if (this.map.numEnemies < 1) {
+            this.map.addNewEnemy(new enemy.Enemy(10, 1, this.map.path))
+            return
+        }
         //if (this.counter > 30) return;
         if (distributionPattern == "random") {
             // 10% chance to spawn new enemy
-            if (Math.random() < 0.99) return; //0.95) return;
+            if (Math.random() < 0.995) return; //0.95) return;
         }
 
         let speedRangeMin = 1

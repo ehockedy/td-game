@@ -40,6 +40,12 @@ class Enemy {
         }
     }
 
+    positionInNSteps(n) {
+        let futureStep = this.steps + (this.speed * n)
+        if (futureStep >= this.path.length) return this.path[this.path.length - 1]
+        return this.path[futureStep]
+    }
+
 }
 
 module.exports = {

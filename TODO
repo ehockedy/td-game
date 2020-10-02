@@ -7,3 +7,4 @@ Place tower button
 Bullet and enemy collision animation
 Range that bullet can travel should probably be further than aim range
     - for cases where enemy just appears then moves out of range
+Add middle of subgrid size to config

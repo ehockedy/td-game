@@ -54,6 +54,8 @@ class GameMap {
 
     this.path = [] // Exact path through the sub grids that the enemeis will take
     this.mainPath = [] // Main map grid squares that the enemy path goes through
+
+    this.numEnemies = 0
   }
 
   setGridValue(row, col, value, property) {
@@ -74,6 +76,7 @@ class GameMap {
 
   // Add to front of list
   addNewEnemy(enemy) {
+    this.numEnemies++
     this.map[this.row_start][this.col_start].enemies.unshift(enemy)
   }
 
