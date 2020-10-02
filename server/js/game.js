@@ -87,11 +87,10 @@ class Game {
             }
 
             tower.setTarget(chosenEnemy)
-            let bullet = tower.shoot()
-
-            if (bullet != null) {
+            tower.shoot().forEach((bullet) => {
                 this.bullets.push(bullet)
-            }
+
+            })
 
             tower.fireTick = (tower.fireTick + 1) % tower.rateOfFire
         }

@@ -37,6 +37,7 @@ class Tower {
         this.aimBehaviour = "last" // Furthest enemy, first enemy, etc.
         this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
         this.target
+        this.shootFunction = this._normalShoot
     }
 
     /**
@@ -55,36 +56,46 @@ class Tower {
         this.target = enemy
     }
 
+    /**
+     * Returns an array of bullets that the tower has created
+     */
     shoot() { // TODO change name, since won't always shoot?
-        let newBullet
-        let isHit = false
+        let newBullets = []
         if (this.fireTick == 0) {
-            let ticks = 1
-            newBullet = new bullet.Bullet(
-                this.x,
-                this.y,
-                this.angle,
-                this.damage,
-                this.bulletSpeed,
-                this.shootRange
-                )
-
-            // Iterate through enemies future positions to find one that bullet will hit
-            while (this.target.steps + ticks*this.target.speed < this.target.path.length && !isHit) {
-                let nextCoord = tools.localToGlobal(this.target.positionInNSteps(ticks)) // Where the enemy will be
-                let nextAngle = Math.atan2(nextCoord[1]-this.y, nextCoord[0]-this.x) // The angle of the tower to that position
-                newBullet.updateAngleAndSpeeds(nextAngle)
-                let bulletFuturePos = newBullet.positionInNTicks(ticks) // See where bullet will be, when travelling at that angle, when the enemy is in that position
-                if (newBullet.willCollideWith(nextCoord, bulletFuturePos, Math.floor(config.SUBGRID_SIZE/2))){
-                    isHit = true
-                    if (this.turns) this.angle = nextAngle
-                }
-                ticks++
-            }
+            newBullets = this.shootFunction()
         }
-
         this.fireTick = (this.fireTick + 1) % this.rateOfFire
-        return isHit ? newBullet : null
+        return newBullets
+    }
+
+    // "Private" methods that make the tower shoot in different ways
+
+    // Produce a single bullet the moves towards the target
+    _normalShoot() {
+        let ticks = 1
+        let isHit = false
+        let newBullet = new bullet.Bullet(
+            this.x,
+            this.y,
+            this.angle,
+            this.damage,
+            this.bulletSpeed,
+            this.shootRange
+        )
+
+        // Iterate through enemies future positions to find one that bullet will hit
+        while (this.target.steps + ticks*this.target.speed < this.target.path.length && !isHit) {
+            let nextCoord = tools.localToGlobal(this.target.positionInNSteps(ticks)) // Where the enemy will be
+            let nextAngle = Math.atan2(nextCoord[1]-this.y, nextCoord[0]-this.x) // The angle of the tower to that position
+            newBullet.updateAngleAndSpeeds(nextAngle)
+            let bulletFuturePos = newBullet.positionInNTicks(ticks) // See where bullet will be, when travelling at that angle, when the enemy is in that position
+            if (newBullet.willCollideWith(nextCoord, bulletFuturePos, Math.floor(config.SUBGRID_SIZE/2))){
+                isHit = true
+                if (this.turns) this.angle = nextAngle
+            }
+            ticks++
+        }
+        return [newBullet]
     }
 }
 
