@@ -76,11 +76,15 @@ class Tower {
           case 3: // Sniper
             func = this._normalShot;
             break;
+          case 1: // All dir burst tower
+            func = this._allDirShot;
+            break;
           case 2: // Triple shot tower
             func = this._tripleShot;
             break;
           default:
             func = this._normalShot;
+            break;
         }
         return func
     }
@@ -123,6 +127,21 @@ class Tower {
         rightBullet.updateAngleAndSpeeds(mainBullet.angle + angleVariation)
 
         return [leftBullet, mainBullet, rightBullet]
+    }
+
+    _allDirShot() {
+        let bullets = []
+        for (let a = 0; a < 8; a++) {
+            bullets.push(new bullet.Bullet(
+                this.x,
+                this.y,
+                (Math.PI/4)*a,
+                this.damage,
+                this.bulletSpeed,
+                this.shootRange
+            ))
+        }
+        return bullets
     }
 }
 
