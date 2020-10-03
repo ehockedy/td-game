@@ -1,15 +1,15 @@
 const crypto = require('crypto');
+const point = require('../js/point.js')
 const tools = require('./tools.js')
 
 class Bullet {
-    constructor(x, y, angle, damage, speed, range) {
-        this.x = x
-        this.y = y
-        this.startX = this.x
-        this.startY = this.y
+    constructor(position, angle, damage, speed, range) {
+        this.x = position.x
+        this.y = position.y
 
-        this.bulletPos = tools.globalToLocal([this.x, this.y])
-        this.bulletPosStart = tools.globalToLocal([this.x, this.y])
+        // Have to create new objects so that original object (tower position) is not changed when bullet position is updated during move
+        this.position = new point.Point(this.x, this.y)
+        this.bulletPosStart = new point.Point(this.x, this.y)
 
         this.speed = speed
         this.damage = damage
@@ -26,7 +26,7 @@ class Bullet {
         this.y += this.ySpeed
 
         // Convert into grid & subgrid coordinates
-        this.bulletPos = tools.globalToLocal([this.x, this.y])
+        this.position.updatePosGlobal(this.x, this.y) // TODO make this and bulletPos the same
     }
 
     updateAngleAndSpeeds(newAngle) {
@@ -35,20 +35,15 @@ class Bullet {
         this.ySpeed = this.speed * Math.sin(newAngle)
     }
 
-    collidesWith(y, x, r) {
-        return this.willCollideWith([x, y], [this.x, this.y], r)
+    collidesWith(pos, r) {
+        return this.willCollideWith(pos, this.position, r)
     }
 
-    willCollideWith(xy, xFutureyFuture, r) {
-        let x = xy[0]
-        let y = xy[1]
-        let xFuture = xFutureyFuture[0]
-        let yFuture = xFutureyFuture[1]
-
+    willCollideWith(pos, futurePos, r) {
         // Check if the bullet collides with an object at position x, y with a hit box of a circle radius r
         let granularity = 4 // Go down the fire path in 4 increments
         for (let g = 0; g < granularity; g++) {
-            if (Math.sqrt(Math.pow((x - (this.xSpeed*g/granularity) - xFuture),2) + Math.pow(y - (this.ySpeed*g/granularity) - yFuture,2)) < r) {
+            if (Math.sqrt(Math.pow((pos.x - (this.xSpeed*g/granularity) - futurePos.x),2) + Math.pow(pos.y - (this.ySpeed*g/granularity) - futurePos.y,2)) < r) {
                 return true;
             }
         }
@@ -56,9 +51,9 @@ class Bullet {
     }
 
     positionInNTicks(n) {
-        let x = this.startX + this.xSpeed*n
-        let y = this.startY + this.ySpeed*n
-        return [x, y]
+        let x = this.bulletPosStart.x + this.xSpeed*n
+        let y = this.bulletPosStart.y + this.ySpeed*n
+        return new point.Point(x, y)
     }
 }
 

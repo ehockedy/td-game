@@ -16,11 +16,12 @@ class Enemy {
 
         this.path = path // Reference to the object in map
         this.position = path[this.steps]
-        this.row = this.position[0]
-        this.col = this.position[1]
-        let coords = tools.localToGlobal(this.position)
-        this.x = coords[0]
-        this.y = coords[1]
+        this.row = this.position.row
+        this.col = this.position.col
+        this.subrow = this.position.subrow
+        this.subcol = this.position.subcol
+        this.x = this.position.x
+        this.y = this.position.y
 
         // Update specific variables
         this.isHit = false // Whether the enemy has been hit in that specific update
@@ -31,12 +32,13 @@ class Enemy {
         if (this.steps < this.path.length) {
             this.position = this.path[this.steps]
 
-            this.row = this.position[0]
-            this.col = this.position[1]
+            this.row = this.position.row
+            this.col = this.position.col
+            this.subrow = this.position.subrow
+            this.subcol = this.position.subcol
 
-            let coords = tools.localToGlobal(this.position)
-            this.x = coords[0]
-            this.y = coords[1]
+            this.x = this.position.x
+            this.y = this.position.y
         }
     }
 

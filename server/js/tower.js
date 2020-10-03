@@ -11,18 +11,17 @@ class Tower {
      * @param {String} type Unique name of tower assigned by client
      * @param {Number} type Type of tower
      * @param {String} player Who the tower belongs to
-     * @param {Number} row Main grid row
-     * @param {Number} col Main grid column
+     * @param {Point} position Point object that described the position in global and grid/subgrid coordinates
      */
-    constructor(name, type, player, row, col) {
+    constructor(name, type, player, position) {
         this.name = name;
         this.type = type
 
-        this.row = row
-        this.col = col
-        let coords = tools.localToGlobal([row, col, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT])
-        this.x = coords[0]
-        this.y = coords[1]
+        this.position = position
+        this.row = position.row
+        this.col = position.col
+        this.x = position.x
+        this.y = position.y
 
         this.angle = 0 // Angle in radians, 0 is East, goes clockwise
         this.rateOfFire = towerJson[type]["gameData"]["rateOfFire"] // ticks between bullets
@@ -46,7 +45,7 @@ class Tower {
      */
     calculateShootPath(path) {
         for (let p=0; p < path.length; p++) {
-            if (Math.sqrt(Math.pow((path[p][0] - this.row), 2) + Math.pow((path[p][1] - this.col), 2)) <= this.range) {
+            if (Math.sqrt(Math.pow((path[p].row - this.row), 2) + Math.pow((path[p].col - this.col), 2)) <= this.range) {
                 this.shootRangePath.push(path[p])
             }
         }
@@ -94,8 +93,7 @@ class Tower {
         let ticks = 1
         let isHit = false
         let newBullet = new bullet.Bullet(
-            this.x,
-            this.y,
+            this.position,
             this.angle,
             this.damage,
             this.bulletSpeed,
@@ -104,11 +102,11 @@ class Tower {
 
         // Iterate through enemies future positions to find one that bullet will hit
         while (this.target.steps + ticks*this.target.speed < this.target.path.length && !isHit) {
-            let nextCoord = tools.localToGlobal(this.target.positionInNSteps(ticks)) // Where the enemy will be
-            let nextAngle = Math.atan2(nextCoord[1]-this.y, nextCoord[0]-this.x) // The angle of the tower to that position
+            let nextPos = this.target.positionInNSteps(ticks) // Where the enemy will be
+            let nextAngle = Math.atan2(nextPos.y-this.y, nextPos.x-this.x) // The angle of the tower to that position
             newBullet.updateAngleAndSpeeds(nextAngle)
             let bulletFuturePos = newBullet.positionInNTicks(ticks) // See where bullet will be, when travelling at that angle, when the enemy is in that position
-            if (newBullet.willCollideWith(nextCoord, bulletFuturePos, config.DEFAULT_HITBOX_RADIUS)){
+            if (newBullet.willCollideWith(nextPos, bulletFuturePos, config.DEFAULT_HITBOX_RADIUS)){
                 isHit = true
                 if (this.turns) this.angle = nextAngle
             }
@@ -119,7 +117,7 @@ class Tower {
 
     _tripleShot() {
         let mainBullet = this._normalShot()[0]
-        let leftBullet = this._normalShot()[0]
+        let leftBullet = this._normalShot()[0] // TODO add a "make default bullet" private function to avoid this
         let rightBullet = this._normalShot()[0]
 
         let angleVariation = Math.PI/8
@@ -133,8 +131,7 @@ class Tower {
         let bullets = []
         for (let a = 0; a < 8; a++) {
             bullets.push(new bullet.Bullet(
-                this.x,
-                this.y,
+                this.position,
                 (Math.PI/4)*a,
                 this.damage,
                 this.bulletSpeed,

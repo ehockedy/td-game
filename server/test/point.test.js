@@ -7,8 +7,8 @@ test("converts local coordinates to global correctly", () => {
     expect(testPoint.row).toBe(20)
     expect(testPoint.subcol).toBe(config.SUBGRID_MIDPOINT)
     expect(testPoint.subrow).toBe(config.SUBGRID_MIDPOINT)
-    expect(testPoint.x).toBe(30*config.SUBGRID_SIZE)
-    expect(testPoint.y).toBe(20*config.SUBGRID_SIZE)
+    expect(testPoint.x).toBe(30*config.SUBGRID_SIZE + config.SUBGRID_MIDPOINT)
+    expect(testPoint.y).toBe(20*config.SUBGRID_SIZE + config.SUBGRID_MIDPOINT)
 })
 
 test("converts global coordinates to local correctly", () => {

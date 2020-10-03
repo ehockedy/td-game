@@ -4,6 +4,7 @@ const enemy = require("./enemies.js");
 const gameMap = require('./map.js');
 const tools = require('./tools.js')
 const towerImport = require("./tower.js");
+const point = require('./point.js');
 
 const ENEMY_TYPE = {
     RANDOM: 0,
@@ -37,18 +38,18 @@ class Game {
         // Iterate backwards so what we do not double move enemies that move to the next square on the path
         for (let square = this.map.mainPath.length-1; square >= 0; square--) {
             let rc = this.map.mainPath[square]
-            let enemies = this.map.map[rc[0]][rc[1]].enemies
+            let enemies = this.map.map[rc.row][rc.col].enemies
             // Work backwards through enemies so can remove them easily if needed
             for (let eIdx = enemies.length-1; eIdx >= 0; eIdx--) {
                 let e = enemies[eIdx]
                 e.step() // Move based on speed
-                if (e.position[0] != rc[0] || e.position[1] != rc[1]) { // Check if enemy has moved into new main grid square
-                    this.map.map[rc[0]][rc[1]].enemies.splice(eIdx, 1) // Remove from current square
+                if (e.position.row != rc.row || e.position.col != rc.col) { // Check if enemy has moved into new main grid square
+                    this.map.map[rc.row][rc.col].enemies.splice(eIdx, 1) // Remove from current square
                     this.map.addEnemy(e) // Add to new square
                 }
                 e.isHit = false // reset whether hit
             }
-            this.map.reorderEnemies(rc[0], rc[1])
+            this.map.reorderEnemies(rc.row, rc.col)
         }
     }
 
@@ -61,7 +62,7 @@ class Game {
             if (tower.aimBehaviour == "last") { // Tower aims to the enemy furthest down the path
                 for (let i = tower.shootRangePath.length-1; i >= 0; i--) {
                     let square = tower.shootRangePath[i]
-                    let enemies = this.map.getEnemies(square[0], square[1])
+                    let enemies = this.map.getEnemies(square.row, square.col)
                     if (enemies.length > 0) {
                         chosenEnemy = enemies[enemies.length-1]
                         break;
@@ -70,7 +71,7 @@ class Game {
             } else { // TODO if (tower.behaviour == "first") { // Tower aims at enemy earliest in the path
                 for (let i = 0; i < tower.shootRangePath.length; i++) {
                     let square = tower.shootRangePath[i]
-                    let enemies = this.map.getEnemies(square[0], square[1])
+                    let enemies = this.map.getEnemies(square.row, square.col)
                     if (enemies.length > 0) {
                         chosenEnemy = enemies[0]
                         break;
@@ -103,12 +104,11 @@ class Game {
         // Check all relevant game objects and see how they interact
         // Check collision between enemies and bullets
         this.map.mainPath.forEach((rc) => {
-            this.map.map[rc[0]][rc[1]].enemies.forEach((enemy) => {
+            this.map.map[rc.row][rc.col].enemies.forEach((enemy) => {
                 let enemyPos = this.map.path[enemy.steps]
                 for (let b = this.bullets.length-1; b >= 0; b--) {
                     if(this.bullets[b].collidesWith(
-                        enemyPos[0]*config.SUBGRID_SIZE + enemyPos[2], // TODO make abolute grid value a thing
-                        enemyPos[1]*config.SUBGRID_SIZE + enemyPos[3],
+                        enemyPos,
                         config.DEFAULT_HITBOX_RADIUS)) {
                         enemy.isHit = true
                         enemy.hp -= this.bullets[b].damage
@@ -120,19 +120,19 @@ class Game {
 
         // Check if enemy reached end of path
         this.map.mainPath.forEach((rc) => {
-            for (let i = this.map.map[rc[0]][rc[1]].enemies.length-1; i >= 0; i--) {
-                let enemy = this.map.map[rc[0]][rc[1]].enemies[i]
+            for (let i = this.map.map[rc.row][rc.col].enemies.length-1; i >= 0; i--) {
+                let enemy = this.map.map[rc.row][rc.col].enemies[i]
                 if (enemy.steps > this.map.path.length - config.SUBGRID_MIDPOINT) {
-                    this.map.getEnemies(rc[0], rc[1]).splice(i, 1) // Remove that enemy
+                    this.map.getEnemies(rc.row, rc.col).splice(i, 1) // Remove that enemy
                 }
             }
         })
 
-        // Check for bulets that have travelled too far without hitting an enemy
+        // Check for bulets that have travelled too far without hitting an enemy TODO put this in bullet class
         for (let i = this.bullets.length-1; i >= 0; i--) {
             if (Math.sqrt(
-                    Math.pow(this.bullets[i].bulletPos[0] - this.bullets[i].bulletPosStart[0], 2) +
-                    Math.pow(this.bullets[i].bulletPos[1] - this.bullets[i].bulletPosStart[1], 2)
+                    Math.pow(this.bullets[i].position.col - this.bullets[i].bulletPosStart.col, 2) +
+                    Math.pow(this.bullets[i].position.row - this.bullets[i].bulletPosStart.row, 2)
                 ) > this.bullets[i].range) {
                 this.bullets.splice(i, 1) // Remove that bullet
             }
@@ -164,7 +164,7 @@ class Game {
     }
 
     addTower(name, type, player, row, col) {
-        let newTower = new towerImport.Tower(name, type, player, row, col)
+        let newTower = new towerImport.Tower(name, type, player, new point.Point(col, row, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT))
         newTower.calculateShootPath(this.map.mainPath)
         this.towers.push(newTower)
     }
@@ -202,10 +202,10 @@ class Game {
 
         let hash = crypto.createHash("sha256")
         this.map.mainPath.forEach((rc) => {
-            this.map.map[rc[0]][rc[1]].enemies.forEach((e) => {
+            this.map.map[rc.row][rc.col].enemies.forEach((e) => {
                 state["enemies"]["objects"].push({
                     "name": e.name,
-                    "pathPos": e.position,
+                    "pathPos": [e.row, e.col, e.subrow, e.subcol],
                     "isHit": e.isHit
                 })
                 hash.update(e.name)
@@ -218,7 +218,7 @@ class Game {
             state["towers"]["objects"].push({
                 "name": t.name,
                 "angle": t.angle,
-                "posRowCol": [t.row, t.col],
+                "posRowCol": t.position,
                 "owner": t.player,
                 "type": t.type
             })
@@ -229,7 +229,7 @@ class Game {
         this.bullets.forEach((b) => {
             state["bullets"]["objects"].push({
                 "name": b.name,
-                "bulletPos": b.bulletPos
+                "bulletPos": [b.position.row, b.position.col, b.position.subrow, b.position.subcol]
             })
         })
 
