@@ -1,0 +1,25 @@
+{
+  "name": "td_game",
+  "version": "0.0.0",
+  "description": "A multiplayer cooperative and competitive tower defence game",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jest": "^26.4.2",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehockedy/td-game.git"
+  },
+  "author": "Edward Hockedy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ehockedy/td-game/issues"
+  },
+  "homepage": "https://github.com/ehockedy/td-game#readme"
+}
