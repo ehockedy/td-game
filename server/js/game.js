@@ -1,9 +1,9 @@
-const enemy = require("./enemies.js");
-const towerImport = require("./tower.js");
-const bullet = require("./bullet.js");
-const gameMap = require('./map.js');
 const config = require('./constants.js')
 const crypto = require('crypto');
+const enemy = require("./enemies.js");
+const gameMap = require('./map.js');
+const tools = require('./tools.js')
+const towerImport = require("./tower.js");
 
 const ENEMY_TYPE = {
     RANDOM: 0,
@@ -15,9 +15,6 @@ const TOWER_TYPE = {
     BLUE: 0 // Single shot basic tower
 }
 
-function calculateAngle(row1, col1, row2, col2) {
-    return Math.atan2((row2-row1), (col2-col1))
-}
 
 class Game {
     constructor(mapX, mapY, subGridXY) {
@@ -112,7 +109,7 @@ class Game {
                     if(this.bullets[b].collidesWith(
                         enemyPos[0]*config.SUBGRID_SIZE + enemyPos[2], // TODO make abolute grid value a thing
                         enemyPos[1]*config.SUBGRID_SIZE + enemyPos[3],
-                        Math.floor(config.SUBGRID_SIZE/2))) {
+                        config.DEFAULT_HITBOX_RADIUS)) {
                         enemy.isHit = true
                         enemy.hp -= this.bullets[b].damage
                         this.bullets.splice(b, 1) // Remove that bullet
@@ -125,7 +122,7 @@ class Game {
         this.map.mainPath.forEach((rc) => {
             for (let i = this.map.map[rc[0]][rc[1]].enemies.length-1; i >= 0; i--) {
                 let enemy = this.map.map[rc[0]][rc[1]].enemies[i]
-                if (enemy.steps > this.map.path.length - this.map.subGridSize/2) {
+                if (enemy.steps > this.map.path.length - config.SUBGRID_MIDPOINT) {
                     this.map.getEnemies(rc[0], rc[1]).splice(i, 1) // Remove that enemy
                 }
             }
@@ -217,7 +214,7 @@ class Game {
         state["enemies"]["hash"] = hash.digest("hex")
 
         hash = crypto.createHash("sha256")
-        this.towers.forEach((t, idx) => {
+        this.towers.forEach((t) => {
             state["towers"]["objects"].push({
                 "name": t.name,
                 "angle": t.angle,

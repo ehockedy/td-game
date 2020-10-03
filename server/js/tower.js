@@ -20,7 +20,7 @@ class Tower {
 
         this.row = row
         this.col = col
-        let coords = tools.localToGlobal([row, col, config.SUBGRID_SIZE/2, config.SUBGRID_SIZE/2])
+        let coords = tools.localToGlobal([row, col, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT])
         this.x = coords[0]
         this.y = coords[1]
 
@@ -108,7 +108,7 @@ class Tower {
             let nextAngle = Math.atan2(nextCoord[1]-this.y, nextCoord[0]-this.x) // The angle of the tower to that position
             newBullet.updateAngleAndSpeeds(nextAngle)
             let bulletFuturePos = newBullet.positionInNTicks(ticks) // See where bullet will be, when travelling at that angle, when the enemy is in that position
-            if (newBullet.willCollideWith(nextCoord, bulletFuturePos, Math.floor(config.SUBGRID_SIZE/2))){
+            if (newBullet.willCollideWith(nextCoord, bulletFuturePos, config.DEFAULT_HITBOX_RADIUS)){
                 isHit = true
                 if (this.turns) this.angle = nextAngle
             }
