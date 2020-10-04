@@ -130,10 +130,7 @@ class Game {
 
         // Check for bulets that have travelled too far without hitting an enemy TODO put this in bullet class
         for (let i = this.bullets.length-1; i >= 0; i--) {
-            if (Math.sqrt(
-                    Math.pow(this.bullets[i].position.col - this.bullets[i].bulletPosStart.col, 2) +
-                    Math.pow(this.bullets[i].position.row - this.bullets[i].bulletPosStart.row, 2)
-                ) > this.bullets[i].range) {
+            if (this.bullets[i].isOutOfRange()) {
                 this.bullets.splice(i, 1) // Remove that bullet
             }
         }

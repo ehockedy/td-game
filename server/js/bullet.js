@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const point = require('../js/point.js')
-const tools = require('./tools.js')
+const config = require('./constants.js')
 
 class Bullet {
     constructor(position, angle, damage, speed, range) {
@@ -13,7 +13,7 @@ class Bullet {
 
         this.speed = speed
         this.damage = damage
-        this.range = range
+        this.range = range * config.SUBGRID_SIZE // Convert to global (since range is configured by number of squares)
         this.name = crypto.randomBytes(20).toString('hex');
 
         this.angle = angle
@@ -54,6 +54,13 @@ class Bullet {
         let x = this.bulletPosStart.x + this.xSpeed*n
         let y = this.bulletPosStart.y + this.ySpeed*n
         return new point.Point(x, y)
+    }
+
+    isOutOfRange() {
+        return Math.sqrt(
+                Math.pow(this.position.x - this.bulletPosStart.x, 2) +
+                Math.pow(this.position.y - this.bulletPosStart.y, 2)
+            ) > this.range
     }
 }
 
