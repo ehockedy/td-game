@@ -62,6 +62,10 @@ class Bullet {
                 Math.pow(this.position.y - this.bulletPosStart.y, 2)
             ) > this.range
     }
+
+    isOffMap() {
+        return (this.x < 0 || this.y < 0 || this.x > config.SUBGRID_SIZE*config.MAP_WIDTH || this.y > config.SUBGRID_SIZE*config.MAP_HEIGHT)
+    }
 }
 
 module.exports = {
