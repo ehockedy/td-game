@@ -82,16 +82,63 @@ class GameMap {
     this.map[this.row_start][this.col_start].enemies.unshift(enemy)
   }
 
-  // Add enemy based on enemies row/column data - does not keep them in path order
+  // Add enemy based on enemies row/column data and keep them in path order
+  // Basic O(n) linear insertion
   addEnemy(enemy) {
     if (this.onMainPath(enemy.row, enemy.col)) {
-      this.map[enemy.row][enemy.col].enemies.push(enemy)
+      let enemies = this.map[enemy.row][enemy.col].enemies
+
+      // If no current enemies or enemy is further than all current enemies, add to the end
+      if (enemies.length == 0 || enemies[enemies.length-1].steps < enemy.steps) {
+        enemies.push(enemy)
+      } else {
+        for (let pos = 0; pos < enemies.length; pos++) {
+          // Put the enemy in front of the first enemy it is earlier than
+          if (enemy.steps < enemies[pos].steps) {
+            enemies.splice(pos, 0, enemy)
+            break
+          }
+        }
+      }
     }
   }
 
-  reorderEnemies(row, col) {
-    if (!this.onMainPath(row, col)) return
-    this.map[row][col].enemies.sort((a, b) => {return a.steps < b.steps ? -1 : 1})
+  removeEnemy(enemy) {
+    let row = enemy.position.row
+    let col = enemy.position.col
+    return this.removeEnemyFromSquare(enemy, row, col)
+  }
+
+  // Traverse through given square until equivalent object found
+  // Unique name provides uniqueness between enemy objects
+  removeEnemyFromSquare(enemy, row, col) {
+    let enemies = this.map[row][col].enemies
+    let found = false
+    for (let e = enemies.length - 1; e >= 0; e--) {
+      if (enemies[e] == enemy) {
+        enemies.splice(e, 1)
+        found = true
+        break
+      }
+    }
+    return found
+  }
+
+  forEachEnemy(callback) {
+    this.mainPath.forEach((rc) => { // Enemies only exist on the main path
+      this.map[rc.row][rc.col].enemies.forEach((enemy) => {
+          callback(enemy)
+      })
+    })
+  }
+
+  forEachEnemyInReverse(callback) { // Iterate through main path backwards, and go through enemies in reverse
+    for (let p = this.mainPath.length-1; p >= 0; p--) {
+      let rc = this.mainPath[p]
+      for (let e = this.map[rc.row][rc.col].enemies.length - 1; e >= 0; e--) {
+        callback(this.map[rc.row][rc.col].enemies[e])
+      }
+    }
   }
 
   // TODO move this (and others) into a MapConstructor class

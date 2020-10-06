@@ -35,21 +35,15 @@ class Game {
     moveEnemies() {
         // Enemies only ever appear on the path, so iterate over those squares only to find enemies
         // Iterate backwards so what we do not double move enemies that move to the next square on the path
-        for (let square = this.map.mainPath.length-1; square >= 0; square--) {
-            let rc = this.map.mainPath[square]
-            let enemies = this.map.map[rc.row][rc.col].enemies
-            // Work backwards through enemies so can remove them easily if needed
-            for (let eIdx = enemies.length-1; eIdx >= 0; eIdx--) {
-                let e = enemies[eIdx]
-                e.step() // Move based on speed
-                if (e.position.row != rc.row || e.position.col != rc.col) { // Check if enemy has moved into new main grid square
-                    this.map.map[rc.row][rc.col].enemies.splice(eIdx, 1) // Remove from current square
-                    this.map.addEnemy(e) // Add to new square
-                }
-                e.isHit = false // reset whether hit
+        this.map.forEachEnemyInReverse((enemy) => {
+            let startPos = enemy.position
+            enemy.step()
+            if (enemy.row != startPos.row || enemy.col != startPos.col) {
+                this.map.removeEnemyFromSquare(enemy, startPos.row, startPos.col)
+                this.map.addEnemy(enemy)
             }
-            this.map.reorderEnemies(rc.row, rc.col)
-        }
+            enemy.isHit = false
+        })
     }
 
     moveTowers() {
@@ -122,28 +116,23 @@ class Game {
     resolveInteractions() {
         // Check all relevant game objects and see how they interact
         // Check collision between enemies and bullets
-        this.map.mainPath.forEach((rc) => {
-            this.map.map[rc.row][rc.col].enemies.forEach((enemy) => {
-                let enemyPos = this.map.path[enemy.steps]
-                let bullets = this.map.map[rc.row][rc.col].bullets
-                for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
-                    let bullet = bullets[bIdx]
-                    if(bullet.collidesWith(enemyPos, config.DEFAULT_HITBOX_RADIUS)) { // TODO make hitbox a property of the enemy
-                        enemy.isHit = true
-                        enemy.hp -= bullet.damage
-                        bullets.splice(bIdx, 1) // Remove that bullet
-                    }
+        this.map.forEachEnemy((enemy) => {
+            let bullets = this.map.map[enemy.position.row][enemy.position.col].bullets
+            for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
+                let bullet = bullets[bIdx]
+                if(bullet.collidesWith(enemy.position, config.DEFAULT_HITBOX_RADIUS)) { // TODO make hitbox a property of the enemy
+                    enemy.isHit = true
+                    enemy.hp -= bullet.damage
+                    bullets.splice(bIdx, 1) // Remove that bullet
                 }
-            })
+            }
         })
 
         // Check if enemy reached end of path
-        this.map.mainPath.forEach((rc) => {
-            for (let i = this.map.map[rc.row][rc.col].enemies.length-1; i >= 0; i--) {
-                let enemy = this.map.map[rc.row][rc.col].enemies[i]
-                if (enemy.steps > this.map.path.length - config.SUBGRID_MIDPOINT) {
-                    this.map.getEnemies(rc.row, rc.col).splice(i, 1) // Remove that enemy
-                }
+        // We must iterate through the enemies in reverse, since removing one would mess up the indexing
+        this.map.forEachEnemyInReverse((enemy) => {
+            if (enemy.steps > this.map.path.length - config.SUBGRID_MIDPOINT) {
+                this.map.removeEnemy(enemy)
             }
         })
 
@@ -222,16 +211,15 @@ class Game {
         }
 
         let hash = crypto.createHash("sha256")
-        this.map.mainPath.forEach((rc) => {
-            this.map.map[rc.row][rc.col].enemies.forEach((e) => {
-                state["enemies"]["objects"].push({
-                    "name": e.name,
-                    "pathPos": [e.row, e.col, e.subrow, e.subcol],
-                    "isHit": e.isHit
-                })
-                hash.update(e.name)
+        this.map.forEachEnemy((e) => {
+            state["enemies"]["objects"].push({
+                "name": e.name,
+                "pathPos": [e.row, e.col, e.subrow, e.subcol],
+                "isHit": e.isHit
             })
+            hash.update(e.name)
         })
+
         state["enemies"]["hash"] = hash.digest("hex")
 
         hash = crypto.createHash("sha256")

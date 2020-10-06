@@ -8,3 +8,6 @@ Bullet and enemy collision animation
 Range that bullet can travel should probably be further than aim range
     - for cases where enemy just appears then moves out of range
 Add middle of subgrid size to config
+Fastest/slowest could be good aim behaviours for towers
+Make sure that a bullet that is within the hitbox of an anamy, is not actually in an adjacent box
+ - or, make sure to check all 3*3 grid of bullets around each enemy
