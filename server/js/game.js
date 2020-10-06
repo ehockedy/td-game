@@ -34,15 +34,20 @@ class Game {
 
     moveEnemies() {
         // Enemies only ever appear on the path, so iterate over those squares only to find enemies
-        // Iterate backwards so what we do not double move enemies that move to the next square on the path
+        // Iterate backwards so that we do not double move enemies that move to the next square on the path
+        let prevEnemySteps = -1
         this.map.forEachEnemyInReverse((enemy) => {
             let startPos = enemy.position
             enemy.step()
             if (enemy.row != startPos.row || enemy.col != startPos.col) {
                 this.map.removeEnemyFromSquare(enemy, startPos.row, startPos.col)
                 this.map.addEnemy(enemy)
+            } else if (prevEnemySteps > 0 && prevEnemySteps < enemy.steps) { // May have overtaken within the same square
+                this.map.removeEnemy(enemy)
+                this.map.addEnemy(enemy)
             }
             enemy.isHit = false
+            prevEnemySteps = enemy.steps
         })
     }
 

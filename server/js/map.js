@@ -89,12 +89,12 @@ class GameMap {
       let enemies = this.map[enemy.row][enemy.col].enemies
 
       // If no current enemies or enemy is further than all current enemies, add to the end
-      if (enemies.length == 0 || enemies[enemies.length-1].steps < enemy.steps) {
+      if (enemies.length == 0 || enemies[enemies.length-1].steps <= enemy.steps) {
         enemies.push(enemy)
       } else {
         for (let pos = 0; pos < enemies.length; pos++) {
           // Put the enemy in front of the first enemy it is earlier than
-          if (enemy.steps < enemies[pos].steps) {
+          if (enemy.steps <= enemies[pos].steps) {
             enemies.splice(pos, 0, enemy)
             break
           }
