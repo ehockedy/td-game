@@ -13,3 +13,4 @@ Make sure that a bullet that is within the hitbox of an anamy, is not actually i
  - or, make sure to check all 3*3 grid of bullets around each enemy
 Sort out even cols infinite loop issue
  -  odd sided grids get stuck in infinite loop - I assume becuase can never meet the end condition since steps are take as multiples of 2 so that no bit of path is adjacent!
+Bullet movement tests

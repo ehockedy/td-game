@@ -35,7 +35,7 @@ class Game {
     moveEnemies() {
         // Enemies only ever appear on the path, so iterate over those squares only to find enemies
         // Iterate backwards so that we do not double move enemies that move to the next square on the path
-        let prevEnemySteps = -1
+        let prevEnemySteps = -1 // TODO can set to total path length (number of steps)+1 and remove the >0 check below
         this.map.forEachEnemyInReverse((enemy) => {
             let startPos = enemy.position
             enemy.step()
@@ -84,7 +84,7 @@ class Game {
 
             tower.setTarget(chosenEnemy)
             tower.shoot().forEach((bullet) => {
-                this.map.map[tower.row][tower.col].bullets.push(bullet)
+                this.map.addBullet(bullet)
             })
 
             tower.fireTick = (tower.fireTick + 1) % tower.rateOfFire
@@ -92,36 +92,28 @@ class Game {
     }
 
     moveBullets() {
-        // Move the bullets
-        this.map.map.forEach((r) => {
-            r.forEach((c) => {
-                c.bullets.forEach((bullet) => {
-                    bullet.move()
-                })
-            })
+        // Move first, so don't double move, but keep track of what needs to be re-added
+        let toAdd = []
+        this.map.forEachBulletInReverse((bullet) => {
+            bullet.move()
+            if (bullet.isOffMap()) {
+                this.map.removeBulletPrevPos(bullet) // Remove that bullet, and do not re-add it - it's off the map
+            } else if (bullet.hasMovedSquare) {
+                this.map.removeBulletPrevPos(bullet)
+                toAdd.push(bullet)
+            }
         })
 
-        // Then update the squares they exist in TODO this could be neater, and probably not most efficient way
-        this.map.map.forEach((r, rIdx) => {
-            r.forEach((c, cIdx) => {
-                let bullets = c.bullets
-                for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
-                    let bullet = bullets[bIdx]
-                    if (bullet.isOffMap()) bullets.splice(bIdx, 1) // Remove that bullet, and do not re-add it - it's off the map
-                    else if (bullet.position.row != rIdx || bullet.position.col != cIdx) {
-                        this.map.map[bullet.position.row][bullet.position.col].bullets.push(bullet)
-                        bullets.splice(bIdx, 1) // Remove that bullet
-                    }
-                }
-            })
+        // Add the bullets to their new square
+        toAdd.forEach((bullet) => {
+            this.map.addBullet(bullet)
         })
-
     }
 
     resolveInteractions() {
         // Check all relevant game objects and see how they interact
         // Check collision between enemies and bullets
-        this.map.forEachEnemy((enemy) => {
+        this.map.forEachEnemy((enemy) => { // TODO forEachEnemyAndBullet
             let bullets = this.map.map[enemy.position.row][enemy.position.col].bullets
             for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
                 let bullet = bullets[bIdx]
@@ -141,16 +133,10 @@ class Game {
             }
         })
 
-        // Check for bullets that have travelled too far without hitting an enemy
-        this.map.map.forEach((r) => {
-            r.forEach((c) => {
-                let bullets = c.bullets
-                for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
-                    if (bullets[bIdx].isOutOfRange()) {
-                       bullets.splice(bIdx, 1) // Remove that bullet
-                    }
-                }
-            })
+        this.map.forEachBulletInReverse((bullet) => {
+            if (bullet.isOutOfRange()) {
+                this.map.removeBullet(bullet)
+            }
         })
     }
 
@@ -240,14 +226,10 @@ class Game {
         })
         state["towers"]["hash"] = hash.digest("hex")
 
-        this.map.map.forEach((r) => {
-            r.forEach((c) => {
-                c.bullets.forEach((b) => {
-                    state["bullets"]["objects"].push({
-                        "name": b.name,
-                        "bulletPos": [b.position.row, b.position.col, b.position.subrow, b.position.subcol]
-                    })
-                })
+        this.map.forEachBullet((b) => {
+            state["bullets"]["objects"].push({
+                "name": b.name,
+                "bulletPos": [b.position.row, b.position.col, b.position.subrow, b.position.subcol]
             })
         })
 

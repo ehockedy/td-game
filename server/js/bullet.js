@@ -9,7 +9,8 @@ class Bullet {
 
         // Have to create new objects so that original object (tower position) is not changed when bullet position is updated during move
         this.position = new point.Point(this.x, this.y)
-        this.bulletPosStart = new point.Point(this.x, this.y)
+        this.bulletPosStart = new point.Point(this.x, this.y) // TODO replace this with cumulative dist travelled
+        this.positionPrev = this.position
 
         this.speed = speed
         this.damage = damage
@@ -19,14 +20,19 @@ class Bullet {
         this.angle = angle
         this.xSpeed = this.speed * Math.cos(this.angle)
         this.ySpeed = this.speed * Math.sin(this.angle)
+
+        this.hasMovedSquare = false
     }
 
     move() {
+        this.positionPrev = new point.Point(this.x, this.y)
+
         this.x += this.xSpeed
         this.y += this.ySpeed
 
         // Convert into grid & subgrid coordinates
-        this.position.updatePosGlobal(this.x, this.y) // TODO make this and bulletPos the same
+        this.position.updatePosGlobal(this.x, this.y)
+        this.hasMovedSquare = (this.position.row != this.positionPrev.row || this.position.col != this.positionPrev.col)
     }
 
     updateAngleAndSpeeds(newAngle) {

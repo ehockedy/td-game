@@ -76,6 +76,12 @@ class GameMap {
     return this.map[row][col].enemies
   }
 
+  // Add bullet based on its current position
+  // No order is maintained in bullet arrays
+  addBullet(bullet) {
+    this.map[bullet.position.row][bullet.position.col].bullets.push(bullet)
+  }
+
   // Add to front of list
   addNewEnemy(enemy) {
     this.numEnemies++
@@ -101,6 +107,32 @@ class GameMap {
         }
       }
     }
+  }
+
+  // TODO make these Bullet/Enemy functions call generic
+  removeBullet(bullet) {
+    return this.removeBulletFromSquare(bullet, bullet.position.row, bullet.position.col)
+  }
+
+  // Sometimes need to use a previous position when removing a bullet
+  // Might be because a consition has been realised only once moved
+  removeBulletPrevPos(bullet) {
+    return this.removeBulletFromSquare(bullet, bullet.positionPrev.row, bullet.positionPrev.col)
+  }
+
+  // Traverse through given square until equivalent object found
+  // Unique name provides uniqueness between enemy objects
+  removeBulletFromSquare(bullet, row, col) {
+    let bullets = this.map[row][col].bullets
+    let found = false
+    for (let b = bullets.length - 1; b >= 0; b--) {
+      if (bullets[b].name == bullet.name) {
+        bullets.splice(b, 1)
+        found = true
+        break
+      }
+    }
+    return found
   }
 
   removeEnemy(enemy) {
@@ -137,6 +169,26 @@ class GameMap {
       let rc = this.mainPath[p]
       for (let e = this.map[rc.row][rc.col].enemies.length - 1; e >= 0; e--) {
         callback(this.map[rc.row][rc.col].enemies[e])
+      }
+    }
+  }
+
+  forEachBullet(callback) {
+    this.map.forEach((row) => {
+      row.forEach((col) => {
+        col.bullets.forEach((bullet) => {
+          callback(bullet)
+        })
+      })
+    })
+  }
+
+  forEachBulletInReverse(callback) { // Iterate through main path backwards, and go through enemies in reverse
+    for (let row = this.map.length - 1; row >= 0; row--) {
+      for (let col = this.map[row].length - 1; col >= 0; col--) {
+        for (let b = this.map[row][col].bullets.length - 1; b >= 0; b--) {
+          callback(this.map[row][col].bullets[b])
+        }
       }
     }
   }
