@@ -14,3 +14,6 @@ Make sure that a bullet that is within the hitbox of an anamy, is not actually i
 Sort out even cols infinite loop issue
  -  odd sided grids get stuck in infinite loop - I assume becuase can never meet the end condition since steps are take as multiples of 2 so that no bit of path is adjacent!
 Bullet movement tests
+Fix the fact that Point has hard coded sub grid size set - in tests have seen that using a different subgrid size to the default, they still pass
+ - enemy tests are find because poit is not used - just goes through pre generated path
+ - but in bullet tests Point is used, and still passes - meaning that as far as the bullet is concerned it shoudl not be in a different square
