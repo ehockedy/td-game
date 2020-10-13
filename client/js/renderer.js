@@ -542,6 +542,8 @@ function updateTowers() {
     let towerStateHash = state["towers"]["hash"];
 
     if (towerStateHash != towerStateHashPrev) {
+        towerStateHashPrev = towerStateHash
+
         // Identify tower not in container but in server update
         let nameIdx = 0
         for (nameIdx; nameIdx < towerStateObjects.length; nameIdx++) {
@@ -565,7 +567,7 @@ function updateTowers() {
         // Move the tower angle
         let towerToUpdate = towerContainer.getChildByName(tower["name"])
         towerToUpdate.rotation = tower["angle"]
-        towerToUpdate.tint = getBoard()[towerToUpdate.gridY][towerToUpdate.gridX]["tower"].colour
+        towerToUpdate.tint = randomColourCode // TODO store all player colours once //getBoard()[towerToUpdate.gridY][towerToUpdate.gridX]["tower"].colour
     })
 }
 

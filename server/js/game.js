@@ -29,7 +29,16 @@ class Game {
     }
 
     getMapStructure() {
-        return this.map.map
+        let basicMap = []
+        for (let r = 0; r < this.map.map.length; r++) {
+            basicMap.push([])
+            for (let c = 0; c < this.map.map[r].length; c++) {
+                basicMap[r].push({
+                    "value": this.map.map[r][c]["value"]
+                })
+            }
+        }
+        return basicMap
     }
 
     moveEnemies() {

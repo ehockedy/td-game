@@ -26,7 +26,7 @@ const socket = io();
 startRenderingMenu();
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) => {
-    // grid is the simple representation of the map - a 2D array or arrays
+    // grid is the simple representation of the map - a 2D array of arrays
     setGridDimsRowsCols(rows, cols);
     setSubGridDim(subGridSize);
     setBoard(grid);
