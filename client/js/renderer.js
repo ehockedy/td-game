@@ -1,6 +1,7 @@
 import { getState, getBoard, getGridDimsRowsCols, getSubGridDim, getGameID } from "./state.js"
 import { MSG_TYPES, sendMessage } from "./networking.js"
 import { randomHexString } from "./tools.js"
+import { Toolbar } from "./views/game/toolbar.js"
 
 const DEFAULT_SPRITE_SIZE_X = 32 // Width of a sprite in the map spritesheet
 const DEFAULT_SPRITE_SIZE_Y = 32 // Height of a sprite in the map spritesheet
@@ -628,15 +629,10 @@ function setup() {
     generateTowerSpritesheetData()
     generateBulletSpritesheetData()
 
-    // Render menu toolbars - increases canvas size if so
-    addToolbar(0, app.view.height, MAP_WIDTH*DEFAULT_SPRITE_SIZE_Y, 3*DEFAULT_SPRITE_SIZE_Y, "bottomToolbar")
-    addToolbar(mapContainer.width, 0, 5*DEFAULT_SPRITE_SIZE_X, app.view.height/2, "towerMenu")
-    addToolbar(mapContainer.width, app.view.height/2, 5*DEFAULT_SPRITE_SIZE_X, app.view.height/2, "towerInfoMenu", "0x757575") // little bit lighter so can see the box
-
-    addMenuTower(0) // First (and currently) only entry in towerJson array
-    addMenuTower(1)
-    addMenuTower(2)
-    addMenuTower(3)
+    // addMenuTower(0) // First (and currently) only entry in towerJson array
+    // addMenuTower(1)
+    // addMenuTower(2)
+    // addMenuTower(3)
 
     app.view.addEventListener('click', (event) => onCanvasClick(event));
 
@@ -648,18 +644,30 @@ function setup() {
 // Sets up PIXI app and run the `setup` function when it's done
 export function startRendering() {
     // These will have been set in a previous setup call from the server
-    MAP_WIDTH = getGridDimsRowsCols()[1]
-    MAP_HEIGHT = getGridDimsRowsCols()[0]
+    let MAP_COLS = getGridDimsRowsCols()[1]
+    let MAP_ROWS = getGridDimsRowsCols()[0]
     SUBGRID_SIZE = getSubGridDim()
 
-    // Not this is starting width/height (just the game map). Toolbars are added later which resize
-    APP_WIDTH = MAP_WIDTH * DEFAULT_SPRITE_SIZE_X
-    APP_HEIGHT = MAP_HEIGHT * DEFAULT_SPRITE_SIZE_Y
+    MAP_WIDTH = MAP_COLS * DEFAULT_SPRITE_SIZE_X
+    MAP_HEIGHT = MAP_ROWS * DEFAULT_SPRITE_SIZE_Y
+
+    let RIGHT_TOOLBAR_WIDTH = 5*DEFAULT_SPRITE_SIZE_X
+    let toolbarTowers = new Toolbar(RIGHT_TOOLBAR_WIDTH, MAP_HEIGHT/2)
+    toolbarTowers.setX(MAP_WIDTH)
+
+    let toolbarTowerInfo = new Toolbar(RIGHT_TOOLBAR_WIDTH, MAP_HEIGHT/2)
+    toolbarTowerInfo.setX(MAP_WIDTH)
+    toolbarTowerInfo.setY(MAP_HEIGHT/2)
+
+    let BOTTOM_TOOLBAR_WIDTH = MAP_WIDTH + RIGHT_TOOLBAR_WIDTH
+    let BOTTOM_TOOLBAR_HEIGHT = 3*DEFAULT_SPRITE_SIZE_Y
+    let toolbarPlayerInfo = new Toolbar(BOTTOM_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT)
+    toolbarPlayerInfo.setY(MAP_HEIGHT)
 
     //Create a Pixi Application
     app = new PIXI.Application({
-        width: APP_WIDTH,
-        height: APP_HEIGHT
+        width: MAP_WIDTH + RIGHT_TOOLBAR_WIDTH,
+        height: MAP_HEIGHT + BOTTOM_TOOLBAR_HEIGHT
     });
 
     // Order in which display objects are added is the order they are put in the
@@ -667,9 +675,9 @@ export function startRendering() {
     app.stage.addChild(mapContainer)
     app.stage.addChild(enemyContainer)
     app.stage.addChild(towerDataContainer)
-    app.stage.addChild(toolbarContainer)
-    app.stage.addChild(towerToolbarContentContainer)
-    app.stage.addChild(towerMenuContainer)
+    app.stage.addChild(toolbarTowers.container)
+    app.stage.addChild(toolbarTowerInfo.container)
+    app.stage.addChild(toolbarPlayerInfo.container)
     app.stage.addChild(bulletContainer)
     app.stage.addChild(towerContainer)
 
