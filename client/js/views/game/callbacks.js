@@ -13,7 +13,6 @@ export function onDragTower(event) {
         // If on map, snap to grid
         let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
         let newGridY = Math.floor(newPosition.y / DEFAULT_SPRITE_SIZE_Y)
-        console.log(getBoard()[newGridY][newGridX])
         if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
             getBoard()[newGridY][newGridX]["value"] == 0) { // Must be empty space
             this.gridX = newGridX

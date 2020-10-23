@@ -1,10 +1,9 @@
-import { getState, getBoard, getGridDimsRowsCols, getSubGridDim, getGameID, getUsername } from "./state.js"
-import { MSG_TYPES, sendMessage } from "./networking.js"
+import { getState, getBoard, getGameID, getUsername } from "./state.js"
 import { randomHexString } from "./tools.js"
 import { Toolbar } from "./views/game/toolbar.js"
 import { TowerToolbar } from "./views/game/towerToolbar.js"
 import { SUBGRID_SIZE, RIGHT_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_HEIGHT, APP_WIDTH} from "./views/constants.js"
-import { getTowerSprite, getTower } from "./views/game/tower.js"
+import { getTowerSprite } from "./views/game/tower.js"
 
 // PIXI application
 let app;
@@ -17,7 +16,6 @@ let enemyContainer = new PIXI.Container(); // All the enemies on the map
 let towerMenuContainer = new PIXI.Container(); // Interactive tower sprites in the tower menu
 let towerDataContainer = new PIXI.Container(); // Range of tower etc.
 let towerContainer = new PIXI.Container(); // All the towers on the map
-//towerContainer.on("childAdded", (child) => child.setParent(towerContainer))
 let bulletContainer = new PIXI.Container(); // All the bullets on the map
 
 // The element currently clicked/active
@@ -28,7 +26,6 @@ let graphics = new PIXI.Graphics();
 
 // Spritesheet data
 let enemySpriteSheet = {};
-let towerSpriteSheet = {};
 let bulletSpriteSheet = {};
 
 // TODO make these general use function to generate animated sprite sheet data
@@ -37,14 +34,6 @@ function generateRedEnemySpritesheetData() {
     enemySpriteSheet["red"] = []
     for (let i = 0; i < 6; ++i) {
         enemySpriteSheet["red"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, i * DEFAULT_SPRITE_SIZE_Y, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
-    }
-}
-
-function generateTowerSpritesheetData() {
-    let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
-    for (let type in towerJson) {
-        towerSpriteSheet[type] = []
-        towerSpriteSheet[type].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, DEFAULT_SPRITE_SIZE_Y*towerJson[type]["spriteSheetNum"], DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
     }
 }
 
@@ -73,7 +62,6 @@ $.getJSON("shared/json/towers.json", function (data) {
 
 // Unique colour code for the user TODO let them pick
 let randomColourCode = "0x" + randomHexString(6);
-let toolbarColourCode = "0x727272"
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Sprite creators
@@ -96,15 +84,6 @@ function addEnemy(name, type) {
     enemyContainer.addChild(animatedEnemySprite)
 }
 
-// function getTowerSprite(type) {
-//     let towerSprite = new PIXI.AnimatedSprite(towerSpriteSheet[type])
-//     towerSprite.loop = false
-//     towerSprite.anchor.set(0.5)
-//     towerSprite.type = type
-//     towerSprite.tint = randomColourCode
-//     return towerSprite
-// }
-
 function generateTowerRange(range) {
     // Add the area circle sprite too
     graphics.beginFill("0xe74c3c") // Red
@@ -126,7 +105,7 @@ function generateTowerRange(range) {
  * @param {Number} type Type of tower
  */
 function addTower(name, type, owner, row, col) {
-    let towerSprite = getTowerSprite(type)  //new PIXI.AnimatedSprite(towerSpriteSheet[type])
+    let towerSprite = getTowerSprite(type)
     towerSprite.loop = false
     towerSprite.anchor.set(0.5)
     towerSprite.animationSpeed = 0.2
@@ -157,139 +136,6 @@ function addTower(name, type, owner, row, col) {
 
     towerContainer.addChild(towerSprite)
 }
-
-// function getTowerUpdateMsg(tower) {
-//     return {
-//         "y": tower.gridY,
-//         "x": tower.gridX,
-//         "value": {
-//             "type": tower.type,
-//             "owner": tower.owner,
-//             "colour": randomColourCode,
-//             "name": tower.name
-//         },
-//         "towerName": tower.name,
-//         "gameID": getGameID()
-//     }
-// }
-
-/**
- * Interactive sprite of the tower the user has slected
- * Once interacted with, adds a sprite to replace the one taken
- * Can be placed on the map, or is removed otherwise
- * @param {Number/String?} type Tower type
- * @param {Number} x x position
- * @param {Number} y y position
- */
-function addTempTower(type, x, y) {
-    let name = randomHexString(6)
-    let tempTowerSprite = getTowerSprite(type)
-    tempTowerSprite.x = x
-    tempTowerSprite.y = y
-    tempTowerSprite.interactive = true
-    tempTowerSprite.buttonMode = true;
-    tempTowerSprite.name = name
-
-    let tempTowerRangeSprite = generateTowerRange(towerJson[type]["gameData"]["seekRange"])
-    tempTowerRangeSprite.x = x
-    tempTowerRangeSprite.y = y
-    tempTowerRangeSprite.name = name
-    tempTowerRangeSprite.interactive = true
-    tempTowerRangeSprite.visible = false
-
-    towerMenuContainer.addChild(tempTowerSprite)
-    towerDataContainer.addChild(tempTowerRangeSprite)
-
-    // Interaction options
-    tempTowerSprite
-        .on('pointerdown', function() {
-            tempTowerRangeSprite
-                .on('pointermove', onDragTower) // Moves the object bound to it
-            tempTowerSprite
-                .on('pointermove', onDragTower)
-                .on('pointermove', onPlaceTower)
-                .on('pointermove', () => {tempTowerRangeSprite.visible = true;}) // Have to register visibility on tower move, since cannot trigger events on the invisible object
-                .on('pointerup', onPlaceTowerConfirm)
-                .on('pointerupoutside', onPlaceTowerConfirm)
-                .on('pointerup', ()=>{
-                    towerMenuContainer.removeChild(tempTowerSprite)
-                    towerDataContainer.removeChild(tempTowerRangeSprite)
-                })
-                .on('pointerupoutside', ()=>{
-                    towerMenuContainer.removeChild(tempTowerSprite)
-                    towerDataContainer.removeChild(tempTowerRangeSprite)
-                })
-                tempTowerSprite.alpha = 0.5
-                addTempTower(type, x, y) // Recursively add another
-            })
-        .on('pointerup', onMenuTowerClick) // Effectively a click - click would not work in parallel to pointerdown
-        .on('clickoff', onMenuTowerUnclick)
-}
-
-/**
- * Adds spot for the specified tower menu icon, then adds a sprite that can be interacted with
- * @param {Number} type Type of tower
- */
-function addMenuTower(type) {
-    // Calculate positon within the tower menu
-    let towerMenuSprite = toolbarContainer.getChildByName("towerMenu")
-    let towersCount = towerMenuContainer.children.length
-
-    let towersPerRow = 2
-    let toolbarWidth = towerMenuSprite.width
-    let towerSpriteWidth = DEFAULT_SPRITE_SIZE_X
-    let spacing = (toolbarWidth - (towersPerRow*towerSpriteWidth)) / (towersPerRow + 1)
-
-    // Equally space the towers across the menu where all the spaces are equal width
-    // <space><tower><space><tower><space>
-    // |__________________________________|
-    //                  |
-    //               <toolbar>
-    // toolbar = 2*tower + 3*space
-    // space = (toolbar - 2*tower) / 3
-    // We know toolbar width and tower width, so can work out space width. Then replace 2 and 3 with n and (n+1)
-    let x = towerMenuSprite.x + (spacing + towerSpriteWidth/2) + ((spacing + towerSpriteWidth) * (towersCount % towersPerRow))
-    let y = towerMenuSprite.y + DEFAULT_SPRITE_SIZE_Y * 2 * (Math.floor(towersCount/towersPerRow) + 1) // +1 so not starting at y = 0
-
-    // Add a sprite where the menu icon has been positioned
-    // When it is used (moved), put another one there
-    addTempTower(type, x, y)
-}
-
-/**
- *
- * @param {Number} x x coordinate
- * @param {Number} y y coordinate
- * @param {Number} width_px 
- * @param {Number} height_px
- * @param {String} name
- * @param {String} col hex colour string. Default is grey (0x727272)
- */
-function addToolbar(x, y, width_px, height_px, name, col=toolbarColourCode) {
-    graphics.beginFill(col)
-    graphics.drawRect(0, 0, width_px, height_px)
-    let towerMenuBackgroundTexture = app.renderer.generateTexture(graphics)
-    let towerMenuBackgroundSprite = new PIXI.Sprite(towerMenuBackgroundTexture) // create a sprite from graphics canvas
-    towerMenuBackgroundSprite.x = x
-    towerMenuBackgroundSprite.y = y
-    towerMenuBackgroundSprite.name = name
-    toolbarContainer.addChild(towerMenuBackgroundSprite)
-
-    // Increase size of canvas if necessary
-    if (x + width_px > app.view.width || x < 0) {
-        app.view.width += width_px
-        app.screen.width += width_px
-        if (x < 0) app.stage.x += width_px // Shift main container (and thus everything in it)
-    }
-    if (y + height_px > app.view.height || y < 0) {
-        app.view.height += height_px
-        app.screen.height += height_px
-        if (y < 0) app.stage.y += height_px
-    }
-
-    graphics.clear()
-}
-
 
 function addBullet(name, type) {
     let bulletSprite = new PIXI.AnimatedSprite(bulletSpriteSheet["simple"]) // TODO add bullet sprite
@@ -386,40 +232,6 @@ function writeTowerInfo(towerNum) {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Events
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-function onDragTower(event) {
-    const newPosition = event.data.getLocalPosition(this.parent);
-    if (isPointWithinContainer(newPosition.x, newPosition.y, mapContainer)) {
-        // If on map, snap to grid
-        let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
-        let newGridY = Math.floor(newPosition.y / DEFAULT_SPRITE_SIZE_Y)
-        if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
-            getBoard()[newGridY][newGridX]["value"] == 0) { // Must be empty space
-            this.gridX = newGridX
-            this.gridY = newGridY
-            this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
-            this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
-        }
-    } else if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < app.view.width && newPosition.y < app.view.height) {
-        // Otherwise, update position normally
-        this.x = newPosition.x
-        this.y = newPosition.y
-    }
-}
-
-function onPlaceTower() {
-    if (isPointWithinContainer(this.x, this.y, mapContainer)) {
-        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, getTowerUpdateMsg(this))
-    }
-}
-
-function onPlaceTowerConfirm() {
-    if (isPointWithinContainer(this.x, this.y, mapContainer)) {
-        let name = randomHexString(20)
-        addTower(name, this.type, getUsername(), this.gridY, this.gridX)
-        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(towerContainer.getChildByName(name)))
-    }
-}
-
 function onTowerClick(event) {
     if (activeClickable == this) { // Clicked on the currently active tower
         this.emit('clickoff');
@@ -591,16 +403,6 @@ function calculateGridPos(pathPos) {
     ]
 }
 
-function isPointWithinContainer(x, y, container) {
-    let mapBounds = container.getLocalBounds()
-    return (
-        x >= mapBounds.x &&
-        y >= mapBounds.y &&
-        x < mapBounds.x + mapBounds.width &&
-        y < mapBounds.y + mapBounds.height
-    )
-}
-
 function gameLoop(delta) {
     // Called every time display is rendered
     updateEnemies();
@@ -617,16 +419,13 @@ function setup() {
 
     // Generates the data that can be reused to make multiple sprites
     generateRedEnemySpritesheetData()
-    generateTowerSpritesheetData()
     generateBulletSpritesheetData()
 
     let toolbarTowers = new TowerToolbar(RIGHT_TOOLBAR_WIDTH, MAP_HEIGHT/2, MAP_WIDTH, 0, towerContainer)
-
     let toolbarTowerInfo = new Toolbar(RIGHT_TOOLBAR_WIDTH, MAP_HEIGHT/2, MAP_WIDTH, MAP_HEIGHT/2)
-
     let toolbarPlayerInfo = new Toolbar(BOTTOM_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT, 0, MAP_HEIGHT)
 
-        // Order in which display objects are added is the order they are put in the
+    // Order in which display objects are added is the order they are put in the
     // children array, which is the order they are rendered.
     app.stage.addChild(mapContainer)
     app.stage.addChild(enemyContainer)
@@ -646,11 +445,6 @@ function setup() {
 
 // Sets up PIXI app and run the `setup` function when it's done
 export function startRendering() {
-    // These will have been set in a previous setup call from the server
-    //let MAP_COLS = getGridDimsRowsCols()[1]
-    //let MAP_ROWS = getGridDimsRowsCols()[0]
-    //SUBGRID_SIZE = getSubGridDim()
-
     //Create a Pixi Application
     app = new PIXI.Application({
         width: APP_WIDTH,
