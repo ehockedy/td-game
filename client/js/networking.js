@@ -22,6 +22,21 @@ const MSG_TYPES = {
     CLIENT_DEBUG: "cd"
 }
 
+function getTowerUpdateMsg(tower) {
+    return {
+        "y": tower.gridY,
+        "x": tower.gridX,
+        "value": {
+            "type": tower.type,
+            "owner": tower.owner,
+            "colour": "0xCC2211",
+            "name": tower.name
+        },
+        "towerName": tower.name,
+        "gameID": getGameID()
+    }
+}
+
 const socket = io();
 startRenderingMenu();
 
@@ -64,4 +79,4 @@ function sendMessageGetAck(msgType, data) {
     })
 }
 
-export { MSG_TYPES, sendMessage, sendMessageGetAck }
+export { MSG_TYPES, sendMessage, sendMessageGetAck, getTowerUpdateMsg }

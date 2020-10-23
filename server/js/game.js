@@ -173,8 +173,8 @@ class Game {
         this.map.addNewEnemy(new enemy.Enemy(10, randomSpeed, this.map.path))
     }
 
-    addTower(name, type, player, row, col) {
-        let newTower = new towerImport.Tower(name, type, player, new point.Point(col, row, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT))
+    addTower(name, type, owner, row, col) {
+        let newTower = new towerImport.Tower(name, type, owner, new point.Point(col, row, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT))
         newTower.calculateShootPath(this.map.mainPath)
         this.towers.push(newTower)
     }
@@ -228,7 +228,7 @@ class Game {
                 "name": t.name,
                 "angle": t.angle,
                 "posRowCol": t.position,
-                "owner": t.player,
+                "owner": t.owner,
                 "type": t.type
             })
             hash.update(t.name)

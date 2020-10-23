@@ -10,10 +10,10 @@ class Tower {
      * A player owned object that shoots at enemies
      * @param {String} type Unique name of tower assigned by client
      * @param {Number} type Type of tower
-     * @param {String} player Who the tower belongs to
+     * @param {String} owner Who the tower belongs to
      * @param {Point} position Point object that described the position in global and grid/subgrid coordinates
      */
-    constructor(name, type, player, position) {
+    constructor(name, type, owner, position) {
         this.name = name;
         this.type = type
 
@@ -30,7 +30,7 @@ class Tower {
         this.shootRange = towerJson[type]["gameData"]["shootRange"] // How far bullet cant travel once fired
         this.bulletSpeed = towerJson[type]["gameData"]["bulletSpeed"]
         this.damage = towerJson[type]["gameData"]["damage"]
-        this.owner = player // The player who owns the tower
+        this.owner = owner // The owner who owns the tower
         this.kills = 0
         this.shootRangePath = [] // Main grid squares that the bullets can reach that are on the path
         this.aimBehaviour = "last" // Furthest enemy, first enemy, etc.

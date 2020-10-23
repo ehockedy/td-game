@@ -17,3 +17,4 @@ Bullet movement tests
 Fix the fact that Point has hard coded sub grid size set - in tests have seen that using a different subgrid size to the default, they still pass
  - enemy tests are find because poit is not used - just goes through pre generated path
  - but in bullet tests Point is used, and still passes - meaning that as far as the bullet is concerned it shoudl not be in a different square
+Use interactiveChildren  property for containers
