@@ -25,6 +25,10 @@ export function onDragTower(event) {
         this.x = newPosition.x
         this.y = newPosition.y
     }
+
+    // Also move range indicator to be same position as tower
+    this.range_subsprite.x = this.x
+    this.range_subsprite.y = this.y
 }
 
 function onPlaceTower() {
@@ -39,6 +43,7 @@ export function onPlaceTowerConfirm() {
         this.removeAllListeners()
         sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(this))
     } // else {
+    this.parent.removeChild(this.range_subsprite)
     this.parent.removeChild(this) // TODO do we also need to rmove this sprite i.e. destroy()?
     //}
     // if (isPointWithinContainer(this.x, this.y, mapContainer)) {

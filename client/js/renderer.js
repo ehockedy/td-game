@@ -3,7 +3,7 @@ import { randomHexString } from "./tools.js"
 import { Toolbar } from "./views/game/toolbar.js"
 import { TowerToolbar } from "./views/game/towerToolbar.js"
 import { SUBGRID_SIZE, RIGHT_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_HEIGHT, APP_WIDTH} from "./views/constants.js"
-import { getTowerSprite } from "./views/game/tower.js"
+import { getTowerSprite, getTowerRangeGraphic } from "./views/game/tower.js"
 
 // PIXI application
 let app;
@@ -20,9 +20,6 @@ let bulletContainer = new PIXI.Container(); // All the bullets on the map
 
 // The element currently clicked/active
 let activeClickable
-
-// PIXI graphics
-let graphics = new PIXI.Graphics();
 
 // Spritesheet data
 let enemySpriteSheet = {};
@@ -84,21 +81,6 @@ function addEnemy(name, type) {
     enemyContainer.addChild(animatedEnemySprite)
 }
 
-function generateTowerRange(range) {
-    // Add the area circle sprite too
-    graphics.beginFill("0xe74c3c") // Red
-    graphics.alpha = 0.5
-    graphics.drawCircle(0, 0, range*DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
-
-    let circleTexture = app.renderer.generateTexture(graphics)
-    let circleSprite = new PIXI.Sprite(circleTexture) // create a sprite from graphics canvas
-
-    circleSprite.anchor.set(0.5)
-    circleSprite.visible = true
-    graphics.clear()
-    return circleSprite
-}
-
 /**
  * Add tower with stats based off the type
  * @param {String} name Unique name of the tower object
@@ -126,7 +108,7 @@ function addTower(name, type, owner, row, col) {
             .on('click', onTowerClick)
             .on('clickoff', onTowerUnclick); // This is a custom event triggered manually
 
-        let circleSprite = generateTowerRange(towerJson[towerSprite.type]["gameData"]["seekRange"])
+        let circleSprite = getTowerRangeGraphic(type) //generateTowerRange(towerJson[towerSprite.type]["gameData"]["seekRange"])
         circleSprite.x = towerSprite.x
         circleSprite.y = towerSprite.y
         circleSprite.name = towerSprite.name // Same name as tower
@@ -468,5 +450,3 @@ export function startRendering() {
 
 
 }
-
-export { generateTowerRange }

@@ -19,21 +19,15 @@ export function getTowerSprite(type) { // Make this a get sprite only function
     return towerSprite
 }
 
-// export function getTowerRangeSprite(type) {
-//     let graphics = new PIXI.Graphics();
-//     graphics.beginFill("0xe74c3c") // Red
-//     graphics.alpha = 0.5
-//     graphics.drawCircle(0, 0, towerJson2[type]["gameData"]["seekRange"]*DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
+export function getTowerRangeGraphic(type) {
+    let graphics = new PIXI.Graphics();
+    graphics.beginFill("0xe74c3c") // Red
+    graphics.alpha = 0.5
+    graphics.drawCircle(0, 0, towerJson2[type]["gameData"]["seekRange"]*DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
+    return graphics //circleSprite
+}
 
-//     //let circleTexture = app.renderer.generateTexture(graphics)
-//     //let circleSprite = new PIXI.Sprite(circleTexture) // create a sprite from graphics canvas
-
-//     circleSprite.anchor.set(0.5)
-//     circleSprite.visible = true
-//     return circleSprite
-// }
-
-export function getTower(type) { // TODO make this draggable tower and have another for clickable game tower
+export function getDraggableTower(type) { // TODO make this draggable tower and have another for clickable game tower
     let sprite = getTowerSprite(type)
     sprite.interactive = true
     sprite.buttonMode = true
@@ -42,9 +36,14 @@ export function getTower(type) { // TODO make this draggable tower and have anot
     sprite.type = type
     sprite.owner = getUsername()
 
+    // Attach a range sprite
+    sprite.range_subsprite = getTowerRangeGraphic(type)
+    sprite.range_subsprite.visible = false
+
     sprite
         .on("pointerdown", () => {
             sprite.dragging = true
+            sprite.range_subsprite.visible = true
         })
         .on("pointermove", onDragTower)
         .on("pointerup", onPlaceTowerConfirm)

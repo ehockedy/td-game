@@ -1,7 +1,6 @@
 import { Toolbar } from "./toolbar.js"
-import { randomHexString } from "../../tools.js"
 import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y } from "../constants.js"
-import { getTowerSprite, getTower } from "./tower.js"
+import { getTowerSprite, getDraggableTower, getTowerRangeGraphic } from "./tower.js"
 
 class TowerToolbar extends Toolbar{
     constructor(width_px, height_px, x, y, towerContainer, col="0x727272") {
@@ -43,40 +42,30 @@ class TowerToolbar extends Toolbar{
      * @param {Number} y y position
      */
     addTowerIcon(type, x, y) {
-        let name = randomHexString(6)
         let tempTowerSprite = getTowerSprite(type)
         tempTowerSprite.x = x
         tempTowerSprite.y = y
         tempTowerSprite.interactive = true
         tempTowerSprite.buttonMode = true;
-        tempTowerSprite.name = name
-
-        // let tempTowerRangeSprite = generateTowerRange(towerJson[type]["gameData"]["seekRange"])
-        // tempTowerRangeSprite.x = x
-        // tempTowerRangeSprite.y = y
-        // tempTowerRangeSprite.name = name
-        // tempTowerRangeSprite.interactive = true
-        // tempTowerRangeSprite.visible = false
 
         this.container.addChild(tempTowerSprite)
-        //towerDataContainer.addChild(tempTowerRangeSprite)
 
         // Interaction options
         tempTowerSprite
             .on("pointerover", () => {
                 // If pointer over, it means that a tower sprite it not here already
                 // since if pointerover is not triggered if a sprite sits on top of the icon
-                let ts = getTower(type)
-                //ts.range_subsprite = getTowerRangeSprite(type)
+                let ts = getDraggableTower(type)
 
+                // Starting pos
                 ts.x = this.container.x + x
                 ts.y = this.container.y + y
-                //ts.range_susbsprite.x = this.container.x + x
-                //ts.range_susbsprite.y = this.container.y + y
+                ts.range_subsprite.x = this.container.x + x
+                ts.range_subsprite.y = this.container.y + y
 
-                ts.tint = "0x0066FF"
-                ts.setParent(this.towerContainer) // This adds this sprite to the given container
-                //ts.range_subsprite.setParent(this.towerContainer)
+                // This adds this sprites to the given container
+                ts.setParent(this.towerContainer)
+                ts.range_subsprite.setParent(this.towerContainer)
         })
     }
 }
