@@ -2,6 +2,9 @@ import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, MAP_WIDTH, MAP_HEIGHT, AP
 import { getBoard } from "../../state.js"
 import { sendMessage, getTowerUpdateMsg, MSG_TYPES } from "../../networking.js"
 
+// The element currently clicked/active
+let activeClickable
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Events
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -53,14 +56,13 @@ export function onPlaceTowerConfirm() {
     // }
 }
 
-function onTowerClick(event) {
+export function onTowerClick(event) {
     if (activeClickable == this) { // Clicked on the currently active tower
-        this.emit('clickoff');
     } else { // Clicked on tower that is not active
         if (typeof activeClickable != "undefined") activeClickable.emit('clickoff') // Cancel current active clickable
         activeClickable = this // Register this as the active object
-        towerDataContainer.getChildByName(this.name).visible = true // Show the range circle
-        writeTowerInfo(this.type)
+        this.range_subsprite.visible = true // Show the range circle
+        //writeTowerInfo(this.type)
         //towerToolbarContentContainer.visible = true // Show info about the tower
     }
 }
@@ -75,9 +77,9 @@ function onMenuTowerClick(event) {
     }
 }
 
-function onTowerUnclick() {
-    towerDataContainer.getChildByName(this.name).visible = false
-    towerToolbarContentContainer.removeChildren()
+export function onTowerUnclick() {
+    this.range_subsprite.visible = false
+    //towerToolbarContentContainer.removeChildren()
     activeClickable = undefined
 }
 
@@ -86,7 +88,7 @@ function onMenuTowerUnclick() {
     activeClickable = undefined
 }
 
-function onCanvasClick(event) {
+export function onCanvasClick(event) {
     if (typeof activeClickable != "undefined") {
         if (!activeClickable.containsPoint(new PIXI.Point(event.layerX, event.layerY))) {
             activeClickable.emit('clickoff'); // clickoff event is agnostic to the type of object stored in activeClickable

@@ -3,7 +3,8 @@ import { randomHexString } from "./tools.js"
 import { Toolbar } from "./views/game/toolbar.js"
 import { TowerToolbar } from "./views/game/towerToolbar.js"
 import { SUBGRID_SIZE, RIGHT_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_HEIGHT, APP_WIDTH} from "./views/constants.js"
-import { getTowerSprite, getTowerRangeGraphic } from "./views/game/tower.js"
+import { getPlacedTower } from "./views/game/tower.js"
+import { onCanvasClick } from "./views/game/callbacks.js"
 
 // PIXI application
 let app;
@@ -17,9 +18,6 @@ let towerMenuContainer = new PIXI.Container(); // Interactive tower sprites in t
 let towerDataContainer = new PIXI.Container(); // Range of tower etc.
 let towerContainer = new PIXI.Container(); // All the towers on the map
 let bulletContainer = new PIXI.Container(); // All the bullets on the map
-
-// The element currently clicked/active
-let activeClickable
 
 // Spritesheet data
 let enemySpriteSheet = {};
@@ -79,44 +77,6 @@ function addEnemy(name, type) {
     animatedEnemySprite.name = name // Unique identifier
     animatedEnemySprite.tintCount = 0
     enemyContainer.addChild(animatedEnemySprite)
-}
-
-/**
- * Add tower with stats based off the type
- * @param {String} name Unique name of the tower object
- * @param {Number} type Type of tower
- */
-function addTower(name, type, owner, row, col) {
-    let towerSprite = getTowerSprite(type)
-    towerSprite.loop = false
-    towerSprite.anchor.set(0.5)
-    towerSprite.animationSpeed = 0.2
-    towerSprite.type = type
-    //animatedEnemySprite.play() // Only play when shoots
-    towerSprite.name = name; // Unique identifier
-    towerSprite.owner = owner;
-    towerSprite.tint = randomColourCode
-    towerSprite.gridX = col
-    towerSprite.gridY = row
-    towerSprite.x = towerSprite.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
-    towerSprite.y = towerSprite.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
-
-    if (owner == getUsername()) { // Only make the tower interactive if the user placed it
-        towerSprite.interactive = true; // reponds to mouse and touch events
-        towerSprite.buttonMode = true; // hand cursor appears when hover over
-        towerSprite
-            .on('click', onTowerClick)
-            .on('clickoff', onTowerUnclick); // This is a custom event triggered manually
-
-        let circleSprite = getTowerRangeGraphic(type) //generateTowerRange(towerJson[towerSprite.type]["gameData"]["seekRange"])
-        circleSprite.x = towerSprite.x
-        circleSprite.y = towerSprite.y
-        circleSprite.name = towerSprite.name // Same name as tower
-        circleSprite.visible = false
-        towerDataContainer.addChild(circleSprite)
-    }
-
-    towerContainer.addChild(towerSprite)
 }
 
 function addBullet(name, type) {
@@ -212,50 +172,6 @@ function writeTowerInfo(towerNum) {
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Events
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-function onTowerClick(event) {
-    if (activeClickable == this) { // Clicked on the currently active tower
-        this.emit('clickoff');
-    } else { // Clicked on tower that is not active
-        if (typeof activeClickable != "undefined") activeClickable.emit('clickoff') // Cancel current active clickable
-        activeClickable = this // Register this as the active object
-        towerDataContainer.getChildByName(this.name).visible = true // Show the range circle
-        //writeTowerInfo(this.type)
-        //towerToolbarContentContainer.visible = true // Show info about the tower
-    }
-}
-
-function onMenuTowerClick(event) {
-    if (activeClickable == this) { // Clicked on the currently active tower
-        this.emit('clickoff');
-    } else { // Clicked on tower that is not active
-        if (typeof activeClickable != "undefined") activeClickable.emit('clickoff') // Cancel current active clickable
-        activeClickable = this // Register this as the active object
-        //writeTowerInfo(this.type)
-    }
-}
-
-function onTowerUnclick() {
-    towerDataContainer.getChildByName(this.name).visible = false
-    towerToolbarContentContainer.removeChildren()
-    activeClickable = undefined
-}
-
-function onMenuTowerUnclick() {
-    towerToolbarContentContainer.removeChildren()
-    activeClickable = undefined
-}
-
-function onCanvasClick(event) {
-    if (typeof activeClickable != "undefined") {
-        if (!activeClickable.containsPoint(new PIXI.Point(event.layerX, event.layerY))) {
-            activeClickable.emit('clickoff'); // clickoff event is agnostic to the type of object stored in activeClickable
-        }
-    }
-}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Sprite updaters
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -339,11 +255,13 @@ function updateTowers() {
                 if (found) break;
             }
             if (!found) {
-                addTower(towerStateObjects[nameIdx].name,
-                    towerStateObjects[nameIdx].type,
+                let newTower = getPlacedTower(towerStateObjects[nameIdx].type,
+                    towerStateObjects[nameIdx].name,
                     towerStateObjects[nameIdx].owner,
                     towerStateObjects[nameIdx].posRowCol.row,
                     towerStateObjects[nameIdx].posRowCol.col)
+                    towerContainer.addChild(newTower.range_subsprite)
+                    towerContainer.addChild(newTower) // Add second so appears on top of range
             }
         }
     }

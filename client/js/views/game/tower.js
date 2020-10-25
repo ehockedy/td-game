@@ -1,4 +1,4 @@
-import { onDragTower, onPlaceTowerConfirm } from "./callbacks.js"
+import { onDragTower, onPlaceTowerConfirm, onTowerClick, onTowerUnclick } from "./callbacks.js"
 import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y } from "../constants.js"
 import { randomHexString } from "../../tools.js"
 import { getUsername } from "../../state.js"
@@ -48,5 +48,31 @@ export function getDraggableTower(type) { // TODO make this draggable tower and 
         .on("pointermove", onDragTower)
         .on("pointerup", onPlaceTowerConfirm)
         .on("pointerupoutside", onPlaceTowerConfirm)
+    return sprite
+}
+
+export function getPlacedTower(type, name, owner, row, col) {
+    let sprite = getTowerSprite(type)
+    sprite.name = name
+    sprite.owner = owner
+
+    sprite.gridX = col
+    sprite.gridY = row
+    sprite.x = sprite.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
+    sprite.y = sprite.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
+
+    if (owner == getUsername()) { // Only make the tower interactive if the user placed it
+        sprite.interactive = true; // reponds to mouse and touch events
+        sprite.buttonMode = true; // hand cursor appears when hover over
+        sprite
+            .on('click', onTowerClick)
+            .on('clickoff', onTowerUnclick); // This is a custom event triggered manually
+
+        sprite.range_subsprite = getTowerRangeGraphic(type)
+        sprite.range_subsprite.x = sprite.x
+        sprite.range_subsprite.y = sprite.y
+        sprite.range_subsprite.visible = false
+    }
+
     return sprite
 }
