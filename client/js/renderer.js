@@ -270,7 +270,7 @@ function updateTowers() {
     towerStateObjects.forEach((tower) => {
         // Move the tower angle
         let towerToUpdate = towerContainer.getChildByName(tower["name"])
-        towerToUpdate.rotation = tower["angle"]
+        towerToUpdate.rotation = tower["angle"] // TODO make this a general udate function, and just call that
         towerToUpdate.tint = randomColourCode // TODO store all player colours once //getBoard()[towerToUpdate.gridY][towerToUpdate.gridX]["tower"].colour
     })
 }

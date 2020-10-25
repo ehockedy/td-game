@@ -64,8 +64,8 @@ class TowerToolbar extends Toolbar{
                 ts.range_subsprite.y = this.container.y + y
 
                 // This adds this sprites to the given container
-                ts.setParent(this.towerContainer)
                 ts.range_subsprite.setParent(this.towerContainer)
+                ts.setParent(this.towerContainer)
         })
     }
 }

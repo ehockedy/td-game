@@ -58,6 +58,7 @@ export function onPlaceTowerConfirm() {
 
 export function onTowerClick(event) {
     if (activeClickable == this) { // Clicked on the currently active tower
+        this.emit("clickoff")
     } else { // Clicked on tower that is not active
         if (typeof activeClickable != "undefined") activeClickable.emit('clickoff') // Cancel current active clickable
         activeClickable = this // Register this as the active object
