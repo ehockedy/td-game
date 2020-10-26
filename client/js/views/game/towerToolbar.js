@@ -1,16 +1,15 @@
 import { Toolbar } from "./toolbar.js"
 import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y } from "../constants.js"
-import { getTowerSprite, getDraggableTower, getTowerRangeGraphic } from "./tower.js"
 
 class TowerToolbar extends Toolbar{
-    constructor(width_px, height_px, x, y, towerContainer, col="0x727272") {
+    constructor(width_px, height_px, x, y, towerManager, col="0x727272") {
         super(width_px, height_px, x, y, col)
-        this.towerContainer = towerContainer
+        this.towerManager = towerManager
         this.addTower(0)
     }
 
     addTower(type) {
-        let towersCount = this.towerContainer.children.length
+        let towersCount = this.towerManager.getTowerCount()
         let towersPerRow = 2
         let toolbarWidth = this.width_px
         let towerSpriteWidth = DEFAULT_SPRITE_SIZE_X
@@ -42,7 +41,7 @@ class TowerToolbar extends Toolbar{
      * @param {Number} y y position
      */
     addTowerIcon(type, x, y) {
-        let tempTowerSprite = getTowerSprite(type)
+        let tempTowerSprite = this.towerManager.getTowerSprite(type)
         tempTowerSprite.x = x
         tempTowerSprite.y = y
         tempTowerSprite.interactive = true
@@ -55,17 +54,7 @@ class TowerToolbar extends Toolbar{
             .on("pointerover", () => {
                 // If pointer over, it means that a tower sprite it not here already
                 // since if pointerover is not triggered if a sprite sits on top of the icon
-                let ts = getDraggableTower(type)
-
-                // Starting pos
-                ts.x = this.container.x + x
-                ts.y = this.container.y + y
-                ts.range_subsprite.x = this.container.x + x
-                ts.range_subsprite.y = this.container.y + y
-
-                // This adds this sprites to the given container
-                ts.range_subsprite.setParent(this.towerContainer)
-                ts.setParent(this.towerContainer)
+                this.towerManager.addDraggableTower(type, this.container.x + x, this.container.y + y)
         })
     }
 }

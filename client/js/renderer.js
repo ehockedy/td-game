@@ -3,7 +3,7 @@ import { randomHexString } from "./tools.js"
 import { Toolbar } from "./views/game/toolbar.js"
 import { TowerToolbar } from "./views/game/towerToolbar.js"
 import { SUBGRID_SIZE, RIGHT_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_HEIGHT, APP_WIDTH} from "./views/constants.js"
-import { getPlacedTower } from "./views/game/tower.js"
+import { TowerManager } from "./views/game/tower.js"
 import { onCanvasClick } from "./views/game/callbacks.js"
 
 // PIXI application
@@ -14,10 +14,9 @@ let mapContainer = new PIXI.Container(); // The grid all the action takes place 
 let toolbarContainer = new PIXI.Container(); // Tower menu background, player stats background, etc.
 let towerToolbarContentContainer = new PIXI.Container(); // Info about the tower
 let enemyContainer = new PIXI.Container(); // All the enemies on the map
-let towerMenuContainer = new PIXI.Container(); // Interactive tower sprites in the tower menu
-let towerDataContainer = new PIXI.Container(); // Range of tower etc.
-let towerContainer = new PIXI.Container(); // All the towers on the map
 let bulletContainer = new PIXI.Container(); // All the bullets on the map
+
+let towerManager = new TowerManager()
 
 // Spritesheet data
 let enemySpriteSheet = {};
@@ -54,9 +53,6 @@ let towerJson
 $.getJSON("shared/json/towers.json", function (data) {
     towerJson = data
 })
-
-// Unique colour code for the user TODO let them pick
-let randomColourCode = "0x" + randomHexString(6);
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Sprite creators
@@ -250,28 +246,23 @@ function updateTowers() {
         let nameIdx = 0
         for (nameIdx; nameIdx < towerStateObjects.length; nameIdx++) {
             let found = false;
-            for (let towerSpriteIdx = towerContainer.children.length - 1; towerSpriteIdx >= 0; towerSpriteIdx--) {
-                found = (towerContainer.children[towerSpriteIdx].name == towerStateObjects[nameIdx].name)
+            for (let towerSpriteIdx = towerManager.towerContainer.children.length - 1; towerSpriteIdx >= 0; towerSpriteIdx--) {
+                found = (towerManager.towerContainer.children[towerSpriteIdx].name == towerStateObjects[nameIdx].name)
                 if (found) break;
             }
             if (!found) {
-                let newTower = getPlacedTower(towerStateObjects[nameIdx].type,
+                towerManager.addPlacedTower(towerStateObjects[nameIdx].type,
                     towerStateObjects[nameIdx].name,
                     towerStateObjects[nameIdx].owner,
                     towerStateObjects[nameIdx].posRowCol.row,
                     towerStateObjects[nameIdx].posRowCol.col)
-                    towerContainer.addChild(newTower.range_subsprite)
-                    towerContainer.addChild(newTower) // Add second so appears on top of range
             }
         }
     }
 
     // Update state of towers present in server update
     towerStateObjects.forEach((tower) => {
-        // Move the tower angle
-        let towerToUpdate = towerContainer.getChildByName(tower["name"])
-        towerToUpdate.rotation = tower["angle"] // TODO make this a general udate function, and just call that
-        towerToUpdate.tint = randomColourCode // TODO store all player colours once //getBoard()[towerToUpdate.gridY][towerToUpdate.gridX]["tower"].colour
+        towerManager.updateTower(tower.name, tower.angle)
     })
 }
 
@@ -321,7 +312,7 @@ function setup() {
     generateRedEnemySpritesheetData()
     generateBulletSpritesheetData()
 
-    let toolbarTowers = new TowerToolbar(RIGHT_TOOLBAR_WIDTH, MAP_HEIGHT/2, MAP_WIDTH, 0, towerContainer)
+    let toolbarTowers = new TowerToolbar(RIGHT_TOOLBAR_WIDTH, MAP_HEIGHT/2, MAP_WIDTH, 0, towerManager)
     let toolbarTowerInfo = new Toolbar(RIGHT_TOOLBAR_WIDTH, MAP_HEIGHT/2, MAP_WIDTH, MAP_HEIGHT/2)
     let toolbarPlayerInfo = new Toolbar(BOTTOM_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT, 0, MAP_HEIGHT)
 
@@ -329,12 +320,12 @@ function setup() {
     // children array, which is the order they are rendered.
     app.stage.addChild(mapContainer)
     app.stage.addChild(enemyContainer)
-    app.stage.addChild(towerDataContainer)
+    app.stage.addChild(towerManager.towerDataContainer)
     app.stage.addChild(toolbarTowers.container)
     app.stage.addChild(toolbarTowerInfo.container)
     app.stage.addChild(toolbarPlayerInfo.container)
     app.stage.addChild(bulletContainer)
-    app.stage.addChild(towerContainer)
+    app.stage.addChild(towerManager.towerContainer)
 
     app.view.addEventListener('click', (event) => onCanvasClick(event));
 
@@ -365,6 +356,5 @@ export function startRendering() {
         .add("client/img/tower_spritesheet.png")
         .add("client/img/bullet_spritesheet.png")
         .load(setup);
-
 
 }
