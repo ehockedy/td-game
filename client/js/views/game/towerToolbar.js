@@ -5,11 +5,13 @@ class TowerToolbar extends Toolbar{
     constructor(width_px, height_px, x, y, towerManager, col="0x727272") {
         super(width_px, height_px, x, y, col)
         this.towerManager = towerManager
-        this.addTower(0)
+        for (let i=0; i < 4; i++) {
+            this.addTower(i)
+        }
     }
 
     addTower(type) {
-        let towersCount = this.towerManager.getTowerCount()
+        let towersCount = this.container.children.length-1
         let towersPerRow = 2
         let toolbarWidth = this.width_px
         let towerSpriteWidth = DEFAULT_SPRITE_SIZE_X
