@@ -1,5 +1,5 @@
 import { MAP_ROWS, MAP_COLS, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y} from "../../views/constants.js"
-import { getBoard} from "../../state.js"
+import { getBoard } from "../../state.js"
 
 export class Map {
     constructor(sprite_handler) {
@@ -7,11 +7,11 @@ export class Map {
         this.containerName = "map" // How to access container for map tiles in the sprite handler
     }
 
-    registerMapContainer() {
+    registerContainer() {
         let mapContainer = new PIXI.Container(); // The grid all the action takes place in
         mapContainer.name = this.containerName
         this.constructMap(mapContainer)
-        this.sprite_handler.registerMap(mapContainer)
+        this.sprite_handler.registerContainer(mapContainer)
     }
 
     constructMap(mapContainer) {

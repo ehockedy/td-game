@@ -1,7 +1,7 @@
 /**
  * This is the class that holds all the sprites and interaction with those sprites
  */
-import { SUBGRID_SIZE, RIGHT_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_HEIGHT, APP_WIDTH} from "./../views/constants.js"
+import { APP_HEIGHT, APP_WIDTH} from "./../views/constants.js"
 import { getState, getBoard, getGameID, getUsername } from "../state.js"
 
 
@@ -21,21 +21,21 @@ export class SpriteHandler {
         document.body.appendChild(this.app.view);
     }
 
-    load() {
-        return PIXI.Loader.shared
-            .add("client/img/map_spritesheet.png")
-            .add("client/img/enemy_spritesheet.png")
-            .add("client/img/tower_spritesheet.png")
-            .add("client/img/bullet_spritesheet.png");
-    }
-
     render() {
         this.app.ticker.add(delta => this.gameLoop(delta))
     }
 
     gameLoop() {}
 
-    registerMap(mapContainer) {
+    registerContainer(mapContainer) { // TODO should this be a generic add container
         this.app.stage.addChild(mapContainer)
+    }
+
+    addTowerMenuSprite(sprite) {
+        this.app.stage.getChildByName("towermenu").addChild(sprite)
+    }
+
+    containerSize(name) {
+        return this.app.stage.getChildByName(name).children.length
     }
 }

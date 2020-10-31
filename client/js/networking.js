@@ -1,7 +1,7 @@
 import { setState, setBoard, setGridDimsRowsCols, setSubGridDim , getGameID } from "./state.js"
 import { startRendering as startRenderingMenu, stopRendering as stopRenderingMenu} from "./menu_renderer.js"
 //import { startRendering as startRenderingGame } from "./renderer.js"
-import { startRendering as startRenderingGame } from "./new/views/game.js"
+import { GameRenderer} from "./new/views/game.js"
 import { printMap } from "./tools.js"
 
 // To get client side debugging, paste "localStorage.debug = '*';" into
@@ -41,6 +41,8 @@ function getTowerUpdateMsg(tower) {
 const socket = io();
 startRenderingMenu();
 
+let game;
+
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) => {
     // grid is the simple representation of the map - a 2D array of arrays
     setGridDimsRowsCols(rows, cols);
@@ -52,13 +54,25 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) =>
 socket.on(MSG_TYPES.GAME_START, (data) => {
     console.log("start rendering game")
     stopRenderingMenu()
-    startRenderingGame();
+    game.startRendering()
 });
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
     setState(data);
-    //console.log(data)
+    game.update(data)
 });
+
+function sendNewGameMessage(data) {
+    // load the assets into shared loader, then construct game view and send message to start
+    PIXI.Loader.shared
+        .add("client/img/map_spritesheet.png")
+        .add("client/img/enemy_spritesheet.png")
+        .add("client/img/tower_spritesheet.png")
+        .add("client/img/bullet_spritesheet.png").load(function() {
+            game = new GameRenderer()
+            sendMessage(MSG_TYPES.NEW_GAME, data)
+    })
+}
 
 function sendMessage(msgType, data) {
     socket.emit(msgType, data)
@@ -80,4 +94,4 @@ function sendMessageGetAck(msgType, data) {
     })
 }
 
-export { MSG_TYPES, sendMessage, sendMessageGetAck, getTowerUpdateMsg }
+export { MSG_TYPES, sendMessage, sendNewGameMessage, sendMessageGetAck, getTowerUpdateMsg }

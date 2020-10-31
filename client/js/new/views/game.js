@@ -1,15 +1,36 @@
-import { Map } from "../components/map.js"
 import { SpriteHandler } from "../sprite_handler.js"
+import { Map } from "../components/map.js"
+import { TowerMenu } from "../components/towerMenu.js"
+import { InfoToolbar } from "../components/infoToolbar.js"
+import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH } from "./../../views/constants.js"
 
+/**
+ * This class sets up what will appear in the game view.
+ * It also takes updates from the server and passes the update data to the relevant components
+ */
+export class GameRenderer {
+    constructor() {
+        this.spriteHandler = new SpriteHandler()
+        this.map = new Map(this.spriteHandler)
+        this.tm = new TowerMenu(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, 0)
+        this.it = new InfoToolbar(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, RIGHT_TOOLBAR_HEIGHT)
+    }
 
-export function startRendering() {
-    let spriteHandler = new SpriteHandler()
-    let map = new Map(spriteHandler)
+    startRendering() {
+        // Register containers with the sprite layer
+        this.map.registerContainer()
+        this.tm.registerContainer()
+        this.it.registerContainer()
 
-    // Once all the compnent have been set, load the sprite files then begin rendering
-    spriteHandler.load().load(function() {
-        map.registerMapContainer()
+        // Set up links between components that need them
+        this.tm.setInfoToolbarLink(this.it)
 
-        spriteHandler.render()
-    })
+        // Begin the rendering loop
+        this.spriteHandler.render()
+    }
+
+    update(serverUpdate) {
+        //console.log(serverUpdate)
+    }
+
 }
