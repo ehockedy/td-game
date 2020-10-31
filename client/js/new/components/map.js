@@ -1,17 +1,15 @@
 import { MAP_ROWS, MAP_COLS, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y} from "../../views/constants.js"
 import { getBoard } from "../../state.js"
+import { BaseComponent } from "./base/baseComponent.js"
 
-export class Map {
+export class MapComponent extends BaseComponent{
     constructor(sprite_handler) {
-        this.sprite_handler = sprite_handler // todo make this subclass?
-        this.containerName = "map" // How to access container for map tiles in the sprite handler
+        super(sprite_handler, "map")
     }
 
     registerContainer() {
-        let mapContainer = new PIXI.Container(); // The grid all the action takes place in
-        mapContainer.name = this.containerName
-        this.constructMap(mapContainer)
-        this.sprite_handler.registerContainer(mapContainer)
+        super.registerContainer()
+        this.constructMap(this.container)
     }
 
     constructMap(mapContainer) {

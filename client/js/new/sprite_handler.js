@@ -31,10 +31,6 @@ export class SpriteHandler {
         this.app.stage.addChild(mapContainer)
     }
 
-    addTowerMenuSprite(sprite) {
-        this.app.stage.getChildByName("towermenu").addChild(sprite)
-    }
-
     containerSize(name) {
         return this.app.stage.getChildByName(name).children.length
     }

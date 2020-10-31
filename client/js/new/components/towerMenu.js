@@ -1,15 +1,10 @@
+import { BaseToolbarComponent } from "./base/baseToolbarComponent.js";
 import { DEFAULT_SPRITE_SIZE_X } from "../../views/constants.js"
 import { TowerManager } from "../../views/game/tower.js"
 
-export class TowerMenu {
+export class TowerMenu  extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {
-        this.sprite_handler = sprite_handler
-        this.containerName = "towermenu"
-
-        this.width_px = width_px
-        this.height_px = height_px
-        this.x = x
-        this.y = y
+        super(sprite_handler, "towermenu", width_px, height_px, x, y)
 
         this.infoToolbarLink
     }
@@ -19,19 +14,7 @@ export class TowerMenu {
     }
 
     registerContainer() {
-        let container = new PIXI.Container(); // The grid all the action takes place in
-        container.x = this.x
-        container.y = this.y
-        container.name = this.containerName
-
-        // Add the toolbar background
-        let graphics = new PIXI.Graphics();
-        graphics.beginFill("0x727272")
-        graphics.drawRect(0, 0, this.width_px, this.height_px)
-        container.addChild(graphics)
-
-
-        this.sprite_handler.registerContainer(container)
+        super.registerContainer()
         this.addTowers()
     }
 
@@ -41,7 +24,7 @@ export class TowerMenu {
             .on("pointerover", ()=>{this.infoToolbarLink.onTowerMenuPointerOver(0)})
             .on("pointerover", this.onTowerMenuPointerOver)
 
-        this.sprite_handler.addTowerMenuSprite(icon)
+        this.container.addChild(icon)
     }
 
     getTower(type) {

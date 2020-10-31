@@ -64,13 +64,9 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
 
 function sendNewGameMessage(data) {
     // load the assets into shared loader, then construct game view and send message to start
-    PIXI.Loader.shared
-        .add("client/img/map_spritesheet.png")
-        .add("client/img/enemy_spritesheet.png")
-        .add("client/img/tower_spritesheet.png")
-        .add("client/img/bullet_spritesheet.png").load(function() {
-            game = new GameRenderer()
-            sendMessage(MSG_TYPES.NEW_GAME, data)
+    game = new GameRenderer()
+    game.loadAssets().then(()=>{
+        sendMessage(MSG_TYPES.NEW_GAME, data)
     })
 }
 
