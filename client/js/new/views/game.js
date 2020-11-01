@@ -55,7 +55,7 @@ export class GameRenderer {
     }
 
     update(serverUpdate) {
-        //console.log(serverUpdate)
+        this.tc.update(serverUpdate["towers"])
     }
 
 }

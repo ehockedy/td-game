@@ -5,13 +5,14 @@ import { onDragTower, onPlaceTowerConfirm } from "../../views/game/callbacks.js"
 import { BaseComponent } from "./base/baseComponent.js"
 
 /**
- * This comonent stores all the information about the towers that are out on the map
+ * This component stores all the information about the towers that are out on the map
  * In future, might be best to remove the sprite creation functions out
  */
 export class TowersComponent extends BaseComponent {
     constructor(sprite_handler){
         super(sprite_handler)
         this.randomColourCode = "0x" + randomHexString(6); // TODO should be defined elsewhere
+        this.towerStateHashPrev = ""
     }
 
     // Asynchronosly load the tower data
@@ -97,5 +98,38 @@ export class TowersComponent extends BaseComponent {
         }
 
         sprite.setParent(this.container)
+    }
+
+    update(towerData) {
+        let towerStateObjects = towerData["objects"];
+        let towerStateHash = towerData["hash"];
+
+        if (towerStateHash != this.towerStateHashPrev) {
+            this.towerStateHashPrev = towerStateHash
+
+            // Identify tower not in container but in server update
+            let nameIdx = 0
+            for (nameIdx; nameIdx < towerStateObjects.length; nameIdx++) {
+                let found = false;
+                for (let towerSpriteIdx = this.container.children.length - 1; towerSpriteIdx >= 0; towerSpriteIdx--) {
+                    found = (this.container.children[towerSpriteIdx].name == towerStateObjects[nameIdx].name)
+                    if (found) break;
+                }
+                if (!found) {
+                    this.addPlacedTower(towerStateObjects[nameIdx].type,
+                        towerStateObjects[nameIdx].name,
+                        towerStateObjects[nameIdx].owner,
+                        towerStateObjects[nameIdx].posRowCol.row,
+                        towerStateObjects[nameIdx].posRowCol.col)
+                }
+            }
+        }
+
+        // Update state of towers present in server update
+        towerStateObjects.forEach((tower) => {
+            let towerToUpdate = this.container.getChildByName(tower.name)
+            towerToUpdate.rotation = tower.angle
+            towerToUpdate.tint = this.randomColourCode // TODO store all player colours once
+        })
     }
 }
