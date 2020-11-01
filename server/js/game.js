@@ -214,7 +214,7 @@ class Game {
         this.map.forEachEnemy((e) => {
             state["enemies"]["objects"].push({
                 "name": e.name,
-                "pathPos": [e.row, e.col, e.subrow, e.subcol],
+                "pathPos": e.position,
                 "isHit": e.isHit
             })
             hash.update(e.name)

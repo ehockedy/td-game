@@ -81,9 +81,9 @@ web_sockets_server.on('connection', (socket) => {
     console.log(rooms)
 
     socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+    socket.emit(MSG_TYPES.GAME_START)
     updateGameAndSend(gameID)
     setInterval(updateGameAndSend,50*0.2, gameID); // 20 "fps"
-    socket.emit(MSG_TYPES.GAME_START)
   });
 
   socket.on(MSG_TYPES.JOIN_GAME, (data, callback) => {

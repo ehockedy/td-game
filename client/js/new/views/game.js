@@ -3,6 +3,7 @@ import { MapComponent } from "../components/map.js"
 import { TowerMenu } from "../components/towerMenu.js"
 import { InfoToolbar } from "../components/infoToolbar.js"
 import { TowersComponent } from "../components/towersComponent.js"
+import { EnemiesComponent } from "../components/enemiesComponent.js"
 import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH } from "./../../views/constants.js"
 
 /**
@@ -16,6 +17,7 @@ export class GameRenderer {
         this.tm = new TowerMenu(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, 0)
         this.it = new InfoToolbar(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, RIGHT_TOOLBAR_HEIGHT)
         this.tc = new TowersComponent(this.spriteHandler)
+        this.ec = new EnemiesComponent(this.spriteHandler)
     }
 
     loadAssets() {
@@ -43,6 +45,7 @@ export class GameRenderer {
         this.tm.registerContainer()
         this.it.registerContainer()
         this.tc.registerContainer()
+        this.ec.registerContainer()
 
         // Set up links between components that need them
         this.tm.setInfoToolbarLink(this.it)
@@ -56,6 +59,7 @@ export class GameRenderer {
 
     update(serverUpdate) {
         this.tc.update(serverUpdate["towers"])
+        this.ec.update(serverUpdate["enemies"])
     }
 
 }
