@@ -119,8 +119,8 @@ export class TowersComponent extends BaseComponent {
                     this.addPlacedTower(towerStateObjects[nameIdx].type,
                         towerStateObjects[nameIdx].name,
                         towerStateObjects[nameIdx].owner,
-                        towerStateObjects[nameIdx].posRowCol.row,
-                        towerStateObjects[nameIdx].posRowCol.col)
+                        towerStateObjects[nameIdx].position.row,
+                        towerStateObjects[nameIdx].position.col)
                 }
             }
         }

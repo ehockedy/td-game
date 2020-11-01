@@ -84,7 +84,7 @@ export class EnemiesComponent extends BaseComponent {
         enemyStateObjects.forEach((enemy, idx) => {
             // Move the enemy
             let enemyToUpdate = this.container.getChildByName(enemy.name)
-            let newpos = gridPosToMapPos(enemy.pathPos)
+            let newpos = gridPosToMapPos(enemy.position)
             enemyToUpdate.x = newpos[0]
             enemyToUpdate.y = newpos[1]
 

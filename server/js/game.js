@@ -214,7 +214,7 @@ class Game {
         this.map.forEachEnemy((e) => {
             state["enemies"]["objects"].push({
                 "name": e.name,
-                "pathPos": e.position,
+                "position": e.position,
                 "isHit": e.isHit
             })
             hash.update(e.name)
@@ -227,7 +227,7 @@ class Game {
             state["towers"]["objects"].push({
                 "name": t.name,
                 "angle": t.angle,
-                "posRowCol": t.position,
+                "position": t.position,
                 "owner": t.owner,
                 "type": t.type
             })
@@ -238,7 +238,7 @@ class Game {
         this.map.forEachBullet((b) => {
             state["bullets"]["objects"].push({
                 "name": b.name,
-                "bulletPos": [b.position.row, b.position.col, b.position.subrow, b.position.subcol]
+                "position": b.position
             })
         })
 
