@@ -7,22 +7,26 @@ export class TowerMenu  extends BaseToolbarComponent {
         super(sprite_handler, "towermenu", width_px, height_px, x, y)
 
         this.infoToolbarLink
+        this.towerFactoryLink
     }
 
     setInfoToolbarLink(infoToolbar) {
         this.infoToolbarLink = infoToolbar
     }
 
+    setTowerFactoryLink(towerFactory) {
+        this.towerFactoryLink = towerFactory
+    }
+
     registerContainer() {
         super.registerContainer()
-        this.addTowers()
     }
 
     addTowers() {
         let icon = this.getTower(0)
         icon
             .on("pointerover", ()=>{this.infoToolbarLink.onTowerMenuPointerOver(0)})
-            .on("pointerover", this.onTowerMenuPointerOver)
+            .on("pointerover", ()=>{this.towerFactoryLink.addDraggableTower(0, this.x + icon.x, this.y + icon.y)})
 
         this.container.addChild(icon)
     }
@@ -60,8 +64,7 @@ export class TowerMenu  extends BaseToolbarComponent {
      * @param {Number} y y position
      */
     getTowerIcon(type, x, y) {
-        let towerManager = new TowerManager()
-        let tempTowerSprite = towerManager.getTowerSprite(type)
+        let tempTowerSprite = this.towerFactoryLink.getTowerSprite(type)
         tempTowerSprite.x = x
         tempTowerSprite.y = y
         tempTowerSprite.interactive = true
@@ -81,7 +84,4 @@ export class TowerMenu  extends BaseToolbarComponent {
         return tempTowerSprite
     }
 
-    onTowerMenuPointerOver() {
-        console.log("Tower menu pointer over event")
-    }
 }
