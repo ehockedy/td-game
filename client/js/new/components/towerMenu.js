@@ -23,12 +23,13 @@ export class TowerMenu  extends BaseToolbarComponent {
     }
 
     addTowers() {
-        let icon = this.getTower(0)
-        icon
-            .on("pointerover", ()=>{this.infoToolbarLink.onTowerMenuPointerOver(0)})
-            .on("pointerover", ()=>{this.towerFactoryLink.addDraggableTower(0, this.x + icon.x, this.y + icon.y)})
-
-        this.container.addChild(icon)
+        for (let i = 0; i < 4; i++) {
+            let icon = this.getTower(i)
+            icon
+                .on("pointerover", ()=>{this.infoToolbarLink.onTowerMenuPointerOver(i)})
+                .on("pointerover", ()=>{this.towerFactoryLink.addDraggableTower(i, this.x + icon.x, this.y + icon.y)})
+            this.container.addChild(icon)
+        }
     }
 
     getTower(type) {
