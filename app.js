@@ -131,6 +131,24 @@ web_sockets_server.on('connection', (socket) => {
     }
   });
 
+  /**
+   * Client will send a message of the form:
+   * {
+   *   "gameID": "ABCDEF",
+   *   "resource": "tower",
+   *   "update": {
+   *     "name": "012345",
+   *     "aimBehaviour": "first" 
+   *   }
+   * }
+   */
+  socket.on(MSG_TYPES.CLIENT_UPDATE, (data) => {
+    let gameID = data["gameID"]
+    if (data["resource"] == "tower") {
+      rooms[gameID]["game"].updateTower(data["name"], data["updates"])
+    }
+  })
+
   socket.on(MSG_TYPES.CLIENT_DEBUG, (data) => {
     console.log(data)
   })

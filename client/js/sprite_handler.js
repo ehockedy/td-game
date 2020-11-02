@@ -22,9 +22,6 @@ export class SpriteHandler {
 
         // Sprite that focus is currently on
         this.activeClickable
-
-        // If anywhere on the application is clicked
-        this.app.view.addEventListener('click', (event) => this.onCanvasClick(event));
     }
 
     render() {
@@ -55,6 +52,11 @@ export class SpriteHandler {
 
     unsetActiveClickable() {
         this.activeClickable = undefined
+    }
+
+    unclickActiveClickable() {
+        if (this.isActiveClickableSet()) this.activeClickable.emit('clickoff')
+        this.unsetActiveClickable()
     }
 
     onCanvasClick(event) {

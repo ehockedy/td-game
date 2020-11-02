@@ -55,3 +55,16 @@ export function gridPosToMapPos(pathPos) {
         pathPos.row * DEFAULT_SPRITE_SIZE_Y + (pathPos.subrow * subGridSideLen + subGridSideLen / 2)
     ]
 }
+
+export function getPositionWithinEquallySpacedObjects(objectNumber, totalObjects, objectWidth, totalWidth) {
+    // Equally space the objects across the menu where all the spaces are equal width
+    // <space><object><space><object><space>
+    // |__________________________________|
+    //                  |
+    //               <toolbar>
+    // toolbar = 2*object + 3*space
+    // space = (toolbar - 2*object) / 3
+    // We know toolbar width and object width, so can work out space width. Then replace 2 and 3 with n and (n+1)
+    let spacing = (totalWidth - (totalObjects*objectWidth)) / (totalObjects + 1)
+    return (spacing + objectWidth/2) + ((spacing + objectWidth) * ((objectNumber-1) % totalObjects))
+}

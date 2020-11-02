@@ -74,6 +74,7 @@ export class TowersComponent extends BaseComponent {
         sprite
             .on("pointerdown", () => {
                  sprite.dragging = true
+                 this.sprite_handler.unclickActiveClickable() // Shift focus to new tower
             })
             .on("pointermove", this.onDragTower)
             .on("pointerup", this.onPlaceTowerConfirm)

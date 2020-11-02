@@ -88,4 +88,13 @@ function sendMessageGetAck(msgType, data) {
     })
 }
 
+export function sendResourceUpdateMessage(resourceType, name, propertyUpdateArray) {
+    socket.emit(MSG_TYPES.CLIENT_UPDATE, {
+        "gameID": getGameID(),
+        "resource": resourceType,
+        "name": name,
+        "updates": propertyUpdateArray
+    })
+}
+
 export { MSG_TYPES, sendMessage, sendNewGameMessage, sendMessageGetAck, getTowerUpdateMsg }

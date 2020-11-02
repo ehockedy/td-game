@@ -22,21 +22,26 @@ class Tower {
         this.col = position.col
         this.x = position.x
         this.y = position.y
-
-        this.angle = 0 // Angle in radians, 0 is East, goes clockwise
-        this.rateOfFire = towerJson[type]["gameData"]["rateOfFire"] // ticks between bullets
+        
         this.fireTick = 0 // Ticks since last bullet
-        this.range = towerJson[type]["gameData"]["seekRange"]
-        this.shootRange = towerJson[type]["gameData"]["shootRange"] // How far bullet cant travel once fired
-        this.bulletSpeed = towerJson[type]["gameData"]["bulletSpeed"]
-        this.damage = towerJson[type]["gameData"]["damage"]
-        this.owner = owner // The owner who owns the tower
         this.kills = 0
-        this.shootRangePath = [] // Main grid squares that the bullets can reach that are on the path
-        this.aimBehaviour = "last" // Furthest enemy, first enemy, etc.
-        this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
         this.target
         this.shootFunction = this._getShootBehaviour(type)
+        this.shootRangePath = [] // Main grid squares that the bullets can reach that are on the path
+        this.angle = 0 // Angle in radians, 0 is East, goes clockwise
+        this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
+        this.owner = owner // The owner who owns the tower
+
+
+        // These values can change based on user actions
+        this.state = {
+            "rateOfFire" : towerJson[type]["gameData"]["rateOfFire"], // ticks between bullets
+            "range": towerJson[type]["gameData"]["seekRange"],
+            "shootRange": towerJson[type]["gameData"]["shootRange"], // How far bullet can travel once fired
+            "bulletSpeed": towerJson[type]["gameData"]["bulletSpeed"],
+            "damage": towerJson[type]["gameData"]["damage"],
+            "aimBehaviour": "last", // Furthest enemy, first enemy, etc.
+        }
     }
 
     /**
@@ -45,7 +50,7 @@ class Tower {
      */
     calculateShootPath(path) {
         for (let p=0; p < path.length; p++) {
-            if (Math.sqrt(Math.pow((path[p].row - this.row), 2) + Math.pow((path[p].col - this.col), 2)) <= this.range) {
+            if (Math.sqrt(Math.pow((path[p].row - this.row), 2) + Math.pow((path[p].col - this.col), 2)) <= this.state.range) {
                 this.shootRangePath.push(path[p])
             }
         }
@@ -53,6 +58,12 @@ class Tower {
 
     setTarget(enemy) {
         this.target = enemy
+    }
+
+    update(updates) {
+        updates.forEach((update) => {
+            this.state[update.property] = update.newValue
+        })
     }
 
     /**
@@ -63,7 +74,7 @@ class Tower {
         if (this.fireTick == 0) {
             newBullets = this.shootFunction()
         }
-        this.fireTick = (this.fireTick + 1) % this.rateOfFire
+        this.fireTick = (this.fireTick + 1) % this.state.rateOfFire
         return newBullets
     }
 
@@ -95,9 +106,9 @@ class Tower {
         let newBullet = new bullet.Bullet(
             this.position,
             this.angle,
-            this.damage,
-            this.bulletSpeed,
-            this.shootRange
+            this.state.damage,
+            this.state.bulletSpeed,
+            this.state.shootRange
         )
 
         // Iterate through enemies future positions to find one that bullet will hit
@@ -133,9 +144,9 @@ class Tower {
             bullets.push(new bullet.Bullet(
                 this.position,
                 (Math.PI/4)*a,
-                this.damage,
-                this.bulletSpeed,
-                this.shootRange
+                this.state.damage,
+                this.state.bulletSpeed,
+                this.state.shootRange
             ))
         }
         return bullets

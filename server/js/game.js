@@ -66,7 +66,7 @@ class Game {
 
             // Get a enemy to shoot at based on tower behaviour
             let chosenEnemy = null
-            if (tower.aimBehaviour == "last") { // Tower aims to the enemy furthest down the path
+            if (tower.state.aimBehaviour == "last") { // Tower aims to the enemy furthest down the path
                 for (let i = tower.shootRangePath.length-1; i >= 0; i--) {
                     let square = tower.shootRangePath[i]
                     let enemies = this.map.getEnemies(square.row, square.col)
@@ -95,8 +95,6 @@ class Game {
             tower.shoot().forEach((bullet) => {
                 this.map.addBullet(bullet)
             })
-
-            tower.fireTick = (tower.fireTick + 1) % tower.rateOfFire
         }
     }
 
@@ -177,6 +175,14 @@ class Game {
         let newTower = new towerImport.Tower(name, type, owner, new point.Point(col, row, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT))
         newTower.calculateShootPath(this.map.mainPath)
         this.towers.push(newTower)
+    }
+
+    updateTower(name, update) {
+        this.towers.forEach((tower) => {
+            if (tower.name == name) {
+                tower.update(update)
+            }
+        })
     }
 
     updateGameState() {

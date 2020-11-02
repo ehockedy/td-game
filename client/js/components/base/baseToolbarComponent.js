@@ -8,6 +8,10 @@ export class BaseToolbarComponent extends BaseComponent {
         this.x = x
         this.y = y
 
+        // This keeps track of the elements added to the toolbar already
+        this.toolbarComponentsX = this.x
+        this.toolbarComponentsY = this.y
+
         // Add the toolbar background
         let graphics = new PIXI.Graphics();
         graphics.beginFill("0x727272")
