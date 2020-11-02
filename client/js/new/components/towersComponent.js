@@ -13,6 +13,7 @@ export class TowersComponent extends BaseComponent {
         super(sprite_handler)
         this.randomColourCode = "0x" + randomHexString(6); // TODO should be defined elsewhere
         this.towerStateHashPrev = ""
+        this.rangeSpriteContainer = new PIXI.Container();
     }
 
     // Asynchronosly load the tower data
@@ -25,6 +26,12 @@ export class TowersComponent extends BaseComponent {
             })
         })
         return p
+    }
+
+    // An additional container for the range sprites.
+    // Required so that range always appears under all towers
+    registerRangeSpriteContainer() {
+        this.sprite_handler.registerContainer(this.rangeSpriteContainer)
     }
 
     setInfoToolbarLink(infoToolbar) {
@@ -79,7 +86,7 @@ export class TowersComponent extends BaseComponent {
 
 
 
-        sprite.range_subsprite.setParent(this.container) // TODO make differe nt container 
+        sprite.range_subsprite.setParent(this.rangeSpriteContainer) // TODO make differe nt container 
         sprite.setParent(this.container)
     }
 
@@ -117,7 +124,7 @@ export class TowersComponent extends BaseComponent {
             sprite.range_subsprite.x = sprite.x
             sprite.range_subsprite.y = sprite.y
             sprite.range_subsprite.visible = false
-            sprite.range_subsprite.setParent(this.container) // TODO make differe nt container 
+            sprite.range_subsprite.setParent(this.rangeSpriteContainer)
         }
 
         sprite.setParent(this.container)

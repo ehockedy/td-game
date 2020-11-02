@@ -45,10 +45,11 @@ export class GameRenderer {
 
     startRendering() {
         // Register containers with the sprite layer
-        // TODO make the order the depth they appear on the map
+        // The order here is the order they are rendered on the map
         this.map.registerContainer()
         this.tm.registerContainer()
         this.it.registerContainer()
+        this.tc.registerRangeSpriteContainer()
         this.bc.registerContainer()
         this.tc.registerContainer()
         this.ec.registerContainer()
