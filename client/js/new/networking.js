@@ -1,8 +1,6 @@
 import { setState, setBoard, setGridDimsRowsCols, setSubGridDim , getGameID } from "./state.js"
-import { startRendering as startRenderingMenu, stopRendering as stopRenderingMenu} from "./menu_renderer.js"
-//import { startRendering as startRenderingGame } from "./renderer.js"
-import { GameRenderer} from "./new/views/game.js"
-import { printMap } from "./tools.js"
+import { startRendering as startRenderingMenu, stopRendering as stopRenderingMenu} from "./views/menu_renderer.js"
+import { GameRenderer} from "./views/game.js"
 
 // To get client side debugging, paste "localStorage.debug = '*';" into
 // the browser console

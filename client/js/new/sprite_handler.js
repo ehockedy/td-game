@@ -1,8 +1,8 @@
 /**
  * This is the class that holds all the sprites and interaction with those sprites
  */
-import { APP_HEIGHT, APP_WIDTH} from "./../views/constants.js"
-import { getGameID } from "../state.js"
+import { APP_HEIGHT, APP_WIDTH} from "./constants.js"
+import { getGameID } from "./state.js"
 
 
 export class SpriteHandler {

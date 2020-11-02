@@ -1,6 +1,6 @@
 import { BaseComponent } from "./base/baseComponent.js"
-import { gridPosToMapPos } from "../../tools.js"
-import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y} from "../../views/constants.js"
+import { gridPosToMapPos } from "../tools.js"
+import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y} from "../constants.js"
 
 export class EnemiesComponent extends BaseComponent {
     constructor(sprite_handler) {

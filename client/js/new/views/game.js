@@ -5,7 +5,7 @@ import { InfoToolbar } from "../components/infoToolbar.js"
 import { TowersComponent } from "../components/towersComponent.js"
 import { EnemiesComponent } from "../components/enemiesComponent.js"
 import { BulletsComponent } from "../components/bulletsComponent.js"
-import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH } from "./../../views/constants.js"
+import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH } from "../constants.js"
 
 /**
  * This class sets up what will appear in the game view.

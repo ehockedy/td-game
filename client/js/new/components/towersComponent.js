@@ -1,8 +1,8 @@
-import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y } from "../../views/constants.js"
-import { randomHexString } from "../../tools.js"
-import { getUsername } from "../../state.js"
-import { onDragTower, onPlaceTowerConfirm } from "../../views/game/callbacks.js" // TODO move these
+import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_WIDTH, APP_HEIGHT, MAP_WIDTH, MAP_HEIGHT } from "../constants.js"
+import { randomHexString } from "../tools.js"
+import { getUsername, getBoard } from "../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
+import { sendMessage, getTowerUpdateMsg, MSG_TYPES } from "../networking.js"
 
 /**
  * This component stores all the information about the towers that are out on the map
@@ -66,7 +66,6 @@ export class TowersComponent extends BaseComponent {
         sprite.owner = getUsername()
         sprite.x = x
         sprite.y = y
-        sprite.tint = "0xAABBCC"
 
         // Attach a range sprite
         sprite.range_subsprite = this.getTowerRangeGraphic(type)
@@ -76,9 +75,9 @@ export class TowersComponent extends BaseComponent {
             .on("pointerdown", () => {
                  sprite.dragging = true
             })
-            .on("pointermove", onDragTower)
-            .on("pointerup", onPlaceTowerConfirm)
-            .on("pointerupoutside", onPlaceTowerConfirm)
+            .on("pointermove", this.onDragTower)
+            .on("pointerup", this.onPlaceTowerConfirm)
+            .on("pointerupoutside", this.onPlaceTowerConfirm)
             .on("pointerover", ()=>{this.infoToolbarLink.onTowerMenuPointerOver(type)})
             .on("pointerout", () => {if(!sprite.dragging){this.infoToolbarLink.onTowerMenuPointerOff()}})
             .on("pointerup", () => {this.infoToolbarLink.onTowerMenuPointerOff()})
@@ -161,5 +160,49 @@ export class TowersComponent extends BaseComponent {
             towerToUpdate.rotation = tower.angle
             towerToUpdate.tint = this.randomColourCode // TODO store all player colours once
         })
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~
+    // Events - "this" is the parent object
+    // ~~~~~~~~~~~~~~~~~~~~~~~
+    onDragTower(event) {
+        if (!this.dragging) return
+    
+        const newPosition = event.data.getLocalPosition(this.parent);
+        if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < MAP_WIDTH && newPosition.y < MAP_HEIGHT) {
+            // If on map, snap to grid
+            let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
+            let newGridY = Math.floor(newPosition.y / DEFAULT_SPRITE_SIZE_Y)
+            if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
+                getBoard()[newGridY][newGridX]["value"] == 0) { // Must be empty space
+                this.gridX = newGridX
+                this.gridY = newGridY
+                this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
+                this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
+            }
+        } else if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < APP_WIDTH && newPosition.y < APP_HEIGHT) {
+            // Otherwise, update position normally
+            this.x = newPosition.x
+            this.y = newPosition.y
+        }
+    
+        // Also move range indicator to be same position as tower
+        this.range_subsprite.visible = true
+        this.range_subsprite.x = this.x
+        this.range_subsprite.y = this.y
+    }
+
+    onPlaceTowerConfirm() {
+        this.range_subsprite.parent.removeChild(this.range_subsprite)
+        this.parent.removeChild(this) // TODO do we also need to rmove this sprite i.e. destroy()?
+        if (this.x >= 0 && this.y >= 0 && this.x < MAP_WIDTH && this.y < MAP_HEIGHT) {
+            sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(this))
+        }
+    }
+
+    onPlaceTower() {
+        if (this.x >= 0 && this.y >= 0 && this.x < MAP_WIDTH && this.y < MAP_HEIGHT) {
+            sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, getTowerUpdateMsg(this))
+        }
     }
 }

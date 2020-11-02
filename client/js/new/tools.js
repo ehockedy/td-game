@@ -1,4 +1,4 @@
-import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, SUBGRID_SIZE } from "./views/constants.js"
+import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, SUBGRID_SIZE } from "./constants.js"
 
 // Tools used across files
 

@@ -1,6 +1,6 @@
-import { randomAlphaCharString } from "./tools.js"
-import { MSG_TYPES, sendMessage, sendMessageGetAck, sendNewGameMessage } from "./networking.js"
-import { setGameID } from "./state.js"
+import { randomAlphaCharString } from "../tools.js"
+import { MSG_TYPES, sendMessage, sendMessageGetAck, sendNewGameMessage } from "../networking.js"
+import { setGameID } from "../state.js"
 
 
 const GAME_CODE_LEN = 4 // 4 is random enough, and easy to remember

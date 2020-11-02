@@ -1,6 +1,5 @@
 import { BaseToolbarComponent } from "./base/baseToolbarComponent.js";
-import { DEFAULT_SPRITE_SIZE_X } from "../../views/constants.js"
-import { TowerManager } from "../../views/game/tower.js"
+import { DEFAULT_SPRITE_SIZE_X } from "../constants.js"
 
 export class TowerMenu  extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {

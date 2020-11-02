@@ -1,5 +1,5 @@
-import { MAP_ROWS, MAP_COLS, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y} from "../../views/constants.js"
-import { getBoard } from "../../state.js"
+import { MAP_ROWS, MAP_COLS, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y} from "../constants.js"
+import { getBoard } from "../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
 
 export class MapComponent extends BaseComponent{
