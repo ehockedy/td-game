@@ -78,14 +78,24 @@ export class TowersComponent extends BaseComponent {
             .on("pointermove", this.onDragTower)
             .on("pointerup", this.onPlaceTowerConfirm)
             .on("pointerupoutside", this.onPlaceTowerConfirm)
-            .on("pointerover", ()=>{this.infoToolbarLink.onTowerMenuPointerOver(type)})
-            .on("pointerout", () => {if(!sprite.dragging){this.infoToolbarLink.onTowerMenuPointerOff()}})
-            .on("pointerup", () => {this.infoToolbarLink.onTowerMenuPointerOff()})
-            .on("pointerupoutside", () => {this.infoToolbarLink.onTowerMenuPointerOff()})
+            .on("pointerover", ()=>{
+                this.infoToolbarLink.onTowerMenuPointerOver(type)
+            })
+            .on("pointerout", ()=>{
+                if (!sprite.dragging) {
+                    this.infoToolbarLink.onTowerMenuPointerOff()
+                }
+            })
+            .on("pointerup", ()=>{
+                if (sprite.moved) {
+                    this.infoToolbarLink.onTowerMenuPointerOff()
+                }
+            })
+            .on("pointerupoutside", ()=>{
+                this.infoToolbarLink.onTowerMenuPointerOff()
+            })
 
-
-
-        sprite.range_subsprite.setParent(this.rangeSpriteContainer) // TODO make differe nt container 
+        sprite.range_subsprite.setParent(this.rangeSpriteContainer)
         sprite.setParent(this.container)
     }
 
@@ -190,6 +200,8 @@ export class TowersComponent extends BaseComponent {
         this.range_subsprite.visible = true
         this.range_subsprite.x = this.x
         this.range_subsprite.y = this.y
+
+        this.moved = true
     }
 
     onPlaceTowerConfirm() {
