@@ -27,6 +27,10 @@ export class TowersComponent extends BaseComponent {
         return p
     }
 
+    setInfoToolbarLink(infoToolbar) {
+        this.infoToolbarLink = infoToolbar
+    }
+
     getTowerSprite(type) { // Make this a get sprite only function
         let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
         let towerTexture = [new PIXI.Texture(texture, new PIXI.Rectangle(0, DEFAULT_SPRITE_SIZE_Y * this.towerJson[type]["spriteSheetNum"], DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y))]
@@ -68,6 +72,12 @@ export class TowersComponent extends BaseComponent {
             .on("pointermove", onDragTower)
             .on("pointerup", onPlaceTowerConfirm)
             .on("pointerupoutside", onPlaceTowerConfirm)
+            .on("pointerover", ()=>{this.infoToolbarLink.onTowerMenuPointerOver(type)})
+            .on("pointerout", () => {if(!sprite.dragging){this.infoToolbarLink.onTowerMenuPointerOff()}})
+            .on("pointerup", () => {this.infoToolbarLink.onTowerMenuPointerOff()})
+            .on("pointerupoutside", () => {this.infoToolbarLink.onTowerMenuPointerOff()})
+
+
 
         sprite.range_subsprite.setParent(this.container) // TODO make differe nt container 
         sprite.setParent(this.container)
@@ -86,9 +96,22 @@ export class TowersComponent extends BaseComponent {
         if (owner == getUsername()) { // Only make the tower interactive if the user placed it
             sprite.interactive = true; // reponds to mouse and touch events
             sprite.buttonMode = true; // hand cursor appears when hover over
-            //sprite
-            //    .on('click', onTowerClick)
-            //    .on('clickoff', onTowerUnclick); // This is a custom event triggered manually
+            sprite
+                .on('click', ()=> {
+                    if (this.sprite_handler.getActiveClickable() == sprite) { // Clicked on the currently active tower
+                        sprite.emit("clickoff")
+                    } else { // Clicked on tower that is not active
+                        if (this.sprite_handler.isActiveClickableSet()) this.sprite_handler.getActiveClickable().emit('clickoff') // Cancel current active clickable
+                        this.sprite_handler.setActiveClickable(sprite) // Register this as the active object
+                        sprite.range_subsprite.visible = true // Show the range circle
+                        this.infoToolbarLink.onDraggableTowerClick(type)
+                    }
+                })
+                .on('clickoff', ()=>{  // This is a custom event triggered manually
+                    sprite.range_subsprite.visible = false
+                    this.sprite_handler.unsetActiveClickable()
+                    this.infoToolbarLink.onDraggableTowerClickOff()
+                });
 
             sprite.range_subsprite = this.getTowerRangeGraphic(type)
             sprite.range_subsprite.x = sprite.x

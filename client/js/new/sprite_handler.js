@@ -2,7 +2,7 @@
  * This is the class that holds all the sprites and interaction with those sprites
  */
 import { APP_HEIGHT, APP_WIDTH} from "./../views/constants.js"
-import { getState, getBoard, getGameID, getUsername } from "../state.js"
+import { getGameID } from "../state.js"
 
 
 export class SpriteHandler {
@@ -19,6 +19,12 @@ export class SpriteHandler {
     
         //Add the canvas that Pixi automatically created to the HTML document
         document.body.appendChild(this.app.view);
+
+        // Sprite that focus is currently on
+        this.activeClickable
+
+        // If anywhere on the application is clicked
+        this.app.view.addEventListener('click', (event) => this.onCanvasClick(event));
     }
 
     render() {
@@ -27,11 +33,35 @@ export class SpriteHandler {
 
     gameLoop() {}
 
-    registerContainer(mapContainer) { // TODO should this be a generic add container
-        this.app.stage.addChild(mapContainer)
+    registerContainer(container) {
+        this.app.stage.addChild(container)
     }
 
     containerSize(name) {
         return this.app.stage.getChildByName(name).children.length
+    }
+
+    getActiveClickable() {
+        return this.activeClickable
+    }
+
+    setActiveClickable(sprite) {
+        this.activeClickable = sprite
+    }
+
+    isActiveClickableSet() {
+        return typeof this.activeClickable != "undefined"
+    }
+
+    unsetActiveClickable() {
+        this.activeClickable = undefined
+    }
+
+    onCanvasClick(event) {
+        if (this.isActiveClickableSet()) {
+            if (!this.activeClickable.containsPoint(new PIXI.Point(event.layerX, event.layerY))) {
+                this.activeClickable.emit('clickoff'); // clickoff event is agnostic to the type of object stored in activeClickable
+            }
+        }
     }
 }

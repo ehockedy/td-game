@@ -26,7 +26,6 @@ export class TowerMenu  extends BaseToolbarComponent {
         for (let i = 0; i < 4; i++) {
             let icon = this.getTower(i)
             icon
-                .on("pointerover", ()=>{this.infoToolbarLink.onTowerMenuPointerOver(i)})
                 .on("pointerover", ()=>{this.towerFactoryLink.addDraggableTower(i, this.x + icon.x, this.y + icon.y)})
             this.container.addChild(icon)
         }

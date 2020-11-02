@@ -24,6 +24,7 @@ export class GameRenderer {
 
     loadAssets() {
         let _tc = this.tc
+        let _it = this.it
         return new Promise((resolve, reject)=>{
             // Load sprite assets
             PIXI.Loader.shared
@@ -33,9 +34,11 @@ export class GameRenderer {
                 .add("client/img/bullet_spritesheet.png")
                 .load(function() {
                     // Then load tower json
-                    _tc.loadData()
+                    _tc.loadData().then(
+                    _it.loadData().then(
                         // Then can resolve this call and start the game
-                        .then(resolve)
+                        resolve
+                    ))
                 })
         })
     }
@@ -51,7 +54,7 @@ export class GameRenderer {
         this.ec.registerContainer()
 
         // Set up links between components that need them
-        this.tm.setInfoToolbarLink(this.it)
+        this.tc.setInfoToolbarLink(this.it)
         this.tm.setTowerFactoryLink(this.tc)
 
         this.tm.addTowers()
