@@ -97,13 +97,22 @@ export class TowersComponent extends BaseComponent {
                     // The tower is the active clickable object. This makes it accessible for the information toolbar to use
                     this.sprite_handler.setActiveClickable(sprite)
 
-                    // Stop another tower from being produced
+                    // Stop another tower from being produced, or other towers from being interactable hilst placing this one
                     this.towerMenuLink.stopInteraction()
+                    this.stopInteraction()
+                    sprite.interactive = true
 
+                    let _this = this
                     function onPointerUp() {
                         if (sprite.x >= 0 && sprite.y >= 0 && sprite.x < MAP_WIDTH && sprite.y < MAP_HEIGHT) sprite.dragging = false
-                        else this.cleanUpDraggableTower(sprite) // If out of map, remove it
+                        else _this.cleanUpDraggableTower(sprite) // If out of map, remove it
                     }
+
+                    function finishedWithTower() {
+                        _this.startInteraction()
+                        _this.cleanUpDraggableTower(sprite)
+                    }
+
                     // Remove existing behaviour, then add new behaviour
                     sprite.removeAllListeners()
                     sprite.on("pointerdown", () => { sprite.dragging = true })
@@ -111,8 +120,8 @@ export class TowersComponent extends BaseComponent {
                     sprite.on("pointerup", onPointerUp)
                     sprite.on("pointerupoutside", onPointerUp)
                     sprite.on("place", this.onPlaceTowerConfirm) // Custom event triggered by pressing the confirm button
-                    sprite.on("place", () => { this.cleanUpDraggableTower(sprite) })
-                    sprite.on("clear", () => { this.cleanUpDraggableTower(sprite) })
+                    sprite.on("place", finishedWithTower)
+                    sprite.on("clear", finishedWithTower)
                 }
             })
 
@@ -244,5 +253,17 @@ export class TowersComponent extends BaseComponent {
         this.towerMenuLink.startInteraction()
         this.infoToolbarLink.onTowerMenuPointerOff()
         this.sprite_handler.unsetActiveClickable()
+    }
+
+    stopInteraction() {
+        this.container.children.forEach((child) => {
+            child.interactive = false
+        })
+    }
+
+    startInteraction() {
+        this.container.children.forEach((child) => {
+            child.interactive = true
+        })
     }
 }
