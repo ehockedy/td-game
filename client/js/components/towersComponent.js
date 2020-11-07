@@ -112,6 +112,7 @@ export class TowersComponent extends BaseComponent {
                     sprite.on("pointerupoutside", onPointerUp)
                     sprite.on("place", this.onPlaceTowerConfirm) // Custom event triggered by pressing the confirm button
                     sprite.on("place", () => { this.cleanUpDraggableTower(sprite) })
+                    sprite.on("clear", () => { this.cleanUpDraggableTower(sprite) })
                 }
             })
 

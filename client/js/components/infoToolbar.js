@@ -153,14 +153,21 @@ export class InfoToolbar extends BaseToolbarComponent {
      * The button that you press to confirm tower placement
      */
     renderSetTowerButton() {
-        let buttonHeight = this.width_px*0.5 / 2
+        let buttonHeight = this.width_px*0.4
+        let buttonWidth = this.width_px*0.4
         this.toolbarComponentsY += this.defaultYGap + buttonHeight
-        let newButton =  this.getButton(this.width_px*0.8, this.width_px*0.5, this.x + getPositionWithinEquallySpacedObjects(1, 1, 32, this.width_px), this.toolbarComponentsY, "Confirm", 25)
+        let confirmButton =  this.getButton(buttonWidth, buttonHeight, this.x + getPositionWithinEquallySpacedObjects(1, 2, buttonWidth, this.width_px), this.toolbarComponentsY, "\u{1F5F8}" , 40, "0x22FF22")
         let _this = this
-        newButton.on("click", function () {
+        confirmButton.on("click", function () {
             _this.sprite_handler.getActiveClickable().emit("place")
         })
-        this.infoContainer.addChild(newButton)
+        this.infoContainer.addChild(confirmButton)
+
+        let cancelButton =  this.getButton(buttonWidth, buttonHeight, this.x + getPositionWithinEquallySpacedObjects(2, 2, buttonWidth, this.width_px), this.toolbarComponentsY, "\u{2717}", 40, "0xFF2222")
+        cancelButton.on("click", function () {
+            _this.sprite_handler.getActiveClickable().emit("clear")
+        })
+        this.infoContainer.addChild(cancelButton)
     }
 
     // Externally called functions triggered by other components
