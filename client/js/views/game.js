@@ -58,6 +58,7 @@ export class GameRenderer {
         // Set up links between components that need them
         this.tc.setInfoToolbarLink(this.it)
         this.tm.setTowerFactoryLink(this.tc)
+        this.tc.setTowerMenuLink(this.tm)
 
         this.tm.addTowers()
 

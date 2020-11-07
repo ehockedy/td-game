@@ -17,6 +17,7 @@ export class InfoToolbar extends BaseToolbarComponent {
                 _this.towerJson = data
                 _this.renderTowerInfo()
                 _this.renderTowerAimButtons()
+                _this.renderSetTowerButton()
                 resolve()
             })
         })
@@ -47,7 +48,7 @@ export class InfoToolbar extends BaseToolbarComponent {
         })
     }
 
-    getButton(width_px, height_px, x, y, message="", col="0xAA88DD") {
+    getButton(width_px, height_px, x, y, message="", fontSize=20, col="0xAA88DD") {
         let graphics = new PIXI.Graphics();
         graphics.beginFill(col)
         graphics.drawRect(0, 0, width_px, height_px)
@@ -59,7 +60,7 @@ export class InfoToolbar extends BaseToolbarComponent {
 
         let defaultStyle = {
             fontFamily: 'Arial',
-            fontSize: height_px * 0.8,
+            fontSize: fontSize,
             fontWeight: 'bold',
             wordWrap: true,
             wordWrapWidth: width_px * 0.8
@@ -131,7 +132,9 @@ export class InfoToolbar extends BaseToolbarComponent {
         let buttonsPerRow = 2
         behaviours.forEach((behaviour, idx) => {
             this.toolbarComponentsY += (this.defaultYGap*((idx+1)%2))
-            let newButton =  this.getButton(55, 15, this.x + getPositionWithinEquallySpacedObjects(idx+1, buttonsPerRow, 32, this.width_px), this.toolbarComponentsY, behaviour)
+            let width = 55
+            let height = 15
+            let newButton =  this.getButton(width, height, this.x + getPositionWithinEquallySpacedObjects(idx+1, buttonsPerRow, 32, this.width_px), this.toolbarComponentsY, behaviour, height*0.8)
 
             let _this = this
             newButton.on("click", function () {
@@ -144,6 +147,20 @@ export class InfoToolbar extends BaseToolbarComponent {
             })
             this.infoContainer.addChild(newButton)
         })
+    }
+
+    /**
+     * The button that you press to confirm tower placement
+     */
+    renderSetTowerButton() {
+        let buttonHeight = this.width_px*0.5 / 2
+        this.toolbarComponentsY += this.defaultYGap + buttonHeight
+        let newButton =  this.getButton(this.width_px*0.8, this.width_px*0.5, this.x + getPositionWithinEquallySpacedObjects(1, 1, 32, this.width_px), this.toolbarComponentsY, "Confirm", 25)
+        let _this = this
+        newButton.on("click", function () {
+            _this.sprite_handler.getActiveClickable().emit("place")
+        })
+        this.infoContainer.addChild(newButton)
     }
 
     // Externally called functions triggered by other components

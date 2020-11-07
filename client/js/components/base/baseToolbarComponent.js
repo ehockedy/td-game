@@ -16,12 +16,19 @@ export class BaseToolbarComponent extends BaseComponent {
         let graphics = new PIXI.Graphics();
         graphics.beginFill("0x727272")
         graphics.drawRect(0, 0, this.width_px, this.height_px)
-        this.container.addChild(graphics)
+
+        // Keep background and towers separate
+        this.backgroundContainer = new PIXI.Container()
+        this.backgroundContainer.addChild(graphics)
+        this.backgroundContainer.x = this.x
+        this.backgroundContainer.y = this.y
+
         this.container.x = this.x
         this.container.y = this.y
     }
 
     registerContainer() {
+        this.sprite_handler.registerContainer(this.backgroundContainer)
         super.registerContainer()
     }
 }

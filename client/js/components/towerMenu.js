@@ -72,4 +72,18 @@ export class TowerMenu  extends BaseToolbarComponent {
         return tempTowerSprite
     }
 
+    stopInteraction() {
+        this.container.children.forEach((child) => {
+            child.interactive = false
+            child.tint = "0xAAAAAA"
+        })
+    }
+
+    startInteraction() {
+        this.container.children.forEach((child) => {
+            child.interactive = true
+            child.tint = this.towerFactoryLink.randomColourCode
+        })
+    }
+
 }

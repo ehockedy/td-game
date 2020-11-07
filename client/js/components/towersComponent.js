@@ -28,6 +28,10 @@ export class TowersComponent extends BaseComponent {
         return p
     }
 
+    setTowerMenuLink(towerMenu) {
+        this.towerMenuLink = towerMenu
+    }
+
     // An additional container for the range sprites.
     // Required so that range always appears under all towers
     registerRangeSpriteContainer() {
@@ -68,32 +72,47 @@ export class TowersComponent extends BaseComponent {
         sprite.y = y
 
         // Attach a range sprite
-        sprite.range_subsprite = this.getTowerRangeGraphic(type)
+        sprite.range_subsprite = this.getTowerRangeGraphic(type) // TODO make this a child, and put render distances on
         sprite.range_subsprite.visible = false
 
+        // Tower icon sprite behaviour
+        // Initial state is just an icon that can be dragged.
+        // Once dragging MediaStreamTrackAudioSourceNode, behaviour changes
         sprite
-            .on("pointerdown", () => {
-                 sprite.dragging = true
-                 this.sprite_handler.unclickActiveClickable() // Shift focus to new tower
-            })
-            .on("pointermove", this.onDragTower)
-            .on("pointerup", this.onPlaceTowerConfirm)
-            .on("pointerupoutside", this.onPlaceTowerConfirm)
-            .on("pointerover", ()=>{
+            .on("pointerover", ()=>{ // Display the information about the tower - this triggers as soon as tower appears
+                this.sprite_handler.unclickActiveClickable()
                 this.infoToolbarLink.onTowerMenuPointerOver(type)
             })
             .on("pointerout", ()=>{
-                if (!sprite.dragging) {
-                    this.infoToolbarLink.onTowerMenuPointerOff()
-                }
-            })
-            .on("pointerup", ()=>{
-                if (sprite.moved) {
-                    this.infoToolbarLink.onTowerMenuPointerOff()
-                }
-            })
-            .on("pointerupoutside", ()=>{
                 this.infoToolbarLink.onTowerMenuPointerOff()
+                this.container.removeChild(sprite) // remove it, since wasn't used
+            })
+            .on("pointerdown", () => { sprite.dragging = true })
+            .on("pointerup", () => { sprite.dragging = false })
+            .on("pointermove", () => {
+                if (sprite.dragging) {
+                    // At this point, the user has clicked and dragged the tower, indicating they want to use it
+                    // Remove the existing behaviour defined above, and set the new behaviour
+
+                    // The tower is the active clickable object. This makes it accessible for the information toolbar to use
+                    this.sprite_handler.setActiveClickable(sprite)
+
+                    // Stop another tower from being produced
+                    this.towerMenuLink.stopInteraction()
+
+                    function onPointerUp() {
+                        if (sprite.x >= 0 && sprite.y >= 0 && sprite.x < MAP_WIDTH && sprite.y < MAP_HEIGHT) sprite.dragging = false
+                        else this.cleanUpDraggableTower(sprite) // If out of map, remove it
+                    }
+                    // Remove existing behaviour, then add new behaviour
+                    sprite.removeAllListeners()
+                    sprite.on("pointerdown", () => { sprite.dragging = true })
+                    sprite.on("pointermove", this.onDragTower)
+                    sprite.on("pointerup", onPointerUp)
+                    sprite.on("pointerupoutside", onPointerUp)
+                    sprite.on("place", this.onPlaceTowerConfirm) // Custom event triggered by pressing the confirm button
+                    sprite.on("place", () => { this.cleanUpDraggableTower(sprite) })
+                }
             })
 
         sprite.range_subsprite.setParent(this.rangeSpriteContainer)
@@ -206,16 +225,23 @@ export class TowersComponent extends BaseComponent {
     }
 
     onPlaceTowerConfirm() {
-        this.range_subsprite.parent.removeChild(this.range_subsprite)
-        this.parent.removeChild(this) // TODO do we also need to rmove this sprite i.e. destroy()?
-        if (this.x >= 0 && this.y >= 0 && this.x < MAP_WIDTH && this.y < MAP_HEIGHT) {
-            sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(this))
-        }
+        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(this))
     }
 
     onPlaceTower() {
         if (this.x >= 0 && this.y >= 0 && this.x < MAP_WIDTH && this.y < MAP_HEIGHT) {
             sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, getTowerUpdateMsg(this))
+        } else {
+            this.range_subsprite.parent.removeChild(this.range_subsprite)
+            this.parent.removeChild(this)
         }
+    }
+
+    cleanUpDraggableTower(sprite) {
+        this.rangeSpriteContainer.removeChild(sprite.range_subsprite)
+        this.container.removeChild(sprite)
+        this.towerMenuLink.startInteraction()
+        this.infoToolbarLink.onTowerMenuPointerOff()
+        this.sprite_handler.unsetActiveClickable()
     }
 }
