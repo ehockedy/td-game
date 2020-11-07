@@ -81,10 +81,10 @@ export class TowersComponent extends BaseComponent {
         sprite
             .on("pointerover", ()=>{ // Display the information about the tower - this triggers as soon as tower appears
                 this.sprite_handler.unclickActiveClickable()
-                this.infoToolbarLink.onTowerMenuPointerOver(type)
+                this.infoToolbarLink.showTowerInfo(type)
             })
             .on("pointerout", ()=>{
-                this.infoToolbarLink.onTowerMenuPointerOff()
+                this.infoToolbarLink.hideTowerInfo()
                 this.container.removeChild(sprite) // remove it, since wasn't used
             })
             .on("pointerdown", () => { sprite.dragging = true })
@@ -150,13 +150,13 @@ export class TowersComponent extends BaseComponent {
                         if (this.sprite_handler.isActiveClickableSet()) this.sprite_handler.getActiveClickable().emit('clickoff') // Cancel current active clickable
                         this.sprite_handler.setActiveClickable(sprite) // Register this as the active object
                         sprite.range_subsprite.visible = true // Show the range circle
-                        this.infoToolbarLink.onDraggableTowerClick(type)
+                        this.infoToolbarLink.showPlacedTowerInfo(type)
                     }
                 })
                 .on('clickoff', ()=>{  // This is a custom event triggered manually
                     sprite.range_subsprite.visible = false
                     this.sprite_handler.unsetActiveClickable()
-                    this.infoToolbarLink.onDraggableTowerClickOff()
+                    this.infoToolbarLink.hidePlacedTowerInfo()
                 });
 
             sprite.range_subsprite = this.getTowerRangeGraphic(type)
@@ -251,7 +251,7 @@ export class TowersComponent extends BaseComponent {
         this.rangeSpriteContainer.removeChild(sprite.range_subsprite)
         this.container.removeChild(sprite)
         this.towerMenuLink.startInteraction()
-        this.infoToolbarLink.onTowerMenuPointerOff()
+        this.infoToolbarLink.hideTowerInfo()
         this.sprite_handler.unsetActiveClickable()
     }
 

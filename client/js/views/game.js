@@ -49,7 +49,6 @@ export class GameRenderer {
         this.map.registerContainer()
         this.tm.registerContainer()
         this.it.registerContainer()
-        this.it.registerSecondaryContainer()
         this.tc.registerRangeSpriteContainer()
         this.bc.registerContainer()
         this.tc.registerContainer()
