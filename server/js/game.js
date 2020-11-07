@@ -66,7 +66,7 @@ class Game {
 
             // Get a enemy to shoot at based on tower behaviour
             let chosenEnemy = null
-            if (tower.state.aimBehaviour == "last") { // Tower aims to the enemy furthest down the path
+            if (tower.state.aimBehaviour == "first") { // Tower aims to the enemy furthest down the path
                 for (let i = tower.shootRangePath.length-1; i >= 0; i--) {
                     let square = tower.shootRangePath[i]
                     let enemies = this.map.getEnemies(square.row, square.col)

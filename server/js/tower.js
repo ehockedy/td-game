@@ -40,7 +40,7 @@ class Tower {
             "shootRange": towerJson[type]["gameData"]["shootRange"], // How far bullet can travel once fired
             "bulletSpeed": towerJson[type]["gameData"]["bulletSpeed"],
             "damage": towerJson[type]["gameData"]["damage"],
-            "aimBehaviour": "last", // Furthest enemy, first enemy, etc.
+            "aimBehaviour": "first", // Which enemy to shoot at from all those in it's range
         }
     }
 

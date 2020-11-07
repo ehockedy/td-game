@@ -47,7 +47,7 @@ export class InfoToolbar extends BaseToolbarComponent {
         })
     }
 
-    getButton(width_px, height_px, x, y, col="0xAA88DD") {
+    getButton(width_px, height_px, x, y, message="", col="0xAA88DD") {
         let graphics = new PIXI.Graphics();
         graphics.beginFill(col)
         graphics.drawRect(0, 0, width_px, height_px)
@@ -56,6 +56,20 @@ export class InfoToolbar extends BaseToolbarComponent {
         graphics.visible = false
         graphics.interactive = true
         graphics.buttonMode = true
+
+        let defaultStyle = {
+            fontFamily: 'Arial',
+            fontSize: height_px * 0.8,
+            fontWeight: 'bold',
+            wordWrap: true,
+            wordWrapWidth: width_px * 0.8
+        }
+        let text = new PIXI.Text(message, defaultStyle);
+        text.anchor.set(0.5)
+        text.x = width_px/2
+        text.y = height_px/2
+
+        graphics.addChild(text)
         return graphics
     }
 
@@ -113,11 +127,11 @@ export class InfoToolbar extends BaseToolbarComponent {
 
     renderTowerAimButtons() {
         this.toolbarComponentsY += this.defaultYGap
-        let behaviours = ["last", "first", "fastest", "closest"]
+        let behaviours = ["first", "last", "fastest", "closest"]
         let buttonsPerRow = 2
         behaviours.forEach((behaviour, idx) => {
             this.toolbarComponentsY += (this.defaultYGap*((idx+1)%2))
-            let newButton =  this.getButton(55, 15, this.x + getPositionWithinEquallySpacedObjects(idx+1, buttonsPerRow, 32, this.width_px), this.toolbarComponentsY)
+            let newButton =  this.getButton(55, 15, this.x + getPositionWithinEquallySpacedObjects(idx+1, buttonsPerRow, 32, this.width_px), this.toolbarComponentsY, behaviour)
 
             let _this = this
             newButton.on("click", function () {
