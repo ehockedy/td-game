@@ -120,7 +120,7 @@ class Game {
     resolveInteractions() {
         // Check all relevant game objects and see how they interact
         // Check collision between enemies and bullets
-        this.map.forEachEnemy((enemy) => { // TODO forEachEnemyAndBullet
+        this.map.forEachEnemyInReverse((enemy) => { // TODO forEachEnemyAndBullet
             let bullets = this.map.map[enemy.position.row][enemy.position.col].bullets
             for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
                 let bullet = bullets[bIdx]
@@ -128,6 +128,11 @@ class Game {
                     enemy.isHit = true
                     enemy.hp -= bullet.damage
                     bullets.splice(bIdx, 1) // Remove that bullet
+                }
+
+                if (enemy.hp <= 0) { // Enemy has been killed
+                    this.map.removeEnemy(enemy)
+                    bullet.originTower.kills += 1
                 }
             }
         })
@@ -155,7 +160,7 @@ class Game {
      */
     addEnemy(distributionPattern, enemyType) {
         if (this.map.numEnemies < 1) {
-            this.map.addNewEnemy(new enemy.Enemy(10, 1, this.map.path))
+            this.map.addNewEnemy(new enemy.Enemy(30, 1, this.map.path))
             return
         }
         //if (this.counter > 30) return;
@@ -168,7 +173,7 @@ class Game {
         let speedRangeMax = 3
         // TODO create enemy types
         let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
-        this.map.addNewEnemy(new enemy.Enemy(10, randomSpeed, this.map.path))
+        this.map.addNewEnemy(new enemy.Enemy(30, randomSpeed, this.map.path))
     }
 
     addTower(name, type, owner, row, col) {
@@ -235,7 +240,8 @@ class Game {
                 "angle": t.angle,
                 "position": t.position,
                 "owner": t.owner,
-                "type": t.type
+                "type": t.type,
+                "kills": t.kills
             })
             hash.update(t.name)
         })

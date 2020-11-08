@@ -72,6 +72,10 @@ class Bullet {
     isOffMap() {
         return (this.x < 0 || this.y < 0 || this.x > config.SUBGRID_SIZE*config.MAP_WIDTH || this.y > config.SUBGRID_SIZE*config.MAP_HEIGHT)
     }
+
+    setOriginTower(originTower) {
+        this.originTower = originTower // Reference to the tower that shot the bullet
+    }
 }
 
 module.exports = {

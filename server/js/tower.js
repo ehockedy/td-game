@@ -75,6 +75,7 @@ class Tower {
             newBullets = this.shootFunction()
         }
         this.fireTick = (this.fireTick + 1) % this.state.rateOfFire
+        newBullets.forEach(bullet => bullet.setOriginTower(this))
         return newBullets
     }
 
