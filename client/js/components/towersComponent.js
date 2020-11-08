@@ -220,18 +220,17 @@ export class TowersComponent extends BaseComponent {
                 this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
                 this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
             }
+
+            // Also move range indicator to be same position as tower
+            this.range_subsprite.visible = true
+            this.range_subsprite.x = this.x
+            this.range_subsprite.y = this.y
         } else if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < APP_WIDTH && newPosition.y < APP_HEIGHT) {
             // Otherwise, update position normally
             this.x = newPosition.x
             this.y = newPosition.y
+            this.range_subsprite.visible = false
         }
-    
-        // Also move range indicator to be same position as tower
-        this.range_subsprite.visible = true
-        this.range_subsprite.x = this.x
-        this.range_subsprite.y = this.y
-
-        this.moved = true
     }
 
     onPlaceTowerConfirm() {
