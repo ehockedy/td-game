@@ -50,9 +50,9 @@ export class GameRenderer {
         this.tc.registerRangeSpriteContainer()
         this.tm.registerContainer()
         this.it.registerContainer()
-        this.bc.registerContainer()
         this.tc.registerContainer()
         this.ec.registerContainer()
+        this.bc.registerContainer()
 
         // Set up links between components that need them
         this.tc.setInfoToolbarLink(this.it)

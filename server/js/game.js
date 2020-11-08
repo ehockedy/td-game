@@ -109,6 +109,9 @@ class Game {
                 this.map.removeBulletPrevPos(bullet)
                 toAdd.push(bullet)
             }
+
+            // Do not display a bullet that is still "within" the tower
+            bullet.visible = !bullet.isWithinTowerInitialRange()
         })
 
         // Add the bullets to their new square
@@ -248,10 +251,12 @@ class Game {
         state["towers"]["hash"] = hash.digest("hex")
 
         this.map.forEachBullet((b) => {
-            state["bullets"]["objects"].push({
-                "name": b.name,
-                "position": b.position
-            })
+            if (b.visible) {
+                state["bullets"]["objects"].push({
+                    "name": b.name,
+                    "position": b.position
+                })
+            }
         })
 
         return state;

@@ -76,6 +76,13 @@ class Bullet {
     setOriginTower(originTower) {
         this.originTower = originTower // Reference to the tower that shot the bullet
     }
+
+    isWithinTowerInitialRange() {
+        return Math.sqrt(
+            Math.pow(this.position.x - this.bulletPosStart.x, 2) +
+            Math.pow(this.position.y - this.bulletPosStart.y, 2)
+        ) < config.SUBGRID_SIZE/3
+    }
 }
 
 module.exports = {
