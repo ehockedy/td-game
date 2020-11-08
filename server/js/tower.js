@@ -24,7 +24,6 @@ class Tower {
         this.y = position.y
         
         this.fireTick = 0 // Ticks since last bullet
-        this.kills = 0
         this.target
         this.shootFunction = this._getShootBehaviour(type)
         this.shootRangePath = [] // Main grid squares that the bullets can reach that are on the path
@@ -41,6 +40,11 @@ class Tower {
             "bulletSpeed": towerJson[type]["gameData"]["bulletSpeed"],
             "damage": towerJson[type]["gameData"]["damage"],
             "aimBehaviour": "first", // Which enemy to shoot at from all those in it's range
+        }
+
+        // Statistics about a tower that are sent to the client
+        this.stats = {
+            "kills": 0
         }
     }
 

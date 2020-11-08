@@ -132,7 +132,7 @@ class Game {
 
                 if (enemy.hp <= 0) { // Enemy has been killed
                     this.map.removeEnemy(enemy)
-                    bullet.originTower.kills += 1
+                    bullet.originTower.stats.kills += 1
                 }
             }
         })
@@ -241,7 +241,7 @@ class Game {
                 "position": t.position,
                 "owner": t.owner,
                 "type": t.type,
-                "kills": t.kills
+                "stats": t.stats
             })
             hash.update(t.name)
         })

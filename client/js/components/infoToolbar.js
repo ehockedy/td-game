@@ -36,6 +36,10 @@ export class InfoToolbar extends BaseToolbarComponent {
         let towerAimButtonsContainer = this.renderTowerAimButtons()
         this.placedTowerInfoContainer.addChild(towerAimButtonsContainer)
 
+        this.playerTowerStatsContainer = this.renderPlayerTowerStats() // This container is kept as a property of the class, since it needs to be referenced when updated
+        this.placedTowerInfoContainer.addChild(this.playerTowerStatsContainer)
+        this.playerTowerStatsContainer.y += towerAimButtonsContainer.getBounds().height + 15 //this.playerTowerStatsContainer.getBounds().height/2 + 10
+
         // Then hide them because shouldn't show up until towers are interacted with
         this.hideTowerInfo()
         this.hidePlacedTowerInfo()
@@ -199,6 +203,54 @@ export class InfoToolbar extends BaseToolbarComponent {
         return localContainer
     }
 
+    renderPlayerTowerStats() {
+        let localContainer = new PIXI.Container()
+        let defaultStyle = {
+            fontFamily: 'Arial',
+            fontSize: 16,
+            fontWeight: 'bold'
+        }
+        let text = new PIXI.Text("Tower Stats", defaultStyle);
+        text.anchor.set(0.5)
+        text.x = this.width_px/2 // TODO maybe do this up above when setting y for all?
+        localContainer.addChild(text)
+
+        let yOffset = 0
+        let xMargin = 10
+
+        // The stats that are sent from server. Need to link this up with the stats set in the tower class server side
+        let towerStats = {
+            "kills": 0
+        }
+
+        for (let key in towerStats) {
+            yOffset += 10
+
+            // Description title
+            let textValue = key.charAt(0).toUpperCase() + key.slice(1);
+            text = new PIXI.Text(textValue, defaultStyle);
+            text.x = Math.floor(xMargin)
+            text.y = Math.floor(yOffset)
+            text.name = key
+            text.type = "key"
+            text.style.fontSize = 14
+            localContainer.addChild(text);
+
+            // Description content - this is updated
+            text = new PIXI.Text(towerStats[key], defaultStyle);
+            text.x = Math.floor(this.width_px - xMargin)
+            text.y = Math.floor(yOffset)
+            text.anchor.set(1, 0) // Shift right
+            text.style.fontWeight = "normal"
+            text.style.fontSize = 14
+            text.name = key
+            text.type = "value"
+            localContainer.addChild(text);
+        }
+
+        return localContainer
+    }
+
     /**
      * The button that you press to confirm tower placement
      */
@@ -222,5 +274,18 @@ export class InfoToolbar extends BaseToolbarComponent {
         localContainer.addChild(cancelButton)
 
         return localContainer
+    }
+
+    update() {
+        if (this.sprite_handler.isActiveClickableSet()) {
+            let towerStats = this.sprite_handler.getActiveClickable().stats
+            for (let key in towerStats) {
+                this.playerTowerStatsContainer.children.forEach((statText) => {
+                    if (statText.name == key && statText.type == "value") {
+                        statText.text = towerStats[key].toString()
+                    }
+                })
+            }
+        }
     }
 }

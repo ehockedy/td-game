@@ -164,6 +164,9 @@ export class TowersComponent extends BaseComponent {
             sprite.range_subsprite.y = sprite.y
             sprite.range_subsprite.visible = false
             sprite.range_subsprite.setParent(this.rangeSpriteContainer)
+
+            // Sprite stats (custom properties)
+            sprite.kills = 0
         }
 
         sprite.setParent(this.container)
@@ -199,6 +202,11 @@ export class TowersComponent extends BaseComponent {
             let towerToUpdate = this.container.getChildByName(tower.name)
             towerToUpdate.rotation = tower.angle
             towerToUpdate.tint = this.randomColourCode // TODO store all player colours once
+
+            // Update the tower statsistics, but only store stats for towers a player owns
+            if (tower.owner == getUsername()) {
+                towerToUpdate.stats = tower.stats
+            }
         })
     }
 
