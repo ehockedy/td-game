@@ -11,11 +11,6 @@ export class SpriteHandler {
             width: APP_WIDTH,
             height: APP_HEIGHT
         });
-
-        const gameIDText = new PIXI.Text(getGameID());
-        gameIDText.x = 20;
-        gameIDText.y = 20;
-        this.app.stage.addChild(gameIDText);
     
         //Add the canvas that Pixi automatically created to the HTML document
         document.body.appendChild(this.app.view);
@@ -25,6 +20,11 @@ export class SpriteHandler {
     }
 
     render() {
+        const gameIDText = new PIXI.Text(getGameID());
+        gameIDText.x = 20;
+        gameIDText.y = 20;
+        this.app.stage.addChild(gameIDText);
+
         this.app.ticker.add(delta => this.gameLoop(delta))
     }
 
