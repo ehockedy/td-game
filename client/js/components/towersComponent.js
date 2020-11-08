@@ -84,6 +84,7 @@ export class TowersComponent extends BaseComponent {
                 this.infoToolbarLink.showTowerInfo(type)
             })
             .on("pointerout", ()=>{
+                sprite.dragging = false // Turn off, because sprite object still exists, so don't want to trigger movement options i.e. stop interaction
                 this.infoToolbarLink.hideTowerInfo()
                 this.container.removeChild(sprite) // remove it, since wasn't used
             })
