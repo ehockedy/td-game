@@ -103,14 +103,14 @@ export class TowersComponent extends BaseComponent {
                     sprite.interactive = true
 
                     let _this = this
-                    function onPointerUp() {
-                        if (sprite.x >= 0 && sprite.y >= 0 && sprite.x < MAP_WIDTH && sprite.y < MAP_HEIGHT) sprite.dragging = false
-                        else _this.cleanUpDraggableTower(sprite) // If out of map, remove it
-                    }
 
                     function finishedWithTower() {
                         _this.startInteraction()
                         _this.cleanUpDraggableTower(sprite)
+                    }
+                    function onPointerUp() {
+                        if (sprite.x >= 0 && sprite.y >= 0 && sprite.x < MAP_WIDTH && sprite.y < MAP_HEIGHT) sprite.dragging = false
+                        else finishedWithTower() // If out of map, remove it
                     }
 
                     // Remove existing behaviour, then add new behaviour
