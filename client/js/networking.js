@@ -18,7 +18,8 @@ const MSG_TYPES = {
     CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",
     NEW_GAME: "ng",
     JOIN_GAME: "jg",
-    CLIENT_DEBUG: "cd"
+    CLIENT_DEBUG: "cd",
+    ADD_PLAYER: "ap"
 }
 
 function getTowerUpdateMsg(tower) {
@@ -27,7 +28,7 @@ function getTowerUpdateMsg(tower) {
         "x": tower.gridX,
         "value": {
             "type": tower.type,
-            "owner": tower.owner,
+            "playerID": tower.playerID,
             "colour": "0xCC2211",
             "name": tower.name
         },
@@ -59,6 +60,10 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
     setState(data);
     game.update(data)
 });
+
+socket.on(MSG_TYPES.ADD_PLAYER, (data) => {
+    game.addPlayer(data)
+})
 
 function sendNewGameMessage(data) {
     // load the assets into shared loader, then construct game view and send message to start

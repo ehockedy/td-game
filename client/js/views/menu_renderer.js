@@ -1,6 +1,6 @@
 import { randomAlphaCharString } from "../tools.js"
 import { MSG_TYPES, sendMessage, sendMessageGetAck, sendNewGameMessage } from "../networking.js"
-import { setGameID } from "../state.js"
+import { setGameID, getUsername } from "../state.js"
 
 
 const GAME_CODE_LEN = 4 // 4 is random enough, and easy to remember
@@ -116,7 +116,8 @@ function onButtonStopHover() {
 function onStartButtonClick() {
     let gameID = randomAlphaCharString(GAME_CODE_LEN)
     let data = {
-        "gameID": gameID
+        "gameID": gameID,
+        "playerID": getUsername()
     }
     setGameID(gameID)
     sendNewGameMessage(data)
@@ -197,7 +198,8 @@ function logKey(e) {
         sendMessageGetAck(
             MSG_TYPES.JOIN_GAME,
             {
-                "gameID": joinGamePopUpContainer.getChildByName("popupText").text
+                "gameID": joinGamePopUpContainer.getChildByName("popupText").text,
+                "playerID": getUsername()
             }
         ).then(function(resolveVal) {
             if (resolveVal["response"] == "fail") { // Game does not exist

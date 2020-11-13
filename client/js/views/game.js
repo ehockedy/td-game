@@ -2,10 +2,11 @@ import { SpriteHandler } from "../sprite_handler.js"
 import { MapComponent } from "../components/map.js"
 import { TowerMenu } from "../components/towerMenu.js"
 import { InfoToolbar } from "../components/infoToolbar.js"
+import { PlayersToolbar } from "../components/playersToolbar.js"
 import { TowersComponent } from "../components/towersComponent.js"
 import { EnemiesComponent } from "../components/enemiesComponent.js"
 import { BulletsComponent } from "../components/bulletsComponent.js"
-import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH } from "../constants.js"
+import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT } from "../constants.js"
 
 /**
  * This class sets up what will appear in the game view.
@@ -17,6 +18,7 @@ export class GameRenderer {
         this.map = new MapComponent(this.spriteHandler)
         this.tm = new TowerMenu(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, 0)
         this.it = new InfoToolbar(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, RIGHT_TOOLBAR_HEIGHT)
+        this.ut = new PlayersToolbar(this.spriteHandler, MAP_WIDTH, BOTTOM_TOOLBAR_HEIGHT, 0, MAP_HEIGHT)
         this.tc = new TowersComponent(this.spriteHandler)
         this.ec = new EnemiesComponent(this.spriteHandler)
         this.bc = new BulletsComponent(this.spriteHandler)
@@ -50,6 +52,7 @@ export class GameRenderer {
         this.tc.registerRangeSpriteContainer()
         this.tm.registerContainer()
         this.it.registerContainer()
+        this.ut.registerContainer()
         this.tc.registerContainer()
         this.ec.registerContainer()
         this.bc.registerContainer()
@@ -69,7 +72,12 @@ export class GameRenderer {
         this.tc.update(serverUpdate["towers"])
         this.ec.update(serverUpdate["enemies"])
         this.bc.update(serverUpdate["bullets"])
+        this.ut.update(serverUpdate["players"])
         this.it.update()
+    }
+
+    addPlayer(playerInfo) {
+        this.ut.addPlayer(playerInfo)
     }
 
 }

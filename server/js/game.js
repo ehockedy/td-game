@@ -2,7 +2,7 @@ const config = require('./constants.js')
 const crypto = require('crypto');
 const enemy = require("./enemies.js");
 const gameMap = require('./map.js');
-const tools = require('./tools.js')
+const playerImport = require('./player.js')
 const towerImport = require("./tower.js");
 const point = require('./point.js');
 
@@ -20,6 +20,7 @@ const TOWER_TYPE = {
 class Game {
     constructor(mapX, mapY, subGridXY) {
         this.towers = []
+        this.players = []
         this.map = new gameMap.GameMap(mapY, mapX, subGridXY)
         this.map.printMap()
 
@@ -135,7 +136,7 @@ class Game {
 
                 if (enemy.hp <= 0) { // Enemy has been killed
                     this.map.removeEnemy(enemy)
-                    bullet.originTower.stats.kills += 1
+                    bullet.originTower.registerKill()
                 }
             }
         })
@@ -179,10 +180,41 @@ class Game {
         this.map.addNewEnemy(new enemy.Enemy(30, randomSpeed, this.map.path))
     }
 
-    addTower(name, type, owner, row, col) {
-        let newTower = new towerImport.Tower(name, type, owner, new point.Point(col, row, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT))
-        newTower.calculateShootPath(this.map.mainPath)
-        this.towers.push(newTower)
+    addTower(name, type, playerID, row, col) {
+        try {
+            let newPlayer = this.getPlayerByName(playerID)
+            let newTower = new towerImport.Tower(name, type, newPlayer, new point.Point(col, row, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT))
+            newTower.calculateShootPath(this.map.mainPath)
+            this.towers.push(newTower)
+        } catch (exception) {
+            console.log("Tower was unable to be added - player", playerID, "not found")
+        }
+    }
+
+    addPlayer(playerID) {
+        let newPlayer = new playerImport.Player(playerID, this.players.length)
+        this.players.push(newPlayer)
+    }
+
+    getPlayerByName(playerID) {
+        for (let playerIdx=0; playerIdx < this.players.length; playerIdx+=1) {
+            if (this.players[playerIdx].id == playerID) {
+                return this.players[playerIdx]
+            }
+        }
+        throw new Error("Player not found")
+    }
+
+    getPlayerInfo(playerID) {
+        try {
+            let requestedPlayer = this.getPlayerByName(playerID)
+            return {
+                "playerID": requestedPlayer.id,
+                "index": requestedPlayer.index
+            }
+        } catch (exception) {
+            return {}
+        }
     }
 
     updateTower(name, update) {
@@ -221,6 +253,9 @@ class Game {
             },
             "bullets" : {
                 "objects": []
+            },
+            "players": {
+                "objects": []
             }
         }
 
@@ -242,7 +277,7 @@ class Game {
                 "name": t.name,
                 "angle": t.angle,
                 "position": t.position,
-                "owner": t.owner,
+                "playerID": t.player.id,
                 "type": t.type,
                 "stats": t.stats
             })
@@ -257,6 +292,14 @@ class Game {
                     "position": b.position
                 })
             }
+        })
+
+        this.players.forEach((player) => {
+            state["players"]["objects"].push({
+                "playerID": player.id,
+                "index": player.index,
+                "stats": player.stats
+            })
         })
 
         return state;

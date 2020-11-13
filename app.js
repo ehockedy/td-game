@@ -30,7 +30,8 @@ const MSG_TYPES = {
   CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",
   NEW_GAME: "ng",
   JOIN_GAME: "jg",
-  CLIENT_DEBUG: "cd"
+  CLIENT_DEBUG: "cd",
+  ADD_PLAYER: "ap"
 }
 
 // First set up http server to serve index.html and its included files
@@ -68,7 +69,9 @@ web_sockets_server.on('connection', (socket) => {
     if (!(gameID in rooms)) {
       console.log("New room created")
       rooms[gameID] = {}
-      rooms[gameID]["game"] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE),
+      rooms[gameID]["game"] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
+      console.log(data)
+      rooms[gameID]["game"].addPlayer(data["playerID"])
       rooms[gameID]["players"] = {}
       rooms[gameID]["players"][clientAddr] = socket
     }
@@ -81,6 +84,7 @@ web_sockets_server.on('connection', (socket) => {
     console.log(rooms)
 
     socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+    socket.emit(MSG_TYPES.ADD_PLAYER, rooms[gameID]["game"].getPlayerInfo(data["playerID"]))
     socket.emit(MSG_TYPES.GAME_START)
     updateGameAndSend(gameID)
     setInterval(updateGameAndSend,50*0.2, gameID); // 20 "fps"
@@ -100,6 +104,7 @@ web_sockets_server.on('connection', (socket) => {
     } else {
       console.log("Game found")
       rooms[gameID]["players"][clientAddr] = socket
+      rooms[gameID]["game"].addPlayer(data["playerID"])
       callback({
         response: "success"
       })
@@ -107,6 +112,8 @@ web_sockets_server.on('connection', (socket) => {
       // Tell new player about the map
       // TODO this is same msg type as L119 but different num of args
       socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+
+      socket.emit(MSG_TYPES.ADD_PLAYER, rooms[gameID]["game"].getPlayerInfo(data["playerID"]))
 
       // TODO wait for above to be done?
       socket.emit(MSG_TYPES.GAME_START)
@@ -124,7 +131,7 @@ web_sockets_server.on('connection', (socket) => {
     console.log("Writing board change from client")
     rooms[gameID]["game"].map.setGridValue(data["y"], data["x"], data["value"], "tower") // row, col, value
     console.log("DATA", data)
-    rooms[gameID]["game"].addTower(data["towerName"], data["value"]["type"], data["value"]["owner"], data["y"], data["x"])
+    rooms[gameID]["game"].addTower(data["towerName"], data["value"]["type"], data["value"]["playerID"], data["y"], data["x"])
     for (host in rooms[gameID]["players"]) {
       // TODO dont need the dimension args
       rooms[gameID]["players"][host].emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)

@@ -10,10 +10,10 @@ class Tower {
      * A player owned object that shoots at enemies
      * @param {String} type Unique name of tower assigned by client
      * @param {Number} type Type of tower
-     * @param {String} owner Who the tower belongs to
+     * @param {String} player Who the tower belongs to
      * @param {Point} position Point object that described the position in global and grid/subgrid coordinates
      */
-    constructor(name, type, owner, position) {
+    constructor(name, type, player, position) {
         this.name = name;
         this.type = type
 
@@ -29,7 +29,7 @@ class Tower {
         this.shootRangePath = [] // Main grid squares that the bullets can reach that are on the path
         this.angle = 0 // Angle in radians, 0 is East, goes clockwise
         this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
-        this.owner = owner // The owner who owns the tower
+        this.player = player // The player who owns the tower
 
 
         // These values can change based on user actions
@@ -68,6 +68,11 @@ class Tower {
         updates.forEach((update) => {
             this.state[update.property] = update.newValue
         })
+    }
+
+    registerKill() {
+        this.stats.kills += 1
+        this.player.registerKill()
     }
 
     /**

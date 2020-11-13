@@ -67,7 +67,7 @@ export class TowersComponent extends BaseComponent {
         sprite.name = randomHexString(6)
         sprite.dragging = false
         sprite.type = type
-        sprite.owner = getUsername()
+        sprite.playerID = getUsername()
         sprite.x = x
         sprite.y = y
 
@@ -130,17 +130,17 @@ export class TowersComponent extends BaseComponent {
         sprite.setParent(this.container)
     }
 
-    addPlacedTower(type, name, owner, row, col) {
+    addPlacedTower(type, name, playerID, row, col) {
         let sprite = this.getTowerSprite(type)
         sprite.name = name
-        sprite.owner = owner
+        sprite.playerID = playerID
 
         sprite.gridX = col
         sprite.gridY = row
         sprite.x = sprite.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
         sprite.y = sprite.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
 
-        if (owner == getUsername()) { // Only make the tower interactive if the user placed it
+        if (playerID == getUsername()) { // Only make the tower interactive if the user placed it
             sprite.interactive = true; // reponds to mouse and touch events
             sprite.buttonMode = true; // hand cursor appears when hover over
             sprite
@@ -191,7 +191,7 @@ export class TowersComponent extends BaseComponent {
                 if (!found) {
                     this.addPlacedTower(towerStateObjects[nameIdx].type,
                         towerStateObjects[nameIdx].name,
-                        towerStateObjects[nameIdx].owner,
+                        towerStateObjects[nameIdx].playerID,
                         towerStateObjects[nameIdx].position.row,
                         towerStateObjects[nameIdx].position.col)
                 }
@@ -202,10 +202,10 @@ export class TowersComponent extends BaseComponent {
         towerStateObjects.forEach((tower) => {
             let towerToUpdate = this.container.getChildByName(tower.name)
             towerToUpdate.rotation = tower.angle
-            towerToUpdate.tint = this.randomColourCode // TODO store all player colours once
+            towerToUpdate.tint = this.randomColourCode // TODO store all playerID colours once
 
-            // Update the tower statsistics, but only store stats for towers a player owns
-            if (tower.owner == getUsername()) {
+            // Update the tower statsistics, but only store stats for towers a playerID owns
+            if (tower.playerID == getUsername()) {
                 towerToUpdate.stats = tower.stats
             }
         })
