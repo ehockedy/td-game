@@ -36,7 +36,6 @@ const MSG_TYPES = {
 
 // First set up http server to serve index.html and its included files
 const http_server = http.createServer(networking.requestListener);
-
 http_server.listen(8000, () => {
    console.log('HTTP server listening on ' + listeningAddress + ':8000');
 });
@@ -44,78 +43,56 @@ http_server.listen(8000, () => {
 // From then on can connect over WebSocket using socket.io client
 const web_sockets_server = io(http_server)
 
-// Keep track of current connections
-let rooms = {}
+// Keep track of current games
+let games = {}
 
 // Main processing loop
-// Updates the game state and sends the update to all connected clients
-function updateGameAndSend(room) {
-  new_state = rooms[room]["game"].updateGameState()
-  //console.log(new_state)
-  for (host in rooms[room]["players"]) {
-    rooms[room]["players"][host].emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
-  }
+// Updates the game state and sends the update to all connected clients in that game room
+function updateGameAndSend(gameID) {
+  let new_state = games[gameID].updateGameState()
+  web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
 }
 
 web_sockets_server.on('connection', (socket) => {
-  socket.on(MSG_TYPES.NEW_GAME, (data) => {
-    console.log(data)
 
-    let clientAddr = socket["handshake"]["address"]
-    let gameID = data["gameID"]
+  // New game event
+  // Player has started a new game. Create a room with the game ID and send that client the game info.
+  socket.on(MSG_TYPES.NEW_GAME, (data) => {
+    let clientAddr = socket.handshake.address
     console.log("Client " + clientAddr + " connected")
 
-    // Create room if does not exist
-    if (!(gameID in rooms)) {
-      console.log("New room created")
-      rooms[gameID] = {}
-      rooms[gameID]["game"] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
-      console.log(data)
-      rooms[gameID]["game"].addPlayer(data["playerID"])
-      rooms[gameID]["players"] = {}
-      rooms[gameID]["players"][clientAddr] = socket
-    }
+    let gameID = data.gameID
+    socket.join(gameID)
+    games[gameID] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
+    games[gameID].addPlayer(data.playerID)
 
-    // Add player to that room if they are not already in
-    if (!(clientAddr in rooms[gameID]["players"])) {
-      rooms[gameID]["players"][clientAddr] = socket
-    }
-
-    console.log(rooms)
-
-    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
-    socket.emit(MSG_TYPES.ADD_PLAYER, rooms[gameID]["game"].getPlayerInfo(data["playerID"]))
+    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+    socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(data.playerID))
     socket.emit(MSG_TYPES.GAME_START)
-    updateGameAndSend(gameID)
-    setInterval(updateGameAndSend,50*0.2, gameID); // 20 "fps"
+
+    setInterval(updateGameAndSend, 50*0.2, gameID); // 20 "fps"
   });
 
+  // Join game event
+  // Check if game exists, add it and send info if so, send failure message if not
   socket.on(MSG_TYPES.JOIN_GAME, (data, callback) => {
-    console.log(data)
-    let clientAddr = socket["handshake"]["address"]
-    let gameID = data["gameID"]
+    let clientAddr = socket.handshake.address
+    let gameID = data.gameID
     console.log("Client " + clientAddr + " attempting to join game " + gameID)
 
-    if (!(gameID in rooms)) {
+    if (!(gameID in games)) {
       console.log("Game does not exist")
-      callback({
-        response: "fail"
-      })
+      callback({ response: "fail" })
     } else {
       console.log("Game found")
-      rooms[gameID]["players"][clientAddr] = socket
-      rooms[gameID]["game"].addPlayer(data["playerID"])
-      callback({
-        response: "success"
-      })
+      socket.join(gameID)
+      games[gameID].addPlayer(data.playerID)
+      callback({ response: "success" })
 
       // Tell new player about the map
       // TODO this is same msg type as L119 but different num of args
-      socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
-
-      socket.emit(MSG_TYPES.ADD_PLAYER, rooms[gameID]["game"].getPlayerInfo(data["playerID"]))
-
-      // TODO wait for above to be done?
+      socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+      socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(data.playerID))
       socket.emit(MSG_TYPES.GAME_START)
     }
   })
@@ -125,17 +102,13 @@ web_sockets_server.on('connection', (socket) => {
     // TODO broadcast temporary position to other connected clients
   });
 
+  // Player has confirmed placement of tower
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data) => {
-    let clientAddr = socket["handshake"]["address"]
-    let gameID = data["gameID"]
-    console.log("Writing board change from client")
-    rooms[gameID]["game"].map.setGridValue(data["y"], data["x"], data["value"], "tower") // row, col, value
-    console.log("DATA", data)
-    rooms[gameID]["game"].addTower(data["towerName"], data["value"]["type"], data["value"]["playerID"], data["y"], data["x"])
-    for (host in rooms[gameID]["players"]) {
-      // TODO dont need the dimension args
-      rooms[gameID]["players"][host].emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, rooms[gameID]["game"].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
-    }
+    let gameID = data.gameID
+    games[gameID].map.setGridValue(data.y, data.x, data.value, "tower")
+    games[gameID].addTower(data.towerName, data.value.type, data.value.playerID, data.y, data.x)
+    // TODO dont need the dimension args
+    web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
   });
 
   /**
@@ -150,9 +123,9 @@ web_sockets_server.on('connection', (socket) => {
    * }
    */
   socket.on(MSG_TYPES.CLIENT_UPDATE, (data) => {
-    let gameID = data["gameID"]
-    if (data["resource"] == "tower") {
-      rooms[gameID]["game"].updateTower(data["name"], data["updates"])
+    let gameID = data.gameID
+    if (data.resource == "tower") {
+      games[gameID].updateTower(data.name, data.updates)
     }
   })
 
