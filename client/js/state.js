@@ -1,5 +1,3 @@
-import { randomHexString } from "./tools.js"
-
 // State variables accessible for multiple parts of the client
 // They may be updated as the game goes on
 let state = {}
@@ -9,9 +7,7 @@ let mapHeight
 let subGridSize // Same as height
 let gameID
 let playerStates = [{}]
-
-// Random user name TODO let them pick
-let username = randomHexString(6)
+let userID
 
 // Setters
 export function setState(new_state) {
@@ -30,8 +26,8 @@ export function setGameID(id) {
     gameID = id
 }
 
-export function setUsername(name) {
-    username = name
+export function setUserID(name) {
+    userID = name
 }
 
 /**
@@ -66,6 +62,6 @@ export function getGameID() {
     return gameID
 }
 
-export function getUsername() {
-    return username;
+export function getUserID() {
+    return userID;
 }

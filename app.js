@@ -75,13 +75,15 @@ function addPlayer(socket, gameID, playerID) {
 }
 
 web_sockets_server.on('connection', (socket) => {
-
   // New game event
   // Player has started a new game. Create a room with the game ID and send that client the game info.
   socket.on(MSG_TYPES.NEW_GAME, (data) => {
     console.log("Client " + socket.handshake.address + " starting game " + data.gameID)
+    socket.gameID = data.gameID
+    socket.playerID = socket.handshake.address + data.gameID
+
     games[data.gameID] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
-    addPlayer(socket, data.gameID, data.playerID)
+    addPlayer(socket, socket.gameID, socket.playerID)
     socket.emit(MSG_TYPES.GAME_START)
     setInterval(updateGameAndSend, 50*0.2, data.gameID); // 20 "fps"
   });
@@ -101,7 +103,10 @@ web_sockets_server.on('connection', (socket) => {
   // Does not check if game exists
   socket.on(MSG_TYPES.JOIN_GAME, (data) => {
     console.log("Client " + socket.handshake.address + " joining game " + data.gameID)
-    addPlayer(socket, data.gameID, data.playerID)
+    socket.gameID = data.gameID
+    socket.playerID = socket.handshake.address + data.gameID
+
+    addPlayer(socket, socket.gameID, socket.playerID)
     socket.emit(MSG_TYPES.GAME_START)
   })
 
@@ -114,7 +119,7 @@ web_sockets_server.on('connection', (socket) => {
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data) => {
     let gameID = data.gameID
     games[gameID].map.setGridValue(data.y, data.x, data.value, "tower")
-    games[gameID].addTower(data.towerName, data.value.type, data.value.playerID, data.y, data.x)
+    games[gameID].addTower(data.towerName, data.value.type, socket.handshake.address+data.gameID, data.y, data.x)
     // TODO dont need the dimension args
     web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
   });
@@ -139,6 +144,10 @@ web_sockets_server.on('connection', (socket) => {
 
   socket.on(MSG_TYPES.CLIENT_DEBUG, (data) => {
     console.log(data)
+  })
+
+  socket.on('disconnect', function() {
+    console.log("DISCONNCETED", socket.playerID)
   })
 });
 

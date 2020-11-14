@@ -1,6 +1,6 @@
 import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_WIDTH, APP_HEIGHT, MAP_WIDTH, MAP_HEIGHT } from "../constants.js"
 import { randomHexString } from "../tools.js"
-import { getUsername, getBoard } from "../state.js"
+import { getUserID, getBoard } from "../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
 import { sendMessage, getTowerUpdateMsg, MSG_TYPES } from "../networking.js"
 
@@ -27,7 +27,6 @@ export class TowersComponent extends BaseComponent {
                 let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
                 _this.towerJson.forEach((tower)=> {
                     _this.towerSpriteSheetData.push([new PIXI.Texture(texture, new PIXI.Rectangle(0, DEFAULT_SPRITE_SIZE_Y * tower["spriteSheetNum"], DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y))])
-
                 })
                 resolve()
             })
@@ -72,7 +71,6 @@ export class TowersComponent extends BaseComponent {
         sprite.name = randomHexString(6)
         sprite.dragging = false
         sprite.type = type
-        sprite.playerID = getUsername()
         sprite.x = x
         sprite.y = y
 
@@ -145,7 +143,7 @@ export class TowersComponent extends BaseComponent {
         sprite.x = sprite.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
         sprite.y = sprite.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
 
-        if (playerID == getUsername()) { // Only make the tower interactive if the user placed it
+        if (playerID == getUserID()) { // Only make the tower interactive if the user placed it
             sprite.interactive = true; // reponds to mouse and touch events
             sprite.buttonMode = true; // hand cursor appears when hover over
             sprite
@@ -210,7 +208,7 @@ export class TowersComponent extends BaseComponent {
             towerToUpdate.tint = this.randomColourCode // TODO store all playerID colours once
 
             // Update the tower statsistics, but only store stats for towers a playerID owns
-            if (tower.playerID == getUsername()) {
+            if (tower.playerID == getUserID()) {
                 towerToUpdate.stats = tower.stats
             }
         })

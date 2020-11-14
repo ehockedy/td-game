@@ -7,6 +7,7 @@ import { TowersComponent } from "../components/towersComponent.js"
 import { EnemiesComponent } from "../components/enemiesComponent.js"
 import { BulletsComponent } from "../components/bulletsComponent.js"
 import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT } from "../constants.js"
+import { setUserID } from "../state.js"
 
 /**
  * This class sets up what will appear in the game view.
@@ -79,6 +80,7 @@ export class GameRenderer {
     }
 
     addPlayer(playerInfo) {
+        setUserID(playerInfo.playerID)
         this.ut.addPlayer(playerInfo)
     }
 
