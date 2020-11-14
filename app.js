@@ -92,7 +92,15 @@ web_sockets_server.on('connection', (socket) => {
       // Tell new player about the map
       // TODO this is same msg type as L119 but different num of args
       socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
-      socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(data.playerID))
+
+      // Tell all other players about this new player
+      socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(data.playerID))
+
+      // Tell this player about all players (including itself)
+      games[gameID].forEachPlayer((player)=>{
+        socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(player.id))
+      })
+
       socket.emit(MSG_TYPES.GAME_START)
     }
   })

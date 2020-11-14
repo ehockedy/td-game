@@ -217,6 +217,12 @@ class Game {
         }
     }
 
+    forEachPlayer(callback) {
+        this.players.forEach((player) => {
+            callback(player)
+        })
+    }
+
     updateTower(name, update) {
         this.towers.forEach((tower) => {
             if (tower.name == name) {

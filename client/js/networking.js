@@ -8,7 +8,7 @@ import { GameRenderer} from "./views/game.js"
 // MUST keep these synced with enum in server
 // Shared file did not work due to inconsistency with import/require in browser/node
 // See https://socket.io/docs/emit-cheatsheet/ for list of words that should not be used
-const MSG_TYPES = {
+export const MSG_TYPES = {
     CONNECT: "client connection",
     GAME_START: "game start",
     SERVER_UPDATE_GAME_STATE: "server update game state",
@@ -22,7 +22,7 @@ const MSG_TYPES = {
     ADD_PLAYER: "ap"
 }
 
-function getTowerUpdateMsg(tower) {
+export function getTowerUpdateMsg(tower) {
     return {
         "y": tower.gridY,
         "x": tower.gridX,
@@ -65,7 +65,7 @@ socket.on(MSG_TYPES.ADD_PLAYER, (data) => {
     game.addPlayer(data)
 })
 
-function sendNewGameMessage(data) {
+export function sendNewGameMessage(data) {
     // load the assets into shared loader, then construct game view and send message to start
     game = new GameRenderer()
     game.loadAssets().then(()=>{
@@ -73,23 +73,26 @@ function sendNewGameMessage(data) {
     })
 }
 
-function sendMessage(msgType, data) {
+export function sendMessage(msgType, data) {
     socket.emit(msgType, data)
 }
 
-function sendMessageGetAck(msgType, data) {
+export function sendJoinGameMessage(msgType, data) {
     return new Promise((resolve, reject) => {
-        let done = false
-        socket.emit(msgType, data, function (response) {
-            resolve(response)
-            done = true
+        game = new GameRenderer()
+        game.loadAssets().then(()=>{
+            let done = false
+            socket.emit(msgType, data, function (response) {
+                resolve(response)
+                done = true
+            })
+            setTimeout(() => {
+                if (done) return;
+                else reject({
+                    response: "timeout"
+                });
+            }, 2000); // 2s
         })
-        setTimeout(() => {
-            if (done) return;
-            else reject({
-                response: "timeout"
-            });
-          }, 2000); // 2s
     })
 }
 
@@ -101,5 +104,3 @@ export function sendResourceUpdateMessage(resourceType, name, propertyUpdateArra
         "updates": propertyUpdateArray
     })
 }
-
-export { MSG_TYPES, sendMessage, sendNewGameMessage, sendMessageGetAck, getTowerUpdateMsg }

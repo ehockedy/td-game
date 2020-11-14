@@ -1,5 +1,5 @@
 import { randomAlphaCharString } from "../tools.js"
-import { MSG_TYPES, sendMessage, sendMessageGetAck, sendNewGameMessage } from "../networking.js"
+import { MSG_TYPES, sendMessage, sendJoinGameMessage, sendNewGameMessage } from "../networking.js"
 import { setGameID, getUsername } from "../state.js"
 
 
@@ -195,7 +195,7 @@ function logKey(e) {
 
         joinGamePopUpContainer.getChildByName("popupInfoText").text = "Searching for game..."
 
-        sendMessageGetAck(
+        sendJoinGameMessage(
             MSG_TYPES.JOIN_GAME,
             {
                 "gameID": joinGamePopUpContainer.getChildByName("popupText").text,
