@@ -1,5 +1,5 @@
 import { randomAlphaCharString } from "../tools.js"
-import { MSG_TYPES, sendMessage, sendJoinGameMessage, sendNewGameMessage } from "../networking.js"
+import { MSG_TYPES, sendMessage, sendJoinGameMessage, sendNewGameMessage, sendMessageGetAck } from "../networking.js"
 import { setGameID, getUsername } from "../state.js"
 
 
@@ -183,29 +183,35 @@ function onCodeBoxTap() {
 function logKey(e) {
     const regex = RegExp('^[a-zA-z0-9]$'); // Only a single characters or number
     sendMessage(  MSG_TYPES.CLIENT_DEBUG,  [e.key, e.code]  )
+
+    let userInput = joinGamePopUpContainer.getChildByName("popupText").text
     if (regex.test(e.key)) {
-        if (joinGamePopUpContainer.getChildByName("popupText").text.length < GAME_CODE_LEN) {
+        if (userInput.length < GAME_CODE_LEN) {
             joinGamePopUpContainer.getChildByName("popupText").text += e.key.toUpperCase()
         }
     } else if (e.key == "Enter") { // Enter confirms the code and attempts to join game (if code valie and game exists)
-        if (joinGamePopUpContainer.getChildByName("popupText").text.length < GAME_CODE_LEN) {
-            joinGamePopUpContainer.getChildByName("popupInfoText").text = "Error: game code must be " + GAME_CODE_LEN.toString() + " characters"
+        if (userInput.length < GAME_CODE_LEN) {
+            joinGamePopUpContainer.getChildByName("popupInfoText").text = "Error: game code must be " + GAME_CODE_LEN.toString() + " characters long"
             return
         }
 
         joinGamePopUpContainer.getChildByName("popupInfoText").text = "Searching for game..."
 
-        sendJoinGameMessage(
-            MSG_TYPES.JOIN_GAME,
+        sendMessageGetAck(MSG_TYPES.CHECK_GAME,
             {
-                "gameID": joinGamePopUpContainer.getChildByName("popupText").text,
-                "playerID": getUsername()
+                "gameID": userInput
             }
         ).then(function(resolveVal) {
             if (resolveVal["response"] == "fail") { // Game does not exist
                 joinGamePopUpContainer.getChildByName("popupInfoText").text = "Game not found"
             } else if (resolveVal["response"] == "success") { // Game exists
-                setGameID(joinGamePopUpContainer.getChildByName("popupText").text)
+                sendJoinGameMessage(
+                    {
+                        "gameID": userInput,
+                        "playerID": getUsername()
+                    }
+                )
+                setGameID(userInput)
                 joinGamePopUpContainer.removeChildren() // TODO make not visible?
                 document.removeEventListener('keydown', logKey);
             }
@@ -215,7 +221,7 @@ function logKey(e) {
             }
         })
     } else if (e.key == "Backspace") {
-        joinGamePopUpContainer.getChildByName("popupText").text = joinGamePopUpContainer.getChildByName("popupText").text.slice(0, -1)
+        joinGamePopUpContainer.getChildByName("popupText").text = userInput.slice(0, -1)
     } else if (e.key == "Escape") {
         // TODO make these a "close join menu" option (since used above)
         joinGamePopUpContainer.removeChildren() // TODO make not visible?

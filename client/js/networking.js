@@ -18,6 +18,7 @@ export const MSG_TYPES = {
     CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",
     NEW_GAME: "ng",
     JOIN_GAME: "jg",
+    CHECK_GAME: "cg",
     CLIENT_DEBUG: "cd",
     ADD_PLAYER: "ap"
 }
@@ -69,7 +70,17 @@ export function sendNewGameMessage(data) {
     // load the assets into shared loader, then construct game view and send message to start
     game = new GameRenderer()
     game.loadAssets().then(()=>{
+        console.log("new game starting")
         sendMessage(MSG_TYPES.NEW_GAME, data)
+    })
+}
+
+export function sendJoinGameMessage(data) {
+    // load the assets into shared loader, then construct game view and send message to start
+    console.log(data)
+    game = new GameRenderer()
+    game.loadAssets().then(()=>{
+        sendMessage(MSG_TYPES.JOIN_GAME, data)
     })
 }
 
@@ -77,22 +88,19 @@ export function sendMessage(msgType, data) {
     socket.emit(msgType, data)
 }
 
-export function sendJoinGameMessage(msgType, data) {
+export function sendMessageGetAck(msgType, data) {
     return new Promise((resolve, reject) => {
-        game = new GameRenderer()
-        game.loadAssets().then(()=>{
-            let done = false
-            socket.emit(msgType, data, function (response) {
-                resolve(response)
-                done = true
-            })
-            setTimeout(() => {
-                if (done) return;
-                else reject({
-                    response: "timeout"
-                });
-            }, 2000); // 2s
+        let done = false
+        socket.emit(msgType, data, function (response) {
+            resolve(response)
+            done = true
         })
+        setTimeout(() => {
+            if (done) return;
+            else reject({
+                response: "timeout"
+            });
+        }, 2000); // 2s
     })
 }
 

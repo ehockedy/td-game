@@ -26,6 +26,7 @@ export class SpriteHandler {
         this.app.stage.addChild(gameIDText);
 
         this.app.ticker.add(delta => this.gameLoop(delta))
+        console.log("Rendering")
     }
 
     gameLoop() {}
