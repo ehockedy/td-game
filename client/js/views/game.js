@@ -29,7 +29,7 @@ export class GameRenderer {
         let _tc = this.tc
         let _it = this.it
         let _ec = this.ec
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve)=>{
             // Load sprite assets
             PIXI.Loader.shared
                 .add("client/img/map_spritesheet.png")
@@ -37,13 +37,9 @@ export class GameRenderer {
                 .add("client/img/tower_spritesheet.png")
                 .add("client/img/bullet_spritesheet.png")
                 .load(function() {
-                    // Then load tower json
-                    _tc.loadData().then(
-                    _it.loadData().then(
-                    _ec.loadData().then(
-                        // Then can resolve this call and start the game
-                        resolve
-                    )))
+                    // Load component data and textures
+                    Promise.all([_tc.loadData(), _it.loadData(), _ec.loadData()])
+                    .then(resolve)
                 })
         })
     }

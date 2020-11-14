@@ -13,14 +13,13 @@ export class InfoToolbar extends BaseToolbarComponent {
 
     loadData() {
         let _this = this
-        let p = new Promise((resolve) => {
+        return new Promise((resolve) => {
             $.getJSON("shared/json/towers.json", function (data) {
                 _this.towerJson = data
                 _this.setupToolbarComponents()
                 resolve()
             })
         })
-        return p
     }
 
     setupToolbarComponents() {
