@@ -14,18 +14,24 @@ export class TowersComponent extends BaseComponent {
         this.randomColourCode = "0x" + randomHexString(6); // TODO should be defined elsewhere
         this.towerStateHashPrev = ""
         this.rangeSpriteContainer = new PIXI.Container();
+        this.towerSpriteSheetData = []
     }
 
     // Asynchronosly load the tower data
     loadData() {
         let _this = this
-        let p = new Promise((resolve) => {
+        return new Promise((resolve) => {
             $.getJSON("shared/json/towers.json", function (data) {
                 _this.towerJson = data
+
+                let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
+                _this.towerJson.forEach((tower)=> {
+                    _this.towerSpriteSheetData.push([new PIXI.Texture(texture, new PIXI.Rectangle(0, DEFAULT_SPRITE_SIZE_Y * tower["spriteSheetNum"], DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y))])
+
+                })
                 resolve()
             })
         })
-        return p
     }
 
     setTowerMenuLink(towerMenu) {
@@ -43,8 +49,7 @@ export class TowersComponent extends BaseComponent {
     }
 
     getTowerSprite(type) { // Make this a get sprite only function
-        let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
-        let towerTexture = [new PIXI.Texture(texture, new PIXI.Rectangle(0, DEFAULT_SPRITE_SIZE_Y * this.towerJson[type]["spriteSheetNum"], DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y))]
+        let towerTexture = this.towerSpriteSheetData[type]
         let towerSprite = new PIXI.AnimatedSprite(towerTexture)
         towerSprite.tint = this.randomColourCode
         towerSprite.loop = false

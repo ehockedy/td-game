@@ -70,7 +70,6 @@ export function sendNewGameMessage(data) {
     // load the assets into shared loader, then construct game view and send message to start
     game = new GameRenderer()
     game.loadAssets().then(()=>{
-        console.log("new game starting")
         sendMessage(MSG_TYPES.NEW_GAME, data)
     })
 }

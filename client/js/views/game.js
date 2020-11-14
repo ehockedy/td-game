@@ -27,6 +27,7 @@ export class GameRenderer {
     loadAssets() {
         let _tc = this.tc
         let _it = this.it
+        let _ec = this.ec
         return new Promise((resolve, reject)=>{
             // Load sprite assets
             PIXI.Loader.shared
@@ -38,9 +39,10 @@ export class GameRenderer {
                     // Then load tower json
                     _tc.loadData().then(
                     _it.loadData().then(
+                    _ec.loadData().then(
                         // Then can resolve this call and start the game
                         resolve
-                    ))
+                    )))
                 })
         })
     }

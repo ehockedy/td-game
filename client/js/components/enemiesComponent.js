@@ -11,17 +11,15 @@ export class EnemiesComponent extends BaseComponent {
 
     }
 
-    registerContainer() {
-        super.registerContainer()
-        this.loadSpriteSheetData()
-    }
-
-    loadSpriteSheetData() {
-        let texture = PIXI.Loader.shared.resources["client/img/enemy_spritesheet.png"].texture
-        this.enemySpriteSheet["basic"] = []
-        for (let i = 0; i < 6; ++i) {
-            this.enemySpriteSheet["basic"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, i * DEFAULT_SPRITE_SIZE_Y, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
-        }
+    loadData() {
+        return new Promise((resolve) => {
+            let texture = PIXI.Loader.shared.resources["client/img/enemy_spritesheet.png"].texture
+            this.enemySpriteSheet["basic"] = []
+            for (let i = 0; i < 6; ++i) {
+                this.enemySpriteSheet["basic"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, i * DEFAULT_SPRITE_SIZE_Y, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
+            }
+            resolve()
+        })
     }
 
     /**
