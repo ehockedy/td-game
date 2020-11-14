@@ -80,8 +80,6 @@ export class GameRenderer {
     }
 
     addPlayer(playerInfo) {
-        setUserID(playerInfo.playerID)
         this.ut.addPlayer(playerInfo)
     }
-
 }

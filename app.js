@@ -32,7 +32,8 @@ const MSG_TYPES = {
   JOIN_GAME: "jg",
   CHECK_GAME: "cg",
   CLIENT_DEBUG: "cd",
-  ADD_PLAYER: "ap"
+  ADD_PLAYER: "ap",
+  ADD_PLAYER_SELF: "aps"
 }
 
 // First set up http server to serve index.html and its included files
@@ -60,32 +61,39 @@ function gameExists(gameID) {
 
 function addPlayer(socket, gameID, playerID) {
   socket.join(gameID)
-  games[gameID].addPlayer(playerID)
+  if (!games[gameID].playerExists(playerID)) {
+    games[gameID].addPlayer(playerID)
 
-  // Tell new player about the map
-  socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
-
-  // Tell all other players about this new player
-  socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(playerID))
+    // Tell all other players about this new player
+    socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(playerID))
+  }
 
   // Tell this player about existing players (including itself)
   games[gameID].forEachPlayer((player)=>{
-    socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(player.id))
+    if (player.id == playerID) socket.emit(MSG_TYPES.ADD_PLAYER_SELF, games[gameID].getPlayerInfo(player.id))
+    else socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(player.id))
   })
+
+  // Tell new player about the map
+  socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
 }
 
 web_sockets_server.on('connection', (socket) => {
-  // New game event
-  // Player has started a new game. Create a room with the game ID and send that client the game info.
-  socket.on(MSG_TYPES.NEW_GAME, (data) => {
-    console.log("Client " + socket.handshake.address + " starting game " + data.gameID)
+  // Join game event
+  // Player has started or joined game. Create a room with the game ID if one does not exist and send that client the game info.
+  socket.on(MSG_TYPES.JOIN_GAME, (data) => {
+    console.log("Client " + socket.handshake.address + " joining game " + data.gameID)
     socket.gameID = data.gameID
     socket.playerID = socket.handshake.address + data.gameID
 
-    games[data.gameID] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
+    // This is the first request to join this game, so make the game
+    if (!(socket.gameID in games)) {
+      games[data.gameID] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
+      setInterval(updateGameAndSend, 50*0.2, data.gameID); // 20 "fps"
+    }
+
     addPlayer(socket, socket.gameID, socket.playerID)
     socket.emit(MSG_TYPES.GAME_START)
-    setInterval(updateGameAndSend, 50*0.2, data.gameID); // 20 "fps"
   });
 
   // Check whether a game with the given ID exists
@@ -97,17 +105,6 @@ web_sockets_server.on('connection', (socket) => {
       console.log("Game not found")
       callback({ response: "fail" })
     }
-  })
-
-  // Join game event
-  // Does not check if game exists
-  socket.on(MSG_TYPES.JOIN_GAME, (data) => {
-    console.log("Client " + socket.handshake.address + " joining game " + data.gameID)
-    socket.gameID = data.gameID
-    socket.playerID = socket.handshake.address + data.gameID
-
-    addPlayer(socket, socket.gameID, socket.playerID)
-    socket.emit(MSG_TYPES.GAME_START)
   })
 
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {

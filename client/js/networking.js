@@ -1,4 +1,4 @@
-import { setState, setBoard, setGridDimsRowsCols, setSubGridDim , getGameID } from "./state.js"
+import { setState, setBoard, setGridDimsRowsCols, setSubGridDim , getGameID, setUserID } from "./state.js"
 import { startRendering as startRenderingMenu, stopRendering as stopRenderingMenu} from "./views/menu_renderer.js"
 import { GameRenderer} from "./views/game.js"
 
@@ -20,7 +20,8 @@ export const MSG_TYPES = {
     JOIN_GAME: "jg",
     CHECK_GAME: "cg",
     CLIENT_DEBUG: "cd",
-    ADD_PLAYER: "ap"
+    ADD_PLAYER: "ap",
+    ADD_PLAYER_SELF: "aps"
 }
 
 export function getTowerUpdateMsg(tower) {
@@ -66,17 +67,13 @@ socket.on(MSG_TYPES.ADD_PLAYER, (data) => {
     game.addPlayer(data)
 })
 
-export function sendNewGameMessage(data) {
-    // load the assets into shared loader, then construct game view and send message to start
-    game = new GameRenderer()
-    game.loadAssets().then(()=>{
-        sendMessage(MSG_TYPES.NEW_GAME, data)
-    })
-}
+socket.on(MSG_TYPES.ADD_PLAYER_SELF, (data) => {
+    game.addPlayer(data)
+    setUserID(data.playerID)
+})
 
 export function sendJoinGameMessage(data) {
     // load the assets into shared loader, then construct game view and send message to start
-    console.log(data)
     game = new GameRenderer()
     game.loadAssets().then(()=>{
         sendMessage(MSG_TYPES.JOIN_GAME, data)

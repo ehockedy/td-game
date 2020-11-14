@@ -217,6 +217,14 @@ class Game {
         }
     }
 
+    playerExists(playerID) {
+        let exists = false
+        this.forEachPlayer((player)=>{
+            if (player.id == playerID) exists = true
+        })
+        return exists
+    }
+
     forEachPlayer(callback) {
         this.players.forEach((player) => {
             callback(player)

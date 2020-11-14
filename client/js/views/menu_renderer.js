@@ -1,5 +1,5 @@
 import { randomAlphaCharString } from "../tools.js"
-import { MSG_TYPES, sendMessage, sendJoinGameMessage, sendNewGameMessage, sendMessageGetAck } from "../networking.js"
+import { MSG_TYPES, sendMessage, sendJoinGameMessage, sendMessageGetAck } from "../networking.js"
 import { setGameID, getUserID } from "../state.js"
 
 
@@ -119,7 +119,7 @@ function onStartButtonClick() {
         "gameID": gameID
     }
     setGameID(gameID)
-    sendNewGameMessage(data)
+    sendJoinGameMessage(data)
 }
 
 function onJoinButtonClick() {
