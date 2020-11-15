@@ -17,6 +17,10 @@ export class SpriteHandler {
 
         // Sprite that focus is currently on
         this.activeClickable
+
+        // List of sprites that have should be manually updated by each iteration of the render loop
+        // Each sprite should have the "tick" event registered to them
+        this.updatables = []
     }
 
     render() {
@@ -28,7 +32,20 @@ export class SpriteHandler {
         this.app.ticker.add(delta => this.gameLoop(delta))
     }
 
-    gameLoop() {}
+    stopRender() {
+        app.stage.removeChildren()
+        document.body.removeChild(app.view)
+    }
+
+    gameLoop() {
+        this.updatables.forEach((sprite)=>{
+            sprite.emit("tick")
+        })
+    }
+
+    registerUpdatableSprite(sprite) {
+        this.updatables.push(sprite)
+    }
 
     registerContainer(container) {
         this.app.stage.addChild(container)

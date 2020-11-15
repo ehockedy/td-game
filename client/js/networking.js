@@ -1,6 +1,7 @@
 import { setState, setBoard, setGridDimsRowsCols, setSubGridDim , getGameID, setUserID } from "./state.js"
 import { startRendering as startRenderingMenu, stopRendering as stopRenderingMenu} from "./views/menu_renderer.js"
 import { GameRenderer} from "./views/game.js"
+import { MainMenuRenderer } from "./views/menu_renderer_new.js"
 
 // To get client side debugging, paste "localStorage.debug = '*';" into
 // the browser console
@@ -40,9 +41,10 @@ export function getTowerUpdateMsg(tower) {
 }
 
 const socket = io();
-startRenderingMenu();
 
 let game;
+let main_menu = new MainMenuRenderer()
+main_menu.startRendering()
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) => {
     // grid is the simple representation of the map - a 2D array of arrays
@@ -54,7 +56,7 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) =>
 
 socket.on(MSG_TYPES.GAME_START, (data) => {
     console.log("start rendering game")
-    stopRenderingMenu()
+    main_menu.stopRendering()
     game.startRendering()
 });
 
