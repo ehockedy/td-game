@@ -6,6 +6,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "jest": "^26.4.2",
+    "pixi-text-input": "^1.0.5",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {},

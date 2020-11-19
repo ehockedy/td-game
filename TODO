@@ -2,7 +2,6 @@ Client renderer optimisations:
  (based on quick observations and profiling)
  - Profiling suggests that client is rendering 3 times as fast as server is sending, so can reduce the render rate.
 Render moving tower on client
-Make join game box prettier
 Bullet and enemy collision animation
 Add middle of subgrid size to config
 Fastest/slowest could be good aim behaviours for towers

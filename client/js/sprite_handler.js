@@ -33,8 +33,8 @@ export class SpriteHandler {
     }
 
     stopRender() {
-        app.stage.removeChildren()
-        document.body.removeChild(app.view)
+        this.app.stage.removeChildren()
+        document.body.removeChild(this.app.view)
     }
 
     gameLoop() {
