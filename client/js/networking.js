@@ -1,6 +1,7 @@
 import { setState, setBoard, setGridDimsRowsCols, setSubGridDim , getGameID, setUserID } from "./state.js"
 import { GameRenderer} from "./views/game.js"
 import { MainMenuRenderer } from "./views/menu_renderer.js"
+import { LobbyRenderer } from "./views/lobby.js"
 
 // To get client side debugging, paste "localStorage.debug = '*';" into
 // the browser console
@@ -41,6 +42,7 @@ export function getTowerUpdateMsg(tower) {
 
 const socket = io();
 
+let lobby;
 let game;
 let main_menu = new MainMenuRenderer()
 main_menu.startRendering()
@@ -56,7 +58,8 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) =>
 socket.on(MSG_TYPES.GAME_START, (data) => {
     console.log("start rendering game")
     main_menu.stopRendering()
-    game.startRendering()
+    lobby = new LobbyRenderer()
+    lobby.startRendering()
 });
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {

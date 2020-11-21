@@ -18,4 +18,7 @@ export const BOTTOM_TOOLBAR_HEIGHT = 3*DEFAULT_SPRITE_SIZE_Y
 export const APP_WIDTH = MAP_WIDTH + RIGHT_TOOLBAR_WIDTH
 export const APP_HEIGHT = MAP_HEIGHT + BOTTOM_TOOLBAR_HEIGHT
 
+export const LOBBY_WINDOW_WIDTH = APP_WIDTH*0.8
+export const LOBBY_WINDOW_HEIGHT = APP_HEIGHT*0.8
+
 export const GAME_CODE_LEN = 4 // 4 is random enough, and easy to remember
