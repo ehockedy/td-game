@@ -1,6 +1,7 @@
 import { BaseToolbarComponent } from "./base/baseToolbarComponent.js";
 import { getPositionWithinEquallySpacedObjects } from "../tools.js"
 import { sendResourceUpdateMessage } from "../networking.js"
+import { GraphicButton } from "../ui/button.js"
 
 export class InfoToolbar extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {
@@ -91,31 +92,6 @@ export class InfoToolbar extends BaseToolbarComponent {
         })
     }
 
-    getButton(width_px, height_px, x, y, message="", fontSize=20, col="0xAA88DD") {
-        let graphics = new PIXI.Graphics();
-        graphics.beginFill(col)
-        graphics.drawRect(0, 0, width_px, height_px)
-        graphics.x = x - width_px/2
-        graphics.y = y - height_px/2
-        graphics.interactive = true
-        graphics.buttonMode = true
-
-        let defaultStyle = {
-            fontFamily: 'Arial',
-            fontSize: fontSize,
-            fontWeight: 'bold',
-            wordWrap: true,
-            wordWrapWidth: width_px * 0.8
-        }
-        let text = new PIXI.Text(message, defaultStyle);
-        text.anchor.set(0.5)
-        text.x = width_px/2
-        text.y = height_px/2
-
-        graphics.addChild(text)
-        return graphics
-    }
-
     renderTowerInfo() {
         let localContainer = new PIXI.Container()
         let xMargin = 10
@@ -186,7 +162,7 @@ export class InfoToolbar extends BaseToolbarComponent {
             yOffset += (this.yOffsetGap*((idx+1)%2))
             let width = 55
             let height = 15
-            let newButton =  this.getButton(width, height, getPositionWithinEquallySpacedObjects(idx+1, buttonsPerRow, 32, this.width_px), yOffset, behaviour, height*0.8)
+            let newButton =  new GraphicButton(width, height, getPositionWithinEquallySpacedObjects(idx+1, buttonsPerRow, 32, this.width_px), yOffset, behaviour, height*0.8)
 
             let _this = this
             newButton.on("click", function () {
@@ -259,14 +235,14 @@ export class InfoToolbar extends BaseToolbarComponent {
 
         let buttonHeight = this.width_px*0.4
         let buttonWidth = this.width_px*0.4
-        let confirmButton =  this.getButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(1, 2, buttonWidth, this.width_px), yOffset, "\u{1F5F8}" , 40, "0x22FF22")
+        let confirmButton =  new GraphicButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(1, 2, buttonWidth, this.width_px), yOffset, "\u{1F5F8}" , 40, "0x22FF22")
         let _this = this
         confirmButton.on("click", function () {
             _this.sprite_handler.getActiveClickable().emit("place")
         })
         localContainer.addChild(confirmButton)
 
-        let cancelButton =  this.getButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(2, 2, buttonWidth, this.width_px), yOffset, "\u{2717}", 40, "0xFF2222")
+        let cancelButton =  new GraphicButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(2, 2, buttonWidth, this.width_px), yOffset, "\u{2717}", 40, "0xFF2222")
         cancelButton.on("click", function () {
             _this.sprite_handler.getActiveClickable().emit("clear")
         })
