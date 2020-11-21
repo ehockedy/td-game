@@ -32,7 +32,6 @@ export class GameRenderer {
         return new Promise((resolve)=>{
             // Load sprite assets
             PIXI.Loader.shared
-                .add("client/img/map_spritesheet.png")
                 .add("client/img/enemy_spritesheet.png")
                 .add("client/img/tower_spritesheet.png")
                 .add("client/img/bullet_spritesheet.png")

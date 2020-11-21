@@ -1,6 +1,6 @@
 
 export class GraphicBackground extends PIXI.Container {
-    constructor(width_px, height_px, x, y, colour=0xBB9933) {
+    constructor(width_px, height_px, x, y, colour=0x996605) {
         super()
         this.x = x
         this.y = y

@@ -2,8 +2,6 @@
  * This is the class that holds all the sprites and interaction with those sprites
  */
 import { APP_HEIGHT, APP_WIDTH} from "./constants.js"
-import { getGameID } from "./state.js"
-
 
 export class SpriteHandler {
     constructor() {
@@ -24,11 +22,6 @@ export class SpriteHandler {
     }
 
     render() {
-        const gameIDText = new PIXI.Text(getGameID());
-        gameIDText.x = 20;
-        gameIDText.y = 20;
-        this.app.stage.addChild(gameIDText);
-
         this.app.ticker.add(delta => this.gameLoop(delta))
     }
 

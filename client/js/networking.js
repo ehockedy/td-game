@@ -59,7 +59,9 @@ socket.on(MSG_TYPES.GAME_START, (data) => {
     console.log("start rendering game")
     main_menu.stopRendering()
     lobby = new LobbyRenderer()
-    lobby.startRendering()
+    lobby.loadAssets().then(()=>{
+        lobby.startRendering()
+    })
 });
 
 socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
