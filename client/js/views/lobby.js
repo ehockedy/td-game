@@ -2,6 +2,7 @@ import { SpriteHandler } from "../sprite_handler.js"
 import { GraphicButton } from "../ui/button.js"
 import { GraphicBackground } from "../ui/background.js"
 import { MapComponent } from "../components/map.js"
+import { GameSetting } from "../lobby_components/gameSetting.js"
 import { APP_HEIGHT, APP_WIDTH, LOBBY_WINDOW_HEIGHT, LOBBY_WINDOW_WIDTH, MAP_WIDTH } from "../constants.js"
 import { getGameID } from "../state.js"
 
@@ -27,10 +28,14 @@ export class LobbyRenderer {
         this.map = new MapComponent(this.spriteHandler, mapScale)
         this.map.container.x = popupBoundaryLeft + 30
         this.map.container.y = popupBoundaryTop + 100
-
-        this.map.container.calculateBounds()
-
         this.regenerateMapButton = new GraphicButton(200, 30, this.map.container.x+this.map.width, this.map.container.y - 5, "Regenerate Map", 20, 0x448877, 1, 1)
+
+        let optionWidth = 350
+        let optionFontSize = 25
+        let optionGap = 15
+        this.mapPathSetting = new GameSetting(this.map.container.x+this.map.width+40, this.map.container.y + 20, "Map type", ["Straight", "Winding"], 1, optionFontSize, optionWidth)
+        this.roundsSetting = new GameSetting(this.map.container.x+this.map.width+40, this.mapPathSetting.y + this.mapPathSetting.getLocalBounds().height + optionGap, "Rounds", [25, 50, 75, 100], 1, optionFontSize, optionWidth)
+        this.difficultySetting = new GameSetting(this.map.container.x+this.map.width+40, this.roundsSetting.y + this.roundsSetting.getLocalBounds().height + optionGap, "Difficulty", ["Easy", "Medium", "Hard", "Very Hard"], 1, optionFontSize, optionWidth)
 
     }
 
@@ -49,6 +54,10 @@ export class LobbyRenderer {
         this.spriteHandler.registerContainer(this.gameIDText)
         this.map.registerContainer()
         this.spriteHandler.registerContainer(this.regenerateMapButton);
+        this.spriteHandler.registerContainer(this.mapPathSetting);
+        this.spriteHandler.registerContainer(this.roundsSetting);
+        this.spriteHandler.registerContainer(this.difficultySetting);
+
 
         // Begin the rendering loop
         this.spriteHandler.render()

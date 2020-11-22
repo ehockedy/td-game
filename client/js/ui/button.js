@@ -26,8 +26,8 @@ export class GraphicButton extends PIXI.Container {
         }
         let text = new PIXI.Text(message, defaultStyle);
         text.anchor.set(0.5)
-        if (anchor_x != 0.5) text.x = (-width_px/2)*anchor_x // If there is an offset of the button, then move text to keep it in the center of the botton
-        if (anchor_y != 0.5) text.y = (-height_px/2)*anchor_y
+        text.x = graphics.x + width_px/2 // Fix text to center of button
+        text.y = graphics.y + height_px/2
         this.addChild(text)
     }
 }
