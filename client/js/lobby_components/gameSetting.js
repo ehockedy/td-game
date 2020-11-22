@@ -1,9 +1,9 @@
 import { GraphicButton } from "../ui/button.js"
 
 export class GameSetting extends PIXI.Container {
-    constructor(x, y, name, values, defaultValueIndex, fontSize, width_px) {
+    constructor(x, y, name, values, defaultValueIndex, fontSize, width_px, anchorX=0.5, anchorY=0.5) {
         super()
-        this.x = x
+        this.x = x -(anchorX*(width_px))
         this.y = y
         this.name = name
         this.values = values
