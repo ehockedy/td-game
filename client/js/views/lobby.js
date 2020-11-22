@@ -3,8 +3,10 @@ import { GraphicButton } from "../ui/button.js"
 import { GraphicBackground } from "../ui/background.js"
 import { MapComponent } from "../components/map.js"
 import { GameSetting } from "../lobby_components/gameSetting.js"
+import { Player } from "../lobby_components/player.js"
 import { APP_HEIGHT, APP_WIDTH, LOBBY_WINDOW_HEIGHT, LOBBY_WINDOW_WIDTH, MAP_WIDTH } from "../constants.js"
 import { getGameID } from "../state.js"
+import { getPositionWithinEquallySpacedObjects } from "../tools.js"
 
 /**
  * This class sets up what will appear in the main menu view.
@@ -18,15 +20,18 @@ export class LobbyRenderer {
         let popupBoundaryRight = APP_WIDTH/2 + LOBBY_WINDOW_WIDTH/2
         let popupBoundaryBottom = APP_HEIGHT/2 + LOBBY_WINDOW_HEIGHT/2
 
+        let xMargin = 30
+        let yMargin = 20
+
         this.startButton = new GraphicButton(180, 100, popupBoundaryRight-(180/2)-20, popupBoundaryBottom-(100/2)-20, "Start Game", 45)
         this.background = new GraphicBackground(LOBBY_WINDOW_WIDTH, LOBBY_WINDOW_HEIGHT, APP_WIDTH/2, APP_HEIGHT/2)
         this.gameIDText = new PIXI.Text("Game code: " + getGameID());
-        this.gameIDText.x = popupBoundaryLeft + 30;
-        this.gameIDText.y = popupBoundaryTop + 20;
+        this.gameIDText.x = popupBoundaryLeft + xMargin;
+        this.gameIDText.y = popupBoundaryTop + yMargin;
 
         let mapScale = 450/MAP_WIDTH
         this.map = new MapComponent(this.spriteHandler, mapScale)
-        this.map.container.x = popupBoundaryLeft + 30
+        this.map.container.x = popupBoundaryLeft + xMargin
         this.map.container.y = popupBoundaryTop + 100
         this.regenerateMapButton = new GraphicButton(200, 30, this.map.container.x+this.map.width, this.map.container.y - 5, "Regenerate Map", 20, 0x448877, 1, 1)
 
@@ -36,6 +41,13 @@ export class LobbyRenderer {
         this.mapPathSetting = new GameSetting(this.map.container.x+this.map.width+40, this.map.container.y + 20, "Map type", ["Straight", "Winding"], 1, optionFontSize, optionWidth)
         this.roundsSetting = new GameSetting(this.map.container.x+this.map.width+40, this.mapPathSetting.y + this.mapPathSetting.getLocalBounds().height + optionGap, "Rounds", [25, 50, 75, 100], 1, optionFontSize, optionWidth)
         this.difficultySetting = new GameSetting(this.map.container.x+this.map.width+40, this.roundsSetting.y + this.roundsSetting.getLocalBounds().height + optionGap, "Difficulty", ["Easy", "Medium", "Hard", "Very Hard"], 1, optionFontSize, optionWidth)
+
+        let playerSideLen = popupBoundaryBottom - this.map.container.y - this.map.height - yMargin - 10
+        let playerMargin = 10
+        this.player1 = new Player(1, playerSideLen, playerSideLen, popupBoundaryLeft + xMargin, popupBoundaryBottom-yMargin, 0, 1)
+        this.player2 = new Player(2, playerSideLen, playerSideLen, this.player1.x + playerSideLen + playerMargin, this.player1.y, 0, 1)
+        this.player3 = new Player(3, playerSideLen, playerSideLen, this.player2.x + playerSideLen + playerMargin, this.player1.y, 0, 1)
+        this.player4 = new Player(4, playerSideLen, playerSideLen, this.player3.x + playerSideLen + playerMargin, this.player1.y, 0, 1)
 
     }
 
@@ -57,7 +69,10 @@ export class LobbyRenderer {
         this.spriteHandler.registerContainer(this.mapPathSetting);
         this.spriteHandler.registerContainer(this.roundsSetting);
         this.spriteHandler.registerContainer(this.difficultySetting);
-
+        this.spriteHandler.registerContainer(this.player1)
+        this.spriteHandler.registerContainer(this.player2)
+        this.spriteHandler.registerContainer(this.player3)
+        this.spriteHandler.registerContainer(this.player4)
 
         // Begin the rendering loop
         this.spriteHandler.render()
