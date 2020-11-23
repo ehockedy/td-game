@@ -1,8 +1,8 @@
-import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_WIDTH, APP_HEIGHT, MAP_WIDTH, MAP_HEIGHT } from "../constants.js"
-import { randomHexString } from "../tools.js"
-import { getUserID, getBoard } from "../state.js"
+import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_WIDTH, APP_HEIGHT, MAP_WIDTH, MAP_HEIGHT } from "../../constants.js"
+import { randomHexString } from "../../tools.js"
+import { getUserID, getBoard } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
-import { sendMessage, getTowerUpdateMsg, MSG_TYPES } from "../networking.js"
+import { sendMessage, getTowerUpdateMsg, MSG_TYPES } from "../../networking.js"
 
 /**
  * This component stores all the information about the towers that are out on the map

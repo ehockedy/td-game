@@ -1,4 +1,4 @@
-import { GraphicButton } from "../ui/button.js"
+import { GraphicButton } from "../ui_common/button.js"
 
 export class GameSetting extends PIXI.Container {
     constructor(x, y, name, values, defaultValueIndex, fontSize, width_px, anchorX=0.5, anchorY=0.5) {

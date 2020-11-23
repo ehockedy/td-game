@@ -1,6 +1,6 @@
 import { setState, setBoard, setGridDimsRowsCols, setSubGridDim , getGameID, setUserID } from "./state.js"
 import { GameRenderer} from "./views/game.js"
-import { MainMenuRenderer } from "./views/menu_renderer.js"
+import { MainMenuRenderer } from "./views/main_menu.js"
 import { LobbyRenderer } from "./views/lobby.js"
 
 // To get client side debugging, paste "localStorage.debug = '*';" into
@@ -57,13 +57,13 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) =>
     //printMap(grid);
 });
 
-socket.on(MSG_TYPES.LOBBY_START, (data) => {
+socket.on(MSG_TYPES.LOBBY_START, () => {
     console.log("start rendering lobby")
     main_menu.stopRendering()
     lobby.startRendering()
 });
 
-socket.on(MSG_TYPES.GAME_START, (data) => {
+socket.on(MSG_TYPES.GAME_START, () => {
     console.log("start rendering game")
     lobby.stopRendering()
     // load the assets into shared loader, then construct game view and send message to start

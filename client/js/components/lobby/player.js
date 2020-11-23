@@ -1,4 +1,4 @@
-import { TextRect } from "../lobby_components/textRect.js"
+import { TextRect } from "../ui_common/textRect.js"
 
 export class Player extends PIXI.Container {
     constructor(index, width_px, height_px, x, y, anchorX, anchorY) {

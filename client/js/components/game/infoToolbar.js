@@ -1,7 +1,7 @@
 import { BaseToolbarComponent } from "./base/baseToolbarComponent.js";
-import { getPositionWithinEquallySpacedObjects } from "../tools.js"
-import { sendResourceUpdateMessage } from "../networking.js"
-import { GraphicButton } from "../ui/button.js"
+import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
+import { sendResourceUpdateMessage } from "../../networking.js"
+import { GraphicButton } from "../ui_common/button.js"
 
 export class InfoToolbar extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {

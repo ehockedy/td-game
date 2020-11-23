@@ -1,7 +1,7 @@
 import { BaseMenuOptionComponent } from "./base/baseMenuOptionComponent.js"
-import { setGameID } from "../state.js"
-import { APP_WIDTH, APP_HEIGHT } from "../constants.js"
-import { MSG_TYPES, sendJoinGameMessage, sendMessageGetAck } from "../networking.js"
+import { setGameID } from "../../state.js"
+import { APP_WIDTH, APP_HEIGHT } from "../../constants.js"
+import { MSG_TYPES, sendJoinGameMessage, sendMessageGetAck } from "../../networking.js"
 
 export class JoinGameComponent extends BaseMenuOptionComponent {
     constructor(sprite_handler, x, y) {

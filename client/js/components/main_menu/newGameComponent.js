@@ -1,8 +1,8 @@
 import { BaseMenuOptionComponent } from "./base/baseMenuOptionComponent.js"
-import { setGameID } from "../state.js"
-import { GAME_CODE_LEN } from "../constants.js"
-import { sendJoinGameMessage } from "../networking.js"
-import { randomAlphaCharString } from "../tools.js"
+import { setGameID } from "../../state.js"
+import { GAME_CODE_LEN } from "../../constants.js"
+import { sendJoinGameMessage } from "../../networking.js"
+import { randomAlphaCharString } from "../../tools.js"
 
 export class NewGameComponent extends BaseMenuOptionComponent {
     constructor(sprite_handler, x, y) {

@@ -1,6 +1,5 @@
 import { BaseToolbarComponent } from "./base/baseToolbarComponent.js";
-import { getPositionWithinEquallySpacedObjects } from "../tools.js"
-import { sendResourceUpdateMessage } from "../networking.js"
+import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 
 export class PlayersToolbar extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {

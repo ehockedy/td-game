@@ -1,5 +1,5 @@
-import { BaseComponent } from  "../../components/base/baseComponent.js";
-import { menuOptionStyle } from "../../styles/text.js"
+import { BaseComponent } from  "../../../components/game/base/baseComponent.js";
+import { menuOptionStyle } from "../../../styles/text.js"
 
 export class BaseMenuOptionComponent extends BaseComponent {
     constructor(sprite_handler, containerName, x, y, text) {

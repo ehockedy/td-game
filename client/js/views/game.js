@@ -1,13 +1,12 @@
 import { SpriteHandler } from "../sprite_handler.js"
-import { MapComponent } from "../components/map.js"
-import { TowerMenu } from "../components/towerMenu.js"
-import { InfoToolbar } from "../components/infoToolbar.js"
-import { PlayersToolbar } from "../components/playersToolbar.js"
-import { TowersComponent } from "../components/towersComponent.js"
-import { EnemiesComponent } from "../components/enemiesComponent.js"
-import { BulletsComponent } from "../components/bulletsComponent.js"
+import { MapComponent } from "../components/game/map.js"
+import { TowerMenu } from "../components/game/towerMenu.js"
+import { InfoToolbar } from "../components/game/infoToolbar.js"
+import { PlayersToolbar } from "../components/game/playersToolbar.js"
+import { TowersComponent } from "../components/game/towersComponent.js"
+import { EnemiesComponent } from "../components/game/enemiesComponent.js"
+import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT } from "../constants.js"
-import { setUserID } from "../state.js"
 
 /**
  * This class sets up what will appear in the game view.

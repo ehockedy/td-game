@@ -1,6 +1,6 @@
 import { BaseToolbarComponent } from "./base/baseToolbarComponent.js";
-import { DEFAULT_SPRITE_SIZE_X } from "../constants.js"
-import { getPositionWithinEquallySpacedObjects } from "../tools.js"
+import { DEFAULT_SPRITE_SIZE_X } from "../../constants.js"
+import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 
 export class TowerMenu  extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {

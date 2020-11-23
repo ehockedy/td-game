@@ -1,7 +1,7 @@
 import { SpriteHandler } from "../sprite_handler.js"
-import { MenuTitle } from "../main_menu_components/title.js"
-import { NewGameComponent } from "../main_menu_components/newGameComponent.js"
-import { JoinGameComponent } from "../main_menu_components/joinGameComponent.js"
+import { MenuTitle } from "../components/main_menu/title.js"
+import { NewGameComponent } from "../components/main_menu/newGameComponent.js"
+import { JoinGameComponent } from "../components/main_menu/joinGameComponent.js"
 import { APP_HEIGHT, APP_WIDTH } from "../constants.js"
 
 /**
