@@ -129,4 +129,8 @@ export class LobbyRenderer {
         console.log(playerData)
         this.players[playerData.index].setPlayer(playerData)
     }
+
+    removePlayer(playerData) {
+        this.players[playerData.index].clearPlayer()
+    }
 }

@@ -16,7 +16,10 @@ export class Player extends PIXI.Container {
     }
 
     setPlayer(playerData) {
-        this.removeChild(this.noPlayerPlaceholder)
+        this.playerInfoContainer = new PIXI.Container()
+        this.addChild(this.playerInfoContainer)
+
+        this.noPlayerPlaceholder.visible = false
 
         let titleStyle = {
             align: 'left',
@@ -27,7 +30,7 @@ export class Player extends PIXI.Container {
         let title = new PIXI.Text("Player " + this.index.toString(), titleStyle);
         title.x = this.xLocal + 5
         title.y = this.yLocal + 5
-        this.addChild(title)
+        this.playerInfoContainer.addChild(title)
 
         let nameStyle = {
             align: 'left',
@@ -38,7 +41,7 @@ export class Player extends PIXI.Container {
         let name = new PIXI.Text(" Name:", nameStyle);
         name.x = this.xLocal + 5
         name.y = this.yLocal + 30
-        this.addChild(name)
+        this.playerInfoContainer.addChild(name)
 
         let nameValueStyle = {
             align: 'left',
@@ -48,7 +51,11 @@ export class Player extends PIXI.Container {
         let nameValue = new PIXI.Text(" " + playerData.playerID, nameValueStyle);
         nameValue.x = this.xLocal + 5
         nameValue.y = this.yLocal + 50
-        this.addChild(nameValue)
+        this.playerInfoContainer.addChild(nameValue)
+    }
 
+    clearPlayer() {
+        this.noPlayerPlaceholder.visible = true
+        this.removeChild(this.playerInfoContainer)
     }
 }

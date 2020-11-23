@@ -34,7 +34,8 @@ const MSG_TYPES = {
   LOBBY_START: "ls",
   CLIENT_DEBUG: "cd",
   ADD_PLAYER: "ap",
-  ADD_PLAYER_SELF: "aps"
+  ADD_PLAYER_SELF: "aps",
+  REMOVE_PLAYER: "rp"
 }
 
 // First set up http server to serve index.html and its included files
@@ -64,10 +65,10 @@ function addPlayer(socket, gameID, playerID) {
   socket.join(gameID)
   if (!games[gameID].playerExists(playerID)) {
     games[gameID].addPlayer(playerID)
-
-    // Tell all other players about this new player
-    socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(playerID))
   }
+
+  // Tell all other players about this new player
+  socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(playerID))
 
   // Tell this player about existing players (including itself)
   games[gameID].forEachPlayer((player)=>{
@@ -149,7 +150,11 @@ web_sockets_server.on('connection', (socket) => {
   })
 
   socket.on('disconnect', function() {
-    console.log("DISCONNCETED", socket.playerID)
+    if (socket.playerID != undefined) {
+      console.log("DISCONNCETED", socket.playerID)
+      socket.to(socket.gameID).emit(MSG_TYPES.REMOVE_PLAYER, games[socket.gameID].getPlayerInfo(socket.playerID))
+      // For now we leave the player in the game, but they are not used. This is becuase want to keep track of their scores etc if they come back later.
+    }
   })
 });
 

@@ -23,7 +23,8 @@ export const MSG_TYPES = {
     LOBBY_START: "ls",
     CLIENT_DEBUG: "cd",
     ADD_PLAYER: "ap",
-    ADD_PLAYER_SELF: "aps"
+    ADD_PLAYER_SELF: "aps",
+    REMOVE_PLAYER: "rp"
 }
 
 export function getTowerUpdateMsg(tower) {
@@ -84,6 +85,11 @@ socket.on(MSG_TYPES.ADD_PLAYER, (data) => {
 socket.on(MSG_TYPES.ADD_PLAYER_SELF, (data) => {
     lobby.addPlayer(data)
     setUserID(data.playerID)
+})
+
+socket.on(MSG_TYPES.REMOVE_PLAYER, (data) => {
+    lobby.removePlayer(data)
+    // TODO this should also be callable on the game
 })
 
 export function sendJoinGameMessage(data) {
