@@ -20,6 +20,7 @@ export const MSG_TYPES = {
     NEW_GAME: "ng",
     JOIN_GAME: "jg",
     CHECK_GAME: "cg",
+    LOBBY_START: "ls",
     CLIENT_DEBUG: "cd",
     ADD_PLAYER: "ap",
     ADD_PLAYER_SELF: "aps"
@@ -55,12 +56,19 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) =>
     //printMap(grid);
 });
 
+socket.on(MSG_TYPES.LOBBY_START, (data) => {
+    console.log("start rendering lobby")
+    main_menu.stopRendering()
+    lobby.startRendering()
+});
+
 socket.on(MSG_TYPES.GAME_START, (data) => {
     console.log("start rendering game")
-    main_menu.stopRendering()
-    lobby = new LobbyRenderer()
-    lobby.loadAssets().then(()=>{
-        lobby.startRendering()
+    lobby.stopRendering()
+    // load the assets into shared loader, then construct game view and send message to start
+    game = new GameRenderer()
+    game.loadAssets().then(()=>{
+        game.startRendering()
     })
 });
 
@@ -70,18 +78,17 @@ socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
 });
 
 socket.on(MSG_TYPES.ADD_PLAYER, (data) => {
-    game.addPlayer(data)
+    lobby.addPlayer(data)
 })
 
 socket.on(MSG_TYPES.ADD_PLAYER_SELF, (data) => {
-    game.addPlayer(data)
+    lobby.addPlayer(data)
     setUserID(data.playerID)
 })
 
 export function sendJoinGameMessage(data) {
-    // load the assets into shared loader, then construct game view and send message to start
-    game = new GameRenderer()
-    game.loadAssets().then(()=>{
+    lobby = new LobbyRenderer()
+    lobby.loadAssets().then(()=>{
         sendMessage(MSG_TYPES.JOIN_GAME, data)
     })
 }

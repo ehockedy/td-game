@@ -70,17 +70,21 @@ export class LobbyRenderer {
 
         // Lobby members - player that clicked new game is player 1. They can change the game options. When another player joins they fill in the second slot and so on
         let playerSideLen = popupBoundaryBottom - this.map.container.y - this.map.height - yMargin - 20
-        let playerMargin = 10
-        this.player1 = new Player(1, playerSideLen, playerSideLen, popupBoundaryLeft + xMargin, popupBoundaryBottom-yMargin, 0, 1)
-        this.player2 = new Player(2, playerSideLen, playerSideLen, this.player1.x + playerSideLen + playerMargin, this.player1.y, 0, 1)
-        this.player3 = new Player(3, playerSideLen, playerSideLen, this.player2.x + playerSideLen + playerMargin, this.player1.y, 0, 1)
-        this.player4 = new Player(4, playerSideLen, playerSideLen, this.player3.x + playerSideLen + playerMargin, this.player1.y, 0, 1)
+        let playerMargin = 15
+        let playersY = popupBoundaryBottom-yMargin
+        let playersX = popupBoundaryLeft + xMargin
+        let numPlayers = 4 // TODO make this and all other const
+        this.players = []
+        for (let idx = 1; idx <=numPlayers; idx++) {
+            // Note that index starts at 1 (since don't want player 0)
+            this.players.push(new Player(idx, playerSideLen, playerSideLen, playersX + (idx-1)*(playerSideLen + playerMargin), playersY, 0, 1))
+        }
 
         // Start game button - takes the game setting chsoe and begins the game for all present players
         let startButtonWidth = 180
         let startButtonHeight = 100
-        let startButtonStartX = this.player4.x + playerSideLen
-        let startButtonStartY = this.player4.y - playerSideLen
+        let startButtonStartX = this.players[numPlayers-1].x + playerSideLen
+        let startButtonStartY = this.players[numPlayers-1].y - playerSideLen
         this.startButton = new GraphicButton(
             startButtonWidth, startButtonHeight,
             startButtonStartX + getPositionWithinEquallySpacedObjects(1, 1, startButtonWidth, popupBoundaryRight - startButtonStartX),
@@ -109,10 +113,9 @@ export class LobbyRenderer {
         this.spriteHandler.registerContainer(this.mapPathSetting);
         this.spriteHandler.registerContainer(this.roundsSetting);
         this.spriteHandler.registerContainer(this.difficultySetting);
-        this.spriteHandler.registerContainer(this.player1)
-        this.spriteHandler.registerContainer(this.player2)
-        this.spriteHandler.registerContainer(this.player3)
-        this.spriteHandler.registerContainer(this.player4)
+        this.players.forEach((player) => {
+            this.spriteHandler.registerContainer(player)
+        })
 
         // Begin the rendering loop
         this.spriteHandler.render()
@@ -120,5 +123,10 @@ export class LobbyRenderer {
 
     stopRendering() {
         this.spriteHandler.stopRender()
+    }
+
+    addPlayer(playerData) {
+        console.log(playerData)
+        this.players[playerData.index].setPlayer(playerData)
     }
 }

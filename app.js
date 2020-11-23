@@ -31,6 +31,7 @@ const MSG_TYPES = {
   NEW_GAME: "ng",
   JOIN_GAME: "jg",
   CHECK_GAME: "cg",
+  LOBBY_START: "ls",
   CLIENT_DEBUG: "cd",
   ADD_PLAYER: "ap",
   ADD_PLAYER_SELF: "aps"
@@ -89,11 +90,10 @@ web_sockets_server.on('connection', (socket) => {
     // This is the first request to join this game, so make the game
     if (!(socket.gameID in games)) {
       games[data.gameID] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
-      setInterval(updateGameAndSend, 50*0.2, data.gameID); // 20 "fps"
     }
 
     addPlayer(socket, socket.gameID, socket.playerID)
-    socket.emit(MSG_TYPES.GAME_START)
+    socket.emit(MSG_TYPES.LOBBY_START) // TODO do we even need this?
   });
 
   // Check whether a game with the given ID exists
@@ -105,6 +105,11 @@ web_sockets_server.on('connection', (socket) => {
       console.log("Game not found")
       callback({ response: "fail" })
     }
+  })
+
+  socket.on(MSG_TYPES.GAME_START, (data)=>{
+    socket.emit(MSG_TYPES.GAME_START)
+    setInterval(updateGameAndSend, 50*0.2, data.gameID); // 20 "fps"
   })
 
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
