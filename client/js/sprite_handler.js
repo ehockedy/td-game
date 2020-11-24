@@ -25,9 +25,9 @@ export class SpriteHandler {
         this.app.ticker.add(delta => this.gameLoop(delta))
     }
 
-    stopRender() {
+    clear() {
         this.app.stage.removeChildren()
-        document.body.removeChild(this.app.view)
+        this.updatables = []
     }
 
     gameLoop() {

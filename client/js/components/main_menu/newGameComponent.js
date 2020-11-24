@@ -1,7 +1,7 @@
 import { BaseMenuOptionComponent } from "./base/baseMenuOptionComponent.js"
 import { setGameID } from "../../state.js"
 import { GAME_CODE_LEN } from "../../constants.js"
-import { sendJoinGameMessage } from "../../networking.js"
+import { sendMessage, MSG_TYPES } from "../../networking.js"
 import { randomAlphaCharString } from "../../tools.js"
 
 export class NewGameComponent extends BaseMenuOptionComponent {
@@ -20,6 +20,6 @@ export class NewGameComponent extends BaseMenuOptionComponent {
             "gameID": gameID
         }
         setGameID(gameID)
-        sendJoinGameMessage(data)
+        sendMessage(MSG_TYPES.JOIN_GAME, data)
     }
 }

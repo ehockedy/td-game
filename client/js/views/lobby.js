@@ -1,20 +1,21 @@
-import { SpriteHandler } from "../sprite_handler.js"
 import { GraphicButton } from "../components/ui_common/button.js"
 import { GraphicBackground } from "../components/ui_common/background.js"
 import { MapComponent } from "../components/game/map.js"
 import { GameSetting } from "../components/lobby/gameSetting.js"
 import { Player } from "../components/lobby/player.js"
 import { APP_HEIGHT, APP_WIDTH, LOBBY_WINDOW_HEIGHT, LOBBY_WINDOW_WIDTH, MAP_WIDTH } from "../constants.js"
-import { getGameID } from "../state.js"
 import { getPositionWithinEquallySpacedObjects } from "../tools.js"
+import { addSocketEvent, MSG_TYPES } from "../networking.js"
+import { setBoard, getGameID } from "../state.js"
+
 
 /**
  * This class sets up what will appear in the lobby view.
  * All components positions are defined relative to each other and the boundaries of the menu.
  */
 export class LobbyRenderer {
-    constructor() {
-        this.spriteHandler = new SpriteHandler()
+    constructor(spriteHandler) {
+        this.spriteHandler = spriteHandler
 
         let popupBoundaryLeft = APP_WIDTH/2 - LOBBY_WINDOW_WIDTH/2
         let popupBoundaryTop = APP_HEIGHT/2 - LOBBY_WINDOW_HEIGHT/2
@@ -92,6 +93,14 @@ export class LobbyRenderer {
             "Start Game",
             45, 0xAA88DD, // font size, colour
             0.5, 0.5) // anchor
+
+
+        // Events the can come from server
+        addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid) => {
+            // grid is the simple representation of the map - a 2D array of arrays
+            setBoard(grid);
+            this.map.constructMap()
+        })
     }
 
     loadAssets() {
@@ -123,6 +132,7 @@ export class LobbyRenderer {
 
     stopRendering() {
         this.spriteHandler.stopRender()
+        // TODO remove socket events
     }
 
     addPlayer(playerData) {

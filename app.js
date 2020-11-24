@@ -77,7 +77,7 @@ function addPlayer(socket, gameID, playerID) {
   })
 
   // Tell new player about the map
-  socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+  socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure())
 }
 
 web_sockets_server.on('connection', (socket) => {
@@ -93,8 +93,7 @@ web_sockets_server.on('connection', (socket) => {
       games[data.gameID] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
     }
 
-    addPlayer(socket, socket.gameID, socket.playerID)
-    socket.emit(MSG_TYPES.LOBBY_START) // TODO do we even need this?
+    socket.emit(MSG_TYPES.LOBBY_START)
   });
 
   // Check whether a game with the given ID exists
@@ -106,6 +105,10 @@ web_sockets_server.on('connection', (socket) => {
       console.log("Game not found")
       callback({ response: "fail" })
     }
+  })
+
+  socket.on(MSG_TYPES.LOBBY_START, () => {
+    addPlayer(socket, socket.gameID, socket.playerID)
   })
 
   socket.on(MSG_TYPES.GAME_START, (data)=>{
@@ -123,8 +126,7 @@ web_sockets_server.on('connection', (socket) => {
     let gameID = data.gameID
     games[gameID].map.setGridValue(data.y, data.x, data.value, "tower")
     games[gameID].addTower(data.towerName, data.value.type, socket.handshake.address+data.gameID, data.y, data.x)
-    // TODO dont need the dimension args
-    web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure(), config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+    web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure())
   });
 
   /**

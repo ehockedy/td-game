@@ -44,53 +44,61 @@ export function getTowerUpdateMsg(tower) {
 
 const socket = io();
 
-let lobby;
-let game;
-let main_menu = new MainMenuRenderer()
-main_menu.startRendering()
+export function addSocketEvent(messageType, callback) {
+    socket.on(messageType, callback)
+}
 
-socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) => {
-    // grid is the simple representation of the map - a 2D array of arrays
-    setGridDimsRowsCols(rows, cols);
-    setSubGridDim(subGridSize);
-    setBoard(grid);
-    //printMap(grid);
-});
+export function sendMessage(msgType, data) {
+    socket.emit(msgType, data)
+}
 
-socket.on(MSG_TYPES.LOBBY_START, () => {
-    console.log("start rendering lobby")
-    main_menu.stopRendering()
-    lobby.startRendering()
-});
+// let lobby;
+// let game;
+// let main_menu = new MainMenuRenderer()
+// main_menu.startRendering()
 
-socket.on(MSG_TYPES.GAME_START, () => {
-    console.log("start rendering game")
-    lobby.stopRendering()
-    // load the assets into shared loader, then construct game view and send message to start
-    game = new GameRenderer()
-    game.loadAssets().then(()=>{
-        game.startRendering()
-    })
-});
+// socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) => {
+//     // grid is the simple representation of the map - a 2D array of arrays
+//     setGridDimsRowsCols(rows, cols);
+//     setSubGridDim(subGridSize);
+//     setBoard(grid);
+//     //printMap(grid);
+// });
 
-socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
-    setState(data);
-    game.update(data)
-});
+// socket.on(MSG_TYPES.LOBBY_START, () => {
+//     console.log("start rendering lobby")
+//     main_menu.stopRendering()
+//     lobby.startRendering()
+// });
 
-socket.on(MSG_TYPES.ADD_PLAYER, (data) => {
-    lobby.addPlayer(data)
-})
+// socket.on(MSG_TYPES.GAME_START, () => {
+//     console.log("start rendering game")
+//     lobby.stopRendering()
+//     // load the assets into shared loader, then construct game view and send message to start
+//     game = new GameRenderer()
+//     game.loadAssets().then(()=>{
+//         game.startRendering()
+//     })
+// });
 
-socket.on(MSG_TYPES.ADD_PLAYER_SELF, (data) => {
-    lobby.addPlayer(data)
-    setUserID(data.playerID)
-})
+// socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
+//     setState(data);
+//     game.update(data)
+// });
 
-socket.on(MSG_TYPES.REMOVE_PLAYER, (data) => {
-    lobby.removePlayer(data)
-    // TODO this should also be callable on the game
-})
+// socket.on(MSG_TYPES.ADD_PLAYER, (data) => {
+//     lobby.addPlayer(data)
+// })
+
+// socket.on(MSG_TYPES.ADD_PLAYER_SELF, (data) => {
+//     lobby.addPlayer(data)
+//     setUserID(data.playerID)
+// })
+
+// socket.on(MSG_TYPES.REMOVE_PLAYER, (data) => {
+//     lobby.removePlayer(data)
+//     // TODO this should also be callable on the game
+// })
 
 export function sendJoinGameMessage(data) {
     lobby = new LobbyRenderer()
@@ -99,9 +107,7 @@ export function sendJoinGameMessage(data) {
     })
 }
 
-export function sendMessage(msgType, data) {
-    socket.emit(msgType, data)
-}
+
 
 export function sendMessageGetAck(msgType, data) {
     return new Promise((resolve, reject) => {

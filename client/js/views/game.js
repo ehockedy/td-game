@@ -59,6 +59,7 @@ export class GameRenderer {
         this.tm.setTowerFactoryLink(this.tc)
         this.tc.setTowerMenuLink(this.tm)
 
+        this.map.constructMap()
         this.tm.addTowers()
 
         // Begin the rendering loop
