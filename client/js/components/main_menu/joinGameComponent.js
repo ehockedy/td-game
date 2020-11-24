@@ -1,7 +1,7 @@
 import { BaseMenuOptionComponent } from "./base/baseMenuOptionComponent.js"
 import { setGameID } from "../../state.js"
 import { APP_WIDTH, APP_HEIGHT } from "../../constants.js"
-import { MSG_TYPES, sendJoinGameMessage, sendMessageGetAck } from "../../networking.js"
+import { MSG_TYPES, sendMessage, sendMessageGetAck } from "../../networking.js"
 
 export class JoinGameComponent extends BaseMenuOptionComponent {
     constructor(sprite_handler, x, y) {
@@ -27,6 +27,11 @@ export class JoinGameComponent extends BaseMenuOptionComponent {
         this.joinGameResponseText.y = this.gameCodeTextBox.y + this.gameCodeTextBox.height/2 + 16
         this.joinGameResponseText.anchor.set(0.5)
         this.popupContainer.addChild(this.joinGameResponseText)
+
+        // Text box DOM elements stuck around, so actively remove so that destroy is called on it
+        this.popupContainer.on('removed', ()=>{
+            this.popupContainer.removeChildren()
+        })
     }
 
     registerContainer() {
@@ -90,7 +95,7 @@ export class JoinGameComponent extends BaseMenuOptionComponent {
                 _this.joinGameResponseText.text = "Game not found"
                 setTimeout(()=>{ _this.joinGameResponseText.text = "" }, 2000);
             } else if (resolveVal["response"] == "success") { // Game exists
-                sendJoinGameMessage( { "gameID": userInput } )
+                sendMessage(MSG_TYPES.JOIN_GAME, { "gameID": userInput } )
                 setGameID(userInput)
             }
         }).catch(function(rejectVal) {

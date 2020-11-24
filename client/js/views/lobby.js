@@ -6,7 +6,7 @@ import { Player } from "../components/lobby/player.js"
 import { APP_HEIGHT, APP_WIDTH, LOBBY_WINDOW_HEIGHT, LOBBY_WINDOW_WIDTH, MAP_WIDTH } from "../constants.js"
 import { getPositionWithinEquallySpacedObjects } from "../tools.js"
 import { addSocketEvent, MSG_TYPES } from "../networking.js"
-import { setBoard, getGameID } from "../state.js"
+import { setBoard, setUserID, getGameID } from "../state.js"
 
 
 /**
@@ -101,6 +101,19 @@ export class LobbyRenderer {
             setBoard(grid);
             this.map.constructMap()
         })
+
+        addSocketEvent(MSG_TYPES.ADD_PLAYER, (data) => {
+            this.addPlayer(data)
+        })
+
+        addSocketEvent(MSG_TYPES.ADD_PLAYER_SELF, (data) => {
+            this.addPlayer(data)
+            setUserID(data.playerID)
+        })
+
+        addSocketEvent(MSG_TYPES.REMOVE_PLAYER, (data) => {
+            this.removePlayer(data)
+        })
     }
 
     loadAssets() {
@@ -136,7 +149,6 @@ export class LobbyRenderer {
     }
 
     addPlayer(playerData) {
-        console.log(playerData)
         this.players[playerData.index].setPlayer(playerData)
     }
 

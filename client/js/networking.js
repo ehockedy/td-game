@@ -86,20 +86,6 @@ export function sendMessage(msgType, data) {
 //     game.update(data)
 // });
 
-// socket.on(MSG_TYPES.ADD_PLAYER, (data) => {
-//     lobby.addPlayer(data)
-// })
-
-// socket.on(MSG_TYPES.ADD_PLAYER_SELF, (data) => {
-//     lobby.addPlayer(data)
-//     setUserID(data.playerID)
-// })
-
-// socket.on(MSG_TYPES.REMOVE_PLAYER, (data) => {
-//     lobby.removePlayer(data)
-//     // TODO this should also be callable on the game
-// })
-
 export function sendJoinGameMessage(data) {
     lobby = new LobbyRenderer()
     lobby.loadAssets().then(()=>{
