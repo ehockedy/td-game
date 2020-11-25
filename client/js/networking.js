@@ -12,6 +12,7 @@ import { LobbyRenderer } from "./views/lobby.js"
 export const MSG_TYPES = {
     CONNECT: "client connection",
     GAME_START: "game start",
+    GAME_START_REQUEST: "gsr",
     SERVER_UPDATE_GAME_STATE: "server update game state",
     SERVER_UPDATE_GAME_BOARD: "server update game board",
     CLIENT_UPDATE: "client update",
@@ -51,49 +52,6 @@ export function addSocketEvent(messageType, callback) {
 export function sendMessage(msgType, data) {
     socket.emit(msgType, data)
 }
-
-// let lobby;
-// let game;
-// let main_menu = new MainMenuRenderer()
-// main_menu.startRendering()
-
-// socket.on(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid, rows, cols, subGridSize) => {
-//     // grid is the simple representation of the map - a 2D array of arrays
-//     setGridDimsRowsCols(rows, cols);
-//     setSubGridDim(subGridSize);
-//     setBoard(grid);
-//     //printMap(grid);
-// });
-
-// socket.on(MSG_TYPES.LOBBY_START, () => {
-//     console.log("start rendering lobby")
-//     main_menu.stopRendering()
-//     lobby.startRendering()
-// });
-
-// socket.on(MSG_TYPES.GAME_START, () => {
-//     console.log("start rendering game")
-//     lobby.stopRendering()
-//     // load the assets into shared loader, then construct game view and send message to start
-//     game = new GameRenderer()
-//     game.loadAssets().then(()=>{
-//         game.startRendering()
-//     })
-// });
-
-// socket.on(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (data) => {
-//     setState(data);
-//     game.update(data)
-// });
-
-export function sendJoinGameMessage(data) {
-    lobby = new LobbyRenderer()
-    lobby.loadAssets().then(()=>{
-        sendMessage(MSG_TYPES.JOIN_GAME, data)
-    })
-}
-
-
 
 export function sendMessageGetAck(msgType, data) {
     return new Promise((resolve, reject) => {

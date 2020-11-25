@@ -7,14 +7,15 @@ import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT } from "../constants.js"
+import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
 
 /**
  * This class sets up what will appear in the game view.
  * It also takes updates from the server and passes the update data to the relevant components
  */
 export class GameRenderer {
-    constructor() {
-        this.spriteHandler = new SpriteHandler()
+    constructor(spriteHandler) {
+        this.spriteHandler = spriteHandler
         this.map = new MapComponent(this.spriteHandler)
         this.tm = new TowerMenu(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, 0)
         this.it = new InfoToolbar(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, RIGHT_TOOLBAR_HEIGHT)
@@ -22,6 +23,22 @@ export class GameRenderer {
         this.tc = new TowersComponent(this.spriteHandler)
         this.ec = new EnemiesComponent(this.spriteHandler)
         this.bc = new BulletsComponent(this.spriteHandler)
+
+        addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (gameUpdate) => {
+            this.update(gameUpdate)
+        })
+
+        addSocketEvent(MSG_TYPES.ADD_PLAYER, (gameUpdate) => {
+            this.addPlayer(gameUpdate)
+        })
+
+        addSocketEvent(MSG_TYPES.ADD_PLAYER_SELF, (gameUpdate) => {
+            this.addPlayer(gameUpdate)
+        })
+
+        addSocketEvent(MSG_TYPES.REMOVE_PLAYER, (gameUpdate) => {
+            this.addPlayer(gameUpdate)
+        })
     }
 
     loadAssets() {

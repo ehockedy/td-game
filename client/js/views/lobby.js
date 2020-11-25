@@ -5,7 +5,7 @@ import { GameSetting } from "../components/lobby/gameSetting.js"
 import { Player } from "../components/lobby/player.js"
 import { APP_HEIGHT, APP_WIDTH, LOBBY_WINDOW_HEIGHT, LOBBY_WINDOW_WIDTH, MAP_WIDTH } from "../constants.js"
 import { getPositionWithinEquallySpacedObjects } from "../tools.js"
-import { addSocketEvent, MSG_TYPES } from "../networking.js"
+import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
 import { setBoard, setUserID, getGameID } from "../state.js"
 
 
@@ -93,6 +93,9 @@ export class LobbyRenderer {
             "Start Game",
             45, 0xAA88DD, // font size, colour
             0.5, 0.5) // anchor
+        this.startButton.on('click', ()=>{
+            sendMessage(MSG_TYPES.GAME_START_REQUEST)
+        })
 
 
         // Events the can come from server
@@ -144,7 +147,7 @@ export class LobbyRenderer {
     }
 
     stopRendering() {
-        this.spriteHandler.stopRender()
+        this.spriteHandler.clear()
         // TODO remove socket events
     }
 

@@ -24,5 +24,14 @@ export class Application {
                 sendMessage(MSG_TYPES.LOBBY_START) // Tell the server the client is ready
             })
         })
+
+        addSocketEvent(MSG_TYPES.GAME_START, ()=>{
+            this.view.stopRendering()
+            this.view = new GameRenderer(this.spriteHandler)
+            this.view.loadAssets().then(()=>{
+                this.view.startRendering()
+                sendMessage(MSG_TYPES.GAME_START) // Tell the server the client is ready
+            })
+        })
     }
 }

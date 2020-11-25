@@ -23,6 +23,7 @@ if (interfaces.hasOwnProperty("WiFi")) {
 const MSG_TYPES = {
   CONNECT: "client connection",
   GAME_START: "game start",
+  GAME_START_REQUEST: "gsr",
   SERVER_UPDATE_GAME_STATE: "server update game state",
   SERVER_UPDATE_GAME_BOARD: "server update game board", //  Make this some kind of init?
   CLIENT_UPDATE: "client update",
@@ -61,6 +62,15 @@ function gameExists(gameID) {
   return gameID in games
 }
 
+function broadcastPlayers(socket) {
+  let gameID = socket.gameID
+  let playerID = socket.playerID
+  games[gameID].forEachPlayer((player)=>{
+    if (player.id == playerID) socket.emit(MSG_TYPES.ADD_PLAYER_SELF, games[gameID].getPlayerInfo(player.id))
+    else socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(player.id))
+  })
+}
+
 function addPlayer(socket, gameID, playerID) {
   socket.join(gameID)
   if (!games[gameID].playerExists(playerID)) {
@@ -71,10 +81,7 @@ function addPlayer(socket, gameID, playerID) {
   socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(playerID))
 
   // Tell this player about existing players (including itself)
-  games[gameID].forEachPlayer((player)=>{
-    if (player.id == playerID) socket.emit(MSG_TYPES.ADD_PLAYER_SELF, games[gameID].getPlayerInfo(player.id))
-    else socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(player.id))
-  })
+  broadcastPlayers(socket, gameID)
 
   // Tell new player about the map
   socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure())
@@ -111,9 +118,13 @@ web_sockets_server.on('connection', (socket) => {
     addPlayer(socket, socket.gameID, socket.playerID)
   })
 
-  socket.on(MSG_TYPES.GAME_START, (data)=>{
+  socket.on(MSG_TYPES.GAME_START_REQUEST, ()=> {
     socket.emit(MSG_TYPES.GAME_START)
-    setInterval(updateGameAndSend, 50*0.2, data.gameID); // 20 "fps"
+  })
+
+  socket.on(MSG_TYPES.GAME_START, ()=>{
+    broadcastPlayers(socket)
+    setInterval(updateGameAndSend, 50*0.2, socket.gameID); // 20 "fps"
   })
 
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
