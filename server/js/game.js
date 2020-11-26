@@ -22,11 +22,7 @@ class Game {
         this.towers = []
         this.players = []
         this.map = new gameMap.GameMap(mapY, mapX, subGridXY)
-        this.map.printMap()
-
-        this.map.generateMap()
-        this.map.printMap()
-        this.map.calculatePath()
+        this.generateMap()
 
         this.hasStarted = false
     }
@@ -42,6 +38,13 @@ class Game {
             }
         }
         return basicMap
+    }
+
+    generateMap() {
+        this.map.init()
+        this.map.generateMap()
+        //this.map.printMap()
+        this.map.calculatePath()
     }
 
     moveEnemies() {

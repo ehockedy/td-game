@@ -11,6 +11,7 @@ export const MSG_TYPES = {
     GAME_START: "game start",
     GAME_START_REQUEST: "gsr",
     GET_MAP: "gm",
+    GET_MAP_REGENERATE: "gmr",
     GAME_START_PLAYER_NOT_PRESENT: "pnp",
     SERVER_UPDATE_GAME_STATE: "server update game state",
     SERVER_UPDATE_GAME_BOARD: "server update game board",

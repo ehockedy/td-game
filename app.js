@@ -26,6 +26,7 @@ const MSG_TYPES = {
   GAME_START_PLAYER_NOT_PRESENT: "pnp",
   GAME_START_REQUEST: "gsr",
   GET_MAP: "gm",
+  GET_MAP_REGENERATE: "gmr",
   SERVER_UPDATE_GAME_STATE: "server update game state",
   SERVER_UPDATE_GAME_BOARD: "server update game board", //  Make this some kind of init?
   CLIENT_UPDATE: "client update",
@@ -111,6 +112,11 @@ web_sockets_server.on('connection', (socket) => {
   })
 
   socket.on(MSG_TYPES.GET_MAP, ()=>{
+    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[socket.gameID].getMapStructure())
+  })
+
+  socket.on(MSG_TYPES.GET_MAP_REGENERATE, ()=>{
+    games[socket.gameID].generateMap()
     socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[socket.gameID].getMapStructure())
   })
 

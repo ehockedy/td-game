@@ -12,6 +12,7 @@ export class MapComponent extends BaseComponent {
     }
 
     constructMap() {
+        this.container.removeChildren()
         const MAP_SPRITE_SIZE_X = DEFAULT_SPRITE_SIZE_X*this.scalingFactor // Width of a sprite in the map spritesheet
         const MAP_SPRITE_SIZE_Y = DEFAULT_SPRITE_SIZE_Y*this.scalingFactor // Height of a sprite in the map spritesheet
 

@@ -48,6 +48,8 @@ export class LobbyRenderer {
             "Regenerate Map",
             20, 0x448877, // font size, colour
             1, 1) // anchor
+        this.regenerateMapButton.on("click", ()=>{sendMessage(MSG_TYPES.GET_MAP_REGENERATE)})
+        this.regenerateMapButton.on("tap", ()=>{sendMessage(MSG_TYPES.GET_MAP_REGENERATE)})
 
         // Settings for the game
         let optionWidth = 350
@@ -98,7 +100,6 @@ export class LobbyRenderer {
 
         // Events the can come from server
         addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid) => {
-            // grid is the simple representation of the map - a 2D array of arrays
             setBoard(grid);
             this.map.constructMap()
         })

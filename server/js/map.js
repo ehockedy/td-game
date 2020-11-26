@@ -15,6 +15,12 @@ class GameMap {
     // Size of the sub grid that makes up one map square
     this.subGridSize = subGridSize
 
+    this.numEnemies = 0
+
+    this.init()
+  }
+
+  init() {
     // Current position for drawing map
     this.row = Math.floor(Math.random() * this.height/2) + Math.floor(this.height/4);
     this.col = 0
@@ -27,9 +33,9 @@ class GameMap {
 
     // initialise board
     this.map = [] //new Array(this.height); // Make rows
-    for(var i=0; i < rows; i++) {
+    for(var i=0; i < this.height; i++) {
       this.map.push([])
-      for(var j=0; j < cols; j++) {
+      for(var j=0; j < this.width; j++) {
         this.map[i].push({
           "value": 0,
           "enemies": [],
@@ -56,9 +62,7 @@ class GameMap {
 
     this.path = [] // Exact path through the sub grids that the enemeis will take
     this.mainPath = [] // Main map grid squares that the enemy path goes through
-
-    this.numEnemies = 0
-  }
+}
 
   setGridValue(row, col, value, property) {
     this.map[row][col][property] = value
