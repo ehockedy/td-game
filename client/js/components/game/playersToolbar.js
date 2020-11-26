@@ -9,9 +9,11 @@ export class PlayersToolbar extends BaseToolbarComponent {
     }
 
     addPlayer(info) {
-        let playerInfoContainer = this.renderPlayerInfo(info)
-        playerInfoContainer.x = getPositionWithinEquallySpacedObjects(info.index+1, 4, this.width_px/4, this.width_px) - this.width_px/4/2
-        this.container.addChild(playerInfoContainer)
+        if (!this.container.getChildByName(info.playerID)) {
+            let playerInfoContainer = this.renderPlayerInfo(info)
+            playerInfoContainer.x = getPositionWithinEquallySpacedObjects(info.index+1, 4, this.width_px/4, this.width_px) - this.width_px/4/2
+            this.container.addChild(playerInfoContainer)
+        }
     }
 
     renderPlayerInfo(playerInfo) {
@@ -66,13 +68,16 @@ export class PlayersToolbar extends BaseToolbarComponent {
 
     update(playersData) {
         playersData.objects.forEach((player) => {
-            this.container.getChildByName(player.playerID).children.forEach((field) => {
-                for (let stat in player.stats) {
-                    if (field.name == stat && field.type == "value") {
-                        field.text = player.stats[stat].toString()
+            let playerInfo = this.container.getChildByName(player.playerID)
+            if (playerInfo != undefined) {
+                this.container.getChildByName(player.playerID).children.forEach((field) => {
+                    for (let stat in player.stats) {
+                        if (field.name == stat && field.type == "value") {
+                            field.text = player.stats[stat].toString()
+                        }
                     }
-                }
-            })
+                })
+            }
         })
     }
 }

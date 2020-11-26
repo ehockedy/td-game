@@ -24,6 +24,7 @@ const MSG_TYPES = {
   CONNECT: "client connection",
   GAME_START: "game start",
   GAME_START_REQUEST: "gsr",
+  GET_MAP: "gm",
   SERVER_UPDATE_GAME_STATE: "server update game state",
   SERVER_UPDATE_GAME_BOARD: "server update game board", //  Make this some kind of init?
   CLIENT_UPDATE: "client update",
@@ -71,22 +72,6 @@ function broadcastPlayers(socket) {
   })
 }
 
-function addPlayer(socket, gameID, playerID) {
-  socket.join(gameID)
-  if (!games[gameID].playerExists(playerID)) {
-    games[gameID].addPlayer(playerID)
-  }
-
-  // Tell all other players about this new player
-  socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(playerID))
-
-  // Tell this player about existing players (including itself)
-  broadcastPlayers(socket, gameID)
-
-  // Tell new player about the map
-  socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure())
-}
-
 web_sockets_server.on('connection', (socket) => {
   // Join game event
   // Player has started or joined game. Create a room with the game ID if one does not exist and send that client the game info.
@@ -100,7 +85,15 @@ web_sockets_server.on('connection', (socket) => {
       games[data.gameID] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
     }
 
-    socket.emit(MSG_TYPES.LOBBY_START)
+    if (games[socket.gameID].hasStarted) {
+      console.log(games[socket.gameID].players, socket.playerID)
+      if (games[socket.gameID].playerExists(socket.playerID)) {
+        socket.emit(MSG_TYPES.GAME_START)
+      } // TODO else send error message
+    } else {
+      socket.emit(MSG_TYPES.LOBBY_START)
+    }
+
   });
 
   // Check whether a game with the given ID exists
@@ -114,17 +107,29 @@ web_sockets_server.on('connection', (socket) => {
     }
   })
 
-  socket.on(MSG_TYPES.LOBBY_START, () => {
-    addPlayer(socket, socket.gameID, socket.playerID)
+  socket.on(MSG_TYPES.GET_MAP, ()=>{
+    socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[socket.gameID].getMapStructure())
+  })
+
+  socket.on(MSG_TYPES.ADD_PLAYER, () => {
+    let gameID = socket.gameID
+    let playerID = socket.playerID
+    socket.join(gameID)
+    if (!games[gameID].playerExists(playerID)) {
+      games[gameID].addPlayer(playerID)
+    }
+
+    // Tell all other players about this new player
+    socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(playerID))
+
+    // Tell this player about existing players (including itself)
+    broadcastPlayers(socket)
   })
 
   socket.on(MSG_TYPES.GAME_START_REQUEST, ()=> {
-    socket.emit(MSG_TYPES.GAME_START)
-  })
-
-  socket.on(MSG_TYPES.GAME_START, ()=>{
-    broadcastPlayers(socket)
-    setInterval(updateGameAndSend, 50*0.2, socket.gameID); // 20 "fps"
+    games[socket.gameID].start()
+    setInterval(updateGameAndSend, 50*0.2, socket.gameID);  // 20 "fps"
+    web_sockets_server.in(socket.gameID).emit(MSG_TYPES.GAME_START)
   })
 
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {

@@ -1,4 +1,3 @@
-import { SpriteHandler } from "../sprite_handler.js"
 import { MapComponent } from "../components/game/map.js"
 import { TowerMenu } from "../components/game/towerMenu.js"
 import { InfoToolbar } from "../components/game/infoToolbar.js"
@@ -7,7 +6,8 @@ import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT } from "../constants.js"
-import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
+import { addSocketEvent, MSG_TYPES } from "../networking.js"
+import { setBoard } from "../state.js"
 
 /**
  * This class sets up what will appear in the game view.
@@ -39,24 +39,18 @@ export class GameRenderer {
         addSocketEvent(MSG_TYPES.REMOVE_PLAYER, (gameUpdate) => {
             this.addPlayer(gameUpdate)
         })
+
+        addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid) => {
+            setBoard(grid);
+            this.map.constructMap()
+        })
     }
 
     loadAssets() {
         let _tc = this.tc
         let _it = this.it
         let _ec = this.ec
-        return new Promise((resolve)=>{
-            // Load sprite assets
-            PIXI.Loader.shared
-                .add("client/img/enemy_spritesheet.png")
-                .add("client/img/tower_spritesheet.png")
-                .add("client/img/bullet_spritesheet.png")
-                .load(function() {
-                    // Load component data and textures
-                    Promise.all([_tc.loadData(), _it.loadData(), _ec.loadData()])
-                    .then(resolve)
-                })
-        })
+        return Promise.all([_tc.loadData(), _it.loadData(), _ec.loadData()])
     }
 
     startRendering() {
@@ -76,7 +70,6 @@ export class GameRenderer {
         this.tm.setTowerFactoryLink(this.tc)
         this.tc.setTowerMenuLink(this.tm)
 
-        this.map.constructMap()
         this.tm.addTowers()
 
         // Begin the rendering loop

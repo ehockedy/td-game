@@ -13,6 +13,7 @@ export const MSG_TYPES = {
     CONNECT: "client connection",
     GAME_START: "game start",
     GAME_START_REQUEST: "gsr",
+    GET_MAP: "gm",
     SERVER_UPDATE_GAME_STATE: "server update game state",
     SERVER_UPDATE_GAME_BOARD: "server update game board",
     CLIENT_UPDATE: "client update",

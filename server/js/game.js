@@ -27,6 +27,8 @@ class Game {
         this.map.generateMap()
         this.map.printMap()
         this.map.calculatePath()
+
+        this.hasStarted = false
     }
 
     getMapStructure() {
@@ -317,6 +319,10 @@ class Game {
         })
 
         return state;
+    }
+
+    start() {
+        this.hasStarted = true
     }
 }
 

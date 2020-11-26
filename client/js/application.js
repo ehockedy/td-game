@@ -19,10 +19,9 @@ export class Application {
         addSocketEvent(MSG_TYPES.LOBBY_START, ()=>{
             this.view.stopRendering()
             this.view = new LobbyRenderer(this.spriteHandler)
-            this.view.loadAssets().then(()=>{
-                this.view.startRendering()
-                sendMessage(MSG_TYPES.LOBBY_START) // Tell the server the client is ready
-            })
+            this.view.startRendering()
+            sendMessage(MSG_TYPES.GET_MAP)
+            sendMessage(MSG_TYPES.ADD_PLAYER)
         })
 
         addSocketEvent(MSG_TYPES.GAME_START, ()=>{
@@ -30,7 +29,8 @@ export class Application {
             this.view = new GameRenderer(this.spriteHandler)
             this.view.loadAssets().then(()=>{
                 this.view.startRendering()
-                sendMessage(MSG_TYPES.GAME_START) // Tell the server the client is ready
+                sendMessage(MSG_TYPES.GET_MAP)
+                sendMessage(MSG_TYPES.ADD_PLAYER)
             })
         })
     }

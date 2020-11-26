@@ -93,10 +93,8 @@ export class LobbyRenderer {
             "Start Game",
             45, 0xAA88DD, // font size, colour
             0.5, 0.5) // anchor
-        this.startButton.on('click', ()=>{
-            sendMessage(MSG_TYPES.GAME_START_REQUEST)
-        })
-
+        this.startButton.on('click', ()=>{sendMessage(MSG_TYPES.GAME_START_REQUEST)})
+        this.startButton.on('tap', ()=>{sendMessage(MSG_TYPES.GAME_START_REQUEST)})
 
         // Events the can come from server
         addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid) => {
@@ -116,15 +114,6 @@ export class LobbyRenderer {
 
         addSocketEvent(MSG_TYPES.REMOVE_PLAYER, (data) => {
             this.removePlayer(data)
-        })
-    }
-
-    loadAssets() {
-        return new Promise((resolve)=>{
-            // Load sprite assets
-            PIXI.Loader.shared
-                .add("client/img/map_spritesheet.png")
-                .load(resolve)
         })
     }
 
