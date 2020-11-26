@@ -101,8 +101,17 @@ export class JoinGameComponent extends BaseMenuOptionComponent {
         }).catch(function(rejectVal) {
             if (rejectVal["response"] == "timeout") {
                 _this.joinGameResponseText.text = "Connection with server timed out"
-                setTimeout(()=>{ _this.joinGameResponseText.text = "" }, 2000);
+                setTimeout(()=>{_this._clearTextBoxText()}, 2000);
             }
         })
+    }
+
+    setJoinGameResponseTextBoxMessage(message) {
+        this.joinGameResponseText.text = message
+        setTimeout(()=>{this._clearTextBoxText()}, 2000);
+    }
+
+    _clearTextBoxText() {
+        this.joinGameResponseText.text = ""
     }
 }

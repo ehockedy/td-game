@@ -23,6 +23,7 @@ if (interfaces.hasOwnProperty("WiFi")) {
 const MSG_TYPES = {
   CONNECT: "client connection",
   GAME_START: "game start",
+  GAME_START_PLAYER_NOT_PRESENT: "pnp",
   GAME_START_REQUEST: "gsr",
   GET_MAP: "gm",
   SERVER_UPDATE_GAME_STATE: "server update game state",
@@ -89,7 +90,9 @@ web_sockets_server.on('connection', (socket) => {
       console.log(games[socket.gameID].players, socket.playerID)
       if (games[socket.gameID].playerExists(socket.playerID)) {
         socket.emit(MSG_TYPES.GAME_START)
-      } // TODO else send error message
+      } else {
+        socket.emit(MSG_TYPES.GAME_START_PLAYER_NOT_PRESENT)
+      }
     } else {
       socket.emit(MSG_TYPES.LOBBY_START)
     }

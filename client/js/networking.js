@@ -1,7 +1,4 @@
-import { setState, setBoard, setGridDimsRowsCols, setSubGridDim , getGameID, setUserID } from "./state.js"
-import { GameRenderer} from "./views/game.js"
-import { MainMenuRenderer } from "./views/main_menu.js"
-import { LobbyRenderer } from "./views/lobby.js"
+import { getGameID } from "./state.js"
 
 // To get client side debugging, paste "localStorage.debug = '*';" into
 // the browser console
@@ -14,6 +11,7 @@ export const MSG_TYPES = {
     GAME_START: "game start",
     GAME_START_REQUEST: "gsr",
     GET_MAP: "gm",
+    GAME_START_PLAYER_NOT_PRESENT: "pnp",
     SERVER_UPDATE_GAME_STATE: "server update game state",
     SERVER_UPDATE_GAME_BOARD: "server update game board",
     CLIENT_UPDATE: "client update",
