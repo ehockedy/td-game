@@ -25,7 +25,9 @@ export const MSG_TYPES = {
     CLIENT_DEBUG: "cd",
     ADD_PLAYER: "ap",
     ADD_PLAYER_SELF: "aps",
-    REMOVE_PLAYER: "rp"
+    REMOVE_PLAYER: "rp",
+    ROUND_START: "rs",
+    ROUND_END: "re"
 }
 
 export function getTowerUpdateMsg(tower) {

@@ -5,8 +5,9 @@ import { PlayersToolbar } from "../components/game/playersToolbar.js"
 import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
-import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT } from "../constants.js"
-import { addSocketEvent, MSG_TYPES } from "../networking.js"
+import { GraphicButton } from "../components/ui_common/button.js"
+import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT, APP_WIDTH, APP_HEIGHT } from "../constants.js"
+import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
 import { setBoard } from "../state.js"
 
 /**
@@ -23,6 +24,15 @@ export class GameRenderer {
         this.tc = new TowersComponent(this.spriteHandler)
         this.ec = new EnemiesComponent(this.spriteHandler)
         this.bc = new BulletsComponent(this.spriteHandler)
+
+        this.startRoundButton = new GraphicButton(
+            120, 90, // width, height
+            APP_WIDTH, APP_HEIGHT, // x, y
+            "Start Round",
+            40, 0x448877, // font size, colour
+            1, 1) // anchor
+        this.startRoundButton.on("click", ()=>{sendMessage(MSG_TYPES.ROUND_START)})
+        this.startRoundButton.on("tap", ()=>{sendMessage(MSG_TYPES.ROUND_START)})
 
         addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (gameUpdate) => {
             this.update(gameUpdate)
@@ -64,6 +74,7 @@ export class GameRenderer {
         this.tc.registerContainer()
         this.ec.registerContainer()
         this.bc.registerContainer()
+        this.spriteHandler.registerContainer(this.startRoundButton)
 
         // Set up links between components that need them
         this.tc.setInfoToolbarLink(this.it)

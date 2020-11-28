@@ -25,6 +25,10 @@ class Game {
         this.generateMap()
 
         this.hasStarted = false
+        this.level = 0
+        this.enemyQueue = []
+        this.enemyCount = 0
+        this.enemyCountTarget = 0
     }
 
     getMapStructure() {
@@ -111,6 +115,8 @@ class Game {
             bullet.move()
             if (bullet.isOffMap()) {
                 this.map.removeBulletPrevPos(bullet) // Remove that bullet, and do not re-add it - it's off the map
+            } else if (bullet.isOutOfRange()) {
+                this.map.removeBulletPrevPos(bullet)
             } else if (bullet.hasMovedSquare) {
                 this.map.removeBulletPrevPos(bullet)
                 toAdd.push(bullet)
@@ -124,6 +130,11 @@ class Game {
         toAdd.forEach((bullet) => {
             this.map.addBullet(bullet)
         })
+    }
+
+    removeEnemy(enemy) {
+        this.map.removeEnemy(enemy)
+        this.enemyCount += 1
     }
 
     resolveInteractions() {
@@ -140,8 +151,9 @@ class Game {
                 }
 
                 if (enemy.hp <= 0) { // Enemy has been killed
-                    this.map.removeEnemy(enemy)
+                    this.removeEnemy(enemy)
                     bullet.originTower.registerKill()
+                    break // If enemy has been killed, even if it is removed the enemy object still exiest. This can cause a double kill, so skip to next enemy
                 }
             }
         })
@@ -150,13 +162,7 @@ class Game {
         // We must iterate through the enemies in reverse, since removing one would mess up the indexing
         this.map.forEachEnemyInReverse((enemy) => {
             if (enemy.steps > this.map.path.length - config.SUBGRID_MIDPOINT) {
-                this.map.removeEnemy(enemy)
-            }
-        })
-
-        this.map.forEachBulletInReverse((bullet) => {
-            if (bullet.isOutOfRange()) {
-                this.map.removeBullet(bullet)
+                this.removeEnemy(enemy)
             }
         })
     }
@@ -183,6 +189,18 @@ class Game {
         // TODO create enemy types
         let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
         this.map.addNewEnemy(new enemy.Enemy(30, randomSpeed, this.map.path))
+    }
+
+    shiftEnemyQueue() {
+        if (this.enemyQueue.length > 0) {
+            if (this.enemyQueue[0].stepsUntilGo == 0) {
+                this.addEnemy("", ENEMY_TYPE.RANDOM)
+                this.enemyQueue.shift()
+                //this.addEnemy(this.enemyQueue.shift())
+            } else {
+                this.enemyQueue[0].stepsUntilGo -= 1
+            }
+        }
     }
 
     addTower(name, type, playerID, row, col) {
@@ -244,7 +262,30 @@ class Game {
         })
     }
 
-    updateGameState() {
+    advanceLevel() {
+        if (this.roundActive()) return // This should not occur
+
+        this.level += 1
+
+        // Generate the enemy queue
+        this.enemyQueue = []
+        for (let i=0; i < 5; i+=1) {
+            this.enemyQueue.push({
+                "stepsUntilGo": 40*Math.floor(Math.random()*10 + 1),
+                "type": "TODO"
+            })
+        }
+
+        // This is how we determine if the round is over - this many enemies have been killed or got to end
+        this.enemyCountTarget = this.enemyQueue.length
+        this.enemyCount = 0
+    }
+
+    roundActive() {
+        return this.enemyCount < this.enemyCountTarget
+    }
+
+    updateActiveGameState() {
         // Update the state of existing enemies
         this.moveEnemies();
 
@@ -257,9 +298,19 @@ class Game {
         // See if enemy reached end, bullet hit, etc.
         this.resolveInteractions();
 
-        // Add random enemy with a random distribution
-        this.addEnemy("random", ENEMY_TYPE.RANDOM);
+        // Fopr the current level, determine whether to send another enemy
+        this.shiftEnemyQueue();
+    }
 
+    // Game state updates when not in a round
+    updateInactiveGameState() {
+        // Move any bullets - this lets any remaining bullets finish their movement
+        this.moveBullets();
+
+        this.resolveInteractions();
+    }
+
+    getGameState() {
         // Write the updated state
         let state = {
             "enemies" : {
@@ -287,7 +338,6 @@ class Game {
             })
             hash.update(e.name)
         })
-
         state["enemies"]["hash"] = hash.digest("hex")
 
         hash = crypto.createHash("sha256")

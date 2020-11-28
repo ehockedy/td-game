@@ -39,7 +39,9 @@ const MSG_TYPES = {
   CLIENT_DEBUG: "cd",
   ADD_PLAYER: "ap",
   ADD_PLAYER_SELF: "aps",
-  REMOVE_PLAYER: "rp"
+  REMOVE_PLAYER: "rp",
+  ROUND_START: "rs",
+  ROUND_END: "re"
 }
 
 // First set up http server to serve index.html and its included files
@@ -57,7 +59,17 @@ let games = {}
 // Main processing loop
 // Updates the game state and sends the update to all connected clients in that game room
 function updateGameAndSend(gameID) {
-  let new_state = games[gameID].updateGameState()
+  if (games[gameID].roundActive()) {
+    games[gameID].updateActiveGameState() // Advance the game by one tick
+
+    if (!games[gameID].roundActive()) { // Round is over
+      web_sockets_server.in(gameID).emit(MSG_TYPES.ROUND_END)
+    }
+  } else {
+    games[gameID].updateInactiveGameState()
+  }
+
+  let new_state = games[gameID].getGameState()
   web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
 }
 
@@ -139,6 +151,11 @@ web_sockets_server.on('connection', (socket) => {
     games[socket.gameID].start()
     setInterval(updateGameAndSend, 50*0.2, socket.gameID);  // 20 "fps"
     web_sockets_server.in(socket.gameID).emit(MSG_TYPES.GAME_START)
+  })
+
+  socket.on(MSG_TYPES.ROUND_START, ()=>{
+    // TODO if and only if all players ready then start
+    games[socket.gameID].advanceLevel()
   })
 
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
