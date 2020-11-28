@@ -63,7 +63,7 @@ function updateGameAndSend(gameID) {
     games[gameID].updateActiveGameState() // Advance the game by one tick
 
     if (!games[gameID].roundActive()) { // Round is over
-      web_sockets_server.in(gameID).emit(MSG_TYPES.ROUND_END)
+      web_sockets_server.in(gameID).emit(MSG_TYPES.ROUND_END, games[gameID].getNextRoundInfo())
     }
   } else {
     games[gameID].updateInactiveGameState()

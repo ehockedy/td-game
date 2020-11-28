@@ -269,7 +269,7 @@ class Game {
 
         // Generate the enemy queue
         this.enemyQueue = []
-        for (let i=0; i < 5; i+=1) {
+        for (let i=0; i < 3; i+=1) {
             this.enemyQueue.push({
                 "stepsUntilGo": 40*Math.floor(Math.random()*10 + 1),
                 "type": "TODO"
@@ -279,6 +279,12 @@ class Game {
         // This is how we determine if the round is over - this many enemies have been killed or got to end
         this.enemyCountTarget = this.enemyQueue.length
         this.enemyCount = 0
+    }
+
+    getNextRoundInfo() {
+        return {
+            "roundNumber": this.level+1
+        }
     }
 
     roundActive() {

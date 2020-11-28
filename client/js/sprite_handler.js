@@ -40,8 +40,20 @@ export class SpriteHandler {
         this.updatables.push(sprite)
     }
 
+    removeUpdatableSprite(sprite) {
+        for (let i=0; i < this.updatables.length; i++) {
+            if (sprite == this.updatables[i]) { // TODO make sure object comparison works
+                this.updatables.splice(i, 1)
+            }
+        }
+    }
+
     registerContainer(container) {
         this.app.stage.addChild(container)
+    }
+
+    removeContainer(container) {
+        this.app.stage.removeChild(container)
     }
 
     containerSize(name) {

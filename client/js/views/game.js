@@ -6,6 +6,7 @@ import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { GraphicButton } from "../components/ui_common/button.js"
+import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT, APP_WIDTH, APP_HEIGHT } from "../constants.js"
 import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
 import { setBoard } from "../state.js"
@@ -24,6 +25,7 @@ export class GameRenderer {
         this.tc = new TowersComponent(this.spriteHandler)
         this.ec = new EnemiesComponent(this.spriteHandler)
         this.bc = new BulletsComponent(this.spriteHandler)
+        this.perRoundUpdateText = new OnScreenMessage(MAP_WIDTH/2, MAP_HEIGHT/2, "Round 1", 30)
 
         this.startRoundButton = new GraphicButton(
             120, 90, // width, height
@@ -54,6 +56,18 @@ export class GameRenderer {
             setBoard(grid);
             this.map.constructMap()
         })
+
+        addSocketEvent(MSG_TYPES.ROUND_END, (nextRoundInfo) => {
+            let timePerFade = 1000
+            let timeBetweenFade = 2000
+            let timeBetweenMessages = 2000
+            this.perRoundUpdateText.updateText("Round Complete")
+            this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
+            setTimeout(()=>{
+                this.perRoundUpdateText.updateText("Round " + nextRoundInfo.roundNumber.toString())
+                this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
+            }, timePerFade*2 + timeBetweenMessages)
+        })
     }
 
     loadAssets() {
@@ -75,6 +89,7 @@ export class GameRenderer {
         this.ec.registerContainer()
         this.bc.registerContainer()
         this.spriteHandler.registerContainer(this.startRoundButton)
+        this.spriteHandler.registerContainer(this.perRoundUpdateText)
 
         // Set up links between components that need them
         this.tc.setInfoToolbarLink(this.it)
@@ -85,6 +100,8 @@ export class GameRenderer {
 
         // Begin the rendering loop
         this.spriteHandler.render()
+
+        this.perRoundUpdateText.fadeInThenOut(1000, 2000)
     }
 
     update(serverUpdate) {
