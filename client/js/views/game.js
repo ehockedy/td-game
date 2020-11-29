@@ -77,6 +77,10 @@ export class GameRenderer {
             this.map.constructMap()
         })
 
+        addSocketEvent(MSG_TYPES.PLAYER_READY, (playerData) => {
+            this.ut.setPlayerReady(playerData.playerID)
+        })
+
         addSocketEvent(MSG_TYPES.ROUND_END, (nextRoundInfo) => {
             let timePerFade = 1000
             let timeBetweenFade = 2000
@@ -87,6 +91,7 @@ export class GameRenderer {
                 this.perRoundUpdateText.updateText("Round " + nextRoundInfo.roundNumber.toString())
                 this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
             }, timePerFade*2 + timeBetweenMessages)
+            this.ut.unsetAllPlayers()
         })
     }
 

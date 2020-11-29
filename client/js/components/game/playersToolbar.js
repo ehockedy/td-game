@@ -63,7 +63,46 @@ export class PlayersToolbar extends BaseToolbarComponent {
             text.type = "value"
             localContainer.addChild(text);
         })
+
+        // Ready icon
+        let readyIconStyle = {
+            fill: "0x22FF33",
+            fontFamily: 'Arial',
+            fontSize: 16,
+            fontWeight: 'bold',
+        }
+        let readyIcon = new PIXI.Text("\u{1F5F8}", readyIconStyle);
+        readyIcon.x = 0
+        readyIcon.y = 0
+        readyIcon.anchor.set(0)
+        readyIcon.name = "readyIcon"
+        readyIcon.visible = false
+        localContainer.addChild(readyIcon)
+
         return localContainer
+    }
+
+    setPlayerReady(playerID) {
+        this._setReadiness(playerID, true)
+    }
+
+    unsetPlayerReady() {
+        this._setReadiness(playerID, false)
+    }
+
+    unsetAllPlayers() {
+        // TODO this could be done more nicely
+        this.container.children.forEach((child) => {
+            let readyIcon = child.getChildByName("readyIcon")
+            if (readyIcon) readyIcon.visible = false
+        })
+    }
+
+    _setReadiness(playerID, readiness) {
+        let playerInfoContainer = this.container.getChildByName(playerID)
+        if (playerInfoContainer) {
+            playerInfoContainer.getChildByName("readyIcon").visible = readiness
+        }
     }
 
     update(playersData) {

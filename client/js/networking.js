@@ -28,6 +28,7 @@ export const MSG_TYPES = {
     REMOVE_PLAYER: "rp",
     ROUND_START: "rs",
     ROUND_END: "re",
+    PLAYER_READY: "pr",
     DEBUG_EXPORT_GAME_STATE: "debug_export",
     DEBUG_IMPORT_GAME_STATE: "debug_import"
 }

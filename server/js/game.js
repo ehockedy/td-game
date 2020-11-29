@@ -232,7 +232,7 @@ class Game {
                 return this.players[playerIdx]
             }
         }
-        throw new Error("Player not found")
+        throw new Error("Player " + playerID + " not found")
     }
 
     getPlayerInfo(playerID) {
@@ -269,6 +269,10 @@ class Game {
         })
     }
 
+    ready() {
+        return this.players.every((player) => player.isReady())
+    }
+
     advanceLevel() {
         if (this.roundActive()) return // This should not occur
 
@@ -286,6 +290,11 @@ class Game {
         // This is how we determine if the round is over - this many enemies have been killed or got to end
         this.enemyCountTarget = this.enemyQueue.length
         this.enemyCount = 0
+
+        // Reset players ready status
+        this.players.forEach((player) => {
+            player.unsetReady()
+        })
     }
 
     getNextRoundInfo() {

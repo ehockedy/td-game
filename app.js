@@ -42,6 +42,7 @@ const MSG_TYPES = {
   REMOVE_PLAYER: "rp",
   ROUND_START: "rs",
   ROUND_END: "re",
+  PLAYER_READY: "pr",
   DEBUG_EXPORT_GAME_STATE: "debug_export",
   DEBUG_IMPORT_GAME_STATE: "debug_import"
 }
@@ -156,8 +157,13 @@ web_sockets_server.on('connection', (socket) => {
   })
 
   socket.on(MSG_TYPES.ROUND_START, ()=>{
-    // TODO if and only if all players ready then start
-    games[socket.gameID].advanceLevel()
+    let playerID = socket.playerID
+    let gameID = socket.gameID
+    games[gameID].getPlayerByName(playerID).setReady()
+    if (games[gameID].ready()) {
+      games[gameID].advanceLevel()
+    }
+    web_sockets_server.in(gameID).emit(MSG_TYPES.PLAYER_READY, games[gameID].getPlayerInfo(playerID))
   })
 
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
