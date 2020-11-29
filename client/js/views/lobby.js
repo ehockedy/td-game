@@ -42,14 +42,6 @@ export class LobbyRenderer {
         this.map = new MapComponent(this.spriteHandler, mapScale)
         this.map.container.x = popupBoundaryLeft + xMargin
         this.map.container.y = popupBoundaryTop + 80
-        this.regenerateMapButton = new GraphicButton(
-            200, 25, // width, height
-            this.map.container.x+this.map.width, this.map.container.y - 5, // x, y
-            "Regenerate Map",
-            20, 0x448877, // font size, colour
-            1, 1) // anchor
-        this.regenerateMapButton.on("click", ()=>{sendMessage(MSG_TYPES.GET_MAP_REGENERATE)})
-        this.regenerateMapButton.on("tap", ()=>{sendMessage(MSG_TYPES.GET_MAP_REGENERATE)})
 
         // Settings for the game
         let optionWidth = 350
@@ -70,6 +62,33 @@ export class LobbyRenderer {
             "Difficulty", ["Easy", "Medium", "Hard", "Very Hard"], 1,
             optionFontSize, optionWidth,
             1, 0)
+
+        this.seedInput = new PIXI.TextInput({
+            input: {
+                fontSize: '25px',
+                padding: '2px',
+                width: '350px',
+                color: '#26272E'
+            },
+            box: {
+                default: {fill: 0xE8E9F3, stroke: {color: 0xCBCEE0, width: 1}},
+                focused: {fill: 0xE1E3EE, stroke: {color: 0xABAFC6, width: 1}},
+                disabled: {fill: 0xDBDBDB}
+            }
+        })
+
+        this.seedInput.placeholder = 'Game seed...'
+        this.seedInput.x = this.map.container.x + 420 + 20
+        this.seedInput.y = this.roundsSetting.y + this.difficultySetting.getLocalBounds().height + optionGap + 45
+
+        this.regenerateMapButton = new GraphicButton(
+            200, 25, // width, height
+            this.map.container.x+this.map.width, this.map.container.y - 5, // x, y
+            "Regenerate Map",
+            20, 0x448877, // font size, colour
+            1, 1) // anchor
+        this.regenerateMapButton.on("click", ()=>{sendMessage(MSG_TYPES.GET_MAP_REGENERATE, {"seed": this.seedInput.text})})
+        this.regenerateMapButton.on("tap", ()=>{sendMessage(MSG_TYPES.GET_MAP_REGENERATE, {"seed": this.seedInput.text})})
 
         // Lobby members - player that clicked new game is player 1. They can change the game options. When another player joins they fill in the second slot and so on
         let playerSideLen = popupBoundaryBottom - this.map.container.y - this.map.height - yMargin - 20
@@ -128,6 +147,7 @@ export class LobbyRenderer {
         this.spriteHandler.registerContainer(this.mapPathSetting);
         this.spriteHandler.registerContainer(this.roundsSetting);
         this.spriteHandler.registerContainer(this.difficultySetting);
+        this.spriteHandler.registerContainer(this.seedInput);
         this.players.forEach((player) => {
             this.spriteHandler.registerContainer(player)
         })

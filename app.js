@@ -129,8 +129,8 @@ web_sockets_server.on('connection', (socket) => {
     socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[socket.gameID].getMapStructure())
   })
 
-  socket.on(MSG_TYPES.GET_MAP_REGENERATE, ()=>{
-    games[socket.gameID].generateMap()
+  socket.on(MSG_TYPES.GET_MAP_REGENERATE, (mapArgs)=>{
+    games[socket.gameID].generateMap(mapArgs.seed)
     socket.emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[socket.gameID].getMapStructure())
   })
 
