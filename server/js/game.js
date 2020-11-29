@@ -6,6 +6,7 @@ const playerImport = require('./player.js')
 const towerImport = require("./tower.js");
 const point = require('./point.js');
 const seedrandom = require('seedrandom');
+const fs = require('fs');
 
 const ENEMY_TYPE = {
     RANDOM: 0,
@@ -391,12 +392,37 @@ class Game {
     }
 
     exportGame() {
-        this.towers.forEach((tower) => {console.log(tower)})
-        console.log("Seed: ", this.seed)
+        let toWrite = {
+            "seed": this.seed,
+            "towers": []
+        }
+        this.towers.forEach((tower) => {
+            toWrite.towers.push(tower)
+        })
+
+        fs.writeFile("backups/backup.json", JSON.stringify(toWrite), (err) => {
+            if (err) throw err;
+            console.log("Game data backed up");
+        })
     }
 
     importGame() {
-        console.log("Importing most recently saved game")
+        return new Promise((resolve, reject) => {
+            fs.readFile("backups/backup.json", (err, data) => {
+                if (err) reject(err);
+                console.log("Imported most recently saved game");
+                let gameStateJson = JSON.parse(data)
+
+                this.generateMap(gameStateJson.seed)
+
+                gameStateJson.towers.forEach((tower)=>{
+                    this.map.setGridValue(tower.row, tower.col, data.value, "tower")
+                    this.addTower(tower.name, tower.type, this.players[0].id, tower.row, tower.col)
+                })
+
+                resolve()
+            })
+        })
     }
 }
 

@@ -200,7 +200,15 @@ web_sockets_server.on('connection', (socket) => {
   })
 
   socket.on(MSG_TYPES.DEBUG_IMPORT_GAME_STATE, () => {
-    games[socket.gameID].importGame()
+    let gameID = socket.gameID
+    games[gameID].importGame().then(()=>{
+        console.log("Import successful")
+        //games[gameID].map.setGridValue(data.y, data.x, data.value, "tower") // TODO need to also call this, as this is what is sent to client
+        // Alternatively (and probably better) sort out exactly what is sent from client and stored in the map structure
+        web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure())
+      }).catch((err)=>{
+        throw err
+      })
   })
 
   socket.on('disconnect', function() {

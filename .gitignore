@@ -2,4 +2,4 @@ client/include/*
 node_modules/*
 package-lock.json
 client/img/unused/*
-
+backups/*
