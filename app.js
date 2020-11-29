@@ -162,6 +162,7 @@ web_sockets_server.on('connection', (socket) => {
     games[gameID].getPlayerByName(playerID).setReady()
     if (games[gameID].ready()) {
       games[gameID].advanceLevel()
+      web_sockets_server.in(gameID).emit(MSG_TYPES.ROUND_START)
     }
     web_sockets_server.in(gameID).emit(MSG_TYPES.PLAYER_READY, games[gameID].getPlayerInfo(playerID))
   })

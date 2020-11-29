@@ -28,7 +28,7 @@ export class GameRenderer {
         this.perRoundUpdateText = new OnScreenMessage(MAP_WIDTH/2, MAP_HEIGHT/2, "Round 1", 30)
 
         this.startRoundButton = new GraphicButton(
-            120, 90, // width, height
+            RIGHT_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT, // width, height
             APP_WIDTH, APP_HEIGHT, // x, y
             "Start Round",
             40, 0x448877, // font size, colour
@@ -81,6 +81,12 @@ export class GameRenderer {
             this.ut.setPlayerReady(playerData.playerID)
         })
 
+        addSocketEvent(MSG_TYPES.ROUND_START, () => {
+            this.tm.stopInteraction()
+            this.startRoundButton.interactive = false // TODO this button should also disappear - weird to have it during the round
+            this.startRoundButton.buttonMode = false
+        })
+
         addSocketEvent(MSG_TYPES.ROUND_END, (nextRoundInfo) => {
             let timePerFade = 1000
             let timeBetweenFade = 2000
@@ -92,6 +98,9 @@ export class GameRenderer {
                 this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
             }, timePerFade*2 + timeBetweenMessages)
             this.ut.unsetAllPlayers()
+            this.tm.startInteraction()
+            this.startRoundButton.interactive = true
+            this.startRoundButton.buttonMode = true
         })
     }
 
