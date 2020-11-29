@@ -62,7 +62,7 @@ class GameMap {
 
     this.path = [] // Exact path through the sub grids that the enemeis will take
     this.mainPath = [] // Main map grid squares that the enemy path goes through
-}
+  }
 
   setGridValue(row, col, value, property) {
     this.map[row][col][property] = value

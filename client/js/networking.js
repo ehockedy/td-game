@@ -27,7 +27,9 @@ export const MSG_TYPES = {
     ADD_PLAYER_SELF: "aps",
     REMOVE_PLAYER: "rp",
     ROUND_START: "rs",
-    ROUND_END: "re"
+    ROUND_END: "re",
+    DEBUG_EXPORT_GAME_STATE: "debug_export",
+    DEBUG_IMPORT_GAME_STATE: "debug_import"
 }
 
 export function getTowerUpdateMsg(tower) {

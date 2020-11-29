@@ -5,6 +5,7 @@ const gameMap = require('./map.js');
 const playerImport = require('./player.js')
 const towerImport = require("./tower.js");
 const point = require('./point.js');
+const seedrandom = require('seedrandom');
 
 const ENEMY_TYPE = {
     RANDOM: 0,
@@ -44,7 +45,12 @@ class Game {
         return basicMap
     }
 
-    generateMap() {
+    generateMap(seed="") {
+        let newSeed = Math.random().toString()
+        if (seed != "") newSeed = seed
+        seedrandom(newSeed, { global: true }); // globally - i.e. all further calls to Math.random()
+        this.seed = newSeed
+
         this.map.init()
         this.map.generateMap()
         //this.map.printMap()
@@ -382,6 +388,15 @@ class Game {
 
     start() {
         this.hasStarted = true
+    }
+
+    exportGame() {
+        this.towers.forEach((tower) => {console.log(tower)})
+        console.log("Seed: ", this.seed)
+    }
+
+    importGame() {
+        console.log("Importing most recently saved game")
     }
 }
 

@@ -41,7 +41,9 @@ const MSG_TYPES = {
   ADD_PLAYER_SELF: "aps",
   REMOVE_PLAYER: "rp",
   ROUND_START: "rs",
-  ROUND_END: "re"
+  ROUND_END: "re",
+  DEBUG_EXPORT_GAME_STATE: "debug_export",
+  DEBUG_IMPORT_GAME_STATE: "debug_import"
 }
 
 // First set up http server to serve index.html and its included files
@@ -191,6 +193,14 @@ web_sockets_server.on('connection', (socket) => {
 
   socket.on(MSG_TYPES.CLIENT_DEBUG, (data) => {
     console.log(data)
+  })
+
+  socket.on(MSG_TYPES.DEBUG_EXPORT_GAME_STATE, () => {
+    games[socket.gameID].exportGame()
+  })
+
+  socket.on(MSG_TYPES.DEBUG_IMPORT_GAME_STATE, () => {
+    games[socket.gameID].importGame()
   })
 
   socket.on('disconnect', function() {

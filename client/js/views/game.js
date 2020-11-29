@@ -36,6 +36,26 @@ export class GameRenderer {
         this.startRoundButton.on("click", ()=>{sendMessage(MSG_TYPES.ROUND_START)})
         this.startRoundButton.on("tap", ()=>{sendMessage(MSG_TYPES.ROUND_START)})
 
+        // **** DEBUG BUTTON TO SAVE/LOAD TOWERS ***
+        this.debugExportGameButton = new GraphicButton(
+            32, 32, // width, height
+            0, 0, // x, y
+            "EXPORT",
+            8, 0x448877, // font size, colour
+            0, 0) // anchor
+        this.debugExportGameButton.on("click", ()=>{sendMessage(MSG_TYPES.DEBUG_EXPORT_GAME_STATE)})
+        this.debugExportGameButton.on("tap", ()=>{sendMessage(MSG_TYPES.DEBUG_EXPORT_GAME_STATE)})
+
+        this.debugImportGameButton = new GraphicButton(
+            32, 32, // width, height
+            32, 0, // x, y
+            "IMPORT",
+            8, 0x887744, // font size, colour
+            0, 0) // anchor
+        this.debugImportGameButton.on("click", ()=>{sendMessage(MSG_TYPES.DEBUG_IMPORT_GAME_STATE)})
+        this.debugImportGameButton.on("tap", ()=>{sendMessage(MSG_TYPES.DEBUG_IMPORT_GAME_STATE)})
+        // **** END OF DEBUG ****
+
         addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (gameUpdate) => {
             this.update(gameUpdate)
         })
@@ -90,6 +110,10 @@ export class GameRenderer {
         this.bc.registerContainer()
         this.spriteHandler.registerContainer(this.startRoundButton)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
+
+        this.spriteHandler.registerContainer(this.debugExportGameButton)
+        this.spriteHandler.registerContainer(this.debugImportGameButton)
+
 
         // Set up links between components that need them
         this.tc.setInfoToolbarLink(this.it)
