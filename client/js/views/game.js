@@ -7,7 +7,8 @@ import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { GraphicButton } from "../components/ui_common/button.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
-import { RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT, APP_WIDTH, APP_HEIGHT } from "../constants.js"
+import { GameInfoToolbar } from "../components/game/gameInfoToolbar.js"
+import { RIGHT_TOOLBAR_WIDTH, TOWER_INFO_MENU_HEIGHT, TOWER_MENU_HEIGHT, GAME_STATS_MENU_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT, APP_WIDTH, APP_HEIGHT } from "../constants.js"
 import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
 import { setBoard } from "../state.js"
 
@@ -19,8 +20,9 @@ export class GameRenderer {
     constructor(spriteHandler) {
         this.spriteHandler = spriteHandler
         this.map = new MapComponent(this.spriteHandler)
-        this.tm = new TowerMenu(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, 0)
-        this.it = new InfoToolbar(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, RIGHT_TOOLBAR_HEIGHT, MAP_WIDTH, RIGHT_TOOLBAR_HEIGHT)
+        this.tm = new TowerMenu(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, TOWER_MENU_HEIGHT, MAP_WIDTH, 0)
+        this.it = new InfoToolbar(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, TOWER_INFO_MENU_HEIGHT, MAP_WIDTH, TOWER_MENU_HEIGHT)
+        this.git = new GameInfoToolbar(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, GAME_STATS_MENU_HEIGHT, MAP_WIDTH, TOWER_MENU_HEIGHT+TOWER_INFO_MENU_HEIGHT)
         this.ut = new PlayersToolbar(this.spriteHandler, MAP_WIDTH, BOTTOM_TOOLBAR_HEIGHT, 0, MAP_HEIGHT)
         this.tc = new TowersComponent(this.spriteHandler)
         this.ec = new EnemiesComponent(this.spriteHandler)
@@ -115,12 +117,13 @@ export class GameRenderer {
         // Register containers with the sprite layer
         // The order here is the order they are rendered on the map
         this.map.registerContainer()
+        this.ec.registerContainer()
         this.tc.registerRangeSpriteContainer()
         this.tm.registerContainer()
         this.it.registerContainer()
+        this.git.registerContainer()
         this.ut.registerContainer()
         this.tc.registerContainer()
-        this.ec.registerContainer()
         this.bc.registerContainer()
         this.spriteHandler.registerContainer(this.startRoundButton)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
@@ -148,6 +151,7 @@ export class GameRenderer {
         this.bc.update(serverUpdate["bullets"])
         this.ut.update(serverUpdate["players"])
         this.it.update()
+        this.git.update(serverUpdate["worldState"])
     }
 
     addPlayer(playerInfo) {

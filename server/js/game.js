@@ -28,6 +28,7 @@ class Game {
 
         this.hasStarted = false
         this.level = 0
+        this.lives = 100
         this.enemyQueue = []
         this.enemyCount = 0
         this.enemyCountTarget = 0
@@ -144,6 +145,11 @@ class Game {
         this.enemyCount += 1
     }
 
+    processEndOfPathEnemy(enemy) {
+        this.lives -= 1 // TODO dependent on enemy type?
+        this.removeEnemy(enemy)
+    }
+
     resolveInteractions() {
         // Check all relevant game objects and see how they interact
         // Check collision between enemies and bullets
@@ -168,8 +174,8 @@ class Game {
         // Check if enemy reached end of path
         // We must iterate through the enemies in reverse, since removing one would mess up the indexing
         this.map.forEachEnemyInReverse((enemy) => {
-            if (enemy.steps > this.map.path.length - config.SUBGRID_MIDPOINT) {
-                this.removeEnemy(enemy)
+            if (enemy.steps > this.map.path.length) {
+                this.processEndOfPathEnemy(enemy)
             }
         })
     }
@@ -181,18 +187,13 @@ class Game {
      * @param {Number} enemyType type of enemy to add. ENEMY_TYPE.RANDOM (0) will generate a random enemy
      */
     addEnemy(distributionPattern, enemyType) {
-        if (this.map.numEnemies < 1) {
-            this.map.addNewEnemy(new enemy.Enemy(30, 1, this.map.path))
-            return
-        }
-        //if (this.counter > 30) return;
         if (distributionPattern == "random") {
             // 10% chance to spawn new enemy
             if (Math.random() < 0.995) return; //0.95) return;
         }
 
-        let speedRangeMin = 1
-        let speedRangeMax = 3
+        let speedRangeMin = 7
+        let speedRangeMax = 8
         // TODO create enemy types
         let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
         this.map.addNewEnemy(new enemy.Enemy(30, randomSpeed, this.map.path))
@@ -348,6 +349,9 @@ class Game {
             },
             "players": {
                 "objects": []
+            },
+            "worldState" : {
+                "lives": this.lives
             }
         }
 
