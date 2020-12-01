@@ -84,11 +84,11 @@ export class TowersComponent extends BaseComponent {
         sprite
             .on("pointerover", ()=>{ // Display the information about the tower - this triggers as soon as tower appears
                 this.sprite_handler.unclickActiveClickable()
-                this.infoToolbarLink.showTowerInfo(type)
+                this.infoToolbarLink.showDragTowerInfo(type)
             })
             .on("pointerout", ()=>{
                 sprite.dragging = false // Turn off, because sprite object still exists, so don't want to trigger movement options i.e. stop interaction
-                this.infoToolbarLink.hideTowerInfo()
+                this.infoToolbarLink.hideDragTowerInfo()
                 this.container.removeChild(sprite) // remove it, since wasn't used
             })
             .on("pointerdown", () => { sprite.dragging = true })
@@ -262,7 +262,7 @@ export class TowersComponent extends BaseComponent {
         this.rangeSpriteContainer.removeChild(sprite.range_subsprite)
         this.container.removeChild(sprite)
         this.towerMenuLink.startInteraction()
-        this.infoToolbarLink.hideTowerInfo()
+        this.infoToolbarLink.hideDragTowerInfo()
         this.sprite_handler.unsetActiveClickable()
     }
 

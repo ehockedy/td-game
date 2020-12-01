@@ -1,5 +1,6 @@
 import { BaseToolbarComponent } from "./base/baseToolbarComponent.js";
 import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
+import { KeyValueInfo } from "../ui_common/keyValueInfo.js"
 
 export class PlayersToolbar extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {
@@ -43,25 +44,11 @@ export class PlayersToolbar extends BaseToolbarComponent {
         playerFields.forEach((field) => {
             yOffset += this.yOffsetGap
 
-            // Description title
-            text = new PIXI.Text(field, defaultStyle);
-            text.x = Math.floor(xMargin)
-            text.y = Math.floor(yOffset)
-            text.name = field
-            text.type = "name"
-            text.style.fontSize = 16
-            localContainer.addChild(text);
+            let info = new KeyValueInfo(field, 0, this.width_px/4, xMargin, 16)
+            info.name = field
+            info.y = Math.floor(yOffset)
 
-            // Description content
-            text = new PIXI.Text(0, defaultStyle);
-            text.x = Math.floor(this.width_px/4 - xMargin)
-            text.y = Math.floor(yOffset)
-            text.anchor.set(1, 0) // Shift right
-            text.style.fontWeight = "normal"
-            text.style.fontSize = 16
-            text.name = field
-            text.type = "value"
-            localContainer.addChild(text);
+            localContainer.addChild(info);
         })
 
         // Ready icon
@@ -111,8 +98,8 @@ export class PlayersToolbar extends BaseToolbarComponent {
             if (playerInfo != undefined) {
                 this.container.getChildByName(player.playerID).children.forEach((field) => {
                     for (let stat in player.stats) {
-                        if (field.name == stat && field.type == "value") {
-                            field.text = player.stats[stat].toString()
+                        if (field.name == stat) {
+                            field.setValue(player.stats[stat].toString())
                         }
                     }
                 })
