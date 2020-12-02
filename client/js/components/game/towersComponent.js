@@ -15,6 +15,11 @@ export class TowersComponent extends BaseComponent {
         this.towerStateHashPrev = ""
         this.rangeSpriteContainer = new PIXI.Container();
         this.towerSpriteSheetData = []
+
+        this.towerIconContainer = new PIXI.Container()
+        this.setTowersContainer = new PIXI.Container()
+        this.container.addChild(this.towerIconContainer)
+        this.container.addChild(this.setTowersContainer)
     }
 
     // Asynchronosly load the tower data
@@ -68,69 +73,89 @@ export class TowersComponent extends BaseComponent {
         let sprite = this.getTowerSprite(type)
         sprite.interactive = true
         sprite.buttonMode = true
-        sprite.name = randomHexString(6)
         sprite.dragging = false
         sprite.type = type
         sprite.x = x
         sprite.y = y
+        sprite.xStart = x
+        sprite.yStart = y
 
         // Attach a range sprite
         sprite.range_subsprite = this.getTowerRangeGraphic(type) // TODO make this a child, and put render distances on
         sprite.range_subsprite.visible = false
 
-        // Tower icon sprite behaviour
-        // Initial state is just an icon that can be dragged.
-        // Once dragging MediaStreamTrackAudioSourceNode, behaviour changes
-        sprite
-            .on("pointerover", ()=>{ // Display the information about the tower - this triggers as soon as tower appears
+        let towerReset = () => {
+            // Move back to original position
+            sprite.x = sprite.xStart
+            sprite.y = sprite.yStart
+            sprite.range_subsprite.visible = false
+            sprite.dragging = false
+            this.startInteraction()
+            this.infoToolbarLink.hideDragTowerInfo()
+            this.sprite_handler.unsetActiveClickable()
+        }
+
+        let onPointerOver = ()=>{
+            this.infoToolbarLink.showDragTowerInfo(type)
+            if (sprite.x == sprite.xStart && sprite.y == sprite.yStart) {
                 this.sprite_handler.unclickActiveClickable()
-                this.infoToolbarLink.showDragTowerInfo(type)
-            })
-            .on("pointerout", ()=>{
-                sprite.dragging = false // Turn off, because sprite object still exists, so don't want to trigger movement options i.e. stop interaction
+            }
+        }
+
+        let onPointerOut = ()=>{
+            if (sprite.x == sprite.xStart && sprite.y == sprite.yStart) {
                 this.infoToolbarLink.hideDragTowerInfo()
-                this.container.removeChild(sprite) // remove it, since wasn't used
-            })
-            .on("pointerdown", () => { sprite.dragging = true })
-            .on("pointerup", () => { sprite.dragging = false })
-            .on("pointermove", () => {
-                if (sprite.dragging) {
-                    // At this point, the user has clicked and dragged the tower, indicating they want to use it
-                    // Remove the existing behaviour defined above, and set the new behaviour
+                this.sprite_handler.unclickActiveClickable()
+            }
+        }
 
-                    // The tower is the active clickable object. This makes it accessible for the information toolbar to use
-                    this.sprite_handler.setActiveClickable(sprite)
-
-                    // Stop another tower from being produced, or other towers from being interactable hilst placing this one
-                    this.towerMenuLink.stopInteraction()
-                    this.stopInteraction()
-                    sprite.interactive = true
-
-                    let _this = this
-
-                    function finishedWithTower() {
-                        _this.startInteraction()
-                        _this.cleanUpDraggableTower(sprite)
-                    }
-                    function onPointerUp() {
-                        if (sprite.x >= 0 && sprite.y >= 0 && sprite.x < MAP_WIDTH && sprite.y < MAP_HEIGHT) sprite.dragging = false
-                        else finishedWithTower() // If out of map, remove it
-                    }
-
-                    // Remove existing behaviour, then add new behaviour
-                    sprite.removeAllListeners()
-                    sprite.on("pointerdown", () => { sprite.dragging = true })
-                    sprite.on("pointermove", this.onDragTower)
-                    sprite.on("pointerup", onPointerUp)
-                    sprite.on("pointerupoutside", onPointerUp)
-                    sprite.on("place", this.onPlaceTowerConfirm) // Custom event triggered by pressing the confirm button
-                    sprite.on("place", finishedWithTower)
-                    sprite.on("clear", finishedWithTower)
+        let onPointerUp = () => {
+            if (sprite.dragging) {
+                if ((sprite.x < 0 || sprite.y < 0 || sprite.x > MAP_WIDTH || sprite.y > MAP_HEIGHT) && // Not on map
+                    (sprite.x != sprite.xStart || sprite.y != sprite.yStart)) { // and has moved
+                    towerReset()
                 }
-            })
+            }
+            sprite.dragging = false
+        }
+
+        let onPointerDown = () => {
+            sprite.dragging = true
+            this.infoToolbarLink.showDragTowerInfo(type)
+        }
+
+        let onTowerMove = () => {
+            if (sprite.dragging) {
+                this.sprite_handler.setActiveClickable(sprite)
+
+                // Stop another tower from being produced, or other towers from being interactable whilst placing this one
+                this.stopInteraction()
+                sprite.interactive = true
+                sprite.buttonMode = true
+            }
+        }
+
+        let onTowerPlaceConfirm = () => {
+            if (sprite.x >= 0 && sprite.y >= 0 && sprite.x < MAP_WIDTH && sprite.y < MAP_HEIGHT) {
+                sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(sprite))
+            }
+            towerReset()
+        }
+
+        // Tower icon sprite behaviour
+        sprite
+            .on("pointerover", onPointerOver)
+            .on("pointerout", onPointerOut)
+            .on("pointerdown", onPointerDown)
+            .on("pointerup", onPointerUp)
+            .on("pointerupoutside", onPointerUp)
+            .on("pointermove", this.onDragTower)
+            .on("pointermove", onTowerMove)
+            .on("place", onTowerPlaceConfirm)
+            .on("clear", towerReset)
 
         sprite.range_subsprite.setParent(this.rangeSpriteContainer)
-        sprite.setParent(this.container)
+        this.towerIconContainer.addChild(sprite)
     }
 
     addPlacedTower(type, name, playerID, row, col) {
@@ -173,7 +198,7 @@ export class TowersComponent extends BaseComponent {
             sprite.kills = 0
         }
 
-        sprite.setParent(this.container)
+        this.setTowersContainer.addChild(sprite)
     }
 
     update(towerData) {
@@ -187,8 +212,8 @@ export class TowersComponent extends BaseComponent {
             let nameIdx = 0
             for (nameIdx; nameIdx < towerStateObjects.length; nameIdx++) {
                 let found = false;
-                for (let towerSpriteIdx = this.container.children.length - 1; towerSpriteIdx >= 0; towerSpriteIdx--) {
-                    found = (this.container.children[towerSpriteIdx].name == towerStateObjects[nameIdx].name)
+                for (let towerSpriteIdx = this.setTowersContainer.children.length - 1; towerSpriteIdx >= 0; towerSpriteIdx--) {
+                    found = (this.setTowersContainer.children[towerSpriteIdx].name == towerStateObjects[nameIdx].name)
                     if (found) break;
                 }
                 if (!found) {
@@ -203,7 +228,7 @@ export class TowersComponent extends BaseComponent {
 
         // Update state of towers present in server update
         towerStateObjects.forEach((tower) => {
-            let towerToUpdate = this.container.getChildByName(tower.name)
+            let towerToUpdate = this.setTowersContainer.getChildByName(tower.name)
             towerToUpdate.rotation = tower.angle
             towerToUpdate.tint = this.randomColourCode // TODO store all playerID colours once
 
@@ -212,6 +237,31 @@ export class TowersComponent extends BaseComponent {
                 towerToUpdate.stats = tower.stats
             }
         })
+    }
+
+    _setContainerInteraction(container, value) {
+        container.children.forEach((child) => {
+            child.interactive = value
+            child.buttonMode = value
+        })
+    }
+
+    startInteraction() {
+        this._setContainerInteraction(this.towerIconContainer, true)
+        this._setContainerInteraction(this.setTowersContainer, true)
+    }
+
+    stopInteraction() {
+        this._setContainerInteraction(this.towerIconContainer, false)
+        this._setContainerInteraction(this.setTowersContainer, false)
+    }
+
+    startInteractionTowerIconsOnly() {
+        this._setContainerInteraction(this.towerIconContainer, true)
+    }
+
+    stopInteractionTowerIconsOnly() {
+        this._setContainerInteraction(this.towerIconContainer, false)
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~
@@ -243,38 +293,5 @@ export class TowersComponent extends BaseComponent {
             this.y = newPosition.y
             this.range_subsprite.visible = false
         }
-    }
-
-    onPlaceTowerConfirm() {
-        sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(this))
-    }
-
-    onPlaceTower() {
-        if (this.x >= 0 && this.y >= 0 && this.x < MAP_WIDTH && this.y < MAP_HEIGHT) {
-            sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, getTowerUpdateMsg(this))
-        } else {
-            this.range_subsprite.parent.removeChild(this.range_subsprite)
-            this.parent.removeChild(this)
-        }
-    }
-
-    cleanUpDraggableTower(sprite) {
-        this.rangeSpriteContainer.removeChild(sprite.range_subsprite)
-        this.container.removeChild(sprite)
-        this.towerMenuLink.startInteraction()
-        this.infoToolbarLink.hideDragTowerInfo()
-        this.sprite_handler.unsetActiveClickable()
-    }
-
-    stopInteraction() {
-        this.container.children.forEach((child) => {
-            child.interactive = false
-        })
-    }
-
-    startInteraction() {
-        this.container.children.forEach((child) => {
-            child.interactive = true
-        })
     }
 }

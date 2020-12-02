@@ -1,4 +1,5 @@
 import { getGameID } from "./state.js"
+import { randomHexString } from "./tools.js"
 
 // To get client side debugging, paste "localStorage.debug = '*';" into
 // the browser console
@@ -34,6 +35,7 @@ export const MSG_TYPES = {
 }
 
 export function getTowerUpdateMsg(tower) {
+    let name = randomHexString(6)
     return {
         "y": tower.gridY,
         "x": tower.gridX,
@@ -41,9 +43,9 @@ export function getTowerUpdateMsg(tower) {
             "type": tower.type,
             "playerID": tower.playerID,
             "colour": "0xCC2211",
-            "name": tower.name
+            "name": name
         },
-        "towerName": tower.name,
+        "towerName": name,
         "gameID": getGameID()
     }
 }

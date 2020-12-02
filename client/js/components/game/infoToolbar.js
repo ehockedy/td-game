@@ -188,16 +188,19 @@ export class InfoToolbar extends BaseToolbarComponent {
         let buttonHeight = this.width_px*0.4
         let buttonWidth = this.width_px*0.4
         let confirmButton =  new GraphicButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(1, 2, buttonWidth, this.width_px), yOffset, "\u{1F5F8}" , 40, "0x22FF22")
-        let _this = this
-        confirmButton.on("click", function () {
-            _this.sprite_handler.getActiveClickable().emit("place")
-        })
+        let confirm = () => {
+            this.sprite_handler.getActiveClickable().emit("place")
+        }
+        confirmButton.on("click", confirm)
+        confirmButton.on("tap", confirm)
         localContainer.addChild(confirmButton)
 
         let cancelButton =  new GraphicButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(2, 2, buttonWidth, this.width_px), yOffset, "\u{2717}", 40, "0xFF2222")
-        cancelButton.on("click", function () {
-            _this.sprite_handler.getActiveClickable().emit("clear")
-        })
+        let deny = () => {
+            this.sprite_handler.getActiveClickable().emit("clear")
+        }
+        cancelButton.on("click", deny)
+        cancelButton.on("tap", deny)
         localContainer.addChild(cancelButton)
 
         return localContainer

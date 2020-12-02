@@ -84,7 +84,7 @@ export class GameRenderer {
         })
 
         addSocketEvent(MSG_TYPES.ROUND_START, () => {
-            this.tm.stopInteraction()
+            this.tc.stopInteractionTowerIconsOnly()
             this.startRoundButton.interactive = false // TODO this button should also disappear - weird to have it during the round
             this.startRoundButton.buttonMode = false
         })
@@ -100,7 +100,7 @@ export class GameRenderer {
                 this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
             }, timePerFade*2 + timeBetweenMessages)
             this.ut.unsetAllPlayers()
-            this.tm.startInteraction()
+            this.tc.startInteractionTowerIconsOnly()
             this.startRoundButton.interactive = true
             this.startRoundButton.buttonMode = true
         })
@@ -122,10 +122,10 @@ export class GameRenderer {
         this.tm.registerContainer()
         this.it.registerContainer()
         this.git.registerContainer()
+        this.spriteHandler.registerContainer(this.startRoundButton)
         this.ut.registerContainer()
         this.tc.registerContainer()
         this.bc.registerContainer()
-        this.spriteHandler.registerContainer(this.startRoundButton)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
 
         this.spriteHandler.registerContainer(this.debugExportGameButton)

@@ -6,12 +6,7 @@ export class TowerMenu  extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {
         super(sprite_handler, "towermenu", width_px, height_px, x, y)
 
-        this.infoToolbarLink
         this.towerFactoryLink
-    }
-
-    setInfoToolbarLink(infoToolbar) {
-        this.infoToolbarLink = infoToolbar
     }
 
     setTowerFactoryLink(towerFactory) {
@@ -25,9 +20,8 @@ export class TowerMenu  extends BaseToolbarComponent {
     addTowers() {
         for (let i = 0; i < 4; i++) {
             let icon = this.getTower(i)
-            icon
-                .on("pointerover", ()=>{this.towerFactoryLink.addDraggableTower(i, this.x + icon.x, this.y + icon.y)})
-            this.container.addChild(icon)
+            this.container.addChild(icon) // The placeholder
+            this.towerFactoryLink.addDraggableTower(i, this.x + icon.x, this.y + icon.y) // The interactive, draggable icon
         }
     }
 
@@ -37,53 +31,12 @@ export class TowerMenu  extends BaseToolbarComponent {
         let toolbarWidth = this.width_px
         let towerSpriteWidth = DEFAULT_SPRITE_SIZE_X
 
-        let x = getPositionWithinEquallySpacedObjects(towerNum, towersPerRow, towerSpriteWidth, toolbarWidth) // (spacing + towerSpriteWidth/2) + ((spacing + towerSpriteWidth) * (towersCount % towersPerRow))
+        let x = getPositionWithinEquallySpacedObjects(towerNum, towersPerRow, towerSpriteWidth, toolbarWidth)
         let y = 32 * 2 * (Math.floor(type/towersPerRow) + 1) // +1 so not starting at y = 0
 
-        return this.getTowerIcon(type, x, y)
+        let towerSprite = this.towerFactoryLink.getTowerSprite(type)
+        towerSprite.x = x
+        towerSprite.y = y
+        return towerSprite
     }
-
-    /**
-     * Interactive sprite of the tower the user has slected
-     * Once interacted with, adds a sprite to replace the one taken
-     * Can be placed on the map, or is removed otherwise
-     * @param {Number/String?} type Tower type
-     * @param {Number} x x position
-     * @param {Number} y y position
-     */
-    getTowerIcon(type, x, y) {
-        let tempTowerSprite = this.towerFactoryLink.getTowerSprite(type)
-        tempTowerSprite.x = x
-        tempTowerSprite.y = y
-        tempTowerSprite.interactive = true
-        tempTowerSprite.buttonMode = true;
-
-        //this.container.addChild(tempTowerSprite)
-
-        // Interaction options
-        // tempTowerSprite
-        //     .on("pointerover", () => {
-        //         // If pointer over, it means that a tower sprite it not here already
-        //         // since if pointerover is not triggered if a sprite sits on top of the icon
-        //         //this.towerManager.addDraggableTower(type, this.container.x + x, this.container.y + y)
-        //         this.sprite_handler.towerFactory
-        // })
-
-        return tempTowerSprite
-    }
-
-    stopInteraction() {
-        this.container.children.forEach((child) => {
-            child.interactive = false
-            child.tint = "0xAAAAAA"
-        })
-    }
-
-    startInteraction() {
-        this.container.children.forEach((child) => {
-            child.interactive = true
-            child.tint = this.towerFactoryLink.randomColourCode
-        })
-    }
-
 }

@@ -18,14 +18,10 @@ Make the towers always be moving, might make them a bit more realistic
 Remove the events from a client view on stopRendering
 Put place tower buttons by the tower, not on toolbar
 Component that is the town being attacked or whatever. If enemy reached it, can tell because of change in lives value so play animation
-With the tower menu icons, I think a better solution to current is this:
- - have a non-interactive sprite (i.e. just the "icon"), and laid on top of that the interactive, draggable sprite.
- - Can use this draggable sprite like normal, but instead of removing it when releasing, just ping it back to he icon position.
- - so never need to create more or remove any, can only have one at a time, and should work with mobile
+If player does nothing for 2ish minutes, they are disconnected and cannot reconnect, would have to join game again. If they interact with the map will cause server error because they are at the 
+game screen, with a new, different game code.
 
 Main features:
- - stop tower placement during round
- - group lives
  - buy/sell towers
  - placement round behaviour - all take a turn or simultaneous - what about if  players place at same time?
  - game over screen
