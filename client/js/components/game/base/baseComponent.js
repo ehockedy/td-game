@@ -9,4 +9,19 @@ export class BaseComponent {
     registerContainer() {
         this.sprite_handler.registerContainer(this.container)
     }
+
+    _setContainerInteraction(container, value) {
+        container.children.forEach((child) => {
+            child.interactive = value
+            child.buttonMode = value
+        })
+    }
+
+    startInteraction() {
+        this._setContainerInteraction(this.container, true)
+    }
+
+    stopInteraction() {
+        this._setContainerInteraction(this.container, false)
+    }
 }

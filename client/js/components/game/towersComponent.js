@@ -1,8 +1,7 @@
-import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_WIDTH, APP_HEIGHT, MAP_WIDTH, MAP_HEIGHT } from "../../constants.js"
+import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y } from "../../constants.js"
 import { randomHexString } from "../../tools.js"
-import { getUserID, getBoard } from "../../state.js"
+import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
-import { sendMessage, getTowerUpdateMsg, MSG_TYPES } from "../../networking.js"
 
 /**
  * This component stores all the information about the towers that are out on the map
@@ -16,9 +15,7 @@ export class TowersComponent extends BaseComponent {
         this.rangeSpriteContainer = new PIXI.Container();
         this.towerSpriteSheetData = []
 
-        this.towerIconContainer = new PIXI.Container()
         this.setTowersContainer = new PIXI.Container()
-        this.container.addChild(this.towerIconContainer)
         this.container.addChild(this.setTowersContainer)
     }
 
@@ -36,10 +33,6 @@ export class TowersComponent extends BaseComponent {
                 resolve()
             })
         })
-    }
-
-    setTowerMenuLink(towerMenu) {
-        this.towerMenuLink = towerMenu
     }
 
     // An additional container for the range sprites.
@@ -67,95 +60,6 @@ export class TowersComponent extends BaseComponent {
         graphics.alpha = 0.5
         graphics.drawCircle(0, 0, this.towerJson[type]["gameData"]["seekRange"] * DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
         return graphics
-    }
-
-    addDraggableTower(type, x, y) {
-        let sprite = this.getTowerSprite(type)
-        sprite.interactive = true
-        sprite.buttonMode = true
-        sprite.dragging = false
-        sprite.type = type
-        sprite.x = x
-        sprite.y = y
-        sprite.xStart = x
-        sprite.yStart = y
-
-        // Attach a range sprite
-        sprite.range_subsprite = this.getTowerRangeGraphic(type) // TODO make this a child, and put render distances on
-        sprite.range_subsprite.visible = false
-
-        let towerReset = () => {
-            // Move back to original position
-            sprite.x = sprite.xStart
-            sprite.y = sprite.yStart
-            sprite.range_subsprite.visible = false
-            sprite.dragging = false
-            this.startInteraction()
-            this.infoToolbarLink.hideDragTowerInfo()
-            this.sprite_handler.unsetActiveClickable()
-        }
-
-        let onPointerOver = ()=>{
-            this.infoToolbarLink.showDragTowerInfo(type)
-            if (sprite.x == sprite.xStart && sprite.y == sprite.yStart) {
-                this.sprite_handler.unclickActiveClickable()
-            }
-        }
-
-        let onPointerOut = ()=>{
-            if (sprite.x == sprite.xStart && sprite.y == sprite.yStart) {
-                this.infoToolbarLink.hideDragTowerInfo()
-                this.sprite_handler.unclickActiveClickable()
-            }
-        }
-
-        let onPointerUp = () => {
-            if (sprite.dragging) {
-                if ((sprite.x < 0 || sprite.y < 0 || sprite.x > MAP_WIDTH || sprite.y > MAP_HEIGHT) && // Not on map
-                    (sprite.x != sprite.xStart || sprite.y != sprite.yStart)) { // and has moved
-                    towerReset()
-                }
-            }
-            sprite.dragging = false
-        }
-
-        let onPointerDown = () => {
-            sprite.dragging = true
-            this.infoToolbarLink.showDragTowerInfo(type)
-        }
-
-        let onTowerMove = () => {
-            if (sprite.dragging) {
-                this.sprite_handler.setActiveClickable(sprite)
-
-                // Stop another tower from being produced, or other towers from being interactable whilst placing this one
-                this.stopInteraction()
-                sprite.interactive = true
-                sprite.buttonMode = true
-            }
-        }
-
-        let onTowerPlaceConfirm = () => {
-            if (sprite.x >= 0 && sprite.y >= 0 && sprite.x < MAP_WIDTH && sprite.y < MAP_HEIGHT) {
-                sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(sprite))
-            }
-            towerReset()
-        }
-
-        // Tower icon sprite behaviour
-        sprite
-            .on("pointerover", onPointerOver)
-            .on("pointerout", onPointerOut)
-            .on("pointerdown", onPointerDown)
-            .on("pointerup", onPointerUp)
-            .on("pointerupoutside", onPointerUp)
-            .on("pointermove", this.onDragTower)
-            .on("pointermove", onTowerMove)
-            .on("place", onTowerPlaceConfirm)
-            .on("clear", towerReset)
-
-        sprite.range_subsprite.setParent(this.rangeSpriteContainer)
-        this.towerIconContainer.addChild(sprite)
     }
 
     addPlacedTower(type, name, playerID, row, col) {
@@ -239,59 +143,11 @@ export class TowersComponent extends BaseComponent {
         })
     }
 
-    _setContainerInteraction(container, value) {
-        container.children.forEach((child) => {
-            child.interactive = value
-            child.buttonMode = value
-        })
-    }
-
     startInteraction() {
-        this._setContainerInteraction(this.towerIconContainer, true)
         this._setContainerInteraction(this.setTowersContainer, true)
     }
 
     stopInteraction() {
-        this._setContainerInteraction(this.towerIconContainer, false)
         this._setContainerInteraction(this.setTowersContainer, false)
-    }
-
-    startInteractionTowerIconsOnly() {
-        this._setContainerInteraction(this.towerIconContainer, true)
-    }
-
-    stopInteractionTowerIconsOnly() {
-        this._setContainerInteraction(this.towerIconContainer, false)
-    }
-
-    // ~~~~~~~~~~~~~~~~~~~~~~~
-    // Events - "this" is the parent object
-    // ~~~~~~~~~~~~~~~~~~~~~~~
-    onDragTower(event) {
-        if (!this.dragging) return
-    
-        const newPosition = event.data.getLocalPosition(this.parent);
-        if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < MAP_WIDTH && newPosition.y < MAP_HEIGHT) {
-            // If on map, snap to grid
-            let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
-            let newGridY = Math.floor(newPosition.y / DEFAULT_SPRITE_SIZE_Y)
-            if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
-                getBoard()[newGridY][newGridX]["value"] == 0) { // Must be empty space
-                this.gridX = newGridX
-                this.gridY = newGridY
-                this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
-                this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
-            }
-
-            // Also move range indicator to be same position as tower
-            this.range_subsprite.visible = true
-            this.range_subsprite.x = this.x
-            this.range_subsprite.y = this.y
-        } else if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < APP_WIDTH && newPosition.y < APP_HEIGHT) {
-            // Otherwise, update position normally
-            this.x = newPosition.x
-            this.y = newPosition.y
-            this.range_subsprite.visible = false
-        }
     }
 }
