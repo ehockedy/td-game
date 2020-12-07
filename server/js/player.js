@@ -26,6 +26,14 @@ class Player {
     isReady() {
         return this.ready
     }
+
+    reduceMoney(amount) {
+        this.stats.money = Math.max(0, this.stats.money - amount)
+    }
+
+    increaseMoney(amount) {
+        this.stats.money += amount
+    }
 }
 
 module.exports = {

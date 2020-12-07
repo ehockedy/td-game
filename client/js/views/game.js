@@ -107,10 +107,7 @@ export class GameRenderer {
     }
 
     loadAssets() {
-        let _tc = this.tc
-        let _it = this.it
-        let _ec = this.ec
-        return Promise.all([_tc.loadData(), _it.loadData(), _ec.loadData()])
+        return Promise.all([this.tc.loadData(), this.it.loadData(), this.ec.loadData(), this.tm.loadData()])
     }
 
     startRendering() {
@@ -148,6 +145,7 @@ export class GameRenderer {
 
     update(serverUpdate) {
         this.tc.update(serverUpdate["towers"])
+        this.tm.update(serverUpdate["players"])
         this.ec.update(serverUpdate["enemies"])
         this.bc.update(serverUpdate["bullets"])
         this.ut.update(serverUpdate["players"])

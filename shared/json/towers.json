@@ -19,7 +19,8 @@
             "numberOfBullets": 1,
             "turns": true,
             "piercing": false
-        }
+        },
+        "cost": 50
     },
     {
         "name": "all direction tower",
@@ -41,7 +42,8 @@
             "numberOfBullets": 8,
             "turns": false,
             "piercing": false
-        }
+        },
+        "cost": 50
     },
     {
         "name": "triple tower",
@@ -63,7 +65,8 @@
             "numberOfBullets": 3,
             "turns": true,
             "piercing": false
-        }
+        },
+        "cost": 120
     },
     {
         "name": "sniper tower",
@@ -85,6 +88,7 @@
             "numberOfBullets": 1,
             "turns": true,
             "piercing": false
-        }
+        },
+        "cost": 200
     }
 ]

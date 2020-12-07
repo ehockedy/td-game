@@ -213,10 +213,11 @@ class Game {
 
     addTower(name, type, playerID, row, col) {
         try {
-            let newPlayer = this.getPlayerByName(playerID)
-            let newTower = new towerImport.Tower(name, type, newPlayer, new point.Point(col, row, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT))
+            let player = this.getPlayerByName(playerID)
+            let newTower = new towerImport.Tower(name, type, player, new point.Point(col, row, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT))
             newTower.calculateShootPath(this.map.mainPath)
             this.towers.push(newTower)
+            player.reduceMoney(newTower.getCost()) // Keep player implementation simple and let client determine whether player can afffort tower
         } catch (exception) {
             console.log("Tower was unable to be added - player", playerID, "not found")
         }

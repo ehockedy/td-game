@@ -15,6 +15,16 @@ export class TowerMenu  extends BaseToolbarComponent {
         this.rangeSpriteContainer = new PIXI.Container()
     }
 
+    loadData() {
+        let _this = this
+        return new Promise((resolve) => {
+            $.getJSON("shared/json/towers.json", function (data) {
+                _this.towerJson = data
+                resolve()
+            })
+        })
+    }
+
     registerContainer() {
         super.registerContainer()
         this.sprite_handler.registerContainer(this.towerSpriteContainer) // Do not want to restrict the positions to the root container
@@ -185,5 +195,25 @@ export class TowerMenu  extends BaseToolbarComponent {
 
     stopInteraction() {
         this._setContainerInteraction(this.towerSpriteContainer, false)
+    }
+
+    update(playerData) {
+        let money = 0
+        let players = playerData.objects
+        for (let i = 0; i < players.length; i++) {
+            if (players[i].playerID == getUserID()) {
+                money = players[i].stats.money
+                break
+            }
+        }
+        this.towerSpriteContainer.children.forEach((tower, idx) => {
+            if (money < this.towerJson[idx].cost) {
+                tower.interactive = false
+                tower.buttonMode = false
+            } else {
+                tower.interactive = true
+                tower.buttonMode = true
+            }
+        })
     }
 }

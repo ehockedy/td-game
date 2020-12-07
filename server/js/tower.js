@@ -1,5 +1,4 @@
 const fs = require('fs');
-const tools = require('./tools.js')
 const config = require('./constants.js')
 const bullet = require("./bullet.js");
 
@@ -30,6 +29,7 @@ class Tower {
         this.angle = 0 // Angle in radians, 0 is East, goes clockwise
         this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
         this.player = player // The player who owns the tower
+        this.cost = towerJson[type]["cost"]
 
 
         // These values can change based on user actions
@@ -73,6 +73,10 @@ class Tower {
     registerKill() {
         this.stats.kills += 1
         this.player.registerKill()
+    }
+
+    getCost() {
+        return this.cost
     }
 
     /**

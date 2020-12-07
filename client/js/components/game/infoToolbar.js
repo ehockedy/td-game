@@ -123,6 +123,10 @@ export class InfoToolbar extends BaseToolbarComponent {
 
                 yOffset += this.yOffsetGap
             }
+            let costInfo = new KeyValueInfo("Cost", this.towerJson[i]["cost"], this.width_px, xMargin, 16)
+            costInfo.y = Math.floor(yOffset)
+            costInfo.type = i
+            localContainer.addChild(costInfo)
         }
         return localContainer
     }
