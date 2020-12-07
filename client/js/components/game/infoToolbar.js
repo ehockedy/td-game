@@ -30,10 +30,6 @@ export class InfoToolbar extends BaseToolbarComponent {
         this.towerDescriptionContainer.y = this.titleTowerInfo.getBounds().height + 5
         this.container.addChild(this.towerDescriptionContainer)
 
-        this.setTowerButtonsContainer = this.renderSetTowerButton()
-        this.setTowerButtonsContainer.y = this.towerDescriptionContainer.y + this.towerDescriptionContainer.getBounds().height + this.setTowerButtonsContainer.getBounds().height/2 + 20 // Note that bounds ignore display objects that are not visible
-        this.container.addChild(this.setTowerButtonsContainer)
-
         // Placed tower components
         this.titleAim = this.renderTitle('Aim Behaviour')
         this.container.addChild(this.titleAim)
@@ -81,7 +77,6 @@ export class InfoToolbar extends BaseToolbarComponent {
     _setVisibilityDragTowerComponents(visibility) {
         this.titleTowerInfo.visible = visibility
         this.towerDescriptionContainer.visible = visibility
-        this.setTowerButtonsContainer.visible = visibility
     }
 
     _setVisibilityPlacedTowerComponents(visibility) {
@@ -178,34 +173,6 @@ export class InfoToolbar extends BaseToolbarComponent {
             yOffset += 10
 
         }
-
-        return localContainer
-    }
-
-    /**
-     * The button that you press to confirm tower placement
-     */
-    renderSetTowerButton() {
-        let localContainer = new PIXI.Container()
-        let yOffset = 0
-
-        let buttonHeight = this.width_px*0.4
-        let buttonWidth = this.width_px*0.4
-        let confirmButton =  new GraphicButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(1, 2, buttonWidth, this.width_px), yOffset, "\u{1F5F8}" , 40, "0x22FF22")
-        let confirm = () => {
-            this.sprite_handler.getActiveClickable().emit("place")
-        }
-        confirmButton.on("click", confirm)
-        confirmButton.on("tap", confirm)
-        localContainer.addChild(confirmButton)
-
-        let cancelButton =  new GraphicButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(2, 2, buttonWidth, this.width_px), yOffset, "\u{2717}", 40, "0xFF2222")
-        let deny = () => {
-            this.sprite_handler.getActiveClickable().emit("clear")
-        }
-        cancelButton.on("click", deny)
-        cancelButton.on("tap", deny)
-        localContainer.addChild(cancelButton)
 
         return localContainer
     }

@@ -3,6 +3,7 @@ import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_WIDTH, APP_HEIGHT, MA
 import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 import { sendMessage, getTowerUpdateMsg, MSG_TYPES } from "../../networking.js"
 import { getUserID, getBoard } from "../../state.js"
+import { GraphicButton } from "../ui_common/button.js"
 
 export class TowerMenu  extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {
@@ -13,6 +14,9 @@ export class TowerMenu  extends BaseToolbarComponent {
 
         this.towerSpriteContainer = new PIXI.Container()
         this.rangeSpriteContainer = new PIXI.Container()
+
+        this.placeTowerButtons = this.getSetTowerButtons()
+        this.placeTowerButtons.visible = false
     }
 
     loadData() {
@@ -28,6 +32,7 @@ export class TowerMenu  extends BaseToolbarComponent {
     registerContainer() {
         super.registerContainer()
         this.sprite_handler.registerContainer(this.towerSpriteContainer) // Do not want to restrict the positions to the root container
+        this.sprite_handler.registerContainer(this.placeTowerButtons)
     }
 
     setTowerFactoryLink(towerFactory) {
@@ -92,6 +97,7 @@ export class TowerMenu  extends BaseToolbarComponent {
             this.towerFactoryLink.startInteraction()
             this.infoToolbarLink.hideDragTowerInfo()
             this.sprite_handler.unsetActiveClickable()
+            this.placeTowerButtons.visible = false
         }
 
         let onPointerOver = ()=>{
@@ -113,6 +119,14 @@ export class TowerMenu  extends BaseToolbarComponent {
                 if ((sprite.x < 0 || sprite.y < 0 || sprite.x > MAP_WIDTH || sprite.y > MAP_HEIGHT) && // Not on map
                     (sprite.x != sprite.xStart || sprite.y != sprite.yStart)) { // and has moved
                     towerReset()
+                } else {
+                    this.placeTowerButtons.visible = true
+                    this.placeTowerButtons.x = sprite.x
+                    if (sprite.gridY == 0) {
+                        this.placeTowerButtons.y = sprite.y + 32
+                    } else {
+                        this.placeTowerButtons.y = sprite.y - 32
+                    }
                 }
             }
             sprite.dragging = false
@@ -120,6 +134,7 @@ export class TowerMenu  extends BaseToolbarComponent {
 
         let onPointerDown = () => {
             sprite.dragging = true
+            this.placeTowerButtons.visible = false
             this.infoToolbarLink.showDragTowerInfo(type)
         }
 
@@ -156,6 +171,36 @@ export class TowerMenu  extends BaseToolbarComponent {
 
         sprite.range_subsprite.setParent(this.rangeSpriteContainer)
         return sprite
+    }
+
+    /**
+     * The button that you press to confirm tower placement
+     */
+    getSetTowerButtons() {
+        let localContainer = new PIXI.Container()
+        let yOffset = 0
+
+        let buttonHeight = 24
+        let buttonWidth = 24
+        let width_px = buttonWidth * 2 + 16 // 10 is gap between buttons
+
+        let confirmButton =  new GraphicButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(1, 2, buttonWidth, width_px)-width_px/2, yOffset, "\u{1F5F8}" , 20, "0x22FF22")
+        let confirm = () => {
+            this.sprite_handler.getActiveClickable().emit("place")
+        }
+        confirmButton.on("click", confirm)
+        confirmButton.on("tap", confirm)
+        localContainer.addChild(confirmButton)
+
+        let cancelButton =  new GraphicButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(2, 2, buttonWidth, width_px) - width_px/2, yOffset, "\u{2717}", 20, "0xFF2222")
+        let deny = () => {
+            this.sprite_handler.getActiveClickable().emit("clear")
+        }
+        cancelButton.on("click", deny)
+        cancelButton.on("tap", deny)
+        localContainer.addChild(cancelButton)
+
+        return localContainer
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~
