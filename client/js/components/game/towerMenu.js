@@ -12,11 +12,17 @@ export class TowerMenu  extends BaseToolbarComponent {
         this.towerFactoryLink
         this.infoToolbarLink
 
+        this.towersYOffset = 64
+
         this.towerSpriteContainer = new PIXI.Container()
         this.rangeSpriteContainer = new PIXI.Container()
 
         this.placeTowerButtons = this.getSetTowerButtons()
         this.placeTowerButtons.visible = false
+
+        let title = this.renderTitle("Towers")
+        title.y = 16
+        this.container.addChild(title)
     }
 
     loadData() {
@@ -52,6 +58,7 @@ export class TowerMenu  extends BaseToolbarComponent {
     addTowers() {
         for (let i = 0; i < 4; i++) {
             let icon = this.getTower(i)
+            icon.y += this.towersYOffset
             this.container.addChild(icon) // The placeholder
             this.towerSpriteContainer.addChild(this.getDraggableTower(i, this.x + icon.x, this.y + icon.y)) // The interactive, draggable icon
         }
@@ -59,16 +66,26 @@ export class TowerMenu  extends BaseToolbarComponent {
 
     getTower(type) {
         let towerNum = type+1 // hacky but works
-        let towersPerRow = 2
+        let towersPerRow = 3
         let toolbarWidth = this.width_px
         let towerSpriteWidth = DEFAULT_SPRITE_SIZE_X
 
         let x = getPositionWithinEquallySpacedObjects(towerNum, towersPerRow, towerSpriteWidth, toolbarWidth)
-        let y = 32 * 2 * (Math.floor(type/towersPerRow) + 1) // +1 so not starting at y = 0
+        let y = 32 * 2 * (Math.floor(type/towersPerRow)) // +1 so not starting at y = 0
 
         let towerSprite = this.towerFactoryLink.getTowerSprite(type)
         towerSprite.x = x
         towerSprite.y = y
+
+        let style = {
+            fontFamily: 'Arial',
+            fontSize: 14
+        }
+        let costText = new PIXI.Text("£"+this.towerJson[type].cost.toString(), style);
+        costText.anchor.set(0.5, 0)
+        costText.y += DEFAULT_SPRITE_SIZE_Y/2
+        towerSprite.addChild(costText)
+
         return towerSprite
     }
 

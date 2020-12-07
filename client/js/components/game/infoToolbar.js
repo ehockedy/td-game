@@ -86,24 +86,6 @@ export class InfoToolbar extends BaseToolbarComponent {
         this.playerTowerStatsContainer.visible = visibility
     }
 
-    renderTitle(titleText) {
-        let xMargin = 10
-
-        let defaultStyle = {
-            fontFamily: 'Arial',
-            fontSize: 20,
-            fontWeight: 'bold',
-            wordWrap: true,
-            wordWrapWidth: this.width_px - xMargin
-        }
-
-        // Title
-        let text = new PIXI.Text(titleText, defaultStyle);
-        text.x = Math.floor(this.width_px/2)
-        text.anchor.set(0.5, 0)
-        return text
-    }
-
     renderTowerInfo() {
         let localContainer = new PIXI.Container()
         let xMargin = 10
@@ -118,10 +100,6 @@ export class InfoToolbar extends BaseToolbarComponent {
 
                 yOffset += this.yOffsetGap
             }
-            let costInfo = new KeyValueInfo("Cost", this.towerJson[i]["cost"], this.width_px, xMargin, 16)
-            costInfo.y = Math.floor(yOffset)
-            costInfo.type = i
-            localContainer.addChild(costInfo)
         }
         return localContainer
     }

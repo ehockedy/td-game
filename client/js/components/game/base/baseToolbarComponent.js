@@ -31,4 +31,22 @@ export class BaseToolbarComponent extends BaseComponent {
         this.sprite_handler.registerContainer(this.backgroundContainer)
         super.registerContainer()
     }
+
+    renderTitle(titleText) {
+        let xMargin = 10
+
+        let titleStyle = {
+            fontFamily: 'Arial',
+            fontSize: 20,
+            fontWeight: 'bold',
+            wordWrap: true,
+            wordWrapWidth: this.width_px - xMargin
+        }
+
+        // Title
+        let text = new PIXI.Text(titleText, titleStyle);
+        text.x = Math.floor(this.width_px/2)
+        text.anchor.set(0.5, 0)
+        return text
+    }
 }
