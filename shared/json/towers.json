@@ -2,13 +2,7 @@
     {
         "name": "basic tower",
         "spriteSheetNum": 0,
-        "displayInfo": {
-            "Ammo": "standard",
-            "Damage": "low",
-            "Rate": "medium",
-            "Range": "medium",
-            "Resistance": "none"
-        },
+        "displayInfo": "This simple tower shoots one bullet at a time. Average damage, average range, average rate of fire. Reliable, but thorougly mediocre.",
         "gameData": {
             "seekRange": 5,
             "shootRange": 8,
@@ -25,13 +19,7 @@
     {
         "name": "all direction tower",
         "spriteSheetNum": 1,
-        "displayInfo": {
-            "Ammo": "all dirs",
-            "Damage": "low",
-            "Rate": "medium",
-            "Range": "short",
-            "Resistance": "none"
-        },
+        "displayInfo": "Shoots bullets in eight directions at a high rate.",
         "gameData": {
             "seekRange": 1.6,
             "shootRange": 1.6,
@@ -48,13 +36,7 @@
     {
         "name": "triple tower",
         "spriteSheetNum": 2,
-        "displayInfo": {
-            "Ammo": "3 standard",
-            "Damage": "medium",
-            "Rate": "medium",
-            "Range": "medium",
-            "Resistance": "none"
-        },
+        "displayInfo": "Similar to a basic tower, but shoots three times as many bullets.",
         "gameData": {
             "seekRange": 5,
             "shootRange": 8,
@@ -71,13 +53,7 @@
     {
         "name": "sniper tower",
         "spriteSheetNum": 3,
-        "displayInfo": {
-            "Ammo": "standard",
-            "Damage": "high",
-            "Rate": "low",
-            "Range": "far",
-            "Resistance": "none"
-        },
+        "displayInfo": "Slow to fire, but packs a punch when it does. Plus can see over half the whole map.",
         "gameData": {
             "seekRange": 10,
             "shootRange": 20,
