@@ -3,7 +3,7 @@ import { titleStyle } from "../../styles/text.js"
 
 export class MenuTitle extends BaseComponent {
     constructor(sprite_handler, x_px, y_px) {
-        super(sprite_handler, "menuTitle")
+        super("menuTitle")
 
         this.textSprite = new PIXI.Text('TOWER DEFENCE!', titleStyle);
         this.textSprite.anchor.set(0.5);
@@ -12,10 +12,10 @@ export class MenuTitle extends BaseComponent {
         this.textSprite.startX = this.textSprite.x
         this.textSprite.startY = this.textSprite.y
         this.textSprite.name = "title"
-        this.container.addChild(this.textSprite);
+        this.addChild(this.textSprite);
 
         this.textSprite.on("tick", this.bounce)
-        this.sprite_handler.registerUpdatableSprite(this.textSprite)
+        sprite_handler.registerUpdatableSprite(this.textSprite)
 
         this.textSprite.bounceDir = 1
     }

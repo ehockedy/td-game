@@ -1,13 +1,7 @@
-export class BaseComponent {
-    constructor(sprite_handler, containerName) {
-        this.sprite_handler = sprite_handler
-        this.container = new PIXI.Container();
-        this.containerName = containerName
-        this.container.name = this.containerName
-    }
-
-    registerContainer() {
-        this.sprite_handler.registerContainer(this.container)
+export class BaseComponent extends PIXI.Container {
+    constructor(name) {
+        super()
+        this.name = name
     }
 
     _setContainerInteraction(container, value) {
@@ -18,10 +12,10 @@ export class BaseComponent {
     }
 
     startInteraction() {
-        this._setContainerInteraction(this.container, true)
+        this._setContainerInteraction(this, true)
     }
 
     stopInteraction() {
-        this._setContainerInteraction(this.container, false)
+        this._setContainerInteraction(this, false)
     }
 }

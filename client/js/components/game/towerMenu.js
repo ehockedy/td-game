@@ -8,8 +8,8 @@ import { InfoTextBox } from "../ui_common/infoTextBox.js"
 
 export class TowerMenu  extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {
-        super(sprite_handler, "towermenu", width_px, height_px, x, y)
-
+        super("towermenu", width_px, height_px, x, y)
+        this.sprite_handler = sprite_handler
         this.towerFactoryLink
 
         this.towersYOffset = 64
@@ -23,7 +23,11 @@ export class TowerMenu  extends BaseToolbarComponent {
 
         let title = this.renderTitle("Towers")
         title.y = 16
-        this.container.addChild(title)
+        this.addChild(title)
+        this.addChild(this.towerSpriteContainer)
+        this.addChild(this.rangeSpriteContainer)
+        this.addChild(this.towerInfoContainer)
+        this.addChild(this.placeTowerButtons)
     }
 
     loadData() {
@@ -36,31 +40,18 @@ export class TowerMenu  extends BaseToolbarComponent {
         })
     }
 
-    registerContainer() {
-        super.registerContainer()
-        this.sprite_handler.registerContainer(this.towerSpriteContainer) // Do not want to restrict the positions to the root container
-        this.sprite_handler.registerContainer(this.placeTowerButtons)
-        this.sprite_handler.registerContainer(this.towerInfoContainer)
-    }
-
     setTowerFactoryLink(towerFactory) {
         this.towerFactoryLink = towerFactory
-    }
-
-    // An additional container for the range sprites.
-    // Required so that range always appears under all towers
-    registerRangeSpriteContainer() {
-        this.sprite_handler.registerContainer(this.rangeSpriteContainer)
     }
 
     addTowers() {
         for (let i = 0; i < this.towerJson.length; i++) {
             let icon = this.getTower(i)
             icon.y += this.towersYOffset
-            this.container.addChild(icon) // The placeholder
-            this.towerSpriteContainer.addChild(this.getDraggableTower(i, this.x + icon.x, this.y + icon.y)) // The interactive, draggable icon
+            this.addChild(icon) // The placeholder
+            this.towerSpriteContainer.addChild(this.getDraggableTower(i, icon.x, icon.y)) // The interactive, draggable icon
 
-            let infoTextBox = new InfoTextBox(MAP_WIDTH-200, 0, 200, 200, this.towerJson[i].displayInfo, 16)
+            let infoTextBox = new InfoTextBox(-200, 0, 200, 200, this.towerJson[i].displayInfo, 16)
             infoTextBox.visible = false
             this.towerInfoContainer.addChild(infoTextBox)
         }
@@ -97,8 +88,11 @@ export class TowerMenu  extends BaseToolbarComponent {
         sprite.buttonMode = true
         sprite.dragging = false
         sprite.type = type
+
         sprite.x = x
         sprite.y = y
+        sprite.global_x = sprite.x + this.x
+        sprite.global_y = sprite.y + this.y
         sprite.xStart = x
         sprite.yStart = y
 
@@ -135,7 +129,7 @@ export class TowerMenu  extends BaseToolbarComponent {
 
         let onPointerUp = () => {
             if (sprite.dragging) {
-                if ((sprite.x < 0 || sprite.y < 0 || sprite.x > MAP_WIDTH || sprite.y > MAP_HEIGHT) && // Not on map
+                if ((sprite.global_x < 0 || sprite.global_y < 0 || sprite.global_x > MAP_WIDTH || sprite.global_y > MAP_HEIGHT) && // Not on map
                     (sprite.x != sprite.xStart || sprite.y != sprite.yStart)) { // and has moved
                     towerReset()
                 } else {
@@ -169,7 +163,7 @@ export class TowerMenu  extends BaseToolbarComponent {
         }
 
         let onTowerPlaceConfirm = () => {
-            if (sprite.x >= 0 && sprite.y >= 0 && sprite.x < MAP_WIDTH && sprite.y < MAP_HEIGHT) {
+            if (sprite.global_x >= 0 && sprite.global_y >= 0 && sprite.global_x < MAP_WIDTH && sprite.global_y < MAP_HEIGHT) {
                 sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(sprite))
             }
             towerReset()
@@ -226,8 +220,7 @@ export class TowerMenu  extends BaseToolbarComponent {
     // ~~~~~~~~~~~~~~~~~~~~~~~
     onDragTower(event) {
         if (!this.dragging) return
-
-        const newPosition = event.data.getLocalPosition(this.parent);
+        const newPosition = event.data.global //event.data.getLocalPosition(this.parent);
         if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < MAP_WIDTH && newPosition.y < MAP_HEIGHT) {
             // If on map, snap to grid
             let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
@@ -236,8 +229,10 @@ export class TowerMenu  extends BaseToolbarComponent {
                 getBoard()[newGridY][newGridX]["value"] == 0) { // Must be empty space
                 this.gridX = newGridX
                 this.gridY = newGridY
-                this.x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
-                this.y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
+                this.global_x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2
+                this.global_y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2
+                this.x = this.global_x - this.parent.parent.x;
+                this.y = this.global_y - this.parent.parent.y;
             }
 
             // Also move range indicator to be same position as tower
@@ -246,8 +241,10 @@ export class TowerMenu  extends BaseToolbarComponent {
             this.range_subsprite.y = this.y
         } else if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < APP_WIDTH && newPosition.y < APP_HEIGHT) {
             // Otherwise, update position normally
-            this.x = newPosition.x
-            this.y = newPosition.y
+            this.global_x = newPosition.x
+            this.global_y = newPosition.y
+            this.x = this.global_x - this.parent.parent.x;
+            this.y = this.global_y - this.parent.parent.y;
             this.range_subsprite.visible = false
         }
     }

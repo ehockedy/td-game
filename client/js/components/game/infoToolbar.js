@@ -6,7 +6,8 @@ import { KeyValueInfo } from "../ui_common/keyValueInfo.js"
 
 export class InfoToolbar extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {
-        super(sprite_handler, "towerinfo", width_px, height_px, x, y)
+        super("towerinfo", width_px, height_px, x, y)
+        this.sprite_handler = sprite_handler
         this.yOffsetGap = 20
     }
 
@@ -24,27 +25,27 @@ export class InfoToolbar extends BaseToolbarComponent {
     setupToolbarComponents() {
         // Drag tower components
         this.titleTowerInfo = this.renderTitle('Tower Info')
-        this.container.addChild(this.titleTowerInfo)
+        this.addChild(this.titleTowerInfo)
 
         this.towerDescriptionContainer = this.renderTowerInfo()
         this.towerDescriptionContainer.y = this.titleTowerInfo.getBounds().height + 5
-        this.container.addChild(this.towerDescriptionContainer)
+        this.addChild(this.towerDescriptionContainer)
 
         // Placed tower components
         this.titleAim = this.renderTitle('Aim Behaviour')
-        this.container.addChild(this.titleAim)
+        this.addChild(this.titleAim)
 
         this.towerAimButtonsContainer = this.renderTowerAimButtons()
         this.towerAimButtonsContainer.y = this.titleAim.getBounds().height + 5
-        this.container.addChild(this.towerAimButtonsContainer)
+        this.addChild(this.towerAimButtonsContainer)
 
         this.titleStats = this.renderTitle('Tower Stats')
         this.titleStats.y = this.towerAimButtonsContainer.y + this.towerAimButtonsContainer.getBounds().height + 15
-        this.container.addChild(this.titleStats)
+        this.addChild(this.titleStats)
 
         this.playerTowerStatsContainer = this.renderPlayerTowerStats()
         this.playerTowerStatsContainer.y = this.titleStats.y + this.titleStats.getBounds().height + 5
-        this.container.addChild(this.playerTowerStatsContainer)
+        this.addChild(this.playerTowerStatsContainer)
 
         // Then hide them because shouldn't show up until towers are interacted with
         this.hideDragTowerInfo()

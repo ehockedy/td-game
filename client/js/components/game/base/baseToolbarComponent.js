@@ -1,8 +1,8 @@
 import { BaseComponent } from "./baseComponent.js";
 
 export class BaseToolbarComponent extends BaseComponent {
-    constructor(sprite_handler, containerName, width_px, height_px, x, y) {
-        super(sprite_handler, containerName)
+    constructor(containerName, width_px, height_px, x, y) {
+        super(containerName)
         this.width_px = width_px
         this.height_px = height_px
         this.x = x
@@ -20,16 +20,8 @@ export class BaseToolbarComponent extends BaseComponent {
         // Keep background and towers separate
         this.backgroundContainer = new PIXI.Container()
         this.backgroundContainer.addChild(graphics)
-        this.backgroundContainer.x = this.x
-        this.backgroundContainer.y = this.y
 
-        this.container.x = this.x
-        this.container.y = this.y
-    }
-
-    registerContainer() {
-        this.sprite_handler.registerContainer(this.backgroundContainer)
-        super.registerContainer()
+        this.addChild(this.backgroundContainer)
     }
 
     renderTitle(titleText) {
@@ -40,10 +32,10 @@ export class BaseToolbarComponent extends BaseComponent {
             fontSize: 20,
             fontWeight: 'bold',
             wordWrap: true,
-            wordWrapWidth: this.width_px - xMargin
+            wordWrapWidth: this.width_px - xMargin,
+            fill: "0x000000"
         }
 
-        // Title
         let text = new PIXI.Text(titleText, titleStyle);
         text.x = Math.floor(this.width_px/2)
         text.anchor.set(0.5, 0)

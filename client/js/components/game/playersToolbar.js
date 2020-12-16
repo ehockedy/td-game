@@ -3,17 +3,17 @@ import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 import { KeyValueInfo } from "../ui_common/keyValueInfo.js"
 
 export class PlayersToolbar extends BaseToolbarComponent {
-    constructor(sprite_handler, width_px, height_px, x, y) {
-        super(sprite_handler, "playerinfo", width_px, height_px, x, y)
+    constructor(width_px, height_px, x, y) {
+        super("playerinfo", width_px, height_px, x, y)
 
         this.yOffsetGap = 20
     }
 
     addPlayer(info) {
-        if (!this.container.getChildByName(info.playerID)) {
+        if (!this.getChildByName(info.playerID)) {
             let playerInfoContainer = this.renderPlayerInfo(info)
             playerInfoContainer.x = getPositionWithinEquallySpacedObjects(info.index+1, 4, this.width_px/4, this.width_px) - this.width_px/4/2
-            this.container.addChild(playerInfoContainer)
+            this.addChild(playerInfoContainer)
         }
     }
 
@@ -79,14 +79,14 @@ export class PlayersToolbar extends BaseToolbarComponent {
 
     unsetAllPlayers() {
         // TODO this could be done more nicely
-        this.container.children.forEach((child) => {
+        this.children.forEach((child) => {
             let readyIcon = child.getChildByName("readyIcon")
             if (readyIcon) readyIcon.visible = false
         })
     }
 
     _setReadiness(playerID, readiness) {
-        let playerInfoContainer = this.container.getChildByName(playerID)
+        let playerInfoContainer = this.getChildByName(playerID)
         if (playerInfoContainer) {
             playerInfoContainer.getChildByName("readyIcon").visible = readiness
         }
@@ -94,9 +94,9 @@ export class PlayersToolbar extends BaseToolbarComponent {
 
     update(playersData) {
         playersData.objects.forEach((player) => {
-            let playerInfo = this.container.getChildByName(player.playerID)
+            let playerInfo = this.getChildByName(player.playerID)
             if (playerInfo != undefined) {
-                this.container.getChildByName(player.playerID).children.forEach((field) => {
+                this.getChildByName(player.playerID).children.forEach((field) => {
                     for (let stat in player.stats) {
                         if (field.name == stat) {
                             field.setValue(player.stats[stat].toString())

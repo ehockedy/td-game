@@ -39,16 +39,16 @@ export class LobbyRenderer {
 
         // Map preview - the primary player (1) can regenrate the map that will be used in the game. The setting will affect the map generated
         let mapScale = 420/MAP_WIDTH // Scale the map down by this much
-        this.map = new MapComponent(this.spriteHandler, mapScale)
-        this.map.container.x = popupBoundaryLeft + xMargin
-        this.map.container.y = popupBoundaryTop + 80
+        this.map = new MapComponent(mapScale)
+        this.map.x = popupBoundaryLeft + xMargin
+        this.map.y = popupBoundaryTop + 80
 
         // Settings for the game
         let optionWidth = 350
         let optionFontSize = 25
         let optionGap = 25
         this.mapPathSetting = new GameSetting( // The structure of the map that will be regenerated
-            popupBoundaryRight - xMargin, this.map.container.y + 20, // x, y
+            popupBoundaryRight - xMargin, this.map.y + 20, // x, y
             "Map type", ["Straight", "Winding"], 1, // Setting values
             optionFontSize, optionWidth, // font size and width (px)
             1, 0) // Anchor
@@ -78,12 +78,12 @@ export class LobbyRenderer {
         })
 
         this.seedInput.placeholder = 'Game seed...'
-        this.seedInput.x = this.map.container.x + 420 + 20
+        this.seedInput.x = this.map.x + 420 + 20
         this.seedInput.y = this.roundsSetting.y + this.difficultySetting.getLocalBounds().height + optionGap + 45
 
         this.regenerateMapButton = new GraphicButton(
             200, 25, // width, height
-            this.map.container.x+this.map.width, this.map.container.y - 5, // x, y
+            this.map.x+this.map.getWidth(), this.map.y - 5, // x, y
             "Regenerate Map",
             20, 0x448877, // font size, colour
             1, 1) // anchor
@@ -91,9 +91,9 @@ export class LobbyRenderer {
         this.regenerateMapButton.on("tap", ()=>{sendMessage(MSG_TYPES.GET_MAP_REGENERATE, {"seed": this.seedInput.text})})
 
         // Lobby members - player that clicked new game is player 1. They can change the game options. When another player joins they fill in the second slot and so on
-        let playerSideLen = popupBoundaryBottom - this.map.container.y - this.map.height - yMargin - 20
+        let playerSideLen = popupBoundaryBottom - this.map.y - this.map.getHeight() - yMargin - 20
         let playerMargin = 15
-        let playersY = popupBoundaryBottom-yMargin
+        let playersY = popupBoundaryBottom - yMargin
         let playersX = popupBoundaryLeft + xMargin
         let numPlayers = 4 // TODO make this and all other const
         this.players = []
@@ -142,7 +142,7 @@ export class LobbyRenderer {
         this.spriteHandler.registerContainer(this.startButton)
         this.spriteHandler.registerContainer(this.gameIDText)
         this.spriteHandler.registerContainer(this.lobbyTitleText)
-        this.map.registerContainer()
+        this.spriteHandler.registerContainer(this.map)
         this.spriteHandler.registerContainer(this.regenerateMapButton);
         this.spriteHandler.registerContainer(this.mapPathSetting);
         this.spriteHandler.registerContainer(this.roundsSetting);

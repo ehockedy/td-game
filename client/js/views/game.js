@@ -19,14 +19,14 @@ import { setBoard } from "../state.js"
 export class GameRenderer {
     constructor(spriteHandler) {
         this.spriteHandler = spriteHandler
-        this.map = new MapComponent(this.spriteHandler)
+        this.map = new MapComponent()
         this.tm = new TowerMenu(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, TOWER_MENU_HEIGHT, MAP_WIDTH, 0)
         this.it = new InfoToolbar(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, TOWER_INFO_MENU_HEIGHT, MAP_WIDTH, TOWER_MENU_HEIGHT)
-        this.git = new GameInfoToolbar(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, GAME_STATS_MENU_HEIGHT, MAP_WIDTH, TOWER_MENU_HEIGHT+TOWER_INFO_MENU_HEIGHT)
-        this.ut = new PlayersToolbar(this.spriteHandler, MAP_WIDTH, BOTTOM_TOOLBAR_HEIGHT, 0, MAP_HEIGHT)
+        this.git = new GameInfoToolbar(RIGHT_TOOLBAR_WIDTH, GAME_STATS_MENU_HEIGHT, MAP_WIDTH, TOWER_MENU_HEIGHT+TOWER_INFO_MENU_HEIGHT)
+        this.ut = new PlayersToolbar(MAP_WIDTH, BOTTOM_TOOLBAR_HEIGHT, 0, MAP_HEIGHT)
         this.tc = new TowersComponent(this.spriteHandler)
-        this.ec = new EnemiesComponent(this.spriteHandler)
-        this.bc = new BulletsComponent(this.spriteHandler)
+        this.ec = new EnemiesComponent()
+        this.bc = new BulletsComponent()
         this.perRoundUpdateText = new OnScreenMessage(MAP_WIDTH/2, MAP_HEIGHT/2, "Round 1", 30)
 
         this.startRoundButton = new GraphicButton(
@@ -107,23 +107,27 @@ export class GameRenderer {
     }
 
     loadAssets() {
-        return Promise.all([this.tc.loadData(), this.it.loadData(), this.ec.loadData(), this.tm.loadData()])
+        return Promise.all([
+            this.tc.loadData(),
+            this.it.loadData(),
+            this.ec.loadData(),
+            this.tm.loadData(),
+            this.bc.loadData()
+        ])
     }
 
     startRendering() {
         // Register containers with the sprite layer
         // The order here is the order they are rendered on the map
-        this.map.registerContainer()
-        this.ec.registerContainer()
-        this.tc.registerRangeSpriteContainer()
-        this.tm.registerRangeSpriteContainer()
-        this.tm.registerContainer()
-        this.it.registerContainer()
-        this.git.registerContainer()
+        this.spriteHandler.registerContainer(this.map)
+        this.spriteHandler.registerContainer(this.ec)
+        this.spriteHandler.registerContainer(this.tm)
+        this.spriteHandler.registerContainer(this.it)
+        this.spriteHandler.registerContainer(this.git)
         this.spriteHandler.registerContainer(this.startRoundButton)
-        this.ut.registerContainer()
-        this.tc.registerContainer()
-        this.bc.registerContainer()
+        this.spriteHandler.registerContainer(this.ut)
+        this.spriteHandler.registerContainer(this.tc)
+        this.spriteHandler.registerContainer(this.bc)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
 
         this.spriteHandler.registerContainer(this.debugExportGameButton)

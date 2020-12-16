@@ -9,14 +9,16 @@ import { BaseComponent } from "./base/baseComponent.js"
  */
 export class TowersComponent extends BaseComponent {
     constructor(sprite_handler){
-        super(sprite_handler)
+        super()
+        this.sprite_handler = sprite_handler
         this.randomColourCode = "0x" + randomHexString(6); // TODO should be defined elsewhere
         this.towerStateHashPrev = ""
         this.rangeSpriteContainer = new PIXI.Container();
         this.towerSpriteSheetData = []
 
         this.setTowersContainer = new PIXI.Container()
-        this.container.addChild(this.setTowersContainer)
+        this.addChild(this.setTowersContainer)
+        this.addChild(this.rangeSpriteContainer)
     }
 
     // Asynchronosly load the tower data
@@ -37,9 +39,9 @@ export class TowersComponent extends BaseComponent {
 
     // An additional container for the range sprites.
     // Required so that range always appears under all towers
-    registerRangeSpriteContainer() {
-        this.sprite_handler.registerContainer(this.rangeSpriteContainer)
-    }
+    // registerRangeSpriteContainer() {
+    //     this.sprite_handler.registerContainer(this.rangeSpriteContainer)
+    // }
 
     setInfoToolbarLink(infoToolbar) {
         this.infoToolbarLink = infoToolbar

@@ -5,8 +5,8 @@ import { sendMessage, MSG_TYPES } from "../../networking.js"
 import { randomAlphaCharString } from "../../tools.js"
 
 export class NewGameComponent extends BaseMenuOptionComponent {
-    constructor(sprite_handler, x, y) {
-        super(sprite_handler, "newGame", x, y, "New Game")
+    constructor(x, y) {
+        super("newGame", x, y, "New Game")
         this.textSprite
             .on("click", this.onStartButtonClick)
             .on("tap", this.onStartButtonClick)

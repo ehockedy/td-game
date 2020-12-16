@@ -3,16 +3,24 @@ import { getBoard } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
 
 export class MapComponent extends BaseComponent {
-    constructor(sprite_handler, scalingFactor=1) {
-        super(sprite_handler, "map")
+    constructor(scalingFactor=1) {
+        super("map")
         this.scalingFactor = scalingFactor
 
-        this.width = DEFAULT_SPRITE_SIZE_X*this.scalingFactor*MAP_COLS
-        this.height = DEFAULT_SPRITE_SIZE_Y*this.scalingFactor*MAP_ROWS
+        this.width_px = DEFAULT_SPRITE_SIZE_X*this.scalingFactor*MAP_COLS
+        this.height_px = DEFAULT_SPRITE_SIZE_Y*this.scalingFactor*MAP_ROWS
+    }
+
+    getWidth() {
+        return this.width_px
+    }
+
+    getHeight() {
+        return this.height_px
     }
 
     constructMap() {
-        this.container.removeChildren()
+        this.removeChildren()
         const MAP_SPRITE_SIZE_X = DEFAULT_SPRITE_SIZE_X*this.scalingFactor // Width of a sprite in the map spritesheet
         const MAP_SPRITE_SIZE_Y = DEFAULT_SPRITE_SIZE_Y*this.scalingFactor // Height of a sprite in the map spritesheet
 
@@ -40,7 +48,7 @@ export class MapComponent extends BaseComponent {
                 map_square_sprite.scale.x = this.scalingFactor
                 map_square_sprite.scale.y = this.scalingFactor
 
-                this.container.addChild(map_square_sprite);
+                this.addChild(map_square_sprite);
             }
         }
     }

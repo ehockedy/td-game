@@ -4,8 +4,8 @@ import { APP_WIDTH, APP_HEIGHT } from "../../constants.js"
 import { MSG_TYPES, sendMessage, sendMessageGetAck } from "../../networking.js"
 
 export class JoinGameComponent extends BaseMenuOptionComponent {
-    constructor(sprite_handler, x, y) {
-        super(sprite_handler, "joinGame", x, y, "Join Game")
+    constructor(x, y) {
+        super("joinGame", x, y, "Join Game")
         this.textSprite
             .on("click", ()=>{ this.onJoinButtonClick() })
             .on("tap", ()=>{ this.onJoinButtonClick() })
@@ -32,11 +32,8 @@ export class JoinGameComponent extends BaseMenuOptionComponent {
         this.popupContainer.on('removed', ()=>{
             this.popupContainer.removeChildren()
         })
-    }
 
-    registerContainer() {
-        super.registerContainer()
-        this.sprite_handler.registerContainer(this.popupContainer)
+        this.addChild(this.popupContainer)
     }
 
     onJoinButtonClick() {

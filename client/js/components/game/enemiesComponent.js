@@ -3,12 +3,10 @@ import { gridPosToMapPos } from "../../tools.js"
 import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y} from "../../constants.js"
 
 export class EnemiesComponent extends BaseComponent {
-    constructor(sprite_handler) {
-        super(sprite_handler)
+    constructor() {
+        super()
         this.enemyStateHashPrev = ""
-
         this.enemySpriteSheet = {}
-
     }
 
     loadData() {
@@ -36,7 +34,7 @@ export class EnemiesComponent extends BaseComponent {
         animatedEnemySprite.play()
         animatedEnemySprite.name = name // Unique identifier
         animatedEnemySprite.tintCount = 0
-        this.container.addChild(animatedEnemySprite)
+        this.addChild(animatedEnemySprite)
     }
 
     update(enemyUpdate) {
@@ -56,22 +54,22 @@ export class EnemiesComponent extends BaseComponent {
         if (enemyStateHash != this.enemyStateHashPrev) { // TODO further optimisation - hash of all added and removed enemies
             this.enemyStateHashPrev = enemyStateHash
 
-            for (let enemySpriteIdx = this.container.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
+            for (let enemySpriteIdx = this.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
                 let found = false
                 for (let nameIdx = 0; nameIdx < enemyStateObjects.length; nameIdx++) {
                     // Whether enemy is found in this.container, but not in server update
-                    found = (this.container.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
+                    found = (this.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
                     if (found) break; // Think this is ok
                 }
-                if (!found) this.container.removeChildAt(enemySpriteIdx);
+                if (!found) this.removeChildAt(enemySpriteIdx);
             }
 
             // Add any enemies not present in container i.e. just spawned
             for (let nameIdx = 0; nameIdx < enemyStateObjects.length; nameIdx++) {
                 let found = false;
-                for (let enemySpriteIdx = this.container.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
+                for (let enemySpriteIdx = this.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
                     // Whether enemy if found in server update, but not in this.container
-                    found = (this.container.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
+                    found = (this.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
                     if (found) break;
                 }
                 if (!found) this.addEnemy(enemyStateObjects[nameIdx].name)
@@ -81,7 +79,7 @@ export class EnemiesComponent extends BaseComponent {
         // Update state of enemies present in server update
         enemyStateObjects.forEach((enemy, idx) => {
             // Move the enemy
-            let enemyToUpdate = this.container.getChildByName(enemy.name)
+            let enemyToUpdate = this.getChildByName(enemy.name)
             let newpos = gridPosToMapPos(enemy.position)
             enemyToUpdate.x = newpos[0]
             enemyToUpdate.y = newpos[1]
