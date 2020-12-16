@@ -23,14 +23,6 @@ export class InfoToolbar extends BaseToolbarComponent {
     }
 
     setupToolbarComponents() {
-        // Drag tower components
-        this.titleTowerInfo = this.renderTitle('Tower Info')
-        this.addChild(this.titleTowerInfo)
-
-        this.towerDescriptionContainer = this.renderTowerInfo()
-        this.towerDescriptionContainer.y = this.titleTowerInfo.getBounds().height + 5
-        this.addChild(this.towerDescriptionContainer)
-
         // Placed tower components
         this.titleAim = this.renderTitle('Aim Behaviour')
         this.addChild(this.titleAim)
@@ -48,23 +40,7 @@ export class InfoToolbar extends BaseToolbarComponent {
         this.addChild(this.playerTowerStatsContainer)
 
         // Then hide them because shouldn't show up until towers are interacted with
-        this.hideDragTowerInfo()
         this.hidePlacedTowerInfo()
-    }
-
-    showDragTowerInfo(towerType) {
-        this._setVisibilityDragTowerComponents(true)
-        this.towerDescriptionContainer.children.forEach(tower => {
-            if (tower.type == towerType) {
-                tower.visible = true
-            } else {
-                tower.visible = false
-            }
-        });
-    }
-
-    hideDragTowerInfo() {
-        this._setVisibilityDragTowerComponents(false)
     }
 
     showPlacedTowerInfo() {
@@ -85,24 +61,6 @@ export class InfoToolbar extends BaseToolbarComponent {
         this.towerAimButtonsContainer.visible = visibility
         this.titleAim.visible = visibility
         this.playerTowerStatsContainer.visible = visibility
-    }
-
-    renderTowerInfo() {
-        let localContainer = new PIXI.Container()
-        let xMargin = 10
-        for (let i = 0; i < this.towerJson.length; i++) {
-            let yOffset = 0
-            let towerInfo = this.towerJson[i]["displayInfo"]
-            for (let key in towerInfo) {
-                let info = new KeyValueInfo(key, towerInfo[key], this.width_px, xMargin, 16)
-                info.y = Math.floor(yOffset)
-                info.type = i
-                localContainer.addChild(info)
-
-                yOffset += this.yOffsetGap
-            }
-        }
-        return localContainer
     }
 
     renderTowerAimButtons() {
