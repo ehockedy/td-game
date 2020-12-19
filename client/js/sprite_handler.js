@@ -23,14 +23,9 @@ export class SpriteHandler {
 
     clear() {
         this.app.stage.removeChildren()
-        this.updatables = []
     }
 
-    gameLoop() {
-        this.updatables.forEach((sprite)=>{
-            sprite.emit("tick")
-        })
-    }
+    gameLoop() {}
 
     // Add a PIXI container (or sub class) to the sprite pool to be rendered
     registerContainer(container) {

@@ -17,8 +17,8 @@ export class TowersComponent extends BaseComponent {
         this.towerSpriteSheetData = []
 
         this.setTowersContainer = new PIXI.Container()
-        this.addChild(this.setTowersContainer)
         this.addChild(this.rangeSpriteContainer)
+        this.addChild(this.setTowersContainer)
     }
 
     // Asynchronosly load the tower data
@@ -36,12 +36,6 @@ export class TowersComponent extends BaseComponent {
             })
         })
     }
-
-    // An additional container for the range sprites.
-    // Required so that range always appears under all towers
-    // registerRangeSpriteContainer() {
-    //     this.sprite_handler.registerContainer(this.rangeSpriteContainer)
-    // }
 
     setInfoToolbarLink(infoToolbar) {
         this.infoToolbarLink = infoToolbar

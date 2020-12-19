@@ -24,8 +24,8 @@ export class TowerMenu  extends BaseToolbarComponent {
         let title = this.renderTitle("Towers")
         title.y = 16
         this.addChild(title)
-        this.addChild(this.towerSpriteContainer)
         this.addChild(this.rangeSpriteContainer)
+        this.addChild(this.towerSpriteContainer)
         this.addChild(this.towerInfoContainer)
         this.addChild(this.placeTowerButtons)
     }
