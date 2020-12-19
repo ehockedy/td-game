@@ -2,7 +2,7 @@ import { BaseComponent } from "../../components/game/base/baseComponent.js"
 import { titleStyle } from "../../styles/text.js"
 
 export class MenuTitle extends BaseComponent {
-    constructor(sprite_handler, x_px, y_px) {
+    constructor(x_px, y_px) {
         super("menuTitle")
 
         this.textSprite = new PIXI.Text('TOWER DEFENCE!', titleStyle);
@@ -14,25 +14,26 @@ export class MenuTitle extends BaseComponent {
         this.textSprite.name = "title"
         this.addChild(this.textSprite);
 
-        this.textSprite.on("tick", this.bounce)
-        sprite_handler.registerUpdatableSprite(this.textSprite)
-
-        this.textSprite.bounceDir = 1
+        this.bounceDir = 1
     }
 
     bounce() {
         // Make the title "bounce"
         const range = 15
         const speed = 1
-        let displacement = this.y-this.startY
+        let displacement = this.textSprite.y-this.textSprite.startY
         let displacementProportionOfRange = Math.pow((1 - (range - displacement) / range ), 1)
         let toMove = Math.max(speed * displacementProportionOfRange, 0.01)
 
-        this.y += this.bounceDir * toMove
+        this.textSprite.y += this.bounceDir * toMove
 
-        if (this.y > this.startY+range) this.bounceDir = -1
-        else if (this.y < this.startY) this.bounceDir = 1
+        if (this.textSprite.y > this.textSprite.startY+range) this.bounceDir = -1
+        else if (this.textSprite.y < this.textSprite.startY) this.bounceDir = 1
 
     }
 
+    tick() {
+        super.tick()
+        this.bounce()
+    }
 }

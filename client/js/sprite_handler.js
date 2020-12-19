@@ -15,10 +15,6 @@ export class SpriteHandler {
 
         // Sprite that focus is currently on
         this.activeClickable
-
-        // List of sprites that have should be manually updated by each iteration of the render loop
-        // Each sprite should have the "tick" event registered to them
-        this.updatables = []
     }
 
     render() {
@@ -36,20 +32,15 @@ export class SpriteHandler {
         })
     }
 
-    registerUpdatableSprite(sprite) {
-        this.updatables.push(sprite)
-    }
-
-    removeUpdatableSprite(sprite) {
-        for (let i=0; i < this.updatables.length; i++) {
-            if (sprite == this.updatables[i]) { // TODO make sure object comparison works
-                this.updatables.splice(i, 1)
-            }
-        }
-    }
-
+    // Add a PIXI container (or sub class) to the sprite pool to be rendered
     registerContainer(container) {
         this.app.stage.addChild(container)
+    }
+
+    // Add PIXI container, but will have the tick update function called every iteration of the randering loop
+    registerDynamicContainer(container) {
+        this.registerContainer(container)
+        this.app.ticker.add(()=>{container.tick()})
     }
 
     removeContainer(container) {

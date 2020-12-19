@@ -1,8 +1,10 @@
 export class BaseComponent extends PIXI.Container {
-    constructor(name) {
+    constructor(name="") {
         super()
         this.name = name
     }
+
+    tick() {}
 
     _setContainerInteraction(container, value) {
         container.children.forEach((child) => {

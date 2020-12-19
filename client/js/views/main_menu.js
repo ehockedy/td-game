@@ -10,7 +10,7 @@ import { addSocketEvent, MSG_TYPES } from "../networking.js"
 export class MainMenuRenderer {
     constructor(spriteHandler) {
         this.spriteHandler = spriteHandler
-        this.title = new MenuTitle(this.spriteHandler, APP_WIDTH/2, APP_HEIGHT/3)
+        this.title = new MenuTitle(APP_WIDTH/2, APP_HEIGHT/3)
         this.newGame = new NewGameComponent(APP_WIDTH/3, APP_HEIGHT*2/3)
         this.joinGame = new JoinGameComponent(APP_WIDTH*2/3, APP_HEIGHT*2/3)
 
@@ -20,7 +20,7 @@ export class MainMenuRenderer {
     }
 
     startRendering() {
-        this.spriteHandler.registerContainer(this.title)
+        this.spriteHandler.registerDynamicContainer(this.title)
         this.spriteHandler.registerContainer(this.newGame)
         this.spriteHandler.registerContainer(this.joinGame)
 

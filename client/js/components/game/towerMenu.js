@@ -159,6 +159,11 @@ export class TowerMenu  extends BaseToolbarComponent {
                 this.towerFactoryLink.stopInteraction()
                 sprite.interactive = true
                 sprite.buttonMode = true
+
+                // To achieve this, overwrite the new tick() function.
+                // Transition can set positions of where needs to move to, or a speed setting maybe
+                // Then when reached destination, set speed to zero.
+                //this.transitionHorizontal(1, 2)
             }
         }
 
