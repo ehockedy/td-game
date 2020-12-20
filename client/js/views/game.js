@@ -121,12 +121,12 @@ export class GameRenderer {
         // The order here is the order they are rendered on the map
         this.spriteHandler.registerContainer(this.map)
         this.spriteHandler.registerContainer(this.ec)
-        this.spriteHandler.registerContainer(this.tm)
         this.spriteHandler.registerContainer(this.it)
         this.spriteHandler.registerContainer(this.git)
         this.spriteHandler.registerContainer(this.startRoundButton)
         this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.tc)
+        this.spriteHandler.registerDynamicContainer(this.tm)
         this.spriteHandler.registerContainer(this.bc)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
 

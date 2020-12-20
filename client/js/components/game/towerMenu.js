@@ -6,6 +6,14 @@ import { getUserID, getBoard } from "../../state.js"
 import { GraphicButton } from "../ui_common/button.js"
 import { InfoTextBox } from "../ui_common/infoTextBox.js"
 
+let transitionStates = {
+    menuRevealing: 0,
+    menuHiding: 1,
+    infoRevealing: 2,
+    infoHiding: 3,
+    notMoving: 4
+}
+
 export class TowerMenu  extends BaseToolbarComponent {
     constructor(sprite_handler, width_px, height_px, x, y) {
         super("towermenu", width_px, height_px, x, y)
@@ -17,17 +25,21 @@ export class TowerMenu  extends BaseToolbarComponent {
         this.towerSpriteContainer = new PIXI.Container()
         this.rangeSpriteContainer = new PIXI.Container()
         this.towerInfoContainer = new PIXI.Container()
+        this.towerInfoDimension = 200
 
         this.placeTowerButtons = this.getSetTowerButtons()
         this.placeTowerButtons.visible = false
 
         let title = this.renderTitle("Towers")
         title.y = 16
-        this.addChild(title)
+        this.backgroundContainer.addChild(title)
         this.addChild(this.rangeSpriteContainer)
         this.addChild(this.towerSpriteContainer)
-        this.addChild(this.towerInfoContainer)
+        this.addChildAt(this.towerInfoContainer, 0)
         this.addChild(this.placeTowerButtons)
+
+        // Data used in sliding transitions
+        this.transitionState = transitionStates.notMoving
     }
 
     loadData() {
@@ -48,11 +60,12 @@ export class TowerMenu  extends BaseToolbarComponent {
         for (let i = 0; i < this.towerJson.length; i++) {
             let icon = this.getTower(i)
             icon.y += this.towersYOffset
-            this.addChild(icon) // The placeholder
+            this.backgroundContainer.addChild(icon) // The placeholder
             this.towerSpriteContainer.addChild(this.getDraggableTower(i, icon.x, icon.y)) // The interactive, draggable icon
 
-            let infoTextBox = new InfoTextBox(-200, 0, 200, 200, this.towerJson[i].displayInfo, 16)
+            let infoTextBox = new InfoTextBox(0, 0, this.towerInfoDimension, this.towerInfoDimension, this.towerJson[i].displayInfo, 16)
             infoTextBox.visible = false
+            this.towerInfoContainer.x = -this.towerInfoDimension
             this.towerInfoContainer.addChild(infoTextBox)
         }
     }
@@ -87,6 +100,7 @@ export class TowerMenu  extends BaseToolbarComponent {
         sprite.interactive = true
         sprite.buttonMode = true
         sprite.dragging = false
+        sprite.moved = false
         sprite.type = type
 
         sprite.x = x
@@ -106,22 +120,24 @@ export class TowerMenu  extends BaseToolbarComponent {
             sprite.y = sprite.yStart
             sprite.range_subsprite.visible = false
             sprite.dragging = false
+            sprite.moved = false
             this.startInteraction()
             this.towerFactoryLink.startInteraction()
             this.towerInfoContainer.getChildAt(type).visible = false
             this.sprite_handler.unsetActiveClickable()
             this.placeTowerButtons.visible = false
+            this.slideIn()
         }
 
         let onPointerOver = ()=>{
             this.towerInfoContainer.getChildAt(type).visible = true
-            if (sprite.x == sprite.xStart && sprite.y == sprite.yStart) {
+            if (!sprite.moved) {
                 this.sprite_handler.unclickActiveClickable()
             }
         }
 
         let onPointerOut = ()=>{
-            if (sprite.x == sprite.xStart && sprite.y == sprite.yStart) {
+            if (!sprite.moved) {
                 this.sprite_handler.unclickActiveClickable()
                 this.towerInfoContainer.getChildAt(type).visible = false
             }
@@ -130,7 +146,7 @@ export class TowerMenu  extends BaseToolbarComponent {
         let onPointerUp = () => {
             if (sprite.dragging) {
                 if ((sprite.global_x < 0 || sprite.global_y < 0 || sprite.global_x > MAP_WIDTH || sprite.global_y > MAP_HEIGHT) && // Not on map
-                    (sprite.x != sprite.xStart || sprite.y != sprite.yStart)) { // and has moved
+                    sprite.moved) { // and has moved
                     towerReset()
                 } else {
                     this.placeTowerButtons.visible = true
@@ -152,6 +168,10 @@ export class TowerMenu  extends BaseToolbarComponent {
 
         let onTowerMove = () => {
             if (sprite.dragging) {
+                if (!sprite.moved) {
+                    sprite.moved = true
+                    this.slideOut()
+                }
                 this.sprite_handler.setActiveClickable(sprite)
 
                 // Stop another tower from being produced, or other towers from being interactable whilst placing this one
@@ -159,11 +179,6 @@ export class TowerMenu  extends BaseToolbarComponent {
                 this.towerFactoryLink.stopInteraction()
                 sprite.interactive = true
                 sprite.buttonMode = true
-
-                // To achieve this, overwrite the new tick() function.
-                // Transition can set positions of where needs to move to, or a speed setting maybe
-                // Then when reached destination, set speed to zero.
-                //this.transitionHorizontal(1, 2)
             }
         }
 
@@ -225,7 +240,7 @@ export class TowerMenu  extends BaseToolbarComponent {
     // ~~~~~~~~~~~~~~~~~~~~~~~
     onDragTower(event) {
         if (!this.dragging) return
-        const newPosition = event.data.global //event.data.getLocalPosition(this.parent);
+        const newPosition = event.data.global
         if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < MAP_WIDTH && newPosition.y < MAP_HEIGHT) {
             // If on map, snap to grid
             let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
@@ -260,6 +275,67 @@ export class TowerMenu  extends BaseToolbarComponent {
 
     stopInteraction() {
         this._setContainerInteraction(this.towerSpriteContainer, false)
+    }
+
+    slideOut() {
+        this.transitionState = transitionStates.infoHiding
+    }
+
+    slideIn() {
+        this.transitionState = transitionStates.menuRevealing
+    }
+
+    updateSlidingState() {
+        let menuSpeed = 10
+        let infoSpeed = 12
+
+        switch (this.transitionState) {
+            case transitionStates.infoHiding:
+                if (!this.transitionX(this.towerInfoContainer, this.towerInfoContainer.x, 0, infoSpeed)) {
+                    this.transitionState = transitionStates.menuHiding
+                }
+                break;
+            case transitionStates.menuHiding:
+                this.transitionX(this.towerInfoContainer, 0, this.width_px, menuSpeed)
+                this.towerSpriteContainer.children.forEach((sprite) => { // todo make this a bit nicer
+                    if (sprite == this.sprite_handler.getActiveClickable()) sprite.visible = true
+                    else sprite.visible = false
+                })
+                if (!this.transitionX(this.backgroundContainer, 0, this.width_px, menuSpeed)) {
+                    this.transitionState = transitionStates.notMoving
+                }
+                break;
+            case transitionStates.infoRevealing:
+                if (!this.transitionX(this.towerInfoContainer, 0, -this.towerInfoDimension, infoSpeed)) {
+                    this.transitionState = transitionStates.notMoving
+                }
+                break;
+            case transitionStates.menuRevealing:
+                this.towerSpriteContainer.children.forEach((sprite) => {sprite.visible = false})
+                if (!this.transitionX(this.backgroundContainer, this.width_px, 0, menuSpeed)) {
+                    this.transitionState = transitionStates.infoRevealing
+                    this.towerSpriteContainer.children.forEach((sprite) => {sprite.visible = true})
+                }
+                break;
+            case transitionStates.notMoving:
+            default:
+                break;
+        }
+    }
+
+    // For a given container, specify the start position and end position and travel speed
+    // Once call to this function will move the container by speed number of pixels in the direction of start -> finish
+    // returns true if there is more to move, false if has reached target position
+    transitionX(container, startPos, endPos, speedMagnitude) {
+        if (speedMagnitude == 0 || startPos == endPos ) return false
+        let direction = (endPos - startPos) / Math.abs(endPos - startPos) // Direction of travel (+1 or -1)
+        container.x = (direction == 1) ? Math.min(container.x + speedMagnitude * direction, endPos) : Math.max(container.x + speedMagnitude * direction, endPos)
+        return container.x != endPos
+    }
+
+    tick() {
+        super.tick()
+        this.updateSlidingState()
     }
 
     update(playerData) {
