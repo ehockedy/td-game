@@ -32,3 +32,10 @@ Main features:
  - game settings menu - have game code in here
  - save game behaviour
  - player leaves game behaviour
+
+Theme
+ - Max max wasteland style
+ - name: <something> valley defence
+ - bandits and monsters travel through the valley to your town
+ - explains why they are confined to the path
+ - towers: rock thrower (basic), shrapnel (all dir)
