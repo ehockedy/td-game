@@ -23,10 +23,14 @@ export class TextRect extends PIXI.Container {
             wordWrap: true,
             wordWrapWidth: width_px * 0.8
         }
-        let text = new PIXI.Text(message, defaultStyle);
-        text.anchor.set(0.5)
-        text.x = graphics.x + width_px/2 // Fix text to center of button
-        text.y = graphics.y + height_px/2
-        this.addChild(text)
+        this.text = new PIXI.Text(message, defaultStyle);
+        this.text.anchor.set(0.5)
+        this.text.x = graphics.x + width_px/2 // Fix text to center of button
+        this.text.y = graphics.y + height_px/2
+        this.addChild(this.text)
+    }
+
+    updateText(newMessage) {
+        this.text.text = newMessage
     }
 }

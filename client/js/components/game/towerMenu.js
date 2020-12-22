@@ -11,7 +11,9 @@ let transitionStates = {
     menuHiding: 1,
     infoRevealing: 2,
     infoHiding: 3,
-    notMoving: 4
+    wholeMenuRevealing: 4,
+    wholeMenuHiding: 5,
+    notMoving: 6
 }
 
 export class TowerMenu  extends BaseToolbarComponent {
@@ -30,6 +32,8 @@ export class TowerMenu  extends BaseToolbarComponent {
         this.placeTowerButtons = this.getSetTowerButtons()
         this.placeTowerButtons.visible = false
 
+        this.toggleMenuButton = this.getMenuToggleButton()
+
         let title = this.renderTitle("Towers")
         title.y = 16
         this.backgroundContainer.addChild(title)
@@ -37,6 +41,7 @@ export class TowerMenu  extends BaseToolbarComponent {
         this.addChild(this.towerSpriteContainer)
         this.addChildAt(this.towerInfoContainer, 0)
         this.addChild(this.placeTowerButtons)
+        this.backgroundContainer.addChild(this.toggleMenuButton)
 
         // Data used in sliding transitions
         this.transitionState = transitionStates.notMoving
@@ -235,6 +240,24 @@ export class TowerMenu  extends BaseToolbarComponent {
         return localContainer
     }
 
+    getMenuToggleButton() {
+        let toggleButton = new GraphicButton(20, 20, -20, 0, ">" , 18, "0x727272", 0, 0)
+        toggleButton.menuOut = true
+        let toggle = () => {
+            if (toggleButton.menuOut) {
+                this.transitionState = transitionStates.menuHiding
+            } else {
+                this.transitionState = transitionStates.menuRevealing
+                if (this.sprite_handler.isActiveClickableSet()) {
+                    this.sprite_handler.getActiveClickable().emit("clear")
+                }
+            }
+        }
+        toggleButton.on("click", toggle)
+        toggleButton.on("tap", toggle)
+        return toggleButton
+    }
+
     // ~~~~~~~~~~~~~~~~~~~~~~~
     // Events - "this" is the parent object
     // ~~~~~~~~~~~~~~~~~~~~~~~
@@ -278,11 +301,11 @@ export class TowerMenu  extends BaseToolbarComponent {
     }
 
     slideOut() {
-        this.transitionState = transitionStates.infoHiding
+        this.transitionState = transitionStates.wholeMenuHiding
     }
 
     slideIn() {
-        this.transitionState = transitionStates.menuRevealing
+        this.transitionState = transitionStates.wholeMenuRevealing
     }
 
     updateSlidingState() {
@@ -292,25 +315,45 @@ export class TowerMenu  extends BaseToolbarComponent {
         switch (this.transitionState) {
             case transitionStates.infoHiding:
                 if (!this.transitionX(this.towerInfoContainer, this.towerInfoContainer.x, 0, infoSpeed)) {
-                    this.transitionState = transitionStates.menuHiding
+                    this.towerInfoContainer.visible = false
+                    this.transitionState = transitionStates.notMoving
                 }
                 break;
             case transitionStates.menuHiding:
-                this.transitionX(this.towerInfoContainer, 0, this.width_px, menuSpeed)
                 this.towerSpriteContainer.children.forEach((sprite) => { // todo make this a bit nicer
                     if (sprite == this.sprite_handler.getActiveClickable()) sprite.visible = true
                     else sprite.visible = false
                 })
+                this.toggleMenuButton.menuOut = false
+                this.toggleMenuButton.updateText("<")
                 if (!this.transitionX(this.backgroundContainer, 0, this.width_px, menuSpeed)) {
                     this.transitionState = transitionStates.notMoving
                 }
                 break;
+            case transitionStates.wholeMenuHiding:
+                if (!this.transitionX(this.towerInfoContainer, this.towerInfoContainer.x, 0, infoSpeed)) {
+                    this.towerInfoContainer.visible = false
+                    this.transitionState = transitionStates.menuHiding
+                }
+                break;
             case transitionStates.infoRevealing:
+                this.towerInfoContainer.visible = true
                 if (!this.transitionX(this.towerInfoContainer, 0, -this.towerInfoDimension, infoSpeed)) {
                     this.transitionState = transitionStates.notMoving
                 }
                 break;
             case transitionStates.menuRevealing:
+                this.towerSpriteContainer.children.forEach((sprite) => {sprite.visible = false})
+                this.toggleMenuButton.menuOut = true
+                this.toggleMenuButton.updateText(">")
+                if (!this.transitionX(this.backgroundContainer, this.width_px, 0, menuSpeed)) {
+                    this.transitionState = transitionStates.notMoving
+                    this.towerSpriteContainer.children.forEach((sprite) => {sprite.visible = true})
+                }
+                break;
+            case transitionStates.wholeMenuRevealing:
+                this.toggleMenuButton.menuOut = true
+                this.toggleMenuButton.updateText(">")
                 this.towerSpriteContainer.children.forEach((sprite) => {sprite.visible = false})
                 if (!this.transitionX(this.backgroundContainer, this.width_px, 0, menuSpeed)) {
                     this.transitionState = transitionStates.infoRevealing
@@ -328,8 +371,12 @@ export class TowerMenu  extends BaseToolbarComponent {
     // returns true if there is more to move, false if has reached target position
     transitionX(container, startPos, endPos, speedMagnitude) {
         if (speedMagnitude == 0 || startPos == endPos ) return false
-        let direction = (endPos - startPos) / Math.abs(endPos - startPos) // Direction of travel (+1 or -1)
-        container.x = (direction == 1) ? Math.min(container.x + speedMagnitude * direction, endPos) : Math.max(container.x + speedMagnitude * direction, endPos)
+        if (!container.visible) {
+            container.x = endPos
+        } else {
+            let direction = (endPos - startPos) / Math.abs(endPos - startPos) // Direction of travel (+1 or -1)
+            container.x = (direction == 1) ? Math.min(container.x + speedMagnitude * direction, endPos) : Math.max(container.x + speedMagnitude * direction, endPos)
+        }
         return container.x != endPos
     }
 
