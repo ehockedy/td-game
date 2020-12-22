@@ -2,6 +2,7 @@ import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y } from "../../constants.js
 import { randomHexString } from "../../tools.js"
 import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
+import { TowerInfoComponent } from "./towerInfoComponent.js"
 
 /**
  * This component stores all the information about the towers that are out on the map
@@ -37,10 +38,6 @@ export class TowersComponent extends BaseComponent {
         })
     }
 
-    setInfoToolbarLink(infoToolbar) {
-        this.infoToolbarLink = infoToolbar
-    }
-
     getTowerSprite(type) { // Make this a get sprite only function
         let towerTexture = this.towerSpriteSheetData[type]
         let towerSprite = new PIXI.AnimatedSprite(towerTexture)
@@ -71,6 +68,9 @@ export class TowersComponent extends BaseComponent {
         if (playerID == getUserID()) { // Only make the tower interactive if the user placed it
             sprite.interactive = true; // reponds to mouse and touch events
             sprite.buttonMode = true; // hand cursor appears when hover over
+            sprite.info = new TowerInfoComponent(sprite)
+            sprite.info.visible = false
+            sprite.info.position = sprite.position
             sprite
                 .on('click', ()=> {
                     if (this.sprite_handler.getActiveClickable() == sprite) { // Clicked on the currently active tower
@@ -79,13 +79,13 @@ export class TowersComponent extends BaseComponent {
                         if (this.sprite_handler.isActiveClickableSet()) this.sprite_handler.getActiveClickable().emit('clickoff') // Cancel current active clickable
                         this.sprite_handler.setActiveClickable(sprite) // Register this as the active object
                         sprite.range_subsprite.visible = true // Show the range circle
-                        this.infoToolbarLink.showPlacedTowerInfo(type)
+                        sprite.info.visible = true
                     }
                 })
                 .on('clickoff', ()=>{  // This is a custom event triggered manually
                     sprite.range_subsprite.visible = false
                     this.sprite_handler.unsetActiveClickable()
-                    this.infoToolbarLink.hidePlacedTowerInfo()
+                    sprite.info.visible = false
                 });
 
             sprite.range_subsprite = this.getTowerRangeGraphic(type)
@@ -93,11 +93,11 @@ export class TowersComponent extends BaseComponent {
             sprite.range_subsprite.y = sprite.y
             sprite.range_subsprite.visible = false
             sprite.range_subsprite.setParent(this.rangeSpriteContainer)
+            this.rangeSpriteContainer.addChild(sprite.info)
 
             // Sprite stats (custom properties)
             sprite.kills = 0
         }
-
         this.setTowersContainer.addChild(sprite)
     }
 
@@ -134,7 +134,7 @@ export class TowersComponent extends BaseComponent {
 
             // Update the tower statsistics, but only store stats for towers a playerID owns
             if (tower.playerID == getUserID()) {
-                towerToUpdate.stats = tower.stats
+                towerToUpdate.info.update(tower.stats)
             }
         })
     }

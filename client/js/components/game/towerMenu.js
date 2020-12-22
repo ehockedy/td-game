@@ -140,6 +140,7 @@ export class TowerMenu  extends BaseToolbarComponent {
             this.towerInfoContainer.getChildAt(type).visible = true
             if (!sprite.moved) {
                 this.unsetActiveTower()
+                this.sprite_handler.unclickActiveClickable()
             }
         }
 

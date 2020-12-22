@@ -1,6 +1,5 @@
 import { MapComponent } from "../components/game/map.js"
 import { TowerMenu } from "../components/game/towerMenu.js"
-import { InfoToolbar } from "../components/game/infoToolbar.js"
 import { PlayersToolbar } from "../components/game/playersToolbar.js"
 import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
@@ -21,7 +20,6 @@ export class GameRenderer {
         this.spriteHandler = spriteHandler
         this.map = new MapComponent()
         this.tm = new TowerMenu(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, TOWER_MENU_HEIGHT, MAP_WIDTH - RIGHT_TOOLBAR_WIDTH, 0)
-        this.it = new InfoToolbar(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, TOWER_INFO_MENU_HEIGHT, MAP_WIDTH - RIGHT_TOOLBAR_WIDTH, TOWER_MENU_HEIGHT)
         this.git = new GameInfoToolbar(RIGHT_TOOLBAR_WIDTH, GAME_STATS_MENU_HEIGHT, MAP_WIDTH, TOWER_MENU_HEIGHT+TOWER_INFO_MENU_HEIGHT)
         this.ut = new PlayersToolbar(MAP_WIDTH, BOTTOM_TOOLBAR_HEIGHT, 0, MAP_HEIGHT)
         this.tc = new TowersComponent(this.spriteHandler)
@@ -109,7 +107,6 @@ export class GameRenderer {
     loadAssets() {
         return Promise.all([
             this.tc.loadData(),
-            this.it.loadData(),
             this.ec.loadData(),
             this.tm.loadData(),
             this.bc.loadData()
@@ -121,7 +118,6 @@ export class GameRenderer {
         // The order here is the order they are rendered on the map
         this.spriteHandler.registerContainer(this.map)
         this.spriteHandler.registerContainer(this.ec)
-        this.spriteHandler.registerContainer(this.it)
         this.spriteHandler.registerContainer(this.git)
         this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.startRoundButton)
@@ -135,7 +131,6 @@ export class GameRenderer {
 
 
         // Set up links between components that need them
-        this.tc.setInfoToolbarLink(this.it)
         this.tm.setTowerFactoryLink(this.tc)
 
         this.tm.addTowers()
@@ -152,7 +147,6 @@ export class GameRenderer {
         this.ec.update(serverUpdate["enemies"])
         this.bc.update(serverUpdate["bullets"])
         this.ut.update(serverUpdate["players"])
-        this.it.update()
         this.git.update(serverUpdate["worldState"])
     }
 
