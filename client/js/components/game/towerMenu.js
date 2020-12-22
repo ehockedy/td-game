@@ -7,12 +7,12 @@ import { GraphicButton } from "../ui_common/button.js"
 import { InfoTextBox } from "../ui_common/infoTextBox.js"
 
 let transitionStates = {
-    menuRevealing: 0,
-    menuHiding: 1,
-    infoRevealing: 2,
-    infoHiding: 3,
-    wholeMenuRevealing: 4,
-    wholeMenuHiding: 5,
+    menuOpening: 0,
+    menuClosing: 1,
+    infoOpening: 2,
+    infoClosing: 3,
+    menuThenInfoOpening: 4,
+    infoThenMenuClosing: 5,
     notMoving: 6
 }
 
@@ -25,6 +25,7 @@ export class TowerMenu  extends BaseToolbarComponent {
         this.towersYOffset = 64
 
         this.towerSpriteContainer = new PIXI.Container()
+        this.activeTowerSpriteContainer = new PIXI.Container()
         this.rangeSpriteContainer = new PIXI.Container()
         this.towerInfoContainer = new PIXI.Container()
         this.towerInfoDimension = 200
@@ -39,6 +40,7 @@ export class TowerMenu  extends BaseToolbarComponent {
         this.backgroundContainer.addChild(title)
         this.addChild(this.rangeSpriteContainer)
         this.addChild(this.towerSpriteContainer)
+        this.addChild(this.activeTowerSpriteContainer)
         this.addChildAt(this.towerInfoContainer, 0)
         this.addChild(this.placeTowerButtons)
         this.backgroundContainer.addChild(this.toggleMenuButton)
@@ -126,24 +128,24 @@ export class TowerMenu  extends BaseToolbarComponent {
             sprite.range_subsprite.visible = false
             sprite.dragging = false
             sprite.moved = false
+            this.unsetActiveTower()
             this.startInteraction()
             this.towerFactoryLink.startInteraction()
             this.towerInfoContainer.getChildAt(type).visible = false
-            this.sprite_handler.unsetActiveClickable()
             this.placeTowerButtons.visible = false
-            this.slideIn()
+            this.triggerWholeMenuOpen()
         }
 
         let onPointerOver = ()=>{
             this.towerInfoContainer.getChildAt(type).visible = true
             if (!sprite.moved) {
-                this.sprite_handler.unclickActiveClickable()
+                this.unsetActiveTower()
             }
         }
 
         let onPointerOut = ()=>{
             if (!sprite.moved) {
-                this.sprite_handler.unclickActiveClickable()
+                this.unsetActiveTower()
                 this.towerInfoContainer.getChildAt(type).visible = false
             }
         }
@@ -173,11 +175,12 @@ export class TowerMenu  extends BaseToolbarComponent {
 
         let onTowerMove = () => {
             if (sprite.dragging) {
+                this.setActiveTower(sprite)
+
                 if (!sprite.moved) {
                     sprite.moved = true
-                    this.slideOut()
+                    this.triggerWholeMenuClose()
                 }
-                this.sprite_handler.setActiveClickable(sprite)
 
                 // Stop another tower from being produced, or other towers from being interactable whilst placing this one
                 this.stopInteraction()
@@ -242,12 +245,12 @@ export class TowerMenu  extends BaseToolbarComponent {
 
     getMenuToggleButton() {
         let toggleButton = new GraphicButton(20, 20, -20, 0, ">" , 18, "0x727272", 0, 0)
-        toggleButton.menuOut = true
+        toggleButton.menuOpen = true
         let toggle = () => {
-            if (toggleButton.menuOut) {
-                this.transitionState = transitionStates.menuHiding
+            if (toggleButton.menuOpen) {
+                this.triggerMenuClose()
             } else {
-                this.transitionState = transitionStates.menuRevealing
+                this.triggerMenuOpen()
                 if (this.sprite_handler.isActiveClickableSet()) {
                     this.sprite_handler.getActiveClickable().emit("clear")
                 }
@@ -292,6 +295,22 @@ export class TowerMenu  extends BaseToolbarComponent {
         }
     }
 
+    setActiveTower(tower) {
+        this.sprite_handler.setActiveClickable(tower)
+        this.activeTowerSpriteContainer.addChild(tower)
+        this.towerActive = true
+        this.towerSpriteContainer.removeChild(tower)
+    }
+
+    unsetActiveTower() {
+        if (this.towerActive) {
+            let removedTower = this.activeTowerSpriteContainer.removeChildAt(0)
+            this.towerSpriteContainer.addChild(removedTower)
+            this.towerActive = false
+            this.sprite_handler.unsetActiveClickable(removedTower)
+        }
+    }
+
     startInteraction() {
         this._setContainerInteraction(this.towerSpriteContainer, true)
     }
@@ -300,91 +319,112 @@ export class TowerMenu  extends BaseToolbarComponent {
         this._setContainerInteraction(this.towerSpriteContainer, false)
     }
 
-    slideOut() {
-        this.transitionState = transitionStates.wholeMenuHiding
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Menu transition animation methods
+    // Private
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    triggerWholeMenuClose() {
+        this.transitionState = transitionStates.infoThenMenuClosing
     }
 
-    slideIn() {
-        this.transitionState = transitionStates.wholeMenuRevealing
+    triggerMenuClose() {
+        this.transitionState = transitionStates.menuClosing
     }
 
-    updateSlidingState() {
-        let menuSpeed = 10
-        let infoSpeed = 12
+    triggerInfoOpen() {
+        this.transitionState = transitionStates.infoOpening
+    }
 
-        switch (this.transitionState) {
-            case transitionStates.infoHiding:
-                if (!this.transitionX(this.towerInfoContainer, this.towerInfoContainer.x, 0, infoSpeed)) {
-                    this.towerInfoContainer.visible = false
-                    this.transitionState = transitionStates.notMoving
-                }
+    triggerMenuOpen() {
+        this.transitionState = transitionStates.menuOpening
+    }
+
+    triggerWholeMenuOpen() {
+        this.transitionState = transitionStates.menuThenInfoOpening
+    }
+
+    menuToggleClose() {
+        this.toggleMenuButton.menuOpen = false
+        this.toggleMenuButton.updateText("<")
+    }
+
+    menuToggleOpen() {
+        this.toggleMenuButton.menuOpen = true
+        this.toggleMenuButton.updateText(">")
+    }
+
+    updateSlidingState(transitionState) {
+        let menuSpeed = 12
+        let infoSpeed = 15
+        let endState = transitionState
+    
+        // Based on the given state of the transition, update the positions of the relevant components that should move
+        let transitionComplete = false
+        switch (transitionState) {
+            case transitionStates.infoClosing:
+            case transitionStates.infoThenMenuClosing:
+                transitionComplete = this.transitionX(this.towerInfoContainer, -this.towerInfoDimension, this.width_px, infoSpeed)
                 break;
-            case transitionStates.menuHiding:
-                this.towerSpriteContainer.children.forEach((sprite) => { // todo make this a bit nicer
-                    if (sprite == this.sprite_handler.getActiveClickable()) sprite.visible = true
-                    else sprite.visible = false
-                })
-                this.toggleMenuButton.menuOut = false
-                this.toggleMenuButton.updateText("<")
-                if (!this.transitionX(this.backgroundContainer, 0, this.width_px, menuSpeed)) {
-                    this.transitionState = transitionStates.notMoving
-                }
+            case transitionStates.infoOpening:
+                transitionComplete = this.transitionX(this.towerInfoContainer, this.width_px, -this.towerInfoDimension, infoSpeed)
                 break;
-            case transitionStates.wholeMenuHiding:
-                if (!this.transitionX(this.towerInfoContainer, this.towerInfoContainer.x, 0, infoSpeed)) {
-                    this.towerInfoContainer.visible = false
-                    this.transitionState = transitionStates.menuHiding
-                }
+            case transitionStates.menuClosing:
+                this.transitionX(this.towerSpriteContainer, 0, this.width_px, menuSpeed)
+                transitionComplete = this.transitionX(this.backgroundContainer, 0, this.width_px, menuSpeed)
                 break;
-            case transitionStates.infoRevealing:
-                this.towerInfoContainer.visible = true
-                if (!this.transitionX(this.towerInfoContainer, 0, -this.towerInfoDimension, infoSpeed)) {
-                    this.transitionState = transitionStates.notMoving
-                }
-                break;
-            case transitionStates.menuRevealing:
-                this.towerSpriteContainer.children.forEach((sprite) => {sprite.visible = false})
-                this.toggleMenuButton.menuOut = true
-                this.toggleMenuButton.updateText(">")
-                if (!this.transitionX(this.backgroundContainer, this.width_px, 0, menuSpeed)) {
-                    this.transitionState = transitionStates.notMoving
-                    this.towerSpriteContainer.children.forEach((sprite) => {sprite.visible = true})
-                }
-                break;
-            case transitionStates.wholeMenuRevealing:
-                this.toggleMenuButton.menuOut = true
-                this.toggleMenuButton.updateText(">")
-                this.towerSpriteContainer.children.forEach((sprite) => {sprite.visible = false})
-                if (!this.transitionX(this.backgroundContainer, this.width_px, 0, menuSpeed)) {
-                    this.transitionState = transitionStates.infoRevealing
-                    this.towerSpriteContainer.children.forEach((sprite) => {sprite.visible = true})
-                }
+            case transitionStates.menuOpening:
+            case transitionStates.menuThenInfoOpening:
+                this.transitionX(this.towerSpriteContainer, this.width_px, 0, menuSpeed)
+                transitionComplete = this.transitionX(this.backgroundContainer, this.width_px, 0, menuSpeed)
                 break;
             case transitionStates.notMoving:
             default:
                 break;
         }
+
+        // If the transition has finished, carry out and actions and change to relevant state
+        if (transitionComplete) {
+            endState = transitionStates.notMoving
+            switch (transitionState) {
+                case transitionStates.infoThenMenuClosing:
+                    endState = transitionStates.menuClosing
+                    break
+                case transitionStates.menuThenInfoOpening:
+                    endState = transitionStates.infoOpening
+                    // no break
+                case transitionStates.menuOpening:
+                    this.menuToggleOpen()
+                    break
+                case transitionStates.menuClosing:
+                    this.menuToggleClose()
+                    break
+                default:
+                    break
+            }
+        }
+        return endState
     }
 
     // For a given container, specify the start position and end position and travel speed
     // Once call to this function will move the container by speed number of pixels in the direction of start -> finish
-    // returns true if there is more to move, false if has reached target position
+    // returns false if there is more to move, true if has reached target position
     transitionX(container, startPos, endPos, speedMagnitude) {
-        if (speedMagnitude == 0 || startPos == endPos ) return false
+        if (speedMagnitude == 0 || startPos == endPos ) return true
         if (!container.visible) {
             container.x = endPos
         } else {
             let direction = (endPos - startPos) / Math.abs(endPos - startPos) // Direction of travel (+1 or -1)
             container.x = (direction == 1) ? Math.min(container.x + speedMagnitude * direction, endPos) : Math.max(container.x + speedMagnitude * direction, endPos)
         }
-        return container.x != endPos
+        return container.x == endPos
     }
 
     tick() {
         super.tick()
-        this.updateSlidingState()
+        this.transitionState = this.updateSlidingState(this.transitionState)
     }
 
+    // State update function using external data
     update(playerData) {
         let money = 0
         let players = playerData.objects
@@ -394,8 +434,8 @@ export class TowerMenu  extends BaseToolbarComponent {
                 break
             }
         }
-        this.towerSpriteContainer.children.forEach((tower, idx) => {
-            if (money < this.towerJson[idx].cost) {
+        this.towerSpriteContainer.children.forEach((tower) => {
+            if (money < this.towerJson[tower.type].cost) {
                 tower.interactive = false
                 tower.buttonMode = false
             } else {
