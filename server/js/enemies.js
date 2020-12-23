@@ -1,5 +1,4 @@
 const crypto = require('crypto');
-const tools = require('./tools.js')
 
 class Enemy {
     /**
@@ -8,11 +7,12 @@ class Enemy {
      * @param {Number} speed Number of ticks it takes to move through a grid square
      * @param {Object} path Array of coordinates that tht enemy will follow
      */
-    constructor(hp, speed, path) {
+    constructor(hp, speed, path, hitboxRadius) {
         this.hp = hp;
         this.speed = speed;
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
+        this.hitboxRadius = hitboxRadius
 
         this.path = path // Reference to the object in map
         this.position = path[this.steps]

@@ -1,5 +1,4 @@
 const fs = require('fs');
-const config = require('./constants.js')
 const bullet = require("./bullet.js");
 
 let towerJson = JSON.parse(fs.readFileSync('shared/json/towers.json'));
@@ -131,7 +130,7 @@ class Tower {
             let nextAngle = Math.atan2(nextPos.y-this.y, nextPos.x-this.x) // The angle of the tower to that position
             newBullet.updateAngleAndSpeeds(nextAngle)
             let bulletFuturePos = newBullet.positionInNTicks(ticks) // See where bullet will be, when travelling at that angle, when the enemy is in that position
-            if (newBullet.willCollideWith(nextPos, bulletFuturePos, config.DEFAULT_HITBOX_RADIUS)){
+            if (newBullet.willCollideWith(nextPos, bulletFuturePos, this.target.hitboxRadius)){
                 isHit = true
                 if (this.turns) this.angle = nextAngle
             }

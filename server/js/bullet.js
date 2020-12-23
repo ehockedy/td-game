@@ -1,6 +1,9 @@
 const crypto = require('crypto');
 const point = require('../js/point.js')
-const config = require('./constants.js')
+const fs = require('fs');
+// VERY temporary measure
+const config = JSON.parse(fs.readFileSync('shared/json/gameConfig.json'));
+
 
 class Bullet {
     constructor(position, angle, damage, speed, range) {

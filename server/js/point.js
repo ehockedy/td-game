@@ -1,11 +1,13 @@
-const config = require('./constants.js')
+const fs = require('fs');
+// VERY temporary measure
+const config = JSON.parse(fs.readFileSync('shared/json/gameConfig.json'));
 
 /**
  * Simple class to keep both global and grid/subgrid format coordinates together, and easily use either
  */
 class Point {
     /**
-     * Behaviour depende on the numebr of arguments. If 4 - assumes local coordinates given. If jsut two, assumes global
+     * Behaviour depends on the number of arguments. If 4 - assumes local coordinates given. If just two, assumes global
      * @param {Number} x x global coordinate or column if sx and sy present
      * @param {Number} y y global coordinate or row if sx and sy present
      * @param {Number} sx sub column
@@ -21,7 +23,6 @@ class Point {
         this.row = globalForm ? Math.floor(y / config.SUBGRID_SIZE) : y
         this.subcol = globalForm ? Math.floor(x % config.SUBGRID_SIZE) : sx
         this.subrow = globalForm ? Math.floor(y % config.SUBGRID_SIZE) : sy
-
     }
 
     getPos() {

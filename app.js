@@ -3,7 +3,8 @@ const io = require('socket.io');
 const game = require('./server/js/game.js')
 const networking = require('./server/js/networking.js')
 const os = require('os');
-const config = require('./server/js/constants.js')
+const fs = require('fs');
+
 networking.setRootDir(__dirname) // Set the location to get files from
 
 const interfaces = os.networkInterfaces();
@@ -46,6 +47,9 @@ const MSG_TYPES = {
   DEBUG_EXPORT_GAME_STATE: "debug_export",
   DEBUG_IMPORT_GAME_STATE: "debug_import"
 }
+
+let configJson = fs.readFileSync('shared/json/gameConfig.json');
+let config = JSON.parse(configJson);
 
 // First set up http server to serve index.html and its included files
 const http_server = http.createServer(networking.requestListener);

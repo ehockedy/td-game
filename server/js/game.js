@@ -1,4 +1,3 @@
-const config = require('./constants.js')
 const crypto = require('crypto');
 const enemy = require("./enemies.js");
 const gameMap = require('./map.js');
@@ -32,6 +31,9 @@ class Game {
         this.enemyQueue = []
         this.enemyCount = 0
         this.enemyCountTarget = 0
+
+        this.subgridSize = subGridXY
+        this.subgridMidpoint = Math.floor(subGridXY/2)
     }
 
     getMapStructure() {
@@ -157,7 +159,7 @@ class Game {
             let bullets = this.map.map[enemy.position.row][enemy.position.col].bullets
             for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
                 let bullet = bullets[bIdx]
-                if(bullet.collidesWith(enemy.position, config.DEFAULT_HITBOX_RADIUS)) { // TODO make hitbox a property of the enemy
+                if(bullet.collidesWith(enemy.position, enemy.hitboxRadius)) {
                     enemy.isHit = true
                     enemy.hp -= bullet.damage
                     bullets.splice(bIdx, 1) // Remove that bullet
@@ -196,7 +198,7 @@ class Game {
         let speedRangeMax = 8
         // TODO create enemy types
         let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
-        this.map.addNewEnemy(new enemy.Enemy(30, randomSpeed, this.map.path))
+        this.map.addNewEnemy(new enemy.Enemy(30, randomSpeed, this.map.path, this.subgridSize/3))
     }
 
     shiftEnemyQueue() {
@@ -214,7 +216,7 @@ class Game {
     addTower(name, type, playerID, row, col) {
         try {
             let player = this.getPlayerByName(playerID)
-            let newTower = new towerImport.Tower(name, type, player, new point.Point(col, row, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT))
+            let newTower = new towerImport.Tower(name, type, player, new point.Point(col, row, this.subgridMidpoint, this.subgridMidpoint))
             newTower.calculateShootPath(this.map.mainPath)
             this.towers.push(newTower)
             player.reduceMoney(newTower.getCost()) // Keep player implementation simple and let client determine whether player can afffort tower
