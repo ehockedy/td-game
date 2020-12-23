@@ -12,7 +12,7 @@ export class PlayersToolbar extends BaseToolbarComponent {
     }
 
     addPlayer(info) {
-        if (!this.getChildByName(info.playerID)) {
+        if (!this.playersContainer.getChildByName(info.playerID)) {
             let numberMargin = 20
             let infoWidth = this.playerSpaceWidth / 4
             let playerIndex = this.playersContainer.children.length

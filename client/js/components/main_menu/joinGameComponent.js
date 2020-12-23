@@ -18,18 +18,20 @@ export class JoinGameComponent extends BaseMenuOptionComponent {
         // Joins the game (if exists) on enter
         this.gameCodeTextBox = this.createGameCodeTextBox()
         this.gameCodeTextBox.visible = false
+        this.gameCodeTextBox.x = APP_WIDTH/2 - x
+        this.gameCodeTextBox.y = APP_HEIGHT*4/5 - y
         this.popupContainer.addChild(this.gameCodeTextBox)
 
         // Holds the response message for if the game does not exist or request times out
         this.joinGameResponseText = new PIXI.Text("");
         this.joinGameResponseText.style.fill = 0xFF2233;
-        this.joinGameResponseText.x = APP_WIDTH/2
+        this.joinGameResponseText.x = APP_WIDTH/2 - x
         this.joinGameResponseText.y = this.gameCodeTextBox.y + this.gameCodeTextBox.height/2 + 16
         this.joinGameResponseText.anchor.set(0.5)
         this.popupContainer.addChild(this.joinGameResponseText)
 
         // Text box DOM elements stuck around, so actively remove so that destroy is called on it
-        this.popupContainer.on('removed', ()=>{
+        this.on('removed', ()=>{
             this.popupContainer.removeChildren()
         })
 
@@ -58,8 +60,6 @@ export class JoinGameComponent extends BaseMenuOptionComponent {
         })
         
         input.placeholder = 'Enter game code...'
-        input.x = APP_WIDTH/2
-        input.y = APP_HEIGHT*4/5
         input.pivot.x = input.width/2
         input.pivot.y = input.height/2
         input.maxLength = 4
