@@ -6,50 +6,69 @@ export class PlayersToolbar extends BaseToolbarComponent {
     constructor(width_px, height_px, x, y) {
         super("playerinfo", width_px, height_px, x, y)
 
-        this.yOffsetGap = 20
+        this.playerSpaceWidth = width_px * 0.75
+        this.playersContainer = new PIXI.Container()
+        this.addChild(this.playersContainer)
     }
 
     addPlayer(info) {
         if (!this.getChildByName(info.playerID)) {
-            let playerInfoContainer = this.renderPlayerInfo(info)
-            playerInfoContainer.x = getPositionWithinEquallySpacedObjects(info.index+1, 4, this.width_px/4, this.width_px) - this.width_px/4/2
-            this.addChild(playerInfoContainer)
+            let numberMargin = 20
+            let infoWidth = this.playerSpaceWidth / 4
+            let playerIndex = this.playersContainer.children.length
+
+            let numberPosition = infoWidth * playerIndex + numberMargin/2
+            let playerInfoPosition = numberPosition + numberMargin/2
+
+            let positionNumber = this.getLeaderBoardPosition(playerIndex + 1)
+            positionNumber.x = numberPosition
+            positionNumber.y = this.height_px/2
+            this.addChild(positionNumber)
+
+            let playerInfoContainerWidth = infoWidth - numberMargin
+            let playerInfoContainer = this.renderPlayerInfo(info, playerInfoContainerWidth)
+            playerInfoContainer.x = playerInfoPosition
+            this.playersContainer.addChild(playerInfoContainer)
         }
     }
 
-    renderPlayerInfo(playerInfo) {
+    getLeaderBoardPosition(position) {
+        let defaultStyle = {
+            fontFamily: 'Arial',
+            fontSize: 20,
+            fontWeight: 'bold'
+        }
+
+        let positionNumber = new PIXI.Text(position, defaultStyle);
+        positionNumber.anchor.set(0.5)
+        return positionNumber
+    }
+
+    renderPlayerInfo(playerInfo, width) {
         let localContainer = new PIXI.Container()
         localContainer.name = playerInfo.playerID
-
-        let xMargin = 20
 
         let defaultStyle = {
             fontFamily: 'Arial',
             fontSize: 20,
-            fontWeight: 'bold',
-            wordWrap: true,
-            wordWrapWidth: this.width_px/4 - xMargin // TODO make 4 max players
+            fontWeight: 'bold'
         }
 
         // Title
         let text = new PIXI.Text(playerInfo.playerID, defaultStyle);
-        text.x = this.width_px/4/2
+        text.x = width/2
         text.y = 10
         text.anchor.set(0.5)
         localContainer.addChild(text);
 
-        let playerFields = ["points", "money"]
 
-        let yOffset = 0
-        playerFields.forEach((field) => {
-            yOffset += this.yOffsetGap
+        // Points
+        let xMargin = 5
+        let points = new KeyValueInfo("Points", 0, width, xMargin, 16)
+        points.name = "points"
+        points.y = Math.floor(40)
+        localContainer.addChild(points);
 
-            let info = new KeyValueInfo(field, 0, this.width_px/4, xMargin, 16)
-            info.name = field
-            info.y = Math.floor(yOffset)
-
-            localContainer.addChild(info);
-        })
 
         // Ready icon
         let readyIconStyle = {
@@ -86,7 +105,7 @@ export class PlayersToolbar extends BaseToolbarComponent {
     }
 
     _setReadiness(playerID, readiness) {
-        let playerInfoContainer = this.getChildByName(playerID)
+        let playerInfoContainer = this.playersContainer.getChildByName(playerID)
         if (playerInfoContainer) {
             playerInfoContainer.getChildByName("readyIcon").visible = readiness
         }
@@ -94,15 +113,9 @@ export class PlayersToolbar extends BaseToolbarComponent {
 
     update(playersData) {
         playersData.objects.forEach((player) => {
-            let playerInfo = this.getChildByName(player.playerID)
+            let playerInfo = this.playersContainer.getChildByName(player.playerID)
             if (playerInfo != undefined) {
-                this.getChildByName(player.playerID).children.forEach((field) => {
-                    for (let stat in player.stats) {
-                        if (field.name == stat) {
-                            field.setValue(player.stats[stat].toString())
-                        }
-                    }
-                })
+                playerInfo.getChildByName("points").setValue(player.stats["points"])
             }
         })
     }

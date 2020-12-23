@@ -31,7 +31,7 @@ export class GameRenderer {
             RIGHT_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT, // width, height
             APP_WIDTH, APP_HEIGHT, // x, y
             "Start Round",
-            40, 0x448877, // font size, colour
+            BOTTOM_TOOLBAR_HEIGHT*0.5, 0x448877, // font size, colour
             1, 1) // anchor
         this.startRoundButton.on("click", ()=>{sendMessage(MSG_TYPES.ROUND_START)})
         this.startRoundButton.on("tap", ()=>{sendMessage(MSG_TYPES.ROUND_START)})
