@@ -6,8 +6,6 @@ import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { GraphicButton } from "../components/ui_common/button.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
-import { GameInfoToolbar } from "../components/game/gameInfoToolbar.js"
-import { RIGHT_TOOLBAR_WIDTH, TOWER_INFO_MENU_HEIGHT, TOWER_MENU_HEIGHT, GAME_STATS_MENU_HEIGHT, MAP_WIDTH, MAP_HEIGHT, BOTTOM_TOOLBAR_HEIGHT, APP_WIDTH, APP_HEIGHT } from "../constants.js"
 import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
 import { setBoard } from "../state.js"
 
@@ -16,22 +14,21 @@ import { setBoard } from "../state.js"
  * It also takes updates from the server and passes the update data to the relevant components
  */
 export class GameRenderer {
-    constructor(spriteHandler) {
+    constructor(spriteHandler, config) {
         this.spriteHandler = spriteHandler
-        this.map = new MapComponent()
-        this.tm = new TowerMenu(this.spriteHandler, RIGHT_TOOLBAR_WIDTH, TOWER_MENU_HEIGHT, MAP_WIDTH - RIGHT_TOOLBAR_WIDTH, 0)
-        this.git = new GameInfoToolbar(RIGHT_TOOLBAR_WIDTH, GAME_STATS_MENU_HEIGHT, MAP_WIDTH, TOWER_MENU_HEIGHT+TOWER_INFO_MENU_HEIGHT)
-        this.ut = new PlayersToolbar(MAP_WIDTH, BOTTOM_TOOLBAR_HEIGHT, 0, MAP_HEIGHT)
-        this.tc = new TowersComponent(this.spriteHandler)
-        this.ec = new EnemiesComponent()
-        this.bc = new BulletsComponent()
-        this.perRoundUpdateText = new OnScreenMessage(MAP_WIDTH/2, MAP_HEIGHT/2, "Round 1", 30)
+        this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE)
+        this.tm = new TowerMenu(this.spriteHandler, config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, config.MAP_WIDTH - config.TOWER_MENU_WIDTH, 0, config.MAP_WIDTH, config.MAP_HEIGHT, config.SPRITE_SIZE)
+        this.ut = new PlayersToolbar(config.PLAYER_TOOLBAR_WIDTH, config.PLAYER_TOOLBAR_HEIGHT, 0, config.MAP_HEIGHT)
+        this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE)
+        this.ec = new EnemiesComponent(config.SPRITE_SIZE, config.SUBGRID_SIZE)
+        this.bc = new BulletsComponent(config.SPRITE_SIZE, config.SUBGRID_SIZE)
+        this.perRoundUpdateText = new OnScreenMessage(config.MAP_WIDTH/2, config.MAP_HEIGHT/2, "Round 1", 30)
 
         this.startRoundButton = new GraphicButton(
-            RIGHT_TOOLBAR_WIDTH, BOTTOM_TOOLBAR_HEIGHT, // width, height
-            APP_WIDTH, APP_HEIGHT, // x, y
+            150, 80, // width, height
+            config.APP_WIDTH, config.APP_HEIGHT, // x, y
             "Start Round",
-            BOTTOM_TOOLBAR_HEIGHT*0.5, 0x448877, // font size, colour
+            80*0.5, 0x448877, // font size, colour
             1, 1) // anchor
         this.startRoundButton.on("click", ()=>{sendMessage(MSG_TYPES.ROUND_START)})
         this.startRoundButton.on("tap", ()=>{sendMessage(MSG_TYPES.ROUND_START)})
@@ -118,7 +115,6 @@ export class GameRenderer {
         // The order here is the order they are rendered on the map
         this.spriteHandler.registerContainer(this.map)
         this.spriteHandler.registerContainer(this.ec)
-        this.spriteHandler.registerContainer(this.git)
         this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.startRoundButton)
         this.spriteHandler.registerContainer(this.tc)
@@ -147,7 +143,7 @@ export class GameRenderer {
         this.ec.update(serverUpdate["enemies"])
         this.bc.update(serverUpdate["bullets"])
         this.ut.update(serverUpdate["players"])
-        this.git.update(serverUpdate["worldState"])
+        //this.git.update(serverUpdate["worldState"])
     }
 
     addPlayer(playerInfo) {

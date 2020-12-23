@@ -1,14 +1,16 @@
-import { MAP_ROWS, MAP_COLS, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y} from "../../constants.js"
 import { getBoard } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
 
 export class MapComponent extends BaseComponent {
-    constructor(scalingFactor=1) {
+    constructor(cols, rows, towerSpriteSize, scalingFactor=1) {
         super("map")
+        this.towerSpriteSize = towerSpriteSize
         this.scalingFactor = scalingFactor
+        this.cols = cols
+        this.rows = rows
 
-        this.width_px = DEFAULT_SPRITE_SIZE_X*this.scalingFactor*MAP_COLS
-        this.height_px = DEFAULT_SPRITE_SIZE_Y*this.scalingFactor*MAP_ROWS
+        this.width_px = this.towerSpriteSize*this.scalingFactor*this.cols
+        this.height_px = this.towerSpriteSize*this.scalingFactor*this.rows
     }
 
     getWidth() {
@@ -21,21 +23,21 @@ export class MapComponent extends BaseComponent {
 
     constructMap() {
         this.removeChildren()
-        const MAP_SPRITE_SIZE_X = DEFAULT_SPRITE_SIZE_X*this.scalingFactor // Width of a sprite in the map spritesheet
-        const MAP_SPRITE_SIZE_Y = DEFAULT_SPRITE_SIZE_Y*this.scalingFactor // Height of a sprite in the map spritesheet
+        const MAP_SPRITE_SIZE_X = this.towerSpriteSize*this.scalingFactor // Width of a sprite in the map spritesheet
+        const MAP_SPRITE_SIZE_Y = this.towerSpriteSize*this.scalingFactor // Height of a sprite in the map spritesheet
 
         // A texture is a WebGL-ready image
         // Keep things in a texture cache to make rendering fast and efficient
         let texture = PIXI.Loader.shared.resources["client/img/map_spritesheet.png"].texture
 
-        let rectangle_1 = new PIXI.Rectangle(0, 0, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y);
-        let rectangle_2 = new PIXI.Rectangle(0, DEFAULT_SPRITE_SIZE_Y, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y);
+        let rectangle_1 = new PIXI.Rectangle(0, 0, this.towerSpriteSize, this.towerSpriteSize);
+        let rectangle_2 = new PIXI.Rectangle(0, this.towerSpriteSize, this.towerSpriteSize, this.towerSpriteSize);
 
         let green_square_texture = new PIXI.Texture(texture, rectangle_1)
         let brown_square_texture = new PIXI.Texture(texture, rectangle_2)
 
-        for (let r = 0; r < MAP_ROWS; r++) {
-            for (let c = 0; c < MAP_COLS; c++) {
+        for (let r = 0; r < this.rows; r++) {
+            for (let c = 0; c < this.cols; c++) {
                 // Default to 0 aka grass
                 var map_square_sprite = new PIXI.Sprite(green_square_texture);
 

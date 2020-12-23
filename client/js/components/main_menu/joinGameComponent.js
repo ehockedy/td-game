@@ -1,10 +1,9 @@
 import { BaseMenuOptionComponent } from "./base/baseMenuOptionComponent.js"
 import { setGameID } from "../../state.js"
-import { APP_WIDTH, APP_HEIGHT } from "../../constants.js"
 import { MSG_TYPES, sendMessage, sendMessageGetAck } from "../../networking.js"
 
 export class JoinGameComponent extends BaseMenuOptionComponent {
-    constructor(x, y) {
+    constructor(x, y, appWidth, appHeight) {
         super("joinGame", x, y, "Join Game")
         this.textSprite
             .on("click", ()=>{ this.onJoinButtonClick() })
@@ -18,14 +17,14 @@ export class JoinGameComponent extends BaseMenuOptionComponent {
         // Joins the game (if exists) on enter
         this.gameCodeTextBox = this.createGameCodeTextBox()
         this.gameCodeTextBox.visible = false
-        this.gameCodeTextBox.x = APP_WIDTH/2 - x
-        this.gameCodeTextBox.y = APP_HEIGHT*4/5 - y
+        this.gameCodeTextBox.x = appWidth/2 - x
+        this.gameCodeTextBox.y = appHeight*4/5 - y
         this.popupContainer.addChild(this.gameCodeTextBox)
 
         // Holds the response message for if the game does not exist or request times out
         this.joinGameResponseText = new PIXI.Text("");
         this.joinGameResponseText.style.fill = 0xFF2233;
-        this.joinGameResponseText.x = APP_WIDTH/2 - x
+        this.joinGameResponseText.x = appWidth/2 - x
         this.joinGameResponseText.y = this.gameCodeTextBox.y + this.gameCodeTextBox.height/2 + 16
         this.joinGameResponseText.anchor.set(0.5)
         this.popupContainer.addChild(this.joinGameResponseText)

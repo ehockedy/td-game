@@ -1,10 +1,12 @@
 import { BaseComponent } from "./base/baseComponent.js"
 import { gridPosToMapPos } from "../../tools.js"
-import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y} from "../../constants.js"
 
 export class EnemiesComponent extends BaseComponent {
-    constructor() {
+    constructor(spriteSize, subgridSize) {
         super()
+        this.spriteSize = spriteSize
+        this.subgridSize = subgridSize
+
         this.enemyStateHashPrev = ""
         this.enemySpriteSheet = {}
     }
@@ -14,7 +16,7 @@ export class EnemiesComponent extends BaseComponent {
             let texture = PIXI.Loader.shared.resources["client/img/enemy_spritesheet.png"].texture
             this.enemySpriteSheet["basic"] = []
             for (let i = 0; i < 6; ++i) {
-                this.enemySpriteSheet["basic"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, i * DEFAULT_SPRITE_SIZE_Y, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
+                this.enemySpriteSheet["basic"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, i * this.spriteSize, this.spriteSize, this.spriteSize)))
             }
             resolve()
         })
@@ -80,7 +82,7 @@ export class EnemiesComponent extends BaseComponent {
         enemyStateObjects.forEach((enemy, idx) => {
             // Move the enemy
             let enemyToUpdate = this.getChildByName(enemy.name)
-            let newpos = gridPosToMapPos(enemy.position)
+            let newpos = gridPosToMapPos(enemy.position, this.spriteSize, this.subgridSize)
             enemyToUpdate.x = newpos[0]
             enemyToUpdate.y = newpos[1]
 

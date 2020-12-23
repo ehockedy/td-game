@@ -1,10 +1,11 @@
 import { BaseComponent } from "./base/baseComponent.js"
 import { gridPosToMapPos } from "../../tools.js"
-import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y } from "../../constants.js"
 
 export class BulletsComponent extends BaseComponent {
-    constructor() {
+    constructor(spriteSize, subgridSize) {
         super()
+        this.spriteSize = spriteSize
+        this.subgridSize = subgridSize
         this.bulletStateHashPrev = ""
         this.bulletSpriteSheet = {}
     }
@@ -12,7 +13,7 @@ export class BulletsComponent extends BaseComponent {
     loadData() {
         let texture = PIXI.Loader.shared.resources["client/img/bullet_spritesheet.png"].texture
         this.bulletSpriteSheet["basic"] = []
-        this.bulletSpriteSheet["basic"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, 0, DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y)))
+        this.bulletSpriteSheet["basic"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, 0, this.spriteSize, this.spriteSize)))
     }
 
     addBullet(name, type) {
@@ -28,7 +29,7 @@ export class BulletsComponent extends BaseComponent {
             this.addBullet(bullet.name, "TODO") // New bullet
     
             // Move bullet
-            let newpos = gridPosToMapPos(bullet.position)
+            let newpos = gridPosToMapPos(bullet.position, this.spriteSize, this.subgridSize)
             this.getChildByName(bullet.name).x = newpos[0]
             this.getChildByName(bullet.name).y = newpos[1]
         })

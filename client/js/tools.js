@@ -1,5 +1,3 @@
-import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, SUBGRID_SIZE } from "./constants.js"
-
 // Tools used across files
 
 /**
@@ -47,12 +45,12 @@ export function randomAlphaCharString(len) {
  * @param {Number[4]} pathPos server grid Point
  * @return {Number[2]} array of position of sprite in canvas [x, y]
  */
-export function gridPosToMapPos(pathPos) {
-    let subGridSideLen = DEFAULT_SPRITE_SIZE_X / SUBGRID_SIZE
+export function gridPosToMapPos(pathPos, spriteSize, subgridSize) {
+    let subGridSideLen = spriteSize / subgridSize
     return [
         // Map square                       Square within map square      Midway through square
-        pathPos.col * DEFAULT_SPRITE_SIZE_X + (pathPos.subcol * subGridSideLen + subGridSideLen / 2),
-        pathPos.row * DEFAULT_SPRITE_SIZE_Y + (pathPos.subrow * subGridSideLen + subGridSideLen / 2)
+        pathPos.col * spriteSize + (pathPos.subcol * subGridSideLen + subGridSideLen / 2),
+        pathPos.row * spriteSize + (pathPos.subrow * subGridSideLen + subGridSideLen / 2)
     ]
 }
 

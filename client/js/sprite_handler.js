@@ -1,13 +1,11 @@
 /**
  * This is the class that holds all the sprites and interaction with those sprites
  */
-import { APP_HEIGHT, APP_WIDTH} from "./constants.js"
-
 export class SpriteHandler {
-    constructor() {
+    constructor(width_px, height_px) {
         this.app = new PIXI.Application({
-            width: APP_WIDTH,
-            height: APP_HEIGHT
+            width: width_px,
+            height: height_px
         });
     
         //Add the canvas that Pixi automatically created to the HTML document

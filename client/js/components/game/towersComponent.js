@@ -1,4 +1,3 @@
-import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y } from "../../constants.js"
 import { randomHexString } from "../../tools.js"
 import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
@@ -9,8 +8,9 @@ import { TowerInfoComponent } from "./towerInfoComponent.js"
  * In future, might be best to remove the sprite creation functions out
  */
 export class TowersComponent extends BaseComponent {
-    constructor(sprite_handler){
+    constructor(sprite_handler, towerSpriteSize){
         super()
+        this.towerSpriteSize = towerSpriteSize
         this.sprite_handler = sprite_handler
         this.randomColourCode = "0x" + randomHexString(6); // TODO should be defined elsewhere
         this.towerStateHashPrev = ""
@@ -31,7 +31,7 @@ export class TowersComponent extends BaseComponent {
 
                 let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
                 _this.towerJson.forEach((tower)=> {
-                    _this.towerSpriteSheetData.push([new PIXI.Texture(texture, new PIXI.Rectangle(0, DEFAULT_SPRITE_SIZE_Y * tower["spriteSheetNum"], DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y))])
+                    _this.towerSpriteSheetData.push([new PIXI.Texture(texture, new PIXI.Rectangle(0, _this.towerSpriteSize * tower["spriteSheetNum"], _this.towerSpriteSize, _this.towerSpriteSize))])
                 })
                 resolve()
             })
@@ -51,7 +51,7 @@ export class TowersComponent extends BaseComponent {
         let graphics = new PIXI.Graphics();
         graphics.beginFill("0xe74c3c") // Red
         graphics.alpha = 0.5
-        graphics.drawCircle(0, 0, this.towerJson[type]["gameData"]["seekRange"] * DEFAULT_SPRITE_SIZE_Y) // position 0, 0 of the graphics canvas
+        graphics.drawCircle(0, 0, this.towerJson[type]["gameData"]["seekRange"] * this.towerSpriteSize) // position 0, 0 of the graphics canvas
         return graphics
     }
 
@@ -62,8 +62,8 @@ export class TowersComponent extends BaseComponent {
 
         sprite.gridX = col
         sprite.gridY = row
-        sprite.x = sprite.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2;
-        sprite.y = sprite.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2;
+        sprite.x = sprite.gridX * this.towerSpriteSize + this.towerSpriteSize / 2;
+        sprite.y = sprite.gridY * this.towerSpriteSize + this.towerSpriteSize / 2;
 
         if (playerID == getUserID()) { // Only make the tower interactive if the user placed it
             sprite.interactive = true; // reponds to mouse and touch events

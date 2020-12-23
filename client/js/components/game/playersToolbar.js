@@ -1,5 +1,4 @@
 import { BaseToolbarComponent } from "./base/baseToolbarComponent.js";
-import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 import { KeyValueInfo } from "../ui_common/keyValueInfo.js"
 
 export class PlayersToolbar extends BaseToolbarComponent {

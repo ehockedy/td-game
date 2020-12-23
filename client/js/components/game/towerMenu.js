@@ -1,5 +1,4 @@
 import { BaseToolbarComponent } from "./base/baseToolbarComponent.js"
-import { DEFAULT_SPRITE_SIZE_X, DEFAULT_SPRITE_SIZE_Y, APP_WIDTH, APP_HEIGHT, MAP_WIDTH, MAP_HEIGHT } from "../../constants.js"
 import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 import { sendMessage, getTowerUpdateMsg, MSG_TYPES } from "../../networking.js"
 import { getUserID, getBoard } from "../../state.js"
@@ -17,9 +16,12 @@ let transitionStates = {
 }
 
 export class TowerMenu  extends BaseToolbarComponent {
-    constructor(sprite_handler, width_px, height_px, x, y) {
+    constructor(sprite_handler, width_px, height_px, x, y, towerAreaBoundsX, towerAreaBoundsY, towerSpriteSize) {
         super("towermenu", width_px, height_px, x, y)
         this.sprite_handler = sprite_handler
+        this.towerSpriteSize = towerSpriteSize
+        this.towerAreaBoundsX = towerAreaBoundsX
+        this.towerAreaBoundsY = towerAreaBoundsY
         this.towerFactoryLink
 
         this.towersYOffset = 64
@@ -81,7 +83,7 @@ export class TowerMenu  extends BaseToolbarComponent {
         let towerNum = type+1 // hacky but works
         let towersPerRow = 3
         let toolbarWidth = this.width_px
-        let towerSpriteWidth = DEFAULT_SPRITE_SIZE_X
+        let towerSpriteWidth = this.towerSpriteSize
 
         let x = getPositionWithinEquallySpacedObjects(towerNum, towersPerRow, towerSpriteWidth, toolbarWidth)
         let y = 32 * 2 * (Math.floor(type/towersPerRow)) // +1 so not starting at y = 0
@@ -96,7 +98,7 @@ export class TowerMenu  extends BaseToolbarComponent {
         }
         let costText = new PIXI.Text("£"+this.towerJson[type].cost.toString(), style);
         costText.anchor.set(0.5, 0)
-        costText.y += DEFAULT_SPRITE_SIZE_Y/2
+        costText.y += this.towerSpriteSize/2
         towerSprite.addChild(costText)
 
         return towerSprite
@@ -153,8 +155,8 @@ export class TowerMenu  extends BaseToolbarComponent {
 
         let onPointerUp = () => {
             if (sprite.dragging) {
-                if ((sprite.global_x < 0 || sprite.global_y < 0 || sprite.global_x > MAP_WIDTH || sprite.global_y > MAP_HEIGHT) && // Not on map
-                    sprite.moved) { // and has moved
+                if (!this.isPositionOnMap(sprite.global_x, sprite.global_y)  // Not on map
+                    && sprite.moved) { // and has moved
                     towerReset()
                 } else {
                     this.placeTowerButtons.visible = true
@@ -192,10 +194,14 @@ export class TowerMenu  extends BaseToolbarComponent {
         }
 
         let onTowerPlaceConfirm = () => {
-            if (sprite.global_x >= 0 && sprite.global_y >= 0 && sprite.global_x < MAP_WIDTH && sprite.global_y < MAP_HEIGHT) {
+            if (this.isPositionOnMap(sprite.global_x, sprite.global_y)) {
                 sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(sprite))
             }
             towerReset()
+        }
+
+        let onDragTower = (event) => {
+            this.onDragTower(event, sprite)
         }
 
         // Tower icon sprite behaviour
@@ -205,7 +211,7 @@ export class TowerMenu  extends BaseToolbarComponent {
             .on("pointerdown", onPointerDown)
             .on("pointerup", onPointerUp)
             .on("pointerupoutside", onPointerUp)
-            .on("pointermove", this.onDragTower)
+            .on("pointermove", onDragTower)
             .on("pointermove", onTowerMove)
             .on("place", onTowerPlaceConfirm)
             .on("clear", towerReset)
@@ -263,36 +269,29 @@ export class TowerMenu  extends BaseToolbarComponent {
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~
-    // Events - "this" is the parent object
+    // Event
     // ~~~~~~~~~~~~~~~~~~~~~~~
-    onDragTower(event) {
-        if (!this.dragging) return
+    onDragTower(event, sprite) {
+        if (!sprite.dragging) return
         const newPosition = event.data.global
-        if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < MAP_WIDTH && newPosition.y < MAP_HEIGHT) {
+        if (this.isPositionOnMap(newPosition.x, newPosition.y)) {
             // If on map, snap to grid
-            let newGridX = Math.floor(newPosition.x / DEFAULT_SPRITE_SIZE_X)
-            let newGridY = Math.floor(newPosition.y / DEFAULT_SPRITE_SIZE_Y)
-            if ((newGridX != this.gridX || newGridY != this.gridY) && // Been some change
+            let newGridX = Math.floor(newPosition.x / this.towerSpriteSize)
+            let newGridY = Math.floor(newPosition.y / this.towerSpriteSize)
+            if ((newGridX != sprite.gridX || newGridY != sprite.gridY) && // Been some change
                 getBoard()[newGridY][newGridX]["value"] == 0) { // Must be empty space
-                this.gridX = newGridX
-                this.gridY = newGridY
-                this.global_x = this.gridX * DEFAULT_SPRITE_SIZE_X + DEFAULT_SPRITE_SIZE_X / 2
-                this.global_y = this.gridY * DEFAULT_SPRITE_SIZE_Y + DEFAULT_SPRITE_SIZE_Y / 2
-                this.x = this.global_x - this.parent.parent.x;
-                this.y = this.global_y - this.parent.parent.y;
-            }
+                sprite.gridX = newGridX
+                sprite.gridY = newGridY
+                sprite.global_x = sprite.gridX * this.towerSpriteSize + this.towerSpriteSize / 2
+                sprite.global_y = sprite.gridY * this.towerSpriteSize + this.towerSpriteSize / 2
+                sprite.x = sprite.global_x - this.x;
+                sprite.y = sprite.global_y - this.y;
 
-            // Also move range indicator to be same position as tower
-            this.range_subsprite.visible = true
-            this.range_subsprite.x = this.x
-            this.range_subsprite.y = this.y
-        } else if (newPosition.x >= 0 && newPosition.y >= 0 && newPosition.x < APP_WIDTH && newPosition.y < APP_HEIGHT) {
-            // Otherwise, update position normally
-            this.global_x = newPosition.x
-            this.global_y = newPosition.y
-            this.x = this.global_x - this.parent.parent.x;
-            this.y = this.global_y - this.parent.parent.y;
-            this.range_subsprite.visible = false
+                // Also move range indicator to be same position as tower
+                sprite.range_subsprite.visible = true
+                sprite.range_subsprite.x = sprite.x
+                sprite.range_subsprite.y = sprite.y
+            }
         }
     }
 
@@ -318,6 +317,10 @@ export class TowerMenu  extends BaseToolbarComponent {
 
     stopInteraction() {
         this._setContainerInteraction(this.towerSpriteContainer, false)
+    }
+
+    isPositionOnMap(x, y) {
+        return x >= 0 && y >= 0 && x < this.towerAreaBoundsX && y < this.towerAreaBoundsY
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~

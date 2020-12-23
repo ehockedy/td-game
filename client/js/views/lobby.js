@@ -3,7 +3,6 @@ import { GraphicBackground } from "../components/ui_common/background.js"
 import { MapComponent } from "../components/game/map.js"
 import { GameSetting } from "../components/lobby/gameSetting.js"
 import { Player } from "../components/lobby/player.js"
-import { APP_HEIGHT, APP_WIDTH, LOBBY_WINDOW_HEIGHT, LOBBY_WINDOW_WIDTH, MAP_WIDTH } from "../constants.js"
 import { getPositionWithinEquallySpacedObjects } from "../tools.js"
 import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
 import { setBoard, setUserID, getGameID } from "../state.js"
@@ -14,18 +13,18 @@ import { setBoard, setUserID, getGameID } from "../state.js"
  * All components positions are defined relative to each other and the boundaries of the menu.
  */
 export class LobbyRenderer {
-    constructor(spriteHandler) {
+    constructor(spriteHandler, config) {
         this.spriteHandler = spriteHandler
 
-        let popupBoundaryLeft = APP_WIDTH/2 - LOBBY_WINDOW_WIDTH/2
-        let popupBoundaryTop = APP_HEIGHT/2 - LOBBY_WINDOW_HEIGHT/2
-        let popupBoundaryRight = APP_WIDTH/2 + LOBBY_WINDOW_WIDTH/2
-        let popupBoundaryBottom = APP_HEIGHT/2 + LOBBY_WINDOW_HEIGHT/2
+        let popupBoundaryLeft = config.APP_WIDTH/2 - config.LOBBY_WINDOW_WIDTH/2
+        let popupBoundaryTop = config.APP_HEIGHT/2 - config.LOBBY_WINDOW_HEIGHT/2
+        let popupBoundaryRight = config.APP_WIDTH/2 + config.LOBBY_WINDOW_WIDTH/2
+        let popupBoundaryBottom = config.APP_HEIGHT/2 + config.LOBBY_WINDOW_HEIGHT/2
 
         let xMargin = 25
         let yMargin = 20
 
-        this.background = new GraphicBackground(LOBBY_WINDOW_WIDTH, LOBBY_WINDOW_HEIGHT, APP_WIDTH/2, APP_HEIGHT/2)
+        this.background = new GraphicBackground(config.LOBBY_WINDOW_WIDTH, config.LOBBY_WINDOW_HEIGHT, config.APP_WIDTH/2, config.APP_HEIGHT/2)
 
         this.lobbyTitleText = new PIXI.Text("Lobby");
         this.lobbyTitleText.x = popupBoundaryLeft + xMargin;
@@ -38,8 +37,8 @@ export class LobbyRenderer {
         this.gameIDText.y = popupBoundaryTop + yMargin;
 
         // Map preview - the primary player (1) can regenrate the map that will be used in the game. The setting will affect the map generated
-        let mapScale = 420/MAP_WIDTH // Scale the map down by this much
-        this.map = new MapComponent(mapScale)
+        let mapScale = 420/config.MAP_WIDTH // Scale the map down by this much
+        this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE, mapScale)
         this.map.x = popupBoundaryLeft + xMargin
         this.map.y = popupBoundaryTop + 80
 

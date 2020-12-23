@@ -1,26 +1,31 @@
-export const DEFAULT_SPRITE_SIZE_X = 32
-export const DEFAULT_SPRITE_SIZE_Y = 32
-
-// TODO these are the most important three numbers and need to be in a file shared with the server config
-export const MAP_ROWS = 18;
-export const MAP_COLS = 30;
-export const SUBGRID_SIZE = 95;
-
-export const MAP_WIDTH = MAP_COLS * DEFAULT_SPRITE_SIZE_X
-export const MAP_HEIGHT = MAP_ROWS * DEFAULT_SPRITE_SIZE_Y
-
-export const RIGHT_TOOLBAR_WIDTH = 5*DEFAULT_SPRITE_SIZE_X
-export const TOWER_MENU_HEIGHT = MAP_HEIGHT/5*2
-export const TOWER_INFO_MENU_HEIGHT = MAP_HEIGHT/5*2
-export const GAME_STATS_MENU_HEIGHT = MAP_HEIGHT/5
-
-export const BOTTOM_TOOLBAR_WIDTH = MAP_WIDTH + RIGHT_TOOLBAR_WIDTH
-export const BOTTOM_TOOLBAR_HEIGHT = DEFAULT_SPRITE_SIZE_Y*2
-
-export const APP_WIDTH = MAP_WIDTH
-export const APP_HEIGHT = MAP_HEIGHT + BOTTOM_TOOLBAR_HEIGHT
-
-export const LOBBY_WINDOW_WIDTH = APP_WIDTH*0.90
-export const LOBBY_WINDOW_HEIGHT = APP_HEIGHT*0.75
-
-export const GAME_CODE_LEN = 4 // 4 is random enough, and easy to remember
+export function generateClientConfig(config) {
+    const SPRITE_SIZE_PX = 32
+    const MAP_WIDTH = config.MAP_WIDTH * SPRITE_SIZE_PX
+    const MAP_HEIGHT = config.MAP_HEIGHT * SPRITE_SIZE_PX
+    const TOWER_MENU_WIDTH = SPRITE_SIZE_PX * 5
+    const TOWER_MENU_HEIGHT = SPRITE_SIZE_PX * 8
+    const PLAYER_TOOLBAR_WIDTH = MAP_WIDTH
+    const PLAYER_TOOLBAR_HEIGHT = SPRITE_SIZE_PX * 2
+    const APP_WIDTH = MAP_WIDTH
+    const APP_HEIGHT = MAP_HEIGHT + PLAYER_TOOLBAR_HEIGHT
+    const LOBBY_WINDOW_WIDTH = APP_WIDTH*0.90
+    const LOBBY_WINDOW_HEIGHT = APP_HEIGHT*0.75
+    const GAME_CODE_LEN = 4 // 4 is random enough, and easy to remember
+    return {
+        MAP_ROWS: config.MAP_HEIGHT,
+        MAP_COLS: config.MAP_WIDTH,
+        SUBGRID_SIZE: config.SUBGRID_SIZE,
+        SPRITE_SIZE: SPRITE_SIZE_PX,
+        MAP_WIDTH: MAP_WIDTH,
+        MAP_HEIGHT: MAP_HEIGHT,
+        TOWER_MENU_WIDTH: TOWER_MENU_WIDTH,
+        TOWER_MENU_HEIGHT: TOWER_MENU_HEIGHT,
+        PLAYER_TOOLBAR_WIDTH: PLAYER_TOOLBAR_WIDTH,
+        PLAYER_TOOLBAR_HEIGHT: PLAYER_TOOLBAR_HEIGHT,
+        APP_HEIGHT: APP_HEIGHT,
+        APP_WIDTH: APP_WIDTH,
+        LOBBY_WINDOW_WIDTH: LOBBY_WINDOW_WIDTH,
+        LOBBY_WINDOW_HEIGHT: LOBBY_WINDOW_HEIGHT,
+        GAME_CODE_LEN: GAME_CODE_LEN
+    }
+}
