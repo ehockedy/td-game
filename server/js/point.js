@@ -45,6 +45,11 @@ class Point {
         this.subcol = Math.floor(x % config.SUBGRID_SIZE)
         this.subrow = Math.floor(y % config.SUBGRID_SIZE)
     }
+
+    // returns a deep copy of this Point
+    getCopy() {
+        return new Point(this.x, this.y)
+    }
 }
 
 module.exports = {

@@ -1,5 +1,4 @@
 const crypto = require('crypto');
-const point = require('../js/point.js')
 const fs = require('fs');
 // VERY temporary measure
 const config = JSON.parse(fs.readFileSync('shared/json/gameConfig.json'));
@@ -7,13 +6,9 @@ const config = JSON.parse(fs.readFileSync('shared/json/gameConfig.json'));
 
 class Bullet {
     constructor(position, angle, damage, speed, range) {
-        this.x = position.x
-        this.y = position.y
-
-        // Have to create new objects so that original object (tower position) is not changed when bullet position is updated during move
-        this.position = new point.Point(this.x, this.y)
-        this.bulletPosStart = new point.Point(this.x, this.y) // TODO replace this with cumulative dist travelled
-        this.positionPrev = this.position
+        this.position = position.getCopy()
+        this.bulletPosStart = position.getCopy()  // TODO replace this with cumulative dist travelled
+        this.positionPrev = position.getCopy()
 
         this.speed = speed
         this.damage = damage
@@ -28,13 +23,10 @@ class Bullet {
     }
 
     move() {
-        this.positionPrev = new point.Point(this.x, this.y)
-
-        this.x += this.xSpeed
-        this.y += this.ySpeed
+        this.positionPrev = this.position.getCopy()
 
         // Convert into grid & subgrid coordinates
-        this.position.updatePosGlobal(this.x, this.y)
+        this.position.updatePosGlobal(this.position.x + this.xSpeed, this.position.y + this.ySpeed)
         this.hasMovedSquare = (this.position.row != this.positionPrev.row || this.position.col != this.positionPrev.col)
     }
 
@@ -60,9 +52,10 @@ class Bullet {
     }
 
     positionInNTicks(n) {
-        let x = this.bulletPosStart.x + this.xSpeed*n
-        let y = this.bulletPosStart.y + this.ySpeed*n
-        return new point.Point(x, y)
+        let tempPos = this.bulletPosStart.getCopy()
+        tempPos.x += this.xSpeed*n
+        tempPos.y += this.ySpeed*n
+        return tempPos
     }
 
     isOutOfRange() {
@@ -73,7 +66,7 @@ class Bullet {
     }
 
     isOffMap() {
-        return (this.x < 0 || this.y < 0 || this.x > config.SUBGRID_SIZE*config.MAP_WIDTH || this.y > config.SUBGRID_SIZE*config.MAP_HEIGHT)
+        return (this.position.x < 0 || this.position.y < 0 || this.position.x > config.SUBGRID_SIZE*config.MAP_WIDTH || this.position.y > config.SUBGRID_SIZE*config.MAP_HEIGHT)
     }
 
     setOriginTower(originTower) {
