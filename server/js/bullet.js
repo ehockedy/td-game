@@ -1,8 +1,4 @@
 const crypto = require('crypto');
-const fs = require('fs');
-// VERY temporary measure
-const config = JSON.parse(fs.readFileSync('shared/json/gameConfig.json'));
-
 
 class Bullet {
     constructor(position, angle, damage, speed, range) {
@@ -12,7 +8,7 @@ class Bullet {
 
         this.speed = speed
         this.damage = damage
-        this.range = range * config.SUBGRID_SIZE // Convert to global (since range is configured by number of squares)
+        this.range = range
         this.name = crypto.randomBytes(20).toString('hex');
 
         this.angle = angle
@@ -58,26 +54,26 @@ class Bullet {
         return tempPos
     }
 
-    isOutOfRange() {
+    isOutOfGivenRange(range) {
         return Math.sqrt(
-                Math.pow(this.position.x - this.bulletPosStart.x, 2) +
-                Math.pow(this.position.y - this.bulletPosStart.y, 2)
-            ) > this.range
+            Math.pow(this.position.x - this.bulletPosStart.x, 2) +
+            Math.pow(this.position.y - this.bulletPosStart.y, 2)
+        ) > range
     }
 
-    isOffMap() {
-        return (this.position.x < 0 || this.position.y < 0 || this.position.x > config.SUBGRID_SIZE*config.MAP_WIDTH || this.position.y > config.SUBGRID_SIZE*config.MAP_HEIGHT)
+    isWithinGivenRange(range) {
+        return Math.sqrt(
+            Math.pow(this.position.x - this.bulletPosStart.x, 2) +
+            Math.pow(this.position.y - this.bulletPosStart.y, 2)
+        ) < range
+    }
+
+    isOffMap(mapWidth, mapHeight, subgridSize) {
+        return (this.position.x < 0 || this.position.y < 0 || this.position.x > subgridSize*mapWidth || this.position.y > subgridSize*mapHeight)
     }
 
     setOriginTower(originTower) {
         this.originTower = originTower // Reference to the tower that shot the bullet
-    }
-
-    isWithinTowerInitialRange() {
-        return Math.sqrt(
-            Math.pow(this.position.x - this.bulletPosStart.x, 2) +
-            Math.pow(this.position.y - this.bulletPosStart.y, 2)
-        ) < config.SUBGRID_SIZE/3
     }
 }
 

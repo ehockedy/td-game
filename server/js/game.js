@@ -19,10 +19,10 @@ const TOWER_TYPE = {
 
 
 class Game {
-    constructor(mapX, mapY, subGridXY) {
+    constructor(cols, rows, subgridSize) {
         this.towers = []
         this.players = []
-        this.map = new gameMap.GameMap(mapY, mapX, subGridXY)
+        this.map = new gameMap.GameMap(rows, cols, subgridSize)
         this.generateMap()
 
         this.hasStarted = false
@@ -32,8 +32,7 @@ class Game {
         this.enemyCount = 0
         this.enemyCountTarget = 0
 
-        this.subgridSize = subGridXY
-        this.subgridMidpoint = Math.floor(subGridXY/2)
+        this.subgridMidpoint = Math.floor(subgridSize/2)
     }
 
     getMapStructure() {
@@ -123,9 +122,9 @@ class Game {
         let toAdd = []
         this.map.forEachBulletInReverse((bullet) => {
             bullet.move()
-            if (bullet.isOffMap()) {
+            if (bullet.isOffMap(this.map.rows, this.map.cols, this.map.subgridSize)) {
                 this.map.removeBulletPrevPos(bullet) // Remove that bullet, and do not re-add it - it's off the map
-            } else if (bullet.isOutOfRange()) {
+            } else if (bullet.isOutOfGivenRange(bullet.range*this.map.subgridSize)) { // Convert to global (since range is configured by number of squares)
                 this.map.removeBulletPrevPos(bullet)
             } else if (bullet.hasMovedSquare) {
                 this.map.removeBulletPrevPos(bullet)
@@ -133,7 +132,7 @@ class Game {
             }
 
             // Do not display a bullet that is still "within" the tower
-            bullet.visible = !bullet.isWithinTowerInitialRange()
+            bullet.visible = !bullet.isWithinGivenRange(this.map.subgridSize/3)
         })
 
         // Add the bullets to their new square
@@ -198,7 +197,7 @@ class Game {
         let speedRangeMax = 8
         // TODO create enemy types
         let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
-        this.map.addNewEnemy(new enemy.Enemy(30, randomSpeed, this.map.path, this.subgridSize/3))
+        this.map.addNewEnemy(new enemy.Enemy(30, randomSpeed, this.map.path, this.map.subgridSize/3))
     }
 
     shiftEnemyQueue() {
@@ -216,7 +215,7 @@ class Game {
     addTower(name, type, playerID, row, col) {
         try {
             let player = this.getPlayerByName(playerID)
-            let newTower = new towerImport.Tower(name, type, player, new point.Point(this.subgridSize, col, row, this.subgridMidpoint, this.subgridMidpoint))
+            let newTower = new towerImport.Tower(name, type, player, new point.Point(this.map.subgridSize, col, row, this.subgridMidpoint, this.subgridMidpoint))
             newTower.calculateShootPath(this.map.mainPath)
             this.towers.push(newTower)
             player.reduceMoney(newTower.getCost()) // Keep player implementation simple and let client determine whether player can afffort tower

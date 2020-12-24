@@ -34,7 +34,7 @@ class Tower {
         // These values can change based on user actions
         this.state = {
             "rateOfFire" : towerJson[type]["gameData"]["rateOfFire"], // ticks between bullets
-            "range": towerJson[type]["gameData"]["seekRange"],
+            "seekRange": towerJson[type]["gameData"]["seekRange"],
             "shootRange": towerJson[type]["gameData"]["shootRange"], // How far bullet can travel once fired
             "bulletSpeed": towerJson[type]["gameData"]["bulletSpeed"],
             "damage": towerJson[type]["gameData"]["damage"],
@@ -53,7 +53,7 @@ class Tower {
      */
     calculateShootPath(path) {
         for (let p=0; p < path.length; p++) {
-            if (Math.sqrt(Math.pow((path[p].row - this.row), 2) + Math.pow((path[p].col - this.col), 2)) <= this.state.range) {
+            if (Math.sqrt(Math.pow((path[p].row - this.row), 2) + Math.pow((path[p].col - this.col), 2)) <= this.state.seekRange) {
                 this.shootRangePath.push(path[p])
             }
         }
