@@ -51,6 +51,28 @@ const MSG_TYPES = {
 let configJson = fs.readFileSync('shared/json/gameConfig.json');
 let config = JSON.parse(configJson);
 
+function parseGameConfig(config) {
+  function logError(configOpt, errorMsg) {
+    console.log("Config error:")
+    console.log("  Config setting:", configOpt)
+    console.log("  Config value:", config[configOpt])
+    console.log("  Error message:", errorMsg)
+    return false
+  }
+  if (config.MAP_WIDTH % 2 == 1) {
+    return logError("MAP_WIDTH", "Must be an even positive integer")
+  } else if  (config.MAP_HEIGHT % 2 == 1) {
+    return logError("MAP_HEIGHT", "Must be an even positive integer")
+  } else if  (config.SUBGRID_SIZE % 2 == 0) {
+    return logError("SUBGRID_SIZE", "Must be an odd positive integer")
+  }
+  return true
+}
+
+if (!parseGameConfig(config)) {
+  process.exit(1)
+}
+
 // First set up http server to serve index.html and its included files
 const http_server = http.createServer(networking.requestListener);
 http_server.listen(8000, () => {
