@@ -26,14 +26,16 @@ export class TowersComponent extends BaseComponent {
     loadData() {
         let _this = this
         return new Promise((resolve) => {
-            $.getJSON("shared/json/towers.json", function (data) {
-                _this.towerJson = data
+            fetch("shared/json/towers.json").then((response) => {
+                response.json().then((data) => {
+                    _this.towerJson = data
 
-                let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
-                _this.towerJson.forEach((tower)=> {
-                    _this.towerSpriteSheetData.push([new PIXI.Texture(texture, new PIXI.Rectangle(0, _this.towerSpriteSize * tower["spriteSheetNum"], _this.towerSpriteSize, _this.towerSpriteSize))])
+                    let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
+                    _this.towerJson.forEach((tower)=> {
+                        _this.towerSpriteSheetData.push([new PIXI.Texture(texture, new PIXI.Rectangle(0, _this.towerSpriteSize * tower["spriteSheetNum"], _this.towerSpriteSize, _this.towerSpriteSize))])
+                    })
+                    resolve()
                 })
-                resolve()
             })
         })
     }

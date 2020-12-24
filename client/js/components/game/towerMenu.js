@@ -54,9 +54,11 @@ export class TowerMenu  extends BaseToolbarComponent {
     loadData() {
         let _this = this
         return new Promise((resolve) => {
-            $.getJSON("shared/json/towers.json", function (data) {
-                _this.towerJson = data
-                resolve()
+            fetch("shared/json/towers.json").then((response) => {
+                response.json().then((data) => {
+                    _this.towerJson = data
+                    resolve()
+                })
             })
         })
     }
