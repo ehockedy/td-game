@@ -1,14 +1,16 @@
 const point = require('../js/point.js')
-const config = require('../js/constants.js')
+const fs = require('fs');
+const config = JSON.parse(fs.readFileSync('shared/json/gameConfig.json'));
+let SUBGRID_MIDPOINT = Math.floor(config.SUBGRID_SIZE/2)
 
 test("converts local coordinates to global correctly", () => {
-    let testPoint = new point.Point(30, 20, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT)
+    let testPoint = new point.Point(30, 20, SUBGRID_MIDPOINT, SUBGRID_MIDPOINT)
     expect(testPoint.col).toBe(30)
     expect(testPoint.row).toBe(20)
-    expect(testPoint.subcol).toBe(config.SUBGRID_MIDPOINT)
-    expect(testPoint.subrow).toBe(config.SUBGRID_MIDPOINT)
-    expect(testPoint.x).toBe(30*config.SUBGRID_SIZE + config.SUBGRID_MIDPOINT)
-    expect(testPoint.y).toBe(20*config.SUBGRID_SIZE + config.SUBGRID_MIDPOINT)
+    expect(testPoint.subcol).toBe(SUBGRID_MIDPOINT)
+    expect(testPoint.subrow).toBe(SUBGRID_MIDPOINT)
+    expect(testPoint.x).toBe(30*config.SUBGRID_SIZE + SUBGRID_MIDPOINT)
+    expect(testPoint.y).toBe(20*config.SUBGRID_SIZE + SUBGRID_MIDPOINT)
 })
 
 test("converts global coordinates to local correctly", () => {

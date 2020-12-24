@@ -1,15 +1,16 @@
 const gameImport = require('../js/game.js');
 const bulletImport = require("../js/bullet.js");
 const pointImport = require("../js/point.js");
-const config = require('../js/constants.js');
-
+const fs = require('fs');
+const config = JSON.parse(fs.readFileSync('shared/json/gameConfig.json'));
+let SUBGRID_MIDPOINT = Math.floor(config.SUBGRID_SIZE/2)
 
 test ("bullet moves between squares correctly", () => {
     let game = new gameImport.Game(6, 6, 7)
 
     // Add bullet of speed 1
     let b1 = new bulletImport.Bullet(
-        new pointImport.Point(0, 0, 0, config.SUBGRID_MIDPOINT), // Vertically halfway down the first square
+        new pointImport.Point(0, 0, 0, SUBGRID_MIDPOINT), // Vertically halfway down the first square
         0, // Horizontally right
         1,
         1,
@@ -21,7 +22,7 @@ test ("bullet moves between squares correctly", () => {
 
     game.moveBullets()
     expect(b1.position.subcol).toBe(1)
-    expect(b1.position.subrow).toBe(config.SUBGRID_MIDPOINT)
+    expect(b1.position.subrow).toBe(SUBGRID_MIDPOINT)
     expect(b1.position.col).toBe(0)
     expect(b1.position.row).toBe(0)
 
@@ -29,7 +30,7 @@ test ("bullet moves between squares correctly", () => {
         game.moveBullets()
     }
     expect(b1.position.subcol).toBe(1)
-    expect(b1.position.subrow).toBe(config.SUBGRID_MIDPOINT)
+    expect(b1.position.subrow).toBe(SUBGRID_MIDPOINT)
     expect(b1.position.col).toBe(1)
     expect(b1.position.row).toBe(0)
 
@@ -47,7 +48,7 @@ test ("bullet moves diagonally between squares correctly", () => {
 
     // Add bullet of speed 1
     let b1 = new bulletImport.Bullet(
-        new pointImport.Point(0, 0, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT), // Middle of square
+        new pointImport.Point(0, 0, SUBGRID_MIDPOINT, SUBGRID_MIDPOINT), // Middle of square
         Math.PI/4, // down and right
         1,
         1,
@@ -59,7 +60,7 @@ test ("bullet moves diagonally between squares correctly", () => {
 
     // Should take a number of moves equal to distance from the mid square to target corner before
     // moving into next square. So add 1 to ensure this happens
-    let toMove = Math.sqrt(config.SUBGRID_MIDPOINT*config.SUBGRID_MIDPOINT*2) // hypotenuse of the triangle
+    let toMove = Math.sqrt(SUBGRID_MIDPOINT*SUBGRID_MIDPOINT*2) // hypotenuse of the triangle
     for (let i = 0; i < toMove; i++) {
         game.moveBullets()
     }
@@ -87,7 +88,7 @@ test ("bullet is removed when out of map", () => {
 
     // Add bullet of speed 1
     let b1 = new bulletImport.Bullet(
-        new pointImport.Point(0, 0, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT), // Middle of square
+        new pointImport.Point(0, 0, SUBGRID_MIDPOINT, SUBGRID_MIDPOINT), // Middle of square
         Math.PI,
         1,
         1,
@@ -95,7 +96,7 @@ test ("bullet is removed when out of map", () => {
     )
     game.map.addBullet(b1)
 
-    for (let i = 0; i < config.SUBGRID_MIDPOINT; i++) {
+    for (let i = 0; i < SUBGRID_MIDPOINT; i++) {
         game.moveBullets()
     }
     console.log(b1)
@@ -118,7 +119,7 @@ test ("bullet is removed when travelled further than its range", () => {
 
     // Add bullet of speed 1
     let b1 = new bulletImport.Bullet(
-        new pointImport.Point(0, 0, config.SUBGRID_MIDPOINT, config.SUBGRID_MIDPOINT), // Middle of square
+        new pointImport.Point(0, 0, SUBGRID_MIDPOINT, SUBGRID_MIDPOINT), // Middle of square
         0,
         1,
         1,
@@ -144,5 +145,5 @@ test ("bullet is removed when travelled further than its range", () => {
     game.map.forEachBullet(() => {
         bullets++
     })
-    expect(bullets).toBe(0) // After one mroe move, bullet has gone
+    expect(bullets).toBe(0) // After one more move, bullet has gone
 })
