@@ -10,7 +10,7 @@ test ("bullet moves between squares correctly", () => {
 
     // Add bullet of speed 1
     let b1 = new bulletImport.Bullet(
-        new pointImport.Point(0, 0, 0, SUBGRID_MIDPOINT), // Vertically halfway down the first square
+        new pointImport.Point(config.SUBGRID_SIZE, 0, 0, 0, SUBGRID_MIDPOINT), // Vertically halfway down the first square
         0, // Horizontally right
         1,
         1,
@@ -48,7 +48,7 @@ test ("bullet moves diagonally between squares correctly", () => {
 
     // Add bullet of speed 1
     let b1 = new bulletImport.Bullet(
-        new pointImport.Point(0, 0, SUBGRID_MIDPOINT, SUBGRID_MIDPOINT), // Middle of square
+        new pointImport.Point(config.SUBGRID_SIZE, 0, 0, SUBGRID_MIDPOINT, SUBGRID_MIDPOINT), // Middle of square
         Math.PI/4, // down and right
         1,
         1,
@@ -88,7 +88,7 @@ test ("bullet is removed when out of map", () => {
 
     // Add bullet of speed 1
     let b1 = new bulletImport.Bullet(
-        new pointImport.Point(0, 0, SUBGRID_MIDPOINT, SUBGRID_MIDPOINT), // Middle of square
+        new pointImport.Point(config.SUBGRID_SIZE, 0, 0, SUBGRID_MIDPOINT, SUBGRID_MIDPOINT), // Middle of square
         Math.PI,
         1,
         1,
@@ -119,7 +119,7 @@ test ("bullet is removed when travelled further than its range", () => {
 
     // Add bullet of speed 1
     let b1 = new bulletImport.Bullet(
-        new pointImport.Point(0, 0, SUBGRID_MIDPOINT, SUBGRID_MIDPOINT), // Middle of square
+        new pointImport.Point(config.SUBGRID_SIZE, 0, 0, SUBGRID_MIDPOINT, SUBGRID_MIDPOINT), // Middle of square
         0,
         1,
         1,

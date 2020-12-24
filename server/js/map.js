@@ -7,13 +7,13 @@ function mod(a, x) {
 }
 
 class GameMap {
-  constructor(rows, cols, subGridSize) {
+  constructor(rows, cols, subgridSize) {
     // Size of map
     this.height = rows
     this.width = cols
 
     // Size of the sub grid that makes up one map square
-    this.subGridSize = subGridSize
+    this.subgridSize = subgridSize
 
     this.numEnemies = 0
 
@@ -368,7 +368,7 @@ class GameMap {
   //TODO test cases:
   // - no negative numbers
   // - no duplicate coords
-  // - number steps is subGridSize+1 * number of subgrids
+  // - number steps is subgridSize+1 * number of subgrids
   calculatePath() {
     // Given the map, calculate the path through the map the enemies will take
     // Splits each map grid square into a subgrid of size given by the parameter
@@ -376,9 +376,9 @@ class GameMap {
 
     // If even number sub grid divisions, add 1
     // If was even then path to travel through the subgrid would differ depending on direction
-    if (this.subGridSize % 2 == 0) this.subGridSize++
+    if (this.subgridSize % 2 == 0) this.subgridSize++
 
-    let midSubGridPos = Math.floor(this.subGridSize/2)
+    let midSubGridPos = Math.floor(this.subgridSize/2)
 
     // Total length of path through subgrids
     let pathLen = 0
@@ -390,8 +390,8 @@ class GameMap {
 
     // Start of path
     // Format of a path position is [map grid y, map grid x, sub grid y, sub grid x]
-    for (let i=0; i < this.subGridSize; ++i) {
-      this.path.push(new point.Point(this.col_start, this.row_start, i, midSubGridPos))
+    for (let i=0; i < this.subgridSize; ++i) {
+      this.path.push(new point.Point(this.subgridSize, this.col_start, this.row_start, i, midSubGridPos))
       //console.log([this.row_start, this.col_start, midSubGridPos, i])
     }
 
@@ -437,18 +437,18 @@ class GameMap {
       // end of the previous squares path (d e) continues into the start of the current subgrid
       //console.log("prevSquareSecondPath: ", prevSquareSecondPath)
       prevSquareSecondPath.forEach((value, index) => {
-        let newSquareFirstPath = new point.Point(
+        let newSquareFirstPath = new point.Point(this.subgridSize,
           currSubGridCoord[1], // Column of current subgrid
           currSubGridCoord[0], // Row of current subgrid
-          mod((value.subcol + midSubGridPos*dirVectorPrevToCurr[1]), (this.subGridSize)),  // Column within current subgrid
-          mod((value.subrow + midSubGridPos*dirVectorPrevToCurr[0]), (this.subGridSize)) // Row within current subgrid
+          mod((value.subcol + midSubGridPos*dirVectorPrevToCurr[1]), (this.subgridSize)),  // Column within current subgrid
+          mod((value.subrow + midSubGridPos*dirVectorPrevToCurr[0]), (this.subgridSize)) // Row within current subgrid
         )
         this.path.push(newSquareFirstPath)
         //console.log("newSquareFirstPath: ", newSquareFirstPath)
       })
 
       // Add the center subgrid position
-      this.path.push(new point.Point(
+      this.path.push(new point.Point(this.subgridSize,
         currSubGridCoord[1],
         currSubGridCoord[0],
         midSubGridPos,
@@ -492,7 +492,7 @@ class GameMap {
 
       // Write second part of path - path from current subgrid to next subgrid
       for (let nsspLen = 1; nsspLen <= midSubGridPos; nsspLen++) {
-        let newSquareSecondPath = new point.Point(
+        let newSquareSecondPath = new point.Point(this.subgridSize,
           currSubGridCoord[1],
           currSubGridCoord[0],
           midSubGridPos + (nsspLen*dirVectorCurrToNext[1]),
@@ -511,28 +511,28 @@ class GameMap {
         break;
       }
     }
-    for (let i=0; i < this.subGridSize; ++i) {
-      this.path.push(new point.Point(this.width-1, finalSquareRow, i, midSubGridPos))
+    for (let i=0; i < this.subgridSize; ++i) {
+      this.path.push(new point.Point(this.subgridSize, this.width-1, finalSquareRow, i, midSubGridPos))
       //console.log([this.row_start, this.col_start, midSubGridPos, i])
     }
 
     console.log("Path: ", this.path)
 
     // Generate the main squares path
-    this.mainPath.push(new point.Point(
+    this.mainPath.push(new point.Point(this.subgridSize,
       this.path[0].col,
       this.path[0].row,
-      Math.floor(this.subGridSize/2),
-      Math.floor(this.subGridSize/2)
+      Math.floor(this.subgridSize/2),
+      Math.floor(this.subgridSize/2)
     )) // Main square of first sub grid square
     for (let squareIdx=0; squareIdx < this.path.length; squareIdx++) {
       if (this.path[squareIdx].row != this.mainPath[this.mainPath.length-1].row ||
           this.path[squareIdx].col != this.mainPath[this.mainPath.length-1].col) {
-            this.mainPath.push(new point.Point(
+            this.mainPath.push(new point.Point(this.subgridSize,
               this.path[squareIdx].col,
               this.path[squareIdx].row,
-              Math.floor(this.subGridSize/2),
-              Math.floor(this.subGridSize/2)
+              Math.floor(this.subgridSize/2),
+              Math.floor(this.subgridSize/2)
             ))
       }
     }
