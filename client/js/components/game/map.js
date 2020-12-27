@@ -31,7 +31,7 @@ export class MapComponent extends BaseComponent {
         let texture = PIXI.Loader.shared.resources["client/img/map_spritesheet.png"].texture
 
         let rectangle_1 = new PIXI.Rectangle(0, 0, this.towerSpriteSize, this.towerSpriteSize);
-        let rectangle_2 = new PIXI.Rectangle(0, this.towerSpriteSize, this.towerSpriteSize, this.towerSpriteSize);
+        let rectangle_2 = new PIXI.Rectangle(this.towerSpriteSize, 0, this.towerSpriteSize, this.towerSpriteSize);
 
         let green_square_texture = new PIXI.Texture(texture, rectangle_1)
         let brown_square_texture = new PIXI.Texture(texture, rectangle_2)

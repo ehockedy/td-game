@@ -38,7 +38,7 @@ export class LobbyRenderer {
 
         // Map preview - the primary player (1) can regenrate the map that will be used in the game. The setting will affect the map generated
         let mapScale = 420/config.MAP_WIDTH // Scale the map down by this much
-        this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE, mapScale)
+        this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE_MAP, mapScale)
         this.map.x = popupBoundaryLeft + xMargin
         this.map.y = popupBoundaryTop + 80
 

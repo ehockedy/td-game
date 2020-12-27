@@ -16,10 +16,10 @@ let transitionStates = {
 }
 
 export class TowerMenu  extends BaseToolbarComponent {
-    constructor(sprite_handler, width_px, height_px, x, y, towerAreaBoundsX, towerAreaBoundsY, towerSpriteSize) {
+    constructor(sprite_handler, width_px, height_px, x, y, towerAreaBoundsX, towerAreaBoundsY, mapSpriteSize) {
         super("towermenu", width_px, height_px, x, y)
         this.sprite_handler = sprite_handler
-        this.towerSpriteSize = towerSpriteSize
+        this.mapSpriteSize = mapSpriteSize
         this.towerAreaBoundsX = towerAreaBoundsX
         this.towerAreaBoundsY = towerAreaBoundsY
         this.towerFactoryLink
@@ -85,12 +85,11 @@ export class TowerMenu  extends BaseToolbarComponent {
         let towerNum = type+1 // hacky but works
         let towersPerRow = 3
         let toolbarWidth = this.width_px
-        let towerSpriteWidth = this.towerSpriteSize
-
-        let x = getPositionWithinEquallySpacedObjects(towerNum, towersPerRow, towerSpriteWidth, toolbarWidth)
-        let y = 32 * 2 * (Math.floor(type/towersPerRow)) // +1 so not starting at y = 0
+        let towerSpriteGap = 20
 
         let towerSprite = this.towerFactoryLink.getTowerSprite(type)
+        let x = getPositionWithinEquallySpacedObjects(towerNum, towersPerRow, towerSprite.width, toolbarWidth)
+        let y = 32 * 2 * (Math.floor(type/towersPerRow)) // +1 so not starting at y = 0
         towerSprite.x = x
         towerSprite.y = y
 
@@ -100,7 +99,7 @@ export class TowerMenu  extends BaseToolbarComponent {
         }
         let costText = new PIXI.Text("£"+this.towerJson[type].cost.toString(), style);
         costText.anchor.set(0.5, 0)
-        costText.y += this.towerSpriteSize/2
+        costText.y += towerSpriteGap
         towerSprite.addChild(costText)
 
         return towerSprite
@@ -278,14 +277,14 @@ export class TowerMenu  extends BaseToolbarComponent {
         const newPosition = event.data.global
         if (this.isPositionOnMap(newPosition.x, newPosition.y)) {
             // If on map, snap to grid
-            let newGridX = Math.floor(newPosition.x / this.towerSpriteSize)
-            let newGridY = Math.floor(newPosition.y / this.towerSpriteSize)
+            let newGridX = Math.floor(newPosition.x / this.mapSpriteSize)
+            let newGridY = Math.floor(newPosition.y / this.mapSpriteSize)
             if ((newGridX != sprite.gridX || newGridY != sprite.gridY) && // Been some change
                 getBoard()[newGridY][newGridX]["value"] == 0) { // Must be empty space
                 sprite.gridX = newGridX
                 sprite.gridY = newGridY
-                sprite.global_x = sprite.gridX * this.towerSpriteSize + this.towerSpriteSize / 2
-                sprite.global_y = sprite.gridY * this.towerSpriteSize + this.towerSpriteSize / 2
+                sprite.global_x = sprite.gridX * this.mapSpriteSize + this.mapSpriteSize / 2
+                sprite.global_y = sprite.gridY * this.mapSpriteSize + this.mapSpriteSize / 2
                 sprite.x = sprite.global_x - this.x;
                 sprite.y = sprite.global_y - this.y;
 

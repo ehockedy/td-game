@@ -206,10 +206,10 @@ class GameMap {
 
     var moves = []
     var min_dist = 2 // Min distance to travel in one move
-    var max_dist = 4 // Min distance to travel in one move
+    var max_dist = 2 // Max distance to travel in one move
 
-    var right_bonus = 1 // Value added to max distance moved right (so paths have a more right moving nature)
-    var left_penalty = 1 // Value removed to max distance moved left (so paths don't go too far back on themselves)
+    var right_bonus = 0 // Value added to max distance moved right (so paths have a more right moving nature)
+    var left_penalty = 0 // Value removed to max distance moved left (so paths don't go too far back on themselves)
 
     // Right moves
     var c = this.col

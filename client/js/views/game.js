@@ -16,10 +16,10 @@ import { setBoard } from "../state.js"
 export class GameRenderer {
     constructor(spriteHandler, config) {
         this.spriteHandler = spriteHandler
-        this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE)
-        this.tm = new TowerMenu(this.spriteHandler, config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, config.MAP_WIDTH - config.TOWER_MENU_WIDTH, 0, config.MAP_WIDTH, config.MAP_HEIGHT, config.SPRITE_SIZE)
+        this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE_MAP)
+        this.tm = new TowerMenu(this.spriteHandler, config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, config.MAP_WIDTH - config.TOWER_MENU_WIDTH, 0, config.MAP_WIDTH, config.MAP_HEIGHT, config.SPRITE_SIZE_MAP)
         this.ut = new PlayersToolbar(config.PLAYER_TOOLBAR_WIDTH, config.PLAYER_TOOLBAR_HEIGHT, 0, config.MAP_HEIGHT)
-        this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE)
+        this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_TOWER)
         this.ec = new EnemiesComponent(config.SPRITE_SIZE, config.SUBGRID_SIZE)
         this.bc = new BulletsComponent(config.SPRITE_SIZE, config.SUBGRID_SIZE)
         this.perRoundUpdateText = new OnScreenMessage(config.MAP_WIDTH/2, config.MAP_HEIGHT/2, "Round 1", 30)
