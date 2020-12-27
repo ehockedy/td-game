@@ -3,16 +3,23 @@
  */
 export class SpriteHandler {
     constructor(width_px, height_px) {
+        this.width_px = width_px
+        this.height_px = height_px
+
         this.app = new PIXI.Application({
-            width: width_px,
-            height: height_px
+            width: this.width_px,
+            height: this.height_px
         });
-    
+
         //Add the canvas that Pixi automatically created to the HTML document
         document.body.appendChild(this.app.view);
 
         // Sprite that focus is currently on
         this.activeClickable
+
+        // View scaling
+        this.margin = 20 // The margin to include in every aspect ration calculation, to ensure scaled view does not quite touch the window edges
+        this.globalResizeMultiplier = 1 // The scale of the view, relative to the previous scale
     }
 
     render() {
@@ -23,7 +30,24 @@ export class SpriteHandler {
         this.app.stage.removeChildren()
     }
 
-    gameLoop() {}
+    gameLoop() {
+        this.resizeView()
+    }
+
+    resizeView() {
+        // Keep ratio the same, so see if width or height needs to be scaled the most to be visible
+        let resizeMultiplier = Math.min((window.innerWidth - this.margin) / this.width_px, (window.innerHeight - this.margin) / this.height_px)
+        if (resizeMultiplier != this.globalResizeMultiplier) { // If a resize has occurred, scale the canvas and everything in it
+            // Update measurements
+            this.width_px *= resizeMultiplier
+            this.height_px *= resizeMultiplier
+            this.globalResizeMultiplier = resizeMultiplier
+
+            // Editing the CSS seems to be the simplets way - all the sprites scale too
+            this.app.view.style.width = this.width_px + 'px'
+            this.app.view.style.height = this.height_px + 'px'
+        }
+    }
 
     // Add a PIXI container (or sub class) to the sprite pool to be rendered
     registerContainer(container) {
