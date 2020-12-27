@@ -2,11 +2,10 @@ import { BaseComponent } from "./base/baseComponent.js"
 import { gridPosToMapPos } from "../../tools.js"
 
 export class EnemiesComponent extends BaseComponent {
-    constructor(spriteSize, subgridSize) {
+    constructor(spriteSize, spriteSizeMap) {
         super()
         this.spriteSize = spriteSize
-        this.subgridSize = subgridSize
-
+        this.spriteSizeMap = spriteSizeMap
         this.enemyStateHashPrev = ""
         this.enemySpriteSheet = {}
     }
@@ -82,7 +81,7 @@ export class EnemiesComponent extends BaseComponent {
         enemyStateObjects.forEach((enemy, idx) => {
             // Move the enemy
             let enemyToUpdate = this.getChildByName(enemy.name)
-            let newpos = gridPosToMapPos(enemy.position, this.spriteSize, this.subgridSize)
+            let newpos = gridPosToMapPos(enemy.position, this.spriteSizeMap, enemy.position.subgridSize)
             enemyToUpdate.x = newpos[0]
             enemyToUpdate.y = newpos[1]
 

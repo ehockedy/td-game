@@ -2,10 +2,10 @@ import { BaseComponent } from "./base/baseComponent.js"
 import { gridPosToMapPos } from "../../tools.js"
 
 export class BulletsComponent extends BaseComponent {
-    constructor(spriteSize, subgridSize) {
+    constructor(spriteSize, spriteSizeMap) {
         super()
         this.spriteSize = spriteSize
-        this.subgridSize = subgridSize
+        this.spriteSizeMap = spriteSizeMap
         this.bulletStateHashPrev = ""
         this.bulletSpriteSheet = {}
     }
@@ -29,7 +29,7 @@ export class BulletsComponent extends BaseComponent {
             this.addBullet(bullet.name, "TODO") // New bullet
     
             // Move bullet
-            let newpos = gridPosToMapPos(bullet.position, this.spriteSize, this.subgridSize)
+            let newpos = gridPosToMapPos(bullet.position, this.spriteSizeMap, bullet.position.subgridSize)
             this.getChildByName(bullet.name).x = newpos[0]
             this.getChildByName(bullet.name).y = newpos[1]
         })

@@ -8,9 +8,10 @@ import { TowerInfoComponent } from "./towerInfoComponent.js"
  * In future, might be best to remove the sprite creation functions out
  */
 export class TowersComponent extends BaseComponent {
-    constructor(sprite_handler, towerSpriteSize){
+    constructor(sprite_handler, towerSpriteSize, mapSpriteSize){
         super()
         this.towerSpriteSize = towerSpriteSize
+        this.mapSpriteSize = mapSpriteSize
         this.sprite_handler = sprite_handler
         this.randomColourCode = "0x" + randomHexString(6); // TODO should be defined elsewhere
         this.towerStateHashPrev = ""
@@ -64,8 +65,8 @@ export class TowersComponent extends BaseComponent {
 
         sprite.gridX = col
         sprite.gridY = row
-        sprite.x = sprite.gridX * this.towerSpriteSize + this.towerSpriteSize / 2;
-        sprite.y = sprite.gridY * this.towerSpriteSize + this.towerSpriteSize / 2;
+        sprite.x = sprite.gridX * this.mapSpriteSize + this.mapSpriteSize / 2;
+        sprite.y = sprite.gridY * this.mapSpriteSize + this.mapSpriteSize / 2;
 
         if (playerID == getUserID()) { // Only make the tower interactive if the user placed it
             sprite.interactive = true; // reponds to mouse and touch events
