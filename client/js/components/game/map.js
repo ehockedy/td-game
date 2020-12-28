@@ -29,6 +29,7 @@ export class MapComponent extends BaseComponent {
         // A texture is a WebGL-ready image
         // Keep things in a texture cache to make rendering fast and efficient
         let texture = PIXI.Loader.shared.resources["client/img/map_spritesheet.png"].texture
+        let rocksTextures = PIXI.Loader.shared.resources["client/img/rocks.json"].textures
 
         let rectangle_1 = new PIXI.Rectangle(0, 0, this.towerSpriteSize, this.towerSpriteSize);
         let rectangle_2 = new PIXI.Rectangle(this.towerSpriteSize, 0, this.towerSpriteSize, this.towerSpriteSize);
@@ -51,6 +52,18 @@ export class MapComponent extends BaseComponent {
                 map_square_sprite.scale.y = this.scalingFactor
 
                 this.addChild(map_square_sprite);
+
+                if (getBoard()[r][c]["value"] == 1) {
+                    let maxRocksPerMapSquare = 4
+                    let rocksCount = Math.floor(Math.random() * maxRocksPerMapSquare) // 0 -> 3
+                    for (let rockIdx=0; rockIdx < rocksCount; rockIdx += 1) {
+                        let rockTexture = rocksTextures[Math.floor(Math.random() * Object.keys(rocksTextures).length)]
+                        let rockSprite = new PIXI.Sprite(rockTexture)
+                        rockSprite.x = Math.floor(Math.random() * (MAP_SPRITE_SIZE_X-rockTexture.width))
+                        rockSprite.y = Math.floor(Math.random() * (MAP_SPRITE_SIZE_X-rockTexture.height))
+                        map_square_sprite.addChild(rockSprite);
+                    }
+                }
             }
         }
     }

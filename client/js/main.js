@@ -6,6 +6,7 @@ PIXI.Loader.shared
     .add("client/img/tower_spritesheet.png")
     .add("client/img/bullet_spritesheet.png")
     .add("client/img/infoBox1.png")
+    .add("client/img/rocks.json")
     .load(loadConfig)
 
 function loadConfig() {
