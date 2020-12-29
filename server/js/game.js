@@ -56,7 +56,7 @@ class Game {
 
         this.map.init()
         this.map.generateMap()
-        //this.map.printMap()
+        this.map.printMap()
         this.map.calculatePath()
     }
 

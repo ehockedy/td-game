@@ -71,6 +71,10 @@ export class GameRenderer {
 
         addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid) => {
             setBoard(grid);
+        })
+
+        addSocketEvent(MSG_TYPES.SERVER_SET_GAME_BOARD, (grid) => {
+            setBoard(grid);
             this.map.constructMap()
         })
 

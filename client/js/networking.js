@@ -16,6 +16,7 @@ export const MSG_TYPES = {
     GAME_START_PLAYER_NOT_PRESENT: "pnp",
     SERVER_UPDATE_GAME_STATE: "server update game state",
     SERVER_UPDATE_GAME_BOARD: "server update game board",
+    SERVER_SET_GAME_BOARD: "sb",
     CLIENT_UPDATE: "client update",
     CLIENT_UPDATE_GAME_BOARD: "client update game board",
     CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",

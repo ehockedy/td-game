@@ -117,7 +117,7 @@ export class LobbyRenderer {
         this.startButton.on('tap', ()=>{sendMessage(MSG_TYPES.GAME_START_REQUEST)})
 
         // Events the can come from server
-        addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid) => {
+        addSocketEvent(MSG_TYPES.SERVER_SET_GAME_BOARD, (grid) => {
             setBoard(grid);
             this.map.constructMap()
         })

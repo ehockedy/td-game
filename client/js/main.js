@@ -1,12 +1,12 @@
 import { Application } from "./application.js"
 
 PIXI.Loader.shared
-    .add("client/img/map_spritesheet.png")
     .add("client/img/enemy_spritesheet.png")
     .add("client/img/tower_spritesheet.png")
     .add("client/img/bullet_spritesheet.png")
     .add("client/img/infoBox1.png")
     .add("client/img/rocks.json")
+    .add("client/img/map_tiles.json")
     .load(loadConfig)
 
 function loadConfig() {
