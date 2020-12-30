@@ -41,7 +41,8 @@ class Game {
             basicMap.push([])
             for (let c = 0; c < this.map.map[r].length; c++) {
                 basicMap[r].push({
-                    "value": this.map.map[r][c]["value"]
+                    "value": this.map.map[r][c]["value"],
+                    "adjacentPathDirs": this.map.map[r][c]["adjacentPathDirs"]
                 })
             }
         }

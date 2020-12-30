@@ -40,7 +40,8 @@ class GameMap {
           "value": 0,
           "enemies": [],
           "bullets": [],
-          "towers": null
+          "towers": null,
+          "adjacentPathDirs": [] // For non-path tiles, which adjacent tiles need valley wall rendering. Info for client use only.
         }) // Make columns
       }
     }
@@ -548,6 +549,29 @@ class GameMap {
               Math.floor(this.subgridSize/2),
               Math.floor(this.subgridSize/2)
             ))
+      }
+    }
+
+    // Get which directions of valley wall are needed for the non-path squares, based on the adjacent path tiles
+    // 0  1  2
+    // 3     4
+    // 5  6  7
+    for (var r=0; r < this.height; r++) {
+      for (var c=0; c < this.width; c++) {
+        if (this.map[r][c]["value"] == 0) { // Non-path tiles only
+          let tileIdx = 0
+          for (var r2=-1; r2 <= 1; r2++) {
+            for (var c2=-1; c2 <= 1; c2++) {
+              if (r + r2 >= 0 && r+r2 < this.height &&
+                  c + c2 >= 0 && c+c2 < this.width) {
+                if (this.map[r + r2][c + c2]["value"] != 0) {
+                  this.map[r][c]["adjacentPathDirs"].push(tileIdx)
+                }
+              }
+              if (c2 != 0 || r2 != 0) tileIdx += 1
+            }
+          }
+        }
       }
     }
   }

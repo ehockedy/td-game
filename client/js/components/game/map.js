@@ -1,6 +1,11 @@
 import { getBoard } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
 
+function getRandomObject(jsonObject) {
+    let randKey = Object.keys(jsonObject)[Math.floor(Math.random() * Object.keys(jsonObject).length)]
+    return jsonObject[randKey]
+}
+
 export class MapComponent extends BaseComponent {
     constructor(cols, rows, mapSpriteSize, scalingFactor=1) {
         super("map")
@@ -12,6 +17,8 @@ export class MapComponent extends BaseComponent {
         this.width_px = this.mapSpriteSize*this.scalingFactor*this.cols
         this.height_px = this.mapSpriteSize*this.scalingFactor*this.rows
         this.scale.set(scalingFactor)
+
+        this.overlaySprites = new PIXI.Container()
     }
 
     getWidth() {
@@ -23,12 +30,14 @@ export class MapComponent extends BaseComponent {
     }
 
     constructMap() {
+        this.overlaySprites.removeChildren()
         this.removeChildren()
 
         // A texture is a WebGL-ready image
         // Keep things in a texture cache to make rendering fast and efficient
         let mapTextures = PIXI.Loader.shared.resources["client/img/map_tiles.json"].textures
         let rocksTextures = PIXI.Loader.shared.resources["client/img/rocks.json"].textures
+        let wallTextures = PIXI.Loader.shared.resources["client/img/valley_walls.json"].textures
 
         for (let r = 0; r < this.rows; r++) {
             for (let c = 0; c < this.cols; c++) {
@@ -85,8 +94,7 @@ export class MapComponent extends BaseComponent {
                     let maxRocksPerMapSquare = 4
                     let rocksCount = Math.floor(Math.random() * maxRocksPerMapSquare) // 0 -> 3
                     for (let rockIdx=0; rockIdx < rocksCount; rockIdx += 1) {
-                        let randKey = Object.keys(rocksTextures)[Math.floor(Math.random() * Object.keys(rocksTextures).length)]
-                        let rockTexture = rocksTextures[randKey]
+                        let rockTexture = getRandomObject(rocksTextures)
                         let rockSprite = new PIXI.Sprite(rockTexture)
                         rockSprite.x = Math.floor(Math.random() * (this.mapSpriteSize-rockTexture.width))
                         rockSprite.y = Math.floor(Math.random() * (this.mapSpriteSize-rockTexture.height))
@@ -99,7 +107,76 @@ export class MapComponent extends BaseComponent {
                         map_square_sprite.addChild(rockSprite);
                     }
                 }
+
+                // Add the wall of the valley. These sprites go on the tiles adjacent to the path, so there is enough room for enemy sprites.
+                // Rotate based on direction of the path relative to tile.
+                // 0  1  2
+                // 3     4
+                // 5  6  7
+                getBoard()[r][c]["adjacentPathDirs"].forEach((direction) => {
+                    let wallTexture = "valley_wall_1.png" //getRandomObject(wallTextures)
+                    let positionAdjustmentX = 0
+                    let positionAdjustmentY = 0
+                    let horizontalScale = 1
+                    let wallAngleAdjustment = 0
+                    let aboveEnemySprites = false
+                    let skip = false
+                    switch(direction) {
+                        case 1: // Wall/path is at top of this tile
+                            positionAdjustmentY = -2
+                            wallTexture = "valley_wall_lower_1.png"
+                            aboveEnemySprites = true
+                            break
+                        case 3: // Wall/path is at left of this tile
+                            wallAngleAdjustment = -Math.PI/2
+                            positionAdjustmentY += this.mapSpriteSize
+                            if (c > this.cols/2) {
+                                horizontalScale = (c-(this.cols/2))/(this.cols/2)
+                            } else {
+                                wallTexture = "valley_wall_lower_1.png"
+                                positionAdjustmentX += -2
+                                aboveEnemySprites = true
+                            }
+                            break
+                        case 4: // Wall/path is at right of this tile
+                            wallAngleAdjustment = Math.PI/2
+                            positionAdjustmentX += this.mapSpriteSize
+                            if (c < this.cols/2) {
+                                horizontalScale = 1 - c/(this.cols/2)
+                            } else {
+                                wallTexture = "valley_wall_lower_1.png"
+                                positionAdjustmentX += 2
+                                aboveEnemySprites = true
+                            }
+                            break
+                        case 6: // Wall/path is at bottom of this tile
+                            wallAngleAdjustment = Math.PI
+                            positionAdjustmentY += this.mapSpriteSize
+                            positionAdjustmentX += this.mapSpriteSize
+                            break
+                        default:
+                            skip = true
+                            break
+                    }
+
+                    let wallSprite = new PIXI.Sprite(wallTextures[wallTexture])
+                    wallSprite.setTransform(
+                        positionAdjustmentX, positionAdjustmentY, // position
+                        1, horizontalScale,                       // scale
+                        wallAngleAdjustment,                      // angle
+                        0, 0,                                     // skew
+                        0, 0                                      // pivot
+                    )
+                    if (!skip) {
+                        if (aboveEnemySprites) {
+                            wallSprite.x += map_square_sprite.x
+                            wallSprite.y += map_square_sprite.y
+                            this.overlaySprites.addChild(wallSprite)
+                        } else map_square_sprite.addChild(wallSprite)
+                    }
+                })
             }
         }
+        this.addChild(this.overlaySprites) // TODO find a way to get this over enemy sprites
     }
 }

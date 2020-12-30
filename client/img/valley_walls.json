@@ -1,0 +1,28 @@
+{"frames": {
+
+"valley_wall_1.png":
+{
+	"frame": {"x":0,"y":0,"w":48,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":8},
+	"sourceSize": {"w":48,"h":8}
+},
+"valley_wall_lower_1.png":
+{
+	"frame": {"x":0,"y":8,"w":48,"h":2},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":2},
+	"sourceSize": {"w":48,"h":2}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "valley_walls.png",
+	"format": "RGBA8888",
+	"size": {"w":48,"h":10},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:2294ec836826171c29a8788ffa1fe474:01b5458c3e52e84824dd18ba6d8e3805:5a3b6cefefdefd118962efdff9e21ecd$"
+}
+}
