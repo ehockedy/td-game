@@ -15,14 +15,22 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":2},
 	"sourceSize": {"w":48,"h":2}
+},
+"valley_wall_side_2.png":
+{
+	"frame": {"x":0,"y":10,"w":48,"h":7},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":7},
+	"sourceSize": {"w":48,"h":7}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "valley_walls.png",
 	"format": "RGBA8888",
-	"size": {"w":48,"h":10},
+	"size": {"w":48,"h":17},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:2294ec836826171c29a8788ffa1fe474:01b5458c3e52e84824dd18ba6d8e3805:5a3b6cefefdefd118962efdff9e21ecd$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1632fed940476060e2ebaf516910db3f:8a836d65afccbaefce7ab015e214b526:5a3b6cefefdefd118962efdff9e21ecd$"
 }
 }
