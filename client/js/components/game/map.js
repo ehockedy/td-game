@@ -6,6 +6,17 @@ function getRandomObject(jsonObject) {
     return jsonObject[randKey]
 }
 
+let PATH_DIRECTIONS = {
+    TOP_LEFT:     0,
+    TOP:          1,
+    TOP_RIGHT:    2,
+    LEFT:         3,
+    RIGHT:        4,
+    BOTTOM_RIGHT: 5,
+    BOTTOM:       6,
+    BOTTOM_LEFT:  7,
+}
+
 export class MapComponent extends BaseComponent {
     constructor(cols, rows, mapSpriteSize, scalingFactor=1) {
         super("map")
@@ -23,6 +34,12 @@ export class MapComponent extends BaseComponent {
         this.sideWalls = new PIXI.Container()
         this.topWalls = new PIXI.Container()
         this.landTiles = new PIXI.Container()
+
+        // A texture is a WebGL-ready image
+        // Keep things in a texture cache to make rendering fast and efficient
+        this.mapTextures = PIXI.Loader.shared.resources["client/img/map_tiles.json"].textures
+        this.rocksTextures = PIXI.Loader.shared.resources["client/img/rocks.json"].textures
+        this.wallTextures = PIXI.Loader.shared.resources["client/img/valley_walls.json"].textures
     }
 
     getWidth() {
@@ -40,12 +57,6 @@ export class MapComponent extends BaseComponent {
         this.topWalls.removeChildren()
         this.landTiles.removeChildren()
         this.removeChildren()
-
-        // A texture is a WebGL-ready image
-        // Keep things in a texture cache to make rendering fast and efficient
-        let mapTextures = PIXI.Loader.shared.resources["client/img/map_tiles.json"].textures
-        let rocksTextures = PIXI.Loader.shared.resources["client/img/rocks.json"].textures
-        let wallTextures = PIXI.Loader.shared.resources["client/img/valley_walls.json"].textures
 
         for (let r = 0; r < this.rows; r++) {
             for (let c = 0; c < this.cols; c++) {
@@ -83,7 +94,7 @@ export class MapComponent extends BaseComponent {
                         break
                 }
 
-                var map_square_sprite = new PIXI.Sprite(mapTextures[textureName]);
+                var map_square_sprite = new PIXI.Sprite(this.mapTextures[textureName]);
                 map_square_sprite.y += r * this.mapSpriteSize
                 map_square_sprite.x += c * this.mapSpriteSize
                 map_square_sprite.name = "map_" + r.toString() + "_" + c.toString()
@@ -107,7 +118,7 @@ export class MapComponent extends BaseComponent {
                     let maxRocksPerMapSquare = 4
                     let rocksCount = Math.floor(Math.random() * maxRocksPerMapSquare) // 0 -> 3
                     for (let rockIdx=0; rockIdx < rocksCount; rockIdx += 1) {
-                        let rockTexture = getRandomObject(rocksTextures)
+                        let rockTexture = getRandomObject(this.rocksTextures)
                         let rockSprite = new PIXI.Sprite(rockTexture)
                         rockSprite.x = Math.floor(Math.random() * (this.mapSpriteSize-rockTexture.width))
                         rockSprite.y = Math.floor(Math.random() * (this.mapSpriteSize-rockTexture.height))
@@ -128,12 +139,6 @@ export class MapComponent extends BaseComponent {
                 // 5  6  7
                 getBoard()[r][c]["adjacentPathDirs"].forEach((direction) => {
                     let wallTexture = "valley_wall_1.png"
-                    let shadowTexture = ""
-                    let shadowRotation = 0
-                    let shadowShiftX = 0
-                    let shadowShiftY = 0
-                    let shadowScaleY = 0
-                    let shadowScaleX = 0
                     let positionAdjustmentX = 0
                     let positionAdjustmentY = 0
                     let horizontalScale = 1
@@ -144,18 +149,10 @@ export class MapComponent extends BaseComponent {
                         case 1: // Wall/path is at top of this tile
                             positionAdjustmentY = -2 // Offset by the height of the texture since it sits on the path TODO make this not a fixed number
                             wallTexture = "valley_wall_lower_1.png"
-                            shadowTexture = "valley_floor_shadow_slanted.png"
-                            shadowShiftX = -16
-                            shadowShiftY = -18
                             break
                         case 3: // Wall/path is at left of this tile
                             wallAngleAdjustment = -Math.PI/2
                             positionAdjustmentY += this.mapSpriteSize
-                            shadowTexture = "valley_floor_shadow_slanted.png"
-                            shadowRotation = -Math.PI/2
-                            shadowShiftY = -16
-                            shadowScaleX = -1
-                            shadowShiftX = -18
                             if (c > this.cols/2) {
                                 wallTexture = "valley_wall_side_2.png"
                                 positionAdjustmentX -= 3
@@ -187,7 +184,7 @@ export class MapComponent extends BaseComponent {
                             break
                     }
 
-                    let wallSprite = new PIXI.Sprite(wallTextures[wallTexture])
+                    let wallSprite = new PIXI.Sprite(this.wallTextures[wallTexture])
                     wallSprite.setTransform(
                         positionAdjustmentX, positionAdjustmentY, // position
                         verticalScale, horizontalScale,           // scale
@@ -196,18 +193,11 @@ export class MapComponent extends BaseComponent {
                         0, 0                                      // pivot
                     )
 
-                    if (shadowTexture != "") {
-                        let shadowSprite =  new PIXI.Sprite(wallTextures[shadowTexture])
-                        shadowSprite.setTransform(
-                            shadowShiftX, shadowShiftY, // position
-                            shadowScaleX, shadowScaleY, // scale
-                            shadowRotation,             // angle
-                            0, 0,                       // skew
-                            0, 0                        // pivot
-                            )
-                        shadowSprite.x += map_square_sprite.x
-                        shadowSprite.y += map_square_sprite.y
-                        this.shadowTiles.addChild(shadowSprite)
+                    let shadow = this.getShadow(direction)
+                    if (shadow.required) {
+                        shadow.sprite.x += map_square_sprite.x
+                        shadow.sprite.y += map_square_sprite.y
+                        this.shadowTiles.addChild(shadow.sprite)
                     }
 
                     if (!skip) {
@@ -229,5 +219,48 @@ export class MapComponent extends BaseComponent {
         this.addChild(this.landTiles)
         this.addChild(this.sideWalls)
         this.addChild(this.topWalls) // TODO find a way to get this over enemy sprites
+    }
+
+    // Return a shadow based on path direction
+    // TODO the template of this function could be adopted by all get sprite types
+    getShadow(pathDirection) {
+        let textureImageName = "valley_floor_shadow_slanted.png"
+        let texture = this.wallTextures[textureImageName]
+        let rotation = 0
+        let shiftX = 0
+        let shiftY = 0
+        let scaleX = 0
+        let scaleY = 0
+        let shiftOffset = 16 // This is the amount that the sprite should be shifted so that it appeard off center due to the sun. Ideally would include it in the sprite json
+        let isSpriteRequired = true
+
+        switch(pathDirection) { // TODO this is the only part specific to shadow - could reused rest of the function and move this into a getShadowTransformations function
+            case PATH_DIRECTIONS.TOP:
+                shiftX = -shiftOffset // Move left so appears left because sun is right
+                shiftY = -texture.height // Move it up so it appears behind the wall
+                break
+            case PATH_DIRECTIONS.LEFT:
+                rotation = -Math.PI/2 // Rotate so it same direction as the wall, and wall grooves are visible
+                shiftY = -shiftOffset // Shift so that
+                scaleX = -1 // Rotate in X axis
+                shiftX = -texture.height
+                break
+            default:
+                isSpriteRequired = false
+                break
+        }
+
+        let sprite
+        if (isSpriteRequired) {
+            sprite = new PIXI.Sprite(texture)
+            sprite.setTransform(
+                shiftX, shiftY, // position
+                scaleX, scaleY, // scale
+                rotation,       // angle in rad
+                0, 0,           // skew
+                0, 0            // pivot
+            )
+        }
+        return { "required": isSpriteRequired, "sprite": sprite }
     }
 }
