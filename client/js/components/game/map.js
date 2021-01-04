@@ -18,8 +18,11 @@ export class MapComponent extends BaseComponent {
         this.height_px = this.mapSpriteSize*this.scalingFactor*this.rows
         this.scale.set(scalingFactor)
 
+        this.pathTiles = new PIXI.Container()
+        this.shadowTiles = new PIXI.Container()
         this.sideWalls = new PIXI.Container()
         this.topWalls = new PIXI.Container()
+        this.landTiles = new PIXI.Container()
     }
 
     getWidth() {
@@ -31,8 +34,11 @@ export class MapComponent extends BaseComponent {
     }
 
     constructMap() {
+        this.pathTiles.removeChildren()
+        this.shadowTiles.removeChildren()
         this.sideWalls.removeChildren()
         this.topWalls.removeChildren()
+        this.landTiles.removeChildren()
         this.removeChildren()
 
         // A texture is a WebGL-ready image
@@ -89,7 +95,12 @@ export class MapComponent extends BaseComponent {
                     map_square_sprite.y += this.mapSpriteSize/2
                     map_square_sprite.angle += angleAdjustment
                 }
-                this.addChild(map_square_sprite);
+
+                if (getBoard()[r][c]["value"] == 0) {
+                    this.landTiles.addChild(map_square_sprite)
+                } else {
+                    this.pathTiles.addChild(map_square_sprite)
+                }
 
                 // Randomly add some rocks to path tiles
                 if (getBoard()[r][c]["value"] != 0) {
@@ -117,6 +128,12 @@ export class MapComponent extends BaseComponent {
                 // 5  6  7
                 getBoard()[r][c]["adjacentPathDirs"].forEach((direction) => {
                     let wallTexture = "valley_wall_1.png"
+                    let shadowTexture = ""
+                    let shadowRotation = 0
+                    let shadowShiftX = 0
+                    let shadowShiftY = 0
+                    let shadowScaleY = 0
+                    let shadowScaleX = 0
                     let positionAdjustmentX = 0
                     let positionAdjustmentY = 0
                     let horizontalScale = 1
@@ -127,26 +144,34 @@ export class MapComponent extends BaseComponent {
                         case 1: // Wall/path is at top of this tile
                             positionAdjustmentY = -2 // Offset by the height of the texture since it sits on the path TODO make this not a fixed number
                             wallTexture = "valley_wall_lower_1.png"
+                            shadowTexture = "valley_floor_shadow_slanted.png"
+                            shadowShiftX = -16
+                            shadowShiftY = -18
                             break
                         case 3: // Wall/path is at left of this tile
                             wallAngleAdjustment = -Math.PI/2
                             positionAdjustmentY += this.mapSpriteSize
+                            shadowTexture = "valley_floor_shadow_slanted.png"
+                            shadowRotation = -Math.PI/2
+                            shadowShiftY = -16
+                            shadowScaleX = -1
+                            shadowShiftX = -18
                             if (c > this.cols/2) {
                                 wallTexture = "valley_wall_side_2.png"
                                 positionAdjustmentX -= 3
-                                horizontalScale = Math.min((c-(this.cols/2))/(this.cols/2) + 0.2, 1) // Scale by how close to middle so perspective can change. = 0.2 so that it is not super thin. Max 1 so does not go bigger than possible
+                                horizontalScale = Math.min((c-(this.cols/2))/(this.cols/2) + 0.5, 1) // Scale by how close to middle so perspective can change. = 0.2 so that it is not super thin. Max 1 so does not go bigger than possible
                             } else {
                                 wallTexture = "valley_wall_lower_1.png"
                                 positionAdjustmentX -= 2
                             }
                             break
                         case 4: // Wall/path is at right of this tile
-                        wallAngleAdjustment = Math.PI/2
-                        positionAdjustmentX += this.mapSpriteSize
+                            wallAngleAdjustment = Math.PI/2
+                            positionAdjustmentX += this.mapSpriteSize
                             if (c < this.cols/2) {
                                 wallTexture = "valley_wall_side_2.png"
                                 positionAdjustmentX += 3
-                                horizontalScale = Math.min(1 - c/(this.cols/2) + 0.2, 1)
+                                horizontalScale = Math.min(1 - c/(this.cols/2) + 0.5, 1)
                             } else {
                                 wallTexture = "valley_wall_lower_1.png"
                                 positionAdjustmentX += 2
@@ -170,6 +195,21 @@ export class MapComponent extends BaseComponent {
                         0, 0,                                     // skew
                         0, 0                                      // pivot
                     )
+
+                    if (shadowTexture != "") {
+                        let shadowSprite =  new PIXI.Sprite(wallTextures[shadowTexture])
+                        shadowSprite.setTransform(
+                            shadowShiftX, shadowShiftY, // position
+                            shadowScaleX, shadowScaleY, // scale
+                            shadowRotation,             // angle
+                            0, 0,                       // skew
+                            0, 0                        // pivot
+                            )
+                        shadowSprite.x += map_square_sprite.x
+                        shadowSprite.y += map_square_sprite.y
+                        this.shadowTiles.addChild(shadowSprite)
+                    }
+
                     if (!skip) {
                         // Add these sprites to separate containers so that they appear on top of all the other tiles
                         wallSprite.x += map_square_sprite.x
@@ -183,6 +223,10 @@ export class MapComponent extends BaseComponent {
                 })
             }
         }
+        this.addChild(this.pathTiles)
+        this.shadowTiles.filters=[new PIXI.filters.AlphaFilter(0.4)]; // Set alpha filter for whole container, so that individual shadow alphas so not add together
+        this.addChild(this.shadowTiles)
+        this.addChild(this.landTiles)
         this.addChild(this.sideWalls)
         this.addChild(this.topWalls) // TODO find a way to get this over enemy sprites
     }
