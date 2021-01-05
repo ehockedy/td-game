@@ -222,43 +222,60 @@ export class MapComponent extends BaseComponent {
     }
 
     // Return a shadow based on path direction
-    // TODO the template of this function could be adopted by all get sprite types
+    // Set the sprite to use
     getShadow(pathDirection) {
         let textureImageName = "valley_floor_shadow_slanted.png"
         let texture = this.wallTextures[textureImageName]
-        let rotation = 0
-        let shiftX = 0
-        let shiftY = 0
-        let scaleX = 0
-        let scaleY = 0
-        let shiftOffset = 16 // This is the amount that the sprite should be shifted so that it appeard off center due to the sun. Ideally would include it in the sprite json
-        let isSpriteRequired = true
+        return this._makeMapSprite(pathDirection, texture, this._shadowSwitch)
+    }
 
-        switch(pathDirection) { // TODO this is the only part specific to shadow - could reused rest of the function and move this into a getShadowTransformations function
+    // ~~~~~ Switch functions ~~~~~
+    // Given a path direction, determines the transformations required to get sprite into the right place
+    // Returns true if transformations set, returns false if this sprite is not required
+
+    // Set the transformations required to set a shadow on the path
+    // A shadow sprite is only required in the case where the path is above or left of the path (since sun is coming from bottom right)
+    _shadowSwitch(pathDirection, texture, transformationObj) {
+        let isSpriteRequired = true
+        let shiftOffset = 16 // This is the amount that the sprite should be shifted so that it appeard off center due to the sun. Ideally would include it in the sprite json
+        switch(pathDirection) {
             case PATH_DIRECTIONS.TOP:
-                shiftX = -shiftOffset // Move left so appears left because sun is right
-                shiftY = -texture.height // Move it up so it appears behind the wall
+                transformationObj.shiftX = -shiftOffset // Move left so appears left because sun is right
+                transformationObj.shiftY = -texture.height // Move it up so it appears behind the wall
                 break
             case PATH_DIRECTIONS.LEFT:
-                rotation = -Math.PI/2 // Rotate so it same direction as the wall, and wall grooves are visible
-                shiftY = -shiftOffset // Shift so that
-                scaleX = -1 // Rotate in X axis
-                shiftX = -texture.height
+                transformationObj.rotation = -Math.PI/2 // Rotate so it same direction as the wall, and wall grooves are visible
+                transformationObj.shiftY = -shiftOffset // Shift so that
+                transformationObj.scaleX = -1 // Rotate in X axis
+                transformationObj.shiftX = -texture.height
                 break
             default:
                 isSpriteRequired = false
                 break
         }
+        return isSpriteRequired
+    }
+
+    // Generic make sprite function that, given a texture and transformation setting function, makes a sprite if one is required
+    _makeMapSprite(pathDirection, texture, switchFn) {
+        let transformationObj = {
+            rotation: 0,
+            shiftX: 0,
+            shiftY: 0,
+            scaleX: 0,
+            scaleY: 0
+        }
 
         let sprite
+        let isSpriteRequired = switchFn(pathDirection, texture, transformationObj)
         if (isSpriteRequired) {
             sprite = new PIXI.Sprite(texture)
             sprite.setTransform(
-                shiftX, shiftY, // position
-                scaleX, scaleY, // scale
-                rotation,       // angle in rad
-                0, 0,           // skew
-                0, 0            // pivot
+                transformationObj.shiftX, transformationObj.shiftY, // position
+                transformationObj.scaleX, transformationObj.scaleY, // scale
+                transformationObj.rotation,                         // angle in rad
+                0, 0,                                               // skew
+                0, 0                                                // pivot
             )
         }
         return { "required": isSpriteRequired, "sprite": sprite }
