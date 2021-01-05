@@ -150,30 +150,6 @@ export class MapComponent extends BaseComponent {
                             positionAdjustmentY = -2 // Offset by the height of the texture since it sits on the path TODO make this not a fixed number
                             wallTexture = "valley_wall_lower_1.png"
                             break
-                        case 3: // Wall/path is at left of this tile
-                            wallAngleAdjustment = -Math.PI/2
-                            positionAdjustmentY += this.mapSpriteSize
-                            if (c > this.cols/2) {
-                                wallTexture = "valley_wall_side_2.png"
-                                positionAdjustmentX -= 3
-                                horizontalScale = Math.min((c-(this.cols/2))/(this.cols/2) + 0.5, 1) // Scale by how close to middle so perspective can change. = 0.2 so that it is not super thin. Max 1 so does not go bigger than possible
-                            } else {
-                                wallTexture = "valley_wall_lower_1.png"
-                                positionAdjustmentX -= 2
-                            }
-                            break
-                        case 4: // Wall/path is at right of this tile
-                            wallAngleAdjustment = Math.PI/2
-                            positionAdjustmentX += this.mapSpriteSize
-                            if (c < this.cols/2) {
-                                wallTexture = "valley_wall_side_2.png"
-                                positionAdjustmentX += 3
-                                horizontalScale = Math.min(1 - c/(this.cols/2) + 0.5, 1)
-                            } else {
-                                wallTexture = "valley_wall_lower_1.png"
-                                positionAdjustmentX += 2
-                            }
-                            break
                         case 6: // Wall/path is at bottom of this tile
                             wallAngleAdjustment = Math.PI
                             positionAdjustmentY += this.mapSpriteSize
@@ -193,6 +169,26 @@ export class MapComponent extends BaseComponent {
                         0, 0                                      // pivot
                     )
 
+                    let midCol = this.cols / 2
+                    if ((direction == PATH_DIRECTIONS.LEFT && c > midCol) ||
+                        (direction == PATH_DIRECTIONS.RIGHT && c < midCol)) {
+                        let exposedSideWall = this.getExposedSideWall(direction)
+                        if (exposedSideWall.required) {
+                            exposedSideWall.sprite.x += map_square_sprite.x
+                            exposedSideWall.sprite.y += map_square_sprite.y
+                            exposedSideWall.sprite.scale.y = Math.max(Math.abs(c - midCol) / (midCol), 0.6) // Scale to show perspective
+                            this.sideWalls.addChild(exposedSideWall.sprite)
+                        }
+                    } else if ((direction == PATH_DIRECTIONS.LEFT && c <= midCol) ||
+                               (direction == PATH_DIRECTIONS.RIGHT && c >= midCol)) {
+                        let unexposedSideWall = this.getUnexposedSideWall(direction)
+                        if (unexposedSideWall.required) {
+                            unexposedSideWall.sprite.x += map_square_sprite.x
+                            unexposedSideWall.sprite.y += map_square_sprite.y
+                            this.sideWalls.addChild(unexposedSideWall.sprite)
+                        }
+                    }
+
                     let shadow = this.getShadow(direction)
                     if (shadow.required) {
                         shadow.sprite.x += map_square_sprite.x
@@ -204,9 +200,7 @@ export class MapComponent extends BaseComponent {
                         // Add these sprites to separate containers so that they appear on top of all the other tiles
                         wallSprite.x += map_square_sprite.x
                         wallSprite.y += map_square_sprite.y
-                        if (direction == 3 || direction == 4) {
-                            this.sideWalls.addChild(wallSprite)
-                        } else if (direction == 1 || direction == 6) {
+                        if (direction == 1 || direction == 6) {
                             this.topWalls.addChild(wallSprite)
                         }
                     }
@@ -229,6 +223,18 @@ export class MapComponent extends BaseComponent {
         return this._makeMapSprite(pathDirection, texture, this._shadowSwitch)
     }
 
+    getExposedSideWall(pathDirection) {
+        let textureImageName = "valley_wall_side_2.png"
+        let texture = this.wallTextures[textureImageName]
+        return this._makeMapSprite(pathDirection, texture, (a, b, c)=>{return this._exposedSideWallSwitch(a, b, c)}) // TODO change a, b, c
+    }
+
+    getUnexposedSideWall(pathDirection) {
+        let textureImageName = "valley_wall_lower_1.png"
+        let texture = this.wallTextures[textureImageName]
+        return this._makeMapSprite(pathDirection, texture, (a, b, c)=>{return this._unexposedSideWallSwitch(a, b, c)})
+    }
+
     // ~~~~~ Switch functions ~~~~~
     // Given a path direction, determines the transformations required to get sprite into the right place
     // Returns true if transformations set, returns false if this sprite is not required
@@ -248,6 +254,48 @@ export class MapComponent extends BaseComponent {
                 transformationObj.shiftY = -shiftOffset // Shift so that
                 transformationObj.scaleX = -1 // Rotate in X axis
                 transformationObj.shiftX = -texture.height
+                break
+            default:
+                isSpriteRequired = false
+                break
+        }
+        return isSpriteRequired
+    }
+
+    _exposedSideWallSwitch(pathDirection, _, transformationObj) {
+        let isSpriteRequired = true
+        let shiftOffset = 3
+        switch(pathDirection) {
+            case PATH_DIRECTIONS.RIGHT:
+                transformationObj.rotation = Math.PI/2
+                transformationObj.shiftX += this.mapSpriteSize
+                transformationObj.shiftX += shiftOffset
+                break
+            case PATH_DIRECTIONS.LEFT:
+                transformationObj.rotation = -Math.PI/2
+                transformationObj.shiftY += this.mapSpriteSize
+                transformationObj.shiftX += -shiftOffset
+                break
+            default:
+                isSpriteRequired = false
+                break
+        }
+        return isSpriteRequired
+    }
+
+    _unexposedSideWallSwitch(pathDirection, _, transformationObj) {
+        let isSpriteRequired = true
+        let shiftOffset = 2
+        switch(pathDirection) {
+            case PATH_DIRECTIONS.RIGHT:
+                transformationObj.rotation = Math.PI/2
+                transformationObj.shiftX += this.mapSpriteSize
+                transformationObj.shiftX += shiftOffset
+                break
+            case PATH_DIRECTIONS.LEFT:
+                transformationObj.rotation = -Math.PI/2
+                transformationObj.shiftY += this.mapSpriteSize
+                transformationObj.shiftX += -shiftOffset
                 break
             default:
                 isSpriteRequired = false
