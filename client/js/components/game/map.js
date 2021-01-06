@@ -137,50 +137,44 @@ export class MapComponent extends BaseComponent {
                 // 0  1  2
                 // 3     4
                 // 5  6  7
-                getBoard()[r][c]["adjacentPathDirs"].forEach((direction) => {
+                let adjacentPathDirs = getBoard()[r][c]["adjacentPathDirs"]
+                for (let i=0; i < adjacentPathDirs.length; i++) {
+                    let direction = adjacentPathDirs[i]
                     let midCol = this.cols / 2
 
+                    // Get the sprite based on the direction of the path relative to the current tile
+                    let sprite
                     if (direction == PATH_DIRECTIONS.BOTTOM) {
-                        let backWall = this.getBackWall(direction)
-                        if (backWall.required) {
-                            backWall.sprite.x += map_square_sprite.x
-                            backWall.sprite.y += map_square_sprite.y
-                            this.topWalls.addChild(backWall.sprite)
-                        }
+                        sprite = this.getBackWall(direction)
+                        this.topWalls.addChild(sprite)
                     } else if (direction == PATH_DIRECTIONS.TOP) {
-                        let wall = this.getOverhangWall(direction)
-                        if (wall.required) {
-                            wall.sprite.x += map_square_sprite.x
-                            wall.sprite.y += map_square_sprite.y
-                            this.topWalls.addChild(wall.sprite)
-                        }
+                        sprite = this.getOverhangWall(direction)
+                        this.topWalls.addChild(sprite)
                     } else if ((direction == PATH_DIRECTIONS.LEFT && c > midCol) ||
                                (direction == PATH_DIRECTIONS.RIGHT && c < midCol)) {
-                        let exposedSideWall = this.getExposedSideWall(direction)
-                        if (exposedSideWall.required) {
-                            exposedSideWall.sprite.x += map_square_sprite.x
-                            exposedSideWall.sprite.y += map_square_sprite.y
-                            exposedSideWall.sprite.scale.y = Math.max(Math.abs(c - midCol) / (midCol), 0.6) // Scale to show perspective
-                            this.sideWalls.addChild(exposedSideWall.sprite)
-                        }
+                        sprite = this.getExposedSideWall(direction)
+                        sprite.scale.y = Math.max(Math.abs(c - midCol) / (midCol), 0.6) // Scale to show perspective
+                        this.sideWalls.addChild(sprite)
                     } else if ((direction == PATH_DIRECTIONS.LEFT && c <= midCol) ||
                                (direction == PATH_DIRECTIONS.RIGHT && c >= midCol)) {
-                        let unexposedSideWall = this.getUnexposedSideWall(direction)
-                        if (unexposedSideWall.required) {
-                            unexposedSideWall.sprite.x += map_square_sprite.x
-                            unexposedSideWall.sprite.y += map_square_sprite.y
-                            // TODO scale also?
-                            this.sideWalls.addChild(unexposedSideWall.sprite)
-                        }
+                        sprite = this.getUnexposedSideWall(direction)
+                        this.sideWalls.addChild(sprite)
+                    } else {
+                        continue // sprite not needed, so skip
                     }
 
-                    let shadow = this.getShadow(direction)
-                    if (shadow.required) {
-                        shadow.sprite.x += map_square_sprite.x
-                        shadow.sprite.y += map_square_sprite.y
-                        this.shadowTiles.addChild(shadow.sprite)
+                    // Shift because transformations are local
+                    sprite.x += map_square_sprite.x
+                    sprite.y += map_square_sprite.y
+
+                    // Some directions will cast a shadow
+                    if (direction == PATH_DIRECTIONS.LEFT || direction == PATH_DIRECTIONS.TOP) {
+                        let shadow = this.getShadow(direction)
+                        shadow.x += map_square_sprite.x
+                        shadow.y += map_square_sprite.y
+                        this.shadowTiles.addChild(shadow)
                     }
-                })
+                }
             }
         }
         this.addChild(this.pathTiles)
@@ -320,6 +314,6 @@ export class MapComponent extends BaseComponent {
                 0, 0                                                // pivot
             )
         }
-        return { "required": isSpriteRequired, "sprite": sprite }
+        return sprite //{ "required": isSpriteRequired, "sprite": sprite }
     }
 }
