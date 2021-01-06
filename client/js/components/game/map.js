@@ -138,40 +138,24 @@ export class MapComponent extends BaseComponent {
                 // 3     4
                 // 5  6  7
                 getBoard()[r][c]["adjacentPathDirs"].forEach((direction) => {
-                    let wallTexture = "valley_wall_1.png"
-                    let positionAdjustmentX = 0
-                    let positionAdjustmentY = 0
-                    let horizontalScale = 1
-                    let verticalScale = 1
-                    let wallAngleAdjustment = 0
-                    let skip = false
-                    switch(direction) {
-                        case 1: // Wall/path is at top of this tile
-                            positionAdjustmentY = -2 // Offset by the height of the texture since it sits on the path TODO make this not a fixed number
-                            wallTexture = "valley_wall_lower_1.png"
-                            break
-                        case 6: // Wall/path is at bottom of this tile
-                            wallAngleAdjustment = Math.PI
-                            positionAdjustmentY += this.mapSpriteSize
-                            positionAdjustmentX += this.mapSpriteSize
-                            break
-                        default:
-                            skip = true
-                            break
-                    }
-
-                    let wallSprite = new PIXI.Sprite(this.wallTextures[wallTexture])
-                    wallSprite.setTransform(
-                        positionAdjustmentX, positionAdjustmentY, // position
-                        verticalScale, horizontalScale,           // scale
-                        wallAngleAdjustment,                      // angle
-                        0, 0,                                     // skew
-                        0, 0                                      // pivot
-                    )
-
                     let midCol = this.cols / 2
-                    if ((direction == PATH_DIRECTIONS.LEFT && c > midCol) ||
-                        (direction == PATH_DIRECTIONS.RIGHT && c < midCol)) {
+
+                    if (direction == PATH_DIRECTIONS.BOTTOM) {
+                        let backWall = this.getBackWall(direction)
+                        if (backWall.required) {
+                            backWall.sprite.x += map_square_sprite.x
+                            backWall.sprite.y += map_square_sprite.y
+                            this.topWalls.addChild(backWall.sprite)
+                        }
+                    } else if (direction == PATH_DIRECTIONS.TOP) {
+                        let wall = this.getOverhangWall(direction)
+                        if (wall.required) {
+                            wall.sprite.x += map_square_sprite.x
+                            wall.sprite.y += map_square_sprite.y
+                            this.topWalls.addChild(wall.sprite)
+                        }
+                    } else if ((direction == PATH_DIRECTIONS.LEFT && c > midCol) ||
+                               (direction == PATH_DIRECTIONS.RIGHT && c < midCol)) {
                         let exposedSideWall = this.getExposedSideWall(direction)
                         if (exposedSideWall.required) {
                             exposedSideWall.sprite.x += map_square_sprite.x
@@ -195,15 +179,6 @@ export class MapComponent extends BaseComponent {
                         shadow.sprite.x += map_square_sprite.x
                         shadow.sprite.y += map_square_sprite.y
                         this.shadowTiles.addChild(shadow.sprite)
-                    }
-
-                    if (!skip) {
-                        // Add these sprites to separate containers so that they appear on top of all the other tiles
-                        wallSprite.x += map_square_sprite.x
-                        wallSprite.y += map_square_sprite.y
-                        if (direction == 1 || direction == 6) {
-                            this.topWalls.addChild(wallSprite)
-                        }
                     }
                 })
             }
@@ -234,6 +209,18 @@ export class MapComponent extends BaseComponent {
         let textureImageName = "valley_wall_lower_1.png"
         let texture = this.wallTextures[textureImageName]
         return this._makeMapSprite(texture, (transformationObj)=>{return this._wallSwitch(pathDirection, 2, transformationObj)})
+    }
+
+    getBackWall(pathDirection) {
+        let textureImageName = "valley_wall_1.png"
+        let texture = this.wallTextures[textureImageName]
+        return this._makeMapSprite(texture, (transformationObj)=>{return this._backWallSwitch(pathDirection, transformationObj)})
+    }
+
+    getOverhangWall(pathDirection) {
+        let textureImageName = "valley_wall_lower_1.png"
+        let texture = this.wallTextures[textureImageName]
+        return this._makeMapSprite(texture, (transformationObj)=>{return this._overhangWallSwitch(pathDirection, transformationObj)})
     }
 
     // ~~~~~ Switch functions ~~~~~
@@ -275,6 +262,34 @@ export class MapComponent extends BaseComponent {
                 transformationObj.rotation = -Math.PI/2
                 transformationObj.shiftY += this.mapSpriteSize
                 transformationObj.shiftX += -shiftOffset
+                break
+            default:
+                isSpriteRequired = false
+                break
+        }
+        return isSpriteRequired
+    }
+
+    _backWallSwitch(pathDirection, transformationObj) {
+        let isSpriteRequired = true
+        switch(pathDirection) {
+            case PATH_DIRECTIONS.BOTTOM:
+                transformationObj.rotation = Math.PI
+                transformationObj.shiftY += this.mapSpriteSize
+                transformationObj.shiftX += this.mapSpriteSize
+                break
+            default:
+                isSpriteRequired = false
+                break
+        }
+        return isSpriteRequired
+    }
+
+    _overhangWallSwitch(pathDirection, transformationObj) {
+        let isSpriteRequired = true
+        switch(pathDirection) {
+            case PATH_DIRECTIONS.TOP:
+                transformationObj.shiftY -= 2
                 break
             default:
                 isSpriteRequired = false
