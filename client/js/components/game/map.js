@@ -185,6 +185,7 @@ export class MapComponent extends BaseComponent {
                         if (unexposedSideWall.required) {
                             unexposedSideWall.sprite.x += map_square_sprite.x
                             unexposedSideWall.sprite.y += map_square_sprite.y
+                            // TODO scale also?
                             this.sideWalls.addChild(unexposedSideWall.sprite)
                         }
                     }
@@ -220,19 +221,19 @@ export class MapComponent extends BaseComponent {
     getShadow(pathDirection) {
         let textureImageName = "valley_floor_shadow_slanted.png"
         let texture = this.wallTextures[textureImageName]
-        return this._makeMapSprite(pathDirection, texture, this._shadowSwitch)
+        return this._makeMapSprite(texture, (transformationObj) => {return this._shadowSwitch(pathDirection, texture, transformationObj)})
     }
 
     getExposedSideWall(pathDirection) {
         let textureImageName = "valley_wall_side_2.png"
         let texture = this.wallTextures[textureImageName]
-        return this._makeMapSprite(pathDirection, texture, (a, b, c)=>{return this._exposedSideWallSwitch(a, b, c)}) // TODO change a, b, c
+        return this._makeMapSprite(texture, (transformationObj)=>{return this._wallSwitch(pathDirection, 3, transformationObj)})
     }
 
     getUnexposedSideWall(pathDirection) {
         let textureImageName = "valley_wall_lower_1.png"
         let texture = this.wallTextures[textureImageName]
-        return this._makeMapSprite(pathDirection, texture, (a, b, c)=>{return this._unexposedSideWallSwitch(a, b, c)})
+        return this._makeMapSprite(texture, (transformationObj)=>{return this._wallSwitch(pathDirection, 2, transformationObj)})
     }
 
     // ~~~~~ Switch functions ~~~~~
@@ -262,30 +263,8 @@ export class MapComponent extends BaseComponent {
         return isSpriteRequired
     }
 
-    _exposedSideWallSwitch(pathDirection, _, transformationObj) {
+    _wallSwitch(pathDirection, shiftOffset, transformationObj) {
         let isSpriteRequired = true
-        let shiftOffset = 3
-        switch(pathDirection) {
-            case PATH_DIRECTIONS.RIGHT:
-                transformationObj.rotation = Math.PI/2
-                transformationObj.shiftX += this.mapSpriteSize
-                transformationObj.shiftX += shiftOffset
-                break
-            case PATH_DIRECTIONS.LEFT:
-                transformationObj.rotation = -Math.PI/2
-                transformationObj.shiftY += this.mapSpriteSize
-                transformationObj.shiftX += -shiftOffset
-                break
-            default:
-                isSpriteRequired = false
-                break
-        }
-        return isSpriteRequired
-    }
-
-    _unexposedSideWallSwitch(pathDirection, _, transformationObj) {
-        let isSpriteRequired = true
-        let shiftOffset = 2
         switch(pathDirection) {
             case PATH_DIRECTIONS.RIGHT:
                 transformationObj.rotation = Math.PI/2
@@ -305,7 +284,7 @@ export class MapComponent extends BaseComponent {
     }
 
     // Generic make sprite function that, given a texture and transformation setting function, makes a sprite if one is required
-    _makeMapSprite(pathDirection, texture, switchFn) {
+    _makeMapSprite(texture, switchFn) {
         let transformationObj = {
             rotation: 0,
             shiftX: 0,
@@ -315,7 +294,7 @@ export class MapComponent extends BaseComponent {
         }
 
         let sprite
-        let isSpriteRequired = switchFn(pathDirection, texture, transformationObj)
+        let isSpriteRequired = switchFn(transformationObj)
         if (isSpriteRequired) {
             sprite = new PIXI.Sprite(texture)
             sprite.setTransform(
