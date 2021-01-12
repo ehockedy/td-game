@@ -1,0 +1,28 @@
+{"frames": {
+
+"rock_thrower_1.png":
+{
+	"frame": {"x":0,"y":0,"w":48,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
+	"sourceSize": {"w":48,"h":48}
+},
+"rock_thrower_base.png":
+{
+	"frame": {"x":48,"y":0,"w":48,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
+	"sourceSize": {"w":48,"h":48}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "rock_thrower.png",
+	"format": "RGBA8888",
+	"size": {"w":96,"h":48},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:178fe7155ad7d72821ded117f8df8a19:b055f9bfde8691b37521fc253f7b1a90:71780bcf46feca24b4bf88ea46486cd1$"
+}
+}

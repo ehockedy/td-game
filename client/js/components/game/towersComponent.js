@@ -30,10 +30,22 @@ export class TowersComponent extends BaseComponent {
             fetch("shared/json/towers.json").then((response) => {
                 response.json().then((data) => {
                     _this.towerJson = data
-
-                    let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
                     _this.towerJson.forEach((tower)=> {
-                        _this.towerSpriteSheetData.push([new PIXI.Texture(texture, new PIXI.Rectangle(0, _this.towerSpriteSize * tower["spriteSheetNum"], _this.towerSpriteSize, _this.towerSpriteSize))])
+                        let towerSpriteData = {
+                            "frames": [],
+                            "base": []
+                        }
+                        if (tower["spriteSheetNum"] == 0) {
+                            let textures = PIXI.Loader.shared.resources["client/img/towers/1-rock_thrower/rock_thrower.json"].textures
+                            for (let frame in textures) {
+                                if (frame.includes("base")) towerSpriteData.base.push(textures[frame])
+                                else towerSpriteData.frames.push(textures[frame])
+                            }
+                        } else {
+                            let texture = PIXI.Loader.shared.resources["client/img/tower_spritesheet.png"].texture
+                            towerSpriteData.frames.push(new PIXI.Texture(texture, new PIXI.Rectangle(0, _this.towerSpriteSize * tower["spriteSheetNum"], _this.towerSpriteSize, _this.towerSpriteSize)))
+                        }
+                        _this.towerSpriteSheetData.push(towerSpriteData)
                     })
                     resolve()
                 })
@@ -42,9 +54,17 @@ export class TowersComponent extends BaseComponent {
     }
 
     getTowerSprite(type) { // Make this a get sprite only function
-        let towerTexture = this.towerSpriteSheetData[type]
-        let towerSprite = new PIXI.AnimatedSprite(towerTexture)
-        towerSprite.tint = this.randomColourCode
+        let towerSpriteData = this.towerSpriteSheetData[type]
+        let towerTextures = towerSpriteData.frames
+        let towerSprite = new PIXI.AnimatedSprite(towerTextures)
+        if (towerSpriteData.base.length > 0) {
+            let baseSprite = new PIXI.Sprite(towerSpriteData.base[0])
+            baseSprite.anchor.set(0.5)
+            baseSprite.tint = this.randomColourCode
+            towerSprite.addChild(baseSprite)
+        } else {
+            towerSprite.tint = this.randomColourCode
+        }
         towerSprite.loop = false
         towerSprite.anchor.set(0.5)
         return towerSprite
@@ -133,7 +153,13 @@ export class TowersComponent extends BaseComponent {
         towerStateObjects.forEach((tower) => {
             let towerToUpdate = this.setTowersContainer.getChildByName(tower.name)
             towerToUpdate.rotation = tower.angle
-            towerToUpdate.tint = this.randomColourCode // TODO store all playerID colours once
+            towerToUpdate.children.forEach((child) => {
+                // Colour the base texture
+                child.tint = this.randomColourCode // TODO store all playerID colours once
+            })
+            if (towerToUpdate.children.length == 0) {
+                towerToUpdate.tint = this.randomColourCode
+            }
 
             // Update the tower statsistics, but only store stats for towers a playerID owns
             if (tower.playerID == getUserID()) {
