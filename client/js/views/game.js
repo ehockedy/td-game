@@ -19,7 +19,7 @@ export class GameRenderer {
         this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE_MAP)
         this.tm = new TowerMenu(this.spriteHandler, config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, config.MAP_WIDTH - config.TOWER_MENU_WIDTH, 0, config.MAP_WIDTH, config.MAP_HEIGHT, config.SPRITE_SIZE_MAP)
         this.ut = new PlayersToolbar(config.PLAYER_TOOLBAR_WIDTH, config.PLAYER_TOOLBAR_HEIGHT, 0, config.MAP_HEIGHT)
-        this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
+        this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_MAP)
         this.ec = new EnemiesComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
         this.bc = new BulletsComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
         this.perRoundUpdateText = new OnScreenMessage(config.MAP_WIDTH/2, config.MAP_HEIGHT/2, "Round 1", 30)

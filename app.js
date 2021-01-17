@@ -201,9 +201,9 @@ web_sockets_server.on('connection', (socket) => {
 
   // Player has confirmed placement of tower
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data) => {
-    let gameID = data.gameID
-    games[gameID].map.setGridValue(data.y, data.x, data.value, "tower")
-    games[gameID].addTower(data.towerName, data.value.type, socket.handshake.address+data.gameID, data.y, data.x)
+    let gameID = socket.gameID
+    games[gameID].map.setGridValue(data.row, data.col, 1, "tower") // Register that there is a tower in that spot
+    games[gameID].addTower(data.id, data.type, socket.playerID, data.row, data.col)
     web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure())
   });
 

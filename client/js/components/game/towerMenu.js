@@ -1,6 +1,6 @@
 import { BaseToolbarComponent } from "./base/baseToolbarComponent.js"
-import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
-import { sendMessage, getTowerUpdateMsg, MSG_TYPES } from "../../networking.js"
+import { getPositionWithinEquallySpacedObjects, randomHexString } from "../../tools.js"
+import { sendMessage, MSG_TYPES } from "../../networking.js"
 import { getUserID, getBoard } from "../../state.js"
 import { GraphicButton } from "../ui_common/button.js"
 import { InfoTextBox } from "../ui_common/infoTextBox.js"
@@ -28,7 +28,6 @@ export class TowerMenu  extends BaseToolbarComponent {
 
         this.towerSpriteContainer = new PIXI.Container()
         this.activeTowerSpriteContainer = new PIXI.Container()
-        this.rangeSpriteContainer = new PIXI.Container()
         this.towerInfoContainer = new PIXI.Container()
         this.towerInfoDimension = 200
 
@@ -40,7 +39,6 @@ export class TowerMenu  extends BaseToolbarComponent {
         let title = this.renderTitle("Towers")
         title.y = 16
         this.backgroundContainer.addChild(title)
-        this.addChild(this.rangeSpriteContainer)
         this.addChild(this.towerSpriteContainer)
         this.addChild(this.activeTowerSpriteContainer)
         this.addChildAt(this.towerInfoContainer, 0)
@@ -68,28 +66,30 @@ export class TowerMenu  extends BaseToolbarComponent {
     }
 
     addTowers() {
-        for (let i = 0; i < this.towerJson.length; i++) {
-            let icon = this.getTower(i)
+        let idx = 0
+        for (let towerType in this.towerJson) {
+            let icon = this.getTowerMenuIcon(towerType, idx)
             icon.y += this.towersYOffset
             this.backgroundContainer.addChild(icon) // The placeholder
-            this.towerSpriteContainer.addChild(this.getDraggableTower(i, icon.x, icon.y)) // The interactive, draggable icon
+            this.towerSpriteContainer.addChild(this.getDraggableTower(towerType, icon.x, icon.y)) // The interactive, draggable icon
 
-            let infoTextBox = new InfoTextBox(0, 0, this.towerInfoDimension, this.towerInfoDimension, this.towerJson[i].displayInfo, 16)
+            let infoTextBox = new InfoTextBox(0, 0, this.towerInfoDimension, this.towerInfoDimension, this.towerJson[towerType].displayInfo, 16)
             infoTextBox.visible = false
+            infoTextBox.name = towerType
             this.towerInfoContainer.x = -this.towerInfoDimension
             this.towerInfoContainer.addChild(infoTextBox)
+            break
         }
     }
 
-    getTower(type) {
-        let towerNum = type+1 // hacky but works
+    getTowerMenuIcon(towerType, menuPosition) {
         let towersPerRow = 3
         let toolbarWidth = this.width_px
         let towerSpriteGap = 20
 
-        let towerSprite = this.towerFactoryLink.getTowerSprite(type)
-        let x = getPositionWithinEquallySpacedObjects(towerNum, towersPerRow, towerSprite.width, toolbarWidth)
-        let y = 32 * 2 * (Math.floor(type/towersPerRow)) // +1 so not starting at y = 0
+        let towerSprite = this.towerFactoryLink.getTowerSprite(towerType + "_icon", towerType)
+        let x = getPositionWithinEquallySpacedObjects(menuPosition + 1, towersPerRow, towerSprite.width, toolbarWidth) // + 1 because positioning function is 1 indexed
+        let y = 32 * 2 * (Math.floor(menuPosition/towersPerRow)) // +1 so not starting at y = 0
         towerSprite.x = x
         towerSprite.y = y
 
@@ -97,7 +97,7 @@ export class TowerMenu  extends BaseToolbarComponent {
             fontFamily: 'Arial',
             fontSize: 14
         }
-        let costText = new PIXI.Text("£"+this.towerJson[type].cost.toString(), style);
+        let costText = new PIXI.Text("£"+this.towerJson[towerType].cost.toString(), style);
         costText.anchor.set(0.5, 0)
         costText.y += towerSpriteGap
         towerSprite.addChild(costText)
@@ -105,13 +105,12 @@ export class TowerMenu  extends BaseToolbarComponent {
         return towerSprite
     }
 
-    getDraggableTower(type, x, y) {
-        let sprite = this.towerFactoryLink.getTowerSprite(type)
+    getDraggableTower(towerType, x, y) {
+        let sprite = this.towerFactoryLink.getTowerSprite(towerType + "_drag", towerType)
         sprite.interactive = true
         sprite.buttonMode = true
         sprite.dragging = false
         sprite.moved = false
-        sprite.type = type
 
         sprite.x = x
         sprite.y = y
@@ -120,27 +119,23 @@ export class TowerMenu  extends BaseToolbarComponent {
         sprite.xStart = x
         sprite.yStart = y
 
-        // Attach a range sprite
-        sprite.range_subsprite = this.towerFactoryLink.getTowerRangeGraphic(type) // TODO make this a child, and put render distances on
-        sprite.range_subsprite.visible = false
-
         let towerReset = () => {
             // Move back to original position
             sprite.x = sprite.xStart
             sprite.y = sprite.yStart
-            sprite.range_subsprite.visible = false
+            sprite.hideRangeCircle()
             sprite.dragging = false
             sprite.moved = false
             this.unsetActiveTower()
             this.startInteraction()
             this.towerFactoryLink.startInteraction()
-            this.towerInfoContainer.getChildAt(type).visible = false
+            this.towerInfoContainer.getChildByName(towerType).visible = false
             this.placeTowerButtons.visible = false
             this.triggerWholeMenuOpen()
         }
 
         let onPointerOver = ()=>{
-            this.towerInfoContainer.getChildAt(type).visible = true
+            this.towerInfoContainer.getChildByName(towerType).visible = true
             if (!sprite.moved) {
                 this.unsetActiveTower()
                 this.sprite_handler.unclickActiveClickable()
@@ -150,7 +145,7 @@ export class TowerMenu  extends BaseToolbarComponent {
         let onPointerOut = ()=>{
             if (!sprite.moved) {
                 this.unsetActiveTower()
-                this.towerInfoContainer.getChildAt(type).visible = false
+                this.towerInfoContainer.getChildByName(towerType).visible = false
             }
         }
 
@@ -196,7 +191,14 @@ export class TowerMenu  extends BaseToolbarComponent {
 
         let onTowerPlaceConfirm = () => {
             if (this.isPositionOnMap(sprite.global_x, sprite.global_y)) {
-                sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, getTowerUpdateMsg(sprite))
+                let name = randomHexString(6)
+                let setTowerMsg = {
+                    "row": sprite.gridY,
+                    "col": sprite.gridX,
+                    "type": sprite.type,
+                    "id": name
+                }
+                sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, setTowerMsg)
             }
             towerReset()
         }
@@ -217,7 +219,6 @@ export class TowerMenu  extends BaseToolbarComponent {
             .on("place", onTowerPlaceConfirm)
             .on("clear", towerReset)
 
-        sprite.range_subsprite.setParent(this.rangeSpriteContainer)
         return sprite
     }
 
@@ -289,9 +290,7 @@ export class TowerMenu  extends BaseToolbarComponent {
                 sprite.y = sprite.global_y - this.y;
 
                 // Also move range indicator to be same position as tower
-                sprite.range_subsprite.visible = true
-                sprite.range_subsprite.x = sprite.x
-                sprite.range_subsprite.y = sprite.y
+                sprite.showRangeCircle()
             }
         }
     }
@@ -440,7 +439,7 @@ export class TowerMenu  extends BaseToolbarComponent {
             }
         }
         this.towerSpriteContainer.children.forEach((tower) => {
-            if (money < this.towerJson[tower.type].cost) {
+            if (money < tower.cost) { // TODO update with the tower cost
                 tower.interactive = false
                 tower.buttonMode = false
             } else {

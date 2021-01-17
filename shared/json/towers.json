@@ -1,6 +1,5 @@
-[
-    {
-        "name": "basic tower",
+{
+    "rock-thrower": {
         "spriteSheetNum": 0,
         "displayInfo": "This simple tower shoots one bullet at a time. Average damage, average range, average rate of fire. Reliable, but thorougly mediocre.",
         "gameData": {
@@ -14,10 +13,10 @@
             "turns": true,
             "piercing": false
         },
-        "cost": 50
+        "cost": 50,
+        "textureAtlas": "client/img/towers/1-rock_thrower/rock_thrower.json"
     },
-    {
-        "name": "all direction tower",
+    "shapnel-blast": {
         "spriteSheetNum": 1,
         "displayInfo": "Shoots bullets in eight directions at a high rate.",
         "gameData": {
@@ -33,8 +32,7 @@
         },
         "cost": 50
     },
-    {
-        "name": "triple tower",
+    "rock-scatter": {
         "spriteSheetNum": 2,
         "displayInfo": "Similar to a basic tower, but shoots three times as many bullets.",
         "gameData": {
@@ -50,8 +48,7 @@
         },
         "cost": 120
     },
-    {
-        "name": "sniper tower",
+    "sniper": {
         "spriteSheetNum": 3,
         "displayInfo": "Slow to fire, but packs a punch when it does. Plus can see over half the whole map.",
         "gameData": {
@@ -67,4 +64,4 @@
         },
         "cost": 200
     }
-]
+}

@@ -5,12 +5,12 @@ import { GraphicButton } from "../ui_common/button.js"
 import { KeyValueInfo } from "../ui_common/keyValueInfo.js"
 
 export class TowerInfoComponent extends BaseComponent {
-    constructor(tower) {
+    constructor(towerName) {
         super("towerinfo")
         this.stats = {
             "kills": 0
         }
-        this.towerName = tower.name
+        this.towerName = towerName
         this.setupToolbarComponents()
     }
 

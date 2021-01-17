@@ -21,6 +21,7 @@ Component that is the town being attacked or whatever. If enemy reached it, can 
 If player does nothing for 2ish minutes, they are disconnected and cannot reconnect, would have to join game again. If they interact with the map will cause server error because they are at the 
 game screen, with a new, different game code.
 Remove money view for other players, just put players money and put it near the towers so they can easily compare prices
+Tower range is above towers placed before that tower, but under others - make it a ring not circle?
 Other towers:
  - support ones like mopeny/points booster if enemy killed in its range?
 

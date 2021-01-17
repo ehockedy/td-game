@@ -40,7 +40,7 @@ class GameMap {
           "value": 0,
           "enemies": [],
           "bullets": [],
-          "towers": null,
+          "tower": null,
           "adjacentPathDirs": [] // For non-path tiles, which adjacent tiles need valley wall rendering. Info for client use only.
         }) // Make columns
       }

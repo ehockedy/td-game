@@ -1,5 +1,4 @@
 import { getGameID } from "./state.js"
-import { randomHexString } from "./tools.js"
 
 // To get client side debugging, paste "localStorage.debug = '*';" into
 // the browser console
@@ -33,22 +32,6 @@ export const MSG_TYPES = {
     PLAYER_READY: "pr",
     DEBUG_EXPORT_GAME_STATE: "debug_export",
     DEBUG_IMPORT_GAME_STATE: "debug_import"
-}
-
-export function getTowerUpdateMsg(tower) {
-    let name = randomHexString(6)
-    return {
-        "y": tower.gridY,
-        "x": tower.gridX,
-        "value": {
-            "type": tower.type,
-            "playerID": tower.playerID,
-            "colour": "0xCC2211",
-            "name": name
-        },
-        "towerName": name,
-        "gameID": getGameID()
-    }
 }
 
 const socket = io();
