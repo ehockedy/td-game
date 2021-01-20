@@ -121,7 +121,7 @@ export class GameRenderer {
         this.spriteHandler.registerContainer(this.ec)
         this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.startRoundButton)
-        this.spriteHandler.registerContainer(this.tc)
+        this.spriteHandler.registerDynamicContainer(this.tc)
         this.spriteHandler.registerDynamicContainer(this.tm)
         this.spriteHandler.registerContainer(this.bc)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)

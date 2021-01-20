@@ -16,7 +16,7 @@
         "cost": 50,
         "textureAtlas": "client/img/towers/1-rock_thrower/rock_thrower.json"
     },
-    "shapnel-blast": {
+    "shrapnel-burst": {
         "spriteSheetNum": 1,
         "displayInfo": "Shoots bullets in eight directions at a high rate.",
         "gameData": {
@@ -30,7 +30,8 @@
             "turns": false,
             "piercing": false
         },
-        "cost": 50
+        "cost": 50,
+        "textureAtlas": "client/img/towers/2-shrapnel_burst/shrapnel_burst.json"
     },
     "rock-scatter": {
         "spriteSheetNum": 2,

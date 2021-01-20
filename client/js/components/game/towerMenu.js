@@ -78,7 +78,9 @@ export class TowerMenu  extends BaseToolbarComponent {
             infoTextBox.name = towerType
             this.towerInfoContainer.x = -this.towerInfoDimension
             this.towerInfoContainer.addChild(infoTextBox)
-            break
+
+            idx += 1
+            if (idx == 2) break
         }
     }
 

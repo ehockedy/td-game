@@ -20,7 +20,7 @@ class Tower {
         this.col = position.col
         this.x = position.x
         this.y = position.y
-        
+
         this.fireTick = 0 // Ticks since last bullet
         this.target
         this.shootFunction = this._getShootBehaviour(type)
@@ -29,7 +29,7 @@ class Tower {
         this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
         this.player = player // The player who owns the tower
         this.cost = towerJson[type]["cost"]
-
+        this.hasShot = false // Whether the tower has shot in this update round
 
         // These values can change based on user actions
         this.state = {

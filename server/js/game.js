@@ -83,6 +83,7 @@ class Game {
     moveTowers() {
         for (let t = 0; t < this.towers.length; t++) {
             let tower = this.towers[t]
+            tower.hasShot = false // reset whether the tower has shot this round
 
             // Get a enemy to shoot at based on tower behaviour
             let chosenEnemy = null
@@ -112,9 +113,13 @@ class Game {
             }
 
             tower.setTarget(chosenEnemy)
-            tower.shoot().forEach((bullet) => {
-                this.map.addBullet(bullet)
-            })
+            let newBullets = tower.shoot()
+            if (newBullets.length > 0) {
+                tower.hasShot = true
+                newBullets.forEach((bullet) => {
+                    this.map.addBullet(bullet)
+                })
+            }
         }
     }
 
@@ -373,7 +378,8 @@ class Game {
                 "position": t.position,
                 "playerID": t.player.id,
                 "type": t.type,
-                "stats": t.stats
+                "stats": t.stats,
+                "hasShot": t.hasShot
             })
             hash.update(t.name)
         })

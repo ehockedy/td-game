@@ -2,6 +2,7 @@ import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
 import { TowerInfoComponent } from "./towerInfoComponent.js"
 import { RockThrowerTower } from "./towers/rockThrower.js"
+import { ShrapnelBurstTower } from "./towers/shrapnelBurst.js"
 import { randomHexString } from "../../tools.js"
 
 /**
@@ -37,6 +38,9 @@ export class TowersComponent extends BaseComponent {
         switch(type) {
             case "rock-thrower":
                 sprite = new RockThrowerTower(name, this.towerJson)
+                break
+            case "shrapnel-burst":
+                sprite = new ShrapnelBurstTower(name, this.towerJson)
                 break
         }
         return sprite
@@ -106,8 +110,13 @@ export class TowersComponent extends BaseComponent {
 
         // Update state of towers present in server update
         towerStateObjects.forEach((tower) => {
+            // console.log(tower)
             let towerToUpdate = this.getChildByName(tower.name)
             towerToUpdate.rotation = tower.angle
+
+            if (tower.hasShot) {
+                towerToUpdate.onShoot()
+            }
 
             // Update the tower statsistics, but only store stats for towers a playerID owns
             if (tower.playerID == getUserID()) {
@@ -122,5 +131,10 @@ export class TowersComponent extends BaseComponent {
 
     stopInteraction() {
         this._setContainerInteraction(this, false)
+    }
+
+    tick() {
+        super.tick()
+        this.children.forEach((tower) => { tower.tick() })
     }
 }

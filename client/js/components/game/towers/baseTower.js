@@ -23,13 +23,14 @@ export class BaseTower extends BaseComponent {
         }
         this.sprite = new PIXI.AnimatedSprite(spriteTextures)
         this.sprite.anchor.set(0.5)
-        
-        this.baseSprite = new PIXI.AnimatedSprite(baseTextures)
-        this.baseSprite.anchor.set(0.5)
-        this.baseSprite.tint = this.randomColourCode
-
         this.addChild(this.sprite)
-        this.addChild(this.baseSprite)
+
+        if (baseTextures.length > 0) {
+            this.baseSprite = new PIXI.AnimatedSprite(baseTextures)
+            this.baseSprite.anchor.set(0.5)
+            this.baseSprite.tint = this.randomColourCode
+            this.addChild(this.baseSprite)
+        }
     }
 
     generateRangeSprite(range) { // TODO not all sprites may have range sprite
@@ -70,4 +71,6 @@ export class BaseTower extends BaseComponent {
 
     // What do to when the tower shoots
     onShoot() {}
+
+    tick() {}
 }
