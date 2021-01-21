@@ -23,7 +23,7 @@ class Tower {
 
         this.fireTick = 0 // Ticks since last bullet
         this.target
-        this.shootFunction = this._getShootBehaviour(type)
+        this.shootFunction = this._getShootBehaviour(towerJson[type]["shootPattern"])
         this.shootRangePath = [] // Main grid squares that the bullets can reach that are on the path
         this.angle = 0 // Angle in radians, 0 is East, goes clockwise
         this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
@@ -92,17 +92,16 @@ class Tower {
     }
 
     // "Private" methods that make the tower shoot in different ways
-    _getShootBehaviour(type) {
+    _getShootBehaviour(shootPattern) {
         let func;
-        switch (type) {
-          case 0: // Basic tower
-          case 3: // Sniper
+        switch (shootPattern) {
+          case "single":
             func = this._normalShot;
             break;
-          case 1: // All dir burst tower
+          case "burst":
             func = this._allDirShot;
             break;
-          case 2: // Triple shot tower
+          case "scatter":
             func = this._tripleShot;
             break;
           default:

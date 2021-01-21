@@ -14,6 +14,7 @@
             "piercing": false
         },
         "cost": 50,
+        "shootPattern": "single",
         "textureAtlas": "client/img/towers/1-rock_thrower/rock_thrower.json"
     },
     "shrapnel-burst": {
@@ -31,6 +32,7 @@
             "piercing": false
         },
         "cost": 50,
+        "shootPattern": "burst",
         "textureAtlas": "client/img/towers/2-shrapnel_burst/shrapnel_burst.json"
     },
     "rock-scatter": {
@@ -47,7 +49,8 @@
             "turns": true,
             "piercing": false
         },
-        "cost": 120
+        "cost": 120,
+        "shootPattern": "scatter"
     },
     "sniper": {
         "spriteSheetNum": 3,
@@ -63,6 +66,7 @@
             "turns": true,
             "piercing": false
         },
-        "cost": 200
+        "cost": 200,
+        "shootPattern": "single"
     }
 }
