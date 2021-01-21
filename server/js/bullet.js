@@ -69,7 +69,7 @@ class Bullet {
     }
 
     isOffMap(mapWidth, mapHeight, subgridSize) {
-        return (this.position.x < 0 || this.position.y < 0 || this.position.x > subgridSize*mapWidth || this.position.y > subgridSize*mapHeight)
+        return (this.position.x < 0 || this.position.y < 0 || this.position.x >= subgridSize*mapWidth || this.position.y >= subgridSize*mapHeight)
     }
 
     setOriginTower(originTower) {
