@@ -6,6 +6,9 @@ export class ShrapnelBurstTower extends BaseTower {
         this.spinTickCount = 0
         this.spinTickCountMax = 10 // Frames
         this.isSpinning = false
+        this.extraSpinAngleTop = 0 // Additional spin angle so each tower is slightly different
+        this.extraSpinAngleMid = 0
+        this.extraSpinAngleBot = 0
     }
 
     // Override base sprite generation method because this sprite is made of layers that move independently
@@ -31,9 +34,9 @@ export class ShrapnelBurstTower extends BaseTower {
 
     tick() {
         if (this.isSpinning) {
-            this.bottomLayer.angle += 15
-            this.middleLayer.angle -= 20
-            this.topLayer.angle += 25
+            this.bottomLayer.angle += 15 + this.extraSpinAngleBot
+            this.middleLayer.angle -= 20 + this.extraSpinAngleMid
+            this.topLayer.angle += 25 + this.extraSpinAngleTop
 
             this.spinTickCount += 1
 
@@ -47,6 +50,9 @@ export class ShrapnelBurstTower extends BaseTower {
     onShoot() {
         if (!this.isSpinning) {
             this.isSpinning = true
+            this.extraSpinAngleTop = Math.floor(Math.random()*5)
+            this.extraSpinAngleMid = Math.floor(Math.random()*5)
+            this.extraSpinAngleBot = Math.floor(Math.random()*5)
         }
     }
 }
