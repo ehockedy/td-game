@@ -168,12 +168,12 @@ export class MapComponent extends BaseComponent {
                     sprite.y += map_square_sprite.y
 
                     // Some directions will cast a shadow
-                    if (direction == PATH_DIRECTIONS.LEFT || direction == PATH_DIRECTIONS.TOP) {
-                        let shadow = this.getShadow(direction)
-                        shadow.x += map_square_sprite.x
-                        shadow.y += map_square_sprite.y
-                        this.shadowTiles.addChild(shadow)
-                    }
+                    // if (direction == PATH_DIRECTIONS.LEFT || direction == PATH_DIRECTIONS.TOP) {
+                    //     let shadow = this.getShadow(direction)
+                    //     shadow.x += map_square_sprite.x
+                    //     shadow.y += map_square_sprite.y
+                    //     this.shadowTiles.addChild(shadow)
+                    // }
                 }
             }
         }
