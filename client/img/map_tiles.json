@@ -2,35 +2,35 @@
 
 "land_1.png":
 {
-	"frame": {"x":0,"y":0,"w":48,"h":48},
+	"frame": {"x":0,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
-	"sourceSize": {"w":48,"h":48}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 },
 "track_corner_1.png":
 {
-	"frame": {"x":48,"y":0,"w":48,"h":48},
+	"frame": {"x":64,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
-	"sourceSize": {"w":48,"h":48}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 },
 "track_straight_1.png":
 {
-	"frame": {"x":96,"y":0,"w":48,"h":48},
+	"frame": {"x":128,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
-	"sourceSize": {"w":48,"h":48}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "map_tiles.png",
 	"format": "RGBA8888",
-	"size": {"w":144,"h":48},
+	"size": {"w":192,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f626fd7964db6fbaf382dabc5ce49b8f:8a9a05b66e962960583e879b3a18f7f9:894750894faa74e77373a25ee41e7c70$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b5a057efc2a8e04b8975c085564fbfdd:5f5005e878f5eb5e1c56ec51e494ce26:894750894faa74e77373a25ee41e7c70$"
 }
 }

@@ -6,7 +6,8 @@
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":18},
-	"sourceSize": {"w":64,"h":18}
+	"sourceSize": {"w":64,"h":18},
+	"pivot": {"x":0.5,"y":0.5}
 },
 "valley_floor_shadow_straight.png":
 {
@@ -14,39 +15,43 @@
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":16},
-	"sourceSize": {"w":48,"h":16}
+	"sourceSize": {"w":48,"h":16},
+	"pivot": {"x":0.5,"y":0.5}
 },
 "valley_wall_1.png":
 {
-	"frame": {"x":0,"y":34,"w":48,"h":8},
+	"frame": {"x":0,"y":34,"w":64,"h":13},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":8},
-	"sourceSize": {"w":48,"h":8}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":13},
+	"sourceSize": {"w":64,"h":13},
+	"pivot": {"x":0.5,"y":0.5}
 },
 "valley_wall_lower_1.png":
 {
-	"frame": {"x":0,"y":42,"w":48,"h":2},
+	"frame": {"x":0,"y":47,"w":64,"h":3},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":2},
-	"sourceSize": {"w":48,"h":2}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":3},
+	"sourceSize": {"w":64,"h":3},
+	"pivot": {"x":0.5,"y":0.5}
 },
 "valley_wall_side_2.png":
 {
-	"frame": {"x":0,"y":44,"w":48,"h":7},
+	"frame": {"x":0,"y":50,"w":64,"h":9},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":7},
-	"sourceSize": {"w":48,"h":7}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":9},
+	"sourceSize": {"w":64,"h":9},
+	"pivot": {"x":0.5,"y":0.5}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "valley_walls.png",
 	"format": "RGBA8888",
-	"size": {"w":64,"h":51},
+	"size": {"w":64,"h":59},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:d1fce71c898cf87dc246e78abe753d29:fb2f4906d851c92ab3459758a5730340:5a3b6cefefdefd118962efdff9e21ecd$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a95addcf02c601271fa914f0f66e2f2e:9c0f909f7b37091ced3375836ee402ea:5a3b6cefefdefd118962efdff9e21ecd$"
 }
 }

@@ -196,19 +196,19 @@ export class MapComponent extends BaseComponent {
     getExposedSideWall(pathDirection) {
         let textureImageName = "valley_wall_side_2.png"
         let texture = this.wallTextures[textureImageName]
-        return this._makeMapSprite(texture, (transformationObj)=>{return this._wallSwitch(pathDirection, 3, transformationObj)})
+        return this._makeMapSprite(texture, (transformationObj)=>{return this._wallSwitch(pathDirection, Math.floor(texture.height/2), transformationObj)})
     }
 
     getUnexposedSideWall(pathDirection) {
         let textureImageName = "valley_wall_lower_1.png"
         let texture = this.wallTextures[textureImageName]
-        return this._makeMapSprite(texture, (transformationObj)=>{return this._wallSwitch(pathDirection, 2, transformationObj)})
+        return this._makeMapSprite(texture, (transformationObj)=>{return this._wallSwitch(pathDirection, Math.floor(texture.height), transformationObj)})
     }
 
     getBackWall(pathDirection) {
         let textureImageName = "valley_wall_1.png"
         let texture = this.wallTextures[textureImageName]
-        return this._makeMapSprite(texture, (transformationObj)=>{return this._backWallSwitch(pathDirection, transformationObj)})
+        return this._makeMapSprite(texture, (transformationObj)=>{return this._backWallSwitch(pathDirection, Math.floor(texture.height/2), transformationObj)})
     }
 
     getOverhangWall(pathDirection) {
@@ -264,12 +264,12 @@ export class MapComponent extends BaseComponent {
         return isSpriteRequired
     }
 
-    _backWallSwitch(pathDirection, transformationObj) {
+    _backWallSwitch(pathDirection, shiftOffset, transformationObj) {
         let isSpriteRequired = true
         switch(pathDirection) {
             case PATH_DIRECTIONS.BOTTOM:
                 transformationObj.rotation = Math.PI
-                transformationObj.shiftY += this.mapSpriteSize
+                transformationObj.shiftY += this.mapSpriteSize + shiftOffset
                 transformationObj.shiftX += this.mapSpriteSize
                 break
             default:

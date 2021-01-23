@@ -1,5 +1,5 @@
 export function generateClientConfig(config) {
-    const SPRITE_SIZE_MAP_PX = 48
+    const SPRITE_SIZE_MAP_PX = 64
     const SPRITE_SIZE_TOWER_PX = 32
     const MAP_WIDTH = config.MAP_WIDTH * SPRITE_SIZE_MAP_PX
     const MAP_HEIGHT = config.MAP_HEIGHT * SPRITE_SIZE_MAP_PX
