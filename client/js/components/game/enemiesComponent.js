@@ -7,17 +7,29 @@ export class EnemiesComponent extends BaseComponent {
         this.spriteSize = spriteSize
         this.spriteSizeMap = spriteSizeMap
         this.enemyStateHashPrev = ""
-        this.enemySpriteSheet = {}
+        this.enemyTextures = {}
     }
 
     loadData() {
+        let _this = this
         return new Promise((resolve) => {
-            let texture = PIXI.Loader.shared.resources["client/img/enemy_spritesheet.png"].texture
-            this.enemySpriteSheet["basic"] = []
-            for (let i = 0; i < 6; ++i) {
-                this.enemySpriteSheet["basic"].push(new PIXI.Texture(texture, new PIXI.Rectangle(0, i * this.spriteSize, this.spriteSize, this.spriteSize)))
-            }
-            resolve()
+            fetch("shared/json/enemies.json").then((response) => {
+                response.json().then((data) => {
+                    _this.enemyJson = data
+                    let textures = PIXI.Loader.shared.resources["client/img/enemies/enemies.json"].textures
+
+                    // Load textures using keyword in each filename for each type of bullet
+                    for (let type in _this.enemyJson) this.enemyTextures[type] = []
+
+                    // Identify if the texture file name is one of the types in the json config, add to the texture dictionary if so
+                    for (let textureName in textures) {
+                        for (let type in _this.enemyJson) {
+                            if (textureName.includes(_this.enemyJson[type].filenameKeyword)) this.enemyTextures[type].push(textures[textureName])
+                        }
+                    }
+                    resolve()
+                })
+            })
         })
     }
 
@@ -28,11 +40,11 @@ export class EnemiesComponent extends BaseComponent {
      */
     addEnemy(name, type) {
         // TODO have different types
-        let animatedEnemySprite = new PIXI.AnimatedSprite(this.enemySpriteSheet["basic"])
-        animatedEnemySprite.loop = true
+        let animatedEnemySprite = new PIXI.Sprite(this.enemyTextures["boneheadBandit"][0]) // TODO send type from server, and make animated sprite
+        //animatedEnemySprite.loop = true
         animatedEnemySprite.anchor.set(0.5)
-        animatedEnemySprite.animationSpeed = 0.2
-        animatedEnemySprite.play()
+        //animatedEnemySprite.animationSpeed = 0.2
+        //animatedEnemySprite.play()
         animatedEnemySprite.name = name // Unique identifier
         animatedEnemySprite.tintCount = 0
         this.addChild(animatedEnemySprite)
