@@ -128,7 +128,7 @@ class Game {
         let toAdd = []
         this.map.forEachBulletInReverse((bullet) => {
             bullet.move()
-            if (bullet.isOffMap(this.map.rows, this.map.cols, this.map.subgridSize)) {
+            if (bullet.isOffMap(this.map.width, this.map.height, this.map.subgridSize)) {
                 this.map.removeBulletPrevPos(bullet) // Remove that bullet, and do not re-add it - it's off the map
             } else if (bullet.isOutOfGivenRange(bullet.range*this.map.subgridSize)) { // Convert to global (since range is configured by number of squares)
                 this.map.removeBulletPrevPos(bullet)
