@@ -8,13 +8,13 @@
             "damage": 5,
             "rateOfFire": 60,
             "bulletSpeed": 8,
-            "bulletType": "simple",
             "numberOfBullets": 1,
             "turns": true,
             "piercing": false
         },
         "cost": 50,
         "shootPattern": "single",
+        "bulletType": "rock",
         "textureAtlas": "client/img/towers/1-rock_thrower/rock_thrower.json"
     },
     "shrapnel-burst": {
@@ -26,13 +26,13 @@
             "damage": 5,
             "rateOfFire": 45,
             "bulletSpeed": 5,
-            "bulletType": "simple",
             "numberOfBullets": 8,
             "turns": false,
             "piercing": false
         },
         "cost": 50,
         "shootPattern": "burst",
+        "bulletType": "shrapnel",
         "textureAtlas": "client/img/towers/2-shrapnel_burst/shrapnel_burst.json"
     },
     "rock-scatter": {
@@ -44,12 +44,12 @@
             "damage": 5,
             "rateOfFire": 60,
             "bulletSpeed": 8,
-            "bulletType": "simple",
             "numberOfBullets": 3,
             "turns": true,
             "piercing": false
         },
         "cost": 120,
+        "bulletType": "rock",
         "shootPattern": "scatter"
     },
     "sniper": {
@@ -61,12 +61,12 @@
             "damage": 5,
             "rateOfFire": 240,
             "bulletSpeed": 15,
-            "bulletType": "simple",
             "numberOfBullets": 1,
             "turns": true,
             "piercing": false
         },
         "cost": 200,
+        "bulletType": "rock",
         "shootPattern": "single"
     }
 }

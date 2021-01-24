@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 
 class Bullet {
-    constructor(position, angle, damage, speed, range) {
+    constructor(position, angle, damage, speed, range, type) {
         this.position = position.getCopy()
         this.bulletPosStart = position.getCopy()  // TODO replace this with cumulative dist travelled
         this.positionPrev = position.getCopy()
@@ -9,6 +9,7 @@ class Bullet {
         this.speed = speed
         this.damage = damage
         this.range = range
+        this.type = type
         this.name = crypto.randomBytes(20).toString('hex');
 
         this.angle = angle

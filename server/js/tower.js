@@ -30,6 +30,7 @@ class Tower {
         this.player = player // The player who owns the tower
         this.cost = towerJson[type]["cost"]
         this.hasShot = false // Whether the tower has shot in this update round
+        this.bulletType = towerJson[type]["bulletType"]
 
         // These values can change based on user actions
         this.state = {
@@ -91,6 +92,17 @@ class Tower {
         return newBullets
     }
 
+    _getBullet(position, angle) {
+        return new bullet.Bullet(
+            position,
+            angle,
+            this.state.damage,
+            this.state.bulletSpeed,
+            this.state.shootRange,
+            this.bulletType
+        )
+    }
+
     // "Private" methods that make the tower shoot in different ways
     _getShootBehaviour(shootPattern) {
         let func;
@@ -115,13 +127,7 @@ class Tower {
     _normalShot() {
         let ticks = 1
         let isHit = false
-        let newBullet = new bullet.Bullet(
-            this.position,
-            this.angle,
-            this.state.damage,
-            this.state.bulletSpeed,
-            this.state.shootRange
-        )
+        let newBullet = this._getBullet(this.position, this.angle)
 
         // Iterate through enemies future positions to find one that bullet will hit
         while (this.target.steps + ticks*this.target.speed < this.target.path.length && !isHit) {
@@ -153,13 +159,7 @@ class Tower {
     _allDirShot() {
         let bullets = []
         for (let a = 0; a < 8; a++) {
-            bullets.push(new bullet.Bullet(
-                this.position,
-                (Math.PI/4)*a,
-                this.state.damage,
-                this.state.bulletSpeed,
-                this.state.shootRange
-            ))
+            bullets.push(this._getBullet(this.position, (Math.PI/4)*a))
         }
         return bullets
     }

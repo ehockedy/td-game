@@ -1,0 +1,12 @@
+{
+    "rock": {
+        "filenameKeyword": "rock",
+        "rotate": true,
+        "rotationSpeed": 5
+    },
+    "shrapnel": {
+        "filenameKeyword": "shrapnel",
+        "rotate": true,
+        "rotationSpeed": 15
+    }
+}

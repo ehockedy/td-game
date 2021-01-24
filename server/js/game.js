@@ -389,7 +389,8 @@ class Game {
             if (b.visible) {
                 state["bullets"]["objects"].push({
                     "name": b.name,
-                    "position": b.position
+                    "position": b.position,
+                    "type": b.type
                 })
             }
         })

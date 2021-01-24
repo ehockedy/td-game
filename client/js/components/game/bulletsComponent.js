@@ -7,18 +7,34 @@ export class BulletsComponent extends BaseComponent {
         this.spriteSize = spriteSize
         this.spriteSizeMap = spriteSizeMap
         this.bulletStateHashPrev = ""
-        this.rockBullets = []
+        this.bulletTextures = {}
     }
 
     loadData() {
-        let textures = PIXI.Loader.shared.resources["client/img/bullets/bullets.json"].textures
-        for (let textureName in textures) {
-            if (textureName.includes("rock")) this.rockBullets.push(textures[textureName])
-        }
+        let _this = this
+        return new Promise((resolve) => {
+            fetch("shared/json/bullets.json").then((response) => {
+                response.json().then((data) => {
+                    _this.bulletJson = data
+                    let textures = PIXI.Loader.shared.resources["client/img/bullets/bullets.json"].textures
+
+                    // Load textures using keyword in each filename for each type of bullet
+                    for (let type in _this.bulletJson) this.bulletTextures[type] = []
+
+                    // Identify if the texture file name is one of the types in the json config, add to the texture dictionary if so
+                    for (let textureName in textures) {
+                        for (let type in _this.bulletJson) {
+                            if (textureName.includes(_this.bulletJson[type].filenameKeyword)) this.bulletTextures[type].push(textures[textureName])
+                        }
+                    }
+                    resolve()
+                })
+            })
+        })
     }
 
     addBullet(name, type) {
-        let bulletSprite = new PIXI.Sprite(this.rockBullets[Math.floor(Math.random() * this.rockBullets.length)])
+        let bulletSprite = new PIXI.Sprite(this.bulletTextures[type][Math.floor(Math.random() * this.bulletTextures[type].length)])
         bulletSprite.name = name
         bulletSprite.anchor.set(0.5)
         bulletSprite.toRemove = false
@@ -26,8 +42,6 @@ export class BulletsComponent extends BaseComponent {
     }
 
     update(bulletUpdate) {
-        //this.children.forEach((bullet) => { bullet.toRemove = true }) // Mark as ready for removal, will be set to false if a bullet with same name is in update
-
         // Go through the bullets in the list from the server and add them or update positions if exist already
         bulletUpdate["objects"].forEach((bulletNew) => {
             let newpos = gridPosToMapPos(bulletNew.position, this.spriteSizeMap, bulletNew.position.subgridSize)
@@ -37,14 +51,14 @@ export class BulletsComponent extends BaseComponent {
                 if (bulletNew.name == bullet.name) {
                     bullet.x = newpos[0]
                     bullet.y = newpos[1]
-                    bullet.angle += 5
+                    if (this.bulletJson[bulletNew.type].rotate) bullet.angle += this.bulletJson[bulletNew.type].rotationSpeed
                     bullet.toRemove = false
                     bulletFound = true
                     break
                 }
             }
             if (!bulletFound) {
-                this.addBullet(bulletNew.name, "TODO") // New bullet
+                this.addBullet(bulletNew.name, bulletNew.type) // New bullet
             }
         })
 
