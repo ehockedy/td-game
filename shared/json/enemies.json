@@ -1,5 +1,7 @@
 {
     "boneheadBandit": {
-        "filenameKeyword": "bonehead"
+        "filenameKeyword": "bonehead",
+        "speed": 2,
+        "hp": 25
     }
 }

@@ -1,15 +1,18 @@
 const crypto = require('crypto');
+const fs = require('fs');
+
+let enemyConfig = JSON.parse(fs.readFileSync('shared/json/enemies.json'));
 
 class Enemy {
     /**
      * 
-     * @param {Number} hp Damage it can take until dead
-     * @param {Number} speed Number of ticks it takes to move through a grid square
+     * @param {String} type The type of enemy to create
      * @param {Object} path Array of coordinates that tht enemy will follow
+     * @param {Object} hitboxRadius Radius of hitbox circle
      */
-    constructor(hp, speed, path, hitboxRadius) {
-        this.hp = hp;
-        this.speed = speed;
+    constructor(type, path, hitboxRadius) {
+        this.hp = enemyConfig[type].hp;
+        this.speed = enemyConfig[type].speed;
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
         this.hitboxRadius = hitboxRadius

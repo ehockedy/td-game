@@ -7,16 +7,7 @@ const point = require('./point.js');
 const seedrandom = require('seedrandom');
 const fs = require('fs');
 
-const ENEMY_TYPE = {
-    RANDOM: 0,
-    RED: 1,
-    _MAX: 2
-}
-
-const TOWER_TYPE = {
-    BLUE: 0 // Single shot basic tower
-}
-
+let enemyConfig = JSON.parse(fs.readFileSync('shared/json/enemies.json'));
 
 class Game {
     constructor(cols, rows, subgridSize) {
@@ -188,30 +179,17 @@ class Game {
     }
 
     /**
-     * Adds an enemy based off a generation strategy
-     * Strategy is something like fixed rate, random within a distribution
-     * @param {String} distributionPattern pattern to generate enemies
-     * @param {Number} enemyType type of enemy to add. ENEMY_TYPE.RANDOM (0) will generate a random enemy
+     * Adds an enemy based
+     * @param {Number} enemyType type of enemy to add
      */
-    addEnemy(distributionPattern, enemyType) {
-        if (distributionPattern == "random") {
-            // 10% chance to spawn new enemy
-            if (Math.random() < 0.995) return; //0.95) return;
-        }
-
-        let speedRangeMin = 7
-        let speedRangeMax = 8
-        // TODO create enemy types
-        let randomSpeed = Math.floor(Math.random() * (speedRangeMax - speedRangeMin)) + speedRangeMin;
-        this.map.addNewEnemy(new enemy.Enemy(30, randomSpeed, this.map.path, this.map.subgridSize/3))
+    addEnemy(enemyType) {
+        this.map.addNewEnemy(new enemy.Enemy(enemyType, this.map.path, this.map.subgridSize/3))
     }
 
     shiftEnemyQueue() {
         if (this.enemyQueue.length > 0) {
             if (this.enemyQueue[0].stepsUntilGo == 0) {
-                this.addEnemy("", ENEMY_TYPE.RANDOM)
-                this.enemyQueue.shift()
-                //this.addEnemy(this.enemyQueue.shift())
+                this.addEnemy(this.enemyQueue.shift().type)
             } else {
                 this.enemyQueue[0].stepsUntilGo -= 1
             }
@@ -286,9 +264,11 @@ class Game {
         // Generate the enemy queue
         this.enemyQueue = []
         for (let i=0; i < 3; i+=1) {
+            let randEnemyIdx = Math.floor(Math.random() * Object.keys(enemyConfig).length) // Random enemy type for now
+            let enemyType = Object.keys(enemyConfig)[randEnemyIdx]
             this.enemyQueue.push({
-                "stepsUntilGo": 40*Math.floor(Math.random()*10 + 1),
-                "type": "TODO"
+                "stepsUntilGo": 10*Math.floor(Math.random()*30 + 1), // Beween 1 and 300 ticks
+                "type": enemyType
             })
         }
 
