@@ -50,8 +50,13 @@ class GameMap {
     this.mainPath = [] // Main map grid squares that the enemy path goes through
   }
 
+  // TODO rename to setGridProperty
   setGridValue(row, col, value, property) {
     this.map[row][col][property] = value
+  }
+
+  getGridValue(row, col) {
+    return this.map[row][col].value
   }
 
   onMainPath(row, col) {

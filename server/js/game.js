@@ -344,7 +344,8 @@ class Game {
             state["enemies"]["objects"].push({
                 "name": e.name,
                 "position": e.position,
-                "isHit": e.isHit
+                "isHit": e.isHit,
+                "squareDirection": this.map.getGridValue(e.position.row, e.position.col)
             })
             hash.update(e.name)
         })
