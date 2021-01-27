@@ -345,7 +345,8 @@ class Game {
                 "name": e.name,
                 "position": e.position,
                 "isHit": e.isHit,
-                "squareDirection": this.map.getGridValue(e.position.row, e.position.col)
+                "squareDirection": this.map.getGridValue(e.position.row, e.position.col),
+                "rotate": e.isNearCentre
             })
             hash.update(e.name)
         })

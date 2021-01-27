@@ -283,7 +283,7 @@ export class TowerMenu  extends BaseToolbarComponent {
             let newGridX = Math.floor(newPosition.x / this.mapSpriteSize)
             let newGridY = Math.floor(newPosition.y / this.mapSpriteSize)
             if ((newGridX != sprite.gridX || newGridY != sprite.gridY) && // Been some change
-                getBoard()[newGridY][newGridX]["value"] == 0) { // Must be empty space
+                getBoard()[newGridY][newGridX]["value"] == 'x') { // Must be empty space
                 sprite.gridX = newGridX
                 sprite.gridY = newGridY
                 sprite.global_x = sprite.gridX * this.mapSpriteSize + this.mapSpriteSize / 2

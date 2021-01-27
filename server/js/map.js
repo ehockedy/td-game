@@ -37,11 +37,10 @@ class GameMap {
       this.map.push([])
       for(var j=0; j < this.width; j++) {
         this.map[i].push({
-          "value": 0,
+          "value": "x",
           "enemies": [],
           "bullets": [],
-          "tower": null,
-          "adjacentPathDirs": [] // For non-path tiles, which adjacent tiles need valley wall rendering. Info for client use only.
+          "tower": null
         }) // Make columns
       }
     }
@@ -211,7 +210,7 @@ class GameMap {
     while(c < this.width-2 && c-this.col < max_dist+right_bonus) {
       c+=2  // 2 means that corners wil be on "even" squares only THis ensures any line does hot have
             // a line parallel and touching it on the next row/column - so always space for a unit next to a path
-      if (this.map[this.row][c]["value"] != 0) break  // Stop if new path would hit an existing path
+      if (this.map[this.row][c]["value"] != "x") break  // Stop if new path would hit an existing path
       if (c-this.col < min_dist) continue // Don't want too mant short paths
       moves.push( ["r",c-this.col] )
     }
@@ -220,7 +219,7 @@ class GameMap {
     c = this.col
     while(c > 1 && this.col-c < max_dist-left_penalty) {
       c-=2
-      if (this.map[this.row][c]["value"] != 0) break
+      if (this.map[this.row][c]["value"] != "x") break
       if (this.col-c < min_dist) continue
       moves.push( ["l",this.col-c] )
     }
@@ -232,7 +231,7 @@ class GameMap {
     var r = this.row
     while(r < this.height-2-row_buffer && r-this.row < max_dist) {
       r+=2
-      if (this.map[r][this.col]["value"] != 0) break
+      if (this.map[r][this.col]["value"] != "x") break
       if (r-this.row < min_dist) continue
       moves.push( ["d",r-this.row] )
     }
@@ -241,7 +240,7 @@ class GameMap {
     r = this.row
     while(r > 1+row_buffer && this.row-r < max_dist) {
       r-=2
-      if (this.map[r][this.col]["value"] != 0) break
+      if (this.map[r][this.col]["value"] != "x") break
       if (this.row-r < min_dist) continue
       moves.push( ["u",this.row-r] )
     }
@@ -255,41 +254,31 @@ class GameMap {
 
     // The first tile might be a corner, so check if it is and write the relevant tile type number
     let prevMoves = this.move_history.length
-    let firstTileType = (dir == 'r' || dir == 'l') ? 1 : 2
-    if (prevMoves > 0) {
-      let prevDir = this.move_history[prevMoves - 1][0]
-      if (prevDir != dir) {
-        if ((prevDir == 'r' && dir == 'u') || (prevDir == 'd' && dir == 'l')) firstTileType = 3
-        else if ((prevDir == 'd' && dir == 'r') || (prevDir == 'l' && dir == 'u')) firstTileType = 4
-        else if ((prevDir == 'u' && dir == 'r') || (prevDir == 'l' && dir == 'd')) firstTileType = 5
-        else if ((prevDir == 'r' && dir == 'd') || (prevDir == 'u' && dir == 'l')) firstTileType = 6
-      }
+    let prevDir = ""
+    if (prevMoves) {
+      let prev = this.move_history[prevMoves-1][0]
+      if (prev != dir) prevDir = prev
     }
 
     var xMultiplier = 0 // whether to increase or decrease coordinate value in the relevant direction
     var yMultiplier = 0
-    var tileType = 0
     switch (dir) {
       case "l":
         xMultiplier = -1
-        tileType = 1
         break
       case "r":
         xMultiplier = 1
-        tileType = 1
         break
       case "u":
         yMultiplier = -1
-        tileType = 2
         break
       case "d":
         yMultiplier = 1
-        tileType = 2
         break
     }
 
     for (var i = 0; i < dist; i++) {
-      this.map[this.row][this.col]["value"] = (i == 0) ? firstTileType : tileType
+      this.map[this.row][this.col]["value"] = (i == 0) ? prevDir + dir : dir
       this.col += xMultiplier
       this.row += yMultiplier
     }
@@ -309,11 +298,11 @@ class GameMap {
 
     for (var i = 0; i < dist; i++) {
       if (dir == "l" || dir == "r") {
-        this.map[this.row][this.col]["value"] = 0
+        this.map[this.row][this.col]["value"] = "x"
         this.col += multiplier
       }
       if (dir == "u" || dir == "d") {
-        this.map[this.row][this.col]["value"] = 0
+        this.map[this.row][this.col]["value"] = "x"
         this.row += multiplier
       }
     }
@@ -330,7 +319,7 @@ class GameMap {
     // True if a square in the final column is 1
     var complete = false
     for (var r=0; r < this.height; r++) {
-      if (this.map[r][this.width-1]["value"] != 0) {
+      if (this.map[r][this.width-1]["value"] != "x") {
         complete = true
       }
     }
@@ -347,7 +336,7 @@ class GameMap {
 
     for (var r=0; r < this.height; r++) {
       for (var c=0; c < this.width; c++) {
-        if (this.map[r][c]["value"] != 0) {
+        if (this.map[r][c]["value"] != "x") {
           if (r < this.width/2 && c < this.height/2) q1++
           else if (r < this.width/2 && c >= this.height/2) q2++
           else if (r >= this.width/2 && c < this.height/2) q3++
@@ -406,7 +395,7 @@ class GameMap {
     let pathLen = 0
     for (var r=0; r < this.height; r++) {
       for (var c=0; c < this.width; c++) {
-        if (this.map[r][c]["value"] != 0) pathLen++
+        if (this.map[r][c]["value"] != "x") pathLen++
       }
     }
 
@@ -493,7 +482,7 @@ class GameMap {
           if (Math.abs(r) == Math.abs(c)) continue; // Only want horizontally and vertically adjacent squares
           //console.log("next grid search: ",currSubGridCoord[0]+r, currSubGridCoord[1]+c)
           //console.log("   ", this.map[currSubGridCoord[0]+r][currSubGridCoord[1]+c], prevSubGridCoord[0], prevSubGridCoord[1])
-          if (this.map[currSubGridCoord[0]+r][currSubGridCoord[1]+c]["value"] != 0 &&
+          if (this.map[currSubGridCoord[0]+r][currSubGridCoord[1]+c]["value"] != "x" &&
               !(prevSubGridCoord[0] == currSubGridCoord[0]+r && prevSubGridCoord[1] == currSubGridCoord[1]+c) ) {
             nextSubGridCoord = [
               currSubGridCoord[0]+r,
@@ -528,7 +517,7 @@ class GameMap {
     // Add final square
     let finalSquareRow = 0
     for (let r=0; r < this.height; r++) {
-      if (this.map[r][this.width-1]["value"] != 0) {
+      if (this.map[r][this.width-1]["value"] != "x") {
         finalSquareRow = r;
         break;
       }
@@ -554,29 +543,6 @@ class GameMap {
               Math.floor(this.subgridSize/2),
               Math.floor(this.subgridSize/2)
             ))
-      }
-    }
-
-    // Get which directions of valley wall are needed for the non-path squares, based on the adjacent path tiles
-    // 0  1  2
-    // 3     4
-    // 5  6  7
-    for (var r=0; r < this.height; r++) {
-      for (var c=0; c < this.width; c++) {
-        if (this.map[r][c]["value"] == 0) { // Non-path tiles only
-          let tileIdx = 0
-          for (var r2=-1; r2 <= 1; r2++) {
-            for (var c2=-1; c2 <= 1; c2++) {
-              if (r + r2 >= 0 && r+r2 < this.height &&
-                  c + c2 >= 0 && c+c2 < this.width) {
-                if (this.map[r + r2][c + c2]["value"] != 0) {
-                  this.map[r][c]["adjacentPathDirs"].push(tileIdx)
-                }
-              }
-              if (c2 != 0 || r2 != 0) tileIdx += 1
-            }
-          }
-        }
       }
     }
   }
