@@ -59,6 +59,7 @@ class Game {
         this.map.forEachEnemyInReverse((enemy) => {
             let startPos = enemy.position
             enemy.step()
+            enemy.turn(this.map.getGridValue(startPos.row, startPos.col))
             if (enemy.row != startPos.row || enemy.col != startPos.col) {
                 this.map.removeEnemyFromSquare(enemy, startPos.row, startPos.col)
                 this.map.addEnemy(enemy)
@@ -183,7 +184,7 @@ class Game {
      * @param {Number} enemyType type of enemy to add
      */
     addEnemy(enemyType) {
-        this.map.addNewEnemy(new enemy.Enemy(enemyType, this.map.path, this.map.subgridSize/3))
+        this.map.addNewEnemy(new enemy.Enemy(enemyType, this.map.path, this.map.subgridSize))
     }
 
     shiftEnemyQueue() {
@@ -345,8 +346,7 @@ class Game {
                 "name": e.name,
                 "position": e.position,
                 "isHit": e.isHit,
-                "squareDirection": this.map.getGridValue(e.position.row, e.position.col),
-                "rotate": e.isNearCentre
+                "rotation": e.rotation
             })
             hash.update(e.name)
         })

@@ -16,6 +16,8 @@ class Enemy {
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
         this.hitboxRadius = subgridSize/3
+        this.nearCentreRadius = this.subgridSize / 10  // Distance from centre point that is considered near. Used to determine when to turn
+        this.rotation = 0  // angle in radians that enemy is facing, starting at 0 which is right/east
 
         this.path = path // Reference to the object in map
         this.subgridSize = subgridSize
@@ -29,8 +31,6 @@ class Enemy {
 
         // Update specific variables
         this.isHit = false  // Whether the enemy has been hit in that specific update
-        this.isNearCentre = false  // Whether the enemy is near the centre of it's current subgrid. Used for rotation animation by the client-side renderer.
-        this.nearCentreRadius = this.subgridSize / 10  // Distance from centre point that is considered near
     }
 
     step() {
@@ -45,11 +45,34 @@ class Enemy {
 
             this.x = this.position.x
             this.y = this.position.y
+        }
+    }
 
-            if (Math.abs(this.subrow - this.subgridSize/2) < this.nearCentreRadius ||
-                Math.abs(this.subcol - this.subgridSize/2) < this.nearCentreRadius) {
-                this.isNearCentre = true
-            } else this.isNearCentre = false
+    // Given the type of tile the enemy is on determine if it needs to rotate itself to be facing a certain direction
+    // tile type is in format '<direction>' or '<direction><direction>' if corner.
+    // <direction> can be u, d, l, or r.
+    // First direction is the direction of travel through the firt half of the square, second direction is direction through the second half od the square
+    turn(tileType) {
+        if (tileType.length != 2) return // No need to rotate if a straight path
+
+        // If is near the centre of the circle, then start to rotate
+        if (Math.abs(this.subrow - this.subgridSize/2) < this.nearCentreRadius &&
+            Math.abs(this.subcol - this.subgridSize/2) < this.nearCentreRadius) {
+            // Determine angle to face based on path tile type
+            switch(tileType[1]) {
+                case 'r':
+                    this.rotation = 0
+                    break
+                case 'd':
+                    this.rotation = Math.PI/2
+                    break
+                case 'l':
+                    this.rotation = Math.PI
+                    break
+                case 'u':
+                    this.rotation = -Math.PI/2
+                    break
+            }
         }
     }
 
