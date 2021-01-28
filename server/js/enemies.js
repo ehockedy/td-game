@@ -16,7 +16,7 @@ class Enemy {
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
         this.hitboxRadius = subgridSize/3
-        this.nearCentreRadius = this.subgridSize / 10  // Distance from centre point that is considered near. Used to determine when to turn
+        this.nearCentreRadius = subgridSize / 10  // Distance from centre point that is considered near. Used to determine when to turn
         this.rotation = 0  // angle in radians that enemy is facing, starting at 0 which is right/east
 
         this.path = path // Reference to the object in map
