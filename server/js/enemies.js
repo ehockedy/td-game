@@ -16,7 +16,8 @@ class Enemy {
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
         this.hitboxRadius = subgridSize/3
-        this.nearCentreRadius = subgridSize / 10  // Distance from centre point that is considered near. Used to determine when to turn
+
+        this.nearCentreRadius = subgridSize / 6  // Distance from centre point that is considered near. Used to determine when to turn
         this.rotation = 0  // angle in radians that enemy is facing, starting at 0 which is right/east
 
         this.path = path // Reference to the object in map
@@ -55,25 +56,54 @@ class Enemy {
     turn(tileType) {
         if (tileType.length != 2) return // No need to rotate if a straight path
 
+        let firstDir = this._rotationAngleSwitch(tileType[0])  // Direction the enemy sprite is facing when it enters it's current square
+        let secondDir = this._rotationAngleSwitch(tileType[1]) // Direction enemy sprite faces when leasing the sqare i.e. moves from first to second angle
+
+        let firstDist = this._distanceToCentre(tileType[0])  // Distance from the current position, if enemy travelling in direction that it entered the grid square, 0 otherwise.
+        let secondDist = this._distanceToCentre(tileType[1]) // Distance from the current position, if enemy travelling in direction that it leaves the grid square, 0 otherwise.
+
         // If is near the centre of the circle, then start to rotate
-        if (Math.abs(this.subrow - this.subgridSize/2) < this.nearCentreRadius &&
-            Math.abs(this.subcol - this.subgridSize/2) < this.nearCentreRadius) {
-            // Determine angle to face based on path tile type
-            switch(tileType[1]) {
-                case 'r':
-                    this.rotation = 0
-                    break
-                case 'd':
-                    this.rotation = Math.PI/2
-                    break
-                case 'l':
-                    this.rotation = Math.PI
-                    break
-                case 'u':
-                    this.rotation = -Math.PI/2
-                    break
-            }
+        if (firstDist < this.nearCentreRadius && secondDist < this.nearCentreRadius) {
+            let midwayAngle = this._getMidwayAngle(firstDir, secondDir)  // Angle to be rotated at if exactly at centre of square
+            // Rotate a percentage of the way between starting angle and ending angle depending how close to centre of grid square
+            this.rotation = (secondDist == 0) ?  // In the first half of the square
+                firstDir + midwayAngle * (1 - firstDist/this.nearCentreRadius) :  // Rotate between starting angle and midway angle
+                secondDir - midwayAngle * (1 - secondDist/this.nearCentreRadius)  // Rotate between midway andle and the ending angle
+        } else {  // Out of centre and have rotated, ensure facing correct direction
+            this.rotation = (secondDist == 0) ? firstDir : secondDir
         }
+    }
+
+    // Given a direction of travel, determine the distance to the centre of the grid square
+    _distanceToCentre(direction) {
+        return (direction == 'r' || direction =='l') ?
+            Math.abs(this.subcol - Math.floor(this.subgridSize/2)) :
+            Math.abs(this.subrow - Math.floor(this.subgridSize/2))
+    }
+
+    _rotationAngleSwitch(direction) {
+        let rotation = 0
+        switch(direction) {
+            case 'r':
+                rotation = 0
+                break
+            case 'd':
+                rotation = 90
+                break
+            case 'l':
+                rotation = 180
+                break
+            case 'u':
+                rotation = 270
+                break
+        }
+        return rotation
+    }
+
+    _getMidwayAngle(firstAngle, secondAngle) {
+        if (firstAngle == 0 && secondAngle == 270) firstAngle = 360
+        if (firstAngle == 270 && secondAngle == 0) secondAngle = 360
+        return (secondAngle - firstAngle) / 2
     }
 
     positionInNSteps(n) {

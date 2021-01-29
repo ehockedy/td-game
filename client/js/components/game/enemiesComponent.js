@@ -96,7 +96,7 @@ export class EnemiesComponent extends BaseComponent {
             let newpos = gridPosToMapPos(enemy.position, this.spriteSizeMap, enemy.position.subgridSize)
             enemyToUpdate.x = newpos[0]
             enemyToUpdate.y = newpos[1]
-            enemyToUpdate.rotation = enemy.rotation
+            enemyToUpdate.angle = enemy.rotation
             // Change tint if hit by bullet
             if (enemy.isHit) {
                 enemyToUpdate.tint = 0xCCCCCC
