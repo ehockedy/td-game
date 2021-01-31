@@ -126,7 +126,7 @@ export class MapComponent extends BaseComponent {
                     if (direction == 'u' || direction == 'd' || direction == 'ur' || direction == 'ld' || direction == 'dr' || direction == 'lu') {
                         if (c <= midCol) {
                             let texture = this.wallTextures["valley_wall_side_2.png"]
-                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + texture.height*scale/2, shiftY, 1, scale, Math.PI/2))
+                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + texture.height*scale/1.5, shiftY, 1, scale, Math.PI/2))
                         } else {
                             let texture = this.wallTextures["valley_wall_lower_1.png"]
                             this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + texture.height*scale, shiftY, 1, scale, Math.PI/2))
