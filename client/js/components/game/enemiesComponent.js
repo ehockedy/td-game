@@ -11,23 +11,27 @@ export class EnemiesComponent extends BaseComponent {
     }
 
     loadData() {
-        let _this = this
+        //let _this = this
         return new Promise((resolve) => {
             fetch("shared/json/enemies.json").then((response) => {
-                response.json().then((data) => {
-                    _this.enemyJson = data
-                    let textures = PIXI.Loader.shared.resources["client/img/enemies/enemies.json"].textures
+                response.json().then((enemyJson) => {
+                    let loader = new PIXI.Loader()
 
                     // Load textures using keyword in each filename for each type of bullet
-                    for (let type in _this.enemyJson) this.enemyTextures[type] = []
-
-                    // Identify if the texture file name is one of the types in the json config, add to the texture dictionary if so
-                    for (let textureName in textures) {
-                        for (let type in _this.enemyJson) {
-                            if (textureName.includes(_this.enemyJson[type].filenameKeyword)) this.enemyTextures[type].push(textures[textureName])
-                        }
+                    for (let type in enemyJson) {
+                        console.log("adding ", enemyJson[type].textureAtlasFile)
+                        loader.add(enemyJson[type].textureAtlasFile)
                     }
-                    resolve()
+
+                    loader.load(() => {
+                        for (let type in enemyJson) {
+                            this.enemyTextures[type] = []
+                            for (const textureValue of Object.values(loader.resources[enemyJson[type].textureAtlasFile].textures)) {
+                                this.enemyTextures[type].push(textureValue)
+                            }
+                        }
+                        resolve()
+                    })
                 })
             })
         })
@@ -40,11 +44,11 @@ export class EnemiesComponent extends BaseComponent {
      */
     addEnemy(name, type) {
         // TODO have different types
-        let animatedEnemySprite = new PIXI.Sprite(this.enemyTextures["boneheadBandit"][0]) // TODO send type from server, and make animated sprite
-        //animatedEnemySprite.loop = true
+        let animatedEnemySprite = new PIXI.AnimatedSprite(this.enemyTextures["boneheadBandit"]) // TODO send type from server
+        animatedEnemySprite.loop = true
         animatedEnemySprite.anchor.set(0.5)
-        //animatedEnemySprite.animationSpeed = 0.2
-        //animatedEnemySprite.play()
+        animatedEnemySprite.animationSpeed = 0.5
+        animatedEnemySprite.play()
         animatedEnemySprite.name = name // Unique identifier
         animatedEnemySprite.tintCount = 0
         this.addChild(animatedEnemySprite)

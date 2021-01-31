@@ -1,6 +1,6 @@
 {
     "boneheadBandit": {
-        "filenameKeyword": "bonehead",
+        "textureAtlasFile": "client/img/enemies/bonehead1.json",
         "speed": 2,
         "hp": 25
     }
