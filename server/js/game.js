@@ -264,7 +264,7 @@ class Game {
 
         // Generate the enemy queue
         this.enemyQueue = []
-        for (let i=0; i < 3; i+=1) {
+        for (let i=0; i < 20; i+=1) {
             let randEnemyIdx = Math.floor(Math.random() * Object.keys(enemyConfig).length) // Random enemy type for now
             let enemyType = Object.keys(enemyConfig)[randEnemyIdx]
             this.enemyQueue.push({
@@ -346,7 +346,8 @@ class Game {
                 "name": e.name,
                 "position": e.position,
                 "isHit": e.isHit,
-                "rotation": e.rotation
+                "rotation": e.rotation,
+                "type": e.type
             })
             hash.update(e.name)
         })

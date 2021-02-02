@@ -43,8 +43,7 @@ export class EnemiesComponent extends BaseComponent {
      * @param {Number} type Type of enemy
      */
     addEnemy(name, type) {
-        // TODO have different types
-        let animatedEnemySprite = new PIXI.AnimatedSprite(this.enemyTextures["boneheadBandit"]) // TODO send type from server
+        let animatedEnemySprite = new PIXI.AnimatedSprite(this.enemyTextures[type])
         animatedEnemySprite.loop = true
         animatedEnemySprite.anchor.set(0.5)
         animatedEnemySprite.animationSpeed = 0.5
@@ -89,7 +88,7 @@ export class EnemiesComponent extends BaseComponent {
                     found = (this.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
                     if (found) break;
                 }
-                if (!found) this.addEnemy(enemyStateObjects[nameIdx].name)
+                if (!found) this.addEnemy(enemyStateObjects[nameIdx].name, enemyStateObjects[nameIdx].type)
             }
         }
 

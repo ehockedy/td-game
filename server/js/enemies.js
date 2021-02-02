@@ -11,6 +11,7 @@ class Enemy {
      * @param {Object} subgridSize Size of the subgrid of the map
      */
     constructor(type, path, subgridSize) {
+        this.type = type
         this.hp = enemyConfig[type].hp;
         this.speed = enemyConfig[type].speed;
         this.steps = 0  // How many steps taken through the map path
