@@ -6,16 +6,17 @@ function getRandomObject(jsonObject) {
     return jsonObject[randKey]
 }
 
-let PATH_DIRECTIONS = {
-    TOP_LEFT:     0,
-    TOP:          1,
-    TOP_RIGHT:    2,
-    LEFT:         3,
-    RIGHT:        4,
-    BOTTOM_RIGHT: 5,
-    BOTTOM:       6,
-    BOTTOM_LEFT:  7,
+function randomlyPlaceObjects(textureArray, maxCount, targetContainer, strictlyWithinSquare, xMax, yMax, xOffset, yOffset) {
+    let objectCount = Math.floor(Math.random() * maxCount) // maxCount is a hard upper limit
+    for (let objectIdx=0; objectIdx < objectCount; objectIdx += 1) {
+        let randomTexture = getRandomObject(textureArray)
+        let objectSprite = new PIXI.Sprite(randomTexture)
+        objectSprite.x = xOffset + Math.floor(Math.random() * (strictlyWithinSquare ? xMax - objectSprite.width : xMax))
+        objectSprite.y = yOffset + Math.floor(Math.random() * (strictlyWithinSquare ? yMax - objectSprite.height : yMax))
+        targetContainer.addChild(objectSprite);
+    }
 }
+
 
 export class MapComponent extends BaseComponent {
     constructor(cols, rows, mapSpriteSize, scalingFactor=1) {
@@ -34,12 +35,14 @@ export class MapComponent extends BaseComponent {
         this.sideWalls = new PIXI.Container()
         this.topWalls = new PIXI.Container()
         this.landTiles = new PIXI.Container()
+        this.landFeatureTiles = new PIXI.Container()
 
         // A texture is a WebGL-ready image
         // Keep things in a texture cache to make rendering fast and efficient
         this.mapTextures = PIXI.Loader.shared.resources["client/img/map_tiles.json"].textures
         this.rocksTextures = PIXI.Loader.shared.resources["client/img/rocks.json"].textures
         this.wallTextures = PIXI.Loader.shared.resources["client/img/valley_walls.json"].textures
+        this.mapFeaturesTextures = PIXI.Loader.shared.resources["client/img/map_ground_features.json"].textures
     }
 
     getWidth() {
@@ -88,23 +91,19 @@ export class MapComponent extends BaseComponent {
                 map_square_sprite.x += c * this.mapSpriteSize
                 map_square_sprite.name = "map_" + r.toString() + "_" + c.toString()
 
-                // Randomly add some rocks to path tiles
+                //  Path tiles
                 if (getBoard()[r][c]["value"] != 'x') {
+                    // Randomly add some rocks to path tiles
                     this.pathTiles.addChild(map_square_sprite)
-                    let maxRocksPerMapSquare = 4
-                    let rocksCount = Math.floor(Math.random() * maxRocksPerMapSquare) // 0 -> 3
-                    for (let rockIdx=0; rockIdx < rocksCount; rockIdx += 1) {
-                        let rockTexture = getRandomObject(this.rocksTextures)
-                        let rockSprite = new PIXI.Sprite(rockTexture)
-                        rockSprite.x = Math.floor(Math.random() * (this.mapSpriteSize-rockTexture.width))
-                        rockSprite.y = Math.floor(Math.random() * (this.mapSpriteSize-rockTexture.height))
-                        map_square_sprite.addChild(rockSprite);
-                    }
-                } else this.landTiles.addChild(map_square_sprite)
+                    randomlyPlaceObjects(
+                        this.rocksTextures, 4, map_square_sprite, true,
+                        this.mapSpriteSize, this.mapSpriteSize,
+                        0, 0
+                    )
 
-                // Add the wall of the valley. These sprites go on the tiles adjacent to the path, so there is enough room for enemy sprites.
-                // Rotate based on direction of the path.
-                let direction = getBoard()[r][c]["value"]
+                    // Add the wall of the valley. These sprites go on the tiles adjacent to the path, so there is enough room for enemy sprites.
+                    // Rotate based on direction of the path.
+                    let direction = getBoard()[r][c]["value"]
                     let midCol = this.cols / 2
                     let shiftX = map_square_sprite.x
                     let shiftY = map_square_sprite.y
@@ -143,12 +142,30 @@ export class MapComponent extends BaseComponent {
                             this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX - texture.height*scale + texture.width, shiftY + texture.width, 1, scale, -Math.PI/2))
                         }
                     }
+                } else {
+                    this.landTiles.addChild(map_square_sprite)
+                }
+
+                // Add texture to the land
+                // Even path tiles have these added, so that it is not sparse near path tiles. THey are rendered under path, so is acceptable.
+                randomlyPlaceObjects(
+                    this.mapFeaturesTextures, 20, this.landFeatureTiles, false,
+                    this.mapSpriteSize, this.mapSpriteSize,
+                    map_square_sprite.x, map_square_sprite.y
+                )
+
+
             }
         }
-        this.addChild(this.pathTiles)
         this.addChild(this.landTiles)
+        this.addChild(this.landFeatureTiles)
+        this.addChild(this.pathTiles)
         this.addChild(this.sideWalls)
         this.addChild(this.topWalls) // TODO find a way to get this over enemy sprites
+
+        // The map contains a lot of sprites, none of which move
+        // As such can set this to cache as a bitmap to save processing
+        this.cacheAsBitmap = true
     }
 
     generateMapWallSprite(texture, shiftX, shiftY, scaleX, scaleY, rotation) {

@@ -9,6 +9,7 @@ PIXI.Loader.shared
     .add("client/img/rocks.json")
     .add("client/img/map_tiles.json")
     .add("client/img/valley_walls.json")
+    .add("client/img/map_ground_features.json")
     .load(loadConfig)
 
 function loadConfig() {
