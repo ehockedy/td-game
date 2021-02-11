@@ -71,6 +71,8 @@ export class MapComponent extends BaseComponent {
         this.wallTextures = PIXI.Loader.shared.resources["client/img/valley_walls.json"].textures
         this.mapFeaturesTextures = PIXI.Loader.shared.resources["client/img/map_ground_features.json"].textures
         this.mapDecorationsTextures = PIXI.Loader.shared.resources["client/img/map_decorations.json"].textures
+
+        this.towerHash = ""
     }
 
     getWidth() {
@@ -191,10 +193,10 @@ export class MapComponent extends BaseComponent {
                     })
                     if (Math.random() >= addObjectChance && !isNextToPath(c, r, this.cols, this.rows)) {
                         randomlyPlaceObjects(
-                            this.mapDecorationsTextures, 1, this.landDecorations, true,
+                            this.mapDecorationsTextures, 1, this.landDecorations, false,
                             this.mapSpriteSize, this.mapSpriteSize,
                             map_square_sprite.x, map_square_sprite.y,
-                            10,1.5,
+                            10, 1.5,
                             false
                         )
                     }
@@ -233,5 +235,28 @@ export class MapComponent extends BaseComponent {
             0, 0            // pivot
         )
         return sprite
+    }
+
+    update(towerUpdate) {
+        if (this.towerHash != towerUpdate.hash) {
+            // A change in the number of towers i.e. new tower placed
+            towerUpdate.objects.forEach((tower) => {
+                // Check if any towers and map object occupy the same space. If they do, remove the object so it looks like the space has been cleared for the tower. Loks weird if tower is just on top.
+                for (let idx = this.landDecorations.children.length-1 ; idx >= 0; idx -= 1) {
+                    let decoration = this.landDecorations.children[idx]
+                    let decCol = Math.floor(decoration.x / this.mapSpriteSize)
+                    let decRow = Math.floor(decoration.y / this.mapSpriteSize)
+                    if (decCol == tower.position.col && decRow == tower.position.row) {
+                        this.cacheAsBitmap = false
+                        this.landDecorations.removeChild(decoration)
+                        this.cacheAsBitmap = true
+                        break // Can do this since one object per square
+                    }
+                }
+            })
+
+        }
+        this.towerHash = towerUpdate.hash
+
     }
 }

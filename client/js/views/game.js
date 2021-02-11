@@ -143,6 +143,7 @@ export class GameRenderer {
 
     update(serverUpdate) {
         this.tc.update(serverUpdate["towers"])
+        this.map.update(serverUpdate["towers"])
         this.tm.update(serverUpdate["players"])
         this.ec.update(serverUpdate["enemies"])
         this.bc.update(serverUpdate["bullets"])
