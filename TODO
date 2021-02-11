@@ -22,6 +22,7 @@ If player does nothing for 2ish minutes, they are disconnected and cannot reconn
 game screen, with a new, different game code.
 Remove money view for other players, just put players money and put it near the towers so they can easily compare prices
 Tower range is above towers placed before that tower, but under others - make it a ring not circle?
+Remove any decorations on map that are below a tower when the tower is placed.
 Other towers:
  - support ones like mopeny/points booster if enemy killed in its range?
 

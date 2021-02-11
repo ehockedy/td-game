@@ -10,6 +10,7 @@ PIXI.Loader.shared
     .add("client/img/map_tiles.json")
     .add("client/img/valley_walls.json")
     .add("client/img/map_ground_features.json")
+    .add("client/img/map_decorations.json")
     .load(loadConfig)
 
 function loadConfig() {
