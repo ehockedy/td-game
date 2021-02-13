@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="480"
+   height="480"
+   viewBox="0 0 127 127"
+   version="1.1"
+   id="svg917"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="bullets.svg"
+   inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock1.png"
+   inkscape:export-xdpi="12.8"
+   inkscape:export-ydpi="12.8">
+  <defs
+     id="defs911" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.52"
+     inkscape:cx="236.07039"
+     inkscape:cy="241.3221"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g1044"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     objecttolerance="10000"
+     guidetolerance="10000"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1002"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid919"
+       empspacing="8"
+       dotted="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata914">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:none">
+    <g
+       id="g859"
+       transform="matrix(0.57142859,0,0,0.57142859,24.795238,27.638143)">
+      <path
+         id="path8"
+         style="fill:#999999;stroke-width:0.264999;stroke-opacity:0.919355"
+         d="M 91.016667,78.316667 82.55,88.9 l -10.583333,2.116667 -12.7,-6.35 -12.7,-4.233334 -6.35,-12.7 L 42.333333,50.8 50.8,40.216667 l 8.281597,-5.716838 12.906291,1.45419 12.90629,1.45419 L 91.016667,44.45 95.25,59.266667 94.424546,71.661757 Z"
+         sodipodi:nodetypes="ccccccccccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 42.333333,50.799999 -2.116667,16.933333 6.35,12.7 12.7,4.233334 12.7,6.35 L 82.549999,88.899999 71.966666,86.783332 61.383333,76.199999 V 67.733333 L 50.8,61.383333 Z"
+         id="path838"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 50.799999,40.216666 8.281598,-5.716837 25.812581,2.90838 L 91.016667,44.45 82.55,38.1 H 59.266667"
+         id="path840"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         style="fill:#c4c4c4;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 76.2,82.55 67.733333,74.083333 82.55,59.266667 l -7.408334,-12.7 -11.641666,-6.35 21.166667,2.116666 2.116666,6.35 L 92.075,60.325 88.9,74.083333 82.55,82.55 Z"
+         id="path842"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         style="fill:#2b2b2b;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 40.216666,67.733332 42.333333,63.5 l 10.583334,4.233333 2.116666,10.583334 16.933333,12.699999 -25.4,-10.583334 z"
+         id="path846"
+         sodipodi:nodetypes="ccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 48.683332,50.8 57.149999,57.15 63.5,61.383334 61.383333,63.5 57.149999,69.85 57.15,63.5 55.033333,59.266667 50.8,55.033334 Z"
+         id="path848"
+         sodipodi:nodetypes="ccccccccc" />
+      <path
+         style="fill:#c1c1c1;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 61.383334,46.566666 c 0,0 0,4.233333 2.116666,6.35 2.116667,2.116667 2.116667,2.116667 2.116667,2.116667 l 2.11667,6.35 L 61.383334,57.149999 57.15,52.916666 v -4.233333 z"
+         id="path850" />
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Shrapnel"
+     style="display:inline">
+    <g
+       id="g1044"
+       transform="translate(2.5371324,-4.6958055)">
+      <path
+         id="rect4569-45-2-9-2"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.1118846,8.5776224 4.5255133,9.3875828 5.0916554,9.7548053 5.408892,10.2701 4.9391419,10.197543 4.393135,10.346355 l -0.6222637,0.370181 -0.5942029,0.0015 0.5090464,-0.70177 0.1200029,-0.5348664 0.1054575,-0.608352 z"
+         sodipodi:nodetypes="cccccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,44.907022,-79.657507)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-14-34-0-9-6"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.103711,9.0859407 4.3044205,8.7905354 4.2763598,9.1592372 4.0677247,10.339379 3.7425625,10.70882 3.3692043,10.930929 3.8782507,10.229159 Z"
+         sodipodi:nodetypes="cccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,43.157456,-83.595512)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-2-00-6-9-8-6-7"
+         style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.533903,9.0653117 4.0641529,8.9927548 3.518146,9.1415669 2.8958823,9.511748 2.3016794,9.5132273 2.6750376,9.2911187 3.0965918,9.2163428 3.7188555,8.8461617 4.1404096,8.7713858 Z"
+         sodipodi:nodetypes="cccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,51.753324,-58.908493)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 63.499999,52.916666 -2.116666,4.233333 2.116666,10.583333 6.35,6.35 v 2.116667 l 4.233333,6.35 -2.116666,-8.466667 -6.35,-8.466666 -2.116667,-12.7 v 0"
+         id="path1038"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+    </g>
+  </g>
+</svg>

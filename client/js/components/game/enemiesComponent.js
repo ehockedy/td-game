@@ -11,13 +11,13 @@ export class EnemiesComponent extends BaseComponent {
     }
 
     loadData() {
-        //let _this = this
         return new Promise((resolve) => {
             fetch("shared/json/enemies.json").then((response) => {
                 response.json().then((enemyJson) => {
+                    // Load enemy sprite data once config loaded, instead of at start
                     let loader = new PIXI.Loader()
 
-                    // Load textures using keyword in each filename for each type of bullet
+                    // Load textures using filename in config for each type of enemy
                     for (let type in enemyJson) {
                         console.log("adding ", enemyJson[type].textureAtlasFile)
                         loader.add(enemyJson[type].textureAtlasFile)

@@ -67,10 +67,10 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "map_ground_features.png",
+	"image": "land_patterns.png",
 	"format": "RGBA8888",
 	"size": {"w":112,"h":247},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:585d53bd879f999775243afaacf709aa:c19aebd46dead91928973aa3995c3876:c1361fcf6c38aff51b6eb05a686d4624$"
+	"smartupdate": "$TexturePacker:SmartUpdate:7daaa2a8f3250cb48801d25e618b99b4:c19aebd46dead91928973aa3995c3876:3ee9f1e80b68656c7efb5417b78c8850$"
 }
 }

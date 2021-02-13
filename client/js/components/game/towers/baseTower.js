@@ -6,13 +6,13 @@ export class BaseTower extends BaseComponent {
         this.type = type
         this.cost = towerConfig[type].cost
 
-        let textures = PIXI.Loader.shared.resources[towerConfig[type].textureAtlas].textures
+        let textures = PIXI.Loader.shared.resources[towerConfig[type].textureAtlasFile].textures
         let baseTextures = []
         let spriteTextures = []
-        let shadowTextures = []
+        //let shadowTextures = []
         for (let textureName in textures) {
             if (textureName.includes("base")) baseTextures.push(textures[textureName])
-            else if (textureName.includes("shadow")) shadowTextures.push(textures[textureName])
+            //else if (textureName.includes("shadow")) shadowTextures.push(textures[textureName])
             else spriteTextures.push(textures[textureName])
         }
 

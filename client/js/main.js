@@ -1,16 +1,16 @@
 import { Application } from "./application.js"
 
 PIXI.Loader.shared
-    .add("client/img/tower_spritesheet.png")
-    .add("client/img/towers/1-rock_thrower/rock_thrower.json")
-    .add("client/img/towers/2-shrapnel_burst/shrapnel_burst.json")
-    .add("client/img/bullets/bullets.json")
-    .add("client/img/infoBox1.png")
-    .add("client/img/rocks.json")
-    .add("client/img/map_tiles.json")
-    .add("client/img/valley_walls.json")
-    .add("client/img/map_ground_features.json")
-    .add("client/img/map_decorations.json")
+    .add("client/assets/bullets/bullets.json")
+    .add("client/assets/towers/1-rock_thrower/rock_thrower.json")
+    .add("client/assets/towers/2-shrapnel_burst/shrapnel_burst.json")
+    .add("client/assets/map/base_tiles/base_tiles.json")
+    .add("client/assets/map/land_patterns/land_patterns.json")
+    .add("client/assets/map/land_decorations/land_decorations.json")
+    .add("client/assets/map/path_decorations/path_decorations.json")
+    .add("client/assets/map/path_sides/path_sides.json")
+
+    .add("client/assets/infoBoxes/infoBox1.png")
     .load(loadConfig)
 
 function loadConfig() {

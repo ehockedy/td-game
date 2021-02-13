@@ -83,10 +83,10 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "rocks.png",
+	"image": "path_decorations.png",
 	"format": "RGBA8888",
 	"size": {"w":32,"h":16},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:db74c7d6edb7a9556402cbe920b87fdb:ba3a69e94b47bf5abfe7615b7c76a922:d1a6669edd33bb4be71949f5d04c017d$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a50dcf78101580e5e03eae03e160a204:ba3a69e94b47bf5abfe7615b7c76a922:20f9c29772e95d379ab8dc3aa197ac81$"
 }
 }

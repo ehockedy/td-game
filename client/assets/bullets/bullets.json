@@ -1,0 +1,28 @@
+{"frames": {
+
+"rock1.png":
+{
+	"frame": {"x":0,"y":0,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"shrapnel1.png":
+{
+	"frame": {"x":0,"y":16,"w":17,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":15},
+	"sourceSize": {"w":17,"h":15}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "bullets.png",
+	"format": "RGBA8888",
+	"size": {"w":17,"h":31},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:dac5c5a4547b18dfbc8569400c6bcb92:703f3da14f631a84ac3a83bc0b061229:878d09cf2bf4ec0dfb23d5bcf7e0eb82$"
+}
+}

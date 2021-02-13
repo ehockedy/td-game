@@ -66,11 +66,11 @@ export class MapComponent extends BaseComponent {
 
         // A texture is a WebGL-ready image
         // Keep things in a texture cache to make rendering fast and efficient
-        this.mapTextures = PIXI.Loader.shared.resources["client/img/map_tiles.json"].textures
-        this.rocksTextures = PIXI.Loader.shared.resources["client/img/rocks.json"].textures
-        this.wallTextures = PIXI.Loader.shared.resources["client/img/valley_walls.json"].textures
-        this.mapFeaturesTextures = PIXI.Loader.shared.resources["client/img/map_ground_features.json"].textures
-        this.mapDecorationsTextures = PIXI.Loader.shared.resources["client/img/map_decorations.json"].textures
+        this.mapTextures = PIXI.Loader.shared.resources["client/assets/map/base_tiles/base_tiles.json"].textures
+        this.rocksTextures = PIXI.Loader.shared.resources["client/assets/map/path_decorations/path_decorations.json"].textures
+        this.wallTextures = PIXI.Loader.shared.resources["client/assets/map/path_sides/path_sides.json"].textures
+        this.mapFeaturesTextures = PIXI.Loader.shared.resources["client/assets/map/land_patterns/land_patterns.json"].textures
+        this.mapDecorationsTextures = PIXI.Loader.shared.resources["client/assets/map/land_decorations/land_decorations.json"].textures
 
         this.towerHash = ""
     }

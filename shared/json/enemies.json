@@ -1,11 +1,11 @@
 {
     "boneheadBandit": {
-        "textureAtlasFile": "client/img/enemies/bonehead1.json",
+        "textureAtlasFile": "client/assets/enemies/bonehead1/bonehead1.json",
         "speed": 2,
         "hp": 25
     },
     "blueBeetle": {
-        "textureAtlasFile": "client/img/enemies/beetle1.json",
+        "textureAtlasFile": "client/assets/enemies/beetle1/beetle1.json",
         "speed": 2,
         "hp": 35
     }

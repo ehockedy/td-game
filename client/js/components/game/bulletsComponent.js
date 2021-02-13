@@ -16,7 +16,7 @@ export class BulletsComponent extends BaseComponent {
             fetch("shared/json/bullets.json").then((response) => {
                 response.json().then((data) => {
                     _this.bulletJson = data
-                    let textures = PIXI.Loader.shared.resources["client/img/bullets/bullets.json"].textures
+                    let textures = PIXI.Loader.shared.resources["client/assets/bullets/bullets.json"].textures
 
                     // Load textures using keyword in each filename for each type of bullet
                     for (let type in _this.bulletJson) this.bulletTextures[type] = []

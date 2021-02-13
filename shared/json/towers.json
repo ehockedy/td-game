@@ -15,7 +15,7 @@
         "cost": 50,
         "shootPattern": "single",
         "bulletType": "rock",
-        "textureAtlas": "client/img/towers/1-rock_thrower/rock_thrower.json"
+        "textureAtlasFile": "client/assets/towers/1-rock_thrower/rock_thrower.json"
     },
     "shrapnel-burst": {
         "spriteSheetNum": 1,
@@ -33,7 +33,7 @@
         "cost": 50,
         "shootPattern": "burst",
         "bulletType": "shrapnel",
-        "textureAtlas": "client/img/towers/2-shrapnel_burst/shrapnel_burst.json"
+        "textureAtlasFile": "client/assets/towers/2-shrapnel_burst/shrapnel_burst.json"
     },
     "rock-scatter": {
         "spriteSheetNum": 2,
