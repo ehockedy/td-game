@@ -57,12 +57,18 @@ export class MapComponent extends BaseComponent {
         this.scale.set(scalingFactor)
 
         this.pathTiles = new PIXI.Container()
-        this.shadowTiles = new PIXI.Container()
         this.sideWalls = new PIXI.Container()
         this.topWalls = new PIXI.Container()
         this.landTiles = new PIXI.Container()
         this.landFeatureTiles = new PIXI.Container()
         this.landDecorations = new PIXI.Container()
+
+        this.addChild(this.landTiles)
+        this.addChild(this.landFeatureTiles)
+        this.addChild(this.pathTiles)
+        this.addChild(this.sideWalls)
+        this.addChild(this.topWalls) // TODO find a way to get this over enemy sprites
+        this.addChild(this.landDecorations)
 
         // A texture is a WebGL-ready image
         // Keep things in a texture cache to make rendering fast and efficient
@@ -84,12 +90,10 @@ export class MapComponent extends BaseComponent {
     }
 
     constructMap() {
-        this.pathTiles.removeChildren()
-        this.shadowTiles.removeChildren()
-        this.sideWalls.removeChildren()
-        this.topWalls.removeChildren()
-        this.landTiles.removeChildren()
-        this.removeChildren()
+        this.children.forEach((container) => {
+            container.removeChildren()
+        })
+
 
         let objectClusterCount = 4
         let objectClusterPoints = []
@@ -213,12 +217,7 @@ export class MapComponent extends BaseComponent {
                 )
             }
         }
-        this.addChild(this.landTiles)
-        this.addChild(this.landFeatureTiles)
-        this.addChild(this.pathTiles)
-        this.addChild(this.sideWalls)
-        this.addChild(this.topWalls) // TODO find a way to get this over enemy sprites
-        this.addChild(this.landDecorations)
+
 
         // The map contains a lot of sprites, none of which move
         // As such can set this to cache as a bitmap to save processing

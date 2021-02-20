@@ -13,7 +13,8 @@ export class ShrapnelBurstTower extends BaseTower {
 
     // Override base sprite generation method because this sprite is made of layers that move independently
     generateSprite(textures) {
-        this.spriteContainer = new PIXI.Container()
+        let spriteContainer = new PIXI.Container()
+        spriteContainer.name = "tower"
         textures.forEach((texture) => {
             let textureName = texture.textureCacheIds[0]
             let sprite = new PIXI.Sprite(texture)
@@ -21,9 +22,9 @@ export class ShrapnelBurstTower extends BaseTower {
             if (textureName.includes("bottom")) this.bottomLayer = sprite
             else if (textureName.includes("middle")) this.middleLayer = sprite
             else if (textureName.includes("top")) this.topLayer = sprite
-            this.spriteContainer.addChild(sprite)
+            spriteContainer.addChild(sprite)
         })
-        this.addChild(this.spriteContainer)
+        this.addChild(spriteContainer)
     }
 
     generateBaseSprite(textures, colour) {

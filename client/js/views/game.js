@@ -1,5 +1,6 @@
 import { MapComponent } from "../components/game/map.js"
 import { TowerMenu } from "../components/game/towerMenu.js"
+import { InteractiveGameSpace } from "../components/game/interactiveGameSpace.js"
 import { PlayersToolbar } from "../components/game/playersToolbar.js"
 import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
@@ -7,7 +8,8 @@ import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { GraphicButton } from "../components/ui_common/button.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
-import { setBoard } from "../state.js"
+import { setBoard, getBoard } from "../state.js"
+import { randomHexString } from "../tools.js"
 
 /**
  * This class sets up what will appear in the game view.
@@ -16,13 +18,20 @@ import { setBoard } from "../state.js"
 export class GameRenderer {
     constructor(spriteHandler, config) {
         this.spriteHandler = spriteHandler
-        this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE_MAP)
-        this.tm = new TowerMenu(this.spriteHandler, config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, config.MAP_WIDTH - config.TOWER_MENU_WIDTH, 0, config.MAP_WIDTH, config.MAP_HEIGHT, config.SPRITE_SIZE_MAP)
-        this.ut = new PlayersToolbar(config.PLAYER_TOOLBAR_WIDTH, config.PLAYER_TOOLBAR_HEIGHT, 0, config.MAP_HEIGHT)
+
+        this.tm = new TowerMenu(
+            config.MAP_WIDTH, config.MAP_HEIGHT + config.TOWER_MENU_HEIGHT, 0, 0, // Component w, h, x, y
+            config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, 0, config.MAP_HEIGHT // Toolbar w, h, x, y
+        )
+        this.ut = new PlayersToolbar(config.PLAYER_TOOLBAR_WIDTH, config.PLAYER_TOOLBAR_HEIGHT, 0, 0)
         this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_MAP)
         this.ec = new EnemiesComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
         this.bc = new BulletsComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
         this.perRoundUpdateText = new OnScreenMessage(config.MAP_WIDTH/2, config.MAP_HEIGHT/2, "Round 1", 30)
+        this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE_MAP)
+
+        this.gameSpace = new InteractiveGameSpace(getBoard(), this.tm, config.SPRITE_SIZE_MAP)
+        this.gameSpace.x = this.ut.width
 
         this.startRoundButton = new GraphicButton(
             150, 80, // width, height
@@ -83,7 +92,6 @@ export class GameRenderer {
         })
 
         addSocketEvent(MSG_TYPES.ROUND_START, () => {
-            this.tm.stopInteraction()
             this.startRoundButton.interactive = false // TODO this button should also disappear - weird to have it during the round
             this.startRoundButton.buttonMode = false
         })
@@ -103,13 +111,41 @@ export class GameRenderer {
             this.startRoundButton.interactive = true
             this.startRoundButton.buttonMode = true
         })
+
+        // TODO this should be a component specifically for communication with the server, initialised, and passed in like sprite handler
+        // For now, use a pixi container as it can listen for events
+        this.clientLink = new PIXI.Container()
+        this.clientLink.on(("confirmTowerPlace"), (tower) => {
+            let name = randomHexString(6)
+            let setTowerMsg = {
+                "row": tower.row,
+                "col": tower.col,
+                "type": tower.type,
+                "id": name
+            }
+            sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, setTowerMsg)
+            tower.reset()
+        })
     }
 
-    loadAssets() {
+    loadData() {
+        let _this = this
+        return new Promise((resolve) => {
+            fetch("shared/json/towers.json").then((response) => {
+                response.json().then((data) => {
+                    _this.towerJson = data
+                    _this.tm.setTowerData(data)
+                    resolve()
+                })
+            })
+        })
+    }
+
+    loadAssets() { // TODO load tower json and pass through
         return Promise.all([
+            this.loadData(),
             this.tc.loadData(),
             this.ec.loadData(),
-            this.tm.loadData(),
             this.bc.loadData()
         ])
     }
@@ -117,23 +153,32 @@ export class GameRenderer {
     startRendering() {
         // Register containers with the sprite layer
         // The order here is the order they are rendered on the map
-        this.spriteHandler.registerContainer(this.map)
-        this.spriteHandler.registerContainer(this.ec)
+        this.gameSpace.addChild(this.map)
+        this.gameSpace.addChild(this.tc) // TODO call tick()
+        this.gameSpace.addChild(this.tm)
+        this.gameSpace.addChild(this.ec)
+        this.gameSpace.addChild(this.bc)
+
+        this.spriteHandler.registerContainer(this.gameSpace)
         this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.startRoundButton)
-        this.spriteHandler.registerDynamicContainer(this.tc)
-        this.spriteHandler.registerDynamicContainer(this.tm)
-        this.spriteHandler.registerContainer(this.bc)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
 
         this.spriteHandler.registerContainer(this.debugExportGameButton)
         this.spriteHandler.registerContainer(this.debugImportGameButton)
 
-
         // Set up links between components that need them
         this.tm.setTowerFactoryLink(this.tc)
 
+        // Load towers into the menu
         this.tm.addTowers()
+        this.tm.subscribeToAllTowers(this.gameSpace)  // TODO this should be done automatically
+
+        // Now that tower menu towers are added, set up the event listeners
+        this.gameSpace.setTowerInteraction()
+
+        // Subscribe componenets to get updated when draggable towers are updated
+        this.tm.subscribeToAllTowers(this.clientLink)
 
         // Begin the rendering loop
         this.spriteHandler.render()
@@ -141,6 +186,7 @@ export class GameRenderer {
         this.perRoundUpdateText.fadeInThenOut(1000, 2000)
     }
 
+    // TODO I think tick from the sprite handler can just be donw using this update call. Keeps undates in line with the server.
     update(serverUpdate) {
         this.tc.update(serverUpdate["towers"])
         this.map.update(serverUpdate["towers"])

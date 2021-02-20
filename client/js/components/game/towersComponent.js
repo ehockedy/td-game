@@ -1,7 +1,7 @@
 import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
 import { TowerInfoComponent } from "./towerInfoComponent.js"
-import { RockThrowerTower } from "./towers/rockThrower.js"
+import { RockThrowerDraggableTower, RockThrowerNonInteractiveTower, RockThrowerDeployedTower } from "./towers/rockThrower.js"
 import { ShrapnelBurstTower } from "./towers/shrapnelBurst.js"
 import { randomHexString } from "../../tools.js"
 
@@ -17,6 +17,8 @@ export class TowersComponent extends BaseComponent {
         this.mapSpriteSize = mapSpriteSize
         this.sprite_handler = sprite_handler
         this.towerStateHashPrev = ""
+
+        this.setupInteraction()
     }
 
     // Asynchronosly load the tower data
@@ -33,11 +35,17 @@ export class TowersComponent extends BaseComponent {
         })
     }
 
-    getTowerSprite(name, type) {
+    setupInteraction() {
+        this.on("clickDeployedTower", (tower) => {
+            tower.toggleInfoContainer()
+        })
+    }
+
+    getDraggableTowerSprite(name, type, originX, originY) {
         let sprite
         switch(type) {
             case "rock-thrower":
-                sprite = new RockThrowerTower(name, this.towerJson)
+                sprite = new RockThrowerDraggableTower(name, this.towerJson, originX, originY)
                 break
             case "shrapnel-burst":
                 sprite = new ShrapnelBurstTower(name, this.towerJson)
@@ -46,41 +54,46 @@ export class TowersComponent extends BaseComponent {
         return sprite
     }
 
-    addPlacedTower(type, name, playerID, row, col) {
-        let sprite = this.getTowerSprite(name, type)
-        sprite.playerID = playerID
-
-        sprite.gridX = col
-        sprite.gridY = row
-        sprite.x = sprite.gridX * this.mapSpriteSize + this.mapSpriteSize / 2;
-        sprite.y = sprite.gridY * this.mapSpriteSize + this.mapSpriteSize / 2;
-
-        if (playerID == getUserID()) { // Only make the tower interactive if the user placed it
-            sprite.interactive = true; // reponds to mouse and touch events
-            sprite.buttonMode = true; // hand cursor appears when hover over
-            sprite.setInfoPopup(new TowerInfoComponent(sprite.name))
-            sprite.hideInfoContainer()
-            sprite
-                .on('click', ()=> {
-                    if (this.sprite_handler.getActiveClickable() == sprite) { // Clicked on the currently active tower
-                        sprite.emit("clickoff")
-                    } else { // Clicked on tower that is not active
-                        if (this.sprite_handler.isActiveClickableSet()) this.sprite_handler.getActiveClickable().emit('clickoff') // Cancel current active clickable
-                        this.sprite_handler.setActiveClickable(sprite) // Register this as the active object
-                        sprite.showRangeCircle()
-                        sprite.showInfoContainer()
-                    }
-                })
-                .on('clickoff', ()=>{  // This is a custom event triggered manually
-                    sprite.hideRangeCircle()
-                    sprite.hideInfoContainer()
-                    this.sprite_handler.unsetActiveClickable()
-                });
-
-            // Sprite stats (custom properties)
-            sprite.kills = 0
+    getStaticTowerSprite(name, type) {
+        let sprite
+        switch(type) {
+            case "rock-thrower":
+                sprite = new RockThrowerNonInteractiveTower(name, this.towerJson)
+                break
+            case "shrapnel-burst":
+                sprite = new ShrapnelBurstTower(name, this.towerJson)
+                break
         }
-        this.addChild(sprite)
+        return sprite
+    }
+
+    getDeployedTowerSprite(name, type, playerID, x, y) {
+        let sprite
+        switch(type) {
+            case "rock-thrower":
+                sprite = new RockThrowerDeployedTower(name, this.towerJson, playerID, x, y)
+                break
+            case "shrapnel-burst":
+                sprite = new ShrapnelBurstTower(name, this.towerJson)
+                break
+        }
+        return sprite
+    }
+
+
+    addPlacedTower(type, name, playerID, row, col) {
+        let x = col * this.mapSpriteSize + this.mapSpriteSize / 2;
+        let y = row * this.mapSpriteSize + this.mapSpriteSize / 2;
+        if (playerID == getUserID()) {
+            let sprite = this.getDeployedTowerSprite(name, type, playerID, x, y)
+            sprite.subscribe(this)
+            this.addChild(sprite)
+        } else {
+            let sprite = this.getStaticTowerSprite(name, type)
+            sprite.x = x
+            sprite.y = y
+            this.addChild(sprite)
+        }
     }
 
     update(towerData) {
