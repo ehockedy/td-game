@@ -1,5 +1,6 @@
-import { BaseTower } from "./baseTower.js"
+import { BaseTower } from "./base/baseTower.js"
 
+// Base tower class the contains functionality for all interactive towers
 export class BaseInteractiveTower extends BaseTower {
     constructor(type, name, towerConfig) {
         super(type, name, towerConfig)

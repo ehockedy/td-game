@@ -1,4 +1,4 @@
-import { BaseTower } from "./baseTower.js"
+import { BaseTower } from "./base/baseTower.js"
 
 export class BaseNonInteractiveTower extends BaseTower {
     constructor(type, name, towerConfig) {

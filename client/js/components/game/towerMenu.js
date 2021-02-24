@@ -2,6 +2,8 @@ import { BaseToolbarComponent } from "./base/baseToolbarComponent.js"
 import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
+import { MenuIconTower } from "./towers/menuIconTower.js"
+import { DraggableTower } from "./towers/draggableTower.js"
 
 /**
  * Class that represents the tower menu
@@ -36,11 +38,6 @@ export class TowerMenu extends BaseComponent {
         this.towerJson = data
     }
 
-    // Link to tower component object that returns a sprite of the requested type
-    setTowerFactoryLink(towerFactory) {
-        this.towerFactoryLink = towerFactory
-    }
-
     // Subscribe the given observer to all of the draggable towers
     // Any event emitted by the towers will be sent to all the observers
     subscribeToAllTowers(observer) {
@@ -53,7 +50,7 @@ export class TowerMenu extends BaseComponent {
     addTowers() {
         let numTowers = 1 // Start at 1 because positioning function is 1 indexed
         for (let towerType in this.towerJson) {
-            let icon =  this.towerFactoryLink.getStaticTowerSprite(towerType + "_icon", towerType)
+            let icon = new MenuIconTower(towerType, towerType + "_icon", this.towerJson)
 
             let x = getPositionWithinEquallySpacedObjects(numTowers, Object.keys(this.towerJson).length, icon.width, this.width_px)
             let y = this.y_menu + this.height_menu_px/2
@@ -61,12 +58,11 @@ export class TowerMenu extends BaseComponent {
             icon.x = x
             icon.y = y
             this.icons.addChild(icon)
-
-            let towerSprite = this.towerFactoryLink.getDraggableTowerSprite(towerType + "_drag", towerType, icon.x, icon.y)
+            let towerSprite = new DraggableTower(towerType, towerType + "_drag", this.towerJson, icon.x, icon.y)
             this.sprites.addChild(towerSprite)
 
             numTowers += 1
-            if (numTowers >= 1) break // Temporary while adding other towers
+            if (numTowers >= 3) break // Temporary while adding other towers
         }
     }
 

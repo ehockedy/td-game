@@ -134,6 +134,7 @@ export class GameRenderer {
             fetch("shared/json/towers.json").then((response) => {
                 response.json().then((data) => {
                     _this.towerJson = data
+                    _this.towerJson["colour"] = "0x" + randomHexString(6) // TODO this needs to go elsewhere, and in one place
                     _this.tm.setTowerData(data)
                     resolve()
                 })
@@ -167,9 +168,6 @@ export class GameRenderer {
         this.spriteHandler.registerContainer(this.debugExportGameButton)
         this.spriteHandler.registerContainer(this.debugImportGameButton)
 
-        // Set up links between components that need them
-        this.tm.setTowerFactoryLink(this.tc)
-
         // Load towers into the menu
         this.tm.addTowers()
         this.tm.subscribeToAllTowers(this.gameSpace)  // TODO this should be done automatically
@@ -195,6 +193,7 @@ export class GameRenderer {
         this.bc.update(serverUpdate["bullets"])
         this.ut.update(serverUpdate["players"])
         //this.git.update(serverUpdate["worldState"])
+        this.tc.tick()
     }
 
     addPlayer(playerInfo) {

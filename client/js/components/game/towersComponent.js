@@ -1,8 +1,6 @@
 import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
-import { TowerInfoComponent } from "./towerInfoComponent.js"
-import { RockThrowerDraggableTower, RockThrowerNonInteractiveTower, RockThrowerDeployedTower } from "./towers/rockThrower.js"
-import { ShrapnelBurstTower } from "./towers/shrapnelBurst.js"
+import { DeployedTower } from "./towers/deployedTower.js"
 import { randomHexString } from "../../tools.js"
 
 /**
@@ -41,59 +39,16 @@ export class TowersComponent extends BaseComponent {
         })
     }
 
-    getDraggableTowerSprite(name, type, originX, originY) {
-        let sprite
-        switch(type) {
-            case "rock-thrower":
-                sprite = new RockThrowerDraggableTower(name, this.towerJson, originX, originY)
-                break
-            case "shrapnel-burst":
-                sprite = new ShrapnelBurstTower(name, this.towerJson)
-                break
-        }
-        return sprite
-    }
-
-    getStaticTowerSprite(name, type) {
-        let sprite
-        switch(type) {
-            case "rock-thrower":
-                sprite = new RockThrowerNonInteractiveTower(name, this.towerJson)
-                break
-            case "shrapnel-burst":
-                sprite = new ShrapnelBurstTower(name, this.towerJson)
-                break
-        }
-        return sprite
-    }
-
-    getDeployedTowerSprite(name, type, playerID, x, y) {
-        let sprite
-        switch(type) {
-            case "rock-thrower":
-                sprite = new RockThrowerDeployedTower(name, this.towerJson, playerID, x, y)
-                break
-            case "shrapnel-burst":
-                sprite = new ShrapnelBurstTower(name, this.towerJson)
-                break
-        }
-        return sprite
-    }
-
-
     addPlacedTower(type, name, playerID, row, col) {
-        let x = col * this.mapSpriteSize + this.mapSpriteSize / 2;
-        let y = row * this.mapSpriteSize + this.mapSpriteSize / 2;
+        let sprite = new DeployedTower(type, name, this.towerJson, playerID)
         if (playerID == getUserID()) {
-            let sprite = this.getDeployedTowerSprite(name, type, playerID, x, y)
             sprite.subscribe(this)
-            this.addChild(sprite)
         } else {
-            let sprite = this.getStaticTowerSprite(name, type)
-            sprite.x = x
-            sprite.y = y
-            this.addChild(sprite)
+            sprite.disableInteractivity()
         }
+        sprite.x = col * this.mapSpriteSize + this.mapSpriteSize / 2;
+        sprite.y = row * this.mapSpriteSize + this.mapSpriteSize / 2;
+        this.addChild(sprite)
     }
 
     update(towerData) {
@@ -128,7 +83,7 @@ export class TowersComponent extends BaseComponent {
             towerToUpdate.rotation = tower.angle
 
             if (tower.hasShot) {
-                towerToUpdate.onShoot()
+                towerToUpdate.shoot()
             }
 
             // Update the tower statsistics, but only store stats for towers a playerID owns

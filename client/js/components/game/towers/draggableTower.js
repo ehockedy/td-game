@@ -1,9 +1,9 @@
-import { BaseInteractiveTower } from "./baseInteractiveTower.js"
+import { BaseInteractiveTower } from "./base/baseInteractiveTower.js"
 import { GraphicButton } from "../../ui_common/button.js"
 import { getPositionWithinEquallySpacedObjects } from "../../../tools.js"
 
-
-export class BaseDraggableTower extends BaseInteractiveTower {
+// Tower class that represents a tower in the menu the user can drag around and buy
+export class DraggableTower extends BaseInteractiveTower {
     constructor(type, name, towerConfig, originX, originY) {
         super(type, name, towerConfig)
         this.cost = towerConfig[type].cost
