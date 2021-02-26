@@ -5,7 +5,7 @@ import { GameSetting } from "../components/lobby/gameSetting.js"
 import { Player } from "../components/lobby/player.js"
 import { getPositionWithinEquallySpacedObjects } from "../tools.js"
 import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
-import { setBoard, setUserID, getGameID } from "../state.js"
+import { setUserID, getGameID } from "../state.js"
 
 
 /**
@@ -118,7 +118,7 @@ export class LobbyRenderer {
 
         // Events the can come from server
         addSocketEvent(MSG_TYPES.SERVER_SET_GAME_BOARD, (grid) => {
-            setBoard(grid);
+            this.map.setGridValues(grid);
             this.map.constructMap()
         })
 

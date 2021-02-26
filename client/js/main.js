@@ -10,7 +10,7 @@ PIXI.Loader.shared
     .add("client/assets/map/path_decorations/path_decorations.json")
     .add("client/assets/map/path_sides/path_sides.json")
 
-    .add("client/assets/infoBoxes/infoBox1.png")
+    .add("client/assets/infoBoxes/infoBoxes.json")
     .load(loadConfig)
 
 function loadConfig() {

@@ -8,7 +8,6 @@ import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { GraphicButton } from "../components/ui_common/button.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
-import { setBoard, getBoard } from "../state.js"
 import { randomHexString } from "../tools.js"
 
 /**
@@ -21,7 +20,7 @@ export class GameRenderer {
 
         this.tm = new TowerMenu(
             config.MAP_WIDTH, config.MAP_HEIGHT + config.TOWER_MENU_HEIGHT, 0, 0, // Component w, h, x, y
-            config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, 0, config.MAP_HEIGHT // Toolbar w, h, x, y
+            config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, 0, config.MAP_HEIGHT + config.BORDER_B/4 // Toolbar w, h, x, y
         )
         this.ut = new PlayersToolbar(config.PLAYER_TOOLBAR_WIDTH, config.PLAYER_TOOLBAR_HEIGHT, 0, 0)
         this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_MAP)
@@ -30,8 +29,13 @@ export class GameRenderer {
         this.perRoundUpdateText = new OnScreenMessage(config.MAP_WIDTH/2, config.MAP_HEIGHT/2, "Round 1", 30)
         this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE_MAP)
 
-        this.gameSpace = new InteractiveGameSpace(getBoard(), this.tm, config.SPRITE_SIZE_MAP)
-        this.gameSpace.x = this.ut.width
+        this.gameSpace = new InteractiveGameSpace(
+            this.map, this.tm,
+            config.SPRITE_SIZE_MAP,
+            config.MAP_WIDTH, config.MAP_HEIGHT + config.BORDER_B
+        )
+        this.gameSpace.x = this.ut.width + config.BORDER_L
+        this.gameSpace.y = config.BORDER_T
 
         this.startRoundButton = new GraphicButton(
             150, 80, // width, height
@@ -79,12 +83,12 @@ export class GameRenderer {
         })
 
         addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid) => {
-            setBoard(grid);
+            this.map.setGridValues(grid);
         })
 
         addSocketEvent(MSG_TYPES.SERVER_SET_GAME_BOARD, (grid) => {
-            setBoard(grid);
-            this.map.constructMap()
+            this.map.setGridValues(grid);
+            this.map.constructMap(2)
         })
 
         addSocketEvent(MSG_TYPES.PLAYER_READY, (playerData) => {

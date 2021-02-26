@@ -1,4 +1,3 @@
-import { getBoard } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
 
 function getRandomObject(jsonObject) {
@@ -21,22 +20,6 @@ function randomlyPlaceObjects(textureArray, maxCount, targetContainer, strictlyW
     }
 }
 
-function isNextToPath(x, y, xMax, yMax) {
-    let nextToPath = false
-    for (let col = -1; col <= 1; col += 1) {
-        for (let row = -1; row <= 1; row += 1) {
-            let colToCheck = x + col
-            let rowToCheck = y + row
-            if (colToCheck >= 0 && colToCheck < xMax && rowToCheck >= 0 && rowToCheck < yMax) {
-                if ( getBoard()[rowToCheck][colToCheck]["value"] != 'x') {
-                    nextToPath = true
-                }
-            }
-        }
-    }
-    return nextToPath
-}
-
 // Returns true if the given row, col combination is within dist squares from the given target row, target col combination
 function isNearToPoint(r, c, target_r, target_c, dist) {
   let r_diff = target_r - r
@@ -51,6 +34,8 @@ export class MapComponent extends BaseComponent {
         this.scalingFactor = scalingFactor
         this.cols = cols
         this.rows = rows
+
+        this.grid = [[]]  // 2d array that stores the row and column values
 
         this.width_px = this.mapSpriteSize*this.scalingFactor*this.cols
         this.height_px = this.mapSpriteSize*this.scalingFactor*this.rows
@@ -89,11 +74,10 @@ export class MapComponent extends BaseComponent {
         return this.height_px
     }
 
-    constructMap() {
+    constructMap(border=0) {
         this.children.forEach((container) => {
             container.removeChildren()
         })
-
 
         let objectClusterCount = 4
         let objectClusterPoints = []
@@ -104,11 +88,11 @@ export class MapComponent extends BaseComponent {
             })
         }
 
-        for (let r = 0; r < this.rows; r++) {
-            for (let c = 0; c < this.cols; c++) {
+        for (let r = 0 - border; r < this.rows + border; r++) {
+            for (let c = 0 - border; c < this.cols + border; c++) {
                 // Determine the sprite to used, based on tile type
                 let textureName = "land_1.png" // Default to land
-                switch(getBoard()[r][c]["value"]) {
+                switch(this.getGridValue(r, c)) {
                     case 'r':
                     case 'l':
                     case 'u':
@@ -135,7 +119,7 @@ export class MapComponent extends BaseComponent {
                 map_square_sprite.name = "map_" + r.toString() + "_" + c.toString()
 
                 //  Path tiles
-                if (getBoard()[r][c]["value"] != 'x') {
+                if (this.getGridValue(r, c) != 'x') {
                     // Randomly add some rocks to path tiles
                     this.pathTiles.addChild(map_square_sprite)
                     randomlyPlaceObjects(
@@ -148,7 +132,7 @@ export class MapComponent extends BaseComponent {
 
                     // Add the wall of the valley. These sprites go on the tiles adjacent to the path, so there is enough room for enemy sprites.
                     // Rotate based on direction of the path.
-                    let direction = getBoard()[r][c]["value"]
+                    let direction = this.getGridValue(r, c)
                     let midCol = this.cols / 2
                     let shiftX = map_square_sprite.x
                     let shiftY = map_square_sprite.y
@@ -190,14 +174,14 @@ export class MapComponent extends BaseComponent {
                 } else {
                     this.landTiles.addChild(map_square_sprite)
 
-                    let addObjectChance = 0.85
+                    let addObjectChance = 0.2
                     let distanceToCluster = 2
                     objectClusterPoints.forEach((point) => {
-                        if (isNearToPoint(r, c, point.r, point.c, distanceToCluster)) addObjectChance = 0.2
+                        if (isNearToPoint(r, c, point.r, point.c, distanceToCluster)) addObjectChance = 0.5
                     })
-                    if (Math.random() >= addObjectChance && !isNextToPath(c, r, this.cols, this.rows)) {
+                    if (Math.random() <= addObjectChance && !this.isNextToPath(c, r, this.cols, this.rows)) {
                         randomlyPlaceObjects(
-                            this.mapDecorationsTextures, 1, this.landDecorations, false,
+                            this.mapDecorationsTextures, 1, this.landDecorations, true,
                             this.mapSpriteSize, this.mapSpriteSize,
                             map_square_sprite.x, map_square_sprite.y,
                             10, 1.5,
@@ -234,6 +218,34 @@ export class MapComponent extends BaseComponent {
             0, 0            // pivot
         )
         return sprite
+    }
+
+    isNextToPath(x, y, xMax, yMax) {
+        let nextToPath = false
+        for (let col = -1; col <= 1; col += 1) {
+            for (let row = -1; row <= 1; row += 1) {
+                let colToCheck = x + col
+                let rowToCheck = y + row
+                if (colToCheck >= 0 && colToCheck < xMax && rowToCheck >= 0 && rowToCheck < yMax) {
+                    if (this.getGridValue(rowToCheck, colToCheck) != 'x') {
+                        nextToPath = true
+                    }
+                }
+            }
+        }
+        return nextToPath
+    }
+
+    getGridValue(r, c) {
+        if (r < 0 || c < 0 || r >= this.rows || c >= this.cols) {
+            return 'x'
+        } else {
+            return this.grid[r][c]["value"]
+        }
+    }
+
+    setGridValues(grid) {
+        this.grid = grid
     }
 
     update(towerUpdate) {

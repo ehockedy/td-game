@@ -10,19 +10,36 @@ import { DraggableTower } from "./towers/draggableTower.js"
  * It contains the menu sprite itself, holds the draggable tower sprites, and defines the area that the towers can move in
  */
 export class TowerMenu extends BaseComponent {
-    constructor(width_px, height_px, x, y, menu_width_px, height_menu_px, x_menu, y_menu) {
+    constructor(width_px, height_px, x, y, width_menu_px, height_menu_px, x_menu, y_menu) {
         super("towermenu")
         this.width_px = width_px
         this.height_px = height_px
-        this.menu_width_px = menu_width_px
+        this.width_menu_px = width_menu_px
         this.height_menu_px = height_menu_px
         this.x = x
         this.y = y
         this.x_menu = x_menu
-        this.y_menu = y_menu
+        this.y_menu = y_menu //- 15 - 70
 
-        this.menuBackground = new BaseToolbarComponent("towermenu", menu_width_px, height_menu_px, x_menu, y_menu)
-        this.addChild(this.menuBackground)
+        let baseTexture = PIXI.Loader.shared.resources["client/assets/infoBoxes/infoBoxes.json"].textures["slanted_infobox_greyscale_1.png"]
+        let infoTextBox = new PIXI.NineSlicePlane(baseTexture, 1, 0, 64, 0)
+        infoTextBox.width = this.width_menu_px - 500
+        infoTextBox.height = this.height_menu_px
+        infoTextBox.y = y_menu
+        infoTextBox.x = x_menu
+        infoTextBox.tint = "0xFFEEBB"
+
+        let shadowTextBox = new PIXI.NineSlicePlane(baseTexture, 1, 0, 64, 0)
+        shadowTextBox.width = infoTextBox.width 
+        shadowTextBox.height = infoTextBox.height
+        shadowTextBox.y = infoTextBox.y + 5
+        shadowTextBox.x = infoTextBox.x
+        shadowTextBox.tint = "0x000000"
+        shadowTextBox.alpha = 0.8
+
+        this.addChild(shadowTextBox)
+        this.addChild(infoTextBox)
+
 
         // The icons that mark the positions of the towers. They cannot be interacted with and do not move.
         this.icons = new PIXI.Container()

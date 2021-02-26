@@ -9,7 +9,7 @@ export class InfoTextBox extends PIXI.Container {
         let xMargin = 24
         let yMargin = 32
         
-        let baseImage = PIXI.Loader.shared.resources["client/assets/infoBoxes/infoBox1.png"].texture
+        let baseImage = PIXI.Loader.shared.resources["client/assets/infoBoxes/infoBoxes.json"].textures["slanted_infobox_greyscale_1.png"]
         let baseTexture = new PIXI.Texture(baseImage, new PIXI.Rectangle(0, 0, 130, 130))
         let infoTextBox = new PIXI.NineSlicePlane(baseTexture, 64, 64, 64, 64)
         infoTextBox.width = width_px
