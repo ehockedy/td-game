@@ -90,7 +90,7 @@ export class LobbyRenderer {
         this.regenerateMapButton.on("tap", ()=>{sendMessage(MSG_TYPES.GET_MAP_REGENERATE, {"seed": this.seedInput.text})})
 
         // Lobby members - player that clicked new game is player 1. They can change the game options. When another player joins they fill in the second slot and so on
-        let playerSideLen = popupBoundaryBottom - this.map.y - this.map.getHeight() - yMargin - 20
+        let playerSideLen = 300 //popupBoundaryBottom - this.map.y - this.map.getHeight() - yMargin - 20
         let playerMargin = 15
         let playersY = popupBoundaryBottom - yMargin
         let playersX = popupBoundaryLeft + xMargin

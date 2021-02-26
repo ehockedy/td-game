@@ -34,7 +34,7 @@ export class GameRenderer {
             config.SPRITE_SIZE_MAP,
             config.MAP_WIDTH, config.MAP_HEIGHT + config.BORDER_B
         )
-        this.gameSpace.x = this.ut.width + config.BORDER_L
+        this.gameSpace.x = 0
         this.gameSpace.y = config.BORDER_T
 
         this.startRoundButton = new GraphicButton(
@@ -165,7 +165,7 @@ export class GameRenderer {
         this.gameSpace.addChild(this.bc)
 
         this.spriteHandler.registerContainer(this.gameSpace)
-        this.spriteHandler.registerContainer(this.ut)
+        //this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.startRoundButton)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
 
