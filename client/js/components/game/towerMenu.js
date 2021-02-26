@@ -1,4 +1,4 @@
-import { BaseToolbarComponent } from "./base/baseToolbarComponent.js"
+import { UIComponentBackground1 } from "../ui_common/uiComponentBackground1.js"
 import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
@@ -21,25 +21,8 @@ export class TowerMenu extends BaseComponent {
         this.x_menu = x_menu
         this.y_menu = y_menu //- 15 - 70
 
-        let baseTexture = PIXI.Loader.shared.resources["client/assets/infoBoxes/infoBoxes.json"].textures["slanted_infobox_greyscale_1.png"]
-        let infoTextBox = new PIXI.NineSlicePlane(baseTexture, 1, 0, 64, 0)
-        infoTextBox.width = this.width_menu_px - 500
-        infoTextBox.height = this.height_menu_px
-        infoTextBox.y = y_menu
-        infoTextBox.x = x_menu
-        infoTextBox.tint = "0xFFEEBB"
-
-        let shadowTextBox = new PIXI.NineSlicePlane(baseTexture, 1, 0, 64, 0)
-        shadowTextBox.width = infoTextBox.width 
-        shadowTextBox.height = infoTextBox.height
-        shadowTextBox.y = infoTextBox.y + 5
-        shadowTextBox.x = infoTextBox.x
-        shadowTextBox.tint = "0x000000"
-        shadowTextBox.alpha = 0.8
-
-        this.addChild(shadowTextBox)
-        this.addChild(infoTextBox)
-
+        this.menuBackground = new UIComponentBackground1("towerMenuBackground", x_menu, y_menu - 10,  this.width_menu_px - 500, "0xFFEEBB")
+        this.addChild(this.menuBackground)
 
         // The icons that mark the positions of the towers. They cannot be interacted with and do not move.
         this.icons = new PIXI.Container()
@@ -70,7 +53,7 @@ export class TowerMenu extends BaseComponent {
             let icon = new MenuIconTower(towerType, towerType + "_icon", this.towerJson)
 
             let x = getPositionWithinEquallySpacedObjects(numTowers, Object.keys(this.towerJson).length, icon.width, this.width_px)
-            let y = this.y_menu + this.height_menu_px/2
+            let y = this.menuBackground.y + this.menuBackground.height / 2
 
             icon.x = x
             icon.y = y

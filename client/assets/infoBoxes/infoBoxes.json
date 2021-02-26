@@ -10,19 +10,19 @@
 },
 "slanted_infobox_greyscale_1.png":
 {
-	"frame": {"x":640,"y":0,"w":84,"h":96},
+	"frame": {"x":640,"y":0,"w":73,"h":84},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":84,"h":96},
-	"sourceSize": {"w":84,"h":96}
+	"spriteSourceSize": {"x":0,"y":0,"w":73,"h":84},
+	"sourceSize": {"w":73,"h":84}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "infoBoxes.png",
 	"format": "RGBA8888",
-	"size": {"w":724,"h":401},
+	"size": {"w":713,"h":401},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:32b261dfd213232d10714665322b91be:fb8c48a59626dc1e33e72244df49626f:6e357e46a3e3296ccfd2792444818046$"
+	"smartupdate": "$TexturePacker:SmartUpdate:213f61debd06efa5b83cdf3ffc84759b:a65711c448607cd901386dfe62e98569:6e357e46a3e3296ccfd2792444818046$"
 }
 }
