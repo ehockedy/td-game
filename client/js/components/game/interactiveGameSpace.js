@@ -12,8 +12,8 @@ export class InteractiveGameSpace extends BaseComponent {
         this.map = map
         this.towerMenu = towerMenu
         this.mapSpriteSize = mapSpriteSize
-        this.interactionBoundaryX = interactionBoundaryX
-        this.interactionBoundaryY = interactionBoundaryY
+        this.interactionBoundaryX = interactionBoundaryX - 1
+        this.interactionBoundaryY = interactionBoundaryY - 1
 
         this.addChild(this.towerMenu)
     }
@@ -25,18 +25,32 @@ export class InteractiveGameSpace extends BaseComponent {
         // If the tower is within the map area, snap to grid
         this.on("clickAndDragTower", (event, tower)=> {
             let pos = event.data.getLocalPosition(this.towerMenu)
+
+            // Still want to move if mouse outside the boundary, so map the position to the most extreme point within the boundary
+            if (pos.x < 0) pos.x = 0
+            if (pos.x > this.interactionBoundaryX) pos.x = this.interactionBoundaryX
+            if (pos.y < 0) pos.y = 0
+            if (pos.y > this.interactionBoundaryY) pos.y = this.interactionBoundaryY
+
+            // Map grid position
             let col = Math.floor(pos.x / this.mapSpriteSize)
             let row = Math.floor(pos.y / this.mapSpriteSize)
 
             // Check is within map
-            if (pos.x >= 0 && pos.y >= 0 && pos.x < this.interactionBoundaryX && pos.y < this.interactionBoundaryY) {
+            let xInArea = pos.x >= 0 && pos.x < this.interactionBoundaryX
+            let yInArea = pos.y >= 0 && pos.y < this.interactionBoundaryY
+            if (xInArea || yInArea) {
                 if (pos.y < this.map.height_px) {
                     // If in the map area, snap to grid, and don't move if over a path or occupied space
                     if (this.map.getGridValue(row, col) == 'x' && pos.y < this.towerMenu.height_px - this.towerMenu.height_menu_px) {
-                        tower.setX(tower.col * this.mapSpriteSize + this.mapSpriteSize / 2)
-                        tower.setY(tower.row * this.mapSpriteSize + this.mapSpriteSize / 2)
-                        tower.setCol(col)
-                        tower.setRow(row)
+                        if (xInArea) {
+                            tower.setX(tower.col * this.mapSpriteSize + this.mapSpriteSize / 2)
+                            tower.setCol(col)
+                        }
+                        if (yInArea) {
+                            tower.setY(tower.row * this.mapSpriteSize + this.mapSpriteSize / 2)
+                            tower.setRow(row)
+                        }
                     }
                 } else {
                     // Update positon normally if within the tower menu area
