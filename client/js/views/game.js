@@ -20,7 +20,7 @@ export class GameRenderer {
 
         this.tm = new TowerMenu(
             config.MAP_WIDTH, config.MAP_HEIGHT + config.TOWER_MENU_HEIGHT, 0, 0, // Component w, h, x, y
-            config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, 0, config.MAP_HEIGHT + config.BORDER_B/4 // Toolbar w, h, x, y
+            config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, -config.BORDER_L, config.MAP_HEIGHT + config.BORDER_B/4 // Toolbar w, h, x, y
         )
         this.ut = new PlayersToolbar(config.PLAYER_TOOLBAR_WIDTH, config.PLAYER_TOOLBAR_HEIGHT, 0, 0)
         this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_MAP)
@@ -34,7 +34,7 @@ export class GameRenderer {
             config.SPRITE_SIZE_MAP,
             config.MAP_WIDTH, config.MAP_HEIGHT + config.BORDER_B
         )
-        this.gameSpace.x = 0
+        this.gameSpace.x = config.BORDER_L
         this.gameSpace.y = config.BORDER_T
 
         this.startRoundButton = new GraphicButton(
@@ -88,7 +88,7 @@ export class GameRenderer {
 
         addSocketEvent(MSG_TYPES.SERVER_SET_GAME_BOARD, (grid) => {
             this.map.setGridValues(grid);
-            this.map.constructMap(2)
+            this.map.constructMap(3)
         })
 
         addSocketEvent(MSG_TYPES.PLAYER_READY, (playerData) => {

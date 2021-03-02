@@ -24,7 +24,7 @@ export class InteractiveGameSpace extends BaseComponent {
         // If the tower is within the tower menu area, move normally
         // If the tower is within the map area, snap to grid
         this.on("clickAndDragTower", (event, tower)=> {
-            let pos = event.data.getLocalPosition(this.towerMenu)
+            let pos = event.data.getLocalPosition(this)
 
             // Still want to move if mouse outside the boundary, so map the position to the most extreme point within the boundary
             if (pos.x < 0) pos.x = 0
@@ -40,15 +40,15 @@ export class InteractiveGameSpace extends BaseComponent {
             let xInArea = pos.x >= 0 && pos.x < this.interactionBoundaryX
             let yInArea = pos.y >= 0 && pos.y < this.interactionBoundaryY
             if (xInArea || yInArea) {
-                if (pos.y < this.map.height_px) {
+                if (pos.y < this.mapSpriteSize*this.map.rows) {
                     // If in the map area, snap to grid, and don't move if over a path or occupied space
-                    if (this.map.getGridValue(row, col) == 'x' && pos.y < this.towerMenu.height_px - this.towerMenu.height_menu_px) {
+                    if (this.map.getGridValue(row, col) == 'x') {
                         if (xInArea) {
-                            tower.setX(tower.col * this.mapSpriteSize + this.mapSpriteSize / 2)
+                            tower.setX(col * this.mapSpriteSize + this.mapSpriteSize / 2)
                             tower.setCol(col)
                         }
                         if (yInArea) {
-                            tower.setY(tower.row * this.mapSpriteSize + this.mapSpriteSize / 2)
+                            tower.setY(row * this.mapSpriteSize + this.mapSpriteSize / 2)
                             tower.setRow(row)
                         }
                     }

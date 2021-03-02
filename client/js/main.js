@@ -9,8 +9,8 @@ PIXI.Loader.shared
     .add("client/assets/map/land_decorations/land_decorations.json")
     .add("client/assets/map/path_decorations/path_decorations.json")
     .add("client/assets/map/path_sides/path_sides.json")
-
     .add("client/assets/infoBoxes/infoBoxes.json")
+    .add("client/assets/infoBoxes/towerPopup/towerPopup.json")
     .load(loadConfig)
 
 function loadConfig() {

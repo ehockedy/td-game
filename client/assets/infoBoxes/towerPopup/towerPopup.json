@@ -1,0 +1,20 @@
+{"frames": {
+
+"button1.png":
+{
+	"frame": {"x":0,"y":0,"w":93,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":93,"h":52},
+	"sourceSize": {"w":93,"h":52}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "towerPopup.png",
+	"format": "RGBA8888",
+	"size": {"w":93,"h":52},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:91d96dd90f69d8d97f61c34814eba57c:5b5b6baab36f43fdf515d498494c144c:7a88af0f4540cb8167dcd78d787cc17c$"
+}
+}
