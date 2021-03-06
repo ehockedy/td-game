@@ -16,7 +16,7 @@ export class TowersComponent extends BaseComponent {
         this.sprite_handler = sprite_handler
         this.towerStateHashPrev = ""
 
-        this.setupInteraction()
+        this.observers = [this]
     }
 
     // Asynchronosly load the tower data
@@ -33,16 +33,14 @@ export class TowersComponent extends BaseComponent {
         })
     }
 
-    setupInteraction() {
-        this.on("clickDeployedTower", (tower) => {
-            tower.toggleInfoContainer()
-        })
+    subscribe(observer) {
+        this.observers.push(observer)
     }
 
     addPlacedTower(type, name, playerID, row, col) {
         let sprite = new DeployedTower(type, name, this.towerJson, playerID)
         if (playerID == getUserID()) {
-            sprite.subscribe(this)
+            this.observers.forEach((observer) => {sprite.subscribe(observer)})
         } else {
             sprite.disableInteractivity()
         }

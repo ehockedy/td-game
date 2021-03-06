@@ -1,28 +1,28 @@
 {"frames": {
 
-"infobox1.png":
-{
-	"frame": {"x":0,"y":0,"w":640,"h":401},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":640,"h":401},
-	"sourceSize": {"w":640,"h":401}
-},
 "slanted_infobox_greyscale_1.png":
 {
-	"frame": {"x":640,"y":0,"w":73,"h":84},
+	"frame": {"x":0,"y":0,"w":73,"h":84},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":73,"h":84},
 	"sourceSize": {"w":73,"h":84}
+},
+"slanted_infobox_greyscale_2.png":
+{
+	"frame": {"x":73,"y":0,"w":110,"h":84},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":110,"h":84},
+	"sourceSize": {"w":110,"h":84}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "infoBoxes.png",
 	"format": "RGBA8888",
-	"size": {"w":713,"h":401},
+	"size": {"w":183,"h":84},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:213f61debd06efa5b83cdf3ffc84759b:a65711c448607cd901386dfe62e98569:6e357e46a3e3296ccfd2792444818046$"
+	"smartupdate": "$TexturePacker:SmartUpdate:504332617f3a5dfee909cb088301935d:6c9ead6998231e273bd74ea7f7130375:6e357e46a3e3296ccfd2792444818046$"
 }
 }

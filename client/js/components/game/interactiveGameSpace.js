@@ -1,4 +1,5 @@
 import { BaseComponent } from "./base/baseComponent.js"
+import { DeployedTowerMainMenu } from "./ui/deployedTowerMenu.js"
 
 /**
  * This class represents the main game area that has interactive components, such as towers and tower menu
@@ -15,7 +16,12 @@ export class InteractiveGameSpace extends BaseComponent {
         this.interactionBoundaryX = interactionBoundaryX - 1
         this.interactionBoundaryY = interactionBoundaryY - 1
 
+        this.addChild(this.map)
         this.addChild(this.towerMenu)
+
+        this.deployedTowerMainMenu = new DeployedTowerMainMenu(this.towerMenu.x_menu, this.towerMenu.y_menu)
+        this.addChild(this.deployedTowerMainMenu)
+        this.deployedTowerMainMenu.hide()
     }
 
     // Assign all the actions that are triggered by interaction with the sub components
@@ -72,6 +78,11 @@ export class InteractiveGameSpace extends BaseComponent {
             if (tower.y > this.towerMenu.height_px - this.towerMenu.height_menu_px) {
                 tower.reset()
             }
+        })
+
+        this.on("clickDeployedTower", (tower) => {
+            this.towerMenu.toggle()
+            this.deployedTowerMainMenu.toggle()
         })
     }
 }

@@ -20,4 +20,16 @@ export class BaseComponent extends PIXI.Container {
     stopInteraction() {
         this._setContainerInteraction(this, false)
     }
+
+    hide() {
+        this.visible = false
+    }
+
+    show() {
+        this.visible = true
+    }
+
+    toggle() {
+        this.visible = !this.visible
+    }
 }

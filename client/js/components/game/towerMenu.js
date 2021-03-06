@@ -1,4 +1,4 @@
-import { UIComponentBackground1 } from "../ui_common/uiComponentBackground1.js"
+import { rightEndedHorizontalMenuOption } from "../ui_common/horizontalMenuOption.js"
 import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
@@ -21,7 +21,7 @@ export class TowerMenu extends BaseComponent {
         this.x_menu = x_menu
         this.y_menu = y_menu //- 15 - 70
 
-        this.menuBackground = new UIComponentBackground1("towerMenuBackground", x_menu, y_menu - 10,  this.width_menu_px - 500, "0xFFEEBB")
+        this.menuBackground = new rightEndedHorizontalMenuOption("towerMenuBackground", x_menu, y_menu,  this.width_menu_px - 500, "0xFFEEBB")
         this.addChild(this.menuBackground)
 
         // The icons that mark the positions of the towers. They cannot be interacted with and do not move.

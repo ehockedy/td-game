@@ -1,5 +1,4 @@
 import { BaseInteractiveTower } from "./base/baseInteractiveTower.js"
-import { DeployedTowerButton } from "./ui/deployedTowerButton.js"
 
 // Tower class that represnets a tower placed on the map
 export class DeployedTower extends BaseInteractiveTower {
@@ -11,8 +10,6 @@ export class DeployedTower extends BaseInteractiveTower {
         this.towerSprite
              .on("click", () => { this._onClick() })
 
-        this.setInfoPopup()
-        this.hideInfoContainer()
         this.init()
     }
 
@@ -46,41 +43,6 @@ export class DeployedTower extends BaseInteractiveTower {
             default:
                 this._shoot()
         }
-    }
-
-    // The info and buttons that user can manage tower with
-    setInfoPopup() {
-        let distaceFromTower = 40
-        this.infoContainer = new PIXI.Container()
-
-        let button2 = new DeployedTowerButton(this.name + "2", distaceFromTower, -Math.PI/6, 1, "0x3399DD")
-        this.infoContainer.addChild(button2)
-        
-        let button1 = new DeployedTowerButton(this.name + "1", distaceFromTower, 0, 1, "0x2299BB")
-        this.infoContainer.addChild(button1)
-
-        let button3 = new DeployedTowerButton(this.name + "3", distaceFromTower, Math.PI/6, 1, "0x225599")
-        this.infoContainer.addChild(button3)
-
-        let button4 = new DeployedTowerButton(this.name + "4", distaceFromTower, 11*Math.PI/12, 1, "0x2277AA")
-        this.infoContainer.addChild(button4)
-
-        let button5 = new DeployedTowerButton(this.name + "5", distaceFromTower, -11*Math.PI/12, 1, "0x335588")
-        this.infoContainer.addChild(button5)
-
-        this.addChild(this.infoContainer)
-    }
-
-    showInfoContainer() {
-        this.infoContainer.visible = true
-    }
-
-    hideInfoContainer() {
-        this.infoContainer.visible = false
-    }
-
-    toggleInfoContainer() {
-        this.infoContainer.visible = !this.infoContainer.visible
     }
 
     _onClick() {

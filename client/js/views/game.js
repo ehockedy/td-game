@@ -20,7 +20,7 @@ export class GameRenderer {
 
         this.tm = new TowerMenu(
             config.MAP_WIDTH, config.MAP_HEIGHT + config.TOWER_MENU_HEIGHT, 0, 0, // Component w, h, x, y
-            config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, -config.BORDER_L, config.MAP_HEIGHT + config.BORDER_B/4 // Toolbar w, h, x, y
+            config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, -config.BORDER_L, config.MAP_HEIGHT + config.BORDER_B/4 - 10 // Toolbar w, h, x, y
         )
         this.ut = new PlayersToolbar(config.PLAYER_TOOLBAR_WIDTH, config.PLAYER_TOOLBAR_HEIGHT, 0, 0)
         this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_MAP)
@@ -158,9 +158,7 @@ export class GameRenderer {
     startRendering() {
         // Register containers with the sprite layer
         // The order here is the order they are rendered on the map
-        this.gameSpace.addChild(this.map)
         this.gameSpace.addChild(this.tc) // TODO call tick()
-        this.gameSpace.addChild(this.tm)
         this.gameSpace.addChild(this.ec)
         this.gameSpace.addChild(this.bc)
 
@@ -175,6 +173,8 @@ export class GameRenderer {
         // Load towers into the menu
         this.tm.addTowers()
         this.tm.subscribeToAllTowers(this.gameSpace)  // TODO this should be done automatically
+
+        this.tc.subscribe(this.gameSpace)
 
         // Now that tower menu towers are added, set up the event listeners
         this.gameSpace.setTowerInteraction()
