@@ -39,6 +39,10 @@ export class BaseInteractiveTower extends BaseTower {
         this.rangeCircle.visible = false
     }
 
+    toggleRangeCircle() {
+        this.rangeCircle.visible = !this.rangeCircle.visible
+    }
+
     subscribe(observer) {
         this.observers.push(observer)
     }

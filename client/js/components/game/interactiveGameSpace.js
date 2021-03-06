@@ -83,6 +83,7 @@ export class InteractiveGameSpace extends BaseComponent {
         this.on("clickDeployedTower", (tower) => {
             this.towerMenu.toggle()
             this.deployedTowerMainMenu.toggle()
+            tower.toggleRangeCircle()
         })
     }
 }
