@@ -31,6 +31,7 @@ class Tower {
         this.cost = towerJson[type]["cost"]
         this.hasShot = false // Whether the tower has shot in this update round
         this.bulletType = towerJson[type]["bulletType"]
+        this.level = 1
 
         // These values can change based on user actions
         this.state = {

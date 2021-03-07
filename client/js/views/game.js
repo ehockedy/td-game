@@ -196,6 +196,7 @@ export class GameRenderer {
         this.ec.update(serverUpdate["enemies"])
         this.bc.update(serverUpdate["bullets"])
         this.ut.update(serverUpdate["players"])
+        this.gameSpace.updateTowers(serverUpdate["towers"])
         //this.git.update(serverUpdate["worldState"])
         this.tc.tick()
     }

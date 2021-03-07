@@ -362,7 +362,8 @@ class Game {
                 "playerID": t.player.id,
                 "type": t.type,
                 "stats": t.stats,
-                "hasShot": t.hasShot
+                "hasShot": t.hasShot,
+                "level": t.level
             })
             hash.update(t.name)
         })

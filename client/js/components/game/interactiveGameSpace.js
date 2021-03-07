@@ -83,7 +83,20 @@ export class InteractiveGameSpace extends BaseComponent {
         this.on("clickDeployedTower", (tower) => {
             this.towerMenu.toggle()
             this.deployedTowerMainMenu.toggle()
+            this.deployedTowerMainMenu.updateTowerInfo(tower)
             tower.toggleRangeCircle()
+            this.activeTower = tower  // This is the tower currently being interacted with
         })
+    }
+
+    updateTowers(towers) {
+        // Get updates from the server so info displayed on the tower menu can be up to date
+        if (this.activeTower) {
+            towers["objects"].forEach((tower) => {
+                if (tower.name == this.activeTower.name) {
+                    this.deployedTowerMainMenu.updateTowerInfo(tower)
+                }
+            })
+        }
     }
 }

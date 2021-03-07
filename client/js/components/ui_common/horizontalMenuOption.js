@@ -29,8 +29,16 @@ class HorizontalMenuOption extends BaseComponent {
     }
 
     setContent(newContent) {
+        if (this.content) this.removeChild(this.content)
+        this.content = newContent
+        this.addChild(this.content)
+    }
+
+    setTextCentral(newContent) {
+        if (this.content) this.removeChild(this.content)
         this.content = newContent
         this.content.anchor.set(0.5)
+        this.content.x = this.infoTextBox.width / 2
         this.content.y = this.infoTextBox.height/2
         this.addChild(this.content)
     }

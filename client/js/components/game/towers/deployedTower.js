@@ -49,10 +49,8 @@ export class DeployedTower extends BaseInteractiveTower {
         this.observers.forEach((o) => { o.emit("clickDeployedTower", this) })
     }
 
-    update(infoContainerStats) {
-        // if (this.infoContainer) {
-        //     this.infoContainer.update(infoContainerStats)
-        // }
+    update(stats) {
+        this.stats = stats
     }
 
 

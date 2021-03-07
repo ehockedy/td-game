@@ -76,9 +76,9 @@ export class TowersComponent extends BaseComponent {
 
         // Update state of towers present in server update
         towerStateObjects.forEach((tower) => {
-            // console.log(tower)
             let towerToUpdate = this.getChildByName(tower.name)
             towerToUpdate.rotation = tower.angle
+            towerToUpdate.level = tower.level
 
             if (tower.hasShot) {
                 towerToUpdate.shoot()
