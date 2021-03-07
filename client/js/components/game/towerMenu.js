@@ -21,7 +21,7 @@ export class TowerMenu extends BaseComponent {
         this.x_menu = x_menu
         this.y_menu = y_menu //- 15 - 70
 
-        this.menuBackground = new rightEndedHorizontalMenuOption("towerMenuBackground", x_menu, y_menu,  this.width_menu_px - 500, "0xFFEEBB")
+        this.menuBackground = new rightEndedHorizontalMenuOption("towerMenuBackground", x_menu, y_menu,  this.width_menu_px - 500, "0xCCBB88")
         this.addChild(this.menuBackground)
 
         // The icons that mark the positions of the towers. They cannot be interacted with and do not move.

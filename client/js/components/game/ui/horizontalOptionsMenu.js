@@ -16,6 +16,7 @@ export class HorizontalOptionsMenu extends BaseComponent {
     addOption(width, tint) {
         let newOption = new doubleEndedHorizontalMenuOption(this.name+this.children.length.toString(), this.getLocalBounds().width + this.x_offset, 0,  width, tint)
         this.addChild(newOption)
+        return newOption
     }
 
     setOffset(x) {

@@ -11,24 +11,28 @@ class HorizontalMenuOption extends BaseComponent {
         this.y = y
 
         let baseTexture = PIXI.Loader.shared.resources["client/assets/infoBoxes/infoBoxes.json"].textures[textureName]
-        let infoTextBox = new PIXI.NineSlicePlane(baseTexture, lhsSlice_px, 0, rhsSlice_px, 0)
-        infoTextBox.width = width_px
-        infoTextBox.tint = tint
+        this.infoTextBox = new PIXI.NineSlicePlane(baseTexture, lhsSlice_px, 0, rhsSlice_px, 0)
+        this.infoTextBox.width = width_px
+        this.infoTextBox.tint = tint
 
-        let shadowTextBox = new PIXI.NineSlicePlane(baseTexture, lhsSlice_px, 0, rhsSlice_px, 0)
-        shadowTextBox.width = infoTextBox.width + shadowExtraWidthX
-        shadowTextBox.height = infoTextBox.height + shadowExtraWidthY
-        shadowTextBox.x += shadowShiftX
-        shadowTextBox.y += shadowShiftY
-        shadowTextBox.tint = "0x000000"
-        shadowTextBox.alpha = 0.8
+        this.shadowTextBox = new PIXI.NineSlicePlane(baseTexture, lhsSlice_px, 0, rhsSlice_px, 0)
+        this.shadowTextBox.width = this.infoTextBox.width + shadowExtraWidthX
+        this.shadowTextBox.height = this.infoTextBox.height + shadowExtraWidthY
+        this.shadowTextBox.x += shadowShiftX
+        this.shadowTextBox.y += shadowShiftY
+        this.shadowTextBox.tint = "0x000000"
+        this.shadowTextBox.alpha = 0.8
 
-        this.addChild(shadowTextBox)
-        this.addChild(infoTextBox)
+        this.addChild(this.shadowTextBox)
+        this.addChild(this.infoTextBox)
+
     }
 
-    updateText(newMessage) {
-        // TODO
+    setContent(newContent) {
+        this.content = newContent
+        this.content.anchor.set(0.5)
+        this.content.y = this.infoTextBox.height/2
+        this.addChild(this.content)
     }
 }
 
