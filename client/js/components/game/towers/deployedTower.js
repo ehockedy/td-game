@@ -29,6 +29,11 @@ export class DeployedTower extends BaseInteractiveTower {
         this.hideRangeCircle()
     }
 
+    setRotation(rotation) {
+        this.towerSprite.rotation = rotation
+        this.towerColourSprite.rotation = rotation
+    }
+
     init() {
         switch(this.type) {
             case "shrapnel-burst":
@@ -39,6 +44,7 @@ export class DeployedTower extends BaseInteractiveTower {
     }
 
     tick() {
+        this._rangeTick()
         switch(this.type) {
             case "shrapnel-burst":
                 this._tickShrapnelBurst()
@@ -97,6 +103,10 @@ export class DeployedTower extends BaseInteractiveTower {
                 this.spinTickCount = 0
             }
         }
+    }
+
+    _rangeTick() {
+        this.rangeCircle.angle += 0.1
     }
 
     // Type specific tick functions

@@ -22,13 +22,26 @@ export class BaseInteractiveTower extends BaseTower {
     }
 
     generateRangeSprite(range, textureSize) {
-        let rangeCircle = new PIXI.Graphics();
-        rangeCircle.name = "rangeCircle"
-        rangeCircle.beginFill("0xe74c3c") // Red
-        rangeCircle.alpha = 0.5
-        rangeCircle.drawCircle(0, 0, range * textureSize) // position 0, 0 of the graphics canvas
-        rangeCircle.visible = false
-        return rangeCircle
+        let rangeGraphics = new PIXI.Graphics()
+        rangeGraphics.beginFill("0x000000", 0)
+        rangeGraphics.lineStyle(5, "0x000000", 1, 0.5)
+
+        let radius = range * textureSize
+        let circumference = 2 * Math.PI * radius
+        let dashWidth = 20
+        let gapWidth = 40
+        let dashesRequired = Math.floor(circumference / (dashWidth + gapWidth))
+        let angleShift = (2 * Math.PI) / dashesRequired  // This is angle to move when drawing each dash
+        let angleDeltaDash = angleShift * (dashWidth / (dashWidth + gapWidth))
+
+        let currentAngle = 0
+        for (let dashIdx = 0; dashIdx < dashesRequired; dashIdx += 1) {
+            rangeGraphics.arc(0, 0, radius, currentAngle, currentAngle + angleDeltaDash)
+            currentAngle += angleShift
+            rangeGraphics.finishPoly()
+        }
+        rangeGraphics.visible = false
+        return rangeGraphics
     }
 
     showRangeCircle() {

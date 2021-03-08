@@ -78,7 +78,7 @@ export class TowersComponent extends BaseComponent {
         // Update state of towers present in server update
         towerStateObjects.forEach((tower) => {
             let towerToUpdate = this.getChildByName(tower.name)
-            towerToUpdate.rotation = tower.angle
+            towerToUpdate.setRotation(tower.angle)
             towerToUpdate.level = tower.level
 
             if (tower.hasShot) {
@@ -96,11 +96,12 @@ export class TowersComponent extends BaseComponent {
         this.on("clickDeployedTower", (tower) => {
             let pos = this.getChildIndex(tower)
             if (pos > 0) {
-                // When a tower is clicked on we want it to render below the other towers
+                // When a tower is clicked on we want it to render above the other towers
                 // This is that the range sprite does not obfiscate them
+                let endIdx = this.children.length - 1
                 let tmp = this.getChildAt(pos)
-                this.children[pos] = this.children[0]
-                this.children[0] = tmp
+                this.children[pos] = this.children[endIdx]
+                this.children[endIdx] = tmp
             }
         })
     }
