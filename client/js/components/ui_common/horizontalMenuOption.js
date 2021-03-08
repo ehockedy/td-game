@@ -8,6 +8,8 @@ class HorizontalMenuOption extends BaseComponent {
             shadowShiftX, shadowShiftY, shadowExtraWidthX, shadowExtraWidthY
     ) {
         super(name)
+        this.start_x = x
+        this.start_y = y
         this.x = x
         this.y = y
         this.startingTint = tint
@@ -47,6 +49,29 @@ class HorizontalMenuOption extends BaseComponent {
             this.infoTextBox.tint = this.startingTint
             if (this.startingTintText) this.content.style.fill = this.startingTintText
         })
+
+        // Move the button and its contents down so that it appears closer to the map, but not enough to fully cover the shadow
+        this.infoTextBox.on("pointerdown", () => {
+            this.infoTextBox.x = this.shadowTextBox.x / 2
+            this.infoTextBox.y = this.shadowTextBox.y / 2
+            if (this.content) {   // TODO this only covers central text content
+                this.content.x = this.infoTextBox.width / 2 + this.shadowTextBox.x / 2
+                this.content.y = this.infoTextBox.height / 2 + this.shadowTextBox.y / 2
+            }
+            this.scale.set(0.98)
+        })
+
+        this.infoTextBox.on("pointerup", () => { this._onPointerup() })
+        this.infoTextBox.on("pointerupoutside", () => { this._onPointerup() })
+    }
+
+    // Reset to original positions and scale
+    _onPointerup() {
+        this.infoTextBox.x = 0
+        this.infoTextBox.y = 0
+        this.content.x = this.infoTextBox.width / 2  // TODO this only covers central text content
+        this.content.y = this.infoTextBox.height / 2
+        this.scale.set(1)
     }
 
     setContent(newContent) {
