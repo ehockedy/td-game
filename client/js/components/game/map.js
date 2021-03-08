@@ -79,7 +79,7 @@ export class MapComponent extends BaseComponent {
             container.removeChildren()
         })
 
-        let objectClusterCount = 4
+        let objectClusterCount = 5
         let objectClusterPoints = []
         for (let ocIdx=0; ocIdx < objectClusterCount; ocIdx += 1) {
             objectClusterPoints.push({
@@ -174,14 +174,14 @@ export class MapComponent extends BaseComponent {
                 } else {
                     this.landTiles.addChild(map_square_sprite)
 
-                    let addObjectChance = 0.2
+                    let addObjectChance = 0.05
                     let distanceToCluster = 2
                     objectClusterPoints.forEach((point) => {
                         if (isNearToPoint(r, c, point.r, point.c, distanceToCluster)) addObjectChance = 0.5
                     })
                     if (Math.random() <= addObjectChance && !this.isNextToPath(c, r, this.cols, this.rows)) {
                         randomlyPlaceObjects(
-                            this.mapDecorationsTextures, 1, this.landDecorations, true,
+                            this.mapDecorationsTextures, 1, this.landDecorations, false,
                             this.mapSpriteSize, this.mapSpriteSize,
                             map_square_sprite.x, map_square_sprite.y,
                             10, 1.5,
