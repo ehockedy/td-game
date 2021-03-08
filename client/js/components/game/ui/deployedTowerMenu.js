@@ -24,12 +24,15 @@ export class DeployedTowerMainMenu extends HorizontalOptionsMenu {
 
         let aimContent = new PIXI.Text("Aim", generateStyle("0xDD3333"))
         this.aimOption.setTextCentral(aimContent)
+        this.aimOption.setClickable()
 
         let upgradeContent = new PIXI.Text("Upgrade", generateStyle("0x229933"))
         this.upgradeOption.setTextCentral(upgradeContent)
+        this.upgradeOption.setClickable()
 
         let sellContent = new PIXI.Text("Sell", generateStyle("0xDDAA11"))
         this.sellOption.setTextCentral(sellContent)
+        this.sellOption.setClickable()
 
         this.populateWithTowerInfo()
     }

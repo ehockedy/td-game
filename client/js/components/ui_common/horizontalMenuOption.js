@@ -1,4 +1,5 @@
 import { BaseComponent } from "../game/base/baseComponent.js"
+import { addColourHexValues } from "../../tools.js"
 
 // This component is a horizontal box that can be stretched horizontally only, to avoid changing the angle of the slope
 class HorizontalMenuOption extends BaseComponent {
@@ -9,6 +10,7 @@ class HorizontalMenuOption extends BaseComponent {
         super(name)
         this.x = x
         this.y = y
+        this.startingTint = tint
 
         let baseTexture = PIXI.Loader.shared.resources["client/assets/infoBoxes/infoBoxes.json"].textures[textureName]
         this.infoTextBox = new PIXI.NineSlicePlane(baseTexture, lhsSlice_px, 0, rhsSlice_px, 0)
@@ -25,7 +27,26 @@ class HorizontalMenuOption extends BaseComponent {
 
         this.addChild(this.shadowTextBox)
         this.addChild(this.infoTextBox)
+    }
 
+    // Set properties that a clickable button would have
+    setClickable() {
+        this.infoTextBox.buttonMode = true
+        this.infoTextBox.interactive = true
+
+        // Lighten when hovered over
+        this.infoTextBox.on("mouseover", () => {
+            this.infoTextBox.tint = addColourHexValues(this.startingTint, "0x111111")
+            if (this.startingTintText) {
+                this.content.style.fill = addColourHexValues(this.startingTintText, "0x111111")
+            }
+        })
+
+        // Return to original colour when mouse removed
+        this.infoTextBox.on("mouseout", () => {
+            this.infoTextBox.tint = this.startingTint
+            if (this.startingTintText) this.content.style.fill = this.startingTintText
+        })
     }
 
     setContent(newContent) {
@@ -40,6 +61,7 @@ class HorizontalMenuOption extends BaseComponent {
         this.content.anchor.set(0.5)
         this.content.x = this.infoTextBox.width / 2
         this.content.y = this.infoTextBox.height/2
+        this.startingTintText = newContent.style.fill
         this.addChild(this.content)
     }
 }
