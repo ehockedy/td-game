@@ -17,6 +17,7 @@ export class TowersComponent extends BaseComponent {
         this.towerStateHashPrev = ""
 
         this.observers = [this]
+        this.setEventListeners()
     }
 
     // Asynchronosly load the tower data
@@ -87,6 +88,19 @@ export class TowersComponent extends BaseComponent {
             // Update the tower statsistics, but only store stats for towers a playerID owns
             if (tower.playerID == getUserID()) {
                 towerToUpdate.update(tower.stats)
+            }
+        })
+    }
+
+    setEventListeners() {
+        this.on("clickDeployedTower", (tower) => {
+            let pos = this.getChildIndex(tower)
+            if (pos > 0) {
+                // When a tower is clicked on we want it to render below the other towers
+                // This is that the range sprite does not obfiscate them
+                let tmp = this.getChildAt(pos)
+                this.children[pos] = this.children[0]
+                this.children[0] = tmp
             }
         })
     }

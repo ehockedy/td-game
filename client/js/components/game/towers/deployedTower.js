@@ -9,6 +9,7 @@ export class DeployedTower extends BaseInteractiveTower {
         // Interaction behaviours
         this.towerSprite
              .on("click", () => { this._onClick() })
+        this.selected = false  // Whether this tower has been clicked on
 
         this.init()
     }
@@ -16,6 +17,16 @@ export class DeployedTower extends BaseInteractiveTower {
     disableInteractivity() {
         this.interactive = false
         this.buttonMode = false
+    }
+
+    setActive() {
+        this.selected = true
+        this.showRangeCircle()
+    }
+
+    unsetActive() {
+        this.selected = false
+        this.hideRangeCircle()
     }
 
     init() {
@@ -46,7 +57,11 @@ export class DeployedTower extends BaseInteractiveTower {
     }
 
     _onClick() {
-        this.observers.forEach((o) => { o.emit("clickDeployedTower", this) })
+        this.selected = !this.selected
+        this.observers.forEach((o) => {
+            if (this.selected) o.emit("clickDeployedTower", this)
+            else o.emit("clickOffDeployedTower", this)
+        })
     }
 
     update(stats) {
