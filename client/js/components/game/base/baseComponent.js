@@ -2,6 +2,9 @@ export class BaseComponent extends PIXI.Container {
     constructor(name="") {
         super()
         this.name = name
+
+        // A list of the observers to emit an event to if the component is interacted with
+        this.observers = []
     }
 
     tick() {}
@@ -31,5 +34,13 @@ export class BaseComponent extends PIXI.Container {
 
     toggle() {
         this.visible = !this.visible
+    }
+
+    subscribe(observer) {
+        this.observers.push(observer)
+    }
+
+    unsubscribe(observer) {
+        this.observers = this.observers.filter(item => item !== observer)
     }
 }

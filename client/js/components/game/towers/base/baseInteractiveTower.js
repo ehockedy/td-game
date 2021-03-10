@@ -16,9 +16,6 @@ export class BaseInteractiveTower extends BaseTower {
         let textureSize = this.textureSize
         this.rangeCircle = this.generateRangeSprite(range, textureSize)
         this.addChildAt(this.rangeCircle, 0) // Add to front so rendered at bottom
-
-        // A list of the observers to emit an event to if the tower is interacted with
-        this.observers = []
     }
 
     generateRangeSprite(range, textureSize) {
@@ -54,13 +51,5 @@ export class BaseInteractiveTower extends BaseTower {
 
     toggleRangeCircle() {
         this.rangeCircle.visible = !this.rangeCircle.visible
-    }
-
-    subscribe(observer) {
-        this.observers.push(observer)
-    }
-
-    unsubscribe(observer) {
-        this.observers = this.observers.filter(item => item !== observer)
     }
 }

@@ -61,7 +61,11 @@ class HorizontalMenuOption extends BaseComponent {
             this.scale.set(0.98)
         })
 
-        this.infoTextBox.on("pointerup", () => { this._onPointerup() })
+        this.infoTextBox.on("pointerup", () => {
+            this._onPointerup()
+            this.emit("selected")
+            this.observers.forEach((observer) => {observer.emit("selected")})  // TODO decide which is better, this or the above line
+        })
         this.infoTextBox.on("pointerupoutside", () => { this._onPointerup() })
     }
 

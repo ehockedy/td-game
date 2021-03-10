@@ -1,5 +1,5 @@
 import { BaseComponent } from "./base/baseComponent.js"
-import { DeployedTowerMainMenu } from "./ui/deployedTowerMenu.js"
+import { DeployedTowerMenu } from "./ui/deployedTowerMenu.js"
 
 /**
  * This class represents the main game area that has interactive components, such as towers and tower menu
@@ -19,7 +19,7 @@ export class InteractiveGameSpace extends BaseComponent {
         this.addChild(this.map)
         this.addChild(this.towerMenu)
 
-        this.deployedTowerMainMenu = new DeployedTowerMainMenu(this.towerMenu.x_menu, this.towerMenu.y_menu)
+        this.deployedTowerMainMenu = new DeployedTowerMenu(this.towerMenu.x_menu, this.towerMenu.y_menu)
         this.addChild(this.deployedTowerMainMenu)
         this.deployedTowerMainMenu.hide()
     }
@@ -97,6 +97,10 @@ export class InteractiveGameSpace extends BaseComponent {
             tower.unsetActive()
             this.activeTower = undefined
         })
+    }
+
+    subscribeToDeployedTowerMenu(observer) {
+        this.deployedTowerMainMenu.subscribe(observer)
     }
 
     updateTowers(towers) {
