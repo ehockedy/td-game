@@ -6,7 +6,7 @@ import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { GraphicButton } from "../components/ui_common/button.js"
-import { StartGameButton } from "../components/game/ui/startGameButton.js"
+import { StartRoundButton } from "../components/game/ui/startRoundButton.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
 import { randomHexString } from "../tools.js"
@@ -39,7 +39,7 @@ export class GameRenderer {
         this.gameSpace.x = config.BORDER_L
         this.gameSpace.y = config.BORDER_T
 
-        this.startRoundButton = new StartGameButton(config.MAP_WIDTH + config.BORDER_R, toolbarY)
+        this.startRoundButton = new StartRoundButton(config.MAP_WIDTH + config.BORDER_R, toolbarY)
 
         // **** DEBUG BUTTON TO SAVE/LOAD TOWERS ***
         this.debugExportGameButton = new GraphicButton(
@@ -91,8 +91,7 @@ export class GameRenderer {
         })
 
         addSocketEvent(MSG_TYPES.ROUND_START, () => {
-            this.startRoundButton.interactive = false // TODO this button should also disappear - weird to have it during the round
-            this.startRoundButton.buttonMode = false
+            this.startRoundButton.stopInteraction()
         })
 
         addSocketEvent(MSG_TYPES.ROUND_END, (nextRoundInfo) => {
@@ -107,8 +106,7 @@ export class GameRenderer {
             }, timePerFade*2 + timeBetweenMessages)
             this.ut.unsetAllPlayers()
             this.tm.startInteraction()
-            this.startRoundButton.interactive = true
-            this.startRoundButton.buttonMode = true
+            this.startRoundButton.startInteraction()
             this.startRoundButton.update(nextRoundInfo.roundNumber.toString())
         })
 

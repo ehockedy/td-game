@@ -2,7 +2,7 @@ import { HorizontalOptionsMenu } from "./horizontalOptionsMenu.js"
 import { generateStyle } from "./deployedTowerMenu.js"
 
 let startMenuColour = "0x40d661"
-export class StartGameButton extends HorizontalOptionsMenu {
+export class StartRoundButton extends HorizontalOptionsMenu {
     constructor(x, y) {
         super("startGameButton", x, y)
         this.setOffset(-20)
@@ -22,5 +22,21 @@ export class StartGameButton extends HorizontalOptionsMenu {
     update(roundNumberString) {
         // Not sure this is the final text I want here, might be better with a dedicated round box
         this.gameRoundText.text = "Start Round " + roundNumberString
+    }
+
+    // Override
+    stopInteraction() {
+        this.startGameRoot.stopInteraction()
+
+        let disabledTint = "0xAAAAAA"
+        this.startGameRoot.setTint(disabledTint)
+        this.gameRoundText.style.fill = disabledTint
+    }
+
+    // Override
+    startInteraction() {
+        this.startGameRoot.startInteraction()
+        this.startGameRoot.setTint(startMenuColour)
+        this.gameRoundText.style.fill = startMenuColour
     }
 }

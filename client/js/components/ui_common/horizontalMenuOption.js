@@ -79,6 +79,10 @@ class HorizontalMenuOption extends BaseComponent {
         this.scale.set(1)
     }
 
+    setTint(tint) {
+        this.infoTextBox.tint = tint
+    }
+
     setContent(newContent) {
         if (this.content) this.removeChild(this.content)
         this.content = newContent
@@ -94,6 +98,18 @@ class HorizontalMenuOption extends BaseComponent {
         this.content.position = this.content.start_position
         this.startingTintText = newContent.style.fill
         this.addChild(this.content)
+    }
+
+    // Override
+    stopInteraction() {
+        this.infoTextBox.buttonMode = false
+        this.infoTextBox.interactive = false
+    }
+
+    // Override
+    startInteraction() {
+        this.infoTextBox.buttonMode = true
+        this.infoTextBox.interactive = true
     }
 }
 
