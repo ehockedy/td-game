@@ -2,7 +2,8 @@ import { HorizontalOptionsMenu } from "./horizontalOptionsMenu.js"
 import { getPositionWithinEquallySpacedObjects } from "../../../tools.js"
 import { BaseComponent } from "../base/baseComponent.js"
 
-function generateStyle(tint, fontSize=48) {
+// TODO move this to a styles section
+export function generateStyle(tint, fontSize=48) {
     return {
         "dropShadow": false,
         "dropShadowAngle": 0.7,
@@ -25,7 +26,7 @@ export class DeployedTowerMainMenu extends HorizontalOptionsMenu {
         this.setOffset(-20)
 
         // TODO add addRoot option
-        this.menuRoot = this.addRoot(350, "0xDDEECC")
+        this.menuRoot = this.addLeftRoot(350, "0xDDEECC")
         this.addChild(this.menuRoot)
 
         // Select this option to open the aiming menu
@@ -79,7 +80,6 @@ export class DeployedTowerMenu extends BaseComponent {
         this.mainMenu = new DeployedTowerMainMenu(x, y)
         this.mainMenu.subscribe(this)
         this.addChild(this.mainMenu)
-        console.log(this.mainMenu)
         this.setUpEventListeners()
     }
 

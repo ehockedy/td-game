@@ -6,6 +6,7 @@ import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { GraphicButton } from "../components/ui_common/button.js"
+import { StartGameButton } from "../components/game/ui/startGameButton.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
 import { randomHexString } from "../tools.js"
@@ -18,9 +19,10 @@ export class GameRenderer {
     constructor(spriteHandler, config) {
         this.spriteHandler = spriteHandler
 
+        let toolbarY = config.MAP_HEIGHT + config.BORDER_B/4 - 10
         this.tm = new TowerMenu(
             config.MAP_WIDTH, config.MAP_HEIGHT + config.TOWER_MENU_HEIGHT, 0, 0, // Component w, h, x, y
-            config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, -config.BORDER_L, config.MAP_HEIGHT + config.BORDER_B/4 - 10 // Toolbar w, h, x, y
+            config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, -config.BORDER_L, toolbarY // Toolbar w, h, x, y
         )
         this.ut = new PlayersToolbar(config.PLAYER_TOOLBAR_WIDTH, config.PLAYER_TOOLBAR_HEIGHT, 0, 0)
         this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_MAP)
@@ -37,14 +39,7 @@ export class GameRenderer {
         this.gameSpace.x = config.BORDER_L
         this.gameSpace.y = config.BORDER_T
 
-        this.startRoundButton = new GraphicButton(
-            150, 80, // width, height
-            config.APP_WIDTH, config.APP_HEIGHT, // x, y
-            "Start Round",
-            80*0.5, 0x448877, // font size, colour
-            1, 1) // anchor
-        this.startRoundButton.on("click", ()=>{sendMessage(MSG_TYPES.ROUND_START)})
-        this.startRoundButton.on("tap", ()=>{sendMessage(MSG_TYPES.ROUND_START)})
+        this.startRoundButton = new StartGameButton(config.MAP_WIDTH + config.BORDER_R, toolbarY)
 
         // **** DEBUG BUTTON TO SAVE/LOAD TOWERS ***
         this.debugExportGameButton = new GraphicButton(
@@ -114,6 +109,7 @@ export class GameRenderer {
             this.tm.startInteraction()
             this.startRoundButton.interactive = true
             this.startRoundButton.buttonMode = true
+            this.startRoundButton.update(nextRoundInfo.roundNumber.toString())
         })
 
         // TODO this should be a component specifically for communication with the server, initialised, and passed in like sprite handler
@@ -129,6 +125,9 @@ export class GameRenderer {
             }
             sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, setTowerMsg)
             tower.reset()
+        })
+        this.clientLink.on("start-round", () => {
+            sendMessage(MSG_TYPES.ROUND_START)
         })
     }
 
@@ -181,6 +180,7 @@ export class GameRenderer {
 
         // Subscribe componenets to get updated when draggable towers are updated
         this.tm.subscribeToAllTowers(this.clientLink)
+        this.startRoundButton.subscribe(this.clientLink)
 
         // Begin the rendering loop
         this.spriteHandler.render()

@@ -1,5 +1,5 @@
 import { BaseComponent } from "../base/baseComponent.js"
-import { rightEndedHorizontalMenuOption, doubleEndedHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
+import { rightEndedHorizontalMenuOption, leftEndedHorizontalMenuOption, doubleEndedHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
 
 // A class that represents a menu that starts on the right of the screen
 export class HorizontalOptionsMenu extends BaseComponent {
@@ -10,8 +10,15 @@ export class HorizontalOptionsMenu extends BaseComponent {
         this.x_offset = 0
     }
 
-    addRoot(width, tint) {
+    // Left root because it exists as the left most element, but right-ended option because the visible edge is on the right
+    addLeftRoot(width, tint) {
         return new rightEndedHorizontalMenuOption(this.name+"_root", 0, 0,  width, tint)
+    }
+
+    addRightRootButton(width, tint, onSelectEventName) {
+        let root = new leftEndedHorizontalMenuOption(this.name+"_root", 0, 0,  width, tint)
+        this._makeButton(root, onSelectEventName)
+        return root
     }
 
     addOption(width, tint) {
@@ -23,11 +30,15 @@ export class HorizontalOptionsMenu extends BaseComponent {
         let option = this.addOption(width, tint)
         let content = new PIXI.Text(buttonText, buttonTextStyle)
         option.setTextCentral(content)
+        this._makeButton(option, onSelectEventName)
+        return option
+    }
+
+    _makeButton(option, onSelectEventName) {
         option.setClickable()
         option.on("selected", () => {
             this.observers.forEach((observer) => {observer.emit(onSelectEventName)})
         })
-        return option
     }
 
     setOffset(x) {

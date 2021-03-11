@@ -55,8 +55,8 @@ class HorizontalMenuOption extends BaseComponent {
             this.infoTextBox.x = this.shadowTextBox.x / 2
             this.infoTextBox.y = this.shadowTextBox.y / 2
             if (this.content) {   // TODO this only covers central text content
-                this.content.x = this.infoTextBox.width / 2 + this.shadowTextBox.x / 2
-                this.content.y = this.infoTextBox.height / 2 + this.shadowTextBox.y / 2
+                this.content.x = this.content.start_position.x + this.shadowTextBox.x / 2
+                this.content.y = this.content.start_position.y + this.shadowTextBox.y / 2
             }
             this.scale.set(0.98)
         })
@@ -73,8 +73,9 @@ class HorizontalMenuOption extends BaseComponent {
     _onPointerup() {
         this.infoTextBox.x = 0
         this.infoTextBox.y = 0
-        this.content.x = this.infoTextBox.width / 2  // TODO this only covers central text content
-        this.content.y = this.infoTextBox.height / 2
+        if (this.content) {   // TODO this only covers central text content
+            this.content.position = this.content.start_position
+        }
         this.scale.set(1)
     }
 
@@ -84,12 +85,13 @@ class HorizontalMenuOption extends BaseComponent {
         this.addChild(this.content)
     }
 
-    setTextCentral(newContent) {
+    // xOffset might be useful if it's a root component
+    setTextCentral(newContent, xOffset=0) {
         if (this.content) this.removeChild(this.content)
         this.content = newContent
         this.content.anchor.set(0.5)
-        this.content.x = this.infoTextBox.width / 2
-        this.content.y = this.infoTextBox.height/2
+        this.content.start_position = new PIXI.Point(this.infoTextBox.width / 2 + xOffset, this.infoTextBox.height / 2)
+        this.content.position = this.content.start_position
         this.startingTintText = newContent.style.fill
         this.addChild(this.content)
     }
@@ -99,14 +101,31 @@ let xTransform = 4
 let yTransform = 6
 
 // This component is a horizontal box, with a shere of the top edge in the positive x direction
-// It has a vertical slant on one side
-// It is designed to be placed at the side of the screen
+// It has a vertical slant on the right side
+// It is designed to be placed at the left side of the screen
 export class rightEndedHorizontalMenuOption extends HorizontalMenuOption {
     constructor (name, x, y, width_px, tint) {
         super(name, x, y, width_px, tint, "slanted_infobox_greyscale_1.png",
             1, 50,      // Slice widths
             0, yTransform, xTransform, 0  // Shadow transformations
         )
+    }
+}
+
+// This component is a horizontal box, with a shere of the top edge in the negative x direction
+// It has a vertical slant on the left side
+// It is designed to be placed at the right side of the screen
+export class leftEndedHorizontalMenuOption extends HorizontalMenuOption {
+    constructor (name, x, y, width_px, tint) {
+        super(name, x, y, width_px, tint, "slanted_infobox_greyscale_1.png",
+            1, 50,      // Slice widths
+            -xTransform, -yTransform, 0, 0  // Shadow transformations
+        )
+
+        // Pivot it so that x, y positions control the top left corner
+        // This wil make it easy to position it on the right hand side of the view
+        this.pivot.y = this.infoTextBox.height
+        this.angle = 180  // rotate so the slante slot in with the slants of the elements to the left of it
     }
 }
 
