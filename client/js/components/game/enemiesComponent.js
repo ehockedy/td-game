@@ -1,6 +1,19 @@
 import { BaseComponent } from "./base/baseComponent.js"
 import { gridPosToMapPos } from "../../tools.js"
 
+// Array of offset magnitudes to apply to an enemy when hit
+// The angle is determined by the direction the enemy is facing
+let hitSequence = []
+for (let i=1; i <= 3; i++) {
+    hitSequence.push(i)
+}
+for (let i=3; i >= -3; i--) {
+    hitSequence.push(i)
+}
+for (let i=-3; i <= 0; i++) {
+    hitSequence.push(i)
+}
+
 export class EnemiesComponent extends BaseComponent {
     constructor(spriteSize, spriteSizeMap) {
         super()
@@ -49,7 +62,7 @@ export class EnemiesComponent extends BaseComponent {
         animatedEnemySprite.animationSpeed = 0.5
         animatedEnemySprite.play()
         animatedEnemySprite.name = name // Unique identifier
-        animatedEnemySprite.tintCount = 0
+        animatedEnemySprite.tickCount = 0
         this.addChild(animatedEnemySprite)
     }
 
@@ -100,13 +113,21 @@ export class EnemiesComponent extends BaseComponent {
             enemyToUpdate.x = newpos[0]
             enemyToUpdate.y = newpos[1]
             enemyToUpdate.angle = enemy.rotation
-            // Change tint if hit by bullet
+
+            // Trigger animation sequence if hit by bullet
             if (enemy.isHit) {
-                enemyToUpdate.tint = 0xCCCCCC
-                enemyToUpdate.tintCount = 10 // Number of frames to tint for
+                if (enemyToUpdate.tickCount == 0) {
+                    enemyToUpdate.tickCount = hitSequence.length
+                }
             }
-            if (enemyToUpdate.tintCount > 0) {
-                enemyToUpdate.tintCount -= 1
+
+            if (enemyToUpdate.tickCount > 0) {
+                enemyToUpdate.tint = 0xFFCCCC
+                enemyToUpdate.tickCount -= 1
+                // TODO fix the bug where animation is not quite right when enemy is moving directly up
+                // This is because the angle of rotation goes from 315 to -45
+                enemyToUpdate.x += hitSequence[enemyToUpdate.tickCount] * Math.sin(enemyToUpdate.angle)
+                enemyToUpdate.y += hitSequence[enemyToUpdate.tickCount] * Math.cos(enemyToUpdate.angle)
             } else {
                 enemyToUpdate.tint = 0xFFFFFF
             }
