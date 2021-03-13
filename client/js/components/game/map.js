@@ -20,11 +20,15 @@ function randomlyPlaceObjects(textureArray, maxCount, targetContainer, strictlyW
     }
 }
 
+function distToPoint(a, b, a_target, b_target) {
+    let a_diff = a_target - a
+    let b_diff = b_target - b
+    return Math.sqrt(Math.pow(a_diff, 2) + Math.pow(b_diff, 2))
+}
+
 // Returns true if the given row, col combination is within dist squares from the given target row, target col combination
 function isNearToPoint(r, c, target_r, target_c, dist) {
-  let r_diff = target_r - r
-  let c_diff = target_c - c
-  return Math.sqrt(Math.pow(r_diff, 2) + Math.pow(c_diff, 2)) <= dist
+  return distToPoint(r, c, target_c, target_r) <= dist
 }
 
 export class MapComponent extends BaseComponent {
@@ -236,6 +240,10 @@ export class MapComponent extends BaseComponent {
         return nextToPath
     }
 
+    isUnoccupied(row, col) {
+        return this.getGridValue(row, col) == 'x'
+    }
+
     getGridValue(r, c) {
         if (r < 0 || c < 0 || r >= this.rows || c >= this.cols) {
             return 'x'
@@ -246,6 +254,58 @@ export class MapComponent extends BaseComponent {
 
     setGridValues(grid) {
         this.grid = grid
+    }
+
+    xy2rc(x, y) {
+        // Returns the row and column that the given x y coordinates map to
+        return {
+            "row": Math.floor(y / this.mapSpriteSize),
+            "col": Math.floor(x / this.mapSpriteSize)
+        }
+    }
+
+    rc2xy(r, c) {
+        // Returns the x and y that the given row column square centres map to
+        return {
+            "x": c * this.mapSpriteSize + this.mapSpriteSize / 2,
+            "y": r * this.mapSpriteSize + this.mapSpriteSize / 2
+        }
+    }
+
+    getNearestNonOccupiedSquare(x, y) {
+        // Returns the closest square that is empty i.e. no path, no tower
+        let rc = this.xy2rc(x, y)  // Get the row and colum this position maps to
+        let closest_rc = rc
+        if (!this.isUnoccupied(rc.row, rc.col)) {  // If occupied, start checking, otherwise just return the given position
+            let offset = 1
+            let found = false
+            while (!found) {
+                let currentShortestDistance = this.mapSpriteSize * offset * 2  // If any are viable, they will be shorter than this distance
+                for (let r = -offset; r <= offset; r++) {
+                    for (let c = -offset; c <= offset; c++) {
+                        let xy_tester = this.rc2xy(rc.row + r, rc.col + c)
+                        // Only do the check if for a square on the outer most check path
+                        // Otherwise would be repeating all the squares done in the previous iteration
+                        // x x x x x
+                        // x y y y x
+                        // x y z y x
+                        // x y y y x
+                        // x x x x x
+                        // i.e. if offset is 2, then only check y squares becuase already checked x and z
+                        if (Math.abs(r) == offset || Math.abs(c) == offset) {
+                            let distance = distToPoint(x, y, xy_tester.x, xy_tester.y)
+                            if (this.isUnoccupied(rc.row + r, rc.col + c) && distance < currentShortestDistance) {  // A viable space, check the distance
+                                found = true  // At least one of the squares at this distance is viable
+                                closest_rc = this.xy2rc(xy_tester.x, xy_tester.y)
+                                currentShortestDistance = distance
+                            }
+                        }
+                    }
+                }
+                offset += 1  // Try squares further away if one not found at current distance
+            }
+        }
+        return closest_rc
     }
 
     update(towerUpdate) {

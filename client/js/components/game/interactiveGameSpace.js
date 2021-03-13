@@ -38,25 +38,23 @@ export class InteractiveGameSpace extends BaseComponent {
             if (pos.y < 0) pos.y = 0
             if (pos.y > this.interactionBoundaryY) pos.y = this.interactionBoundaryY
 
-            // Map grid position
-            let col = Math.floor(pos.x / this.mapSpriteSize)
-            let row = Math.floor(pos.y / this.mapSpriteSize)
-
             // Check is within map
             let xInArea = pos.x >= 0 && pos.x < this.interactionBoundaryX
             let yInArea = pos.y >= 0 && pos.y < this.interactionBoundaryY
             if (xInArea || yInArea) {
                 if (pos.y < this.mapSpriteSize*this.map.rows) {
-                    // If in the map area, snap to grid, and don't move if over a path or occupied space
-                    if (this.map.getGridValue(row, col) == 'x') {
-                        if (xInArea) {
-                            tower.setX(col * this.mapSpriteSize + this.mapSpriteSize / 2)
-                            tower.setCol(col)
-                        }
-                        if (yInArea) {
-                            tower.setY(row * this.mapSpriteSize + this.mapSpriteSize / 2)
-                            tower.setRow(row)
-                        }
+                    // If in the map area, snap to grid
+                    // If over a path or occupied space, snap to the closest non-occupied space
+                    let closestOccupiableSpace = this.map.getNearestNonOccupiedSquare(pos.x, pos.y)
+                    let newRow = closestOccupiableSpace.row
+                    let newCol = closestOccupiableSpace.col
+                    if (xInArea) {
+                        tower.setX(newCol * this.mapSpriteSize + this.mapSpriteSize / 2)
+                        tower.setCol(newCol)
+                    }
+                    if (yInArea) {
+                        tower.setY(newRow * this.mapSpriteSize + this.mapSpriteSize / 2)
+                        tower.setRow(newRow)
                     }
                 } else {
                     // Update positon normally if within the tower menu area
