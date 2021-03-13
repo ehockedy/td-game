@@ -27,7 +27,6 @@ export class StartRoundButton extends HorizontalOptionsMenu {
     // Override
     stopInteraction() {
         this.startGameRoot.stopInteraction()
-
         let disabledTint = "0xAAAAAA"
         this.startGameRoot.setTint(disabledTint)
         this.gameRoundText.style.fill = disabledTint

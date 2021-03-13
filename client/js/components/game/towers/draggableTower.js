@@ -1,6 +1,5 @@
 import { BaseInteractiveTower } from "./base/baseInteractiveTower.js"
-import { GraphicButton } from "../../ui_common/button.js"
-import { getPositionWithinEquallySpacedObjects } from "../../../tools.js"
+import { PlaceTowerMenu } from "../ui/placeTowerMenu.js"
 
 // Tower class that represents a tower in the menu the user can drag around and buy
 export class DraggableTower extends BaseInteractiveTower {
@@ -17,7 +16,10 @@ export class DraggableTower extends BaseInteractiveTower {
         this.dragging = false  // Whether the sprite is currently being moved
 
         // The buttons for confirming or declining placement
-        this.placeTowerButtons = this._getPlaceTowerButtons()
+        this.placeTowerButtons = new PlaceTowerMenu(0, 0)
+        this.placeTowerButtons.x -= this.placeTowerButtons.width / 2
+        this.placeTowerButtons.y += this.towerSprite.height / 2
+        this.placeTowerButtons.subscribe(this)
         this.addChild(this.placeTowerButtons)
 
         // Interaction behaviours
@@ -26,7 +28,9 @@ export class DraggableTower extends BaseInteractiveTower {
             .on("pointerup", () => { this._onPointerUp() })
             .on("pointerupoutside", () => { this._onPointerUp() })
             .on("pointermove", (event) => { this._onPointerMove(event) })
-        
+
+        this.on("confirmTowerPlace", () => {this.observers.forEach((o) => { o.emit("confirmTowerPlace", this) })}) // Send to external subscribers
+        this.on("denyTowerPlace", this.reset)
         this.on("clear", this.reset)
 
         this.reset() // Initialise state
@@ -74,33 +78,5 @@ export class DraggableTower extends BaseInteractiveTower {
         if (this.dragging) {
             this.observers.forEach((o) => { o.emit("clickAndDragTower", event, this) })
         }
-    }
-
-    _getPlaceTowerButtons() {
-        let localContainer = new PIXI.Container()
-        localContainer.visible = false
-
-        let yOffset = 0
-        let buttonHeight = 24
-        let buttonWidth = 24
-        let width_px = buttonWidth * 2 + 16 // gap between buttons
-
-        let confirmButton = new GraphicButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(1, 2, buttonWidth, width_px)-width_px/2, yOffset, "\u{1F5F8}" , 20, "0x22FF22")
-        let confirm = () => {
-            this.observers.forEach((o) => { o.emit("confirmTowerPlace", this) })
-        }
-        confirmButton.on("click", confirm)
-        confirmButton.on("tap", confirm)
-        localContainer.addChild(confirmButton)
-
-        let cancelButton = new GraphicButton(buttonWidth, buttonHeight, getPositionWithinEquallySpacedObjects(2, 2, buttonWidth, width_px) - width_px/2, yOffset, "\u{2717}", 20, "0xFF2222")
-        let deny = () => {
-            this.reset()
-        }
-        cancelButton.on("click", deny)
-        cancelButton.on("tap", deny)
-        localContainer.addChild(cancelButton)
-
-        return localContainer
     }
 }
