@@ -419,7 +419,7 @@ class Game {
                 this.generateMap(gameStateJson.seed)
 
                 gameStateJson.towers.forEach((tower)=>{
-                    this.map.setGridValue(tower.row, tower.col, data.value, "tower")
+                    this.map.setGridProperty(tower.row, tower.col, "value", 't')
                     this.addTower(tower.name, tower.type, this.players[0].id, tower.row, tower.col)
                 })
 
