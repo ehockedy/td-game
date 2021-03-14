@@ -64,6 +64,7 @@ export class DraggableTower extends BaseInteractiveTower {
 
     _onPointerDown() {
         this.dragging = true
+        this.towerSpriteContainer.scale.set(0.8)
         this.placeTowerButtons.visible = false
         this.observers.forEach((o) => { o.emit("pressDownTower", this) })
     }
@@ -71,6 +72,7 @@ export class DraggableTower extends BaseInteractiveTower {
     _onPointerUp() {
         this.dragging = false
         this.placeTowerButtons.visible = true
+        this.towerSpriteContainer.scale.set(1)
         this.observers.forEach((o) => { o.emit("releaseTower", this) })
     }
 

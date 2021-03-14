@@ -17,12 +17,15 @@ export class BaseTower extends BaseComponent {
 
         let randomColourCode = towerConfig["colour"]  // TODO I think colour should be passed in as a parameter, or as part of config in a better way
 
+        this.towerSpriteContainer = new PIXI.Container()
+        this.addChild(this.towerSpriteContainer)
+
         this.towerSprite = this.generateSprite(spriteTextures)
-        this.addChild(this.towerSprite)
+        this.towerSpriteContainer.addChild(this.towerSprite)
 
         if (baseTextures.length > 0) {
             this.towerColourSprite = this.generateBaseSprite(baseTextures, randomColourCode)
-            this.addChild(this.towerColourSprite)
+            this.towerSpriteContainer.addChild(this.towerColourSprite)
         }
     }
 
