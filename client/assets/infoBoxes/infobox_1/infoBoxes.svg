@@ -15,7 +15,14 @@
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="infoBoxes.svg">
   <defs
-     id="defs911" />
+     id="defs911">
+    <rect
+       x="29.633333"
+       y="-29.633333"
+       width="21.166667"
+       height="21.166667"
+       id="rect903" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,7 +32,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
      inkscape:cx="239.46792"
-     inkscape:cy="545.14703"
+     inkscape:cy="60.273813"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -353,5 +360,9 @@
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\infoBoxes\sprites\slanted_infobox_greyscale_2.png"
        inkscape:export-xdpi="62.999985"
        inkscape:export-ydpi="62.999985" />
+    <text
+       xml:space="preserve"
+       id="text901"
+       style="line-height:1.25;font-family:'Cooper Black';font-size:10.58333333px;-inkscape-font-specification:'Cooper Black, ';white-space:pre;shape-inside:url(#rect903);" />
   </g>
 </svg>
