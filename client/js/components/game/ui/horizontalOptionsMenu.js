@@ -1,5 +1,5 @@
 import { BaseComponent } from "../base/baseComponent.js"
-import { rightEndedHorizontalMenuOption, leftEndedHorizontalMenuOption, doubleEndedHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
+import { HorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
 
 // A class that represents a menu that starts on the right of the screen
 export class HorizontalOptionsMenu extends BaseComponent {
@@ -12,17 +12,17 @@ export class HorizontalOptionsMenu extends BaseComponent {
 
     // Left root because it exists as the left most element, but right-ended option because the visible edge is on the right
     addLeftRoot(width, tint) {
-        return new rightEndedHorizontalMenuOption(this.name+"_root", 0, 0,  width, tint)
+        return new HorizontalMenuOption(this.name+"_root", 0, 0,  width, tint, "left")
     }
 
     addRightRootButton(width, tint, onSelectEventName) {
-        let root = new leftEndedHorizontalMenuOption(this.name+"_root", 0, 0,  width, tint)
+        let root = new HorizontalMenuOption(this.name+"_root", 0, 0,  width, tint, "right")
         this._makeButton(root, onSelectEventName)
         return root
     }
 
     addOption(width, tint) {
-        let newOption = new doubleEndedHorizontalMenuOption(this.name+this.children.length.toString(), this.getLocalBounds().width + this.x_offset, 0,  width, tint)
+        let newOption = new HorizontalMenuOption(this.name+this.children.length.toString(), this.getLocalBounds().width + this.x_offset, 0,  width, tint, "none")
         return newOption
     }
 
