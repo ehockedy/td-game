@@ -19,6 +19,10 @@ class Menu extends BaseComponent {
         this.addChild(option)
         return option
     }
+
+    _getNextXPosition(width) {
+        return this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset + this.gap
+    }
 }
 
 
@@ -30,7 +34,7 @@ export class StaticMenu extends Menu {
 
     addOption(width, tint) {
         let option = new StaticHorizontalMenuOption(this.name + "_root",
-            this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset, 0,
+            this._getNextXPosition(width), 0,
             width, tint, "none")
         this.addChild(option)
         return option
@@ -47,7 +51,7 @@ export class ButtonMenu extends Menu {
 
     addOption(width, tint, onSelectEventName) {
         let option = new ButtonHorizontalMenuOption(this.name + "_root",
-            this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset, 0,
+            this._getNextXPosition(width), 0,
             width, tint, "none")
         option.onSelectEventName = onSelectEventName
         this.addChild(option)
@@ -74,21 +78,23 @@ export class SwitchMenu extends Menu {
 
     addOption(width, tint, onSelectEventName, isDefault=false) {
         let option = new SwitchHorizontalMenuOption(this.name + "_root",
-            this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset, 0,
+            this._getNextXPosition(width), 0,
             width, tint, "none")
         this.addChild(option)
         option.onSelectEventName = onSelectEventName
 
         // The default button is the one pressed down from the start
-        if (isDefault) {
-            if (this.selected) this.selected.unsetActive()
-            this.selected = option
-            this.selected.setActive()
-        }
+        if (isDefault) this.setSelected(option)
 
         // Set up interaction for if the button is pressed
         option.subscribe(this)
         return option
+    }
+
+    setSelected(option) {
+        if (this.selected) this.selected.unsetActive()
+        this.selected = option
+        this.selected.setActive()
     }
 
     _setUpInteraction() {

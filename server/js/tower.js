@@ -68,6 +68,7 @@ class Tower {
     update(updates) {
         updates.forEach((update) => {
             this.state[update.property] = update.newValue
+            console.log(this.name, this.player.id, "Updating property", update.property, "to", update.newValue)
         })
     }
 

@@ -84,7 +84,7 @@ export class InteractiveGameSpace extends BaseComponent {
             }
             this.towerMenu.hide()
             this.deployedTowerMainMenu.show()
-            this.deployedTowerMainMenu.updateTowerInfo(tower)
+            this.deployedTowerMainMenu.setSelectedTower(tower)
             tower.setActive()
             this.activeTower = tower  // This is the tower currently being interacted with
         })

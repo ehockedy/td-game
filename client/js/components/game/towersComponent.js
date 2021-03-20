@@ -80,6 +80,7 @@ export class TowersComponent extends BaseComponent {
             let towerToUpdate = this.getChildByName(tower.name)
             towerToUpdate.setRotation(tower.angle)
             towerToUpdate.level = tower.level
+            towerToUpdate.aim = tower.aim
 
             if (tower.hasShot) {
                 towerToUpdate.shoot()

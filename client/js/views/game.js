@@ -8,7 +8,7 @@ import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { GraphicButton } from "../components/ui_common/button.js"
 import { StartRoundButton } from "../components/game/ui/startRoundButton.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
-import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
+import { addSocketEvent, MSG_TYPES, sendMessage, sendResourceUpdateMessage } from "../networking.js"
 import { randomHexString } from "../tools.js"
 
 /**
@@ -127,6 +127,14 @@ export class GameRenderer {
         this.clientLink.on("start-round", () => {
             sendMessage(MSG_TYPES.ROUND_START)
         })
+        this.clientLink.on("update-tower-aim", (tower, aimBehaviour) => {
+            sendResourceUpdateMessage("tower", tower.name, [
+                {
+                    "property" : "aimBehaviour",
+                    "newValue" : aimBehaviour
+                }
+            ])
+        })
     }
 
     loadData() {
@@ -179,6 +187,7 @@ export class GameRenderer {
         // Subscribe componenets to get updated when draggable towers are updated
         this.tm.subscribeToAllTowers(this.clientLink)
         this.startRoundButton.subscribe(this.clientLink)
+        this.gameSpace.subscribeToDeployedTowerMenu(this.clientLink)
 
         // Begin the rendering loop
         this.spriteHandler.render()

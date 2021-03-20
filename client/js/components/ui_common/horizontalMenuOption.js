@@ -193,10 +193,12 @@ export class SwitchHorizontalMenuOption extends HorizontalMenuOption {
             .on("mouseover", () => { this._lighten() })
             .on("mouseout", () => { if (!this.isSelected) this._resetColour() })
             .on("mousedown", () => {
-                this.isSelected = true
-                this._lighten()
-                this._press()
-                this._select()
+                if (!this.isSelected) {
+                    this.isSelected = true
+                    this._lighten()
+                    this._press()
+                    this._select()
+                }
             })
     }
 
