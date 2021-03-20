@@ -2,28 +2,47 @@ import { BaseComponent } from "../game/base/baseComponent.js"
 import { addColourHexValues } from "../../tools.js"
 
 /**
- * TODO
- * wallAttachment - "left", "right", "none"
+ * An element that exists in a menu on the game UI
+ * Wall attachment is the side of the element that is in contact with the edge of a component - probably the screen
+ * This side will have a flat edge and no border so it looks like the element continues off screen to create a neat look.
  */
-export class HorizontalMenuOption extends BaseComponent {
+class HorizontalMenuOption extends BaseComponent {
     constructor (name, x, y, width_px, tint, wallAttachment) {
         super(name)
         this.x = x
         this.y = y
+        this.baseTint = tint
+        this.selectionEventName = "selected"  // The event to emit when selected
 
+        this.baseContentOffsetX = 0
         this._generateSprites(width_px, tint, wallAttachment)
+
+        this.text = new PIXI.Container()
+        this.text.x += this.baseContentOffsetX
+        this.addChild(this.text)
     }
 
     // ~~~ Public ~~~
-    setClickable() {}
 
-    setTint(tint) {}
-
-    setContent(newContent) {
+    // Add a PIXI.Text object onto the element
+    addText(text, x_percent=0.5, y_percent=0.5) {
+        // Position relative to the menu sprite
+        text.x = x_percent * this.menuSprite.width
+        text.y = y_percent * this.menuSprite.height
+        text.baseTint = text.style.fill  // Add this property to record the original colour
+        this.text.addChild(text)
     }
 
-    // xOffset might be useful if it's a root component
-    setTextCentral(newContent, xOffset=0) {
+    // Given a string, render it in the given style in the middle of the element
+    addTextCentral(message, style) {
+        let text = new PIXI.Text(message, style)
+        text.anchor.set(0.5, 0.5)
+        this.addText(text, 0.5, 0.5)
+    }
+
+    // Override the name of the event to emit when selected
+    setSelectEventName(name) {
+        this.selectionEventName = name
     }
 
     // ~~~ Private ~~~
@@ -54,6 +73,7 @@ export class HorizontalMenuOption extends BaseComponent {
                 this.shadowSprite.scale.set(-1)
                 this.menuSprite.pivot.y = this.menuSprite.height
                 this.shadowSprite.pivot.y = this.shadowSprite.height
+                this.baseContentOffsetX = -this.menuSprite.width
                 break
             //   _________
             //  /        /
@@ -86,162 +106,111 @@ export class HorizontalMenuOption extends BaseComponent {
     }
 
 
+    // ~~~ Events ~~~
+    _lighten() {
+        let colourDiff = "0x111111"
+        this.menuSprite.tint = addColourHexValues(this.baseTint, colourDiff)
+        this.text.children.forEach((text) => { text.style.fill = addColourHexValues(text.baseTint, colourDiff)})
+    }
+
+    _resetColour() {
+        this.menuSprite.tint = this.baseTint
+        this.text.children.forEach((text) => { text.style.fill = text.baseTint})
+    }
+
+    _press() {
+        // Bring the content of the button closer to the "ground" by moving it towards the shadow
+        this.menuSprite.x = this.shadowSprite.x / 2
+        this.menuSprite.y = this.shadowSprite.y / 2
+        this.text.x = this.shadowSprite.x / 2 + this.baseContentOffsetX
+        this.text.y = this.shadowSprite.y / 2
+        this.scale.set(0.98)  // Shrink it a bit
+    }
+
+    _release() {
+        // Reset the positions of the content of the button
+        this.menuSprite.x = 0
+        this.menuSprite.y = 0
+        this.text.x = this.baseContentOffsetX
+        this.text.y = 0
+        this.scale.set(1)  // Reset to original size
+    }
+
+    _select() {
+        // The option has been selected
+        // Send the event and the selected menu option object
+        this.observers.forEach((observer) => {observer.emit(this.selectionEventName, this)})
+    }
+
 }
 
+// A menu element that is not interactive
+export class StaticHorizontalMenuOption extends HorizontalMenuOption {
+    constructor (name, x, y, width_px, tint, wallAttachment) {
+        super(name, x, y, width_px, tint, wallAttachment)
+    }
+}
 
+// A menu element that can be pressed down and springs back up when released
+// Used to set a behaviour or trigger an event
+export class ButtonHorizontalMenuOption extends HorizontalMenuOption {
+    constructor (name, x, y, width_px, tint, wallAttachment) {
+        super(name, x, y, width_px, tint, wallAttachment)
+        this._setUpInteractions()
+    }
 
-// // This component is a horizontal box that can be stretched horizontally only, to avoid changing the angle of the slope
-// class HorizontalMenuOption extends BaseComponent {
-//     constructor (name, x, y, width_px, tint, textureName,
-//             lhsSlice_px, rhsSlice_px,
-//             shadowShiftX, shadowShiftY, shadowExtraWidthX, shadowExtraWidthY
-//     ) {
-//         super(name)
-//         this.start_x = x
-//         this.start_y = y
-//         this.x = x
-//         this.y = y
-//         this.startingTint = tint
+    _setUpInteractions() {
+        this.menuSprite.interactive = true
+        this.menuSprite.buttonMode = true
+        this.menuSprite
+            .on("mouseover", () => { this._lighten() })
+            .on("mouseout", () => { this._resetColour() })
+            .on("mousedown", () => { this._press() })
+            .on("mouseup", () => {
+                this._release()
+                this._select()
+            })
+            .on("mouseupoutside", () => {
+                this._release()
+                this._select()
+            })
+    }
+}
 
-//         let baseTexture = PIXI.Loader.shared.resources["client/assets/infoBoxes/infoBoxes.json"].textures[textureName]
-//         this.infoTextBox = new PIXI.NineSlicePlane(baseTexture, lhsSlice_px, 0, rhsSlice_px, 0)
-//         this.infoTextBox.width = width_px
-//         this.infoTextBox.tint = tint
+// A menu element that can be pressed down and is released when another element in the same menu is pressed
+// Used to toggle an option from a set
+export class SwitchHorizontalMenuOption extends HorizontalMenuOption {
+    constructor (name, x, y, width_px, tint, wallAttachment) {
+        super(name, x, y, width_px, tint, wallAttachment)
+        this._setUpInteractions()
+        this.isSelected = false
+    }
 
-//         this.shadowTextBox = new PIXI.NineSlicePlane(baseTexture, lhsSlice_px, 0, rhsSlice_px, 0)
-//         this.shadowTextBox.width = this.infoTextBox.width + shadowExtraWidthX
-//         this.shadowTextBox.height = this.infoTextBox.height + shadowExtraWidthY
-//         this.shadowTextBox.x += shadowShiftX
-//         this.shadowTextBox.y += shadowShiftY
-//         this.shadowTextBox.tint = "0x000000"
-//         this.shadowTextBox.alpha = 0.8
+    _setUpInteractions() {
+        this.menuSprite.interactive = true
+        this.menuSprite.buttonMode = true
+        this.menuSprite
+            .on("mouseover", () => { this._lighten() })
+            .on("mouseout", () => { if (!this.isSelected) this._resetColour() })
+            .on("mousedown", () => {
+                this.isSelected = true
+                this._lighten()
+                this._press()
+                this._select()
+            })
+    }
 
-//         this.addChild(this.shadowTextBox)
-//         this.addChild(this.infoTextBox)
-//     }
+    setActive() {
+        // This is the selected option in the menu
+        // But do not actually trigger the select action - only the user can do this
+        this.isSelected = true
+        this._lighten()
+        this._press()
+    }
 
-//     // Set properties that a clickable button would have
-//     setClickable() {
-//         this.infoTextBox.buttonMode = true
-//         this.infoTextBox.interactive = true
-
-//         // Lighten when hovered over
-//         this.infoTextBox.on("mouseover", () => {
-//             this.infoTextBox.tint = addColourHexValues(this.startingTint, "0x111111")
-//             if (this.startingTintText) {
-//                 this.content.style.fill = addColourHexValues(this.startingTintText, "0x111111")
-//             }
-//         })
-
-//         // Return to original colour when mouse removed
-//         this.infoTextBox.on("mouseout", () => {
-//             this.infoTextBox.tint = this.startingTint
-//             if (this.startingTintText) this.content.style.fill = this.startingTintText
-//         })
-
-//         // Move the button and its contents down so that it appears closer to the map, but not enough to fully cover the shadow
-//         this.infoTextBox.on("pointerdown", () => {
-//             this.infoTextBox.x = this.shadowTextBox.x / 2
-//             this.infoTextBox.y = this.shadowTextBox.y / 2
-//             if (this.content) {   // TODO this only covers central text content
-//                 this.content.x = this.content.start_position.x + this.shadowTextBox.x / 2
-//                 this.content.y = this.content.start_position.y + this.shadowTextBox.y / 2
-//             }
-//             this.scale.set(0.98)
-//         })
-
-//         this.infoTextBox.on("pointerup", () => {
-//             this._onPointerup()
-//             this.emit("selected")
-//             this.observers.forEach((observer) => {observer.emit("selected")})  // TODO decide which is better, this or the above line
-//         })
-//         this.infoTextBox.on("pointerupoutside", () => { this._onPointerup() })
-//     }
-
-//     // Reset to original positions and scale
-//     _onPointerup() {
-//         this.infoTextBox.x = 0
-//         this.infoTextBox.y = 0
-//         if (this.content) {   // TODO this only covers central text content
-//             this.content.position = this.content.start_position
-//         }
-//         this.scale.set(1)
-//     }
-
-//     setTint(tint) {
-//         this.infoTextBox.tint = tint
-//     }
-
-//     setContent(newContent) {
-//         if (this.content) this.removeChild(this.content)
-//         this.content = newContent
-//         this.addChild(this.content)
-//     }
-
-//     // xOffset might be useful if it's a root component
-//     setTextCentral(newContent, xOffset=0) {
-//         if (this.content) this.removeChild(this.content)
-//         this.content = newContent
-//         this.content.anchor.set(0.5)
-//         this.content.start_position = new PIXI.Point(this.infoTextBox.width / 2 + xOffset, this.infoTextBox.height / 2)
-//         this.content.position = this.content.start_position
-//         this.startingTintText = newContent.style.fill
-//         this.addChild(this.content)
-//     }
-
-//     // Override
-//     stopInteraction() {
-//         this.infoTextBox.buttonMode = false
-//         this.infoTextBox.interactive = false
-//     }
-
-//     // Override
-//     startInteraction() {
-//         this.infoTextBox.buttonMode = true
-//         this.infoTextBox.interactive = true
-//     }
-// }
-
-// let xTransform = 4
-// let yTransform = 6
-
-// // This component is a horizontal box, with a shere of the top edge in the positive x direction
-// // It has a vertical slant on the right side
-// // It is designed to be placed at the left side of the screen
-// export class rightEndedHorizontalMenuOption extends HorizontalMenuOption {
-//     constructor (name, x, y, width_px, tint) {
-//         super(name, x, y, width_px, tint, "slanted_infobox_greyscale_1.png",
-//             1, 50,      // Slice widths
-//             0, yTransform, xTransform, 0  // Shadow transformations
-//         )
-//     }
-// }
-
-// // This component is a horizontal box, with a shere of the top edge in the negative x direction
-// // It has a vertical slant on the left side
-// // It is designed to be placed at the right side of the screen
-// export class leftEndedHorizontalMenuOption extends HorizontalMenuOption {
-//     constructor (name, x, y, width_px, tint) {
-//         super(name, x, y, width_px, tint, "slanted_infobox_greyscale_1.png",
-//             1, 50,      // Slice widths
-//             -xTransform, -yTransform, 0, 0  // Shadow transformations
-//         )
-
-//         // Pivot it so that x, y positions control the top left corner
-//         // This wil make it easy to position it on the right hand side of the view
-//         this.pivot.y = this.infoTextBox.height
-//         this.angle = 180  // rotate so the slante slot in with the slants of the elements to the left of it
-//     }
-// }
-
-// // This component is a horizontal box, with a shere of the top edge in the positive x direction
-// // It has a vertical slant on both sides
-// // It is designed to be placed adjacent to a right or left ending menu option
-// export class doubleEndedHorizontalMenuOption extends HorizontalMenuOption {
-//     constructor (name, x, y, width_px, tint) {
-//         super(name, x, y, width_px, tint, "slanted_infobox_greyscale_2.png",
-//             50, 50,     // Slice widths
-//             xTransform, yTransform, 0, 0  // Shadow transformations
-//         )
-//     }
-// }
+    unsetActive() {
+        this.isSelected = false
+        this._resetColour()
+        this._release()
+    }
+}

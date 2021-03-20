@@ -1,4 +1,4 @@
-import { HorizontalOptionsMenu } from "./horizontalOptionsMenu.js"
+import { SwitchMenu, ButtonMenu } from "./horizontalOptionsMenu.js"
 import { getPositionWithinEquallySpacedObjects } from "../../../tools.js"
 import { BaseComponent } from "../base/baseComponent.js"
 
@@ -19,27 +19,25 @@ export function generateStyle(tint, fontSize=48) {
 let aimColour = "0xDD3333"
 let upgradeColour = "0x229933"
 let sellColour = "0xDDAA11"
+let towerInfoColour = "0xAABB99"
 
-export class DeployedTowerMainMenu extends HorizontalOptionsMenu {
+export class DeployedTowerMainMenu extends ButtonMenu {
     constructor(x, y) {
-        super("deployedTowerMainMenu", x, y)
-        this.setOffset(-20)
+        super("deployedTowerMainMenu", x, y, "right", -20)
 
-        // TODO add addRoot option
-        this.menuRoot = this.addLeftRoot(350, "0xDDEECC")
-        this.addChild(this.menuRoot)
+        this.menuRoot = this.addRoot(350, "0xDDEECC")
 
         // Select this option to open the aiming menu
-        this.aimOption = this.addButtonOption(260, aimColour, generateStyle(aimColour), "Aim", "selected-aim")
-        this.addChild(this.aimOption)
+        this.aimOption = this.addOption(260, aimColour, "selected-aim")
+        this.aimOption.addTextCentral("Aim", generateStyle(aimColour))
 
         // Select this option to open the upgrades menu
-        this.upgradeOption = this.addButtonOption(260, upgradeColour, generateStyle(upgradeColour), "Upgrade", "selected-upgrade")
-        this.addChild(this.upgradeOption)
+        this.upgradeOption = this.addOption(260, upgradeColour, "selected-upgrade")
+        this.upgradeOption.addTextCentral("Upgrade", generateStyle(upgradeColour))
 
         // Select this option to open the selling menu
-        this.sellOption = this.addButtonOption(260, sellColour, generateStyle(sellColour), "Sell", "selected-sell")
-        this.addChild(this.sellOption)
+        this.sellOption = this.addOption(260, sellColour, "selected-sell")
+        this.sellOption.addTextCentral("Sell", generateStyle(sellColour))
 
         this.populateWithTowerInfo()
     }
@@ -48,21 +46,13 @@ export class DeployedTowerMainMenu extends HorizontalOptionsMenu {
     populateWithTowerInfo() {
         // Fill the menu to have info relevant to the specified tower
         let fontSize = 28
-        let towerInfoTextContainer = new PIXI.Container()
-        this.nameAndLevel = new PIXI.Text("", generateStyle("0xAABB99", fontSize))
-        this.kills = new PIXI.Text("", generateStyle("0xAABB99", fontSize))
+        this.nameAndLevel = new PIXI.Text("", generateStyle(towerInfoColour, fontSize))
+        this.nameAndLevel.anchor.set(0, 0.5)
+        this.menuRoot.addText(this.nameAndLevel, 0.02, 0.33)
 
-        towerInfoTextContainer.addChild(this.nameAndLevel)
-        towerInfoTextContainer.addChild(this.kills)
-
-        let padding = 10
-        towerInfoTextContainer.children.forEach((child, idx) => {
-            child.anchor.set(0, 0.5)
-            child.x = padding
-            child.y = getPositionWithinEquallySpacedObjects(idx+1, towerInfoTextContainer.children.length, child.height, this.menuRoot.height - padding)
-        })
-
-        this.menuRoot.setContent(towerInfoTextContainer)
+        this.kills = new PIXI.Text("", generateStyle(towerInfoColour, fontSize))
+        this.kills.anchor.set(0, 0.5)
+        this.menuRoot.addText(this.kills, 0.02, 0.66)
     }
 
     // Update just the contents of the info created in populateWithTowerInfo to ensure kill stats is up to date

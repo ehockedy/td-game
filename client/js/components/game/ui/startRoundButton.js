@@ -1,22 +1,23 @@
-import { HorizontalOptionsMenu } from "./horizontalOptionsMenu.js"
+import { ButtonHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
 import { generateStyle } from "./deployedTowerMenu.js"
 
 let startMenuColour = "0x40d661"
-export class StartRoundButton extends HorizontalOptionsMenu {
+export class StartRoundButton extends ButtonHorizontalMenuOption {
     constructor(x, y) {
-        super("startGameButton", x, y)
-        this.setOffset(-20)
+        super("startGameButton", x, y, 300, startMenuColour, "right")
+        //this.setOffset(-20)
 
-        this.startGameRoot = this.addRightRootButton(300, startMenuColour, "start-round")
-        this.addChild(this.startGameRoot)
+        //this.startGameRoot = this.addOption(300, startMenuColour, "start-round")
+        //this.addChild(this.startGameRoot)
 
-        let fontSize = 38
+        let fontSize = 36
         this.gameRoundText = new PIXI.Text("" , generateStyle(startMenuColour, fontSize))
+        this.gameRoundText.anchor.set(0, 0.5)
+        this.addText(this.gameRoundText, 0.15, 0.5)
         this.update("1")  // Populate with expected text for round 1
 
-        // Add the text to the button
-        this.startGameRoot.setTextCentral(this.gameRoundText, -20)
-        this.gameRoundText.angle = 180
+
+        this.setSelectEventName("start-round")
     }
 
     update(roundNumberString) {
@@ -26,16 +27,16 @@ export class StartRoundButton extends HorizontalOptionsMenu {
 
     // Override
     stopInteraction() {
-        this.startGameRoot.stopInteraction()
+        super.stopInteraction()
         let disabledTint = "0xAAAAAA"
-        this.startGameRoot.setTint(disabledTint)
+        this.menuSprite.tint = disabledTint
         this.gameRoundText.style.fill = disabledTint
     }
 
     // Override
     startInteraction() {
-        this.startGameRoot.startInteraction()
-        this.startGameRoot.setTint(startMenuColour)
+        super.startInteraction()
+        this.menuSprite.tint = startMenuColour
         this.gameRoundText.style.fill = startMenuColour
     }
 }

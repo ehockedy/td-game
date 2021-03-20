@@ -1,49 +1,102 @@
 import { BaseComponent } from "../base/baseComponent.js"
-import { HorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
+import { StaticHorizontalMenuOption, ButtonHorizontalMenuOption, SwitchHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
 
-// A class that represents a menu that starts on the right of the screen
-export class HorizontalOptionsMenu extends BaseComponent {
-    constructor(name, x, y) {
+// Base class for the game UI menu type
+class Menu extends BaseComponent {
+    constructor(name, x, y, buildDirection, gap) {
         super(name)
         this.x = x
         this.y = y
-        this.x_offset = 0
+        this.gap = gap
+        this.buildDirection = buildDirection
+        this.buildDirectionMultiplier = this.buildDirection == "right" ? 1 : -1
+        this.optionsOffset = this.buildDirection == "right" ? 0 : -1  // If the options go to the left when added, need to offset because pivot if top left corner of button sprite
     }
 
-    // Left root because it exists as the left most element, but right-ended option because the visible edge is on the right
-    addLeftRoot(width, tint) {
-        return new HorizontalMenuOption(this.name+"_root", 0, 0,  width, tint, "left")
+    addRoot(width, tint) {
+        let wallAttachment = this.buildDirection == "right" ? "left" : "right"
+        let option = new StaticHorizontalMenuOption(this.name + "_root", 0, 0, width, tint, wallAttachment)
+        this.addChild(option)
+        return option
     }
+}
 
-    addRightRootButton(width, tint, onSelectEventName) {
-        let root = new HorizontalMenuOption(this.name+"_root", 0, 0,  width, tint, "right")
-        this._makeButton(root, onSelectEventName)
-        return root
+
+// A menu that has no interactive components
+export class StaticMenu extends Menu {
+    constructor(name, x, y, buildDirection, gap=0) {
+        super(name, x, y, buildDirection, gap)
     }
 
     addOption(width, tint) {
-        let newOption = new HorizontalMenuOption(this.name+this.children.length.toString(), this.getLocalBounds().width + this.x_offset, 0,  width, tint, "none")
-        return newOption
+        let option = new StaticHorizontalMenuOption(this.name + "_root",
+            this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset, 0,
+            width, tint, "none")
+        this.addChild(option)
+        return option
+    }
+}
+
+
+// A group of independent buttons
+export class ButtonMenu extends Menu {
+    constructor(name, x, y, buildDirection, gap=0) {
+        super(name, x, y, buildDirection, gap)
+        this._setUpInteraction()
     }
 
-    addButtonOption(width, tint, buttonTextStyle, buttonText, onSelectEventName) {
-        let option = this.addOption(width, tint)
-        let content = new PIXI.Text(buttonText, buttonTextStyle)
-        option.setTextCentral(content)
-        this._makeButton(option, onSelectEventName)
+    addOption(width, tint, onSelectEventName) {
+        let option = new ButtonHorizontalMenuOption(this.name + "_root",
+            this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset, 0,
+            width, tint, "none")
+        option.onSelectEventName = onSelectEventName
+        this.addChild(option)
+        option.subscribe(this)
         return option
     }
 
-    _makeButton(option, onSelectEventName) {
-        option.setClickable()
-        option.on("selected", () => {
-            this.observers.forEach((observer) => {observer.emit(onSelectEventName)})
+    _setUpInteraction() {
+        this.on("selected", (option) => {
+            this.observers.forEach((observer) => { observer.emit(option.onSelectEventName) })
         })
     }
+}
 
-    setOffset(x) {
-        // For every child added, offset the position by this much
-        // Must be called before the children are added
-        this.x_offset = x
+
+// Holds a set of options, with one being able to be preessed at a time
+// Handles the interactions between the buttons
+// If one is pressed, the currently pressed one is deselected
+export class SwitchMenu extends Menu {
+    constructor(name, x, y, buildDirection, gap=0) {
+        super(name, x, y, buildDirection, gap)
+        this._setUpInteraction()
+    }
+
+    addOption(width, tint, onSelectEventName, isDefault=false) {
+        let option = new SwitchHorizontalMenuOption(this.name + "_root",
+            this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset, 0,
+            width, tint, "none")
+        this.addChild(option)
+        option.onSelectEventName = onSelectEventName
+
+        // The default button is the one pressed down from the start
+        if (isDefault) {
+            if (this.selected) this.selected.unsetActive()
+            this.selected = option
+            this.selected.setActive()
+        }
+
+        // Set up interaction for if the button is pressed
+        option.subscribe(this)
+        return option
+    }
+
+    _setUpInteraction() {
+        this.on("selected", (option) => {
+            if (this.selected) this.selected.unsetActive()
+            this.selected = option
+            this.observers.forEach((observer) => { observer.emit(option.onSelectEventName) })
+        })
     }
 }
+
