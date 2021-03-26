@@ -140,17 +140,6 @@ web_sockets_server.on('connection', (socket) => {
       games[data.gameID] = new session.Session(socket, data.gameID, data.playerID, config)
     }
 
-    if (games[socket.gameID].game.hasStarted) {
-      console.log(games[socket.gameID].game.players, socket.playerID)
-      if (games[socket.gameID].game.playerExists(socket.playerID)) {
-        socket.emit(MSG_TYPES.GAME_START)
-      } else {
-        socket.emit(MSG_TYPES.GAME_START_PLAYER_NOT_PRESENT)
-      }
-    } else {
-      socket.emit(MSG_TYPES.LOBBY_START)
-    }
-
   });
 
   // Check whether a game with the given ID exists
@@ -162,15 +151,6 @@ web_sockets_server.on('connection', (socket) => {
       console.log("Game not found")
       callback({ response: "fail" })
     }
-  })
-
-  socket.on(MSG_TYPES.GET_MAP, ()=>{
-    socket.emit(MSG_TYPES.SERVER_SET_GAME_BOARD, games[socket.gameID].game.getMapStructure())
-  })
-
-  socket.on(MSG_TYPES.GET_MAP_REGENERATE, (mapArgs)=>{
-    games[socket.gameID].game.generateMap(mapArgs.seed)
-    socket.emit(MSG_TYPES.SERVER_SET_GAME_BOARD, games[socket.gameID].game.getMapStructure())
   })
 
   socket.on(MSG_TYPES.ADD_PLAYER, () => {
@@ -218,23 +198,7 @@ web_sockets_server.on('connection', (socket) => {
     web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].game.getMapStructure())
   });
 
-  /**
-   * Client will send a message of the form:
-   * {
-   *   "gameID": "ABCDEF",
-   *   "resource": "tower",
-   *   "update": {
-   *     "name": "012345",
-   *     "aimBehaviour": "first" 
-   *   }
-   * }
-   */
-  socket.on(MSG_TYPES.CLIENT_UPDATE, (data) => {
-    let gameID = data.gameID
-    if (data.resource == "tower") {
-      games[gameID].game.updateTower(data.name, data.updates)
-    }
-  })
+
 
   socket.on(MSG_TYPES.CLIENT_DEBUG, (data) => {
     console.log(data)
