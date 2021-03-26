@@ -1,9 +1,10 @@
 const http = require('http')
 const io = require('socket.io');
-const game = require('./server/js/game.js')
+const session = require('./server/js/session.js')
 const networking = require('./server/js/networking.js')
 const os = require('os');
 const fs = require('fs');
+const { Session } = require('inspector');
 
 networking.setRootDir(__dirname) // Set the location to get files from
 
@@ -89,17 +90,17 @@ let games = {}
 // Main processing loop
 // Updates the game state and sends the update to all connected clients in that game room
 function updateGameAndSend(gameID) {
-  if (games[gameID].roundActive()) {
-    games[gameID].updateActiveGameState() // Advance the game by one tick
+  if (games[gameID].game.roundActive()) {
+    games[gameID].game.updateActiveGameState() // Advance the game by one tick
 
-    if (!games[gameID].roundActive()) { // Round is over
-      web_sockets_server.in(gameID).emit(MSG_TYPES.ROUND_END, games[gameID].getNextRoundInfo())
+    if (!games[gameID].game.roundActive()) { // Round is over
+      web_sockets_server.in(gameID).emit(MSG_TYPES.ROUND_END, games[gameID].game.getNextRoundInfo())
     }
   } else {
-    games[gameID].updateInactiveGameState()
+    games[gameID].game.updateInactiveGameState()
   }
 
-  let new_state = games[gameID].getGameState()
+  let new_state = games[gameID].game.getGameState()
   web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
 }
 
@@ -110,28 +111,38 @@ function gameExists(gameID) {
 function broadcastPlayers(socket) {
   let gameID = socket.gameID
   let playerID = socket.playerID
-  games[gameID].forEachPlayer((player)=>{
-    if (player.id == playerID) socket.emit(MSG_TYPES.ADD_PLAYER_SELF, games[gameID].getPlayerInfo(player.id))
-    else socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(player.id))
+  games[gameID].game.forEachPlayer((player)=>{
+    if (player.id == playerID) socket.emit(MSG_TYPES.ADD_PLAYER_SELF, games[gameID].game.getPlayerInfo(player.id))
+    else socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].game.getPlayerInfo(player.id))
   })
 }
+
+
+/**
+ * To add:
+ * 
+ * Game class - accepts game ID as param
+ * Player/connection class - has a single socket as param
+*/
 
 web_sockets_server.on('connection', (socket) => {
   // Join game event
   // Player has started or joined game. Create a room with the game ID if one does not exist and send that client the game info.
   socket.on(MSG_TYPES.JOIN_GAME, (data) => {
     console.log("Client " + socket.handshake.address + " joining game " + data.gameID)
+
+    // Assigning these variables is temporary
     socket.gameID = data.gameID
     socket.playerID = socket.handshake.address + data.gameID
 
     // This is the first request to join this game, so make the game
-    if (!(socket.gameID in games)) {
-      games[data.gameID] = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)
+    if (!(data.gameID in games)) {
+      games[data.gameID] = new session.Session(socket, data.gameID, data.playerID, config)
     }
 
-    if (games[socket.gameID].hasStarted) {
-      console.log(games[socket.gameID].players, socket.playerID)
-      if (games[socket.gameID].playerExists(socket.playerID)) {
+    if (games[socket.gameID].game.hasStarted) {
+      console.log(games[socket.gameID].game.players, socket.playerID)
+      if (games[socket.gameID].game.playerExists(socket.playerID)) {
         socket.emit(MSG_TYPES.GAME_START)
       } else {
         socket.emit(MSG_TYPES.GAME_START_PLAYER_NOT_PRESENT)
@@ -154,31 +165,31 @@ web_sockets_server.on('connection', (socket) => {
   })
 
   socket.on(MSG_TYPES.GET_MAP, ()=>{
-    socket.emit(MSG_TYPES.SERVER_SET_GAME_BOARD, games[socket.gameID].getMapStructure())
+    socket.emit(MSG_TYPES.SERVER_SET_GAME_BOARD, games[socket.gameID].game.getMapStructure())
   })
 
   socket.on(MSG_TYPES.GET_MAP_REGENERATE, (mapArgs)=>{
-    games[socket.gameID].generateMap(mapArgs.seed)
-    socket.emit(MSG_TYPES.SERVER_SET_GAME_BOARD, games[socket.gameID].getMapStructure())
+    games[socket.gameID].game.generateMap(mapArgs.seed)
+    socket.emit(MSG_TYPES.SERVER_SET_GAME_BOARD, games[socket.gameID].game.getMapStructure())
   })
 
   socket.on(MSG_TYPES.ADD_PLAYER, () => {
     let gameID = socket.gameID
     let playerID = socket.playerID
     socket.join(gameID)
-    if (!games[gameID].playerExists(playerID)) {
-      games[gameID].addPlayer(playerID)
+    if (!games[gameID].game.playerExists(playerID)) {
+      games[gameID].game.addPlayer(playerID)
     }
 
     // Tell all other players about this new player
-    socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].getPlayerInfo(playerID))
+    socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].game.getPlayerInfo(playerID))
 
     // Tell this player about existing players (including itself)
     broadcastPlayers(socket)
   })
 
   socket.on(MSG_TYPES.GAME_START_REQUEST, ()=> {
-    games[socket.gameID].start()
+    games[socket.gameID].game.start()
     setInterval(updateGameAndSend, 50*0.2, socket.gameID);  // 20 "fps"
     web_sockets_server.in(socket.gameID).emit(MSG_TYPES.GAME_START)
   })
@@ -186,12 +197,12 @@ web_sockets_server.on('connection', (socket) => {
   socket.on(MSG_TYPES.ROUND_START, ()=>{
     let playerID = socket.playerID
     let gameID = socket.gameID
-    games[gameID].getPlayerByName(playerID).setReady()
-    if (games[gameID].ready()) {
-      games[gameID].advanceLevel()
+    games[gameID].game.getPlayerByName(playerID).setReady()
+    if (games[gameID].game.ready()) {
+      games[gameID].game.advanceLevel()
       web_sockets_server.in(gameID).emit(MSG_TYPES.ROUND_START)
     }
-    web_sockets_server.in(gameID).emit(MSG_TYPES.PLAYER_READY, games[gameID].getPlayerInfo(playerID))
+    web_sockets_server.in(gameID).emit(MSG_TYPES.PLAYER_READY, games[gameID].game.getPlayerInfo(playerID))
   })
 
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
@@ -202,9 +213,9 @@ web_sockets_server.on('connection', (socket) => {
   // Player has confirmed placement of tower
   socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data) => {
     let gameID = socket.gameID
-    games[gameID].map.setGridProperty(data.row, data.col, "value", 't') // Register that there is a tower in that spot
-    games[gameID].addTower(data.id, data.type, socket.playerID, data.row, data.col)
-    web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure())
+    games[gameID].game.map.setGridProperty(data.row, data.col, "value", 't') // Register that there is a tower in that spot
+    games[gameID].game.addTower(data.id, data.type, socket.playerID, data.row, data.col)
+    web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].game.getMapStructure())
   });
 
   /**
@@ -221,7 +232,7 @@ web_sockets_server.on('connection', (socket) => {
   socket.on(MSG_TYPES.CLIENT_UPDATE, (data) => {
     let gameID = data.gameID
     if (data.resource == "tower") {
-      games[gameID].updateTower(data.name, data.updates)
+      games[gameID].game.updateTower(data.name, data.updates)
     }
   })
 
@@ -230,15 +241,15 @@ web_sockets_server.on('connection', (socket) => {
   })
 
   socket.on(MSG_TYPES.DEBUG_EXPORT_GAME_STATE, () => {
-    games[socket.gameID].exportGame()
+    games[socket.gameID].game.exportGame()
   })
 
   socket.on(MSG_TYPES.DEBUG_IMPORT_GAME_STATE, () => {
     let gameID = socket.gameID
-    games[gameID].importGame().then(()=>{
+    games[gameID].game.importGame().then(()=>{
         console.log("Import successful")
         // Alternatively (and probably better) sort out exactly what is sent from client and stored in the map structure
-        web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].getMapStructure())
+        web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].game.getMapStructure())
       }).catch((err)=>{
         throw err
       })
@@ -247,7 +258,7 @@ web_sockets_server.on('connection', (socket) => {
   socket.on('disconnect', function() {
     if (socket.playerID != undefined) {
       console.log("DISCONNCETED", socket.playerID)
-      socket.to(socket.gameID).emit(MSG_TYPES.REMOVE_PLAYER, games[socket.gameID].getPlayerInfo(socket.playerID))
+      socket.to(socket.gameID).emit(MSG_TYPES.REMOVE_PLAYER, games[socket.gameID].game.getPlayerInfo(socket.playerID))
       // For now we leave the player in the game, but they are not used. This is becuase want to keep track of their scores etc if they come back later.
     }
   })
