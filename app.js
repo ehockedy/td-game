@@ -87,22 +87,6 @@ const web_sockets_server = io(http_server)
 // Keep track of current games
 let games = {}
 
-// Main processing loop
-// Updates the game state and sends the update to all connected clients in that game room
-function updateGameAndSend(gameID) {
-  if (games[gameID].game.roundActive()) {
-    games[gameID].game.updateActiveGameState() // Advance the game by one tick
-
-    if (!games[gameID].game.roundActive()) { // Round is over
-      web_sockets_server.in(gameID).emit(MSG_TYPES.ROUND_END, games[gameID].game.getNextRoundInfo())
-    }
-  } else {
-    games[gameID].game.updateInactiveGameState()
-  }
-
-  let new_state = games[gameID].game.getGameState()
-  web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
-}
 
 function gameExists(gameID) {
   return gameID in games
@@ -124,8 +108,9 @@ function broadcastPlayers(socket) {
  * Game class - accepts game ID as param
  * Player/connection class - has a single socket as param
 */
-
 web_sockets_server.on('connection', (socket) => {
+  // TODO remove all these "setup" events once it is on a game? so just listenes for game events then?
+
   // Join game event
   // Player has started or joined game. Create a room with the game ID if one does not exist and send that client the game info.
   socket.on(MSG_TYPES.JOIN_GAME, (data) => {
@@ -138,6 +123,8 @@ web_sockets_server.on('connection', (socket) => {
     // This is the first request to join this game, so make the game
     if (!(data.gameID in games)) {
       games[data.gameID] = new session.Session(socket, data.gameID, data.playerID, config)
+    } else {
+      games[data.gameID].addSocket(socket, data.playerID)
     }
 
   });
@@ -168,57 +155,31 @@ web_sockets_server.on('connection', (socket) => {
     broadcastPlayers(socket)
   })
 
-  socket.on(MSG_TYPES.GAME_START_REQUEST, ()=> {
-    games[socket.gameID].game.start()
-    setInterval(updateGameAndSend, 50*0.2, socket.gameID);  // 20 "fps"
-    web_sockets_server.in(socket.gameID).emit(MSG_TYPES.GAME_START)
-  })
+  // socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
+  //   console.log("Updated board from client", data)
+  //   // TODO broadcast temporary position to other connected clients
+  // });
 
-  socket.on(MSG_TYPES.ROUND_START, ()=>{
-    let playerID = socket.playerID
-    let gameID = socket.gameID
-    games[gameID].game.getPlayerByName(playerID).setReady()
-    if (games[gameID].game.ready()) {
-      games[gameID].game.advanceLevel()
-      web_sockets_server.in(gameID).emit(MSG_TYPES.ROUND_START)
-    }
-    web_sockets_server.in(gameID).emit(MSG_TYPES.PLAYER_READY, games[gameID].game.getPlayerInfo(playerID))
-  })
+  // socket.on(MSG_TYPES.CLIENT_DEBUG, (data) => {
+  //   console.log(data)
+  // })
 
-  socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
-    console.log("Updated board from client", data)
-    // TODO broadcast temporary position to other connected clients
-  });
+  // socket.on(MSG_TYPES.DEBUG_EXPORT_GAME_STATE, () => {
+  //   games[socket.gameID].game.exportGame()
+  // })
 
-  // Player has confirmed placement of tower
-  socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data) => {
-    let gameID = socket.gameID
-    games[gameID].game.map.setGridProperty(data.row, data.col, "value", 't') // Register that there is a tower in that spot
-    games[gameID].game.addTower(data.id, data.type, socket.playerID, data.row, data.col)
-    web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].game.getMapStructure())
-  });
+  // socket.on(MSG_TYPES.DEBUG_IMPORT_GAME_STATE, () => {
+  //   let gameID = socket.gameID
+  //   games[gameID].game.importGame().then(()=>{
+  //       console.log("Import successful")
+  //       // Alternatively (and probably better) sort out exactly what is sent from client and stored in the map structure
+  //       web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].game.getMapStructure())
+  //     }).catch((err)=>{
+  //       throw err
+  //     })
+  // })
 
-
-
-  socket.on(MSG_TYPES.CLIENT_DEBUG, (data) => {
-    console.log(data)
-  })
-
-  socket.on(MSG_TYPES.DEBUG_EXPORT_GAME_STATE, () => {
-    games[socket.gameID].game.exportGame()
-  })
-
-  socket.on(MSG_TYPES.DEBUG_IMPORT_GAME_STATE, () => {
-    let gameID = socket.gameID
-    games[gameID].game.importGame().then(()=>{
-        console.log("Import successful")
-        // Alternatively (and probably better) sort out exactly what is sent from client and stored in the map structure
-        web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].game.getMapStructure())
-      }).catch((err)=>{
-        throw err
-      })
-  })
-
+  // TODO moveinto a store of disconnected players within the session, and then just mve back if the player comes back
   socket.on('disconnect', function() {
     if (socket.playerID != undefined) {
       console.log("DISCONNCETED", socket.playerID)
@@ -227,8 +188,3 @@ web_sockets_server.on('connection', (socket) => {
     }
   })
 });
-
-
-
-// TODO
-// give kisses to beanie

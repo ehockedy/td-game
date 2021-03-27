@@ -31,7 +31,7 @@ const MSG_TYPES = {
 
 class Session {
     constructor(socket, gameID, playerID, config) {
-        this.sockets = {}  // All the connected players
+        this.sockets = {}  // All the connected players/ TODO I dont think this actually needs to be a map. Just keep ID as socket property.
         this.gameID = gameID
         this.maxConnections = 4
 
@@ -51,6 +51,13 @@ class Session {
         }
         this.sockets[playerID] = socket
         this.setUpEvents(socket)
+    }
+
+    // Send this message to every socket in this session
+    broadcast(msg, ...args) {
+        for (const [id, socket] of Object.entries(this.sockets)) {
+            socket.emit(msg, ...args)
+        }
     }
 
     setUpEvents(socket) {
@@ -79,7 +86,46 @@ class Session {
                 this.game.updateTower(data.name, data.updates)
             }
         })
+
+        socket.on(MSG_TYPES.GAME_START_REQUEST, ()=> {
+            this.game.start()
+            setInterval(()=>{this.updateGameAndSend()}, 50*0.2);  // 20 "fps"
+            this.broadcast(MSG_TYPES.GAME_START)
+        })
+
+        // Player has confirmed placement of tower
+        socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data) => {
+            this.game.map.setGridProperty(data.row, data.col, "value", 't') // Register that there is a tower in that spot
+            this.game.addTower(data.id, data.type, socket.playerID, data.row, data.col)
+            this.broadcast(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, this.game.getMapStructure())
+        });
+
+        socket.on(MSG_TYPES.ROUND_START, ()=>{
+            this.game.getPlayerByName(socket.playerID).setReady()
+            if (this.game.ready()) {
+              this.game.advanceLevel()
+              this.broadcast(MSG_TYPES.ROUND_START)
+            }
+            this.broadcast(MSG_TYPES.PLAYER_READY, this.game.getPlayerInfo(socket.playerID))
+          })
     }
+
+    // Main processing loop
+    // Updates the game state and sends the update to all connected clients in that game room
+    updateGameAndSend() {
+        if (this.game.roundActive()) {
+            this.game.updateActiveGameState() // Advance the game by one tick
+
+            if (!this.game.roundActive()) { // Round is over
+                this.broadcast(MSG_TYPES.ROUND_END, this.game.getNextRoundInfo())
+            }
+        } else {
+            this.game.updateInactiveGameState()
+        }
+
+        let new_state = this.game.getGameState()
+        this.broadcast(MSG_TYPES.SERVER_UPDATE_GAME_STATE, new_state)
+  }
 }
 
 module.exports = {
