@@ -46,10 +46,7 @@ class Game {
         seedrandom(newSeed, { global: true }); // globally - i.e. all further calls to Math.random()
         this.seed = newSeed
 
-        this.map.init()
         this.map.generateMap()
-        this.map.printMap()
-        this.map.calculatePath()
     }
 
     moveEnemies() {
