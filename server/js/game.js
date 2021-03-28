@@ -1,6 +1,5 @@
 const crypto = require('crypto');
 const enemy = require("./enemies.js");
-const gameMap = require('./map.js');
 const playerImport = require('./player.js')
 const towerImport = require("./tower.js");
 const point = require('./point.js');
@@ -10,11 +9,10 @@ const fs = require('fs');
 let enemyConfig = JSON.parse(fs.readFileSync('shared/json/enemies.json'));
 
 class Game {
-    constructor(cols, rows, subgridSize) {
+    constructor(map) {
+        this.map = map
         this.towers = []
         this.players = []
-        this.map = new gameMap.GameMap(rows, cols, subgridSize)
-        this.generateMap()
 
         this.hasStarted = false
         this.level = 0
@@ -23,21 +21,8 @@ class Game {
         this.enemyCount = 0
         this.enemyCountTarget = 0
 
-        this.subgridMidpoint = Math.floor(subgridSize/2)
-    }
-
-    getMapStructure() {
-        let basicMap = []
-        for (let r = 0; r < this.map.map.length; r++) {
-            basicMap.push([])
-            for (let c = 0; c < this.map.map[r].length; c++) {
-                basicMap[r].push({
-                    "value": this.map.map[r][c]["value"],
-                    "adjacentPathDirs": this.map.map[r][c]["adjacentPathDirs"]
-                })
-            }
-        }
-        return basicMap
+        this.subgridSize = this.map.subgridSize
+        this.subgridMidpoint = Math.floor(this.subgridSize/2)
     }
 
     generateMap(seed="") {

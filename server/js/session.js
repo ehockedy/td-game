@@ -1,4 +1,5 @@
 const game = require('./game.js')
+const mapGenerator = require("./mapGenerator.js")
 
 // TODO copy over whils restructuring, then replace with just the event strings that have been rewritten to be better organised
 const MSG_TYPES = {
@@ -34,13 +35,18 @@ class Session {
         this.sockets = {}  // All the connected players/ TODO I dont think this actually needs to be a map. Just keep ID as socket property.
         this.gameID = gameID
         this.maxConnections = 4
+        this.config = config
 
-        this.game = game.setUpGame(config.MAP_WIDTH, config.MAP_HEIGHT, config.SUBGRID_SIZE)  // TODO remove this. Should have a map gneerator, and then an actual game represtation that map is passed to
+        this.mapGenerator = new mapGenerator.MapGenerator(config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+        this.map = this.mapGenerator.generateMap()
+
+        this.hasStarted = false
+
         this.addSocket(socket, playerID)
     }
 
     addSocket(socket, playerID) {
-        if (this.game.hasStarted) {
+        if (this.hasStarted) {
             if (this.game.playerExists(playerID)) {
                 socket.emit(MSG_TYPES.GAME_START)
             } else {
@@ -62,12 +68,13 @@ class Session {
 
     setUpEvents(socket) {
         socket.on(MSG_TYPES.GET_MAP, ()=> {
-            socket.emit(MSG_TYPES.SERVER_SET_GAME_BOARD, this.game.getMapStructure())
+            socket.emit(MSG_TYPES.SERVER_SET_GAME_BOARD, this.map.getMapStructure())
         })
 
         socket.on(MSG_TYPES.GET_MAP_REGENERATE, (mapArgs)=> {
-            this.game.generateMap(mapArgs.seed)
-            socket.emit(MSG_TYPES.SERVER_SET_GAME_BOARD, this.game.getMapStructure())
+            //this.game.generateMap(mapArgs.seed)
+            // TODO replace this with new structure of map regenerator
+            socket.emit(MSG_TYPES.SERVER_SET_GAME_BOARD, this.map.getMapStructure())
         })
 
         /**
@@ -88,6 +95,13 @@ class Session {
         })
 
         socket.on(MSG_TYPES.GAME_START_REQUEST, ()=> {
+            this.game = new game.Game(this.map)
+            this.hasStarted = true
+            for (const [id, socket] of Object.entries(this.sockets)) {
+                this.game.addPlayer(id)
+                if (socket.playerID == id) this.broadcast(MSG_TYPES.ADD_PLAYER_SELF, this.game.getPlayerInfo(id))
+                else this.broadcast(MSG_TYPES.ADD_PLAYER, this.game.getPlayerInfo(id))
+            }
             this.game.start()
             setInterval(()=>{this.updateGameAndSend()}, 50*0.2);  // 20 "fps"
             this.broadcast(MSG_TYPES.GAME_START)
@@ -97,7 +111,7 @@ class Session {
         socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, (data) => {
             this.game.map.setGridProperty(data.row, data.col, "value", 't') // Register that there is a tower in that spot
             this.game.addTower(data.id, data.type, socket.playerID, data.row, data.col)
-            this.broadcast(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, this.game.getMapStructure())
+            this.broadcast(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, this.map.getMapStructure())
         });
 
         socket.on(MSG_TYPES.ROUND_START, ()=>{

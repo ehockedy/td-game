@@ -1,3 +1,4 @@
+const gameMap = require('./map.js');
 const point = require('./point.js')
 
 // Helper functions
@@ -11,8 +12,6 @@ class MapGenerator {
         // Size of map
         this.height = rows
         this.width = cols
-
-        // Size of the sub grid that makes up one map square
         this.subgridSize = subgridSize
 
         // Current position for drawing map
@@ -214,24 +213,6 @@ class MapGenerator {
         console.log("\n")
     }
 
-    generateMap() {
-        var undos = 1
-        while (!this.isComplete()) {
-            var valid_moves = (this.move_history.length) ? this.getValidDirs() : [['r', 1]]
-
-            if (valid_moves.length == 0) {
-                this.undoMoves(undos)
-                undos++
-                if (undos > this.move_history.length) undos = 0
-                continue
-            }
-
-            var move = valid_moves[Math.floor(Math.random() * valid_moves.length)]
-            this.makeMove(move)
-        }
-        return this.map
-    }
-
     //TODO test cases:
     // - no negative numbers
     // - no duplicate coords
@@ -259,7 +240,6 @@ class MapGenerator {
         // Format of a path position is [map grid y, map grid x, sub grid y, sub grid x]
         for (let i = 0; i < this.subgridSize; ++i) {
             this.path.push(new point.Point(this.subgridSize, this.col_start, this.row_start, i, midSubGridPos))
-            //console.log([this.row_start, this.col_start, midSubGridPos, i])
         }
 
         // Algorithm
@@ -321,9 +301,6 @@ class MapGenerator {
                 midSubGridPos,
                 midSubGridPos
             ))
-
-            //console.log("Path: ", this.path)
-
 
             // Get coordinates of the grid square we are moving from
             let prevSubGridCoord = [
@@ -402,6 +379,28 @@ class MapGenerator {
             }
         }
     }
+
+    generateMap() {
+        var undos = 1
+        while (!this.isComplete()) {
+            var valid_moves = (this.move_history.length) ? this.getValidDirs() : [['r', 1]]
+
+            if (valid_moves.length == 0) {
+                this.undoMoves(undos)
+                undos++
+                if (undos > this.move_history.length) undos = 0
+                continue
+            }
+
+            var move = valid_moves[Math.floor(Math.random() * valid_moves.length)]
+            this.makeMove(move)
+        }
+        let map = new gameMap.GameMap(this.map, this.subgridSize)
+        this.calculatePath()
+        map.setPaths(this.path, this.mainPath)
+        return map
+    }
+
 }
 
 module.exports = {

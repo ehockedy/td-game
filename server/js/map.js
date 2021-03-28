@@ -1,16 +1,30 @@
-const { MapGenerator } = require('./mapGenerator.js')
+
 
 class GameMap {
-  constructor(rows, cols, subgridSize) {
-    this.mapGenerator = new MapGenerator(rows, cols, subgridSize)
+  constructor(map, subgridSize) {
+    this.map = map
+
     // Size of map
-    this.height = rows
-    this.width = cols
+    this.height = this.map.length
+    this.width = this.map[0].length
 
     // Size of the sub grid that makes up one map square
     this.subgridSize = subgridSize
-
     this.numEnemies = 0
+  }
+
+  getMapStructure() {
+      let basicMap = []
+      for (let r = 0; r < this.map.length; r++) {
+          basicMap.push([])
+          for (let c = 0; c < this.map[r].length; c++) {
+              basicMap[r].push({
+                  "value": this.map[r][c]["value"],
+                  "adjacentPathDirs": this.map[r][c]["adjacentPathDirs"]
+              })
+          }
+      }
+      return basicMap
   }
 
   generateMap() {
@@ -20,6 +34,11 @@ class GameMap {
     this.map = this.mapGenerator.map
     this.path = this.mapGenerator.path
     this.mainPath = this.mapGenerator.mainPath
+  }
+
+  setPaths(path, mainPath) {
+    this.path = path
+    this.mainPath = mainPath
   }
 
   setGridProperty(row, col, property, value) {
@@ -51,7 +70,7 @@ class GameMap {
   // Add to front of list
   addNewEnemy(enemy) {
     this.numEnemies++
-    this.map[this.mapGenerator.row_start][this.mapGenerator.col_start].enemies.unshift(enemy)
+    this.map[enemy.row][enemy.col].enemies.unshift(enemy)
   }
 
   // Add enemy based on enemies row/column data and keep them in path order

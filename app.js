@@ -122,7 +122,7 @@ web_sockets_server.on('connection', (socket) => {
 
     // This is the first request to join this game, so make the game
     if (!(data.gameID in games)) {
-      games[data.gameID] = new session.Session(socket, data.gameID, data.playerID, config)
+      games[data.gameID] = new session.Session(socket, data.gameID, socket.playerID, config)
     } else {
       games[data.gameID].addSocket(socket, data.playerID)
     }
@@ -138,21 +138,6 @@ web_sockets_server.on('connection', (socket) => {
       console.log("Game not found")
       callback({ response: "fail" })
     }
-  })
-
-  socket.on(MSG_TYPES.ADD_PLAYER, () => {
-    let gameID = socket.gameID
-    let playerID = socket.playerID
-    socket.join(gameID)
-    if (!games[gameID].game.playerExists(playerID)) {
-      games[gameID].game.addPlayer(playerID)
-    }
-
-    // Tell all other players about this new player
-    socket.to(gameID).emit(MSG_TYPES.ADD_PLAYER, games[gameID].game.getPlayerInfo(playerID))
-
-    // Tell this player about existing players (including itself)
-    broadcastPlayers(socket)
   })
 
   // socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
@@ -183,7 +168,10 @@ web_sockets_server.on('connection', (socket) => {
   socket.on('disconnect', function() {
     if (socket.playerID != undefined) {
       console.log("DISCONNCETED", socket.playerID)
-      socket.to(socket.gameID).emit(MSG_TYPES.REMOVE_PLAYER, games[socket.gameID].game.getPlayerInfo(socket.playerID))
+
+      // TODO REMV PLAYER
+
+      //socket.to(socket.gameID).emit(MSG_TYPES.REMOVE_PLAYER, games[socket.gameID].game.getPlayerInfo(socket.playerID))
       // For now we leave the player in the game, but they are not used. This is becuase want to keep track of their scores etc if they come back later.
     }
   })
