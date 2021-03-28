@@ -1,6 +1,10 @@
-
-
 class GameMap {
+  /**
+   * Class that keeps track of the entities on the map - bullets and enemies
+   * The class provides a number of functons to update th stats of these entities.
+   * @param {*} map 2D array where each element is a grid on the map
+   * @param {*} subgridSize Size of the sub grid that makes up one map square
+   */
   constructor(map, subgridSize) {
     this.map = map
 
@@ -8,7 +12,6 @@ class GameMap {
     this.height = this.map.length
     this.width = this.map[0].length
 
-    // Size of the sub grid that makes up one map square
     this.subgridSize = subgridSize
     this.numEnemies = 0
   }
@@ -25,15 +28,6 @@ class GameMap {
           }
       }
       return basicMap
-  }
-
-  generateMap() {
-    this.mapGenerator.generateMap()
-    this.mapGenerator.printMap()
-    this.mapGenerator.calculatePath()
-    this.map = this.mapGenerator.map
-    this.path = this.mapGenerator.path
-    this.mainPath = this.mapGenerator.mainPath
   }
 
   setPaths(path, mainPath) {

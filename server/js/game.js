@@ -3,7 +3,6 @@ const enemy = require("./enemies.js");
 const playerImport = require('./player.js')
 const towerImport = require("./tower.js");
 const point = require('./point.js');
-const seedrandom = require('seedrandom');
 const fs = require('fs');
 
 let enemyConfig = JSON.parse(fs.readFileSync('shared/json/enemies.json'));
@@ -23,15 +22,6 @@ class Game {
 
         this.subgridSize = this.map.subgridSize
         this.subgridMidpoint = Math.floor(this.subgridSize/2)
-    }
-
-    generateMap(seed="") {
-        let newSeed = Math.random().toString()
-        if (seed != "") newSeed = seed
-        seedrandom(newSeed, { global: true }); // globally - i.e. all further calls to Math.random()
-        this.seed = newSeed
-
-        this.map.generateMap()
     }
 
     moveEnemies() {

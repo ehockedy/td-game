@@ -1,5 +1,6 @@
 const gameMap = require('./map.js');
-const point = require('./point.js')
+const point = require('./point.js');
+const seedrandom = require('seedrandom');
 
 // Helper functions
 function mod(a, x) {
@@ -13,42 +14,47 @@ class MapGenerator {
         this.height = rows
         this.width = cols
         this.subgridSize = subgridSize
+    }
 
-        // Current position for drawing map
-        this.row = Math.floor(Math.random() * this.height / 2) + Math.floor(this.height / 4);
-        this.col = 0
+    /**
+     * Reset to an empty 2d array that represents the grid used in the game
+     */
+    resetGrid() {
+        // First square on the path
+        this.row_start = Math.floor(Math.random() * this.height / 2) + Math.floor(this.height / 4);
+        this.col_start = 0
 
-        this.row_start = this.row
-        this.col_start = this.col
+        // The current position whilst generating the map
+        this.row = this.row_start
+        this.col = this.col_start
 
-        // Record the moves take so can backtrace if get stuck
-        this.move_history = []
-
-        // initialise board
-        this.map = [] // Make rows
+        this.map = []
         for (var i = 0; i < this.height; i++) {
             this.map.push([])
             for (var j = 0; j < this.width; j++) {
                 this.map[i].push({
-                    "value": "x",
+                    "value": "x",  // TODO have a type entry, since paths and non-paths have distinctly different entries
                     "enemies": [],
                     "bullets": [],
                     "tower": null
-                }) // Make columns
+                })
             }
         }
+
+        // Record the moves take so can backtrace if get stuck
+        this.move_history = []
 
         this.path = [] // Exact path through the sub grids that the enemeis will take
         this.mainPath = [] // Main map grid squares that the enemy path goes through
     }
 
-    // TODO move this (and others) into a MapConstructor class
+    /**
+     * Returns list of all the different places the path can move to
+     * Move has the form [<direction>, <distance>]
+     * Direction can be 'l', 'r', 'u', 'd' which stand for left, right, up, down
+     * Distance is integer determined by the min/max values below
+     */
     getValidDirs() {
-        // Returns list of all the different places the path can move to
-        // Move has the form [<direction>, <distance>]
-        // Direction can be 'l', 'r', 'u', 'd' which stand for left, right, up, down
-        // Distance is integer determined by the min/max values below
-
         var moves = []
         var min_dist = 2 // Min distance to travel in one move
         var max_dist = 2 // Max distance to travel in one move
@@ -380,7 +386,20 @@ class MapGenerator {
         }
     }
 
-    generateMap() {
+    /**
+     * @returns A GameMap object with a newly generated structure and path
+     */
+    generateMap(seed = "") {
+        // Set up seed if given, otherwise random
+        // Keep the seed regardless if it is given or not for export purposes
+        let newSeed = (seed != "") ? seed : Math.random().toString()
+        seedrandom(newSeed, { global: true }); // globally - i.e. all further calls to Math.random()
+        this.seed = newSeed
+
+        // Reset the current state
+        this.resetGrid()
+
+        // Produce paths until conpletion conditions met
         var undos = 1
         while (!this.isComplete()) {
             var valid_moves = (this.move_history.length) ? this.getValidDirs() : [['r', 1]]
@@ -395,6 +414,8 @@ class MapGenerator {
             var move = valid_moves[Math.floor(Math.random() * valid_moves.length)]
             this.makeMove(move)
         }
+
+        // Generate a GameMap object usignt the new grid and return
         let map = new gameMap.GameMap(this.map, this.subgridSize)
         this.calculatePath()
         map.setPaths(this.path, this.mainPath)
