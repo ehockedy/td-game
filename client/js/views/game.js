@@ -131,7 +131,7 @@ export class GameRenderer {
     setServerEventEmitter() {
         let eventEmitter = new PIXI.utils.EventEmitter()
 
-        // Player has chosen where to place a tower, update the server which will tall all other players
+        // Player has chosen where to place a tower, update the server which will tell all other players
         eventEmitter.on(("confirmTowerPlace"), (tower) => {
             this.socket.emit("server/map/set", {
                 "row": tower.row,

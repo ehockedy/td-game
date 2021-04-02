@@ -24,10 +24,8 @@ Remove any decorations on map that are below a tower when the tower is placed.
 Use volatile events for server -> client state updates - if miss one no need to buffer as just need the latest update
 
 Server restructure:
- - restructure app.js and how it initialises the server
  - redesign exactly how the server an client communicate for certain features
  - stop game state from being sent when round is not active
- - create client socket comms object
 
 Other towers:
  - support ones like mopeny/points booster if enemy killed in its range?
