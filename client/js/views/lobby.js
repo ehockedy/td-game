@@ -4,9 +4,8 @@ import { MapComponent } from "../components/game/map.js"
 import { GameSetting } from "../components/lobby/gameSetting.js"
 import { Player } from "../components/lobby/player.js"
 import { getPositionWithinEquallySpacedObjects } from "../tools.js"
-import { addSocketEvent, MSG_TYPES, sendMessage } from "../networking.js"
+import { addSocketEvent, sendMessage } from "../networking.js"
 import { setUserID, getGameID } from "../state.js"
-
 
 /**
  * This class sets up what will appear in the lobby view.
@@ -86,8 +85,10 @@ export class LobbyRenderer {
             "Regenerate Map",
             20, 0x448877, // font size, colour
             1, 1) // anchor
-        this.regenerateMapButton.on("click", ()=>{sendMessage(MSG_TYPES.GET_MAP_REGENERATE, {"seed": this.seedInput.text})})
-        this.regenerateMapButton.on("tap", ()=>{sendMessage(MSG_TYPES.GET_MAP_REGENERATE, {"seed": this.seedInput.text})})
+
+        function regenrateMapFn() { sendMessage("server/map/regenerate", {"seed": this.seedInput.text}) }
+        this.regenerateMapButton.on("click", () => {regenrateMapFn()})
+        this.regenerateMapButton.on("tap", () => {regenrateMapFn()})
 
         // Lobby members - player that clicked new game is player 1. They can change the game options. When another player joins they fill in the second slot and so on
         let playerSideLen = 300 //popupBoundaryBottom - this.map.y - this.map.getHeight() - yMargin - 20
@@ -113,25 +114,26 @@ export class LobbyRenderer {
             "Start Game",
             45, 0xAA88DD, // font size, colour
             0.5, 0.5) // anchor
-        this.startButton.on('click', ()=>{sendMessage(MSG_TYPES.GAME_START_REQUEST)})
-        this.startButton.on('tap', ()=>{sendMessage(MSG_TYPES.GAME_START_REQUEST)})
+        function startGameReqFn() { sendMessage("server/game/start") }
+        this.startButton.on('click', ()=>{startGameReqFn()})
+        this.startButton.on('tap', ()=>{startGameReqFn()})
 
         // Events the can come from server
-        addSocketEvent(MSG_TYPES.SERVER_SET_GAME_BOARD, (grid) => {
+        addSocketEvent("client/map/set", (grid) => {
             this.map.setGridValues(grid);
             this.map.constructMap()
         })
 
-        addSocketEvent(MSG_TYPES.ADD_PLAYER, (data) => {
+        addSocketEvent("client/player/add", (data) => {
             this.addPlayer(data)
         })
 
-        addSocketEvent(MSG_TYPES.ADD_PLAYER_SELF, (data) => {
+        addSocketEvent("client/player/addSelf", (data) => {
             this.addPlayer(data)
             setUserID(data.playerID)
         })
 
-        addSocketEvent(MSG_TYPES.REMOVE_PLAYER, (data) => {
+        addSocketEvent("client/player/remove", (data) => {
             this.removePlayer(data)
         })
     }

@@ -4,7 +4,6 @@ const session = require('./server/js/session.js')
 const networking = require('./server/js/networking.js')
 const os = require('os');
 const fs = require('fs');
-const { Session } = require('inspector');
 
 networking.setRootDir(__dirname) // Set the location to get files from
 
@@ -17,37 +16,6 @@ if (interfaces.hasOwnProperty("WiFi")) {
           listeningAddress = interfaces["WiFi"][intfIdx]["address"]
         }
   }
-}
-
-// MUST keep these synced with enum in client
-// Shared file did not work due to inconsistency with import/require in browser/node
-// See https://socket.io/docs/emit-cheatsheet/ for list of words that should not be used
-const MSG_TYPES = {
-  CONNECT: "client connection",
-  GAME_START: "game start",
-  GAME_START_PLAYER_NOT_PRESENT: "pnp",
-  GAME_START_REQUEST: "gsr",
-  GET_MAP: "gm",
-  GET_MAP_REGENERATE: "gmr",
-  SERVER_UPDATE_GAME_STATE: "server update game state",
-  SERVER_UPDATE_GAME_BOARD: "server update game board", //  Make this some kind of init?
-  SERVER_SET_GAME_BOARD: "sb",
-  CLIENT_UPDATE: "client update",
-  CLIENT_UPDATE_GAME_BOARD: "client update game board",
-  CLIENT_UPDATE_GAME_BOARD_CONFIRM: "client update set game board",
-  NEW_GAME: "ng",
-  JOIN_GAME: "jg",
-  CHECK_GAME: "cg",
-  LOBBY_START: "ls",
-  CLIENT_DEBUG: "cd",
-  ADD_PLAYER: "ap",
-  ADD_PLAYER_SELF: "aps",
-  REMOVE_PLAYER: "rp",
-  ROUND_START: "rs",
-  ROUND_END: "re",
-  PLAYER_READY: "pr",
-  DEBUG_EXPORT_GAME_STATE: "debug_export",
-  DEBUG_IMPORT_GAME_STATE: "debug_import"
 }
 
 let configJson = fs.readFileSync('shared/json/gameConfig.json');
@@ -113,7 +81,7 @@ web_sockets_server.on('connection', (socket) => {
 
   // Join game event
   // Player has started or joined game. Create a room with the game ID if one does not exist and send that client the game info.
-  socket.on(MSG_TYPES.JOIN_GAME, (data) => {
+  socket.on("server/session/join", (data) => {
     console.log("Client " + socket.handshake.address + " joining game " + data.gameID)
 
     // Assigning these variables is temporary
@@ -130,7 +98,7 @@ web_sockets_server.on('connection', (socket) => {
   });
 
   // Check whether a game with the given ID exists
-  socket.on(MSG_TYPES.CHECK_GAME, (data, callback) => {
+  socket.on("server/session/verify", (data, callback) => {
     if (gameExists(data.gameID)) {
       console.log("Game found")
       callback({ response: "success" })

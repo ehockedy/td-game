@@ -1,7 +1,7 @@
 import { GameRenderer} from "./views/game.js"
 import { MainMenuRenderer } from "./views/main_menu.js"
 import { LobbyRenderer } from "./views/lobby.js"
-import { addSocketEvent, MSG_TYPES, sendMessage } from "./networking.js"
+import { addSocketEvent, sendMessage } from "./networking.js"
 import { SpriteHandler } from "./sprite_handler.js"
 import { generateClientConfig } from "./constants.js"
 
@@ -19,21 +19,19 @@ export class Application {
         this.view = new MainMenuRenderer(this.spriteHandler, this.clientConfig)
         this.view.startRendering()
 
-        addSocketEvent(MSG_TYPES.LOBBY_START, ()=>{
+        addSocketEvent("client/view/lobby", ()=>{
             this.view.stopRendering()
             this.view = new LobbyRenderer(this.spriteHandler, this.clientConfig)
             this.view.startRendering()
-            sendMessage(MSG_TYPES.GET_MAP)
-            sendMessage(MSG_TYPES.ADD_PLAYER)
+            sendMessage("server/map/get")
         })
 
-        addSocketEvent(MSG_TYPES.GAME_START, ()=>{
+        addSocketEvent("client/view/game", ()=>{
             this.view.stopRendering()
             this.view = new GameRenderer(this.spriteHandler, this.clientConfig)
             this.view.loadAssets().then(()=>{
                 this.view.startRendering()
-                sendMessage(MSG_TYPES.GET_MAP)
-                sendMessage(MSG_TYPES.ADD_PLAYER)
+                sendMessage("server/map/get")  // This is required if the user joins an already started game
             })
         })
     }

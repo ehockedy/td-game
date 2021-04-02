@@ -8,7 +8,7 @@ import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { GraphicButton } from "../components/ui_common/button.js"
 import { StartRoundButton } from "../components/game/ui/startRoundButton.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
-import { addSocketEvent, MSG_TYPES, sendMessage, sendResourceUpdateMessage } from "../networking.js"
+import { addSocketEvent, sendMessage, sendResourceUpdateMessage } from "../networking.js"
 import { randomHexString } from "../tools.js"
 
 /**
@@ -61,40 +61,40 @@ export class GameRenderer {
         this.debugImportGameButton.on("tap", ()=>{sendMessage(MSG_TYPES.DEBUG_IMPORT_GAME_STATE)})
         // **** END OF DEBUG ****
 
-        addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_STATE, (gameUpdate) => {
+        addSocketEvent("client/game/update", (gameUpdate) => {
             this.update(gameUpdate)
         })
 
-        addSocketEvent(MSG_TYPES.ADD_PLAYER, (gameUpdate) => {
+        addSocketEvent("client/player/add", (gameUpdate) => {
             this.addPlayer(gameUpdate)
         })
 
-        addSocketEvent(MSG_TYPES.ADD_PLAYER_SELF, (gameUpdate) => {
+        addSocketEvent("client/player/addSelf", (gameUpdate) => {
             this.addPlayer(gameUpdate)
         })
 
-        addSocketEvent(MSG_TYPES.REMOVE_PLAYER, (gameUpdate) => {
+        addSocketEvent("client/player/remove", (gameUpdate) => {
             this.addPlayer(gameUpdate)
         })
 
-        addSocketEvent(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, (grid) => {
+        addSocketEvent("client/map/update", (grid) => {
             this.map.setGridValues(grid);
         })
 
-        addSocketEvent(MSG_TYPES.SERVER_SET_GAME_BOARD, (grid) => {
+        addSocketEvent("client/map/set", (grid) => {
             this.map.setGridValues(grid);
             this.map.constructMap(2)
         })
 
-        addSocketEvent(MSG_TYPES.PLAYER_READY, (playerData) => {
+        addSocketEvent("client/player/ready", (playerData) => {
             this.ut.setPlayerReady(playerData.playerID)
         })
 
-        addSocketEvent(MSG_TYPES.ROUND_START, () => {
+        addSocketEvent("client/game/round/start", () => {
             this.startRoundButton.stopInteraction()
         })
 
-        addSocketEvent(MSG_TYPES.ROUND_END, (nextRoundInfo) => {
+        addSocketEvent("client/game/round/end", (nextRoundInfo) => {
             let timePerFade = 1000
             let timeBetweenFade = 2000
             let timeBetweenMessages = 2000
@@ -121,11 +121,11 @@ export class GameRenderer {
                 "type": tower.type,
                 "id": name
             }
-            sendMessage(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD_CONFIRM, setTowerMsg)
+            sendMessage("server/map/set", setTowerMsg)
             tower.reset()
         })
         this.clientLink.on("start-round", () => {
-            sendMessage(MSG_TYPES.ROUND_START)
+            sendMessage("server/game/round/start")
         })
         this.clientLink.on("update-tower-aim", (tower, aimBehaviour) => {
             sendResourceUpdateMessage("tower", tower.name, [

@@ -1,6 +1,6 @@
 import { BaseMenuOptionComponent } from "./base/baseMenuOptionComponent.js"
 import { setGameID } from "../../state.js"
-import { MSG_TYPES, sendMessage, sendMessageGetAck } from "../../networking.js"
+import { sendMessage, sendMessageGetAck } from "../../networking.js"
 
 export class JoinGameComponent extends BaseMenuOptionComponent {
     constructor(x, y, appWidth, appHeight) {
@@ -85,13 +85,13 @@ export class JoinGameComponent extends BaseMenuOptionComponent {
 
     sendJoinGameRequest(userInput) {
         let _this = this
-        sendMessageGetAck(MSG_TYPES.CHECK_GAME, { "gameID": userInput })
+        sendMessageGetAck("server/session/verify", { "gameID": userInput })
         .then(function(resolveVal) {
             if (resolveVal["response"] == "fail") { // Game does not exist
                 _this.joinGameResponseText.text = "Game not found"
                 setTimeout(()=>{ _this.joinGameResponseText.text = "" }, 2000);
             } else if (resolveVal["response"] == "success") { // Game exists
-                sendMessage(MSG_TYPES.JOIN_GAME, { "gameID": userInput } )
+                sendMessage("sever/session/join", { "gameID": userInput } )
                 setGameID(userInput)
             }
         }).catch(function(rejectVal) {

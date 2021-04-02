@@ -1,7 +1,7 @@
 import { MenuTitle } from "../components/main_menu/title.js"
 import { NewGameComponent } from "../components/main_menu/newGameComponent.js"
 import { JoinGameComponent } from "../components/main_menu/joinGameComponent.js"
-import { addSocketEvent, MSG_TYPES } from "../networking.js"
+import { addSocketEvent } from "../networking.js"
 
 /**
  * This class sets up what will appear in the main menu view.
@@ -13,7 +13,7 @@ export class MainMenuRenderer {
         this.newGame = new NewGameComponent(config.APP_WIDTH/3, config.APP_HEIGHT*2/3, config.GAME_CODE_LEN)
         this.joinGame = new JoinGameComponent(config.APP_WIDTH*2/3, config.APP_HEIGHT*2/3, config.APP_WIDTH, config.APP_HEIGHT)
 
-        addSocketEvent(MSG_TYPES.GAME_START_PLAYER_NOT_PRESENT, () => {
+        addSocketEvent("client/player/notFound", () => {
             this.joinGame.setJoinGameResponseTextBoxMessage("Joining not allowed: game has started")
         })
     }
