@@ -1,10 +1,9 @@
 import { BaseMenuOptionComponent } from "./base/baseMenuOptionComponent.js"
 import { setGameID } from "../../state.js"
-import { sendMessage } from "../../networking.js"
 import { randomAlphaCharString } from "../../tools.js"
 
 export class NewGameComponent extends BaseMenuOptionComponent {
-    constructor(x, y, gameCodeLen) {
+    constructor(socket, x, y, gameCodeLen) {
         super("newGame", x, y, "New Game")
 
         function onStartButtonClick() {
@@ -13,7 +12,7 @@ export class NewGameComponent extends BaseMenuOptionComponent {
                 "gameID": gameID
             }
             setGameID(gameID)
-            sendMessage("server/session/join", data)
+            socket.emit("server/session/join", data)  // TODO have main menu subscribe and pass an event up - do not send the message here
         }
 
         this.textSprite

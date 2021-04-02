@@ -4,7 +4,6 @@ import { MapComponent } from "../components/game/map.js"
 import { GameSetting } from "../components/lobby/gameSetting.js"
 import { Player } from "../components/lobby/player.js"
 import { getPositionWithinEquallySpacedObjects } from "../tools.js"
-import { addSocketEvent, sendMessage } from "../networking.js"
 import { setUserID, getGameID } from "../state.js"
 
 /**
@@ -12,7 +11,8 @@ import { setUserID, getGameID } from "../state.js"
  * All components positions are defined relative to each other and the boundaries of the menu.
  */
 export class LobbyRenderer {
-    constructor(spriteHandler, config) {
+    constructor(socket, spriteHandler, config) {
+        this.socket = socket
         this.spriteHandler = spriteHandler
 
         let popupBoundaryLeft = config.APP_WIDTH/2 - config.LOBBY_WINDOW_WIDTH/2
@@ -86,7 +86,7 @@ export class LobbyRenderer {
             20, 0x448877, // font size, colour
             1, 1) // anchor
 
-        function regenrateMapFn() { sendMessage("server/map/regenerate", {"seed": this.seedInput.text}) }
+        function regenrateMapFn() { socket.on("server/map/regenerate", {"seed": this.seedInput.text}) }
         this.regenerateMapButton.on("click", () => {regenrateMapFn()})
         this.regenerateMapButton.on("tap", () => {regenrateMapFn()})
 
@@ -114,26 +114,26 @@ export class LobbyRenderer {
             "Start Game",
             45, 0xAA88DD, // font size, colour
             0.5, 0.5) // anchor
-        function startGameReqFn() { sendMessage("server/game/start") }
+        function startGameReqFn() { socket.emit("server/game/start") }
         this.startButton.on('click', ()=>{startGameReqFn()})
         this.startButton.on('tap', ()=>{startGameReqFn()})
 
         // Events the can come from server
-        addSocketEvent("client/map/set", (grid) => {
+        socket.on("client/map/set", (grid) => {
             this.map.setGridValues(grid);
             this.map.constructMap()
         })
 
-        addSocketEvent("client/player/add", (data) => {
+        socket.on("client/player/add", (data) => {
             this.addPlayer(data)
         })
 
-        addSocketEvent("client/player/addSelf", (data) => {
+        socket.on("client/player/addSelf", (data) => {
             this.addPlayer(data)
             setUserID(data.playerID)
         })
 
-        addSocketEvent("client/player/remove", (data) => {
+        socket.on("client/player/remove", (data) => {
             this.removePlayer(data)
         })
     }

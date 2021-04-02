@@ -22,6 +22,7 @@ function loadConfig() {
 }
 
 function startGame(config) {
-    let app = new Application(config)
+    let socket = io() // Create the WebSocket connection to the server
+    let app = new Application(config, socket)
     console.log("New app")
 }
