@@ -60,22 +60,6 @@ function gameExists(gameID) {
   return gameID in games
 }
 
-function broadcastPlayers(socket) {
-  let gameID = socket.gameID
-  let playerID = socket.playerID
-  games[gameID].game.forEachPlayer((player)=>{
-    if (player.id == playerID) socket.emit(MSG_TYPES.ADD_PLAYER_SELF, games[gameID].game.getPlayerInfo(player.id))
-    else socket.emit(MSG_TYPES.ADD_PLAYER, games[gameID].game.getPlayerInfo(player.id))
-  })
-}
-
-
-/**
- * To add:
- * 
- * Game class - accepts game ID as param
- * Player/connection class - has a single socket as param
-*/
 web_sockets_server.on('connection', (socket) => {
   // TODO remove all these "setup" events once it is on a game? so just listenes for game events then?
 
@@ -107,30 +91,6 @@ web_sockets_server.on('connection', (socket) => {
       callback({ response: "fail" })
     }
   })
-
-  // socket.on(MSG_TYPES.CLIENT_UPDATE_GAME_BOARD, (data, callback) => {
-  //   console.log("Updated board from client", data)
-  //   // TODO broadcast temporary position to other connected clients
-  // });
-
-  // socket.on(MSG_TYPES.CLIENT_DEBUG, (data) => {
-  //   console.log(data)
-  // })
-
-  // socket.on(MSG_TYPES.DEBUG_EXPORT_GAME_STATE, () => {
-  //   games[socket.gameID].game.exportGame()
-  // })
-
-  // socket.on(MSG_TYPES.DEBUG_IMPORT_GAME_STATE, () => {
-  //   let gameID = socket.gameID
-  //   games[gameID].game.importGame().then(()=>{
-  //       console.log("Import successful")
-  //       // Alternatively (and probably better) sort out exactly what is sent from client and stored in the map structure
-  //       web_sockets_server.in(gameID).emit(MSG_TYPES.SERVER_UPDATE_GAME_BOARD, games[gameID].game.getMapStructure())
-  //     }).catch((err)=>{
-  //       throw err
-  //     })
-  // })
 
   // TODO moveinto a store of disconnected players within the session, and then just mve back if the player comes back
   socket.on('disconnect', function() {

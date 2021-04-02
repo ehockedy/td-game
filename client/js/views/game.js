@@ -5,7 +5,6 @@ import { PlayersToolbar } from "../components/game/playersToolbar.js"
 import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
-import { GraphicButton } from "../components/ui_common/button.js"
 import { StartRoundButton } from "../components/game/ui/startRoundButton.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { addSocketEvent, sendMessage, sendResourceUpdateMessage } from "../networking.js"
@@ -40,26 +39,6 @@ export class GameRenderer {
         this.gameSpace.y = config.BORDER_T
 
         this.startRoundButton = new StartRoundButton(config.MAP_WIDTH + config.BORDER_R, toolbarY)
-
-        // **** DEBUG BUTTON TO SAVE/LOAD TOWERS ***
-        this.debugExportGameButton = new GraphicButton(
-            32, 32, // width, height
-            0, 0, // x, y
-            "EXPORT",
-            8, 0x448877, // font size, colour
-            0, 0) // anchor
-        this.debugExportGameButton.on("click", ()=>{sendMessage(MSG_TYPES.DEBUG_EXPORT_GAME_STATE)})
-        this.debugExportGameButton.on("tap", ()=>{sendMessage(MSG_TYPES.DEBUG_EXPORT_GAME_STATE)})
-
-        this.debugImportGameButton = new GraphicButton(
-            32, 32, // width, height
-            32, 0, // x, y
-            "IMPORT",
-            8, 0x887744, // font size, colour
-            0, 0) // anchor
-        this.debugImportGameButton.on("click", ()=>{sendMessage(MSG_TYPES.DEBUG_IMPORT_GAME_STATE)})
-        this.debugImportGameButton.on("tap", ()=>{sendMessage(MSG_TYPES.DEBUG_IMPORT_GAME_STATE)})
-        // **** END OF DEBUG ****
 
         addSocketEvent("client/game/update", (gameUpdate) => {
             this.update(gameUpdate)
