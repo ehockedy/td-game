@@ -86,7 +86,9 @@ export class LobbyRenderer {
             20, 0x448877, // font size, colour
             1, 1) // anchor
 
-        function regenrateMapFn() { socket.on("server/map/regenerate", {"seed": this.seedInput.text}) }
+        let regenrateMapFn = () => {
+            socket.emit("server/map/regenerate", this.seedInput.text)
+        }
         this.regenerateMapButton.on("click", () => {regenrateMapFn()})
         this.regenerateMapButton.on("tap", () => {regenrateMapFn()})
 
@@ -118,7 +120,7 @@ export class LobbyRenderer {
         this.startButton.on('click', ()=>{startGameReqFn()})
         this.startButton.on('tap', ()=>{startGameReqFn()})
 
-        // Events the can come from server
+        // Events sent from server
         socket.on("client/map/set", (grid) => {
             this.map.setGridValues(grid);
             this.map.constructMap()
@@ -139,6 +141,10 @@ export class LobbyRenderer {
     }
 
     startRendering() {
+        this.socket.emit("server/map/get", (map) => {
+            this.map.setGridValues(map);
+            this.map.constructMap()
+        })
         this.spriteHandler.registerContainer(this.background)
         this.spriteHandler.registerContainer(this.startButton)
         this.spriteHandler.registerContainer(this.gameIDText)

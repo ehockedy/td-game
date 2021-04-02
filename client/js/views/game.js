@@ -93,11 +93,6 @@ export class GameRenderer {
             this.map.setGridValues(grid);
         })
 
-        this.socket.on("client/map/set", (grid) => {
-            this.map.setGridValues(grid);
-            this.map.constructMap(2)
-        })
-
         this.socket.on("client/player/ready", (playerData) => {
             this.ut.setPlayerReady(playerData.playerID)
         })
@@ -166,6 +161,11 @@ export class GameRenderer {
     }
 
     startRendering() {
+        this.socket.emit("server/map/get", (map) => {
+            this.map.setGridValues(map);
+            this.map.constructMap(2)
+        })
+
         // Register containers with the sprite layer
         // The order here is the order they are rendered on the map
         this.gameSpace.addChild(this.tc) // TODO call tick()

@@ -22,7 +22,6 @@ export class Application {
             view.stopRendering()
             view = new LobbyRenderer(socket, spriteHandler, clientConfig)
             view.startRendering()
-            socket.emit("server/map/get")
         })
 
         socket.on("client/view/game", ()=>{
@@ -30,7 +29,6 @@ export class Application {
             view = new GameRenderer(socket, spriteHandler, clientConfig)
             view.loadAssets().then(()=>{
                 view.startRendering()
-                socket.emit("server/map/get")  // This is required if the user joins an already started game - maybe move to game though?
             })
         })
     }

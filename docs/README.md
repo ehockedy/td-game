@@ -25,7 +25,7 @@ These are events that the server will receive and process.
 |server/session/checkGame | Verifies if the game exists for the given code|
 |server/game/round/start | Tell the server that this player is ready to begin the round. Starts the round if all players ready |
 |server/game/start | Tell the server that this players are ready to begin the game |
-|server/map/get | Returns the map|
-|server/map/regenerate | Generates a new map then returns it|
+|server/map/get | Returns the map to the client that asked only|
+|server/map/regenerate | Generates a new map and updates all client with the new map|
 |server/map/set|Adds a new object to the map|
 |server/tower/update | Updates the state of a tower|

@@ -79,6 +79,7 @@ export class MapComponent extends BaseComponent {
     }
 
     constructMap(border=0) {
+        this.cacheAsBitmap = false  // so that can remove existing map
         this.children.forEach((container) => {
             container.removeChildren()
         })

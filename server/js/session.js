@@ -38,14 +38,13 @@ class Session {
     }
 
     setUpEvents(socket) {
-        socket.on("server/map/get", ()=> {
-            socket.emit("client/map/set", this.map.getMapStructure())
+        socket.on("server/map/get", (callback) => {
+            callback(this.map.getMapStructure())
         })
 
-        socket.on("server/map/regenerate", (mapArgs)=> {
-            //this.game.generateMap(mapArgs.seed)
-            // TODO replace this with new structure of map regenerator
-            socket.emit("client/map/update" , this.map.getMapStructure())
+        socket.on("server/map/regenerate", (seed)=> {
+            this.map = this.mapGenerator.generateMap(seed)
+            this.broadcast("client/map/set", this.map.getMapStructure())
         })
 
         /**
