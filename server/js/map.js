@@ -5,8 +5,8 @@ class GameMap {
    * @param {*} map 2D array where each element is a grid on the map
    * @param {*} subgridSize Size of the sub grid that makes up one map square
    */
-  constructor(map, subgridSize) {
-    this.map = map
+  constructor(mapStructure, subgridSize) {
+    this.map = mapStructure
 
     // Size of map
     this.height = this.map.length
@@ -35,8 +35,8 @@ class GameMap {
     this.mainPath = mainPath
   }
 
-  setGridProperty(row, col, property, value) {
-    this.map[row][col][property] = value
+  setGridValue(row, col, value) {
+    this.map[row][col]["value"] = value
   }
 
   getGridValue(row, col) {

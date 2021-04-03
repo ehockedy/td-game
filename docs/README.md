@@ -27,5 +27,5 @@ These are events that the server will receive and process.
 |server/game/start | Tell the server that this players are ready to begin the game |
 |server/map/get | Returns the map to the client that asked only|
 |server/map/regenerate | Generates a new map and updates all client with the new map|
-|server/map/set|Adds a new object to the map|
+|server/tower/add|Adds a new tower to the map|
 |server/tower/update | Updates the state of a tower|

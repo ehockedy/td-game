@@ -175,6 +175,7 @@ class Game {
         newTower.calculateShootPath(this.map.mainPath)
         this.towers.push(newTower)
         player.reduceMoney(newTower.getCost()) // Keep player implementation simple and let client determine whether player can afford tower
+        this.map.setGridValue(row, col, 't') // Register that there is a tower in that spot
     }
 
     addPlayer(playerID) {
@@ -392,7 +393,7 @@ class Game {
                 this.generateMap(gameStateJson.seed)
 
                 gameStateJson.towers.forEach((tower)=>{
-                    this.map.setGridProperty(tower.row, tower.col, "value", 't')
+                    this.map.setGridValue(tower.row, tower.col, 't')
                     this.addTower(tower.name, tower.type, this.players[0].id, tower.row, tower.col)
                 })
 

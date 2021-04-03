@@ -126,9 +126,14 @@ export class GameRenderer {
     setServerEventEmitter() {
         let eventEmitter = new PIXI.utils.EventEmitter()
 
+        // Confirm that this player is ready to begin the round
+        eventEmitter.on("start-round", () => {
+            this.socket.emit("server/game/round/start")
+        })
+
         // Player has chosen where to place a tower, update the server which will tell all other players
         eventEmitter.on(("confirmTowerPlace"), (tower) => {
-            this.socket.emit("server/map/set", {
+            this.socket.emit("server/tower/add", {
                 "row": tower.row,
                 "col": tower.col,
                 "type": tower.type,
@@ -137,15 +142,9 @@ export class GameRenderer {
             tower.reset()
         })
 
-        // Confirm that this player is ready to begin the round
-        eventEmitter.on("start-round", () => {
-            this.socket.emit("server/game/round/start")
-        })
-
         // Update the aim settings of a tower
         eventEmitter.on("update-tower-aim", (tower, aimBehaviour) => {
             this.socket.emit("server/tower/update", {
-                "gameID": getGameID(),
                 "resource": "tower",
                 "name": tower.name,
                 "updates": [

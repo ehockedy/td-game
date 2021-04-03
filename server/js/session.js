@@ -47,23 +47,6 @@ class Session {
             this.broadcast("client/map/set", this.map.getMapStructure())
         })
 
-        /**
-         * Client will send a message of the form:
-         * {
-         *   "gameID": "ABCDEF",
-         *   "resource": "tower",
-         *   "update": {
-         *     "name": "012345",
-         *     "aimBehaviour": "first"
-         *   }
-         * }
-         */
-        socket.on("server/tower/update", (data) => {
-            if (data.resource == "tower") {
-                this.game.updateTower(data.name, data.updates)
-            }
-        })
-
         socket.on("server/game/start", ()=> {
             this.game = new game.Game(this.map)
             this.hasStarted = true
@@ -78,11 +61,26 @@ class Session {
         })
 
         // Player has confirmed placement of tower
-        socket.on("server/map/set", (data) => {
-            this.game.map.setGridProperty(data.row, data.col, "value", 't') // Register that there is a tower in that spot
+        socket.on("server/tower/add", (data) => {
             this.game.addTower(data.id, data.type, socket.playerID, data.row, data.col)
             this.broadcast("client/map/update", this.map.getMapStructure())
         });
+
+        /**
+         * Client will send a message of the form:
+         * {
+         *   "resource": "tower",
+         *   "update": {
+         *     "name": "012345",
+         *     "aimBehaviour": "first"
+         *   }
+         * }
+         */
+         socket.on("server/tower/update", (data) => {
+            if (data.resource == "tower") {
+                this.game.updateTower(data.name, data.updates)
+            }
+        })
 
         socket.on("server/game/round/start", ()=>{
             this.game.getPlayerByName(socket.playerID).setReady()
