@@ -137,7 +137,7 @@ export class GameRenderer {
                 "row": tower.row,
                 "col": tower.col,
                 "type": tower.type,
-                "id": randomHexString(6)
+                "name": randomHexString(6)
             })
             tower.reset()
         })

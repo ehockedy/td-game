@@ -62,7 +62,7 @@ class Session {
 
         // Player has confirmed placement of tower
         socket.on("server/tower/add", (data) => {
-            this.game.addTower(data.id, data.type, socket.playerID, data.row, data.col)
+            this.game.addTower(data.name, data.type, socket.playerID, data.row, data.col)
             this.broadcast("client/map/update", this.map.getMapStructure())
         });
 
