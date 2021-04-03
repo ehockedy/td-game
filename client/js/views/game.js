@@ -133,26 +133,27 @@ export class GameRenderer {
 
         // Player has chosen where to place a tower, update the server which will tell all other players
         eventEmitter.on(("confirmTowerPlace"), (tower) => {
-            this.socket.emit("server/tower/add", {
-                "row": tower.row,
-                "col": tower.col,
-                "type": tower.type,
-                "name": randomHexString(6)
+            this.socket.emit("server/tower/set",
+            {
+                "name": randomHexString(6),
+                "operation": "add",
+                "parameters": {
+                    "row": tower.row,
+                    "col": tower.col,
+                    "type": tower.type
+                }
             })
             tower.reset()
         })
 
         // Update the aim settings of a tower
-        eventEmitter.on("update-tower-aim", (tower, aimBehaviour) => {
-            this.socket.emit("server/tower/update", {
-                "resource": "tower",
-                "name": tower.name,
-                "updates": [
-                    {
-                        "property" : "aimBehaviour",
-                        "newValue" : aimBehaviour
-                    }
-                ]
+        eventEmitter.on("update-tower", (tower, operation, property, value) => {
+            this.socket.emit("server/tower/set",
+            {
+               "name": tower.name,
+               "operation": operation,
+               "property": property,
+               "value": value
             })
         })
 

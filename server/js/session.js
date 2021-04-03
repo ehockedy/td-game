@@ -60,25 +60,43 @@ class Session {
             this.broadcast("client/view/game")
         })
 
-        // Player has confirmed placement of tower
-        socket.on("server/tower/add", (data) => {
-            this.game.addTower(data.name, data.type, socket.playerID, data.row, data.col)
-            this.broadcast("client/map/update", this.map.getMapStructure())
-        });
-
         /**
-         * Client will send a message of the form:
+         * Client will send a message of the example forms:
          * {
-         *   "resource": "tower",
-         *   "update": {
-         *     "name": "012345",
-         *     "aimBehaviour": "first"
+         *   "name": "FFFFFF",
+         *   "operation": "add",
+         *   "parameters": {
+         *     "row": 0,
+         *     "col": 0,
+         *     "type": "rock-thrower"
          *   }
          * }
+         *
+         * {
+         *   "name": "FFFFFF",
+         *   "operation": "sell"
+         * }
+         *
+         * {
+         *   "name": "FFFFFF",
+         *   "operation": "upgrade",
+         *   "property": "upgrade",
+         *   "value": "range1"
+         * }
+         *
+         * {
+         *   "name": "FFFFFF",
+         *   "operation": "aim",
+         *   "property": "aimBehaviour",
+         *   "value": "first"
+         * }
          */
-         socket.on("server/tower/update", (data) => {
-            if (data.resource == "tower") {
-                this.game.updateTower(data.name, data.updates)
+         socket.on("server/tower/set", (data) => {
+            if (data.operation == "add") {
+                this.game.addTower(data.name, data.parameters.type, socket.playerID, data.parameters.row, data.parameters.col)
+                this.broadcast("client/map/update", this.map.getMapStructure())
+            } else if (data.operation == "aim") {
+                this.game.updateTower(data.name, data.property, data.value)
             }
         })
 

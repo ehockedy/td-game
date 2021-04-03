@@ -178,6 +178,14 @@ class Game {
         this.map.setGridValue(row, col, 't') // Register that there is a tower in that spot
     }
 
+    updateTower(name, property, value) {
+        this.towers.forEach((tower) => {
+            if (tower.name == name) {
+                tower.update(property, value)
+            }
+        })
+    }
+
     addPlayer(playerID) {
         let newPlayer = new playerImport.Player(playerID, this.players.length)
         this.players.push(newPlayer)
@@ -215,14 +223,6 @@ class Game {
     forEachPlayer(callback) {
         this.players.forEach((player) => {
             callback(player)
-        })
-    }
-
-    updateTower(name, update) {
-        this.towers.forEach((tower) => {
-            if (tower.name == name) {
-                tower.update(update)
-            }
         })
     }
 

@@ -162,16 +162,16 @@ export class DeployedTowerMenu extends BaseComponent {
 
         // Aim behaviour chosen, emit update event with the currently selected tower and the desired aim behaviour update
         this.on("selected-aim-first", () => {
-            this.observers.forEach((observer) => { observer.emit("update-tower-aim", this.selectedTower, "first") })
+            this.observers.forEach((observer) => { observer.emit("update-tower", this.selectedTower, "aim", "aimBehaviour", "first") })
         })
         this.on("selected-aim-last", () => {
-            this.observers.forEach((observer) => { observer.emit("update-tower-aim", this.selectedTower, "last") })
+            this.observers.forEach((observer) => { observer.emit("update-tower", this.selectedTower, "aim", "aimBehaviour", "last") })
         })
         this.on("selected-aim-closest", () => {
-            this.observers.forEach((observer) => { observer.emit("update-tower-aim", this.selectedTower, "closest") })
+            this.observers.forEach((observer) => { observer.emit("update-tower", this.selectedTower, "aim", "aimBehaviour", "closest") })
         })
         this.on("selected-aim-fastest", () => {
-            this.observers.forEach((observer) => { observer.emit("update-tower-aim", this.selectedTower, "fastest") })
+            this.observers.forEach((observer) => { observer.emit("update-tower", this.selectedTower, "aim", "aimBehaviour", "fastest") })
         })
     }
 
