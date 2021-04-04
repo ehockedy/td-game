@@ -1,10 +1,12 @@
 import { BaseMenuOptionComponent } from "./base/baseMenuOptionComponent.js"
 import { setGameID } from "../../state.js"
-import { MSG_TYPES, sendMessage, sendMessageGetAck } from "../../networking.js"
 
 export class JoinGameComponent extends BaseMenuOptionComponent {
-    constructor(x, y, appWidth, appHeight) {
+    constructor(socket, x, y, appWidth, appHeight) {
         super("joinGame", x, y, "Join Game")
+
+        this.socket = socket
+
         this.textSprite
             .on("click", ()=>{ this.onJoinButtonClick() })
             .on("tap", ()=>{ this.onJoinButtonClick() })
@@ -85,19 +87,13 @@ export class JoinGameComponent extends BaseMenuOptionComponent {
 
     sendJoinGameRequest(userInput) {
         let _this = this
-        sendMessageGetAck(MSG_TYPES.CHECK_GAME, { "gameID": userInput })
-        .then(function(resolveVal) {
-            if (resolveVal["response"] == "fail") { // Game does not exist
+        this.socket.emit("server/session/verify", { "gameID": userInput }, (response) => {
+            if (response["response"] == "fail") { // Game does not exist
                 _this.joinGameResponseText.text = "Game not found"
                 setTimeout(()=>{ _this.joinGameResponseText.text = "" }, 2000);
-            } else if (resolveVal["response"] == "success") { // Game exists
-                sendMessage(MSG_TYPES.JOIN_GAME, { "gameID": userInput } )
+            } else if (response["response"] == "success") { // Game exists
+                this.socket.emit("sever/session/join", { "gameID": userInput } )
                 setGameID(userInput)
-            }
-        }).catch(function(rejectVal) {
-            if (rejectVal["response"] == "timeout") {
-                _this.joinGameResponseText.text = "Connection with server timed out"
-                setTimeout(()=>{_this._clearTextBoxText()}, 2000);
             }
         })
     }

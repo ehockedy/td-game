@@ -13,16 +13,20 @@ Fix the fact that Point has hard coded sub grid size set - in tests have seen th
  - enemy tests are find because poit is not used - just goes through pre generated path
  - but in bullet tests Point is used, and still passes - meaning that as far as the bullet is concerned it shoudl not be in a different square
 Use interactiveChildren property for containers
-Towers can go on same grid on client - stop this
 Make the towers always be moving, might make them a bit more realistic
 Remove the events from a client view on stopRendering
-Put place tower buttons by the tower, not on toolbar
 Component that is the town being attacked or whatever. If enemy reached it, can tell because of change in lives value so play animation
 If player does nothing for 2ish minutes, they are disconnected and cannot reconnect, would have to join game again. If they interact with the map will cause server error because they are at the 
 game screen, with a new, different game code.
 Remove money view for other players, just put players money and put it near the towers so they can easily compare prices
 Tower range is above towers placed before that tower, but under others - make it a ring not circle?
 Remove any decorations on map that are below a tower when the tower is placed.
+Use volatile events for server -> client state updates - if miss one no need to buffer as just need the latest update
+
+Server restructure:
+ - redesign exactly how the server an client communicate for certain features
+ - stop game state from being sent when round is not active
+
 Other towers:
  - support ones like mopeny/points booster if enemy killed in its range?
 

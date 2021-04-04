@@ -65,11 +65,9 @@ class Tower {
         this.target = enemy
     }
 
-    update(updates) {
-        updates.forEach((update) => {
-            this.state[update.property] = update.newValue
-            console.log(this.name, this.player.id, "Updating property", update.property, "to", update.newValue)
-        })
+    update(property, value) {
+        this.state[property] = value
+        console.log(this.name, this.player.id, "Updating property", property, "to", value)
     }
 
     registerKill() {

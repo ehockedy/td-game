@@ -1,20 +1,17 @@
 const crypto = require('crypto');
 const enemy = require("./enemies.js");
-const gameMap = require('./map.js');
 const playerImport = require('./player.js')
 const towerImport = require("./tower.js");
 const point = require('./point.js');
-const seedrandom = require('seedrandom');
 const fs = require('fs');
 
 let enemyConfig = JSON.parse(fs.readFileSync('shared/json/enemies.json'));
 
 class Game {
-    constructor(cols, rows, subgridSize) {
+    constructor(map) {
+        this.map = map
         this.towers = []
         this.players = []
-        this.map = new gameMap.GameMap(rows, cols, subgridSize)
-        this.generateMap()
 
         this.hasStarted = false
         this.level = 0
@@ -23,33 +20,8 @@ class Game {
         this.enemyCount = 0
         this.enemyCountTarget = 0
 
-        this.subgridMidpoint = Math.floor(subgridSize/2)
-    }
-
-    getMapStructure() {
-        let basicMap = []
-        for (let r = 0; r < this.map.map.length; r++) {
-            basicMap.push([])
-            for (let c = 0; c < this.map.map[r].length; c++) {
-                basicMap[r].push({
-                    "value": this.map.map[r][c]["value"],
-                    "adjacentPathDirs": this.map.map[r][c]["adjacentPathDirs"]
-                })
-            }
-        }
-        return basicMap
-    }
-
-    generateMap(seed="") {
-        let newSeed = Math.random().toString()
-        if (seed != "") newSeed = seed
-        seedrandom(newSeed, { global: true }); // globally - i.e. all further calls to Math.random()
-        this.seed = newSeed
-
-        this.map.init()
-        this.map.generateMap()
-        this.map.printMap()
-        this.map.calculatePath()
+        this.subgridSize = this.map.subgridSize
+        this.subgridMidpoint = Math.floor(this.subgridSize/2)
     }
 
     moveEnemies() {
@@ -203,6 +175,15 @@ class Game {
         newTower.calculateShootPath(this.map.mainPath)
         this.towers.push(newTower)
         player.reduceMoney(newTower.getCost()) // Keep player implementation simple and let client determine whether player can afford tower
+        this.map.setGridValue(row, col, 't') // Register that there is a tower in that spot
+    }
+
+    updateTower(name, property, value) {
+        this.towers.forEach((tower) => {
+            if (tower.name == name) {
+                tower.update(property, value)
+            }
+        })
     }
 
     addPlayer(playerID) {
@@ -242,14 +223,6 @@ class Game {
     forEachPlayer(callback) {
         this.players.forEach((player) => {
             callback(player)
-        })
-    }
-
-    updateTower(name, update) {
-        this.towers.forEach((tower) => {
-            if (tower.name == name) {
-                tower.update(update)
-            }
         })
     }
 
@@ -420,7 +393,7 @@ class Game {
                 this.generateMap(gameStateJson.seed)
 
                 gameStateJson.towers.forEach((tower)=>{
-                    this.map.setGridProperty(tower.row, tower.col, "value", 't')
+                    this.map.setGridValue(tower.row, tower.col, 't')
                     this.addTower(tower.name, tower.type, this.players[0].id, tower.row, tower.col)
                 })
 
