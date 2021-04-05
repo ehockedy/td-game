@@ -17,8 +17,8 @@ class Game {
         this.level = 0
         this.lives = 100
         this.enemyQueue = []
-        this.enemyCount = 0
-        this.enemyCountTarget = 0
+        this.enemyKillCount = 0
+        this.enemiesRemaining = 0
 
         this.subgridSize = this.map.subgridSize
         this.subgridMidpoint = Math.floor(this.subgridSize/2)
@@ -113,7 +113,7 @@ class Game {
 
     removeEnemy(enemy) {
         this.map.removeEnemy(enemy)
-        this.enemyCount += 1
+        this.enemiesRemaining -= 1
     }
 
     processEndOfPathEnemy(enemy) {
@@ -131,7 +131,7 @@ class Game {
                 if(bullet.collidesWith(enemy.position, enemy.hitboxRadius)) {
                     enemy.isHit = true
                     enemy.hp -= bullet.damage
-                    bullets.splice(bIdx, 1) // Remove that bullet
+                    this.map.removeBullet(bullet) // Remove that bullet
                 }
 
                 if (enemy.hp <= 0) { // Enemy has been killed
@@ -237,7 +237,7 @@ class Game {
 
         // Generate the enemy queue
         this.enemyQueue = []
-        for (let i=0; i < 20; i+=1) {
+        for (let i=0; i < 8; i+=1) {
             let randEnemyIdx = Math.floor(Math.random() * Object.keys(enemyConfig).length) // Random enemy type for now
             let enemyType = Object.keys(enemyConfig)[randEnemyIdx]
             this.enemyQueue.push({
@@ -247,8 +247,7 @@ class Game {
         }
 
         // This is how we determine if the round is over - this many enemies have been killed or got to end
-        this.enemyCountTarget = this.enemyQueue.length
-        this.enemyCount = 0
+        this.enemiesRemaining = this.enemyQueue.length
 
         // Reset players ready status
         this.players.forEach((player) => {
@@ -262,11 +261,13 @@ class Game {
         }
     }
 
+    // Returns whether the round is currently in progress
+    // Determined by whether there are enemies left to kill and bullets on the map
     roundActive() {
-        return this.enemyCount < this.enemyCountTarget
+        return (this.enemiesRemaining > 0 || this.map.numBullets > 0)
     }
 
-    updateActiveGameState() {
+    updateGameState() {
         // Update the state of existing enemies
         this.moveEnemies();
 
@@ -283,39 +284,11 @@ class Game {
         this.shiftEnemyQueue();
     }
 
-    // Game state updates when not in a round
-    updateInactiveGameState() {
-        // Move any bullets - this lets any remaining bullets finish their movement
-        this.moveBullets();
-
-        this.resolveInteractions();
-    }
-
-    getGameState() {
-        // Write the updated state
-        let state = {
-            "enemies" : {
-                "hash": "",
-                "objects": []
-            },
-            "towers" : {
-                "hash": "",
-                "objects": []
-            },
-            "bullets" : {
-                "objects": []
-            },
-            "players": {
-                "objects": []
-            },
-            "worldState" : {
-                "lives": this.lives
-            }
-        }
-
+    getGameStateEnemies() {
         let hash = crypto.createHash("sha256")
+        let objects = []
         this.map.forEachEnemy((e) => {
-            state["enemies"]["objects"].push({
+            objects.push({
                 "name": e.name,
                 "position": e.position,
                 "isHit": e.isHit,
@@ -324,11 +297,17 @@ class Game {
             })
             hash.update(e.name)
         })
-        state["enemies"]["hash"] = hash.digest("hex")
+        return {
+            "hash": hash.digest("hex"),
+            "objects": objects
+        }
+    }
 
-        hash = crypto.createHash("sha256")
+    getGameStateTowers() {
+        let objects = []
+        let hash = crypto.createHash("sha256")
         this.towers.forEach((t) => {
-            state["towers"]["objects"].push({
+            objects.push({
                 "name": t.name,
                 "angle": t.angle,
                 "position": t.position,
@@ -341,26 +320,68 @@ class Game {
             })
             hash.update(t.name)
         })
-        state["towers"]["hash"] = hash.digest("hex")
+        return {
+            "hash": hash.digest("hex"),
+            "objects": objects
+        }
+    }
 
+    getGameStateBullets() {
+        let state = {
+            "objects": []
+        }
         this.map.forEachBullet((b) => {
             if (b.visible) {
-                state["bullets"]["objects"].push({
+                state.objects.push({
                     "name": b.name,
                     "position": b.position,
                     "type": b.type
                 })
             }
         })
+        return state
+    }
 
+    getGameStatePlayers() {
+        let state = {
+            "objects": []
+        }
         this.players.forEach((player) => {
-            state["players"]["objects"].push({
+            state.objects.push({
                 "playerID": player.id,
                 "index": player.index,
                 "stats": player.stats
             })
         })
+        return state
+    }
 
+    getGameStateWorld() {
+        return {
+            "lives": this.lives
+        }
+    }
+
+    getGameStateEmpty() {
+        return {
+            "hash": "",
+            "objects": []
+        }
+    }
+
+    getGameState() {
+        // Write the updated state
+        let state = {}
+        state.players = this.getGameStatePlayers()
+        state.towers = this.getGameStateTowers()
+        state.worldState = this.getGameStateWorld()
+        if (this.roundActive()) {
+            state.bullets = this.getGameStateBullets()
+            state.enemies = this.getGameStateEnemies()
+        } else {
+            state.bullets = this.getGameStateEmpty()
+            state.enemies = this.getGameStateEmpty()
+        }
         return state;
     }
 

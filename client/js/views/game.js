@@ -199,13 +199,13 @@ export class GameRenderer {
 
     // TODO I think tick from the sprite handler can just be donw using this update call. Keeps undates in line with the server.
     update(serverUpdate) {
-        this.tc.update(serverUpdate["towers"])
-        this.map.update(serverUpdate["towers"])
-        this.tm.update(serverUpdate["players"])
-        this.ec.update(serverUpdate["enemies"])
-        this.bc.update(serverUpdate["bullets"])
-        this.ut.update(serverUpdate["players"])
-        this.gameSpace.updateTowers(serverUpdate["towers"])
+        this.tc.update(serverUpdate.towers)
+        this.map.update(serverUpdate.towers)
+        this.tm.update(serverUpdate.players)
+        this.ut.update(serverUpdate.players)
+        this.gameSpace.updateTowers(serverUpdate.towers)
+        this.bc.update(serverUpdate.bullets)
+        this.ec.update(serverUpdate.enemies)
         //this.git.update(serverUpdate["worldState"])
         this.tc.tick()
     }

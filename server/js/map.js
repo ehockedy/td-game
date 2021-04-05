@@ -14,6 +14,7 @@ class GameMap {
 
     this.subgridSize = subgridSize
     this.numEnemies = 0
+    this.numBullets = 0
   }
 
   getMapStructure() {
@@ -58,12 +59,13 @@ class GameMap {
   // Add bullet based on its current position
   // No order is maintained in bullet arrays
   addBullet(bullet) {
+    this.numBullets += 1
     this.map[bullet.position.row][bullet.position.col].bullets.push(bullet)
   }
 
   // Add to front of list
   addNewEnemy(enemy) {
-    this.numEnemies++
+    this.numEnemies += 1
     this.map[enemy.row][enemy.col].enemies.unshift(enemy)
   }
 
@@ -107,6 +109,7 @@ class GameMap {
     for (let b = bullets.length - 1; b >= 0; b--) {
       if (bullets[b].name == bullet.name) {
         bullets.splice(b, 1)
+        this.numBullets -= 1
         found = true
         break
       }
@@ -128,6 +131,7 @@ class GameMap {
     for (let e = enemies.length - 1; e >= 0; e--) {
       if (enemies[e] == enemy) {
         enemies.splice(e, 1)
+        this.numEnemies -= 1
         found = true
         break
       }

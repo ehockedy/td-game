@@ -114,13 +114,11 @@ class Session {
     // Updates the game state and sends the update to all connected clients in that game room
     updateGameAndSend() {
         if (this.game.roundActive()) {
-            this.game.updateActiveGameState() // Advance the game by one tick
+            this.game.updateGameState() // Advance the game by one tick
 
             if (!this.game.roundActive()) { // Round is over
                 this.broadcast("client/game/round/end", this.game.getNextRoundInfo())
             }
-        } else {
-            this.game.updateInactiveGameState()
         }
 
         let new_state = this.game.getGameState()
