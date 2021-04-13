@@ -6,9 +6,9 @@ import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { StartRoundButton } from "../components/game/ui/startRoundButton.js"
+import { LivesCounter } from "../components/game/ui/livesCounter.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { randomHexString } from "../tools.js"
-import { getGameID } from "../state.js"  // TODO remove use of this global state
 
 /**
  * This class sets up what will appear in the game view.
@@ -41,6 +41,9 @@ export class GameRenderer {
         this.gameSpace.y = config.BORDER_T
 
         this.startRoundButton = new StartRoundButton(config.MAP_WIDTH + config.BORDER_R, toolbarY)
+
+        this.livesCounter = new LivesCounter(config.MAP_WIDTH + config.BORDER_R, toolbarY)
+        this.livesCounter.y -= (this.livesCounter.height + 10)
 
         this.setServerEventListeners()
         this.localEventEmitter = this.setServerEventEmitter()
@@ -160,6 +163,7 @@ export class GameRenderer {
         this.spriteHandler.registerContainer(this.gameSpace)
         //this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.startRoundButton)
+        this.spriteHandler.registerContainer(this.livesCounter)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
 
         // Load towers into the menu
@@ -197,7 +201,6 @@ export class GameRenderer {
         this.startRoundButton.update(this.round.toString())
     }
 
-    // TODO I think tick from the sprite handler can just be donw using this update call. Keeps undates in line with the server.
     update(serverUpdate) {
         this.tc.update(serverUpdate.towers)
         this.map.update(serverUpdate.towers)
@@ -206,6 +209,7 @@ export class GameRenderer {
         this.gameSpace.updateTowers(serverUpdate.towers)
         this.bc.update(serverUpdate.bullets)
         this.ec.update(serverUpdate.enemies)
+        this.livesCounter.update(serverUpdate.worldState.lives)
         //this.git.update(serverUpdate["worldState"])
         this.tc.tick()
 
