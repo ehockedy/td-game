@@ -48,16 +48,18 @@ class Session {
         })
 
         socket.on("server/game/start", ()=> {
-            this.game = new game.Game(this.map)
-            this.hasStarted = true
-            for (const [id, socket] of Object.entries(this.sockets)) {
-                this.game.addPlayer(id)
-                if (socket.playerID == id) this.broadcast("client/player/addSelf", this.game.getPlayerInfo(id))  // TODO client should be able to verify if it is itself
-                else this.broadcast("client/player/add", this.game.getPlayerInfo(id))
+            if (!this.hasStarted) {
+                this.game = new game.Game(this.map)
+                this.hasStarted = true
+                for (const [id, socket] of Object.entries(this.sockets)) {
+                    this.game.addPlayer(id)
+                    if (socket.playerID == id) this.broadcast("client/player/addSelf", this.game.getPlayerInfo(id))  // TODO client should be able to verify if it is itself
+                    else this.broadcast("client/player/add", this.game.getPlayerInfo(id))
+                }
+                this.game.start()
+                setInterval(()=>{this.updateGameAndSend()}, 50*0.2);  // 20 "fps"
+                this.broadcast("client/view/game")
             }
-            this.game.start()
-            setInterval(()=>{this.updateGameAndSend()}, 50*0.2);  // 20 "fps"
-            this.broadcast("client/view/game")
         })
 
         /**
