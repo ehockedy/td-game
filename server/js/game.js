@@ -14,8 +14,10 @@ class Game {
         this.players = []
 
         this.hasStarted = false
-        this.level = 0
+        this.roundActive = false
+        this.round = 1
         this.lives = 100
+
         this.enemyQueue = []
         this.enemyKillCount = 0
         this.enemiesRemaining = 0
@@ -230,10 +232,9 @@ class Game {
         return this.players.every((player) => player.isReady())
     }
 
-    advanceLevel() {
-        if (this.roundActive()) return // This should not occur
-
-        this.level += 1
+    startRound() {
+        if (this.roundActive) return // This should not occur
+        this.roundActive = true
 
         // Generate the enemy queue
         this.enemyQueue = []
@@ -255,19 +256,18 @@ class Game {
         })
     }
 
-    getNextRoundInfo() {
-        return {
-            "roundNumber": this.level+1
+    // Checks whether the round is currently in progress
+    // Determined by whether there are enemies left to kill and bullets on the map
+    // If round is over (and was not at the start) increment the round number
+    checkForRoundEnd() {
+        if (!this.roundActive) return
+        if (this.enemiesRemaining == 0 && this.map.numBullets == 0) {
+            this.round += 1
+            this.roundActive = false
         }
     }
 
-    // Returns whether the round is currently in progress
-    // Determined by whether there are enemies left to kill and bullets on the map
-    roundActive() {
-        return (this.enemiesRemaining > 0 || this.map.numBullets > 0)
-    }
-
-    updateGameState() {
+    updateGameObjects() {
         // Update the state of existing enemies
         this.moveEnemies();
 
@@ -280,8 +280,16 @@ class Game {
         // See if enemy reached end, bullet hit, etc.
         this.resolveInteractions();
 
-        // Fopr the current level, determine whether to send another enemy
+        // For the current level, determine whether to send another enemy
         this.shiftEnemyQueue();
+    }
+
+    updateGameState() {
+        // Only update the entities in the game if the round is active
+        if (this.roundActive) {
+            this.updateGameObjects()
+            this.checkForRoundEnd()
+        }
     }
 
     getGameStateEnemies() {
@@ -358,7 +366,8 @@ class Game {
 
     getGameStateWorld() {
         return {
-            "lives": this.lives
+            "lives": this.lives,
+            "round": this.round
         }
     }
 
@@ -375,7 +384,7 @@ class Game {
         state.players = this.getGameStatePlayers()
         state.towers = this.getGameStateTowers()
         state.worldState = this.getGameStateWorld()
-        if (this.roundActive()) {
+        if (this.roundActive) {
             state.bullets = this.getGameStateBullets()
             state.enemies = this.getGameStateEnemies()
         } else {

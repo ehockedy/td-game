@@ -103,7 +103,7 @@ class Session {
         socket.on("server/game/round/start", ()=>{
             this.game.getPlayerByName(socket.playerID).setReady()
             if (this.game.ready()) {
-              this.game.advanceLevel()
+              this.game.startRound()
               this.broadcast("client/game/round/start")
             }
             this.broadcast("client/player/ready", this.game.getPlayerInfo(socket.playerID))
@@ -113,16 +113,8 @@ class Session {
     // Main processing loop
     // Updates the game state and sends the update to all connected clients in that game room
     updateGameAndSend() {
-        if (this.game.roundActive()) {
-            this.game.updateGameState() // Advance the game by one tick
-
-            if (!this.game.roundActive()) { // Round is over
-                this.broadcast("client/game/round/end", this.game.getNextRoundInfo())
-            }
-        }
-
-        let new_state = this.game.getGameState()
-        this.broadcast("client/game/update", new_state)
+        this.game.updateGameState() // Advance the game by one tick
+        this.broadcast("client/game/update", this.game.getGameState())
   }
 }
 

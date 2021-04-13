@@ -18,6 +18,7 @@ export class GameRenderer {
     constructor(socket, spriteHandler, config) {
         this.spriteHandler = spriteHandler
         this.socket = socket
+        this.round = 1
 
         let toolbarY = config.MAP_HEIGHT + config.BORDER_B/4 - 10
         this.tm = new TowerMenu(
@@ -100,22 +101,6 @@ export class GameRenderer {
         this.socket.on("client/game/round/start", () => {
             this.startRoundButton.stopInteraction()
         })
-
-        this.socket.on("client/game/round/end", (nextRoundInfo) => {
-            let timePerFade = 1000
-            let timeBetweenFade = 2000
-            let timeBetweenMessages = 2000
-            this.perRoundUpdateText.updateText("Round Complete")
-            this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
-            setTimeout(()=>{
-                this.perRoundUpdateText.updateText("Round " + nextRoundInfo.roundNumber.toString())
-                this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
-            }, timePerFade*2 + timeBetweenMessages)
-            this.ut.unsetAllPlayers()
-            this.tm.startInteraction()
-            this.startRoundButton.startInteraction()
-            this.startRoundButton.update(nextRoundInfo.roundNumber.toString())
-        })
     }
 
     /**
@@ -197,6 +182,21 @@ export class GameRenderer {
         this.perRoundUpdateText.fadeInThenOut(1000, 2000)
     }
 
+    startNextRound() {
+        let timePerFade = 1000
+        let timeBetweenFade = 2000
+        let timeBetweenMessages = 2000
+        this.perRoundUpdateText.updateText("Round Complete")
+        this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
+        setTimeout(()=>{
+            this.perRoundUpdateText.updateText("Round " + this.round.toString())
+            this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
+        }, timePerFade*2 + timeBetweenMessages)
+        //this.ut.unsetAllPlayers()
+        this.startRoundButton.startInteraction()
+        this.startRoundButton.update(this.round.toString())
+    }
+
     // TODO I think tick from the sprite handler can just be donw using this update call. Keeps undates in line with the server.
     update(serverUpdate) {
         this.tc.update(serverUpdate.towers)
@@ -208,6 +208,12 @@ export class GameRenderer {
         this.ec.update(serverUpdate.enemies)
         //this.git.update(serverUpdate["worldState"])
         this.tc.tick()
+
+        // Check if the round has finished and therefor changed
+        if (serverUpdate.worldState.round != this.round) {
+            this.round = serverUpdate.worldState.round
+            this.startNextRound()
+        }
     }
 
     addPlayer(playerInfo) {
