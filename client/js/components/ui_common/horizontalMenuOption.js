@@ -172,7 +172,6 @@ export class ButtonHorizontalMenuOption extends HorizontalMenuOption {
             })
             .on("mouseupoutside", () => {
                 this._release()
-                this._select()
             })
     }
 }

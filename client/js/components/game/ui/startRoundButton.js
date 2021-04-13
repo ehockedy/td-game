@@ -21,7 +21,8 @@ export class StartRoundButton extends ButtonHorizontalMenuOption {
 
     // Override
     stopInteraction() {
-        super.stopInteraction()
+        this.menuSprite.interactive = false
+        this.menuSprite.buttonMode = false
         let disabledTint = "0xAAAAAA"
         this.menuSprite.tint = disabledTint
         this.gameRoundText.style.fill = disabledTint
@@ -29,7 +30,8 @@ export class StartRoundButton extends ButtonHorizontalMenuOption {
 
     // Override
     startInteraction() {
-        super.startInteraction()
+        this.menuSprite.interactive = true
+        this.menuSprite.buttonMode = true
         this.menuSprite.tint = startMenuColour
         this.gameRoundText.style.fill = startMenuColour
     }
