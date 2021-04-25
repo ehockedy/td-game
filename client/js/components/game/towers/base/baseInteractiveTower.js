@@ -13,8 +13,7 @@ export class BaseInteractiveTower extends BaseTower {
 
         // Add a circle that shows the range the tower can detect enemies in
         let range = towerConfig[type].gameData.seekRange
-        let textureSize = this.textureSize
-        this.rangeCircle = this.generateRangeSprite(range, textureSize)
+        this.rangeCircle = this.generateRangeSprite(range, this.textureSize)
         this.addChildAt(this.rangeCircle, 0) // Add to front so rendered at bottom
     }
 

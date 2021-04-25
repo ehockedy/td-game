@@ -21,7 +21,7 @@ export class TowerMenu extends BaseComponent {
         this.x_menu = x_menu
         this.y_menu = y_menu //- 15 - 70
 
-        this.menuBackground = new StaticHorizontalMenuOption("towerMenuBackground", x_menu, y_menu,  this.width_menu_px - 500, "0xCCBB88", "left")
+        this.menuBackground = new StaticHorizontalMenuOption("towerMenuBackground", x_menu, y_menu,  this.width_menu_px, "0xCCBB88", "left")
         this.addChild(this.menuBackground)
 
         // The icons that mark the positions of the towers. They cannot be interacted with and do not move.
@@ -52,7 +52,7 @@ export class TowerMenu extends BaseComponent {
         for (let towerType in this.towerJson) {
             let icon = new MenuIconTower(towerType, towerType + "_icon", this.towerJson)
 
-            let x = getPositionWithinEquallySpacedObjects(numTowers, Object.keys(this.towerJson).length, icon.width, this.width_px)
+            let x = getPositionWithinEquallySpacedObjects(numTowers, Object.keys(this.towerJson).length, icon.width, this.width_menu_px)
             let y = this.menuBackground.y + this.menuBackground.height / 2
 
             icon.x = x
@@ -62,7 +62,7 @@ export class TowerMenu extends BaseComponent {
             this.sprites.addChild(towerSprite)
 
             numTowers += 1
-            if (numTowers >= 3) break // Temporary while adding other towers
+            if (numTowers > 4) break // Currentyl uses a "colour entry" to set colour - change this
         }
     }
 

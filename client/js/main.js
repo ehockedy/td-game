@@ -4,6 +4,8 @@ PIXI.Loader.shared
     .add("client/assets/bullets/bullets.json")
     .add("client/assets/towers/1-rock_thrower/rock_thrower.json")
     .add("client/assets/towers/2-shrapnel_burst/shrapnel_burst.json")
+    .add("client/assets/towers/3-rock_scatter/rock_scatter.json")
+    .add("client/assets/towers/4-sniper/sniper.json")
     .add("client/assets/map/base_tiles/base_tiles.json")
     .add("client/assets/map/land_patterns/land_patterns.json")
     .add("client/assets/map/land_decorations/land_decorations.json")

@@ -4,7 +4,7 @@ export function generateClientConfig(config) {
     const MAP_WIDTH = config.MAP_WIDTH * SPRITE_SIZE_MAP_PX
     const MAP_HEIGHT = config.MAP_HEIGHT * SPRITE_SIZE_MAP_PX
     const MAP_BORDER = SPRITE_SIZE_MAP_PX
-    const TOWER_MENU_WIDTH = MAP_WIDTH
+    const TOWER_MENU_WIDTH = MAP_WIDTH - 500
     const TOWER_MENU_HEIGHT = SPRITE_SIZE_MAP_PX
     const PLAYER_TOOLBAR_WIDTH = SPRITE_SIZE_MAP_PX * 3
     const PLAYER_TOOLBAR_HEIGHT = MAP_HEIGHT

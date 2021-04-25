@@ -7,7 +7,7 @@ export class BaseTower extends BaseComponent {
 
         // TODO towerConfig should be for just the tower of the given type
         let textures = PIXI.Loader.shared.resources[towerConfig[type].textureAtlasFile].textures
-        this.textureSize = Object.values(textures)[0].width
+        this.textureSize = 64  // Not necessarily the size of the texture, but the size of the space it sits in
         let baseTextures = []
         let spriteTextures = []
         for (let textureName in textures) {

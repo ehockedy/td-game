@@ -50,7 +50,8 @@
         },
         "cost": 120,
         "bulletType": "rock",
-        "shootPattern": "scatter"
+        "shootPattern": "scatter",
+        "textureAtlasFile": "client/assets/towers/3-rock_scatter/rock_scatter.json"
     },
     "sniper": {
         "spriteSheetNum": 3,
@@ -67,6 +68,7 @@
         },
         "cost": 200,
         "bulletType": "rock",
-        "shootPattern": "single"
+        "shootPattern": "single",
+        "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"
     }
 }
