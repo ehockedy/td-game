@@ -22,6 +22,7 @@ export class InteractiveGameSpace extends BaseComponent {
         this.deployedTowerMainMenu = new DeployedTowerMenu(this.towerMenu.x_menu, this.towerMenu.y_menu)
         this.addChild(this.deployedTowerMainMenu)
         this.deployedTowerMainMenu.hide()
+        this.deployedTowerMainMenu.subscribe(this)
     }
 
     // Assign all the actions that are triggered by interaction with the sub components

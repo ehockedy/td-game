@@ -25,7 +25,6 @@ class Menu extends BaseComponent {
     }
 }
 
-
 // A menu that has no interactive components
 export class StaticMenu extends Menu {
     constructor(name, x, y, buildDirection, gap=0) {
@@ -41,14 +40,82 @@ export class StaticMenu extends Menu {
     }
 }
 
-
-// A group of independent buttons
-export class ButtonMenu extends Menu {
+class InteractiveMenu extends Menu {
     constructor(name, x, y, buildDirection, gap=0) {
         super(name, x, y, buildDirection, gap)
         this._setUpInteraction()
+        this._setUpCancelBackInteraction()
     }
 
+    addCancelButton() {
+        let width = 120
+        let tint = "0x990918"
+        let option = new ButtonHorizontalMenuOption(this.name + "_cancel",
+            this._getNextXPosition(width), 0,
+            width, tint, "none")
+        option.setSelectEventName("cancel")
+        this.addChild(option)
+        option.subscribe(this)
+        option.addTextCentral("\u{2717}", {
+            "dropShadow": false,
+            "dropShadowAngle": 0.7,
+            "fill": "0x000000",
+            "fontFamily": "\"Trebuchet MS\", Helvetica, sans-serif",
+            "fontSize": 32,
+            "fontStyle": "normal",
+            "fontVariant": "small-caps",
+            "letterSpacing": 1,
+            "strokeThickness": Math.ceil(32/10)
+        })
+
+        let scale = 0.8
+        option.y += option.height * (1-scale) / 2
+        option.setDefaultScale(scale)
+        return option
+    }
+
+    addBackButton() {
+        let width = 120
+        let tint = "0x990918"
+        let option = new ButtonHorizontalMenuOption(this.name + "_back",
+            this._getNextXPosition(width), 0,
+            width, tint, "none")
+        option.setSelectEventName("back")
+        this.addChild(option)
+        option.subscribe(this)
+        option.addTextCentral("\u{1f814}", {
+            "dropShadow": false,
+            "dropShadowAngle": 0.7,
+            "fill": "0x000000",
+            "fontFamily": "\"Trebuchet MS\", Helvetica, sans-serif",
+            "fontSize": 40,
+            "fontStyle": "normal",
+            "fontVariant": "small-caps",
+            "letterSpacing": 1,
+            "strokeThickness": Math.ceil(32/10)
+        })
+
+        let scale = 0.8
+        option.y += option.height * (1-scale) / 2
+        option.setDefaultScale(scale)
+        return option
+    }
+
+    // A special interaction setup to listen for the cancel event
+    // Handle separately, since it is used in both button and switch menus and do not want to treat it as a normal event
+    _setUpCancelBackInteraction() {
+        this.on("cancel", () => {
+            this.observers.forEach((observer) => { observer.emit("cancel") })
+        })
+        this.on("back", () => {
+            this.observers.forEach((observer) => { observer.emit("back") })
+        })
+    }
+}
+
+
+// A group of independent buttons
+export class ButtonMenu extends InteractiveMenu {
     addOption(width, tint, onSelectEventName) {
         let option = new ButtonHorizontalMenuOption(this.name + "_root",
             this._getNextXPosition(width), 0,
@@ -60,6 +127,8 @@ export class ButtonMenu extends Menu {
     }
 
     _setUpInteraction() {
+        // "selected" is a generic event emitted by the clickable options - forward the specific event to the subscribers to this menu
+        // this means the buttons do not need any subscribers other than this menu
         this.on("selected", (option) => {
             this.observers.forEach((observer) => { observer.emit(option.onSelectEventName) })
         })
@@ -67,15 +136,10 @@ export class ButtonMenu extends Menu {
 }
 
 
-// Holds a set of options, with one being able to be preessed at a time
+// Holds a set of options, with one being able to be pressed at a time
 // Handles the interactions between the buttons
 // If one is pressed, the currently pressed one is deselected
-export class SwitchMenu extends Menu {
-    constructor(name, x, y, buildDirection, gap=0) {
-        super(name, x, y, buildDirection, gap)
-        this._setUpInteraction()
-    }
-
+export class SwitchMenu extends InteractiveMenu {
     addOption(width, tint, onSelectEventName, isDefault=false) {
         let option = new SwitchHorizontalMenuOption(this.name + "_root",
             this._getNextXPosition(width), 0,
@@ -98,6 +162,9 @@ export class SwitchMenu extends Menu {
     }
 
     _setUpInteraction() {
+        // "selected" is a generic event emitted by the clickable options - forward the specific event to the subscribers to this menu
+        // this means the buttons do not need any subscribers other than this menu
+        // It also means the menu can have control over the switches when one is pressed
         this.on("selected", (option) => {
             if (this.selected) this.selected.unsetActive()
             this.selected = option

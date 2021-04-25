@@ -24,7 +24,6 @@ export class GameRenderer {
         // Calculate the border around the play area. This ara will be renedered but path/towers will not be placed here
         // but the map will be rendered there.
         this.maxBorderSize = Math.max(config.BORDER_L, config.BORDER_R, config.BORDER_T, config.BORDER_B) / config.SPRITE_SIZE_MAP
-        console.log(this.maxBorderSize)
 
         let toolbarY = config.MAP_HEIGHT + config.BORDER_B/4 - 10
         this.tm = new TowerMenu(

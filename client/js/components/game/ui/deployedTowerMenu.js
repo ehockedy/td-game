@@ -1,5 +1,4 @@
 import { SwitchMenu, ButtonMenu } from "./horizontalOptionsMenu.js"
-import { getPositionWithinEquallySpacedObjects } from "../../../tools.js"
 import { BaseComponent } from "../base/baseComponent.js"
 
 // TODO move this to a styles section
@@ -40,6 +39,7 @@ class DeployedTowerMainMenu extends ButtonMenu {
         this.sellOption = this.addOption(260, sellColour, "selected-sell")
         this.sellOption.addTextCentral("Sell", generateStyle(sellColour))
 
+        this.addCancelButton()
         this.populateWithTowerInfo()
     }
 
@@ -88,6 +88,8 @@ class DeployedTowerAimMenu extends SwitchMenu {
         this.fastestOption = this.addOption(optionWidth, aimColour, "selected-aim-fastest", false)
         this.fastestOption.addTextCentral("Fastest", textStyle)
 
+        this.addBackButton()
+        this.addCancelButton()
         this.setRootInfo()
     }
 
@@ -172,6 +174,14 @@ export class DeployedTowerMenu extends BaseComponent {
         })
         this.on("selected-aim-fastest", () => {
             this.observers.forEach((observer) => { observer.emit("update-tower", this.selectedTower, "aim", "aimBehaviour", "fastest") })
+        })
+
+        this.on("back", () => {
+            this.show()
+        })
+
+        this.on("cancel", () => {
+            this.observers.forEach((observer) => { observer.emit("clickOffDeployedTower", this.selectedTower) })
         })
     }
 

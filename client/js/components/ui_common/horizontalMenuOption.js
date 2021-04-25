@@ -13,6 +13,7 @@ class HorizontalMenuOption extends BaseComponent {
         this.y = y
         this.baseTint = tint
         this.selectionEventName = "selected"  // The event to emit when selected
+        this.defaultScale = 1
 
         this.baseContentOffsetX = 0
         this._generateSprites(width_px, tint, wallAttachment)
@@ -43,6 +44,11 @@ class HorizontalMenuOption extends BaseComponent {
     // Override the name of the event to emit when selected
     setSelectEventName(name) {
         this.selectionEventName = name
+    }
+
+    setDefaultScale(scale) {
+        this.defaultScale = scale
+        this.scale.set(scale)
     }
 
     // ~~~ Private ~~~
@@ -124,7 +130,7 @@ class HorizontalMenuOption extends BaseComponent {
         this.menuSprite.y = this.shadowSprite.y / 2
         this.text.x = this.shadowSprite.x / 2 + this.baseContentOffsetX
         this.text.y = this.shadowSprite.y / 2
-        this.scale.set(0.98)  // Shrink it a bit
+        this.scale.set(this.defaultScale * 0.98)  // Shrink it a bit
     }
 
     _release() {
@@ -133,7 +139,7 @@ class HorizontalMenuOption extends BaseComponent {
         this.menuSprite.y = 0
         this.text.x = this.baseContentOffsetX
         this.text.y = 0
-        this.scale.set(1)  // Reset to original size
+        this.scale.set(this.defaultScale)  // Reset to original size
     }
 
     _select() {
