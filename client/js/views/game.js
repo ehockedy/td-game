@@ -6,9 +6,10 @@ import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { StartRoundButton } from "../components/game/ui/startRoundButton.js"
-import { LivesCounter } from "../components/game/ui/livesCounter.js"
+import { Counter } from "../components/game/ui/counter.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { randomHexString } from "../tools.js"
+import { getUserID } from "../state.js"
 
 /**
  * This class sets up what will appear in the game view.
@@ -42,7 +43,10 @@ export class GameRenderer {
 
         this.startRoundButton = new StartRoundButton(config.MAP_WIDTH + config.BORDER_R, toolbarY)
 
-        this.livesCounter = new LivesCounter(config.MAP_WIDTH + config.BORDER_R, toolbarY)
+        this.moneyCounter = new Counter(config.MAP_WIDTH + config.BORDER_R, toolbarY, 180, "Money", 0, "0xDDAA11")
+        this.moneyCounter.y -= (this.moneyCounter.height + 10)
+
+        this.livesCounter = new Counter(config.MAP_WIDTH + config.BORDER_R, this.moneyCounter.y, 160, "Lives", 100)
         this.livesCounter.y -= (this.livesCounter.height + 10)
 
         this.setServerEventListeners()
@@ -164,6 +168,7 @@ export class GameRenderer {
         //this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.startRoundButton)
         this.spriteHandler.registerContainer(this.livesCounter)
+        this.spriteHandler.registerContainer(this.moneyCounter)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
 
         // Load towers into the menu
@@ -212,6 +217,12 @@ export class GameRenderer {
         this.livesCounter.update(serverUpdate.worldState.lives)
         //this.git.update(serverUpdate["worldState"])
         this.tc.tick()
+
+        serverUpdate.players.objects.forEach((player) => {
+            if (player.playerID == getUserID()) {
+                this.moneyCounter.update(player.stats.money)
+            }
+        })
 
         // Check if the round has finished and therefor changed
         if (serverUpdate.worldState.round != this.round) {
