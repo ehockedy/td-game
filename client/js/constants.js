@@ -11,7 +11,7 @@ export function generateClientConfig(config) {
     const BORDER_T = SPRITE_SIZE_MAP_PX*0
     const BORDER_B = SPRITE_SIZE_MAP_PX*2
     const BORDER_L = SPRITE_SIZE_MAP_PX*0
-    const BORDER_R = SPRITE_SIZE_MAP_PX*2
+    const BORDER_R = SPRITE_SIZE_MAP_PX*3
     const APP_WIDTH = MAP_WIDTH + BORDER_R + BORDER_L
     const APP_HEIGHT = MAP_HEIGHT +  BORDER_T + BORDER_B
     const LOBBY_WINDOW_WIDTH = APP_WIDTH*0.90

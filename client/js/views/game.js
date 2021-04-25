@@ -21,6 +21,11 @@ export class GameRenderer {
         this.socket = socket
         this.round = 1
 
+        // Calculate the border around the play area. This ara will be renedered but path/towers will not be placed here
+        // but the map will be rendered there.
+        this.maxBorderSize = Math.max(config.BORDER_L, config.BORDER_R, config.BORDER_T, config.BORDER_B) / config.SPRITE_SIZE_MAP
+        console.log(this.maxBorderSize)
+
         let toolbarY = config.MAP_HEIGHT + config.BORDER_B/4 - 10
         this.tm = new TowerMenu(
             config.MAP_WIDTH, config.MAP_HEIGHT + config.TOWER_MENU_HEIGHT, 0, 0, // Component w, h, x, y
@@ -155,7 +160,7 @@ export class GameRenderer {
     startRendering() {
         this.socket.emit("server/map/get", (map) => {
             this.map.setGridValues(map);
-            this.map.constructMap(2)
+            this.map.constructMap(this.maxBorderSize)
         })
 
         // Register containers with the sprite layer
