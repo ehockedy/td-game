@@ -86,8 +86,19 @@ class Tower {
      */
     shoot() {
         let newBullets = this.shootFunction()
-        this.fireTick = (this.fireTick + 1) % this.state.rateOfFire
-        return this.fireTick == 0 ? newBullets : [] // Only return the bullets if actually shooting
+        if (this.fireTick == 0) {
+            this.hasShot = true
+        } else {
+            newBullets = [] // Only return the bullets if actually shooting
+            this.hasShot = false
+        }
+        return newBullets
+    }
+
+    tick() {
+        if (this.target || (!this.target && this.fireTick > 0)) {
+            this.fireTick = (this.fireTick + 1) % this.state.rateOfFire
+        }
     }
 
     _getBullet(position, angle) {

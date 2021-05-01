@@ -47,10 +47,7 @@ class Game {
     }
 
     moveTowers() {
-        for (let t = 0; t < this.towers.length; t++) {
-            let tower = this.towers[t]
-            tower.hasShot = false // reset whether the tower has shot this round
-
+        this.towers.forEach((tower) => {
             // Get a enemy to shoot at based on tower behaviour
             let chosenEnemy = null
             if (tower.state.aimBehaviour == "first") { // Tower aims to the enemy furthest down the path
@@ -73,20 +70,14 @@ class Game {
                 }
             }
 
-            if (chosenEnemy == null) { // No enemy to in range
-                tower.fireTick = 0 // Stop firing tick counter
-                continue
-            }
-
-            tower.setTarget(chosenEnemy)
-            let newBullets = tower.shoot()
-            if (newBullets.length > 0) {
-                tower.hasShot = true
-                newBullets.forEach((bullet) => {
+            tower.tick()
+            if (chosenEnemy) {  // Aim and try to shoot only if there is an enemy in range
+                tower.setTarget(chosenEnemy)
+                tower.shoot().forEach((bullet) => {
                     this.map.addBullet(bullet)
                 })
             }
-        }
+        })
     }
 
     moveBullets() {
