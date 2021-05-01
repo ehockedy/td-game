@@ -2,9 +2,21 @@ import { BaseInteractiveTower } from "./base/baseInteractiveTower.js"
 
 // Tower class that represnets a tower placed on the map
 export class DeployedTower extends BaseInteractiveTower {
-    constructor(type, name, towerConfig, playerID) {
+    constructor(type, name, x, y, towerConfig, playerID) {
         super(type, name, towerConfig)
         this.playerID = playerID
+
+        this.shootAnimationCount = 0
+        this.shootAnimationCountMax = 0
+        this.animationFrames = []
+
+        this.setX(x)
+        this.setY(y)
+        this.startX = this.x
+        this.startY = this.y
+        // This is a rotation of the object as a whole - does not actually affect the angle of the sprite
+        // subsprites must be rotated for this to work
+        this._rotation = 0
 
         // Interaction behaviours
         this.towerSprite
@@ -30,6 +42,7 @@ export class DeployedTower extends BaseInteractiveTower {
     }
 
     setRotation(rotation) {
+        this._rotation = rotation
         this.towerSprite.rotation = rotation
         this.towerColourSprite.rotation = rotation
     }
@@ -38,6 +51,7 @@ export class DeployedTower extends BaseInteractiveTower {
         switch(this.type) {
             case "shrapnel-burst":
                 this._initShrapnelBurst()
+                break
             default:
                 this._init()
         }
@@ -48,6 +62,7 @@ export class DeployedTower extends BaseInteractiveTower {
         switch(this.type) {
             case "shrapnel-burst":
                 this._tickShrapnelBurst()
+                break
             default:
                 this._tick()
         }
@@ -57,6 +72,7 @@ export class DeployedTower extends BaseInteractiveTower {
         switch(this.type) {
             case "shrapnel-burst":
                 this._shootShrapnelBurst()
+                break
             default:
                 this._shoot()
         }
@@ -76,7 +92,10 @@ export class DeployedTower extends BaseInteractiveTower {
 
 
     // Type specific init functions
-    _init() {}
+    _init() {
+        this.shootAnimationCountMax = 15
+        this._generateAnimationFrames()
+    }
 
     _initShrapnelBurst() {
         this.spinTickCount = 0
@@ -88,7 +107,15 @@ export class DeployedTower extends BaseInteractiveTower {
     }
 
     // Type specific tick functions
-    _tick() {}
+    _tick() {
+        // Advance generic shoot animation
+        if (this.shootAnimationCount > 0) {
+            const frame = this.shootAnimationCountMax - this.shootAnimationCount
+            this.x = this.startX + Math.cos(this._rotation) * this.animationFrames[frame]
+            this.y = this.startY + Math.sin(this._rotation) * this.animationFrames[frame]
+            this.shootAnimationCount -= 1
+        }
+    }
 
     _tickShrapnelBurst() {
         if (this.isSpinning) {
@@ -110,7 +137,9 @@ export class DeployedTower extends BaseInteractiveTower {
     }
 
     // Type specific tick functions
-    _shoot() {}
+    _shoot() {
+        this.shootAnimationCount = this.shootAnimationCountMax
+    }
 
     _shootShrapnelBurst() {
         if (!this.isSpinning) {
@@ -118,6 +147,27 @@ export class DeployedTower extends BaseInteractiveTower {
             this.extraSpinAngleTop = Math.floor(Math.random()*5)
             this.extraSpinAngleMid = Math.floor(Math.random()*5)
             this.extraSpinAngleBot = Math.floor(Math.random()*5)
+        }
+    }
+
+    // Some towers have animations when they shoot
+    // It's a basic animation of recoiling back, for now
+    // The animation works by setting a specific distance to move back to,
+    // sharply moving back over the first few frames, and then slowly moving
+    // forward
+    _generateAnimationFrames() {
+        const pullBackDistance = 15  // Move back to this maximum during the first number of frames
+        const pullBackFrames = 0.1 * this.shootAnimationCountMax // Pull back over this first proportion of frames
+        const pushForwardFrames = this.shootAnimationCountMax - pullBackFrames
+
+        // Calculate the distances to be moved away when recoiling
+        for (let i=1; i < pullBackFrames; i++) {
+            this.animationFrames.push( (i/pullBackFrames) * pullBackDistance * -1)
+        }
+
+        // Calculate the distances to be away from starting position when returning to initial position
+        for (let i=0; i <= pushForwardFrames; i++) {
+            this.animationFrames.push( (1 - i/pushForwardFrames) * pullBackDistance * -1)
         }
     }
 }

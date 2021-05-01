@@ -39,14 +39,14 @@ export class TowersComponent extends BaseComponent {
     }
 
     addPlacedTower(type, name, playerID, row, col) {
-        let sprite = new DeployedTower(type, name, this.towerJson, playerID)
+        const x = col * this.mapSpriteSize + this.mapSpriteSize / 2;
+        const y = row * this.mapSpriteSize + this.mapSpriteSize / 2;
+        let sprite = new DeployedTower(type, name, x, y, this.towerJson, playerID)
         if (playerID == getUserID()) {
             this.observers.forEach((observer) => {sprite.subscribe(observer)})
         } else {
             sprite.disableInteractivity()
         }
-        sprite.x = col * this.mapSpriteSize + this.mapSpriteSize / 2;
-        sprite.y = row * this.mapSpriteSize + this.mapSpriteSize / 2;
         this.addChild(sprite)
     }
 
