@@ -15,6 +15,9 @@ export class DraggableTower extends BaseInteractiveTower {
         // Properties of movement
         this.dragging = false  // Whether the sprite is currently being moved
 
+        // Whether a tower can be bought
+        this.availiableToBuy = true
+
         // The buttons for confirming or declining placement
         this.placeTowerButtons = new PlaceTowerMenu(0, 0)
         this.placeTowerButtons.x -= this.placeTowerButtons.width / 2
@@ -44,14 +47,22 @@ export class DraggableTower extends BaseInteractiveTower {
         this.dragging = false
     }
 
-    disableInteractivity() { 
-        this.towerSprite.interactive = false
-        this.towerSprite.buttonMode = false
+    disableInteractivity() {
+        if (this.availiableToBuy) {
+            this.towerSprite.interactive = false
+            this.towerSprite.buttonMode = false
+            this._setTint("0x555555")  // Darken to show cannot be bought
+            this.availiableToBuy = false
+        }
     }
 
-    enableInteractivity() { 
-        this.towerSprite.interactive = true
-        this.towerSprite.buttonMode = true
+    enableInteractivity() {
+        if (!this.availiableToBuy) {
+            this.towerSprite.interactive = true
+            this.towerSprite.buttonMode = true
+            this._setTint("0xFFFFFF")
+            this.availiableToBuy = true
+        }
     }
 
     showPlaceTowerButtons() {
@@ -80,5 +91,17 @@ export class DraggableTower extends BaseInteractiveTower {
         if (this.dragging) {
             this.observers.forEach((o) => { o.emit("clickAndDragTower", event, this) })
         }
+    }
+
+    _setTint(tint) {
+        this.towerSpriteContainer.children.forEach((sprite) => {
+            if (sprite.children.length > 0) {
+                sprite.children.forEach((childSprite) => {
+                    childSprite.tint = tint
+                })
+            } else {
+                sprite.tint = tint
+            }
+        })
     }
 }
