@@ -81,19 +81,17 @@ class Tower {
 
     /**
      * Returns an array of bullets that the tower has created
+     * This gets called on every tick of the game loop, even though the tower does not always
+     * shoot. It is called so that the tower can rotate to follow the enemy it is aiming at.
      */
-    shoot() { // TODO change name, since won't always shoot?
-        let newBullets = []
-        if (this.fireTick == 0) {
-            newBullets = this.shootFunction()
-        }
+    shoot() {
+        let newBullets = this.shootFunction()
         this.fireTick = (this.fireTick + 1) % this.state.rateOfFire
-        newBullets.forEach(bullet => bullet.setOriginTower(this))
-        return newBullets
+        return this.fireTick == 0 ? newBullets : [] // Only return the bullets if actually shooting
     }
 
     _getBullet(position, angle) {
-        return new bullet.Bullet(
+        let newBullet = new bullet.Bullet(
             position,
             angle,
             this.state.damage,
@@ -101,6 +99,8 @@ class Tower {
             this.state.shootRange,
             this.bulletType
         )
+        newBullet.setOriginTower(this)
+        return newBullet
     }
 
     // "Private" methods that make the tower shoot in different ways
