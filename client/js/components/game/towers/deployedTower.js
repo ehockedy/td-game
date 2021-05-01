@@ -48,34 +48,28 @@ export class DeployedTower extends BaseInteractiveTower {
     }
 
     init() {
+        // Set certain functions based on the type of tower that it is
+        // Mainly concerns animation when shooting
         switch(this.type) {
             case "shrapnel-burst":
                 this._initShrapnelBurst()
+                this.tickFn = this._tickShrapnelBurst
+                this.shootFn = this._shootShrapnelBurst
                 break
             default:
                 this._init()
+                this.tickFn = this._tick
+                this.shootFn = this._shoot
         }
     }
 
     tick() {
         this._rangeTick()
-        switch(this.type) {
-            case "shrapnel-burst":
-                this._tickShrapnelBurst()
-                break
-            default:
-                this._tick()
-        }
+        this.tickFn()
     }
 
     shoot() {
-        switch(this.type) {
-            case "shrapnel-burst":
-                this._shootShrapnelBurst()
-                break
-            default:
-                this._shoot()
-        }
+        this.shootFn()
     }
 
     _onClick() {
