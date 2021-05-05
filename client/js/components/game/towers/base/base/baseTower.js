@@ -15,18 +15,18 @@ export class BaseTower extends BaseComponent {
             else spriteTextures.push(textures[textureName])
         }
 
-        let randomColourCode = towerConfig["colour"]  // TODO I think colour should be passed in as a parameter, or as part of config in a better way
+        this.colour = towerConfig["colour"]  // TODO I think colour should be passed in as a parameter, or as part of config in a better way
 
+        // Create the sprites from the loaded textures
+        // Store them all in their own containers for consistency
+        this.towerSprite = this.getSpriteContainer(spriteTextures)  // This is the tower sprite graphic
+        this.towerColourSprite = this.getBaseSpriteContainer(baseTextures, this.colour)  // This is the bit of colour that each tower has the indicate who it belongs to
+
+        // Put all the sprites into a container
         this.towerSpriteContainer = new PIXI.Container()
-        this.addChild(this.towerSpriteContainer)
-
-        this.towerSprite = this.generateSprite(spriteTextures)
         this.towerSpriteContainer.addChild(this.towerSprite)
-
-        if (baseTextures.length > 0) {
-            this.towerColourSprite = this.generateBaseSprite(baseTextures, randomColourCode)
-            this.towerSpriteContainer.addChild(this.towerColourSprite)
-        }
+        this.towerSpriteContainer.addChild(this.towerColourSprite)
+        this.addChild(this.towerSpriteContainer)
     }
 
     setX(x) { this.x = x }
@@ -35,52 +35,68 @@ export class BaseTower extends BaseComponent {
     setRow(row) { this.row = row }
     setPosition(position) { this.position = position }
 
-    _getSprite(textures) {
+    getSpriteContainer(textures) {
         switch (this.type) {
             case "shrapnel-burst":
                 return this._getSpriteShrapnelBurst(textures)
             default:
-                return this._getSpriteBasic(textures)
+                return this._getSpriteDefault(textures)
         }
     }
 
-    _getColourSprite(textures) {
+    getBaseSpriteContainer(textures, colour) {
+        let baseSprite
         switch (this.type) {
             default:
-                return this._getSpriteBasic(textures)
+                baseSprite = this._getSpriteDefault(textures, colour)
         }
-    }
-
-    generateSprite(textures) {
-        return this._getSprite(textures)
-    }
-
-    generateBaseSprite(textures, colour) {
-        let baseSprite = this._getColourSprite(textures)
-        baseSprite.tint = colour
         return baseSprite
     }
 
-    // Type specific functions
-    _getSpriteBasic(textures) {
-        let sprite = textures.length > 0 ? new PIXI.AnimatedSprite(textures) : new PIXI.Sprite(textures[0])
+    // Creates a basic sprite with a given tint
+    _createSprite(texture, tint="0xFFFFFF") {
+        let sprite = new PIXI.Sprite(texture)
         sprite.anchor.set(0.5)
+        sprite.tint = tint
+        sprite.baseTint = tint
         return sprite
+    }
+
+    // Type specific functions
+    _getSpriteDefault(textures, tint="0xFFFFFF") {
+        let spriteContainer = new PIXI.Container()
+        let sprite = this._createSprite(textures[0], tint)
+        spriteContainer.addChild(sprite)
+        return spriteContainer
     }
 
     // Override base sprite generation method because this sprite is made of layers that move independently
     _getSpriteShrapnelBurst(textures) {
         let spriteContainer = new PIXI.Container()
-        spriteContainer.name = "tower"
         textures.forEach((texture) => {
             let textureName = texture.textureCacheIds[0]
-            let sprite = new PIXI.Sprite(texture)
-            sprite.anchor.set(0.5)
+            let sprite = this._createSprite(texture)
             if (textureName.includes("bottom")) this.bottomLayer = sprite
             else if (textureName.includes("middle")) this.middleLayer = sprite
             else if (textureName.includes("top")) this.topLayer = sprite
             spriteContainer.addChild(sprite)
         })
         return spriteContainer
+    }
+
+    setTint(tint) {
+        this.towerSpriteContainer.children.forEach((subSprite) => {
+            subSprite.children.forEach((sprite) => {
+                sprite.tint = tint
+            })
+        })
+    }
+
+    resetTint() {
+        this.towerSpriteContainer.children.forEach((subSprite) => {
+            subSprite.children.forEach((sprite) => {
+                sprite.tint = sprite.baseTint
+            })
+        })
     }
 }

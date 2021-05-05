@@ -68,9 +68,8 @@ export function getPositionWithinEquallySpacedObjects(objectNumber, totalObjects
 }
 
 // TODO add tests
-export function addColourHexValues(v1, v2) {
+function combineColourHexValues(v1, v2, combinationFn) {
     let result = "0x"  // Assum e hex string starts with '0x', might be '#'
-
     // Determine the starting digit indeex for each hex string - depends on whether its '0x' or '#'
     let v1_start = (v1[0] == '#') ? 1 : 2
     let v2_start = (v2[0] == '#') ? 1 : 2
@@ -84,9 +83,17 @@ export function addColourHexValues(v1, v2) {
         let v2_hex = v2.slice(v2_start + offset, v2_start + offset+2)
         let v2_dec = parseInt(v2_hex, 16);
 
-        let sum_dec = v1_dec + v2_dec
+        let sum_dec = combinationFn(v1_dec, v2_dec)
         let sum_hex = (sum_dec > Math.pow(16, 2)) ? "FF" : sum_dec.toString(16)
         result += sum_hex
     }
     return result
+}
+
+export function addColourHexValues(v1, v2) {
+    return combineColourHexValues(v1, v2, (a, b)=>{ return a + b})
+}
+
+export function avgColourHexValues(v1, v2) {
+    return combineColourHexValues(v1, v2, (a, b)=>{ return (a + b)/2})
 }

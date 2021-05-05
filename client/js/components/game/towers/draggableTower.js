@@ -1,5 +1,6 @@
 import { BaseInteractiveTower } from "./base/baseInteractiveTower.js"
 import { PlaceTowerMenu } from "../ui/placeTowerMenu.js"
+import { avgColourHexValues } from "../../../tools.js"
 
 // Tower class that represents a tower in the menu the user can drag around and buy
 export class DraggableTower extends BaseInteractiveTower {
@@ -51,7 +52,7 @@ export class DraggableTower extends BaseInteractiveTower {
         if (this.availiableToBuy) {
             this.towerSprite.interactive = false
             this.towerSprite.buttonMode = false
-            this._setTint("0x555555")  // Darken to show cannot be bought
+            this.setTint("0x555555")  // Darken to show cannot be bought
             this.availiableToBuy = false
         }
     }
@@ -60,7 +61,7 @@ export class DraggableTower extends BaseInteractiveTower {
         if (!this.availiableToBuy) {
             this.towerSprite.interactive = true
             this.towerSprite.buttonMode = true
-            this._setTint("0xFFFFFF")
+            this.resetTint()
             this.availiableToBuy = true
         }
     }
@@ -93,15 +94,14 @@ export class DraggableTower extends BaseInteractiveTower {
         }
     }
 
-    _setTint(tint) {
-        this.towerSpriteContainer.children.forEach((sprite) => {
-            if (sprite.children.length > 0) {
-                sprite.children.forEach((childSprite) => {
-                    childSprite.tint = tint
-                })
-            } else {
-                sprite.tint = tint
-            }
+    setTint(tint) {
+        super.setTint(tint)
+
+        // Since the tint will override the coloured part instead do an average so can still see
+        // what colour is beneath
+        // TODO maybe this should just be how the function works??
+        this.towerColourSprite.children.forEach((sprite) => {
+            sprite.tint = avgColourHexValues(sprite.baseTint, tint)
         })
     }
 }

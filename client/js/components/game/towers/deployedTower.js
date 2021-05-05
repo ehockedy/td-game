@@ -43,8 +43,7 @@ export class DeployedTower extends BaseInteractiveTower {
 
     setRotation(rotation) {
         this._rotation = rotation
-        this.towerSprite.rotation = rotation
-        this.towerColourSprite.rotation = rotation
+        this.towerSpriteContainer.rotation = rotation
     }
 
     init() {
