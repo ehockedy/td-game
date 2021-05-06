@@ -1,7 +1,7 @@
 import { BaseComponent } from "../../../base/baseComponent.js";
 
 export class BaseTower extends BaseComponent {
-    constructor(type, name, towerConfig) {
+    constructor(type, name, towerConfig, colour) {
         super(name)
         this.type = type
 
@@ -15,7 +15,7 @@ export class BaseTower extends BaseComponent {
             else spriteTextures.push(textures[textureName])
         }
 
-        this.colour = towerConfig["colour"]  // TODO I think colour should be passed in as a parameter, or as part of config in a better way
+        this.colour = colour
 
         // Create the sprites from the loaded textures
         // Store them all in their own containers for consistency

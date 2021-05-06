@@ -1,14 +1,10 @@
-import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
 import { DeployedTower } from "./towers/deployedTower.js"
-import { randomHexString } from "../../tools.js"
 
 /**
  * This component stores all the information about the towers that are out on the map
  * In future, might be best to remove the sprite creation functions out
  */
-// TODO make a central tower factory - the only one that loads towerJson, then have this as the "towers on the map component"
-// Tower factory should holw - tower data, have the name/idx -> tower object switch, tower colour per player maybe?
 export class TowersComponent extends BaseComponent {
     constructor(sprite_handler, mapSpriteSize){
         super()
@@ -20,19 +16,12 @@ export class TowersComponent extends BaseComponent {
         this.setEventListeners()
     }
 
-    // Asynchronosly load the tower data
-    loadData() {
-        let _this = this
-        return new Promise((resolve) => {
-            fetch("shared/json/towers.json").then((response) => {
-                response.json().then((data) => {
-                    _this.towerJson = data
-                    _this.towerJson["colour"] = "0x" + randomHexString(6)
-                    resolve()
-                })
-            })
-        })
+    // Setter for tower config
+    setData(towerConfig, playerConfig) {
+        this.towerConfig = towerConfig
+        this.playerConfig = playerConfig
     }
+
 
     subscribe(observer) {
         this.observers.push(observer)
@@ -41,8 +30,8 @@ export class TowersComponent extends BaseComponent {
     addPlacedTower(type, name, playerID, row, col) {
         const x = col * this.mapSpriteSize + this.mapSpriteSize / 2;
         const y = row * this.mapSpriteSize + this.mapSpriteSize / 2;
-        let sprite = new DeployedTower(type, name, x, y, this.towerJson, playerID)
-        if (playerID == getUserID()) {
+        let sprite = new DeployedTower(type, name, x, y, this.towerConfig, playerID, this.playerConfig[playerID].colour)
+        if (this.playerConfig[playerID].isThisPlayer) { // TODO check if the playerID exist
             this.observers.forEach((observer) => {sprite.subscribe(observer)})
         } else {
             sprite.disableInteractivity()
@@ -87,7 +76,7 @@ export class TowersComponent extends BaseComponent {
             }
 
             // Update the tower statsistics, but only store stats for towers a playerID owns
-            if (tower.playerID == getUserID()) {
+            if (tower.playerID == this.playerConfig[tower.playerID].isThisPlayer) {
                 towerToUpdate.update(tower.stats)
             }
         })

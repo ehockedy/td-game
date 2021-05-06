@@ -9,7 +9,6 @@ import { StartRoundButton } from "../components/game/ui/startRoundButton.js"
 import { Counter } from "../components/game/ui/counter.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { randomHexString } from "../tools.js"
-import { getUserID } from "../state.js"
 
 /**
  * This class sets up what will appear in the game view.
@@ -20,6 +19,13 @@ export class GameRenderer {
         this.spriteHandler = spriteHandler
         this.socket = socket
         this.round = 1
+
+        this.thisPlayerID = config.PLAYER_ID
+        this.playerData = {}
+        this.playerData[config.PLAYER_ID] = {  // TODO this should probably be passed in from Lobby
+            "colour": config.COLOUR,
+            "isThisPlayer": true
+        }
 
         // Calculate the border around the play area. This ara will be renedered but path/towers will not be placed here
         // but the map will be rendered there.
@@ -61,10 +67,9 @@ export class GameRenderer {
         let _this = this
         return new Promise((resolve) => {
             fetch("shared/json/towers.json").then((response) => {
-                response.json().then((data) => {
-                    _this.towerJson = data
-                    _this.towerJson["colour"] = "0x" + randomHexString(6) // TODO this needs to go elsewhere, and in one place
-                    _this.tm.setTowerData(data)
+                response.json().then((towerData) => {
+                    this.tm.setData(towerData, this.thisPlayerID, this.playerData[this.thisPlayerID].colour),
+                    this.tc.setData(towerData, this.playerData),
                     resolve()
                 })
             })
@@ -74,7 +79,6 @@ export class GameRenderer {
     loadAssets() { // TODO load tower json and pass through
         return Promise.all([
             this.loadData(),
-            this.tc.loadData(),
             this.ec.loadData(),
             this.bc.loadData()
         ])
@@ -223,7 +227,7 @@ export class GameRenderer {
         this.tc.tick()
 
         serverUpdate.players.objects.forEach((player) => {
-            if (player.playerID == getUserID()) {
+            if (player.playerID == this.thisPlayerID) {
                 this.moneyCounter.update(player.stats.money)
             }
         })

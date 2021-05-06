@@ -2,8 +2,8 @@ import { BaseInteractiveTower } from "./base/baseInteractiveTower.js"
 
 // Tower class that represnets a tower placed on the map
 export class DeployedTower extends BaseInteractiveTower {
-    constructor(type, name, x, y, towerConfig, playerID) {
-        super(type, name, towerConfig)
+    constructor(type, name, x, y, towerConfig, playerID, colour) {
+        super(type, name, towerConfig, colour)
         this.playerID = playerID
 
         this.shootAnimationCount = 0

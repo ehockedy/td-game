@@ -4,7 +4,7 @@ import { MapComponent } from "../components/game/map.js"
 import { GameSetting } from "../components/lobby/gameSetting.js"
 import { Player } from "../components/lobby/player.js"
 import { getPositionWithinEquallySpacedObjects } from "../tools.js"
-import { setUserID, getGameID } from "../state.js"
+import { getGameID } from "../state.js"
 
 /**
  * This class sets up what will appear in the lobby view.
@@ -132,7 +132,7 @@ export class LobbyRenderer {
 
         socket.on("client/player/addSelf", (data) => {
             this.addPlayer(data)
-            setUserID(data.playerID)
+            config.PLAYER_ID = data.playerID
         })
 
         socket.on("client/player/remove", (data) => {

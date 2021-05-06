@@ -2,8 +2,8 @@ import { BaseTower } from "./base/baseTower.js"
 
 // Base tower class the contains functionality for all interactive towers
 export class BaseInteractiveTower extends BaseTower {
-    constructor(type, name, towerConfig) {
-        super(type, name, towerConfig)
+    constructor(type, name, towerConfig, colour) {
+        super(type, name, towerConfig, colour)
 
         // Set the interactive elements
         // The towerSprite is the bit that is to be clicked

@@ -1,6 +1,5 @@
 import { StaticHorizontalMenuOption } from "../ui_common/horizontalMenuOption.js"
 import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
-import { getUserID } from "../../state.js"
 import { BaseComponent } from "./base/baseComponent.js"
 import { MenuIconTower } from "./towers/menuIconTower.js"
 import { DraggableTower } from "./towers/draggableTower.js"
@@ -33,9 +32,10 @@ export class TowerMenu extends BaseComponent {
         this.addChild(this.sprites)
     }
 
-    // Setter for tower config
-    setTowerData(data) {
-        this.towerJson = data
+    setData(towerConfig, thisPlayer, thisPlayerColour) {
+        this.towerConfig = towerConfig
+        this.thisPlayer = thisPlayer
+        this.thisPlayerColour = thisPlayerColour
     }
 
     // Subscribe the given observer to all of the draggable towers
@@ -49,16 +49,16 @@ export class TowerMenu extends BaseComponent {
     // Adds an icon, and a draggable tower for each tower in the configuration
     addTowers() {
         let numTowers = 1 // Start at 1 because positioning function is 1 indexed
-        for (let towerType in this.towerJson) {
-            let icon = new MenuIconTower(towerType, towerType + "_icon", this.towerJson)
+        for (let towerType in this.towerConfig) {
+            let icon = new MenuIconTower(towerType, towerType + "_icon", this.towerConfig)
 
-            let x = getPositionWithinEquallySpacedObjects(numTowers, Object.keys(this.towerJson).length, icon.width, this.width_menu_px)
+            let x = getPositionWithinEquallySpacedObjects(numTowers, Object.keys(this.towerConfig).length, icon.width, this.width_menu_px)
             let y = this.menuBackground.y + this.menuBackground.height / 2
 
             icon.x = x
             icon.y = y
             this.icons.addChild(icon)
-            let towerSprite = new DraggableTower(towerType, towerType + "_drag", this.towerJson, icon.x, icon.y)
+            let towerSprite = new DraggableTower(towerType, towerType + "_drag", this.towerConfig, icon.x, icon.y, this.thisPlayerColour)
             this.sprites.addChild(towerSprite)
 
             numTowers += 1
@@ -67,13 +67,13 @@ export class TowerMenu extends BaseComponent {
     }
 
     // State update function using external data
-    // TODO should probably just pass user money through here
+    // TODO should probably just pass user money through here - or even just send the relevant players data
     update(playerData) {
         // Disable the towers the user cannot afford
         let money = 0
         let players = playerData.objects
         for (let i = 0; i < players.length; i++) {
-            if (players[i].playerID == getUserID()) {
+            if (players[i].playerID == this.thisPlayer) {
                 money = players[i].stats.money
                 break
             }

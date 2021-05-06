@@ -1,3 +1,5 @@
+import { randomHexString } from "./tools.js"
+
 export function generateClientConfig(config) {
     const SPRITE_SIZE_MAP_PX = 64
     const SPRITE_SIZE_TOWER_PX = 32
@@ -37,6 +39,8 @@ export function generateClientConfig(config) {
         BORDER_R: BORDER_R,
         LOBBY_WINDOW_WIDTH: LOBBY_WINDOW_WIDTH,
         LOBBY_WINDOW_HEIGHT: LOBBY_WINDOW_HEIGHT,
-        GAME_CODE_LEN: GAME_CODE_LEN
+        GAME_CODE_LEN: GAME_CODE_LEN,
+        COLOUR: "0x" + randomHexString(6),  // TODO the player should be able to config re this - make the config object a class and have a set colour option
+        USER_ID: "0x" + randomHexString(6),  // This is not actually used - player ID is set by the server and is a combination of game ID and client IP
     }
 }

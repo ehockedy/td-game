@@ -4,8 +4,8 @@ import { avgColourHexValues } from "../../../tools.js"
 
 // Tower class that represents a tower in the menu the user can drag around and buy
 export class DraggableTower extends BaseInteractiveTower {
-    constructor(type, name, towerConfig, originX, originY) {
-        super(type, name, towerConfig)
+    constructor(type, name, towerConfig, originX, originY, colour) {
+        super(type, name, towerConfig, colour)
         this.cost = towerConfig[type].cost
 
         // The coordinates that the tower is bound to
