@@ -64,7 +64,6 @@ export class GameRenderer {
     }
 
     loadData() {
-        let _this = this
         return new Promise((resolve) => {
             fetch("shared/json/towers.json").then((response) => {
                 response.json().then((towerData) => {
@@ -143,7 +142,6 @@ export class GameRenderer {
                     "type": tower.type
                 }
             })
-            tower.reset()
         })
 
         // Update the aim settings of a tower
@@ -168,7 +166,7 @@ export class GameRenderer {
 
         // Register containers with the sprite layer
         // The order here is the order they are rendered on the map
-        this.gameSpace.addChild(this.tc) // TODO call tick()
+        this.gameSpace.setTowerComponent(this.tc) // TODO call tick()
         this.gameSpace.addChild(this.ec)
         this.gameSpace.addChild(this.bc)
 

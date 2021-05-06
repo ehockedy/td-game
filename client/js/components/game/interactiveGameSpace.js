@@ -23,6 +23,13 @@ export class InteractiveGameSpace extends BaseComponent {
         this.addChild(this.deployedTowerMainMenu)
         this.deployedTowerMainMenu.hide()
         this.deployedTowerMainMenu.subscribe(this)
+
+        this.draggableTowerIsActive = false  // Whether a tower from the tower menu is being dragged around
+    }
+
+    setTowerComponent(towerComponent) {
+        this.towerComponent = towerComponent
+        this.addChild(this.towerComponent)
     }
 
     // Assign all the actions that are triggered by interaction with the sub components
@@ -68,6 +75,13 @@ export class InteractiveGameSpace extends BaseComponent {
         // If pressed down on the tower
         this.on("pressDownTower", (tower)=>{
             tower.hidePlaceTowerButtons()
+            if (!this.draggableTowerIsActive) {
+                // If a tower is being dragged around by the user, want no other tower to be interactable so disable them all
+                this.towerMenu.disableTowers()
+                this.towerComponent.disableTowers()
+                this.towerMenu.enableTowerByName(tower.name)
+                this.draggableTowerIsActive = true
+            }
         })
 
         // If was dragging and let go of the tower
@@ -95,6 +109,13 @@ export class InteractiveGameSpace extends BaseComponent {
             this.deployedTowerMainMenu.hide()
             tower.unsetActive()
             this.activeTower = undefined
+        })
+
+        this.on("resetTower", (tower) => {
+            this.draggableTowerIsActive = false
+            // Release all componets
+            this.towerMenu.enableTowers()
+            this.towerComponent.enableTowers()
         })
     }
 

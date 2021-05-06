@@ -104,6 +104,22 @@ export class TowersComponent extends BaseComponent {
         this._setContainerInteraction(this, false)
     }
 
+    disableTowers() {
+        this.children.forEach((tower) => {
+            tower.interactiveChildren = false
+        })
+    }
+
+    enableTowers() {
+        this.children.forEach((tower) => {
+            tower.interactiveChildren = true
+        })
+    }
+
+    enableTowerByName(name) {
+        this.getChildByName(name).interactiveChildren = true
+    }
+
     tick() {
         super.tick()
         this.children.forEach((tower) => { tower.tick() })

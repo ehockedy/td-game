@@ -86,4 +86,20 @@ export class TowerMenu extends BaseComponent {
             }
         })
     }
+
+    disableTowers() {
+        this.sprites.children.forEach((tower) => {
+            tower.interactiveChildren = false
+        })
+    }
+
+    enableTowers() {
+        this.sprites.children.forEach((tower) => {
+            tower.interactiveChildren = true
+        })
+    }
+
+    enableTowerByName(name) {
+        this.sprites.getChildByName(name).interactiveChildren = true
+    }
 }

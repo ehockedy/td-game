@@ -34,6 +34,7 @@ export class DraggableTower extends BaseInteractiveTower {
             .on("pointermove", (event) => { this._onPointerMove(event) })
 
         this.on("confirmTowerPlace", () => {this.observers.forEach((o) => { o.emit("confirmTowerPlace", this) })}) // Send to external subscribers
+        this.on("confirmTowerPlace", this.reset)
         this.on("denyTowerPlace", this.reset)
         this.on("clear", this.reset)
 
@@ -46,6 +47,7 @@ export class DraggableTower extends BaseInteractiveTower {
         this.hideRangeCircle()
         this.hidePlaceTowerButtons()
         this.dragging = false
+        this.observers.forEach((o) => { o.emit("resetTower", this) })
     }
 
     disableInteractivity() {
