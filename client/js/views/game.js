@@ -44,7 +44,7 @@ export class GameRenderer {
         this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE_MAP)
 
         this.gameSpace = new InteractiveGameSpace(
-            this.map, this.tm,
+            this.map, this.tm, this.tc, this.ec, this.bc,
             config.SPRITE_SIZE_MAP,
             config.MAP_WIDTH, config.MAP_HEIGHT + config.BORDER_B
         )
@@ -163,12 +163,6 @@ export class GameRenderer {
             this.map.setGridValues(map);
             this.map.constructMap(this.maxBorderSize)
         })
-
-        // Register containers with the sprite layer
-        // The order here is the order they are rendered on the map
-        this.gameSpace.setTowerComponent(this.tc) // TODO call tick()
-        this.gameSpace.addChild(this.ec)
-        this.gameSpace.addChild(this.bc)
 
         this.spriteHandler.registerContainer(this.gameSpace)
         //this.spriteHandler.registerContainer(this.ut)

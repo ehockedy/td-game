@@ -7,16 +7,23 @@ import { DeployedTowerMenu } from "./ui/deployedTowerMenu.js"
  * This is good, since the enemies, map squares, bullets etc. are all relative to each other 
  * */
 export class InteractiveGameSpace extends BaseComponent {
-    // TODO I think this should accept more componenets in ctor, such as map, enemies.
-    constructor(map, towerMenu, mapSpriteSize, interactionBoundaryX, interactionBoundaryY) {
+    constructor(map, towerMenu, towersComponent, enemiesComponent, bulletsComponent,
+                mapSpriteSize, interactionBoundaryX, interactionBoundaryY) {
         super("gameSpace")
         this.map = map
         this.towerMenu = towerMenu
+        this.towersComponent = towersComponent
+
         this.mapSpriteSize = mapSpriteSize
         this.interactionBoundaryX = interactionBoundaryX - 1
         this.interactionBoundaryY = interactionBoundaryY - 1
 
+        // Add all the components that sit within this game area
+        // Order placed here is order rendered back-to-front
         this.addChild(this.map)
+        this.addChild(this.towersComponent)
+        this.addChild(enemiesComponent)
+        this.addChild(bulletsComponent)
         this.addChild(this.towerMenu)
 
         this.deployedTowerMainMenu = new DeployedTowerMenu(this.towerMenu.x_menu, this.towerMenu.y_menu)
@@ -25,11 +32,6 @@ export class InteractiveGameSpace extends BaseComponent {
         this.deployedTowerMainMenu.subscribe(this)
 
         this.draggableTowerIsActive = false  // Whether a tower from the tower menu is being dragged around
-    }
-
-    setTowerComponent(towerComponent) {
-        this.towerComponent = towerComponent
-        this.addChild(this.towerComponent)
     }
 
     // Assign all the actions that are triggered by interaction with the sub components
@@ -78,7 +80,7 @@ export class InteractiveGameSpace extends BaseComponent {
             if (!this.draggableTowerIsActive) {
                 // If a tower is being dragged around by the user, want no other tower to be interactable so disable them all
                 this.towerMenu.disableTowers()
-                this.towerComponent.disableTowers()
+                this.towersComponent.disableTowers()
                 this.towerMenu.enableTowerByName(tower.name)
                 this.draggableTowerIsActive = true
             }
@@ -115,7 +117,7 @@ export class InteractiveGameSpace extends BaseComponent {
             this.draggableTowerIsActive = false
             // Release all componets
             this.towerMenu.enableTowers()
-            this.towerComponent.enableTowers()
+            this.towersComponent.enableTowers()
         })
     }
 
