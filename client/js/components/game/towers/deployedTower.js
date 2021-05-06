@@ -10,10 +10,10 @@ export class DeployedTower extends BaseInteractiveTower {
         this.shootAnimationCountMax = 0
         this.animationFrames = []
 
+        // Set position
         this.setX(x)
         this.setY(y)
-        this.startX = this.x
-        this.startY = this.y
+
         // This is a rotation of the object as a whole - does not actually affect the angle of the sprite
         // subsprites must be rotated for this to work
         this._rotation = 0
@@ -104,8 +104,8 @@ export class DeployedTower extends BaseInteractiveTower {
         // Advance generic shoot animation
         if (this.shootAnimationCount > 0) {
             const frame = this.shootAnimationCountMax - this.shootAnimationCount
-            this.x = this.startX + Math.cos(this._rotation) * this.animationFrames[frame]
-            this.y = this.startY + Math.sin(this._rotation) * this.animationFrames[frame]
+            this.towerSpriteContainer.x = Math.cos(this._rotation) * this.animationFrames[frame]
+            this.towerSpriteContainer.y = Math.sin(this._rotation) * this.animationFrames[frame]
             this.shootAnimationCount -= 1
         }
     }
