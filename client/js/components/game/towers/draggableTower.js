@@ -1,6 +1,7 @@
 import { BaseInteractiveTower } from "./base/baseInteractiveTower.js"
 import { PlaceTowerMenu } from "../ui/placeTowerMenu.js"
 import { avgColourHexValues } from "../../../tools.js"
+import { StaticHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
 
 // Tower class that represents a tower in the menu the user can drag around and buy
 export class DraggableTower extends BaseInteractiveTower {
@@ -15,6 +16,7 @@ export class DraggableTower extends BaseInteractiveTower {
 
         // Properties of movement
         this.dragging = false  // Whether the sprite is currently being moved
+        this.inMenu = true  // Whether the sprite has been moved out of the menu
 
         // Whether a tower can be bought
         this.availiableToBuy = true
@@ -28,6 +30,8 @@ export class DraggableTower extends BaseInteractiveTower {
 
         // Interaction behaviours
         this.towerSprite
+            .on("pointerover", () => { this._onPointerOver() })
+            .on("pointerout", () => { this._onPointerOut() })
             .on("pointerdown", () => { this._onPointerDown() })
             .on("pointerup", () => { this._onPointerUp() })
             .on("pointerupoutside", () => { this._onPointerUp() })
@@ -47,6 +51,7 @@ export class DraggableTower extends BaseInteractiveTower {
         this.hideRangeCircle()
         this.hidePlaceTowerButtons()
         this.dragging = false
+        this.inMenu = true
         this.observers.forEach((o) => { o.emit("resetTower", this) })
     }
 
@@ -76,6 +81,16 @@ export class DraggableTower extends BaseInteractiveTower {
         this.placeTowerButtons.visible = false
     }
 
+    _onPointerOver() {
+        if (this.inMenu) {
+            this.observers.forEach((o) => { o.emit("pointerOverTower", this) })
+        }
+    }
+
+    _onPointerOut() {
+        this.observers.forEach((o) => { o.emit("pointerOutTower", this) })
+    }
+
     _onPointerDown() {
         this.dragging = true
         this.towerSpriteContainer.scale.set(0.8)
@@ -92,6 +107,7 @@ export class DraggableTower extends BaseInteractiveTower {
 
     _onPointerMove(event) { // Remove this, and just have set position functions?
         if (this.dragging) {
+            this.inMenu = false
             this.observers.forEach((o) => { o.emit("clickAndDragTower", event, this) })
         }
     }

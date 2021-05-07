@@ -7,7 +7,7 @@ import { addColourHexValues } from "../../tools.js"
  * This side will have a flat edge and no border so it looks like the element continues off screen to create a neat look.
  */
 class HorizontalMenuOption extends BaseComponent {
-    constructor (name, x, y, width_px, tint, wallAttachment) {
+    constructor (name, x, y, width_px, tint, wallAttachment, verticalSize="full") {
         super(name)
         this.x = x
         this.y = y
@@ -16,7 +16,7 @@ class HorizontalMenuOption extends BaseComponent {
         this.defaultScale = 1
 
         this.baseContentOffsetX = 0
-        this._generateSprites(width_px, tint, wallAttachment)
+        this._generateSprites(width_px, tint, wallAttachment, verticalSize)
 
         this.text = new PIXI.Container()
         this.text.x += this.baseContentOffsetX
@@ -54,9 +54,22 @@ class HorizontalMenuOption extends BaseComponent {
     // ~~~ Private ~~~
 
     // Based on where the menu option is places relative to the wall, determine the shape and shadow behaviour and generate those sprites
-    _generateSprites(width_px, tint, wallAttachment) {
-        let oneSidedSprite = "slanted_infobox_greyscale_1.png"
-        let doubleSidedSprite = "slanted_infobox_greyscale_2.png"
+    _generateSprites(width_px, tint, wallAttachment, verticalSize) {
+        // Components of the filenames in the texture atlas
+        let basename = "slanted_infobox_greyscale_"
+        let oneSidedSprite = "1"
+        let doubleSidedSprite = "2"
+        let fullHeight = ""
+        let halfHeight = "_half_size"
+        let filetype = ".png"
+
+        // Construct the filename based on the options
+        let filename = basename
+        filename += (wallAttachment == "none") ? doubleSidedSprite : oneSidedSprite
+        filename += (verticalSize == "full") ? fullHeight : halfHeight
+        filename += filetype
+
+        // 9-splice plane parameters
         let xDiff_px = 4
         let slopedEndSize_px = 50
         let flatEndSize_px = 1
@@ -67,14 +80,14 @@ class HorizontalMenuOption extends BaseComponent {
             // |_______/
             //
             case "left":
-                this._generateSprite(width_px, tint, oneSidedSprite, flatEndSize_px, slopedEndSize_px, 0, xDiff_px)
+                this._generateSprite(width_px, tint, filename, flatEndSize_px, slopedEndSize_px, 0, xDiff_px)
                 break
             //    _______
             //   /       | 
             //  /________|
             //
             case "right":
-                this._generateSprite(width_px, tint, oneSidedSprite, flatEndSize_px, slopedEndSize_px, 0, -xDiff_px)
+                this._generateSprite(width_px, tint, filename, flatEndSize_px, slopedEndSize_px, 0, -xDiff_px)
                 this.menuSprite.scale.set(-1)
                 this.shadowSprite.scale.set(-1)
                 this.menuSprite.pivot.y = this.menuSprite.height
@@ -87,7 +100,7 @@ class HorizontalMenuOption extends BaseComponent {
             //
             case "none":
             default:
-                this._generateSprite(width_px, tint, doubleSidedSprite, slopedEndSize_px, slopedEndSize_px, xDiff_px, 0)
+                this._generateSprite(width_px, tint, filename, slopedEndSize_px, slopedEndSize_px, xDiff_px, 0)
                 break
         }
     }
@@ -152,16 +165,16 @@ class HorizontalMenuOption extends BaseComponent {
 
 // A menu element that is not interactive
 export class StaticHorizontalMenuOption extends HorizontalMenuOption {
-    constructor (name, x, y, width_px, tint, wallAttachment) {
-        super(name, x, y, width_px, tint, wallAttachment)
+    constructor (name, x, y, width_px, tint, wallAttachment, verticalSize) {
+        super(name, x, y, width_px, tint, wallAttachment, verticalSize)
     }
 }
 
 // A menu element that can be pressed down and springs back up when released
 // Used to set a behaviour or trigger an event
 export class ButtonHorizontalMenuOption extends HorizontalMenuOption {
-    constructor (name, x, y, width_px, tint, wallAttachment) {
-        super(name, x, y, width_px, tint, wallAttachment)
+    constructor (name, x, y, width_px, tint, wallAttachment, verticalSize) {
+        super(name, x, y, width_px, tint, wallAttachment, verticalSize)
         this._setUpInteractions()
     }
 
@@ -185,8 +198,8 @@ export class ButtonHorizontalMenuOption extends HorizontalMenuOption {
 // A menu element that can be pressed down and is released when another element in the same menu is pressed
 // Used to toggle an option from a set
 export class SwitchHorizontalMenuOption extends HorizontalMenuOption {
-    constructor (name, x, y, width_px, tint, wallAttachment) {
-        super(name, x, y, width_px, tint, wallAttachment)
+    constructor (name, x, y, width_px, tint, wallAttachment, verticalSize) {
+        super(name, x, y, width_px, tint, wallAttachment, verticalSize)
         this._setUpInteractions()
         this.isSelected = false
     }

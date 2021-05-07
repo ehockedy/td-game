@@ -30,9 +30,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="239.46792"
-     inkscape:cy="60.273813"
+     inkscape:zoom="0.9899495"
+     inkscape:cx="369.86812"
+     inkscape:cy="-35.075364"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -42,9 +42,9 @@
      guidetolerance="10000"
      inkscape:pagecheckerboard="true"
      inkscape:window-width="1920"
-     inkscape:window-height="1002"
+     inkscape:window-height="993"
      inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-y="585"
      inkscape:window-maximized="1"
      inkscape:object-paths="true"
      inkscape:snap-smooth-nodes="true">
@@ -364,5 +364,37 @@
        xml:space="preserve"
        id="text901"
        style="line-height:1.25;font-family:'Cooper Black';font-size:10.58333333px;-inkscape-font-specification:'Cooper Black, ';white-space:pre;shape-inside:url(#rect903);" />
+    <path
+       id="rect984-06-6-61-3-8"
+       style="fill:#cccccc;fill-opacity:1;stroke-width:0.645713"
+       d="M 95.250011,-2.9666667e-6 H 124.88334 L 116.41667,19.05 H 95.25 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\infoBoxes\sprites\slanted_infobox_greyscale_1_half_size.png"
+       inkscape:export-xdpi="62.999985"
+       inkscape:export-ydpi="62.999985" />
+    <path
+       id="rect984-06-8-3-4-4-9"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.439852"
+       d="M 95.250011,2.116667 H 120.65001 L 114.3,16.933333 H 95.25 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\infoBoxes\sprites\slanted_infobox_greyscale_1_half_size.png"
+       inkscape:export-xdpi="62.999985"
+       inkscape:export-ydpi="62.999985" />
+    <path
+       id="rect984-06-6-61-3-7-7"
+       style="fill:#cccccc;fill-opacity:1;stroke-width:0.645713"
+       d="M 141.81667,-1.875e-7 H 171.45 L 162.98333,19.050005 133.35,19.050002 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\infoBoxes\sprites\slanted_infobox_greyscale_2_half_size.png"
+       inkscape:export-xdpi="62.999985"
+       inkscape:export-ydpi="62.999985" />
+    <path
+       id="rect984-06-8-3-4-4-6-9"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.581869"
+       d="m 143.93333,2.1166667 23.28334,3e-6 -6.35,14.8166643 v 0 h -23.28334 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\infoBoxes\sprites\slanted_infobox_greyscale_2_half_size.png"
+       inkscape:export-xdpi="62.999985"
+       inkscape:export-ydpi="62.999985" />
   </g>
 </svg>
