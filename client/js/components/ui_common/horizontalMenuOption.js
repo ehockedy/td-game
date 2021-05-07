@@ -114,8 +114,8 @@ class HorizontalMenuOption extends BaseComponent {
         
         this.shadowSprite = new PIXI.NineSlicePlane(baseTexture, lhsSlice_px, 0, rhsSlice_px, 0)
         this.shadowSprite.width = width_px
-        this.shadowSprite.tint = "0x000000"
-        this.shadowSprite.alpha = 0.8
+        this.shadowSprite.tint = "0x111111"
+        this.shadowSprite.alpha = 0.7
         this.shadowSprite.x += xShift_px
         this.shadowSprite.y += 6  // Shift the shadow 6 pixels down for all types
         this.shadowSprite.width += xGrow_px
