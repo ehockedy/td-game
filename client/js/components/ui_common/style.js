@@ -1,14 +1,34 @@
-
-export function generateStyle(tint, fontSize=48) {
+// Consistent across all text for whole application
+function generateBaseTextStyle(tint, fontSize=64) {
     return {
         "fill": tint,
-        "fontFamily": "\"Trebuchet MS\", Helvetica, sans-serif",
         "fontSize": fontSize,
+        "fontFamily": "MarbleWasteland",
         "fontVariant": "small-caps",
-        "strokeThickness": Math.ceil(fontSize/10)
+        "letterSpacing": 0,
+        "padding": 5,
     }
 }
 
+// For use on buttons or titles
+export function boldTextStyle(tint, fontSize=64) {
+    const base = generateBaseTextStyle(tint, fontSize)
+    const options = {
+        "strokeThickness": Math.ceil(fontSize/10),
+    }
+    return {
+        ...base,
+        ...options,
+    }
+}
+
+// For use in bits of infromation or bodies of text
+export function plainTextStyle(tint, fontSize=64) {
+    return generateBaseTextStyle(tint, fontSize)
+}
+
+
+// Common colour codes to reuse
 export const COLOURS = {
     AIM_RED:         "0xDD3333",
     BLACK:           "0x000000",

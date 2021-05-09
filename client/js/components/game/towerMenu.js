@@ -3,7 +3,7 @@ import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 import { BaseComponent } from "./base/baseComponent.js"
 import { MenuIconTower } from "./towers/menuIconTower.js"
 import { DraggableTower } from "./towers/draggableTower.js"
-import { generateStyle, COLOURS } from "../ui_common/style.js"
+import { plainTextStyle, COLOURS } from "../ui_common/style.js"
 
 /**
  * Class that represents the tower menu
@@ -60,10 +60,9 @@ export class TowerMenu extends BaseComponent {
 
     // Adds an icon, and a draggable tower for each tower in the configuration
     addTowers() {
-        const fontSize = 24
+        const fontSize = 36
 
-        let style = generateStyle("0x222222", fontSize)
-        style.strokeThickness = 0
+        let style = plainTextStyle("0x222222", fontSize)
         let numTowers = 1 // Start at 1 because positioning function is 1 indexed
         for (let towerType in this.towerConfig) {
             let icon = new MenuIconTower(towerType, towerType + "_icon", this.towerConfig)
@@ -85,18 +84,18 @@ export class TowerMenu extends BaseComponent {
             // What to put in each box
             const descText = this.towerConfig[towerType].displayInfo
             const costText = "Cost:    " + this.towerConfig[towerType].cost.toString()
-            const typeText = "Type:    " + towerType
+            const typeText = "Type:    " + towerType.toUpperCase()
 
             // A crude way to scale the info box with the length of it's contents
             const descWidth = descText.length * 12.5
-            const costWidth = costText.length * 13.5
-            const typeWidth = typeText.length * 13.5
+            const costWidth = costText.length * 16
+            const typeWidth = typeText.length * 15
 
             let descBox = this._createTowerMenuInfoBox("desc", 0, descWidth, COLOURS.MENU_SANDY, descText, style)
             let costBox = this._createTowerMenuInfoBox("cost", 0, costWidth, COLOURS.MENU_SANDY, costText, style)
             let typeBox = this._createTowerMenuInfoBox("name", 0, typeWidth, COLOURS.MENU_SANDY, typeText, style)
 
-            const gap = 4  // Gap between each of the info boxes
+            const gap = 5  // Gap between each of the info boxes
             descBox.y -= (descBox.height + gap)
             costBox.y = descBox.y - (costBox.height + gap)
             typeBox.y = costBox.y - (typeBox.height + gap)

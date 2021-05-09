@@ -1,6 +1,6 @@
 import { BaseComponent } from "../base/baseComponent.js"
 import { StaticHorizontalMenuOption, ButtonHorizontalMenuOption, SwitchHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
-import { COLOURS, generateStyle } from "../../ui_common/style.js"
+import { COLOURS, boldTextStyle } from "../../ui_common/style.js"
 
 // Base class for the game UI menu type
 class Menu extends BaseComponent {
@@ -57,7 +57,7 @@ class InteractiveMenu extends Menu {
         option.setSelectEventName("cancel")
         this.addChild(option)
         option.subscribe(this)
-        option.addTextCentral("\u{2717}", generateStyle(COLOURS.BLACK, 32))
+        option.addTextCentral("\u{2717}", boldTextStyle(COLOURS.BLACK, 32))
 
         let scale = 0.8
         option.y += option.height * (1-scale) / 2
@@ -74,7 +74,7 @@ class InteractiveMenu extends Menu {
         option.setSelectEventName("back")
         this.addChild(option)
         option.subscribe(this)
-        option.addTextCentral("\u{1f814}", generateStyle(COLOURS.BLACK, 40))
+        option.addTextCentral("\u{1f814}", boldTextStyle(COLOURS.BLACK, 40))
 
         let scale = 0.8
         option.y += option.height * (1-scale) / 2

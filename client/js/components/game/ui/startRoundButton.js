@@ -1,14 +1,14 @@
 import { ButtonHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
-import { generateStyle, COLOURS } from "../../ui_common/style.js"
+import { boldTextStyle, COLOURS } from "../../ui_common/style.js"
 
 let startMenuColour = COLOURS.CONFIRM_GREEN
 export class StartRoundButton extends ButtonHorizontalMenuOption {
     constructor(x, y) {
         super("startGameButton", x, y, 300, startMenuColour, "right")
-        let fontSize = 36
-        this.gameRoundText = new PIXI.Text("" , generateStyle(startMenuColour, fontSize))
+        let fontSize = 50
+        this.gameRoundText = new PIXI.Text("" , boldTextStyle(startMenuColour, fontSize))
         this.gameRoundText.anchor.set(0, 0.5)
-        this.addText(this.gameRoundText, 0.15, 0.5)
+        this.addText(this.gameRoundText, 0.2, 0.5)
         this.update("1")  // Populate with expected text for round 1
 
         this.setSelectEventName("start-round")
