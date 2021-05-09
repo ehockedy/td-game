@@ -10,3 +10,10 @@ canvas {
     border-color: #AAAAAA;
     border-radius: 5px;
 }
+
+/* Download link for font: https://all-free-download.com/font/download/marble_wasteland_19865.html */
+@font-face {
+    font-family: "MarbleWasteland";
+    src: url("../assets/fonts/marble_wasteland_19865/MarbleWasteland.ttf");
+    unicode-range: U+000-5FF;
+}
