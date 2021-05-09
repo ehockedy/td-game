@@ -9,6 +9,7 @@ import { StartRoundButton } from "../components/game/ui/startRoundButton.js"
 import { Counter } from "../components/game/ui/counter.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { randomHexString } from "../tools.js"
+import { COLOURS } from "../components/ui_common/style.js"
 
 /**
  * This class sets up what will appear in the game view.
@@ -53,7 +54,7 @@ export class GameRenderer {
 
         this.startRoundButton = new StartRoundButton(config.MAP_WIDTH + config.BORDER_R, toolbarY)
 
-        this.moneyCounter = new Counter(config.MAP_WIDTH + config.BORDER_R, toolbarY, 180, "Money", 0, "0xDDAA11")
+        this.moneyCounter = new Counter(config.MAP_WIDTH + config.BORDER_R, toolbarY, 180, "Money", 0, COLOURS.MONEY)
         this.moneyCounter.y -= (this.moneyCounter.height + 10)
 
         this.livesCounter = new Counter(config.MAP_WIDTH + config.BORDER_R, this.moneyCounter.y, 160, "Lives", 100)

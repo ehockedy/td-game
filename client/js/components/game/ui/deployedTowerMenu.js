@@ -1,24 +1,24 @@
 import { SwitchMenu, ButtonMenu } from "./horizontalOptionsMenu.js"
 import { BaseComponent } from "../base/baseComponent.js"
-import { generateStyle, aimColour, upgradeColour, sellColour, towerInfoColour } from "../../ui_common/style.js"
+import { generateStyle, COLOURS } from "../../ui_common/style.js"
 
 class DeployedTowerMainMenu extends ButtonMenu {
     constructor(x, y) {
         super("deployedTowerMainMenu", x, y, "right", -20)
 
-        this.menuRoot = this.addRoot(350, "0xDDEECC")
+        this.menuRoot = this.addRoot(350, COLOURS.INFO_LIGHT_GREY)
 
         // Select this option to open the aiming menu
-        this.aimOption = this.addOption(260, aimColour, "selected-aim")
-        this.aimOption.addTextCentral("Aim", generateStyle(aimColour))
+        this.aimOption = this.addOption(260, COLOURS.AIM_RED, "selected-aim")
+        this.aimOption.addTextCentral("Aim", generateStyle(COLOURS.AIM_RED))
 
         // Select this option to open the upgrades menu
-        this.upgradeOption = this.addOption(260, upgradeColour, "selected-upgrade")
-        this.upgradeOption.addTextCentral("Upgrade", generateStyle(upgradeColour))
+        this.upgradeOption = this.addOption(260, COLOURS.UPGRADE_GREEN, "selected-upgrade")
+        this.upgradeOption.addTextCentral("Upgrade", generateStyle(COLOURS.UPGRADE_GREEN))
 
         // Select this option to open the selling menu
-        this.sellOption = this.addOption(260, sellColour, "selected-sell")
-        this.sellOption.addTextCentral("Sell", generateStyle(sellColour))
+        this.sellOption = this.addOption(260, COLOURS.MONEY, "selected-sell")
+        this.sellOption.addTextCentral("Sell", generateStyle(COLOURS.MONEY))
 
         this.addCancelButton()
         this.populateWithTowerInfo()
@@ -28,11 +28,11 @@ class DeployedTowerMainMenu extends ButtonMenu {
     populateWithTowerInfo() {
         // Fill the menu to have info relevant to the specified tower
         let fontSize = 28
-        this.nameAndLevel = new PIXI.Text("", generateStyle(towerInfoColour, fontSize))
+        this.nameAndLevel = new PIXI.Text("", generateStyle(COLOURS.INFO_MID_GREY, fontSize))
         this.nameAndLevel.anchor.set(0, 0.5)
         this.menuRoot.addText(this.nameAndLevel, 0.02, 0.33)
 
-        this.kills = new PIXI.Text("", generateStyle(towerInfoColour, fontSize))
+        this.kills = new PIXI.Text("", generateStyle(COLOURS.INFO_MID_GREY, fontSize))
         this.kills.anchor.set(0, 0.5)
         this.menuRoot.addText(this.kills, 0.02, 0.66)
     }
@@ -48,25 +48,25 @@ let aimRootWidth = 430
 class DeployedTowerAimMenu extends SwitchMenu {
     constructor(x, y) {
         super("deployedTowerAimMenu", x, y, "right", -20)
-        this.menuRoot = this.addRoot(aimRootWidth, "0xDDEECC")
+        this.menuRoot = this.addRoot(aimRootWidth, COLOURS.INFO_LIGHT_GREY)
 
         let optionWidth = 220
-        let textStyle = generateStyle(aimColour, 44)
+        let textStyle = generateStyle(COLOURS.AIM_RED, 44)
 
         // Aim at the emeny closest to the end of the track and in range
-        this.firstOption = this.addOption(optionWidth, aimColour, "selected-aim-first", true)
+        this.firstOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-first", true)
         this.firstOption.addTextCentral("First", textStyle)
 
         // Aim at the enemy closest to the start of the track and in range
-        this.lastOption = this.addOption(optionWidth, aimColour, "selected-aim-last", false)
+        this.lastOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-last", false)
         this.lastOption.addTextCentral("Last", textStyle)
 
         // Aim at the enemy closest to the tower and in range
-        this.closestOption = this.addOption(optionWidth, aimColour, "selected-aim-closest", false)
+        this.closestOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-closest", false)
         this.closestOption.addTextCentral("Closest", textStyle)
 
         // Aim at the enemy with the highest speed that is in range
-        this.fastestOption = this.addOption(optionWidth, aimColour, "selected-aim-fastest", false)
+        this.fastestOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-fastest", false)
         this.fastestOption.addTextCentral("Fastest", textStyle)
 
         this.addBackButton()
@@ -77,7 +77,7 @@ class DeployedTowerAimMenu extends SwitchMenu {
     // Initialise the information displayed on the root menu component of the aim menu
     setRootInfo() {
         let fontSize = 26
-        let style =  generateStyle(towerInfoColour, fontSize)
+        let style =  generateStyle(COLOURS.INFO_MID_GREY, fontSize)
         style.wordWrap = true
         style.wordWrapWidth = aimRootWidth - 30
         style.fontVariant = "normal"

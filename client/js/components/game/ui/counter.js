@@ -1,10 +1,8 @@
 import { StaticHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
-import { generateStyle } from "../../ui_common/style.js"
-
-const defaultColour = "0xAABB99"
+import { generateStyle, COLOURS } from "../../ui_common/style.js"
 
 export class Counter extends StaticHorizontalMenuOption {
-    constructor(x, y, width, label, defaultValue, colour=defaultColour) {
+    constructor(x, y, width, label, defaultValue, colour=COLOURS.INFO_MID_GREY) {
         super(label, x, y, width, colour, "right")
 
         this.label = new PIXI.Text(label, generateStyle(colour, 30))

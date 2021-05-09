@@ -3,9 +3,8 @@ import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 import { BaseComponent } from "./base/baseComponent.js"
 import { MenuIconTower } from "./towers/menuIconTower.js"
 import { DraggableTower } from "./towers/draggableTower.js"
-import { generateStyle } from "../ui_common/style.js"
+import { generateStyle, COLOURS } from "../ui_common/style.js"
 
-const towerMenuColour = "0xCCBB88"
 /**
  * Class that represents the tower menu
  * It contains the menu sprite itself, holds the draggable tower sprites, and defines the area that the towers can move in
@@ -23,7 +22,7 @@ export class TowerMenu extends BaseComponent {
         this.y_menu = y_menu //- 15 - 70
 
         // The sprite that represents the background of the tower menu, where the draggable towers sit
-        this.menuBackground = new StaticHorizontalMenuOption("towerMenuBackground", x_menu, y_menu,  this.width_menu_px, towerMenuColour, "left")
+        this.menuBackground = new StaticHorizontalMenuOption("towerMenuBackground", x_menu, y_menu,  this.width_menu_px, COLOURS.MENU_SANDY, "left")
         this.addChild(this.menuBackground)
 
         // The icons that mark the positions of the towers. They cannot be interacted with and do not move.
@@ -93,9 +92,9 @@ export class TowerMenu extends BaseComponent {
             const costWidth = costText.length * 13.5
             const typeWidth = typeText.length * 13.5
 
-            let descBox = this._createTowerMenuInfoBox("desc", 0, descWidth, towerMenuColour, descText, style)
-            let costBox = this._createTowerMenuInfoBox("cost", 0, costWidth, towerMenuColour, costText, style)
-            let typeBox = this._createTowerMenuInfoBox("name", 0, typeWidth, towerMenuColour, typeText, style)
+            let descBox = this._createTowerMenuInfoBox("desc", 0, descWidth, COLOURS.MENU_SANDY, descText, style)
+            let costBox = this._createTowerMenuInfoBox("cost", 0, costWidth, COLOURS.MENU_SANDY, costText, style)
+            let typeBox = this._createTowerMenuInfoBox("name", 0, typeWidth, COLOURS.MENU_SANDY, typeText, style)
 
             const gap = 4  // Gap between each of the info boxes
             descBox.y -= (descBox.height + gap)

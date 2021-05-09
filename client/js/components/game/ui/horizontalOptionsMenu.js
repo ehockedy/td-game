@@ -1,5 +1,6 @@
 import { BaseComponent } from "../base/baseComponent.js"
 import { StaticHorizontalMenuOption, ButtonHorizontalMenuOption, SwitchHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
+import { COLOURS } from "../../ui_common/style.js"
 
 // Base class for the game UI menu type
 class Menu extends BaseComponent {
@@ -49,7 +50,7 @@ class InteractiveMenu extends Menu {
 
     addCancelButton() {
         let width = 120
-        let tint = "0x990918"
+        let tint = COLOURS.CANCEL_RED
         let option = new ButtonHorizontalMenuOption(this.name + "_cancel",
             this._getNextXPosition(width), 0,
             width, tint, "none")
@@ -76,7 +77,7 @@ class InteractiveMenu extends Menu {
 
     addBackButton() {
         let width = 120
-        let tint = "0x990918"
+        let tint = COLOURS.CANCEL_RED
         let option = new ButtonHorizontalMenuOption(this.name + "_back",
             this._getNextXPosition(width), 0,
             width, tint, "none")

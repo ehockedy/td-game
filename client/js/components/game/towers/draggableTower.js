@@ -1,6 +1,7 @@
 import { BaseInteractiveTower } from "./base/baseInteractiveTower.js"
 import { PlaceTowerMenu } from "../ui/placeTowerMenu.js"
 import { avgColourHexValues } from "../../../tools.js"
+import { COLOURS } from "../../ui_common/style.js"
 import { StaticHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
 
 // Tower class that represents a tower in the menu the user can drag around and buy
@@ -59,7 +60,7 @@ export class DraggableTower extends BaseInteractiveTower {
         if (this.availiableToBuy) {
             this.towerSprite.interactive = false
             this.towerSprite.buttonMode = false
-            this.setTint("0x555555")  // Darken to show cannot be bought
+            this.setTint(COLOURS.CANNOT_BUY_GREY)  // Darken to show cannot be bought
             this.availiableToBuy = false
         }
     }

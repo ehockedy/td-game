@@ -1,7 +1,7 @@
 import { ButtonHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
-import { generateStyle } from "../../ui_common/style.js"
+import { generateStyle, COLOURS } from "../../ui_common/style.js"
 
-let startMenuColour = "0x40d661"
+let startMenuColour = COLOURS.CONFIRM_GREEN
 export class StartRoundButton extends ButtonHorizontalMenuOption {
     constructor(x, y) {
         super("startGameButton", x, y, 300, startMenuColour, "right")
