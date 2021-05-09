@@ -1,6 +1,6 @@
 import { BaseComponent } from "../base/baseComponent.js"
 import { StaticHorizontalMenuOption, ButtonHorizontalMenuOption, SwitchHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
-import { COLOURS } from "../../ui_common/style.js"
+import { COLOURS, generateStyle } from "../../ui_common/style.js"
 
 // Base class for the game UI menu type
 class Menu extends BaseComponent {
@@ -57,17 +57,7 @@ class InteractiveMenu extends Menu {
         option.setSelectEventName("cancel")
         this.addChild(option)
         option.subscribe(this)
-        option.addTextCentral("\u{2717}", {
-            "dropShadow": false,
-            "dropShadowAngle": 0.7,
-            "fill": "0x000000",
-            "fontFamily": "\"Trebuchet MS\", Helvetica, sans-serif",
-            "fontSize": 32,
-            "fontStyle": "normal",
-            "fontVariant": "small-caps",
-            "letterSpacing": 1,
-            "strokeThickness": Math.ceil(32/10)
-        })
+        option.addTextCentral("\u{2717}", generateStyle(COLOURS.BLACK, 32))
 
         let scale = 0.8
         option.y += option.height * (1-scale) / 2
@@ -84,17 +74,7 @@ class InteractiveMenu extends Menu {
         option.setSelectEventName("back")
         this.addChild(option)
         option.subscribe(this)
-        option.addTextCentral("\u{1f814}", {
-            "dropShadow": false,
-            "dropShadowAngle": 0.7,
-            "fill": "0x000000",
-            "fontFamily": "\"Trebuchet MS\", Helvetica, sans-serif",
-            "fontSize": 40,
-            "fontStyle": "normal",
-            "fontVariant": "small-caps",
-            "letterSpacing": 1,
-            "strokeThickness": Math.ceil(32/10)
-        })
+        option.addTextCentral("\u{1f814}", generateStyle(COLOURS.BLACK, 40))
 
         let scale = 0.8
         option.y += option.height * (1-scale) / 2

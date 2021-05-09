@@ -1,18 +1,13 @@
 
 export function generateStyle(tint, fontSize=48) {
     return {
-        "dropShadow": false,
-        "dropShadowAngle": 0.7,
         "fill": tint,
         "fontFamily": "\"Trebuchet MS\", Helvetica, sans-serif",
         "fontSize": fontSize,
-        "fontStyle": "normal",
         "fontVariant": "small-caps",
-        "letterSpacing": 1,
         "strokeThickness": Math.ceil(fontSize/10)
     }
 }
-
 
 export const COLOURS = {
     AIM_RED:         "0xDD3333",
