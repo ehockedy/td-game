@@ -1,5 +1,5 @@
 import { ButtonMenu } from "./horizontalOptionsMenu.js"
-import { generateStyle } from "./deployedTowerMenu.js"
+import { generateStyle } from "../../ui_common/style.js"
 
 let confirmButtonColour = "0x40d661"
 let denyButtonColour = "0xd64061"

@@ -1,5 +1,5 @@
 import { StaticHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
-import { generateStyle } from "./deployedTowerMenu.js"
+import { generateStyle } from "../../ui_common/style.js"
 
 const defaultColour = "0xAABB99"
 

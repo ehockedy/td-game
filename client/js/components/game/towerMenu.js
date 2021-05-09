@@ -3,7 +3,7 @@ import { getPositionWithinEquallySpacedObjects } from "../../tools.js"
 import { BaseComponent } from "./base/baseComponent.js"
 import { MenuIconTower } from "./towers/menuIconTower.js"
 import { DraggableTower } from "./towers/draggableTower.js"
-import { generateStyle } from "./ui/deployedTowerMenu.js"
+import { generateStyle } from "../ui_common/style.js"
 
 const towerMenuColour = "0xCCBB88"
 /**

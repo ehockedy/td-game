@@ -1,25 +1,6 @@
 import { SwitchMenu, ButtonMenu } from "./horizontalOptionsMenu.js"
 import { BaseComponent } from "../base/baseComponent.js"
-
-// TODO move this to a styles section
-export function generateStyle(tint, fontSize=48) {
-    return {
-        "dropShadow": false,
-        "dropShadowAngle": 0.7,
-        "fill": tint,
-        "fontFamily": "\"Trebuchet MS\", Helvetica, sans-serif",
-        "fontSize": fontSize,
-        "fontStyle": "normal",
-        "fontVariant": "small-caps",
-        "letterSpacing": 1,
-        "strokeThickness": Math.ceil(fontSize/10)
-    }
-}
-
-let aimColour = "0xDD3333"
-let upgradeColour = "0x229933"
-let sellColour = "0xDDAA11"
-let towerInfoColour = "0xAABB99"
+import { generateStyle, aimColour, upgradeColour, sellColour, towerInfoColour } from "../../ui_common/style.js"
 
 class DeployedTowerMainMenu extends ButtonMenu {
     constructor(x, y) {
