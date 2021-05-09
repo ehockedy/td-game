@@ -63,6 +63,10 @@ exports.requestListener = function (req, res) {
         case "json":
             MIME_type = "application/json"
             break;
+        case "otf":
+        case "ttf":
+            MIME_type = "font/" + filetype
+            break;
         default:
             break;
     }
