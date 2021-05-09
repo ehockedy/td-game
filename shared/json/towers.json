@@ -1,7 +1,7 @@
 {
     "rock-thrower": {
         "spriteSheetNum": 0,
-        "displayInfo": "This simple tower shoots one bullet at a time. Average damage, average range, average rate of fire. Reliable, but thorougly mediocre.",
+        "displayInfo": "Simple tower that shoots rocks one at a time.",
         "gameData": {
             "seekRange": 5,
             "shootRange": 8,
@@ -19,7 +19,7 @@
     },
     "shrapnel-burst": {
         "spriteSheetNum": 1,
-        "displayInfo": "Shoots bullets in eight directions at a high rate.",
+        "displayInfo": "A tasty explosion of shrapnel in all directions.",
         "gameData": {
             "seekRange": 1.6,
             "shootRange": 1.6,
@@ -37,7 +37,7 @@
     },
     "rock-scatter": {
         "spriteSheetNum": 2,
-        "displayInfo": "Similar to a basic tower, but shoots three times as many bullets.",
+        "displayInfo": "Multi-shot! Like three basic towers shoved together.",
         "gameData": {
             "seekRange": 5,
             "shootRange": 8,
@@ -55,7 +55,7 @@
     },
     "sniper": {
         "spriteSheetNum": 3,
-        "displayInfo": "Slow to fire, but packs a punch when it does. Plus can see over half the whole map.",
+        "displayInfo": "Shoots infrequently, but hurts when it does. Also has a huge range.",
         "gameData": {
             "seekRange": 10,
             "shootRange": 20,
