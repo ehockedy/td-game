@@ -107,6 +107,36 @@ class DeployedTowerAimMenu extends SwitchMenu {
     }
 }
 
+class DeployedTowerSellMenu extends ButtonMenu {
+    constructor(x, y) {
+        super("deployedTowerSellMenu", x, y, "right", -20)
+
+        this.menuRoot = this.addRoot(350, COLOURS.INFO_LIGHT_GREY)
+
+        // Confirm the selling of the tower in exchange for the displayed amount of money
+        this.yesOption = this.addOption(260, COLOURS.MONEY, "selected-sell-yes")
+        this.yesOption.addTextCentral("Confirm", boldTextStyle(COLOURS.MONEY))
+
+        this.addBackButton()
+        this.addCancelButton()
+        this.populateWithTowerInfo()
+    }
+
+    // Initialise the information displayed on the deployed tower menu
+    populateWithTowerInfo() {
+        // Fill the menu to have info relevant to the specified tower
+        let fontSize = 48
+        this.sellPriceText = new PIXI.Text("", plainTextStyle(COLOURS.BLACK, fontSize))
+        this.sellPriceText.anchor.set(0, 0.5)
+        this.menuRoot.addText(this.sellPriceText, 0.02, 0.5)
+    }
+
+    // Update just the contents of the info created in populateWithTowerInfo to ensure kill stats is up to date
+    updateTowerInfo(tower) {
+        this.sellPriceText.text = "Sell price:  " + tower.sellPrice.toString()
+    }
+}
+
 // This manages the transitions between the menus within the tower menu, and if a selection is made that afects the game, it emits
 // an event to its subscribers.
 export class DeployedTowerMenu extends BaseComponent {
@@ -120,6 +150,10 @@ export class DeployedTowerMenu extends BaseComponent {
         this.aimMenu.subscribe(this)
         this.addChild(this.aimMenu)
 
+        this.sellMenu = new DeployedTowerSellMenu(x, y)
+        this.sellMenu.subscribe(this)
+        this.addChild(this.sellMenu)
+
         this.setUpEventListeners()
     }
 
@@ -128,6 +162,7 @@ export class DeployedTowerMenu extends BaseComponent {
         this.on("selected-aim", () => {
             this.mainMenu.visible = false
             this.aimMenu.visible = true
+            this.sellMenu.visible = false
         })
 
         this.on("selected-upgrade", () => {
@@ -137,9 +172,9 @@ export class DeployedTowerMenu extends BaseComponent {
         })
 
         this.on("selected-sell", () => {
-            //this.mainMenu.visible = false
-            //this.aimMenu.visible = true
-            console.log("Sell selected")
+            this.mainMenu.visible = false
+            this.aimMenu.visible = false
+            this.sellMenu.visible = true
         })
 
         // Aim behaviour chosen, emit update event with the currently selected tower and the desired aim behaviour update
@@ -156,18 +191,25 @@ export class DeployedTowerMenu extends BaseComponent {
             this.observers.forEach((observer) => { observer.emit("update-tower", this.selectedTower, "aim", "aimBehaviour", "fastest") })
         })
 
+        this.on("selected-sell-yes", () => {
+            this.observers.forEach((observer) => { observer.emit("sell-tower", this.selectedTower, "sell") })
+            this.emit("cancel")  // Tower no longer available, so close its menu
+        })
+
         this.on("back", () => {
             this.show()
         })
 
         this.on("cancel", () => {
             this.observers.forEach((observer) => { observer.emit("clickOffDeployedTower", this.selectedTower) })
+            this.selectedTower = undefined
         })
     }
 
     updateTowerInfo(tower) {
         // Live updates of the towers state
         this.mainMenu.updateTowerInfo(tower)
+        this.sellMenu.updateTowerInfo(tower)
     }
 
     setSelectedTower(tower) {

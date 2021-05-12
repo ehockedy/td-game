@@ -29,6 +29,7 @@ class Tower {
         this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
         this.player = player // The player who owns the tower
         this.cost = towerJson[type]["cost"]
+        this.sellPrice = Math.floor(this.cost/2)  // Initial sell cost
         this.hasShot = false // Whether the tower has shot in this update round
         this.bulletType = towerJson[type]["bulletType"]
         this.level = 1

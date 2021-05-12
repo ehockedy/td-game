@@ -99,6 +99,9 @@ class Session {
                 this.broadcast("client/map/update", this.map.getMapStructure())
             } else if (data.operation == "aim") {
                 this.game.updateTower(data.name, data.property, data.value)
+            } else if (data.operation == "sell") {
+                this.game.sellTower(data.name)
+                this.broadcast("client/map/update", this.map.getMapStructure())
             }
         })
 

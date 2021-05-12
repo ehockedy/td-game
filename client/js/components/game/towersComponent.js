@@ -47,8 +47,7 @@ export class TowersComponent extends BaseComponent {
             this.towerStateHashPrev = towerStateHash
 
             // Identify tower not in container but in server update
-            let nameIdx = 0
-            for (nameIdx; nameIdx < towerStateObjects.length; nameIdx++) {
+            for (let nameIdx = 0; nameIdx < towerStateObjects.length; nameIdx++) {
                 let found = false;
                 for (let towerSpriteIdx = this.children.length - 1; towerSpriteIdx >= 0; towerSpriteIdx--) {
                     found = (this.children[towerSpriteIdx].name == towerStateObjects[nameIdx].name)
@@ -60,6 +59,18 @@ export class TowersComponent extends BaseComponent {
                         towerStateObjects[nameIdx].playerID,
                         towerStateObjects[nameIdx].position.row,
                         towerStateObjects[nameIdx].position.col)
+                }
+            }
+
+            // Search for tower in container but not in server update
+            for (let towerSpriteIdx = this.children.length - 1; towerSpriteIdx >= 0; towerSpriteIdx--) {
+                let found = false;
+                for (let towerIdx=0; towerIdx < towerStateObjects.length; towerIdx++) {
+                    found = (this.children[towerSpriteIdx].name == towerStateObjects[towerIdx].name)
+                    if (found) break;
+                }
+                if (!found) {  // Tower has been removed on server, remove it from the client view
+                    this.removeChildAt(towerSpriteIdx)
                 }
             }
         }

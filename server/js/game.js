@@ -179,6 +179,17 @@ class Game {
         })
     }
 
+    sellTower(name) {
+        for (let i = this.towers.length-1; i >= 0; i--) {
+            let tower = this.towers[i]
+            if (tower.name == name) {
+                this.getPlayerByName(tower.player.id).increaseMoney(tower.sellPrice)
+                this.map.setGridValue(tower.row, tower.col, 'x')
+                this.towers.splice(i, 1)
+            }
+        }
+    }
+
     addPlayer(playerID) {
         let newPlayer = new playerImport.Player(playerID, this.players.length)
         this.players.push(newPlayer)
@@ -315,7 +326,8 @@ class Game {
                 "stats": t.stats,
                 "hasShot": t.hasShot,
                 "level": t.level,
-                "aim": t.state.aimBehaviour
+                "aim": t.state.aimBehaviour,
+                "sellPrice": t.sellPrice,
             })
             hash.update(t.name)
         })

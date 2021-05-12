@@ -156,6 +156,14 @@ export class GameRenderer {
             })
         })
 
+        eventEmitter.on("sell-tower", (tower, operation) => {
+            this.socket.emit("server/tower/set",
+            {
+               "name": tower.name,
+               "operation": operation
+            })
+        })
+
         return eventEmitter
     }
 
