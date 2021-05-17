@@ -8,5 +8,10 @@
         "textureAtlasFile": "client/assets/enemies/beetle1/beetle1.json",
         "speed": 2,
         "hp": 35
+    },
+    "greenBeetle": {
+        "textureAtlasFile": "client/assets/enemies/beetle_small/beetle_small.json",
+        "speed": 3,
+        "hp": 20
     }
 }
