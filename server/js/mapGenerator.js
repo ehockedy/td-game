@@ -21,7 +21,7 @@ class MapGenerator {
      */
     resetGrid() {
         // First square on the path
-        this.row_start = Math.floor(Math.random() * this.height / 2) + Math.floor(this.height / 4);
+        this.row_start = Math.floor(this.height/2)
         this.col_start = 0
 
         // The current position whilst generating the map
@@ -63,7 +63,8 @@ class MapGenerator {
         var left_penalty = 0 // Value removed to max distance moved left (so paths don't go too far back on themselves)
 
         if (this.col == this.width - 1) { // In the final column, so move one to the right and finish
-            return [['r', 1]]
+            if (this.row == Math.floor(this.height/2)) return [['r', 1]]
+            else return []
         }
 
         // Right moves
@@ -177,14 +178,8 @@ class MapGenerator {
     }
 
     isComplete() {
-        // True if a square in the final column is 1
-        var complete = false
-        for (var r = 0; r < this.height; r++) {
-            if (this.map[r][this.width - 1]["value"] != "x") {
-                complete = true
-            }
-        }
-        return complete
+        // True if in the final column the middle row
+        return this.map[Math.floor(this.height/2)][this.width - 1]["value"] != 'x'
     }
 
     evaluatePathDistribution() {
