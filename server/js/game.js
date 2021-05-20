@@ -41,7 +41,6 @@ class Game {
                 this.map.removeEnemy(enemy)
                 this.map.addEnemy(enemy)
             }
-            enemy.isHit = false
             prevEnemySteps = enemy.steps
         })
     }
@@ -122,8 +121,7 @@ class Game {
             for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
                 let bullet = bullets[bIdx]
                 if(bullet.collidesWith(enemy.position, enemy.hitboxRadius)) {
-                    enemy.isHit = true
-                    enemy.hp -= bullet.damage
+                    enemy.handleCollision(bullet)
                     this.map.removeBullet(bullet) // Remove that bullet
                 }
 
@@ -240,11 +238,11 @@ class Game {
 
         // Generate the enemy queue
         this.enemyQueue = []
-        for (let i=0; i < 8; i+=1) {
+        for (let i=0; i < 28; i+=1) {
             let randEnemyIdx = Math.floor(Math.random() * Object.keys(enemyConfig).length) // Random enemy type for now
             let enemyType = Object.keys(enemyConfig)[randEnemyIdx]
             this.enemyQueue.push({
-                "stepsUntilGo": 10*Math.floor(Math.random()*30 + 1), // Beween 1 and 300 ticks
+                "stepsUntilGo": 10*Math.floor(Math.random()*15 + 5), // Beween 1 and 300 ticks
                 "type": enemyType
             })
         }
@@ -303,7 +301,8 @@ class Game {
                 "position": e.position,
                 "isHit": e.isHit,
                 "rotation": e.rotation,
-                "type": e.type
+                "type": e.type,
+                "collisionAngles": e.collisionAngles,
             })
             hash.update(e.name)
         })

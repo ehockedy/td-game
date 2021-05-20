@@ -14,6 +14,20 @@ for (let i=-3; i <= 0; i++) {
     hitSequence.push(i)
 }
 
+class Enemy extends BaseComponent {
+    constructor(name, textures) {
+        super(name)
+        this.animatedEnemySprite = new PIXI.AnimatedSprite(textures)
+        this.animatedEnemySprite.loop = true
+        this.animatedEnemySprite.anchor.set(0.5)
+        this.animatedEnemySprite.animationSpeed = 0.5
+        this.animatedEnemySprite.play()
+        this.addChild(this.animatedEnemySprite)
+
+        this.tickCount = 0
+    }
+}
+
 export class EnemiesComponent extends BaseComponent {
     constructor(spriteSize, spriteSizeMap) {
         super()
@@ -21,6 +35,13 @@ export class EnemiesComponent extends BaseComponent {
         this.spriteSizeMap = spriteSizeMap
         this.enemyStateHashPrev = ""
         this.enemyTextures = {}
+
+        // Load textures for creating collision anmation
+        let explosion1Textures = PIXI.Loader.shared.resources["client/assets/collisions/collision1/collision1.json"].textures
+        this.collisionTextures = []
+        for (const texture of Object.values(explosion1Textures)) {
+            this.collisionTextures.push(texture)
+        }
     }
 
     loadData() {
@@ -56,14 +77,19 @@ export class EnemiesComponent extends BaseComponent {
      * @param {Number} type Type of enemy
      */
     addEnemy(name, type) {
-        let animatedEnemySprite = new PIXI.AnimatedSprite(this.enemyTextures[type])
-        animatedEnemySprite.loop = true
+        this.addChild(new Enemy(name, this.enemyTextures[type]))
+    }
+
+    generateEnemyHitAnimation() {
+        let animatedEnemySprite = new PIXI.AnimatedSprite(this.collisionTextures)
+        animatedEnemySprite.loop = false
         animatedEnemySprite.anchor.set(0.5)
-        animatedEnemySprite.animationSpeed = 0.5
+        animatedEnemySprite.animationSpeed = 1
         animatedEnemySprite.play()
-        animatedEnemySprite.name = name // Unique identifier
-        animatedEnemySprite.tickCount = 0
-        this.addChild(animatedEnemySprite)
+        animatedEnemySprite.onComplete = () => {
+            animatedEnemySprite.destroy()
+        }
+        return animatedEnemySprite
     }
 
     update(enemyUpdate) {
@@ -112,7 +138,15 @@ export class EnemiesComponent extends BaseComponent {
             let newpos = gridPosToMapPos(enemy.position, this.spriteSizeMap, enemy.position.subgridSize)
             enemyToUpdate.x = newpos[0]
             enemyToUpdate.y = newpos[1]
-            enemyToUpdate.angle = enemy.rotation
+            enemyToUpdate.animatedEnemySprite.angle = enemy.rotation
+
+            // Add an animation for each hit, if any
+            enemy.collisionAngles.forEach((angle) => {
+                let anim = this.generateEnemyHitAnimation()
+                anim.x = (10 + Math.random()*5) * Math.cos(angle)
+                anim.y = (10 + Math.random()*5) * Math.sin(angle)
+                enemyToUpdate.addChild(anim)
+            })
 
             // Trigger animation sequence if hit by bullet
             if (enemy.isHit) {
@@ -122,14 +156,14 @@ export class EnemiesComponent extends BaseComponent {
             }
 
             if (enemyToUpdate.tickCount > 0) {
-                enemyToUpdate.tint = 0xFFCCCC
+                enemyToUpdate.animatedEnemySprite.tint = 0xFFCCCC
                 enemyToUpdate.tickCount -= 1
                 // TODO fix the bug where animation is not quite right when enemy is moving directly up
                 // This is because the angle of rotation goes from 315 to -45
-                enemyToUpdate.x += hitSequence[enemyToUpdate.tickCount] * Math.sin(enemyToUpdate.angle)
-                enemyToUpdate.y += hitSequence[enemyToUpdate.tickCount] * Math.cos(enemyToUpdate.angle)
+                enemyToUpdate.x += hitSequence[enemyToUpdate.tickCount] * Math.sin(enemyToUpdate.animatedEnemySprite.angle)
+                enemyToUpdate.y += hitSequence[enemyToUpdate.tickCount] * Math.cos(enemyToUpdate.animatedEnemySprite.angle)
             } else {
-                enemyToUpdate.tint = 0xFFFFFF
+                enemyToUpdate.animatedEnemySprite.tint = 0xFFFFFF
             }
         })
     }

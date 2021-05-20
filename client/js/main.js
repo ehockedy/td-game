@@ -15,6 +15,7 @@ function loadAssets() {
         .add("client/assets/map/path_sides/path_sides.json")
         .add("client/assets/infoBoxes/infoBoxes.json")
         .add("client/assets/infoBoxes/towerPopup/towerPopup.json")
+        .add("client/assets/collisions/collision1/collision1.json")
         .load(resolve)
     })
 }

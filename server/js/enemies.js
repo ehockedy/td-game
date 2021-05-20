@@ -33,6 +33,7 @@ class Enemy {
 
         // Update specific variables
         this.isHit = false  // Whether the enemy has been hit in that specific update
+        this.collisionAngles = []  // Array of angles for bullet that collide during a given update
     }
 
     step() {
@@ -48,6 +49,8 @@ class Enemy {
             this.x = this.position.x
             this.y = this.position.y
         }
+        this.isHit = false  // Reset hit status
+        this.collisionAngles = []
     }
 
     // Given the type of tile the enemy is on determine if it needs to rotate itself to be facing a certain direction
@@ -111,6 +114,17 @@ class Enemy {
         let futureStep = this.steps + (this.speed * n)
         if (futureStep >= this.path.length) return this.path[this.path.length - 1]
         return this.path[futureStep]
+    }
+
+    handleCollision(bullet) {
+        this.isHit = true
+        this.hp -= bullet.damage
+
+        // get angle from enemy centre to bullet
+        const xdiff = bullet.position.x - this.x
+        const ydiff = bullet.position.y - this.y
+        const angle = Math.atan2(ydiff, xdiff)
+        this.collisionAngles.push(angle)
     }
 
 }
