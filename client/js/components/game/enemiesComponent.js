@@ -80,16 +80,19 @@ export class EnemiesComponent extends BaseComponent {
         this.addChild(new Enemy(name, this.enemyTextures[type]))
     }
 
-    generateEnemyHitAnimation() {
-        let animatedEnemySprite = new PIXI.AnimatedSprite(this.collisionTextures)
-        animatedEnemySprite.loop = false
-        animatedEnemySprite.anchor.set(0.5)
-        animatedEnemySprite.animationSpeed = 1
-        animatedEnemySprite.play()
-        animatedEnemySprite.onComplete = () => {
-            animatedEnemySprite.destroy()
+    generateEnemyHitAnimation(angle) {
+        let collisionAnimation = new PIXI.AnimatedSprite(this.collisionTextures)
+        collisionAnimation.loop = false
+        collisionAnimation.anchor.set(0.5)
+        collisionAnimation.animationSpeed = 1
+        collisionAnimation.play()
+        collisionAnimation.onComplete = () => {
+            collisionAnimation.destroy()
         }
-        return animatedEnemySprite
+        collisionAnimation.x = (10 + Math.random()*5) * Math.cos(angle)
+        collisionAnimation.y = (10 + Math.random()*5) * Math.sin(angle)
+        collisionAnimation.rotation = Math.random() * Math.PI * 2
+        return collisionAnimation
     }
 
     update(enemyUpdate) {
@@ -116,7 +119,16 @@ export class EnemiesComponent extends BaseComponent {
                     found = (this.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
                     if (found) break; // Think this is ok
                 }
-                if (!found) this.removeChildAt(enemySpriteIdx);
+
+                // An enemy is not present in update from server, must have been destroyed
+                // Remove it and put an explosion animation where it last was
+                if (!found) {
+                    let removedChild = this.removeChildAt(enemySpriteIdx)
+                    let finalExplosion = this.generateEnemyHitAnimation(0)
+                    finalExplosion.position = removedChild.position
+                    finalExplosion.scale.set(2)
+                    this.addChild(finalExplosion)
+                }
             }
 
             // Add any enemies not present in container i.e. just spawned
@@ -142,9 +154,7 @@ export class EnemiesComponent extends BaseComponent {
 
             // Add an animation for each hit, if any
             enemy.collisionAngles.forEach((angle) => {
-                let anim = this.generateEnemyHitAnimation()
-                anim.x = (10 + Math.random()*5) * Math.cos(angle)
-                anim.y = (10 + Math.random()*5) * Math.sin(angle)
+                let anim = this.generateEnemyHitAnimation(angle)
                 enemyToUpdate.addChild(anim)
             })
 
