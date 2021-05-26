@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="480"
+   height="480"
+   viewBox="0 0 127 127"
+   version="1.1"
+   id="svg917"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="flag.svg">
+  <defs
+     id="defs911" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="718.91113"
+     inkscape:cy="-16.097392"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     objecttolerance="10000"
+     guidetolerance="10000"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1002"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:snap-smooth-nodes="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid919"
+       empspacing="8"
+       dotted="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata914">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect850"
+       style="fill:#85560f;fill-opacity:1;stroke-width:1.60379"
+       d="m 15.19562,10.543353 c 0.839991,-0.17977 1.682342,0.45168 1.739143,0.71709 l 18.60307,86.924787 c 0.245403,1.14667 -0.233275,2.21452 -1.073267,2.39429 -0.839992,0.17977 -1.713793,-0.598632 -1.959196,-1.745302 L 13.902301,11.909431 c -0.0568,-0.26541 0.453326,-1.186309 1.293319,-1.366078 z"
+       sodipodi:nodetypes="ssssscs"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag\flagpole.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199" />
+    <path
+       id="rect850-4"
+       style="fill:#4f340b;fill-opacity:1;stroke-width:1.60379"
+       d="m 15.19562,10.543353 c 0.758114,-0.162247 1.626972,0.192955 1.737713,0.710404 l 0.769442,3.595296 17.392097,81.266389 c 0.674806,3.153103 0.209688,4.284318 -0.630304,4.464088 -0.839992,0.17977 0.512275,-1.276287 -0.155433,-4.430895 L 16.475487,11.892892 c -3.869367,1.369246 -2.60657,-1.065607 -1.279867,-1.349539 z"
+       sodipodi:nodetypes="sssssscs"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag\flagpole.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 6.3499999,17.197916 8.2020832,25.4"
+       id="path888" />
+    <path
+       style="fill:#e73b3b;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 16.933333,23.283333 c 0,0 -14.022916,1.852083 -6.879166,2.38125 4.233333,0 -22.489584,11.1125 -18.5208337,8.202084 C -3.3772049,30.134395 -25.4,38.1 -25.4,38.1 c 0,0 21.2362796,-14.357113 17.4625,-10.583333 -4.233333,4.233333 22.225,-11.1125 16.4041667,-10.583334 -6.9750323,1.543401 5.7427243,-3.438589 5.7427243,-3.438589"
+       id="path869"
+       sodipodi:nodetypes="ccscscc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 9.2604167,16.933333 1.3229163,8.995833"
+       id="path886"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag\flagpole.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199" />
+    <path
+       id="rect890"
+       style="fill:#e73b3b;fill-opacity:1;stroke-width:2.05122"
+       d="M 151.83014,15.959087 198.39079,-2.52934 C 200.36915,-3.314917 202.56848,-2.032776 203.2,0 l 11.39935,36.692759 c 0.63152,2.032779 -0.45412,4.335451 -2.52935,4.809208 l -48.84052,11.149874 c -2.07522,0.473749 -4.17768,-0.49656 -4.80921,-2.529342 L 149.3008,20.768297 c -0.63153,-2.032778 0.55098,-4.023641 2.52934,-4.80921 z"
+       sodipodi:nodetypes="sssssssss"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\section_large.png" />
+    <path
+       id="rect894"
+       style="fill:#e73b3b;fill-opacity:1;stroke-width:2.25432"
+       d="M 31.75,35.983333 C 30.415794,31.131779 83.777177,8.1919513 83.777177,8.1919513 85.937555,7.0379423 89.702305,7.053482 90.574661,9.055995 l 6.298692,14.457298 c 0.872362,2.002339 -0.238161,4.664519 -2.790804,4.918048 C 91.016667,29.633333 33.084206,40.834887 31.75,35.983333 Z"
+       sodipodi:nodetypes="zssscz"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\section_small.png" />
+    <path
+       id="rect896"
+       style="fill:#761616;fill-opacity:1;stroke-width:1.10635"
+       d="m 108.6487,-5.741979 19.6881,2.708345 c 0.79941,-0.293126 2.46206,0.547461 2.40495,2.094493 l -0.9394,25.447279 c -0.0571,1.547032 0.31839,2.859549 -0.48099,3.15266 l -11.54375,4.232706 c -0.7994,0.293126 -2.06878,-0.583344 -2.40494,-2.094488 l -7.20496,-32.388332 c -0.33618,-1.511147 -0.31843,-2.859552 0.48099,-3.152663 z"
+       sodipodi:nodetypes="ccssscssc"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\shadow_large.png" />
+    <path
+       id="rect896-9"
+       style="fill:#761616;fill-opacity:1;stroke-width:0.912807"
+       d="m 90.860323,7.773662 -11.480608,7.426192 c -0.613701,-0.0736 -1.598127,1.249549 -0.756797,2.548383 l 8.365831,12.915068 c 0.841333,1.298837 0.845032,2.740421 1.458727,2.814001 l 8.862083,1.062509 c 0.613701,0.0736 1.153153,-1.072294 0.756797,-2.548379 L 92.319053,10.587666 C 91.922694,9.11157 91.474057,7.847228 90.860323,7.773662 Z"
+       sodipodi:nodetypes="ccssscssc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\shadow_small.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199" />
+    <path
+       id="rect892"
+       style="fill:#e73b3b;fill-opacity:1;stroke-width:2.05122"
+       d="M 82.81285,14.402664 127.01657,0.739873 c 2.03369,-0.628583 4.1208,0.847743 4.57832,2.926605 l 4.95516,22.51478 c 0.45753,2.078865 -0.81692,4.295014 -2.9266,4.578324 L 87.768012,36.91745 C 85.65833,37.200772 83.647216,36.069712 83.189691,33.990845 L 79.88625,18.980988 c -0.45753,-2.078866 0.892911,-3.949737 2.9266,-4.578324 z"
+       sodipodi:nodetypes="sssssssss"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\section_mid.png" />
+    <path
+       id="rect898"
+       style="fill:#761616;fill-opacity:1;stroke-width:0.564999"
+       d="m 50.8,97.366667 h 12.7 c 0.586317,0 1.058333,0.472017 1.058333,1.058334 v 10.583329 c 0,0.58632 -0.472016,1.05834 -1.058333,1.05834 H 50.8 c -0.586317,0 -1.058333,-0.47202 -1.058333,-1.05834 V 98.425001 c 0,-0.586317 0.472016,-1.058334 1.058333,-1.058334 z" />
+    <path
+       id="rect850-2"
+       style="fill:#85560f;fill-opacity:1;stroke-width:5.73472"
+       d="m 172.03646,85.334632 c -8.33896,-0.119703 -14.87402,4.896061 -14.70816,5.800418 l 10.32912,56.31758 c 0.7166,3.90716 1.45773,5.82209 4.73304,5.77099 3.27527,-0.0511 3.7892,-1.65239 4.31927,-5.51945 l 7.70777,-56.232252 c -0.0908,-0.908762 -4.22812,-6.020272 -12.38104,-6.137286 z"
+       sodipodi:nodetypes="ssssscs"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\pole.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199" />
+    <path
+       id="rect850-4-6"
+       style="fill:#4f340b;fill-opacity:1;stroke-width:5.73472"
+       d="m 157.32601,91.112152 1.8602,11.754728 7.23671,38.57664 c 2.02301,10.78406 1.72432,12.032 4.9996,11.98088 3.27532,-0.051 0.6249,-2.88664 -1.56139,-13.54667 l -8.99446,-43.85569 c 0,0 -3.53837,-4.88699 -3.54066,-4.909888 z"
+       sodipodi:nodetypes="csssscc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\pole.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199" />
+    <ellipse
+       style="fill:#4f340b;fill-opacity:1;stroke-width:0.509466"
+       id="path941"
+       cx="170.78854"
+       cy="91.346291"
+       rx="13.361456"
+       ry="6.6796241"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\pole.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199" />
+    <path
+       id="rect850-2-9"
+       style="fill:#85560f;fill-opacity:1;stroke-width:5.73471"
+       d="m 268.81667,63.5 c -8.33896,-0.119703 -14.39684,5.591073 -14.1217,6.468382 l 7.18605,22.913411 c 1.18871,3.790303 1.45773,5.82209 4.73304,5.77099 3.27527,-0.0511 2.76232,0.17646 4.31927,-3.402783 l 10.85084,-24.94475 c -0.0908,-0.908762 -4.81458,-6.688236 -12.9675,-6.80525 z"
+       sodipodi:nodetypes="ssssscs"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\pole.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199" />
+    <path
+       id="rect850-4-6-9"
+       style="fill:#4f340b;fill-opacity:1;stroke-width:5.73471"
+       d="M 254.69268,69.945484 260.35,88.9 l 2.11667,6.35 c 0,0 0.79375,3.439583 3.70416,3.439583 -3.70416,-5.55625 -5.82083,-18.25625 -7.93749,-23.83421 0,0 -3.53837,-4.886991 -3.54066,-4.909889 z"
+       sodipodi:nodetypes="cssccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\pole.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199" />
+    <ellipse
+       style="fill:#4f340b;fill-opacity:1;stroke-width:0.509466"
+       id="path941-7"
+       cx="268.15521"
+       cy="70.179619"
+       rx="13.462532"
+       ry="8.7962856"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\pole.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199" />
+    <path
+       id="rect890-6"
+       style="fill:#cd3e3e;fill-opacity:1;stroke-width:2.05122"
+       d="M 159.54375,44.45 207.9625,28.045833 c 2.01606,-0.683036 1.57118,-7.951231 2.15736,-5.904921 l 4.19264,14.636171 c 0.58618,2.046314 0.22602,4.036924 -1.85208,4.497917 l -48.66709,10.795992 c -2.07809,0.46099 -5.22434,-1.349132 -5.83708,-3.387659 l -1.73559,-5.774123 c -0.61274,-2.038519 1.30703,2.223826 3.32309,1.54079 z"
+       sodipodi:nodetypes="sssssssss"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\section_large.png" />
+    <path
+       id="rect890-4"
+       style="fill:#af3333;fill-opacity:1;stroke-width:2.05122"
+       d="m 162.98333,49.477083 44.85333,-14.325115 c 2.02773,-0.647609 3.20799,-9.671005 3.83001,-7.635301 l 2.91041,9.525 c 0.62202,2.035706 -0.83569,4.021942 -2.91041,4.497916 L 163.22948,52.65184 c -2.07471,0.475972 -4.1489,-0.505725 -4.80921,-2.52934 l -0.7286,-2.232917 c -0.66031,-2.023613 0.51721,1.5875 2.64583,1.5875 z"
+       sodipodi:nodetypes="ssssssssss"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\section_large.png" />
+    <path
+       id="rect892-4"
+       style="fill:#e73b3b;fill-opacity:1;stroke-width:2.05122"
+       d="m 243.67952,-49.097336 44.20372,-13.662792 c 2.03369,-0.628583 4.1208,0.847743 4.57832,2.926605 l 4.95516,22.514781 c 0.45753,2.078865 -0.81692,4.295013 -2.9266,4.578323 l -45.85544,6.157868 c -2.10968,0.283324 -4.1208,-0.847736 -4.57832,-2.926604 l -3.30344,-15.009857 c -0.45753,-2.078866 0.89291,-3.949737 2.9266,-4.578324 z"
+       sodipodi:nodetypes="sssssssss"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\section_mid.png" />
+    <path
+       id="rect892-49-7"
+       style="fill:#cd3e3e;fill-opacity:1;stroke-width:2.05122"
+       d="M 247.38542,-30.691667 294.21667,-38.1 c 2.10247,-0.332594 1.41356,-7.374619 1.85208,-5.291667 l 1.05833,5.027084 c 0.43852,2.082958 -0.78643,3.667249 -2.89981,3.9215 L 247.65,-28.839584 c -2.11338,0.254252 -3.21083,0.550288 -3.70417,-1.587499 l -0.79375,-3.439584 c -0.47864,-2.074108 2.13086,3.507596 4.23334,3.175 z"
+       sodipodi:nodetypes="sssssssss"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\section_mid.png" />
+    <path
+       id="rect892-49"
+       style="fill:#af3333;fill-opacity:1;stroke-width:2.05122"
+       d="m 247.12083,-28.839583 47.09584,-7.14375 c 2.10453,-0.319227 1.6992,-8.437275 2.11666,-6.35 l 1.05834,5.291666 c 0.41745,2.087282 -0.79186,4.017941 -2.90155,4.301248 l -45.85544,6.157868 c -2.10969,0.283307 -3.94832,-0.379888 -4.42426,-2.521616 l -0.52917,-2.38125 c -0.46176,-2.07793 1.33504,2.965062 3.43958,2.645834 z"
+       sodipodi:nodetypes="sssssssss"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\animation\flag1\animation\section_mid.png" />
+  </g>
+</svg>

@@ -16,6 +16,7 @@ function loadAssets() {
         .add("client/assets/infoBoxes/infoBoxes.json")
         .add("client/assets/infoBoxes/towerPopup/towerPopup.json")
         .add("client/assets/collisions/collision1/collision1.json")
+        .add("client/assets/camp/flag1/flag1.json")
         .load(resolve)
     })
 }
