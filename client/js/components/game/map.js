@@ -51,6 +51,7 @@ export class MapComponent extends BaseComponent {
         this.landTiles = new PIXI.Container()
         this.landFeatureTiles = new PIXI.Container()
         this.landDecorations = new PIXI.Container()
+        this.baseCamp = new PIXI.Container()
 
         this.addChild(this.landTiles)
         this.addChild(this.landFeatureTiles)
@@ -58,6 +59,7 @@ export class MapComponent extends BaseComponent {
         this.addChild(this.sideWalls)
         this.addChild(this.topWalls) // TODO find a way to get this over enemy sprites
         this.addChild(this.landDecorations)
+        this.addChild(this.baseCamp)
 
         // A texture is a WebGL-ready image
         // Keep things in a texture cache to make rendering fast and efficient
@@ -66,6 +68,13 @@ export class MapComponent extends BaseComponent {
         this.wallTextures = PIXI.Loader.shared.resources["client/assets/map/path_sides/path_sides.json"].textures
         this.mapFeaturesTextures = PIXI.Loader.shared.resources["client/assets/map/land_patterns/land_patterns.json"].textures
         this.mapDecorationsTextures = PIXI.Loader.shared.resources["client/assets/map/land_decorations/land_decorations.json"].textures
+
+        // Animated textures
+        let flagTextures = PIXI.Loader.shared.resources["client/assets/camp/flag1/flag1.json"].textures
+        this.flagFrames = []
+        for (const texture of Object.values(flagTextures)) {
+            this.flagFrames.push(texture)
+        }
 
         this.towerHash = ""
     }
@@ -78,11 +87,27 @@ export class MapComponent extends BaseComponent {
         return this.height_px
     }
 
+    disableCacheAsBitmap() {
+        this.children.forEach((container) => {
+            container.cacheAsBitmap = false
+        })
+    }
+
+    enableCacheAsBitmap() {
+        // Cache as bitmap enabled by default
+        this.children.forEach((container) => {
+            container.cacheAsBitmap = true
+        })
+
+        // Some containers have animated sprites, so do not CAB
+        this.baseCamp.cacheAsBitmap = false
+    }
+
     constructMap(border=0) {
-        this.cacheAsBitmap = false  // so that can remove existing map
         this.children.forEach((container) => {
             container.removeChildren()
         })
+        this.disableCacheAsBitmap()
 
         let objectClusterCount = 5
         let objectClusterPoints = []
@@ -97,7 +122,8 @@ export class MapComponent extends BaseComponent {
         let baseCampContainer = this.createBaseCampSprite(border)
         baseCampContainer.x = this.cols * this.mapSpriteSize
         baseCampContainer.y = Math.floor(this.rows / 2) * this.mapSpriteSize
-        this.addChild(baseCampContainer)
+        baseCampContainer.doNotCacheAsBitmap = true
+        this.baseCamp.addChild(baseCampContainer)
 
 
         for (let r = 0 - border; r < this.rows + border; r++) {
@@ -222,7 +248,7 @@ export class MapComponent extends BaseComponent {
 
         // The map contains a lot of sprites, none of which move
         // As such can set this to cache as a bitmap to save processing
-        this.cacheAsBitmap = true
+        this.enableCacheAsBitmap()
     }
 
     generateMapWallSprite(texture, shiftX, shiftY, scaleX, scaleY, rotation) {
@@ -248,6 +274,23 @@ export class MapComponent extends BaseComponent {
         //  \ _
         //      \
         let baseCampContainer = new PIXI.Container()
+
+        // Add some camp decorations
+        let _this = this
+        function addFlagSprite(x, y, startFrame=0, scale=1, angle=0) {
+            let flag = new PIXI.AnimatedSprite(_this.flagFrames)
+            flag.loop = true
+            flag.animationSpeed = 0.3
+            flag.gotoAndPlay(startFrame)
+            flag.x = x
+            flag.y = y
+            flag.pivot.set(0.5)
+            const angleRange = 30
+            flag.angle = angle //20 * (Math.random() > 0.5 ? -1 : 1) //Math.floor(Math.random()*angleRange) - angleRange/2
+            flag.scale.set(scale)
+            baseCampContainer.addChild(flag)
+        }
+
         for (let col=0; col < border; col++) {
             let rows = 3 + (Math.floor(col / 2) * 2)  // Total number of rows in this column
             let rowsPerSide = Math.floor(rows/2)  // Rows either side of the central path
@@ -288,8 +331,13 @@ export class MapComponent extends BaseComponent {
                             isDiagonal ? Math.PI/4 : 0)
                     )
                 }
+
             }
         }
+
+        // Add two flags at the start of the base
+        addFlagSprite(0, -50, 6, 0.9, 20)
+        addFlagSprite(0,  50, 0, 0.9, 20)
         return baseCampContainer
     }
 
@@ -387,9 +435,9 @@ export class MapComponent extends BaseComponent {
                     let decCol = Math.floor(decoration.x / this.mapSpriteSize)
                     let decRow = Math.floor(decoration.y / this.mapSpriteSize)
                     if (decCol == tower.position.col && decRow == tower.position.row) {
-                        this.cacheAsBitmap = false
+                        this.landDecorations.cacheAsBitmap = false
                         this.landDecorations.removeChild(decoration)
-                        this.cacheAsBitmap = true
+                        this.landDecorations.cacheAsBitmap = true
                         break // Can do this since one object per square
                     }
                 }
