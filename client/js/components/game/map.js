@@ -93,6 +93,13 @@ export class MapComponent extends BaseComponent {
             })
         }
 
+        // Add the base camp container
+        let baseCampContainer = this.createBaseCampSprite(border)
+        baseCampContainer.x = this.cols * this.mapSpriteSize
+        baseCampContainer.y = Math.floor(this.rows / 2) * this.mapSpriteSize
+        this.addChild(baseCampContainer)
+
+
         for (let r = 0 - border; r < this.rows + border; r++) {
             for (let c = 0 - border; c < this.cols + border; c++) {
                 // Determine the sprite to used, based on tile type
@@ -179,12 +186,17 @@ export class MapComponent extends BaseComponent {
                 } else {
                     this.landTiles.addChild(map_square_sprite)
 
-                    let addObjectChance = 0.05
-                    let distanceToCluster = 2
+                    // Add decorations to the land tiles. These decorations could be a cactus, some rocks etc.
+                    let addObjectChance = 0.05 // Chance to add a decoration to any land tile
+                    let distanceToCluster = 2 // If the land tile is within this number of tiles from a cluster,have a higher chance of adding decoration
+
+                    // Calculate whether this tile is near to a cluster - if so increase the chance of adding a decoration
                     objectClusterPoints.forEach((point) => {
                         if (isNearToPoint(r, c, point.r, point.c, distanceToCluster)) addObjectChance = 0.5
                     })
-                    if (Math.random() <= addObjectChance && !this.isNextToPath(c, r, this.cols, this.rows)) {
+
+                    // If RNG chance is met, and not adjacent to the valley path (because may overlap with valley path sprites) or near the camp then add decoration
+                    if (Math.random() <= addObjectChance && !this.isNextToPath(c, r, this.cols, this.rows) && !baseCampContainer.getBounds().contains(map_square_sprite.x, map_square_sprite.y)) {
                         randomlyPlaceObjects(
                             this.mapDecorationsTextures, 1, this.landDecorations, false,
                             this.mapSpriteSize, this.mapSpriteSize,
@@ -207,10 +219,6 @@ export class MapComponent extends BaseComponent {
             }
         }
 
-        let baseCampContainer = this.createBaseCampSprite(border)
-        baseCampContainer.x = this.cols * this.mapSpriteSize
-        baseCampContainer.y = Math.floor(this.rows / 2) * this.mapSpriteSize
-        this.addChild(baseCampContainer)
 
         // The map contains a lot of sprites, none of which move
         // As such can set this to cache as a bitmap to save processing
