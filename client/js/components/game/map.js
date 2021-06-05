@@ -207,6 +207,10 @@ export class MapComponent extends BaseComponent {
             }
         }
 
+        let baseCampContainer = this.createBaseCampSprite(border)
+        baseCampContainer.x = this.cols * this.mapSpriteSize
+        baseCampContainer.y = Math.floor(this.rows / 2) * this.mapSpriteSize
+        this.addChild(baseCampContainer)
 
         // The map contains a lot of sprites, none of which move
         // As such can set this to cache as a bitmap to save processing
@@ -223,6 +227,62 @@ export class MapComponent extends BaseComponent {
             0, 0            // pivot
         )
         return sprite
+    }
+
+    /**
+     * Base camp is the target for the enemies, and the thing the players are protecting
+     * It exists at the end of the path
+     */
+    createBaseCampSprite(border) {
+        //    _ /
+        // _/
+        // _
+        //  \ _
+        //      \
+        let baseCampContainer = new PIXI.Container()
+        for (let col=0; col < border; col++) {
+            let rows = 3 + (Math.floor(col / 2) * 2)  // Total number of rows in this column
+            let rowsPerSide = Math.floor(rows/2)  // Rows either side of the central path
+            for (let row = -rowsPerSide; row <= rowsPerSide; row++) {
+                const x_pos = col * this.mapSpriteSize
+                const y_pos = row * this.mapSpriteSize
+                // Tiles at top and bottom of even numbered columbs are a slant
+                let tileType = (Math.abs(row) == rowsPerSide && col % 2 == 0) ? "track_half_1.png" : "track_straight_1.png"
+                let floor = new PIXI.Sprite(this.mapTextures[tileType])
+                floor.x = x_pos
+                floor.y = y_pos
+
+                // Final tile at bottom of even rows must be flipped because it is slanted
+                if (row == rowsPerSide && col % 2 == 0) {
+                    floor.scale.y = -1
+                    floor.y += floor.height
+                }
+                baseCampContainer.addChild(floor)
+
+                // Add valley sides to the top and bottom
+                const isDiagonal = (col%2==0)
+                if (row == -rowsPerSide) {
+                    let texture = this.wallTextures[isDiagonal ? "valley_wall_diagonal_1.png" : "valley_wall_1.png"]
+                    baseCampContainer.addChild(
+                        this.generateMapWallSprite(texture,
+                            x_pos + (isDiagonal ? -this.mapSpriteSize*0.12 : 0),
+                            y_pos - texture.height/1.5 + (isDiagonal ? this.mapSpriteSize*1.1 : 0),
+                            1, 1,
+                            isDiagonal ? -Math.PI/4 : 0)
+                    )
+                } else if (row == rowsPerSide) {
+                    let texture = this.wallTextures[isDiagonal ? "valley_wall_lower_diagonal_1.png" : "valley_wall_lower_1.png"]
+                    baseCampContainer.addChild(
+                        this.generateMapWallSprite(texture,
+                            x_pos + (isDiagonal ? texture.height / 2 : 0),
+                            y_pos - (texture.height / 2) + (isDiagonal ? 0 : this.mapSpriteSize - (texture.height/2)),
+                            1, 1,
+                            isDiagonal ? Math.PI/4 : 0)
+                    )
+                }
+            }
+        }
+        return baseCampContainer
     }
 
     isNextToPath(x, y, xMax, yMax) {

@@ -13,7 +13,7 @@
    version="1.1"
    id="svg917"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="valleyWalls.svg"
+   sodipodi:docname="path_sides.svg"
    inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_side_2.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="14.790474"
-     inkscape:cx="24.908966"
-     inkscape:cy="11.30669"
+     inkscape:zoom="10.458444"
+     inkscape:cx="15.0873"
+     inkscape:cy="50.523047"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -73,19 +73,11 @@
        inkscape:export-xdpi="127.99693"
        inkscape:export-ydpi="127.99693" />
     <rect
-       style="fill:#d38d5f;stroke:none;stroke-width:0.280633;stroke-opacity:1"
-       id="rect1036"
-       width="12.7"
-       height="4.7624998"
-       x="-12.7"
-       y="-21.166666"
-       transform="rotate(-90)" />
-    <rect
        style="fill:#a05a2c;stroke-width:0.162023"
        id="rect8"
        width="12.7"
        height="0.79374999"
-       x="1.2406819e-07"
+       x="2.1166668"
        y="3.4395831"
        ry="0"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
@@ -94,7 +86,7 @@
     <path
        id="rect10"
        style="fill:#784421;stroke-width:1.03012"
-       d="M -6.6666665e-8,3.4282511 H 12.699999 v 0.805082 L 10.31875,3.9687497 6.8791667,4.2333331 4.7625,3.9687497 3.175,4.2333331 1.0583329,3.9687497 -6.6666665e-8,4.2333331 Z"
+       d="M 2.1166666,3.4282511 H 14.816666 v 0.805082 L 12.435417,3.9687497 8.9958334,4.2333331 6.8791667,3.9687497 5.2916667,4.2333331 3.1749996,3.9687497 2.1166666,4.2333331 Z"
        sodipodi:nodetypes="cccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
        inkscape:export-xdpi="128"
@@ -102,7 +94,7 @@
     <path
        id="rect10-2"
        style="fill:#a05a2c;stroke-width:1.3696"
-       d="M -6.6666665e-8,2.9505072 3.0891891,2.6658786 H 6.8648647 L 10.983783,2.3812501 12.699999,2.6658783 12.7,3.7041664 10.31875,3.4395831 6.8648647,3.8043925 4.7625,3.4395831 3.175,3.7041664 1.0583329,3.4395831 -6.6666665e-8,3.8043925 Z"
+       d="M 2.1166666,2.9505072 5.2058558,2.6658786 h 3.7756756 l 4.1189186,-0.2846285 1.716216,0.2846282 1e-6,1.0382881 L 12.435417,3.4395831 8.9815314,3.8043925 6.8791667,3.4395831 5.2916667,3.7041664 3.1749996,3.4395831 2.1166666,3.8043925 Z"
        sodipodi:nodetypes="ccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
        inkscape:export-xdpi="128"
@@ -110,7 +102,7 @@
     <path
        id="rect918"
        style="fill:#502d16;stroke:none;stroke-width:0.260983;stroke-opacity:1"
-       d="M 1.0583329,3.4395831 3.175,3.7041664 V 4.2333331 L 1.0583329,3.9687497 Z"
+       d="M 3.1749996,3.4395831 5.2916667,3.7041664 V 4.2333331 L 3.1749996,3.9687497 Z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
        inkscape:export-xdpi="128"
@@ -118,7 +110,7 @@
     <path
        id="rect918-2"
        style="fill:#502d16;stroke:none;stroke-width:0.269542;stroke-opacity:1"
-       d="M 4.7625,3.4395831 6.8648647,3.8099996 V 4.2333331 L 4.7625,3.9687497 Z"
+       d="M 6.8791667,3.4395831 8.9815314,3.8099996 V 4.2333331 L 6.8791667,3.9687497 Z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
        inkscape:export-xdpi="128"
@@ -126,7 +118,7 @@
     <path
        id="rect918-5"
        style="fill:#502d16;stroke:none;stroke-width:0.269542;stroke-opacity:1"
-       d="M 10.31875,3.4395831 12.7,3.7041664 12.699999,4.2333331 10.31875,3.9687497 Z"
+       d="m 12.435417,3.4395831 2.38125,0.2645833 -1e-6,0.5291667 -2.381249,-0.2645834 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
        inkscape:export-xdpi="128"
@@ -134,7 +126,7 @@
     <path
        id="rect10-5"
        style="fill:#784421;stroke-width:1.33706"
-       d="M -6.6666665e-8,2.1166661 V 2.3812498 L 1.3729729,2.1166664 2.9104167,2.3812498 5.4918917,2.1166664 8.2020833,2.3812498 10.297297,2.1166664 10.31875,3.1749997 8.2020833,3.4395831 5.55625,3.1749997 2.9104167,3.4395831 1.3229169,3.1749997 -6.6666665e-8,3.4729918 Z"
+       d="M 2.1166666,2.1166661 V 2.3812498 L 3.4896396,2.1166664 5.0270834,2.3812498 7.6085584,2.1166664 10.31875,2.3812498 12.413964,2.1166664 12.435417,3.1749997 10.31875,3.4395831 7.6729167,3.1749997 5.0270834,3.4395831 3.4395836,3.1749997 2.1166666,3.4729918 Z"
        sodipodi:nodetypes="cccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
        inkscape:export-xdpi="128"
@@ -142,7 +134,7 @@
     <path
        id="rect918-7"
        style="fill:#502d16;stroke:none;stroke-width:0.301357;stroke-opacity:1"
-       d="M 1.3229169,2.1166664 2.9104167,2.3812498 V 3.4395831 L 1.3229169,3.1749997 Z"
+       d="M 3.4395836,2.1166664 5.0270834,2.3812498 V 3.4395831 L 3.4395836,3.1749997 Z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
        inkscape:export-xdpi="128"
@@ -150,7 +142,7 @@
     <path
        id="rect918-2-7"
        style="fill:#502d16;stroke:none;stroke-width:0.301357;stroke-opacity:1"
-       d="M 5.4918917,2.1166664 8.2020833,2.3812498 V 3.4395831 L 5.55625,3.1749997 Z"
+       d="M 7.6085584,2.1166664 10.31875,2.3812498 V 3.4395831 L 7.6729167,3.1749997 Z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
        inkscape:export-xdpi="128"
@@ -158,31 +150,17 @@
     <path
        id="rect918-5-7"
        style="fill:#502d16;stroke:none;stroke-width:0.301357;stroke-opacity:1"
-       d="M 10.297297,2.1166661 12.699999,2.3812498 12.7,3.4395831 10.31875,3.1749997 Z"
+       d="m 12.413964,2.1166661 2.402702,0.2645837 1e-6,1.0583333 -2.38125,-0.2645834 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
        inkscape:export-xdpi="128"
        inkscape:export-ydpi="128" />
-    <rect
-       style="fill:#d38d5f;stroke:none;stroke-width:0.264583;stroke-opacity:1"
-       id="rect1032"
-       width="12.7"
-       height="4.2333331"
-       x="35.983334"
-       y="14.816668" />
-    <rect
-       style="fill:#a05a2c;stroke:none;stroke-width:0.264583;stroke-opacity:1"
-       id="rect1041"
-       width="12.7"
-       height="4.2333331"
-       x="31.75"
-       y="4.2333336" />
     <path
        id="rect1038"
        style="fill:#d38d5f;stroke:none;stroke-width:0.272861;stroke-opacity:1"
-       d="M 1.8520829,1.091963 2.1166667,0.79375 3.4395829,0.81056477 5.0270829,1.091963 7.1437498,0.52916667 8.2020828,0.81056477 10.847916,0.52916667 11.641667,1.091963 11.90625,0.79375 12.7,1.0583333 0,1.091963 v 0 L 1.5875,0.81056477 Z"
+       d="M 1.8520833,1.0583333 2.1166667,0.79375 3.4395829,0.81056477 5.0270833,1.0583333 7.1437498,0.52916667 8.2020828,0.81056477 10.847916,0.52916667 11.641667,1.0583333 11.90625,0.79375 12.7,1.0583333 H 0 v 0 L 1.5875,0.81056477 Z"
        sodipodi:nodetypes="cccccccccccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_lower_1.png"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_lower_1.png"
        inkscape:export-xdpi="128"
        inkscape:export-ydpi="128" />
     <path
@@ -647,34 +625,138 @@
        inkscape:export-xdpi="127.99693"
        inkscape:export-ydpi="127.99693" />
     <path
-       id="rect1381"
-       style="fill:#502d16;stroke:none;stroke-width:0.264583;stroke-opacity:1"
-       d="m -4.2333333,4.7625 h 12.7 L 9.7895833,5.2916667 10.583333,6.6145833 11.90625,7.6729167 12.7,8.9958334 H 0 L -0.79375,8.2020833 -1.8520833,7.9375 -2.1166667,6.8791667 -3.175,6.0854167 Z"
-       sodipodi:nodetypes="cccccccccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_floor_shadow_slanted.png"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
-    <path
-       id="rect1038-0"
-       style="fill:#502d16;stroke:none;stroke-width:0.275387;stroke-opacity:1"
-       d="m -2.1166666,4.7625 h 0.79375 L -0.52916659,4.4979167 1.3229168,4.7625 3.4395835,4.2333333 4.7625002,4.4979167 7.6729169,4.2333333 8.4666669,4.7625 l 1.0583334,10e-8 v 0 H -4.2333333 v 0 L -2.38125,4.4979167 Z"
-       sodipodi:nodetypes="cccccccccccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_floor_shadow_slanted.png"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
-    <path
-       id="rect1381-3"
-       style="fill:#502d16;stroke:none;stroke-width:0.264586;stroke-opacity:1"
-       d="m 14.021977,-7.6731874 9.02e-4,12.7003134 0.793788,0.529124 1.323048,1.8520363 1.322973,0.793676 0.793825,1.058303 -9.02e-4,-12.7003157 -0.793807,-0.793713 -0.264658,-1.058341 -1.058353,-0.264514 -0.793825,-1.058303 z"
-       sodipodi:nodetypes="cccccccccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_floor_shadow_slanted.png"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
-    <path
        style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 8.4666666,4.7624999 Z"
        id="path970"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\valley_wall_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect8-6"
+       style="fill:#a05a2c;stroke-width:0.172252"
+       d="m 0,17.358402 h 18.520833 v 0 l -1.5875,1.275205 H -0.26458333 L -0.79375,18.421073 -1.0583333,18.208538 Z"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect10-54"
+       style="fill:#784421;stroke-width:0.922053"
+       d="m -0.19242007,18.199863 1.34696837,-0.208198 2.155152,0.208196 1.616364,-0.208196 2.14059,0.291475 3.5166787,-0.287136 1.5875,0.212534 2.116667,-0.212534 1.322917,0.212534 H 17.4625 l -0.264583,0.212535 -1.852084,0.09976 L 14.022917,18.25625 11.90625,18.520833 10.31875,18.25625 6.6145833,18.520833 4.7625,18.25625 2.9104167,18.520833 1.1545483,18.408059 -0.19242007,18.616256 Z"
+       sodipodi:nodetypes="ccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect918-1"
+       style="fill:#502d16;stroke:none;stroke-width:0.233603;stroke-opacity:1"
+       d="m 1.1545483,17.991667 2.155152,0.208196 -0.3992836,0.32097 -1.7558684,-0.112774 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect918-2-6"
+       style="fill:#502d16;stroke:none;stroke-width:0.241265;stroke-opacity:1"
+       d="m 4.9260643,17.991667 2.14059,0.291474 -0.452071,0.237692 L 4.7625,18.25625 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect918-5-6"
+       style="fill:#502d16;stroke:none;stroke-width:0.241265;stroke-opacity:1"
+       d="m 10.583336,17.991667 1.587497,0.216871 -0.264583,0.312295 -1.5875,-0.264583 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect10-5-2"
+       style="fill:#784421;stroke-width:1.19679"
+       d="m 0.07697393,16.950685 v 0.208197 l 1.39793537,-0.208196 1.565397,0.208196 2.628411,-0.208196 3.327116,0.407716 1.5874997,-0.425069 2.155155,0.26025 2.078179,-0.26025 1.322916,0.425069 1.852084,-0.425069 0.529166,0.425069 L 15.875,17.727083 14.552083,17.4625 11.90625,17.727083 10.31875,17.4625 8.4281823,17.991666 5.2916667,17.727083 2.6458333,17.991667 1.4239403,17.78347 0.07697393,17.991667 Z"
+       sodipodi:nodetypes="cccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect918-7-23"
+       style="fill:#502d16;stroke:none;stroke-width:0.269742;stroke-opacity:1"
+       d="m 1.4239433,16.950686 1.616363,0.208196 -0.394473,0.832785 -1.22189,-0.208197 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect918-2-7-4"
+       style="fill:#502d16;stroke:none;stroke-width:0.269742;stroke-opacity:1"
+       d="m 5.6687173,16.950686 3.327116,0.407716 -0.567648,0.633265 -3.1365186,-0.264584 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect918-5-7-7"
+       style="fill:#502d16;stroke:none;stroke-width:0.269742;stroke-opacity:1"
+       d="m 10.561493,16.950685 2.176995,0.242898 -0.832238,0.5335 -1.5875,-0.264583 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect918-7-23-3"
+       style="fill:#502d16;stroke:none;stroke-width:0.269742;stroke-opacity:1"
+       d="m 0,17.145868 0.07697393,0.01301 v 0.832786 l -0.87072393,0.0043 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect918-7-23-9"
+       style="fill:#502d16;stroke:none;stroke-width:0.269742;stroke-opacity:1"
+       d="m -1.0583333,18.208538 0.86591323,-0.0087 v 0.416393 L -0.79375,18.421073 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect918-5-7-7-3"
+       style="fill:#502d16;stroke:none;stroke-width:0.269743;stroke-opacity:1"
+       d="M 14.816667,16.933333 16.139583,17.358402 15.875,17.727083 14.552083,17.4625 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect918-5-6-6"
+       style="fill:#502d16;stroke:none;stroke-width:0.241264;stroke-opacity:1"
+       d="m 14.2875,18.004681 1.322917,0.203857 -0.264584,0.312295 -1.322916,-0.264583 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect1038-4"
+       style="fill:#d38d5f;stroke:none;stroke-width:0.272862;stroke-opacity:1"
+       d="m 1.8520833,15.345833 0.2645834,-0.264578 1.3229164,0.01681 1.5875002,0.247768 2.1166667,-0.529166 1.0583323,0.281398 2.6458337,-0.281398 0.793751,0.529166 0.79375,-0.529166 1.5875,0.264583 0.529166,-0.264583 1.058334,-0.264584 v 0.264584 l 0.529166,0.264583 1.058334,-0.529167 0.529166,0.79375 -17.727083,0 v 0 L 1.5875,15.09807 Z"
+       sodipodi:nodetypes="cccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_lower_diagonal_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect1038-9-0"
+       style="fill:#502d16;fill-opacity:1;stroke:none;stroke-width:0.272862;stroke-opacity:1"
+       d="m -8.995833,-8.2020787 0.264584,-0.264583 h 0.7937497 l 1.8520833,0.264583 2.38125,-0.529167 1.0583333,0.529167 2.1166667,-0.529167 1.058333,0.529167 h 0.529167 l 0.79375,0.264583 h -12.7 v 0 l 1.322917,-0.529166 z"
+       sodipodi:nodetypes="cccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_lower_1.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="rect1038-1"
+       style="fill:#d38d5f;stroke:none;stroke-width:0.272862;stroke-opacity:1"
+       d="m -8.995833,-7.9374957 0.264584,-0.264583 1.3229161,0.01681 1.5875002,0.247768 2.1166667,-0.529166 1.0583328,0.281398 L 0,-8.4666667 l 0.793751,0.529166 0.264583,-0.264578 0.79375,0.264583 h -12.7 v 0 l 1.5875,-0.247768 z"
+       sodipodi:nodetypes="cccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_lower_1.png"
        inkscape:export-xdpi="128"
        inkscape:export-ydpi="128" />
   </g>

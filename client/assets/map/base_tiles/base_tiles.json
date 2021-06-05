@@ -16,9 +16,17 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
 	"sourceSize": {"w":64,"h":64}
 },
-"track_straight_1.png":
+"track_half_1.png":
 {
 	"frame": {"x":128,"y":0,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"track_straight_1.png":
+{
+	"frame": {"x":192,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -29,8 +37,8 @@
 	"version": "1.0",
 	"image": "base_tiles.png",
 	"format": "RGBA8888",
-	"size": {"w":192,"h":64},
+	"size": {"w":256,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:bbd4f54cf53524fe19a943598d7c3a29:5f5005e878f5eb5e1c56ec51e494ce26:0ab7b12f02b192fb39e42ac82d57971a$"
+	"smartupdate": "$TexturePacker:SmartUpdate:44afa87cce1100a6040c5b9bb8a842dd:3069cf1745fc7d2c9153a20bac1dd2c0:0ab7b12f02b192fb39e42ac82d57971a$"
 }
 }

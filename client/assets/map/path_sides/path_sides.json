@@ -2,25 +2,43 @@
 
 "valley_wall_1.png":
 {
-	"frame": {"x":0,"y":0,"w":64,"h":13},
+	"frame": {"x":64,"y":7,"w":64,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":13},
 	"sourceSize": {"w":64,"h":13},
 	"pivot": {"x":0.5,"y":0.5}
 },
+"valley_wall_diagonal_1.png":
+{
+	"frame": {"x":0,"y":20,"w":101,"h":11},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":101,"h":11},
+	"sourceSize": {"w":101,"h":11},
+	"pivot": {"x":0.5,"y":0.5}
+},
 "valley_wall_lower_1.png":
 {
-	"frame": {"x":0,"y":13,"w":64,"h":3},
+	"frame": {"x":0,"y":0,"w":64,"h":3},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":3},
 	"sourceSize": {"w":64,"h":3},
 	"pivot": {"x":0.5,"y":0.5}
 },
+"valley_wall_lower_diagonal_1.png":
+{
+	"frame": {"x":0,"y":3,"w":89,"h":4},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":89,"h":4},
+	"sourceSize": {"w":89,"h":4},
+	"pivot": {"x":0.5,"y":0.5}
+},
 "valley_wall_side_2.png":
 {
-	"frame": {"x":0,"y":16,"w":64,"h":9},
+	"frame": {"x":0,"y":7,"w":64,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":9},
@@ -32,8 +50,8 @@
 	"version": "1.0",
 	"image": "path_sides.png",
 	"format": "RGBA8888",
-	"size": {"w":64,"h":25},
+	"size": {"w":128,"h":31},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:b570859aeeb8df1492dd58ee63ac8b04:5058e3ab6c4a7caa8f94fc2213c0017a:56b30a1ee4dfe02e2e02f5dff21e73cd$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b87e2290ba7322ab27031094c16c1d7c:5c4cd1b0e0e0d6878843666dd981180f:56b30a1ee4dfe02e2e02f5dff21e73cd$"
 }
 }
