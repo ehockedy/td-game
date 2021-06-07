@@ -174,7 +174,7 @@ export class MapComponent extends BaseComponent {
                     let midCol = this.cols / 2
                     let shiftX = map_square_sprite.x
                     let shiftY = map_square_sprite.y
-                    let scale = Math.max(Math.abs(c - midCol) / (midCol), 0.6) // Scale to show perspective of side walls
+                    let scale = Math.max(Math.abs(c - midCol) / (midCol), 0.5) // Scale to show perspective of side walls
 
                     // Exposed wall at the top of the path sprite
                     if (direction == 'r' || direction == 'l' || direction == 'ur' || direction == 'ld' || direction == 'rd' || direction == 'ul') {
@@ -188,14 +188,14 @@ export class MapComponent extends BaseComponent {
                         this.topWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY + this.mapSpriteSize - texture.height, 1, 1, 0))
                     }
 
-                    // // Edge at the left of the path sprite
+                    // Edge at the left of the path sprite
                     if (direction == 'u' || direction == 'd' || direction == 'ur' || direction == 'ld' || direction == 'dr' || direction == 'lu') {
                         if (c <= midCol) {
                             let texture = this.wallTextures["valley_wall_side_2.png"]
                             this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + texture.height*scale/1.5, shiftY, 1, scale, Math.PI/2))
                         } else {
                             let texture = this.wallTextures["valley_wall_lower_1.png"]
-                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + texture.height*scale, shiftY, 1, scale, Math.PI/2))
+                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + texture.height*1, shiftY, 1, 1, Math.PI/2))
                         }
                     }
 
@@ -203,10 +203,10 @@ export class MapComponent extends BaseComponent {
                     if (direction == 'u' || direction == 'd' || direction == 'ru' || direction == 'dl' || direction == 'rd' || direction == 'ul') {
                         if (c >= midCol) {
                             let texture = this.wallTextures["valley_wall_side_2.png"]
-                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX - texture.height*scale/2 + texture.width, shiftY + texture.width, 1, scale, -Math.PI/2))
+                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX - texture.height*scale/2 + this.mapSpriteSize, shiftY + this.mapSpriteSize, 1, scale, -Math.PI/2))
                         } else {
                             let texture = this.wallTextures["valley_wall_lower_1.png"]
-                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX - texture.height*scale + texture.width, shiftY + texture.width, 1, scale, -Math.PI/2))
+                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX - texture.height*1 + this.mapSpriteSize, shiftY + this.mapSpriteSize, 1, 1, -Math.PI/2))
                         }
                     }
                 } else {
@@ -297,21 +297,22 @@ export class MapComponent extends BaseComponent {
             for (let row = -rowsPerSide; row <= rowsPerSide; row++) {
                 const x_pos = col * this.mapSpriteSize
                 const y_pos = row * this.mapSpriteSize
+                const isDiagonal = (col % 2 ==0)
+
                 // Tiles at top and bottom of even numbered columbs are a slant
-                let tileType = (Math.abs(row) == rowsPerSide && col % 2 == 0) ? "track_half_1.png" : "track_straight_1.png"
+                let tileType = (Math.abs(row) == rowsPerSide && isDiagonal) ? "track_half_1.png" : "track_straight_1.png"
                 let floor = new PIXI.Sprite(this.mapTextures[tileType])
                 floor.x = x_pos
                 floor.y = y_pos
 
                 // Final tile at bottom of even rows must be flipped because it is slanted
-                if (row == rowsPerSide && col % 2 == 0) {
+                if (row == rowsPerSide && isDiagonal) {
                     floor.scale.y = -1
                     floor.y += floor.height
                 }
                 baseCampContainer.addChild(floor)
 
                 // Add valley sides to the top and bottom
-                const isDiagonal = (col%2==0)
                 if (row == -rowsPerSide) {
                     let texture = this.wallTextures[isDiagonal ? "valley_wall_diagonal_1.png" : "valley_wall_1.png"]
                     baseCampContainer.addChild(
