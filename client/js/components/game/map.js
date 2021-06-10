@@ -178,24 +178,24 @@ export class MapComponent extends BaseComponent {
 
                     // Exposed wall at the top of the path sprite
                     if (direction == 'r' || direction == 'l' || direction == 'ur' || direction == 'ld' || direction == 'rd' || direction == 'ul') {
-                        let texture = this.wallTextures["valley_wall_1.png"]
-                        this.topWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY - texture.height/1.5, 1, 1, 0))
+                        let texture = this.wallTextures["valley_wall_side_2.png"]
+                        this.topWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY, 1, 1, 0))
                     }
 
                     // Cliff edge at the bottom of the path sprite
                     if (direction == 'r' || direction == 'l' || direction == 'dr' || direction == 'lu' || direction == 'dl' || direction == 'ru') {
                         let texture = this.wallTextures["valley_wall_lower_1.png"]
-                        this.topWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY + this.mapSpriteSize - texture.height, 1, 1, 0))
+                        this.topWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY + this.mapSpriteSize, 1, 1, 0))
                     }
 
                     // Edge at the left of the path sprite
                     if (direction == 'u' || direction == 'd' || direction == 'ur' || direction == 'ld' || direction == 'dr' || direction == 'lu') {
                         if (c <= midCol) {
                             let texture = this.wallTextures["valley_wall_side_2.png"]
-                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + texture.height*scale/1.5, shiftY, 1, scale, Math.PI/2))
+                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY, 1, scale, Math.PI/2))
                         } else {
                             let texture = this.wallTextures["valley_wall_lower_1.png"]
-                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + texture.height*1, shiftY, 1, 1, Math.PI/2))
+                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY, 1, 1, Math.PI/2))
                         }
                     }
 
@@ -203,10 +203,10 @@ export class MapComponent extends BaseComponent {
                     if (direction == 'u' || direction == 'd' || direction == 'ru' || direction == 'dl' || direction == 'rd' || direction == 'ul') {
                         if (c >= midCol) {
                             let texture = this.wallTextures["valley_wall_side_2.png"]
-                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX - texture.height*scale/2 + this.mapSpriteSize, shiftY + this.mapSpriteSize, 1, scale, -Math.PI/2))
+                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + this.mapSpriteSize, shiftY + this.mapSpriteSize, 1, scale, -Math.PI/2))
                         } else {
                             let texture = this.wallTextures["valley_wall_lower_1.png"]
-                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX - texture.height*1 + this.mapSpriteSize, shiftY + this.mapSpriteSize, 1, 1, -Math.PI/2))
+                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + this.mapSpriteSize, shiftY + this.mapSpriteSize, 1, 1, -Math.PI/2))
                         }
                     }
                 } else {
@@ -253,6 +253,7 @@ export class MapComponent extends BaseComponent {
 
     generateMapWallSprite(texture, shiftX, shiftY, scaleX, scaleY, rotation) {
         let sprite = new PIXI.Sprite(texture)
+        sprite.anchor.set(0, 0.5)
         sprite.setTransform(
             shiftX, shiftY, // position
             scaleX, scaleY, // scale
@@ -317,8 +318,8 @@ export class MapComponent extends BaseComponent {
                     let texture = this.wallTextures[isDiagonal ? "valley_wall_diagonal_1.png" : "valley_wall_1.png"]
                     baseCampContainer.addChild(
                         this.generateMapWallSprite(texture,
-                            x_pos + (isDiagonal ? -this.mapSpriteSize*0.12 : 0),
-                            y_pos - texture.height/1.5 + (isDiagonal ? this.mapSpriteSize*1.1 : 0),
+                            x_pos,
+                            y_pos + (isDiagonal ? this.mapSpriteSize : 0),
                             1, 1,
                             isDiagonal ? -Math.PI/4 : 0)
                     )
@@ -326,8 +327,8 @@ export class MapComponent extends BaseComponent {
                     let texture = this.wallTextures[isDiagonal ? "valley_wall_lower_diagonal_1.png" : "valley_wall_lower_1.png"]
                     baseCampContainer.addChild(
                         this.generateMapWallSprite(texture,
-                            x_pos + (isDiagonal ? texture.height / 2 : 0),
-                            y_pos - (texture.height / 2) + (isDiagonal ? 0 : this.mapSpriteSize - (texture.height/2)),
+                            x_pos,
+                            y_pos + (isDiagonal ? 0 : this.mapSpriteSize),
                             1, 1,
                             isDiagonal ? Math.PI/4 : 0)
                     )
