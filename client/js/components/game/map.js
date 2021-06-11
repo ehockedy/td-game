@@ -65,9 +65,27 @@ export class MapComponent extends BaseComponent {
         // Keep things in a texture cache to make rendering fast and efficient
         this.mapTextures = PIXI.Loader.shared.resources["client/assets/map/base_tiles/base_tiles.json"].textures
         this.rocksTextures = PIXI.Loader.shared.resources["client/assets/map/path_decorations/path_decorations.json"].textures
-        this.wallTextures = PIXI.Loader.shared.resources["client/assets/map/path_sides/path_sides.json"].textures
         this.mapFeaturesTextures = PIXI.Loader.shared.resources["client/assets/map/land_patterns/land_patterns.json"].textures
         this.mapDecorationsTextures = PIXI.Loader.shared.resources["client/assets/map/land_decorations/land_decorations.json"].textures
+
+        // Parse wall textures using filenames
+        let wt = PIXI.Loader.shared.resources["client/assets/map/path_sides/path_sides.json"].textures
+        this.wallTextures = {
+            "exposed": {
+                "diagonal": [],
+                "horizontal": []
+            },
+            "hidden": {
+                "diagonal": [],
+                "horizontal": []
+            },
+        }
+        for (const [key, value] of Object.entries(wt)) {
+            let nameSplit = key.split('/')
+            this.wallTextures[nameSplit[0]][nameSplit[1]].push(value)
+            // todo error checking
+        }
+        console.log(this.wallTextures)
 
         // Animated textures
         let flagTextures = PIXI.Loader.shared.resources["client/assets/camp/flag1/flag1.json"].textures
@@ -85,6 +103,20 @@ export class MapComponent extends BaseComponent {
 
     getHeight() {
         return this.height_px
+    }
+
+    _getRandomWallTexture(type, isDiagonal) {
+        let arr = this.wallTextures[type][isDiagonal ? "diagonal" : "horizontal"]
+        return arr[Math.floor(Math.random() * arr.length)]
+        // TODO error checking
+    }
+
+    getRandomExposedWallTexture(isDiagonal=false) {
+        return this._getRandomWallTexture("exposed", isDiagonal)
+    }
+
+    getRandomHiddenWallTexture(isDiagonal=false) {
+        return this._getRandomWallTexture("hidden", isDiagonal)
     }
 
     disableCacheAsBitmap() {
@@ -174,39 +206,40 @@ export class MapComponent extends BaseComponent {
                     let midCol = this.cols / 2
                     let shiftX = map_square_sprite.x
                     let shiftY = map_square_sprite.y
-                    let scale = Math.max(Math.abs(c - midCol) / (midCol), 0.5) // Scale to show perspective of side walls
+                    let minimumScale = 0.6
+                    let scale = minimumScale + (1-minimumScale) * (Math.abs(c - midCol) / (midCol)) // Scale to show perspective of side walls
 
                     // Exposed wall at the top of the path sprite
                     if (direction == 'r' || direction == 'l' || direction == 'ur' || direction == 'ld' || direction == 'rd' || direction == 'ul') {
-                        let texture = this.wallTextures["valley_wall_side_2.png"]
+                        let texture = this.getRandomExposedWallTexture()
                         this.topWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY, 1, 1, 0))
                     }
 
                     // Cliff edge at the bottom of the path sprite
                     if (direction == 'r' || direction == 'l' || direction == 'dr' || direction == 'lu' || direction == 'dl' || direction == 'ru') {
-                        let texture = this.wallTextures["valley_wall_lower_1.png"]
+                        let texture = this.getRandomHiddenWallTexture()
                         this.topWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY + this.mapSpriteSize, 1, 1, 0))
                     }
 
                     // Edge at the left of the path sprite
                     if (direction == 'u' || direction == 'd' || direction == 'ur' || direction == 'ld' || direction == 'dr' || direction == 'lu') {
                         if (c <= midCol) {
-                            let texture = this.wallTextures["valley_wall_side_2.png"]
+                            let texture = this.getRandomExposedWallTexture()
                             this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY, 1, scale, Math.PI/2))
                         } else {
-                            let texture = this.wallTextures["valley_wall_lower_1.png"]
-                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY, 1, 1, Math.PI/2))
+                            let texture = this.getRandomHiddenWallTexture()
+                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX, shiftY, 1, scale, Math.PI/2))
                         }
                     }
 
                     // Edge at the right of the path sprite
                     if (direction == 'u' || direction == 'd' || direction == 'ru' || direction == 'dl' || direction == 'rd' || direction == 'ul') {
                         if (c >= midCol) {
-                            let texture = this.wallTextures["valley_wall_side_2.png"]
+                            let texture = this.getRandomExposedWallTexture()
                             this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + this.mapSpriteSize, shiftY + this.mapSpriteSize, 1, scale, -Math.PI/2))
                         } else {
-                            let texture = this.wallTextures["valley_wall_lower_1.png"]
-                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + this.mapSpriteSize, shiftY + this.mapSpriteSize, 1, 1, -Math.PI/2))
+                            let texture = this.getRandomHiddenWallTexture()
+                            this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + this.mapSpriteSize, shiftY + this.mapSpriteSize, 1, scale, -Math.PI/2))
                         }
                     }
                 } else {
@@ -287,7 +320,7 @@ export class MapComponent extends BaseComponent {
             flag.y = y
             flag.pivot.set(0.5)
             const angleRange = 30
-            flag.angle = angle //20 * (Math.random() > 0.5 ? -1 : 1) //Math.floor(Math.random()*angleRange) - angleRange/2
+            flag.angle = angle
             flag.scale.set(scale)
             baseCampContainer.addChild(flag)
         }
@@ -315,7 +348,7 @@ export class MapComponent extends BaseComponent {
 
                 // Add valley sides to the top and bottom
                 if (row == -rowsPerSide) {
-                    let texture = this.wallTextures[isDiagonal ? "valley_wall_diagonal_1.png" : "valley_wall_1.png"]
+                    let texture = this.getRandomExposedWallTexture(true)
                     baseCampContainer.addChild(
                         this.generateMapWallSprite(texture,
                             x_pos,
@@ -324,7 +357,7 @@ export class MapComponent extends BaseComponent {
                             isDiagonal ? -Math.PI/4 : 0)
                     )
                 } else if (row == rowsPerSide) {
-                    let texture = this.wallTextures[isDiagonal ? "valley_wall_lower_diagonal_1.png" : "valley_wall_lower_1.png"]
+                    let texture =  this.getRandomHiddenWallTexture(true)
                     baseCampContainer.addChild(
                         this.generateMapWallSprite(texture,
                             x_pos,
