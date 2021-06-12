@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="9.8067272"
-     inkscape:cx="34.029739"
-     inkscape:cy="26.262231"
+     inkscape:zoom="19.613454"
+     inkscape:cx="14.176842"
+     inkscape:cy="55.204221"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -673,7 +673,7 @@
     <path
        id="rect8-6"
        style="fill:#a05a2c;stroke-width:0.192584"
-       d="m -0.264583,17.255388 17.991666,0.330728 0.264584,0.330729 -0.79375,0.868572 -1.852084,0.13229 -1.322916,-0.330728 -2.116667,0.330728 -1.5875,-0.330728 L 6.6145833,18.917707 4.7625,18.586979 2.9104167,18.917707 1.1545483,18.77674 -0.264583,19.05 -0.79374967,18.784332 -1.058333,18.518664 Z"
+       d="m 0.95730733,15.928134 17.99166567,0.330728 0.264584,0.330729 -0.79375,0.868572 -1.852084,0.13229 -1.322916,-0.330728 -2.116667,0.330728 -1.5875,-0.330728 -3.7041667,0.330728 -1.852083,-0.330728 -1.852084,0.330728 -1.755868,-0.140967 -1.41913097,0.27326 -0.529167,-0.265668 -0.264583,-0.265668 z"
        sodipodi:nodetypes="cccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -681,7 +681,7 @@
     <path
        id="rect10-54"
        style="fill:#784421;stroke-width:1.03089"
-       d="m -0.19242007,18.516495 1.34696837,-0.260247 2.155152,0.260244 1.616364,-0.260244 2.14059,0.364343 3.5166787,-0.35892 1.5875,0.265668 2.116667,-0.265668 1.322917,0.265668 H 17.4625 l -0.264583,0.265668 -1.852084,0.1247 -1.322916,-0.330728 -2.116667,0.330728 -1.5875,-0.330728 L 6.6145833,18.917707 4.7625,18.586979 2.9104167,18.917707 1.1545483,18.77674 -0.19242007,19.036986 Z"
+       d="m 1.0294703,17.189241 1.346968,-0.260247 2.155152,0.260244 1.616364,-0.260244 2.14059,0.364343 3.5166787,-0.35892 1.5875,0.265668 2.116667,-0.265668 1.322917,0.265668 h 1.852083 l -0.264583,0.265668 -1.852084,0.1247 -1.322916,-0.330728 -2.116667,0.330728 -1.5875,-0.330728 -3.7041667,0.330728 -1.852083,-0.330728 -1.852084,0.330728 -1.755868,-0.140967 -1.346968,0.260246 z"
        sodipodi:nodetypes="ccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -689,7 +689,7 @@
     <path
        id="rect918-1"
        style="fill:#502d16;stroke:none;stroke-width:0.261176;stroke-opacity:1"
-       d="M 1.1545483,18.25625 3.3097003,18.516495 2.9104167,18.917707 1.1545483,18.77674 Z"
+       d="m 2.3764383,16.928996 2.155152,0.260245 -0.399284,0.401212 -1.755868,-0.140967 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -697,7 +697,7 @@
     <path
        id="rect918-2-6"
        style="fill:#502d16;stroke:none;stroke-width:0.269742;stroke-opacity:1"
-       d="m 4.9260643,18.25625 2.14059,0.364342 -0.452071,0.297115 L 4.7625,18.586979 Z"
+       d="m 6.1479543,16.928996 2.14059,0.364342 -0.452071,0.297115 -1.852083,-0.330728 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -705,7 +705,7 @@
     <path
        id="rect918-5-6"
        style="fill:#502d16;stroke:none;stroke-width:0.269742;stroke-opacity:1"
-       d="m 10.583336,18.25625 1.587497,0.271089 -0.264583,0.390368 -1.5875,-0.330728 z"
+       d="m 11.805226,16.928996 1.587497,0.271089 -0.264583,0.390368 -1.5875,-0.330728 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -713,7 +713,7 @@
     <path
        id="rect10-5-2"
        style="fill:#784421;stroke-width:1.33805"
-       d="m 0.07697393,16.955023 v 0.260246 l 1.39793537,-0.260245 1.565397,0.260245 2.628411,-0.260245 3.327116,0.509645 1.5874997,-0.531336 2.155155,0.325312 2.078179,-0.325312 1.322916,0.531336 1.322917,-0.200606 0.529167,0.661457 H 15.875 L 14.552083,17.594791 11.90625,17.92552 10.31875,17.594791 8.4281823,18.256249 5.2916667,17.92552 2.6458333,18.25625 1.4239403,17.996004 0.07697393,18.25625 Z"
+       d="m 1.2988643,15.627769 v 0.260246 l 1.397935,-0.260245 1.565397,0.260245 2.628411,-0.260245 3.3271157,0.509645 1.5875,-0.531336 2.155155,0.325312 2.078179,-0.325312 1.322916,0.531336 1.322917,-0.200606 0.529167,0.661457 H 17.09689 l -1.322917,-0.330729 -2.645833,0.330729 -1.5875,-0.330729 -1.8905677,0.661458 -3.136516,-0.330729 -2.645833,0.33073 -1.221893,-0.260246 -1.346966,0.260246 z"
        sodipodi:nodetypes="cccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -721,7 +721,7 @@
     <path
        id="rect918-7-23"
        style="fill:#502d16;stroke:none;stroke-width:0.301581;stroke-opacity:1"
-       d="m 1.4239433,16.955024 1.616363,0.260245 -0.394473,1.040981 -1.22189,-0.260246 z"
+       d="m 2.6458333,15.62777 1.616363,0.260245 -0.394473,1.040981 -1.22189,-0.260246 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -729,7 +729,7 @@
     <path
        id="rect918-2-7-4"
        style="fill:#502d16;stroke:none;stroke-width:0.301581;stroke-opacity:1"
-       d="m 5.6687173,16.955024 3.327116,0.509645 -0.567648,0.791581 -3.1365186,-0.33073 z"
+       d="m 6.8906073,15.62777 3.3271157,0.509645 -0.5676477,0.791581 -3.136519,-0.33073 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -737,7 +737,7 @@
     <path
        id="rect918-5-7-7"
        style="fill:#502d16;stroke:none;stroke-width:0.301581;stroke-opacity:1"
-       d="m 10.561493,16.955023 2.176995,0.303622 -0.832238,0.666875 -1.5875,-0.330729 z"
+       d="m 11.783383,15.627769 2.176995,0.303622 -0.832238,0.666875 -1.5875,-0.330729 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -745,7 +745,7 @@
     <path
        id="rect918-7-23-3"
        style="fill:#502d16;stroke:none;stroke-width:0.301581;stroke-opacity:1"
-       d="m -0.26458333,17.264063 0.34155726,-0.0488 v 1.040982 l -1.00426702,0.04115 z"
+       d="m 0.95730633,15.936809 0.34155797,-0.0488 v 1.040982 l -1.00426697,0.04115 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -753,7 +753,7 @@
     <path
        id="rect918-7-23-9"
        style="fill:#502d16;stroke:none;stroke-width:0.301581;stroke-opacity:1"
-       d="m -1.0583333,18.527339 0.86591323,-0.01088 V 19.03695 L -0.79375,18.793007 Z"
+       d="m 0.16355633,17.200085 0.86591397,-0.01088 v 0.520491 L 0.42814033,17.465753 Z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -761,7 +761,7 @@
     <path
        id="rect918-5-7-7-3"
        style="fill:#502d16;stroke:none;stroke-width:0.301582;stroke-opacity:1"
-       d="M 14.816667,16.933333 16.139583,17.464669 15.875,17.92552 14.552083,17.594791 Z"
+       d="m 16.038557,15.606079 1.322916,0.531336 -0.264583,0.460851 -1.322917,-0.330729 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -769,7 +769,7 @@
     <path
        id="rect918-5-6-6"
        style="fill:#502d16;stroke:none;stroke-width:0.269741;stroke-opacity:1"
-       d="m 14.2875,18.272517 1.322917,0.254822 -0.264584,0.390368 -1.322916,-0.330728 z"
+       d="m 15.50939,16.945263 1.322917,0.254822 -0.264584,0.390368 -1.322916,-0.330728 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_diagonal_1.png"
        inkscape:export-xdpi="128"
@@ -2082,14 +2082,6 @@
        inkscape:export-xdpi="127.99697"
        inkscape:export-ydpi="127.99697" />
     <path
-       id="rect1120-1"
-       style="fill:#a05a2c;fill-opacity:1;stroke-width:0.489302"
-       d="m 17.727082,21.431252 h 12.699999 l 2e-6,1.587498 h -12.7 z"
-       sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\valley_wall_1.png"
-       inkscape:export-xdpi="127.99697"
-       inkscape:export-ydpi="127.99697" />
-    <path
        id="rect1038-18-3"
        style="fill:#61361b;fill-opacity:1;stroke:none;stroke-width:0.472515;stroke-opacity:1"
        d="m 15.264517,-0.20349424 h 0.79375 l 1.5875,-0.35277772 0.79375,0.52916659 0.529167,-0.17638887 L 19.84375,7.9999984e-8 21.118973,-0.22559389 22.177306,-0.49017714 23.283333,0.26458333 24.897813,-0.13489882 25.929167,7.9999984e-8 V 1.0583332 h -12.7 V 7.9999984e-8 h 0.79375 z"
@@ -2289,19 +2281,9 @@
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\1.png"
        inkscape:export-xdpi="127.99697"
        inkscape:export-ydpi="127.99697" />
-    <rect
-       style="fill:#d38d5f;fill-opacity:1;stroke-width:0.489304"
-       id="rect1971"
-       width="12.7"
-       height="1.5875002"
-       x="0.52916688"
-       y="14.552083"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\1.png"
-       inkscape:export-xdpi="127.99697"
-       inkscape:export-ydpi="127.99697" />
     <path
        id="rect1971-2-5"
-       style="fill:#c66f37;fill-opacity:1;stroke-width:0.689361"
+       style="fill:#a45c2e;fill-opacity:1;stroke-width:0.689361"
        d="m 12.964583,8.8605447 1.058334,-0.393878 1.058333,0.393878 1.322917,-0.393878 2.645833,0.787756 3.175,-0.787756 1.587501,0.393878 0.529166,-0.393878 1.322917,0.393878 v 0.787756 L 24.605778,9.2047227 24.077083,9.525 23.018751,9.2544227 l -1.648829,-0.27887 -1.790755,0.672748 -1.822666,-0.10041 -1.007435,-0.291189 -1.403233,0.391599 -1.306366,-0.602461 -1.074884,0.602461 z"
        sodipodi:nodetypes="ccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\2.png"
@@ -2317,8 +2299,8 @@
        inkscape:export-ydpi="127.99697" />
     <path
        id="rect1971-2-40-5"
-       style="fill:#af6231;fill-opacity:1;stroke-width:0.689361"
-       d="m 12.964583,9.6483007 0.896455,-0.464165 1.589722,0.542267 1.322917,-0.393879 2.872498,0.503753 1.796644,-0.908457 2.369682,0.720481 0.793749,-0.387884 1.058334,0.387884 V 10.43606 L 24.606251,10.042181 24.023912,10.258557 23.018751,10.04218 21.899089,9.4987247 19.579167,10.43606 17.756501,10.335648 16.342839,10.027892 15.345833,10.43606 14.039467,9.8335967 12.964583,10.43606 Z"
+       style="fill:#864b25;fill-opacity:1;stroke-width:0.689361"
+       d="m 12.964583,9.6483007 0.896455,-0.464165 1.589722,0.542267 1.322917,-0.393879 2.872498,0.503753 1.796644,-0.908457 2.369682,0.720481 0.793749,-0.387884 1.058334,0.387884 V 10.171477 L 24.606251,10.042181 24.023912,10.258557 23.018751,10.04218 21.899089,9.4987247 19.579173,10.481678 v -0.11731 L 16.342839,10.027892 15.345833,10.43606 14.039467,9.8335967 12.964583,10.171477 Z"
        sodipodi:nodetypes="ccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\2.png"
        inkscape:export-xdpi="127.99697"
@@ -2334,14 +2316,14 @@
     <path
        id="rect10-54-8-41-6-4-7"
        style="fill:#502d16;fill-opacity:1;stroke-width:1.68123"
-       d="m 25.664584,10.042182 -1.058333,-1e-6 -0.542657,0.09814 -2.103183,-0.6549423 -2.38125,0.7877573 -3.174999,-0.3440173 -1.058329,0.1130623 -1.320536,-0.3122163 -1.060714,0.3122163 0.0024,0.278586 -0.0024,0.115282 1.058365,-0.393868 1.322921,0.393865 1.058334,-0.393877 3.174995,0.624833 2.38125,-1.0187013 2.116667,0.7877593 0.54545,-0.244506 1.04205,0.244494 z"
+       d="m 25.664583,10.054167 -1.058332,-0.01199 -0.542657,0.09814 -2.103183,-0.6549423 -2.381244,0.8333753 -3.175005,-0.3896353 -1.058329,0.1130623 -1.320536,-0.3122163 -1.060714,0.3242023 0.0024,0.149301 -0.0024,0.115282 1.058365,-0.276569 1.322921,0.393865 1.058334,-0.393877 3.17497,0.439513 2.381275,-0.8333813 2.116667,0.7877593 0.54545,-0.244506 1.042018,0.127196 z"
        sodipodi:nodetypes="cccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\2.png"
        inkscape:export-xdpi="127.99697"
        inkscape:export-ydpi="127.99697" />
     <path
        id="rect1971-2-5-2"
-       style="fill:#c66f37;fill-opacity:1;stroke-width:0.689361"
+       style="fill:#a45c2e;fill-opacity:1;stroke-width:0.689361"
        d="m 0,8.8605447 1.5716303,-0.173799 0.80962,-0.090784 1.574015,0.1562136 L 5.8073436,9.0210044 9.2604172,8.466667 10.318751,8.670268 11.641667,8.4666667 12.7,8.8605447 v 0.787756 L 11.365387,9.1704927 10.530161,9.2805227 8.453177,8.8917094 8.4053392,8.9755527 6.3365105,9.414882 5.0135936,9.6854597 4.3001643,9.54221 2.6458333,9.3837174 1.5881803,9.2659188 0,9.6483007 Z"
        sodipodi:nodetypes="ccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\1.png"
@@ -2350,15 +2332,15 @@
     <path
        id="rect10-54-8-41-6-6-0"
        style="fill:#502d16;fill-opacity:1;stroke-width:1.68123"
-       d="m 0,8.4666667 1.5716303,0.220079 0.80962,-0.090784 1.574015,0.1562137 1.8520783,-0.125049 3.4530776,-0.2735223 1.0583308,0.316664 1.320509,-0.515829 L 12.7,8.4666667 12.6976,8.7452571 12.7,8.8605451 11.641667,8.4666667 10.318789,9.0641468 9.2604537,8.4666677 5.8073801,9.0210051 3.9552862,8.91511 2.3677603,8.8917093 1.5553463,8.8361307 0,8.8605457 Z"
+       d="m 0,8.4666667 1.5716303,0.220079 0.80962,-0.090784 1.574015,0.1562137 1.8520783,-0.125049 3.4530776,-0.2735223 1.0583308,0.316664 1.322915,-0.2036014 1.058333,0 L 12.6976,8.7452571 12.7,8.8605451 11.695627,8.6015656 10.318789,9.0641468 9.2604537,8.4666677 5.8073801,9.0210051 3.9552862,8.91511 2.3677603,8.8917093 1.5553463,8.8361307 0,8.8605457 Z"
        sodipodi:nodetypes="cccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\1.png"
        inkscape:export-xdpi="127.99697"
        inkscape:export-ydpi="127.99697" />
     <path
        id="rect1971-2-40-5-6"
-       style="fill:#af6231;fill-opacity:1;stroke-width:0.689361"
-       d="m 0,9.6483007 1.4097513,-0.244086 1.341009,0.057604 1.574015,0.1562137 L 6.4035184,9.602857 8.4782361,8.9278197 10.318751,9.4580237 11.363593,9.1562927 12.7,9.6483007 V 10.436059 L 11.36586,10.00795 10.530161,10.06828 9.5250016,9.8519027 8.453177,9.420877 l -2.38125,0.79375 v 0 L 3.907386,10.569056 2.6458333,10.171476 1.5881803,10.053675 0,10.436059 Z"
+       style="fill:#864b25;fill-opacity:1;stroke-width:0.689361"
+       d="m 0,9.6483007 1.4097513,-0.244086 1.341009,0.057604 1.574015,0.1562137 L 6.4035184,9.602857 8.4782361,8.9278197 10.318751,9.4580237 11.363593,9.1562927 12.7,9.6483007 V 10.171476 L 11.36586,10.00795 10.530161,10.06828 9.5250016,9.8519027 8.453177,9.420877 l -2.38125,0.79375 v 0 L 5.2303027,10.569056 2.6458333,10.054167 1.3370867,10.422382 0,10.171476 Z"
        sodipodi:nodetypes="ccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\1.png"
        inkscape:export-xdpi="127.99697"
@@ -2374,15 +2356,15 @@
     <path
        id="rect10-54-8-41-6-4-7-3"
        style="fill:#502d16;fill-opacity:1;stroke-width:1.68123"
-       d="M 12.7,10.042181 11.36586,10.00795 10.569843,9.9500427 8.453177,9.420876 6.3365044,10.039716 3.968709,10.470283 2.6458333,9.7775967 1.5740103,9.9500427 0,10.042183 0.0024,10.320769 0,10.436051 l 1.5716613,-0.173789 1.074208,-0.0908 1.3228807,0.411871 2.103177,-0.368707 2.9239381,-0.5663253 1.5874989,0.5974813 0.79881,-0.08846 1.317857,0.278724 z"
+       d="M 12.7,10.054167 11.36586,10.00795 10.569843,9.9500427 8.453177,9.420876 6.3365044,10.039716 5.2916257,10.470283 2.6458333,9.7775967 1.3229167,10.31875 0,10.054167 0.0024,10.056186 0,10.31875 1.3070778,10.4556 2.6458333,10.054167 5.2916667,10.583333 6.071927,10.214626 8.9958651,9.6483007 10.583364,10.245782 11.382174,10.157322 12.7,10.31875 Z"
        sodipodi:nodetypes="cccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\1.png"
        inkscape:export-xdpi="127.99697"
        inkscape:export-ydpi="127.99697" />
     <path
        id="rect1971-2-5-2-6"
-       style="fill:#c66f37;fill-opacity:1;stroke-width:0.689361"
-       d="m 26.19375,8.8605447 0.810066,-0.543257 1.584706,0.3827966 1.838541,-0.2670679 1.58752,0.692111 2.135741,-0.6764383 1.039223,0.017967 1.055979,-0.1829326 1.325308,0.6444633 1.322917,-0.067647 v 0.7877567 l -1.583322,-0.171347 -0.0042,0.04805 -2.659323,-0.6332959 -0.04784,0.08384 -2.916097,0.490765 -0.475649,0.219143 -0.80487,-0.636162 -2.196983,0.262305 -1.228419,-0.2934141 -0.783321,0.6301121 z"
+       style="fill:#a45c2e;fill-opacity:1;stroke-width:0.689361"
+       d="m 26.19375,8.8605447 0.810066,-0.543257 1.584706,0.3827966 1.838541,-0.2670679 1.58752,0.692111 2.116663,-0.8099814 1.058301,0.1515101 1.05837,-0.2645727 1.322917,0.7261034 1.322917,-0.067647 v 0.7877567 l -1.583322,-0.171347 -0.0042,0.04805 -2.659323,-0.6332959 -0.04784,0.08384 -2.916097,0.490765 -0.475649,0.219143 -0.80487,-0.636162 -2.196983,0.262305 -1.228419,-0.2934141 -0.783321,0.6301121 z"
        sodipodi:nodetypes="cccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\3.png"
        inkscape:export-xdpi="127.99697"
@@ -2390,15 +2372,15 @@
     <path
        id="rect10-54-8-41-6-6-0-2"
        style="fill:#502d16;fill-opacity:1;stroke-width:1.68123"
-       d="M 26.19375,8.4666667 27.003816,8.317288 28.588522,8.7000846 30.427063,8.4330167 32.014583,8.73125 34.150328,8.3356264 35.189547,8.466656 36.245526,8.2837234 37.570833,8.73125 38.89375,8.4666667 38.89255,8.6059593 38.89135,8.745252 38.89255,8.802896 38.89375,8.86054 37.570833,8.9958333 36.247917,8.4666667 35.189552,8.8605347 34.150328,8.4486901 32.014588,9.1251284 30.427052,8.5959514 28.575,8.9958333 26.9875,8.4666667 26.193718,8.8605347 Z"
+       d="M 26.19375,8.4666667 27.003816,8.317288 28.588522,8.7000846 30.427063,8.4330167 32.014583,8.73125 34.13125,8.2020833 35.189547,8.466656 36.247917,8.2020833 37.570833,8.73125 38.89375,8.4666667 38.89255,8.6059593 38.89135,8.745252 38.89255,8.802896 38.89375,8.86054 37.570833,8.9958333 36.250308,8.3850266 35.189552,8.8605347 34.13125,8.315147 32.014588,9.1251284 30.427052,8.5959514 28.575,8.9958333 26.9875,8.4666667 26.193718,8.8605347 Z"
        sodipodi:nodetypes="cccccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\3.png"
        inkscape:export-xdpi="127.99697"
        inkscape:export-ydpi="127.99697" />
     <path
        id="rect1971-2-40-5-6-3"
-       style="fill:#af6231;fill-opacity:1;stroke-width:0.689361"
-       d="m 26.19375,9.6483014 0.604892,-0.4918161 1.511775,0.2332161 2.116667,-0.264583 1.322916,0.529166 2.921986,-0.7264727 1.311348,0.4618897 1.325301,0.07305 1.585116,0.185546 v 0.7877576 l -3.172733,-0.7238646 -0.8357,0.06033 -1.812473,0.4391496 v 0 l -1.640987,0.310034 v 0 l -1.330722,0.04733 -1.261553,-0.397568 -0.529166,0.01199 -2.116667,0.252597 z"
+       style="fill:#864b25;fill-opacity:1;stroke-width:0.689361"
+       d="m 26.19375,9.6483014 0.604892,-0.4918161 1.511775,0.2332161 2.116667,-0.264583 1.322916,0.529166 2.921986,-0.7264727 1.311348,0.4618897 1.325301,0.07305 1.585116,0.185546 0,0.5231946 L 35.721018,9.7121904 35.149901,10.172403 33.337428,9.6825034 33.866667,9.525 31.75,10.31875 v 0 L 30.365719,10.039867 29.104166,9.6422993 28.575,9.6542893 26.19375,10.171499 Z"
        sodipodi:nodetypes="ccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\3.png"
        inkscape:export-xdpi="127.99697"
@@ -2414,15 +2396,15 @@
     <path
        id="rect10-54-8-41-6-4-7-3-6"
        style="fill:#502d16;fill-opacity:1;stroke-width:1.68123"
-       d="M 38.893751,10.04218 35.721018,9.7121944 34.925,9.6542844 33.602083,10.054167 31.696435,10.34681 30.1625,10.31875 29.36875,9.9188824 l -1.072503,0.1609606 -2.102497,-0.03765 0.0024,0.278586 -0.0024,0.115282 2.100148,-0.044 0.545721,-0.220587 1.322881,0.411859 1.269358,-0.06161 2.183675,-0.08261 1.322988,-0.4890706 1.309396,0.1041246 2.645864,0.381895 z"
+       d="M 38.89375,10.054187 35.721018,9.7121944 35.189583,10.054167 33.866666,9.5250003 32.014577,10.143856 30.427083,9.7895833 29.633333,9.3897157 28.56083,9.5506763 l -2.36708,0.5035197 0.0024,0.002 -0.0024,0.262554 2.364731,-0.4558847 0.545721,-0.220587 1.322881,0.4118587 1.322917,0.264603 2.130116,-0.4088227 1.322988,0.4399787 0.626626,-0.4441469 3.06402,0.4129919 z"
        sodipodi:nodetypes="cccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\3.png"
        inkscape:export-xdpi="127.99697"
        inkscape:export-ydpi="127.99697" />
     <path
        id="rect1971-2-5-8"
-       style="fill:#c66f37;fill-opacity:1;stroke-width:0.689361"
-       d="M 39.158333,8.8605447 41.275,8.73125 l 1.865606,-0.5603274 1.246848,0.6529087 0.856296,0.172002 1.852083,-0.5291666 1.905256,0.1834946 2.325705,-0.4957194 0.53154,0.7061024 v 0.787756 L 50.323533,8.9943393 49.2125,9.2604167 H 48.947917 L 46.758353,9.0435663 44.945545,9.5377049 43.127083,9.2604167 43.084702,9.095728 41.539583,9.525 40.48125,9.2604163 39.158333,9.6483003 Z"
+       style="fill:#a45c2e;fill-opacity:1;stroke-width:0.689361"
+       d="M 39.158333,8.8605447 41.275,8.73125 l 1.852083,-0.5291667 1.260371,0.621748 0.856296,0.172002 1.852083,-0.5291666 1.905256,0.1834946 2.328078,-0.448078 0.529167,0.658461 v 0.787756 L 50.323533,8.9943393 49.2125,9.2604167 H 48.947917 L 46.758353,9.0435663 44.945545,9.5377049 43.127083,9.2604167 43.084702,9.095728 41.539583,9.525 40.48125,9.2604163 39.158333,9.6483003 Z"
        sodipodi:nodetypes="ccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\4.png"
        inkscape:export-xdpi="127.99697"
@@ -2430,15 +2412,15 @@
     <path
        id="rect10-54-8-41-6-6-8"
        style="fill:#502d16;fill-opacity:1;stroke-width:1.68123"
-       d="M 39.158333,8.4666667 41.275,8.73125 43.140606,8.1709227 44.979167,8.73125 l 1.322917,-0.2645829 1.058337,-0.113063 1.640668,0.296558 2.325705,-0.4957194 0.531539,0.3122244 -0.0024,0.278586 0.0024,0.115288 L 51.329167,8.4666667 49.001077,9.0440371 47.095833,8.4666667 45.24375,8.9958333 44.387454,8.8238313 43.113593,8.2373385 41.539583,8.9958333 39.1583,8.8605417 Z"
+       d="M 39.158333,8.4666667 41.275,8.73125 43.127083,8.2020834 44.979167,8.73125 l 1.322917,-0.2645829 1.058337,-0.113063 1.640668,0.296558 2.328078,-0.448078 0.529166,0.264583 -0.0024,0.278586 0.0024,0.115288 L 51.329167,8.4666667 49.001077,9.0440371 47.095833,8.4666667 45.24375,8.9958333 44.387454,8.8238313 43.10007,8.2684992 41.539583,8.9958333 39.1583,8.8605417 Z"
        sodipodi:nodetypes="cccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\4.png"
        inkscape:export-xdpi="127.99697"
        inkscape:export-ydpi="127.99697" />
     <path
        id="rect1971-2-40-5-68"
-       style="fill:#af6231;fill-opacity:1;stroke-width:0.689361"
-       d="m 39.158333,9.6483007 1.144488,-0.249588 1.341689,0.32769 1.482573,-0.465986 1.88547,0.4652642 L 46.83125,8.9958333 49.001089,9.4379177 50.8,9.2604167 51.858334,9.6483007 V 10.43606 l -1.587501,-0.381892 -0.582339,0.216376 -1.005161,-0.216377 -1.395813,-0.4874287 -1.25002,0.4814377 -1.058334,0.141281 -2.24054,0.1956 -1.199043,0.051 -0.512647,-0.325894 -1.868603,0.325894 z"
+       style="fill:#864b25;fill-opacity:1;stroke-width:0.689361"
+       d="m 39.158333,9.6483007 1.144488,-0.249588 1.341689,0.32769 1.482573,-0.465986 1.88547,0.4652642 1.818697,-0.7298476 2.169839,0.4420844 1.798911,-0.177501 1.058334,0.387884 0,0.5231763 -1.339231,-0.2666653 -0.830609,0.3657323 -1.005161,-0.216377 -1.395813,-0.4874287 -1.25002,0.4814377 -1.058334,0.141281 -2.24054,0.1956 -1.199043,-0.33089 -0.512647,0.056 -1.868603,0.06133 z"
        sodipodi:nodetypes="ccccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\4.png"
        inkscape:export-xdpi="127.99697"
@@ -2454,9 +2436,49 @@
     <path
        id="rect10-54-8-41-6-4-7-7"
        style="fill:#502d16;fill-opacity:1;stroke-width:1.68123"
-       d="m 51.858334,10.042182 -1.587501,0.01199 -0.542657,0.09814 -2.379334,-0.5989154 -1.311348,0.3318594 -3.237545,0.401032 -1.260366,-0.244103 -0.526817,-0.03565 -1.854433,0.03565 0.0024,0.278586 -0.0024,0.115282 1.852084,-0.117299 0.529202,0.117296 1.260371,-0.03671 3.237541,-0.120216 1.311348,-0.5628034 2.392818,0.7317324 0.54545,-0.244506 1.571218,0.232507 z"
+       d="m 51.858333,10.054167 -1.33923,-0.1493553 -0.790927,0.2474963 -2.379334,-0.5989154 -1.311348,0.3318594 -3.237545,0.401032 -1.260366,-0.244103 -0.526817,-0.03565 -1.854433,0.04765 0.0024,0.002 -0.0024,0.262566 2.28133,-0.190796 0.36454,0.190765 0.995787,0.0806 3.237541,-0.120216 1.311348,-0.5628034 2.392818,0.7317324 0.79372,-0.393862 1.322916,0.264565 z"
        sodipodi:nodetypes="cccccccccccccccccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\horizontal\4.png"
+       inkscape:export-xdpi="127.99697"
+       inkscape:export-ydpi="127.99697" />
+    <path
+       id="rect1971-2-5-2-3"
+       style="fill:#a45c2e;fill-opacity:1;stroke-width:0.689361"
+       d="m 0.79375,12.964574 0.77788,-0.0445 0.80962,-0.09078 1.574015,0.156213 1.852079,0.268829 3.453074,-0.554337 1.058333,0.203601 1.838593,-0.01848 1.600989,-0.18512 2.605354,0.329523 1.044853,-0.464422 1.322916,0.658461 L 19.05,13.49375 17.464294,13.243367 16.658591,13.747077 13.963502,13.523685 12.984086,13.232717 10.530161,13.51386 8.453177,13.125046 8.405337,13.208886 6.336508,13.648215 5.013594,13.918793 4.300165,13.775543 2.645833,13.61705 1.58818,13.499252 0,13.881634 Z"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\diagonal\1.png"
+       inkscape:export-xdpi="127.99697"
+       inkscape:export-ydpi="127.99697" />
+    <path
+       id="rect10-54-8-41-6-6-0-5"
+       style="fill:#502d16;fill-opacity:1;stroke-width:1.68123"
+       d="m 1.0583333,12.7 0.5132967,0.220079 0.80962,-0.09078 1.574015,0.156213 1.852079,-0.125049 3.453078,-0.273522 1.05833,0.316664 1.838593,-0.01848 L 13.758333,12.7 16.363687,13.029523 17.40854,12.565101 17.991667,12.7 l 0.737389,0.408274 0.0024,0.115288 L 17.4625,12.7 l -1.058333,0.529167 -2.645834,-0.264584 -1.58747,0.249676 -1.852074,0.08323 L 9.260454,12.700005 5.80738,13.254342 3.955286,13.148447 2.36776,13.125047 1.555346,13.069467 0.79375,12.964583 Z"
+       sodipodi:nodetypes="cccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\diagonal\1.png"
+       inkscape:export-xdpi="127.99697"
+       inkscape:export-ydpi="127.99697" />
+    <path
+       id="rect1971-2-40-5-6-5"
+       style="fill:#864b25;fill-opacity:1;stroke-width:0.689361"
+       d="m 0,13.881634 1.409751,-0.244086 1.341009,0.0576 1.574016,0.156213 2.078743,-0.01517 2.074717,-0.675037 1.840515,0.530204 2.506329,-0.329069 1.03182,0.243044 2.747493,0.175466 L 17.4625,13.229164 19.05,13.49375 18.25625,14.552083 17.4625,14.287504 15.865079,14.581647 13.963739,14.336289 12.7,14.022917 11.072818,14.405744 9.525002,14.085237 8.453178,13.654211 l -2.38125,0.79375 v 0 L 5.230303,14.802389 2.645833,14.2875 1.0725037,14.655715 0.26458333,14.2875 Z"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\diagonal\1.png"
+       inkscape:export-xdpi="127.99697"
+       inkscape:export-ydpi="127.99697" />
+    <path
+       id="rect10-54-8-41-6-5-7-8-8"
+       style="fill:#502d16;fill-opacity:1;stroke-width:1.68123"
+       d="m 0.52916667,13.487756 1.06944233,-0.01086 1.047224,0.140158 1.653425,0.151194 2.037253,-0.120029 2.130157,-0.554337 2.038088,0.419978 2.459827,-0.284693 0.98532,0.287418 2.700991,0.219842 0.811606,-0.50726 1.5875,0.264583 -0.320944,0.402275 0.05636,-0.137692 -1.325302,-0.33764 -0.791365,0.602224 -2.680751,-0.124879 -1.552582,-0.404288 -1.5875,0.529167 -2.381254,-0.815972 -2.09653,0.693151 -2.087739,0.05117 L 2.645833,13.769532 1.460917,13.731712 0,13.88164 Z"
+       sodipodi:nodetypes="cccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\diagonal\1.png"
+       inkscape:export-xdpi="127.99697"
+       inkscape:export-ydpi="127.99697" />
+    <path
+       id="rect10-54-8-41-6-4-7-3-0"
+       style="fill:#502d16;fill-opacity:1;stroke-width:1.68123"
+       d="M 18.520833,14.287519 17.4625,14.2875 15.875,14.552083 13.98358,14.277165 12.729761,13.934233 11.1125,14.2875 8.453177,13.654203 6.336505,14.273043 5.291626,14.703616 2.645833,14.01093 1.0583337,14.552083 0.26458333,14.170191 l 0.0024,0.002 -0.0024,0.262564 0.77791137,0.254159 1.6033383,-0.401433 2.645834,0.529166 0.78026,-0.368707 2.923938,-0.566325 2.130156,0.701611 1.61796,-0.38986 1.254516,0.30634 1.892119,0.238326 1.588198,-0.301176 0.777436,0.115227 z"
+       sodipodi:nodetypes="cccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\path_sides\sprites\exposed\diagonal\1.png"
        inkscape:export-xdpi="127.99697"
        inkscape:export-ydpi="127.99697" />
   </g>
