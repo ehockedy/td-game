@@ -67,6 +67,7 @@ export class MapComponent extends BaseComponent {
         this.rocksTextures = PIXI.Loader.shared.resources["client/assets/map/path_decorations/path_decorations.json"].textures
         this.mapFeaturesTextures = PIXI.Loader.shared.resources["client/assets/map/land_patterns/land_patterns.json"].textures
         this.mapDecorationsTextures = PIXI.Loader.shared.resources["client/assets/map/land_decorations/land_decorations.json"].textures
+        this.campDecorationTextures = PIXI.Loader.shared.resources["client/assets/camp/tents/tents.json"].textures
 
         // Parse wall textures using filenames
         let wt = PIXI.Loader.shared.resources["client/assets/map/path_sides/path_sides.json"].textures
@@ -85,13 +86,23 @@ export class MapComponent extends BaseComponent {
             this.wallTextures[nameSplit[0]][nameSplit[1]].push(value)
             // todo error checking
         }
-        console.log(this.wallTextures)
 
         // Animated textures
         let flagTextures = PIXI.Loader.shared.resources["client/assets/camp/flag1/flag1.json"].textures
         this.flagFrames = []
         for (const texture of Object.values(flagTextures)) {
             this.flagFrames.push(texture)
+        }
+
+        let tent1Textures = PIXI.Loader.shared.resources["client/assets/camp/tents/tent1.json"].textures
+        this.tent1Frames = []
+        for (const texture of Object.values(tent1Textures)) {
+            this.tent1Frames.push(texture)
+        }
+        let tent2Textures = PIXI.Loader.shared.resources["client/assets/camp/tents/tent2.json"].textures
+        this.tent2Frames = []
+        for (const texture of Object.values(tent2Textures)) {
+            this.tent2Frames.push(texture)
         }
 
         this.towerHash = ""
@@ -373,6 +384,34 @@ export class MapComponent extends BaseComponent {
         // Add two flags at the start of the base
         addFlagSprite(0, -50, 6, 0.9, 20)
         addFlagSprite(0,  50, 0, 0.9, 20)
+
+        // Add the contents of the camp - tents with towers being built
+        let tent1 = new PIXI.AnimatedSprite(this.tent1Frames)
+        tent1.position = new PIXI.Point(64, -54)
+        tent1.angle = 10
+        tent1.loop = true
+        tent1.animationSpeed = 0.21
+        tent1.play()
+        baseCampContainer.addChild(tent1)
+
+        let tent2 = new PIXI.AnimatedSprite(this.tent2Frames)
+        tent2.position = new PIXI.Point(60, 70)
+        tent2.angle = -3
+        tent2.loop = true
+        tent2.animationSpeed = 0.19  // Different to other animated sprite so they get out of sync so avoids repetition
+        tent2.play()
+        baseCampContainer.addChild(tent2)
+
+        let tent3 = new PIXI.Sprite(this.campDecorationTextures["tent3.png"])
+        tent3.position = new PIXI.Point(150, 90)
+        tent3.angle = 10
+        baseCampContainer.addChild(tent3)
+
+        let tent2_2 = new PIXI.Sprite(this.campDecorationTextures["tent2.png"])
+        tent2_2.position = new PIXI.Point(140, -65)
+        tent2_2.angle = -40
+        baseCampContainer.addChild(tent2_2)
+
         return baseCampContainer
     }
 

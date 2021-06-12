@@ -1,0 +1,1986 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="480"
+   height="480"
+   viewBox="0 0 127 127"
+   version="1.1"
+   id="svg917"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="tents.svg">
+  <defs
+     id="defs911">
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3263">
+      <path
+         id="path3265"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.447003;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 9.9254101,4.8789571 0.5616679,-0.032258 0.549857,0.00318 0.57348,-0.067693 0.514421,0.032707 0.01119,0.7409794 -6.35e-4,0.7941323 0.03481,0.8000381 -0.05378,0.7941323 -0.404595,-0.0018 -0.48137,0.039536 -0.398689,0.03363 -0.445937,0.021818 -0.115108,-0.789597 -0.115108,-0.7895979 -0.115107,-0.7895979 z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3263-1">
+      <path
+         id="path3265-4"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.447003;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 9.9254101,4.8789571 0.5616679,-0.032258 0.549857,0.00318 0.57348,-0.067693 0.514421,0.032707 0.01119,0.7409794 -6.35e-4,0.7941323 0.03481,0.8000381 -0.05378,0.7941323 -0.404595,-0.0018 -0.48137,0.039536 -0.398689,0.03363 -0.445937,0.021818 -0.115108,-0.789597 -0.115108,-0.7895979 -0.115107,-0.7895979 z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3339">
+      <path
+         id="path3341"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.447003;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 9.9254056,4.8789627 0.5616674,-0.032258 0.549857,0.00318 0.57348,-0.067693 0.514421,0.032707 0.01119,0.7409794 -6.35e-4,0.7941323 0.03481,0.8000381 -0.05378,0.7941323 -0.404595,-0.0018 -0.48137,0.039536 -0.398689,0.03363 -0.445937,0.021818 L 10.270717,7.2477678 10.155609,6.4581699 10.040502,5.668572 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3339-7">
+      <path
+         id="path3341-9"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.447003;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 9.9254056,4.8789627 0.5616674,-0.032258 0.549857,0.00318 0.57348,-0.067693 0.514421,0.032707 0.01119,0.7409794 -6.35e-4,0.7941323 0.03481,0.8000381 -0.05378,0.7941323 -0.404595,-0.0018 -0.48137,0.039536 -0.398689,0.03363 -0.445937,0.021818 L 10.270717,7.2477678 10.155609,6.4581699 10.040502,5.668572 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382">
+      <path
+         id="path3384"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-4">
+      <path
+         id="path3384-9"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-4-1">
+      <path
+         id="path3384-9-5"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445">
+      <path
+         id="path3447"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-6">
+      <path
+         id="path3447-1"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-6-5">
+      <path
+         id="path3447-1-9"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-2">
+      <path
+         id="path3384-6"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-4-2">
+      <path
+         id="path3384-9-59"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-4-1-8">
+      <path
+         id="path3384-9-5-1"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-4">
+      <path
+         id="path3447-6"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-6-4">
+      <path
+         id="path3447-1-8"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-6-5-8">
+      <path
+         id="path3447-1-9-0"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3339-3">
+      <path
+         id="path3341-7"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.447003;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 9.9254056,4.8789627 0.5616674,-0.032258 0.549857,0.00318 0.57348,-0.067693 0.514421,0.032707 0.01119,0.7409794 -6.35e-4,0.7941323 0.03481,0.8000381 -0.05378,0.7941323 -0.404595,-0.0018 -0.48137,0.039536 -0.398689,0.03363 -0.445937,0.021818 L 10.270717,7.2477678 10.155609,6.4581699 10.040502,5.668572 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3339-7-1">
+      <path
+         id="path3341-9-9"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.447003;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 9.9254056,4.8789627 0.5616674,-0.032258 0.549857,0.00318 0.57348,-0.067693 0.514421,0.032707 0.01119,0.7409794 -6.35e-4,0.7941323 0.03481,0.8000381 -0.05378,0.7941323 -0.404595,-0.0018 -0.48137,0.039536 -0.398689,0.03363 -0.445937,0.021818 L 10.270717,7.2477678 10.155609,6.4581699 10.040502,5.668572 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-2-4">
+      <path
+         id="path3384-6-3"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-4-2-4">
+      <path
+         id="path3384-9-59-5"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-4-1-8-0">
+      <path
+         id="path3384-9-5-1-5"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-4-6">
+      <path
+         id="path3447-6-1"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-6-4-9">
+      <path
+         id="path3447-1-8-7"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-6-5-8-2">
+      <path
+         id="path3447-1-9-0-3"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2708-9-3"
+       x="-9.4421591e-07"
+       width="1.0000019"
+       y="-1.6458551e-06"
+       height="1.0000033">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.3018409e-05"
+         id="feGaussianBlur2710-2-29" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2708-9-5-0"
+       x="-9.4421591e-07"
+       width="1.0000019"
+       y="-1.6458551e-06"
+       height="1.0000033">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.3018409e-05"
+         id="feGaussianBlur2710-2-2-3" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2708-9-4-8"
+       x="-9.4421591e-07"
+       width="1.0000019"
+       y="-1.6458551e-06"
+       height="1.0000033">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.3018409e-05"
+         id="feGaussianBlur2710-2-9-5" />
+    </filter>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-2-45">
+      <path
+         id="path3384-6-5"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-4-2-7">
+      <path
+         id="path3384-9-59-4"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-4-1-8-8">
+      <path
+         id="path3384-9-5-1-2"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-4-2">
+      <path
+         id="path3447-6-5"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-6-4-3">
+      <path
+         id="path3447-1-8-6"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-6-5-8-9">
+      <path
+         id="path3447-1-9-0-5"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-6-5-8-9-2">
+      <path
+         id="path3447-1-9-0-5-8"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-6-4-3-8">
+      <path
+         id="path3447-1-8-6-8"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3445-4-2-1">
+      <path
+         id="path3447-6-5-0"
+         style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607917 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979167,6.3499989 4.5097277,7.7083507 4.3832579,9.0369988 3.894251,9.0960578 3.3406995,9.1294667 2.7119792,8.9958317 2.1284784,8.8895267 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-4-1-8-8-4">
+      <path
+         id="path3384-9-5-1-2-3"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-4-2-7-8">
+      <path
+         id="path3384-9-59-4-6"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3382-2-45-1">
+      <path
+         id="path3384-6-5-0"
+         style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:0.314251;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 2.1284784,4.0607919 2.7119792,3.8481802 3.3072919,3.8127448 3.8524913,3.7375753 4.5820322,3.6776766 4.5215408,5.0270825 4.4979161,6.3499992 4.5097271,7.7083507 4.3832574,9.0369993 3.8942505,9.096058 3.3407006,9.1294667 2.7119792,8.995832 2.1284784,8.8895264 2.1166666,7.6729156 2.2347842,6.42087 2.1757254,5.0861418 Z"
+         sodipodi:nodetypes="ccccccccccccccccc" />
+    </mask>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.53"
+     inkscape:cx="883.58046"
+     inkscape:cy="566.15529"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     objecttolerance="10000"
+     guidetolerance="10000"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1002"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     showguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid919"
+       empspacing="8"
+       dotted="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata914">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect2859"
+       style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:3.14374;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 18.264243,71.721123 -3.668266,-1.809083 -3.475438,-1.976981 -3.8612193,-1.641006 -3.152317,-2.026061 2.39764,-4.43408 2.649592,-4.707224 2.4446433,-4.86844 2.986658,-4.517868 2.558862,1.451903 3.183461,1.479945 2.639584,1.220526 2.899786,1.458778 -1.900732,5.092486 -1.900811,5.092502 -1.900822,5.092496 z"
+       sodipodi:nodetypes="ccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <g
+       id="g3105"
+       transform="matrix(-6.3396909,-3.5615186,3.5615186,-6.3396909,62.914692,138.24181)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <rect
+         style="fill:#aa8800;fill-opacity:1;fill-rule:nonzero;stroke-width:0.330984;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect2855"
+         width="1.5875002"
+         height="3.4395833"
+         x="4.4979167"
+         y="4.7624998" />
+      <rect
+         style="fill:#554400;fill-opacity:1;fill-rule:nonzero;stroke-width:0.364768;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect2958-3"
+         width="0.27116525"
+         height="3.4240263"
+         x="4.803391"
+         y="3.5167115"
+         transform="matrix(0.96571945,0.25958803,-0.07727272,0.99700999,0,0)" />
+      <rect
+         style="fill:#554400;fill-opacity:1;fill-rule:nonzero;stroke-width:0.364769;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect2958"
+         width="0.27116525"
+         height="3.4240263"
+         x="6.4136949"
+         y="3.0974422"
+         transform="matrix(0.96571945,0.25958803,-0.07727272,0.99700999,0,0)" />
+      <rect
+         style="fill:#554400;fill-opacity:1;fill-rule:nonzero;stroke-width:0.364769;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect2954"
+         width="0.27116525"
+         height="3.4240265"
+         x="5.3401589"
+         y="3.3769543"
+         transform="matrix(0.96571941,0.25958817,-0.07727275,0.99700999,0,0)" />
+      <rect
+         style="fill:#554400;fill-opacity:1;fill-rule:nonzero;stroke-width:0.364769;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect2956"
+         width="0.27116525"
+         height="3.4240267"
+         x="5.8769269"
+         y="3.2371979"
+         transform="matrix(0.96571942,0.25958812,-0.07727273,0.99700999,0,0)" />
+    </g>
+    <rect
+       style="fill:#000b3c;fill-opacity:0.399194;fill-rule:nonzero;stroke-width:1.49262;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3167-9"
+       width="23.087311"
+       height="5.7718267"
+       x="-95.625305"
+       y="-55.07954"
+       transform="rotate(-150.67355)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2853-8"
+       style="fill:#000000;fill-opacity:0.669355;fill-rule:nonzero;stroke-width:2.09523;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 64.629681,102.24892 -4.335829,-0.94493 -3.880195,-1.931354 -3.681498,-1.541058 -4.804407,-2.279023 4.424013,-6.976861 4.110939,-6.967001 3.992414,-7.282049 4.780126,-6.631245 3.277007,1.426799 3.609374,1.793432 3.585753,2.951477 3.380923,2.644728 -3.568005,6.526579 -4.497803,6.252699 -3.622119,7.324436 z"
+       sodipodi:nodetypes="ccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000b3c;fill-opacity:0.399194;fill-rule:nonzero;stroke-width:0.861762;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3167-63"
+       width="23.087311"
+       height="1.923941"
+       x="-95.625305"
+       y="-55.07954"
+       transform="rotate(-150.67355)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2853"
+       style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:2.11477;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 65.080913,102.78537 -4.347756,-0.92371 -3.882184,-1.927819 -3.685682,-1.533591 -4.807775,-2.273045 4.499686,-7.111566 4.185122,-7.099047 4.06859,-7.417648 4.854637,-6.763877 3.280295,1.420945 3.611247,1.790083 3.578268,2.964816 3.37496,2.655342 -3.636227,6.648019 -4.568022,6.377681 -3.696965,7.457665 z"
+       sodipodi:nodetypes="ccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <g
+       id="g3091-8"
+       transform="matrix(-6.5434473,-4.0521666,3.470739,-5.3973836,65.083669,135.52034)"
+       style="fill:#000000;fill-opacity:0.701613"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         id="rect2857-9"
+         style="fill:#000000;fill-opacity:0.701613;fill-rule:nonzero;stroke-width:0.126446;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 6.1320894,4.7480886 4.4512436,0.014411 -0.02757,0.4039536 0.01142,0.401957 -4.4817662,-0.01216 0.047567,-0.3932995 z"
+         sodipodi:nodetypes="ccccccc" />
+      <path
+         id="rect2985-3-4"
+         style="fill:#000000;fill-opacity:0.701613;fill-rule:nonzero;stroke-width:0.374765;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 6.1208684,6.0836016 4.4343296,-0.00241 0.02813,0.5333935 H 6.0854118 Z"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         id="rect2981-4"
+         style="fill:#000000;fill-opacity:0.701613;fill-rule:nonzero;stroke-width:0.229496;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 6.0854168,3.96875 h 4.4979162 v 0.1984375 l -0.06013,0.280854 0.06013,0.1160209 v 0.1984375 l -4.4537914,0.01377 -0.00828,-0.2060282 0.024429,-0.1836596 -0.00708,-0.182046 z"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         id="rect2983-4"
+         style="fill:#000000;fill-opacity:0.701613;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 6.2408339,3.6848752 1.0832866,0.070113 1.1530097,-0.043963 1.1128011,0.045934 0.8789217,-0.052598 0.05847,0.00648 0.05601,0.1256151 -0.006,0.057952 0.006,0.07434 H 6.0854168 v -0.066146 l 0.035366,-0.084958 0.016993,-0.061349 z"
+         sodipodi:nodetypes="cccccccccccccc" />
+      <path
+         id="rect2985-5"
+         style="fill:#000000;fill-opacity:0.701613;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 6.0854168,6.614583 H 10.583333 V 6.8791663 H 6.0854168 Z" />
+      <path
+         id="rect2985-3-7-2"
+         style="fill:#000000;fill-opacity:0.701613;fill-rule:nonzero;stroke-width:0.374764;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 6.0854168,5.5562496 h 4.4979162 l -0.02813,0.5249406 -4.4422077,0.00281 z"
+         sodipodi:nodetypes="ccccc" />
+    </g>
+    <rect
+       style="fill:#000000;fill-opacity:0.78629;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3337"
+       width="3.6081386"
+       height="0.60135633"
+       x="9.0871639"
+       y="4.5769906"
+       mask="url(#mask3339)"
+       transform="matrix(-6.3396909,-3.5615186,3.3315224,-5.9302856,64.933916,136.00427)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.903226;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3337-0"
+       width="3.5997868"
+       height="0.41760871"
+       x="9.0871639"
+       y="4.5769906"
+       mask="url(#mask3339-7)"
+       transform="matrix(-6.3396909,-3.5615186,3.3315224,-5.9302856,64.933916,136.00427)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2857"
+       style="fill:#78675c;fill-opacity:1;fill-rule:nonzero;stroke-width:0.905227;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 41.646537,85.732077 -29.047663,-18.166213 1.630253,-2.153709 1.368638,-2.300679 29.255286,18.277597 -1.722746,2.012704 z"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2985-3"
+       style="fill:#a6958b;fill-opacity:1;fill-rule:nonzero;stroke-width:2.68296;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 46.513798,78.286923 17.516316,60.28378 l 1.730582,-3.106129 29.40452,18.275013 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2981"
+       style="fill:#483e37;fill-opacity:1;fill-rule:nonzero;stroke-width:1.64297;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 39.154173,90.292927 9.7496647,72.01792 l 0.7122773,-1.113027 1.401273,-1.33095 0.02341,-0.895037 0.712278,-1.113028 29.165472,18.018494 -0.685115,1.189406 -0.818967,0.930866 -0.607457,1.049679 z"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2983"
+       style="fill:#241f1c;fill-opacity:1;fill-rule:nonzero;stroke-width:1.89714;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 37.119168,91.253691 -6.830171,-4.794643 -7.69545,-4.438081 -7.109901,-4.778949 -5.9344703,-3.276328 -0.359161,-0.273698 0.08471,-0.932157 0.24752,-0.300498 0.227616,-0.441327 29.4045113,18.275016 -0.23725,0.371091 -0.536144,0.332826 -0.331286,0.275019 z"
+       sodipodi:nodetypes="cccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2985-3-7"
+       style="fill:#938073;fill-opacity:1;fill-rule:nonzero;stroke-width:2.68294;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 44.852593,81.388825 15.448077,63.113804 17.516255,60.283753 46.566667,78.316667 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2985"
+       style="fill:#ac9d93;fill-opacity:1;fill-rule:nonzero;stroke-width:1.89714;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 48.651543,75.452752 19.247026,57.177732 20.196748,55.693705 49.601257,73.968721 Z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:1.88921;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2921-7"
+       cx="-62.980541"
+       cy="-42.982018"
+       rx="2.9770148"
+       ry="2.6890237"
+       transform="rotate(-150.67355)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:1.8408;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2921"
+       cx="-62.598583"
+       cy="-42.688999"
+       rx="2.8859138"
+       ry="2.6336002"
+       transform="rotate(-150.67355)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.439516;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428"
+       width="3.2600443"
+       height="1.7008929"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445)"
+       transform="matrix(-6.3396909,-3.5615186,3.0503615,-5.4298045,66.187923,132.41529)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-1"
+       width="3.2068915"
+       height="1.1398345"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-6)"
+       transform="matrix(-6.3396909,-3.5615186,3.0503615,-5.4298045,66.187923,132.41529)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-1-1"
+       width="3.2718561"
+       height="0.64964652"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-6-5)"
+       transform="matrix(-6.3396909,-3.5615186,3.0503615,-5.4298045,66.187923,132.41529)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:1.88921;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2921-7-5"
+       cx="-70.810959"
+       cy="-43.549004"
+       rx="2.9770148"
+       ry="2.6890237"
+       transform="rotate(-150.67355)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:1.8408;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2921-8"
+       cx="-70.429001"
+       cy="-43.256012"
+       rx="2.8859138"
+       ry="2.6336002"
+       transform="rotate(-150.67355)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:1.88921;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2921-7-0"
+       cx="-55.284763"
+       cy="-42.574421"
+       rx="2.9770148"
+       ry="2.6890237"
+       transform="rotate(-150.67355)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2853-8-6"
+       style="fill:#000000;fill-opacity:0.669355;fill-rule:nonzero;stroke-width:2.00389;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 104.00544,57.225117 4.51629,-0.177392 4.39368,0.780611 4.07417,0.488638 5.40364,0.86981 -2.03399,7.05344 -1.73351,6.973026 -1.51648,7.21837 -2.49198,6.836016 -3.64425,-0.4829 -4.08596,-0.723529 -4.4384,-1.731302 -4.140043,-1.512968 1.34928,-6.467184 2.340503,-6.443645 1.14293,-7.170141 z"
+       sodipodi:nodetypes="ccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2853-0"
+       style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:2.02258;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 103.39344,56.8644 4.52098,-0.198437 4.39437,0.777417 4.07574,0.48159 5.40508,0.863429 -2.06381,7.18737 -1.76274,7.104342 -1.54639,7.353222 -2.52135,6.967918 -3.64554,-0.477143 -4.08673,-0.720353 -4.43538,-1.74452 -4.137773,-1.523209 1.37615,-6.58794 2.368173,-6.567933 1.17242,-7.302609 z"
+       sodipodi:nodetypes="ccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.649193;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3365"
+       width="3.3325167"
+       height="1.3196435"
+       x="1.4866867"
+       y="7.9512687"
+       mask="url(#mask3382-2)"
+       transform="matrix(7.310108,1.6271548,-1.2018187,5.3992555,92.714387,31.475804)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.649193;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3365-1"
+       width="3.5333166"
+       height="0.83536148"
+       x="1.2858869"
+       y="8.4355507"
+       mask="url(#mask3382-4-2)"
+       transform="matrix(7.310108,1.6271548,-1.2018187,5.3992555,92.714387,31.475804)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.649193;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3365-1-9"
+       width="3.5124362"
+       height="0.49709848"
+       x="1.3067673"
+       y="8.7738132"
+       mask="url(#mask3382-4-1-8)"
+       transform="matrix(7.310108,1.6271548,-1.2018187,5.3992555,92.714387,31.475804)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <g
+       id="g859-8"
+       transform="matrix(0.32535376,0.36064291,-0.37063278,0.33436611,139.04155,26.612163)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         id="path8-7"
+         style="fill:#999999;stroke-width:0.264999;stroke-opacity:0.919355"
+         d="M 91.016667,78.316667 82.55,88.9 l -10.583333,2.116667 -12.7,-6.35 -12.7,-4.233334 -6.35,-12.7 L 42.333333,50.8 50.8,40.216667 l 8.281597,-5.716838 12.906291,1.45419 12.90629,1.45419 L 91.016667,44.45 95.25,59.266667 94.424546,71.661757 Z"
+         sodipodi:nodetypes="ccccccccccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 42.333333,50.799999 -2.116667,16.933333 6.35,12.7 12.7,4.233334 12.7,6.35 L 82.549999,88.899999 71.966666,86.783332 61.383333,76.199999 V 67.733333 L 50.8,61.383333 Z"
+         id="path838-1"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 50.799999,40.216666 8.281598,-5.716837 25.812581,2.90838 L 91.016667,44.45 82.55,38.1 H 59.266667"
+         id="path840-0"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         style="fill:#c4c4c4;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 76.2,82.55 67.733333,74.083333 82.55,59.266667 l -7.408334,-12.7 -11.641666,-6.35 21.166667,2.116666 2.116666,6.35 L 92.075,60.325 88.9,74.083333 82.55,82.55 Z"
+         id="path842-2"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         style="fill:#2b2b2b;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 40.216666,67.733332 42.333333,63.5 l 10.583334,4.233333 2.116666,10.583334 16.933333,12.699999 -25.4,-10.583334 z"
+         id="path846-0"
+         sodipodi:nodetypes="ccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 48.683332,50.8 57.149999,57.15 63.5,61.383334 61.383333,63.5 57.149999,69.85 57.15,63.5 55.033333,59.266667 50.8,55.033334 Z"
+         id="path848-6"
+         sodipodi:nodetypes="ccccccccc" />
+      <path
+         style="fill:#c1c1c1;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 61.383334,46.566666 c 0,0 0,4.233333 2.116666,6.35 2.116667,2.116667 2.116667,2.116667 2.116667,2.116667 l 2.11667,6.35 L 61.383334,57.149999 57.15,52.916666 v -4.233333 z"
+         id="path850-3" />
+    </g>
+    <g
+       id="g859"
+       transform="matrix(0.48571431,0,0,0.49916867,88.385951,14.855379)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         id="path8"
+         style="fill:#999999;stroke-width:0.264999;stroke-opacity:0.919355"
+         d="M 91.016667,78.316667 82.55,88.9 l -10.583333,2.116667 -12.7,-6.35 -12.7,-4.233334 -6.35,-12.7 L 42.333333,50.8 50.8,40.216667 l 8.281597,-5.716838 12.906291,1.45419 12.90629,1.45419 L 91.016667,44.45 95.25,59.266667 94.424546,71.661757 Z"
+         sodipodi:nodetypes="ccccccccccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 42.333333,50.799999 -2.116667,16.933333 6.35,12.7 12.7,4.233334 12.7,6.35 L 82.549999,88.899999 71.966666,86.783332 61.383333,76.199999 V 67.733333 L 50.8,61.383333 Z"
+         id="path838"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 50.799999,40.216666 8.281598,-5.716837 25.812581,2.90838 L 91.016667,44.45 82.55,38.1 H 59.266667"
+         id="path840"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         style="fill:#c4c4c4;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 76.2,82.55 67.733333,74.083333 82.55,59.266667 l -7.408334,-12.7 -11.641666,-6.35 21.166667,2.116666 2.116666,6.35 L 92.075,60.325 88.9,74.083333 82.55,82.55 Z"
+         id="path842"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         style="fill:#2b2b2b;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 40.216666,67.733332 42.333333,63.5 l 10.583334,4.233333 2.116666,10.583334 16.933333,12.699999 -25.4,-10.583334 z"
+         id="path846"
+         sodipodi:nodetypes="ccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 48.683332,50.8 57.149999,57.15 63.5,61.383334 61.383333,63.5 57.149999,69.85 57.15,63.5 55.033333,59.266667 50.8,55.033334 Z"
+         id="path848"
+         sodipodi:nodetypes="ccccccccc" />
+      <path
+         style="fill:#c1c1c1;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 61.383334,46.566666 c 0,0 0,4.233333 2.116666,6.35 2.116667,2.116667 2.116667,2.116667 2.116667,2.116667 l 2.11667,6.35 L 61.383334,57.149999 57.15,52.916666 v -4.233333 z"
+         id="path850" />
+    </g>
+    <rect
+       style="fill:#000000;fill-opacity:0.439516;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-5"
+       width="3.2600443"
+       height="1.7008929"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-4)"
+       transform="matrix(7.310108,1.6271548,-1.2018187,5.3992555,92.714387,31.475804)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-1-7"
+       width="3.2068915"
+       height="1.1398345"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-6-4)"
+       transform="matrix(7.310108,1.6271548,-1.2018187,5.3992555,92.714387,31.475804)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-1-1-2"
+       width="3.2718561"
+       height="0.64964652"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-6-5-8)"
+       transform="matrix(7.310108,1.6271548,-1.2018187,5.3992555,92.714387,31.475804)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2984-6"
+       style="fill:#000000;fill-opacity:0.314516;stroke-width:0.599272"
+       d="m 12.7,12.7 21.166667,8.466667 6.940226,0.352777 22.611699,0.17639 10.990385,-2.293056 h 6.319469 14.012741 l 12.801743,2.99861 10.9904,-3.351388 v 8.466667 6.35 6.879167 l 2.03526,6.173613 v 6.879167 6.87917 l 2.19807,6.879167 v 6.879168 l -12.91371,2.293048 H 95.840229 81.827487 67.814746 L 52.702964,74.436119 37.041668,76.729167 H 23.028928 6.2685904 l 2.1980763,-9.172216 v -6.879167 -6.87917 -6.879167 l 4.3147443,-4.762502 v -6.879167 -6.879167 z"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#6c5d53;fill-opacity:1;fill-rule:nonzero;stroke-width:1.8408;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2921-3"
+       cx="-54.902805"
+       cy="-42.281429"
+       rx="2.8859138"
+       ry="2.6336002"
+       transform="rotate(-150.67355)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.774968;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 111.26868,29.633333 C 116.57488,25.372511 127,12.7 127,12.7 v 0 0"
+       id="path3006"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.881917;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 25.4,25.399999 c 0,0 -7.693915,-5.22552 -16.9333333,-14.816666"
+       id="path3002"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2984"
+       style="fill:#9c782b;fill-opacity:1;stroke-width:0.564999"
+       d="m 19.05,19.05 16.933334,4.233333 h 7.937498 L 65.616667,25.4 76.2,23.283333 h 6.085413 13.493749 L 105.83334,25.4 120.65,21.166667 l -2.11667,8.466666 v 6.35 l 2.11667,6.350001 v 6.35 6.349999 6.35 l 2.11666,6.349999 v 6.35 L 110.33125,76.2 H 96.837499 83.34375 69.85 L 55.297914,74.083332 40.216667,76.2 H 26.722918 10.583333 L 12.7,67.733333 v -6.35 -6.35 -6.35 l 0,-2.116666 L 14.816667,38.1 16.933333,29.633333 Z"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 14.816666,71.966666 c 0,0 -15.2702374,14.552083 -19.0499993,21.166666"
+       id="path3010"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 116.41667,69.849999 c 0,0 17.31131,12.322025 27.51666,23.283334"
+       id="path3008"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2984-9"
+       style="fill:#b38a31;fill-opacity:1;stroke-width:0.591302"
+       d="m 120.65,48.379992 v 11.591669 l 2.11666,6.955002 v 6.955003 L 110.33125,76.2 H 96.8375 83.34375 69.85 L 55.297914,73.881666 40.216666,76.2 H 26.722918 10.583333 l 2.11667,-9.273337 V 59.971661 L 12.7,46.061657 c 21.166667,-4.636668 90.94107,-2.028542 107.95,2.318335 z"
+       sodipodi:nodetypes="cccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <g
+       id="g859-8-5"
+       transform="matrix(-0.04836435,0.3737301,-0.38408248,-0.04970406,174.92243,25.011041)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         id="path8-7-7"
+         style="fill:#999999;stroke-width:0.264999;stroke-opacity:0.919355"
+         d="M 91.016667,78.316667 82.55,88.9 l -10.583333,2.116667 -12.7,-6.35 -12.7,-4.233334 -6.35,-12.7 L 42.333333,50.8 50.8,40.216667 l 8.281597,-5.716838 12.906291,1.45419 12.90629,1.45419 L 91.016667,44.45 95.25,59.266667 94.424546,71.661757 Z"
+         sodipodi:nodetypes="ccccccccccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 42.333333,50.799999 -2.116667,16.933333 6.35,12.7 12.7,4.233334 12.7,6.35 L 82.549999,88.899999 71.966666,86.783332 61.383333,76.199999 V 67.733333 L 50.8,61.383333 Z"
+         id="path838-1-0"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 50.799999,40.216666 8.281598,-5.716837 25.812581,2.90838 L 91.016667,44.45 82.55,38.1 H 59.266667"
+         id="path840-0-5"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         style="fill:#c4c4c4;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 76.2,82.55 67.733333,74.083333 82.55,59.266667 l -7.408334,-12.7 -11.641666,-6.35 21.166667,2.116666 2.116666,6.35 L 92.075,60.325 88.9,74.083333 82.55,82.55 Z"
+         id="path842-2-4"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         style="fill:#2b2b2b;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 40.216666,67.733332 42.333333,63.5 l 10.583334,4.233333 2.116666,10.583334 16.933333,12.699999 -25.4,-10.583334 z"
+         id="path846-0-8"
+         sodipodi:nodetypes="ccccccc" />
+      <path
+         style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 48.683332,50.8 57.149999,57.15 63.5,61.383334 61.383333,63.5 57.149999,69.85 57.15,63.5 55.033333,59.266667 50.8,55.033334 Z"
+         id="path848-6-3"
+         sodipodi:nodetypes="ccccccccc" />
+      <path
+         style="fill:#c1c1c1;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 61.383334,46.566666 c 0,0 0,4.233333 2.116666,6.35 2.116667,2.116667 2.116667,2.116667 2.116667,2.116667 l 2.11667,6.35 L 61.383334,57.149999 57.15,52.916666 v -4.233333 z"
+         id="path850-3-5" />
+    </g>
+    <g
+       id="g1542"
+       transform="matrix(0.74785447,0,0,0.74785447,81.299724,70.266859)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         style="display:inline;fill:#483e37;stroke-width:0.23908;stroke-opacity:0.919355"
+         id="path2253-24"
+         sodipodi:type="arc"
+         sodipodi:cx="-101.60344"
+         sodipodi:cy="205.31853"
+         sodipodi:rx="40"
+         sodipodi:ry="40"
+         sodipodi:start="1.5448731"
+         sodipodi:end="1.5245468"
+         sodipodi:arc-type="arc"
+         sodipodi:open="true"
+         d="m -100.56663,245.30509 a 40,40 0 0 1 -41.01758,-38.74657 40,40 0 0 1 38.53763,-41.21395 40,40 0 0 1 41.409249,38.3277 40,40 0 0 1 -38.116787,41.60348" />
+      <path
+         style="display:inline;fill:#5e5149;fill-opacity:1;stroke-width:0.215175;stroke-opacity:0.919355"
+         id="path2253-2-8"
+         sodipodi:type="arc"
+         sodipodi:cx="-101.60344"
+         sodipodi:cy="205.31853"
+         sodipodi:rx="36"
+         sodipodi:ry="36"
+         sodipodi:start="1.5448731"
+         sodipodi:end="1.5245468"
+         sodipodi:arc-type="arc"
+         sodipodi:open="true"
+         d="m -100.67031,241.30643 a 36,36 0 0 1 -36.91583,-34.87191 36,36 0 0 1 34.68387,-37.09256 36,36 0 0 1 37.268329,34.49494 36,36 0 0 1 -34.305109,37.44313" />
+      <g
+         id="g5025-0-2-3"
+         transform="matrix(12.45533,-6.4725251,6.7240684,12.125549,-218.66488,179.95051)"
+         style="display:inline;filter:url(#filter2708-9-3)">
+        <path
+           id="rect4569-4-2-8-7"
+           style="fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+           d="M 8.9958333,2.6458333 9.2604167,2.38125 9.525,3.175 V 3.4395833 L 9.2604167,3.7041667 8.9533221,4.3987666 7.9375,3.175 8.4666667,2.9104167 Z"
+           sodipodi:nodetypes="ccccccccc" />
+        <path
+           id="rect4777-1-2-0-0-4-7"
+           style="fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+           d="M 8.0917381,3.3013926 7.9375,3.175 8.9958333,2.6458333 9.2604167,2.38125 9.2219971,2.6539526 9.0486324,2.8234823 Z"
+           sodipodi:nodetypes="ccccccc" />
+        <path
+           id="rect4777-1-3-0-6-78"
+           style="fill:#808080;fill-opacity:1;stroke-width:0.264999"
+           d="M 9.2604167,3.7041667 8.9533221,4.3987666 8.8531643,4.1538607 9.1284518,3.6481219 9.3616676,3.4172342 9.3589972,3.1778813 9.2219971,2.6539526 9.2604167,2.38125 9.525,3.175 v 0.2645833 z"
+           sodipodi:nodetypes="ccccccccccc" />
+      </g>
+      <g
+         id="g5025-0-5-9"
+         transform="matrix(6.0608628,11.421588,-11.227422,6.2201237,-58.546891,119.87962)"
+         style="display:inline;filter:url(#filter2708-9-3)">
+        <g
+           id="g4896"
+           transform="matrix(0.94560489,0.31097471,-0.30643288,0.95674963,-0.02054815,-1.2625969)">
+          <path
+             id="rect4569-4-2-3-6"
+             style="fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+             d="M 8.9958333,2.6458333 9.2604167,2.38125 9.525,3.175 V 3.4395833 L 9.2604167,3.7041667 8.9533221,4.3987666 7.9375,3.175 8.4666667,2.9104167 Z"
+             sodipodi:nodetypes="ccccccccc" />
+          <path
+             id="rect4777-1-2-0-0-7-0"
+             style="fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+             d="M 8.0917381,3.3013926 7.9375,3.175 8.9958333,2.6458333 9.2604167,2.38125 9.2219971,2.6539526 9.0486324,2.8234823 Z"
+             sodipodi:nodetypes="ccccccc" />
+          <path
+             id="rect4777-1-3-0-1-3"
+             style="fill:#808080;fill-opacity:1;stroke-width:0.264999"
+             d="M 9.2604167,3.7041667 8.9533221,4.3987666 8.8531643,4.1538607 9.1284518,3.6481219 9.3616676,3.4172342 9.3589972,3.1778813 9.2219971,2.6539526 9.2604167,2.38125 9.525,3.175 v 0.2645833 z"
+             sodipodi:nodetypes="ccccccccccc" />
+        </g>
+      </g>
+      <path
+         id="rect4569-45-2-9-2-3"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999;filter:url(#filter2708-9-3)"
+         d="m 4.0708184,8.9065669 0.1647277,0.3368293 0.35469,0.4105957 0.658722,0.4219261 -0.089583,0.11054 -0.6614584,0.132292 -0.79375,0.529167 0.1322916,-1.7197918 z"
+         sodipodi:nodetypes="ccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,-156.17975,74.86102)" />
+      <path
+         id="rect4777-1-14-34-0-9-6-8"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke-width:0.264999;filter:url(#filter2708-9-3)"
+         d="M 3.8364583,9.1281252 4.0708184,8.9065669 4.1972193,9.1146646 3.9881755,9.2754455 3.943272,10.413415 3.7041674,10.847922 Z"
+         sodipodi:nodetypes="ccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,-156.17975,74.86102)" />
+      <path
+         id="rect4777-1-2-00-6-9-8-6-7-6"
+         style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999;filter:url(#filter2708-9-3)"
+         d="m 5.1160569,9.9814708 0.1329012,0.094447 -0.089583,0.11054 -0.6614584,0.132292 -0.79375,0.529167 L 3.943272,10.413415 4.4615287,10.09258 5.0792723,9.9718419 Z"
+         sodipodi:nodetypes="ccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,-156.17975,74.86102)" />
+      <path
+         style="display:inline;fill:#6c5d53;stroke-width:0.194252;stroke-opacity:0.919355"
+         id="path2253-9-7"
+         sodipodi:type="arc"
+         sodipodi:cx="-101.60344"
+         sodipodi:cy="205.31853"
+         sodipodi:rx="32.5"
+         sodipodi:ry="32.5"
+         sodipodi:start="1.5448731"
+         sodipodi:end="1.5245468"
+         sodipodi:arc-type="arc"
+         sodipodi:open="true"
+         d="m -100.76103,237.80761 a 32.5,32.5 0 0 1 -33.32679,-31.48159 32.5,32.5 0 0 1 31.31183,-33.48633 32.5,32.5 0 0 1 33.645014,31.14126 32.5,32.5 0 0 1 -30.969894,33.80282" />
+      <path
+         style="display:inline;fill:#7c6b60;fill-opacity:1;stroke-width:0.166265;stroke-opacity:0.919355"
+         id="path2253-2-1-6"
+         sodipodi:type="arc"
+         sodipodi:cx="-101.60345"
+         sodipodi:cy="205.31853"
+         sodipodi:rx="27.930325"
+         sodipodi:ry="27.704599"
+         sodipodi:start="1.5448731"
+         sodipodi:end="1.5245468"
+         sodipodi:arc-type="arc"
+         sodipodi:open="true"
+         d="m -100.87948,233.01382 a 27.930325,27.704599 0 0 1 -28.64087,-26.83645 27.930325,27.704599 0 0 1 26.90922,-28.54541 27.930325,27.704599 0 0 1 28.914343,26.54635 27.930325,27.704599 0 0 1 -26.615353,28.81519" />
+      <g
+         id="g5025-0-2-5-1"
+         transform="matrix(9.0825524,-6.9688916,-6.8413516,-9.4766492,-126.80369,292.19952)"
+         style="display:inline;filter:url(#filter2708-9-5-0)">
+        <g
+           id="g4718"
+           transform="matrix(0.89579471,0.41048873,-0.42788061,0.92025529,2.8677357,-2.845178)">
+          <path
+             id="rect4569-4-2-8-1-3"
+             style="fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+             d="M 8.9958333,2.6458333 9.2604167,2.38125 9.525,3.175 V 3.4395833 L 9.2604167,3.7041667 8.9533221,4.3987666 7.9375,3.175 8.4666667,2.9104167 Z"
+             sodipodi:nodetypes="ccccccccc" />
+          <path
+             id="rect4777-1-2-0-0-4-3-9"
+             style="fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+             d="M 8.0917381,3.3013926 7.9375,3.175 8.9958333,2.6458333 9.2604167,2.38125 9.2219971,2.6539526 9.0486324,2.8234823 Z"
+             sodipodi:nodetypes="ccccccc" />
+          <path
+             id="rect4777-1-3-0-6-9-7"
+             style="fill:#808080;fill-opacity:1;stroke-width:0.264999"
+             d="M 9.2604167,3.7041667 8.9533221,4.3987666 8.8531643,4.1538607 9.1284518,3.6481219 9.3616676,3.4172342 9.3589972,3.1778813 9.2219971,2.6539526 9.2604167,2.38125 9.525,3.175 v 0.2645833 z"
+             sodipodi:nodetypes="ccccccccccc" />
+        </g>
+      </g>
+      <g
+         id="g5025-0-5-4-2"
+         transform="matrix(8.4973753,7.9010018,8.3941155,-8.5768513,-202.0863,209.20972)"
+         style="display:inline;filter:url(#filter2708-9-5-0)">
+        <path
+           id="rect4569-4-2-3-8-1"
+           style="fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+           d="M 8.5582722,3.2384563 8.8228556,2.973873 9.0874389,3.767623 V 4.0322063 L 8.8228556,4.2967897 8.515761,4.9913896 7.4999389,3.767623 8.0291056,3.5030397 Z"
+           sodipodi:nodetypes="ccccccccc" />
+        <path
+           id="rect4777-1-2-0-0-7-7-1"
+           style="fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+           d="M 7.654177,3.8940156 7.4999389,3.767623 8.5582722,3.2384563 8.8228556,2.973873 8.784436,3.2465756 8.6110713,3.4161053 Z"
+           sodipodi:nodetypes="ccccccc" />
+        <path
+           id="rect4777-1-3-0-1-6-4"
+           style="fill:#808080;fill-opacity:1;stroke-width:0.264999"
+           d="M 8.8228556,4.2967897 8.515761,4.9913896 8.4156032,4.7464837 8.6908907,4.2407449 8.9241065,4.0098572 8.9214361,3.7705043 8.784436,3.2465756 8.8228556,2.973873 9.0874389,3.767623 v 0.2645833 z"
+           sodipodi:nodetypes="ccccccccccc" />
+      </g>
+      <g
+         id="g5045-6-4-4-8"
+         transform="matrix(10.738624,-6.94084,-6.9783579,-10.853876,-113.16059,333.49518)"
+         style="display:inline;filter:url(#filter2708-9-5-0)">
+        <path
+           id="rect4569-45-2-9-7-6"
+           style="fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+           d="m 4.0708184,8.9065669 0.1647277,0.3368293 0.35469,0.4105957 0.658722,0.4219261 -0.089583,0.11054 -0.6614584,0.132292 -0.79375,0.529167 0.1322916,-1.7197918 z"
+           sodipodi:nodetypes="ccccccccc" />
+        <path
+           id="rect4777-1-14-34-0-9-9-9"
+           style="fill:#808080;fill-opacity:1;stroke-width:0.264999"
+           d="M 3.8364583,9.1281252 4.0708184,8.9065669 4.1972193,9.1146646 3.9881755,9.2754455 3.943272,10.413415 3.7041674,10.847922 Z"
+           sodipodi:nodetypes="ccccccc" />
+        <path
+           id="rect4777-1-2-00-6-9-8-6-8-6"
+           style="fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+           d="m 5.1160569,9.9814708 0.1329012,0.094447 -0.089583,0.11054 -0.6614584,0.132292 -0.79375,0.529167 L 3.943272,10.413415 4.4615287,10.09258 5.0792723,9.9718419 Z"
+           sodipodi:nodetypes="ccccccccc" />
+      </g>
+      <path
+         style="display:inline;fill:#917c6f;stroke-width:0.149425;stroke-opacity:0.919355"
+         id="path2253-0-8"
+         sodipodi:type="arc"
+         sodipodi:cx="-101.60344"
+         sodipodi:cy="205.31853"
+         sodipodi:rx="25"
+         sodipodi:ry="25"
+         sodipodi:start="1.5448731"
+         sodipodi:end="1.5245468"
+         sodipodi:arc-type="arc"
+         sodipodi:open="true"
+         d="m -100.95543,230.31013 a 25,25 0 0 1 -25.63599,-24.21661 25,25 0 0 1 24.08602,-25.75872 25,25 0 0 1 25.880779,23.95482 25,25 0 0 1 -23.822989,26.00217" />
+      <path
+         style="display:inline;fill:#9d8a7f;fill-opacity:1;stroke-width:0.119539;stroke-opacity:0.919355"
+         id="path2253-2-3-8"
+         sodipodi:type="arc"
+         sodipodi:cx="-101.60344"
+         sodipodi:cy="205.31853"
+         sodipodi:rx="20"
+         sodipodi:ry="20"
+         sodipodi:start="1.5448731"
+         sodipodi:end="1.5245468"
+         sodipodi:arc-type="arc"
+         sodipodi:open="true"
+         d="m -101.08503,225.31181 a 20,20 0 0 1 -20.5088,-19.37329 20,20 0 0 1 19.26882,-20.60697 20,20 0 0 1 20.704625,19.16385 20,20 0 0 1 -19.058395,20.80174" />
+      <g
+         id="g5025-0-2-1-2"
+         transform="matrix(1.9978052,-11.244822,9.0143158,2.1514726,-163.76399,274.08832)"
+         style="display:inline;filter:url(#filter2708-9-4-8)">
+        <path
+           id="rect4569-4-2-8-0-1"
+           style="fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+           d="M 8.9958333,2.6458333 9.2604167,2.38125 9.525,3.175 V 3.4395833 L 9.2604167,3.7041667 8.9533221,4.3987666 7.9375,3.175 8.4666667,2.9104167 Z"
+           sodipodi:nodetypes="ccccccccc" />
+        <path
+           id="rect4777-1-2-0-0-4-39-5"
+           style="fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+           d="M 8.0917381,3.3013926 7.9375,3.175 8.9958333,2.6458333 9.2604167,2.38125 9.2219971,2.6539526 9.0486324,2.8234823 Z"
+           sodipodi:nodetypes="ccccccc" />
+        <path
+           id="rect4777-1-3-0-6-7-4"
+           style="fill:#808080;fill-opacity:1;stroke-width:0.264999"
+           d="M 9.2604167,3.7041667 8.9533221,4.3987666 8.8531643,4.1538607 9.1284518,3.6481219 9.3616676,3.4172342 9.3589972,3.1778813 9.2219971,2.6539526 9.2604167,2.38125 9.525,3.175 v 0.2645833 z"
+           sodipodi:nodetypes="ccccccccccc" />
+      </g>
+      <g
+         id="g5025-0-5-45-2"
+         transform="matrix(5.7327662,8.648378,-8.6831588,6.0671908,-95.912339,115.6809)"
+         style="display:inline;filter:url(#filter2708-9-4-8)">
+        <path
+           id="rect4569-4-2-3-89-9"
+           style="fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+           d="M 8.9958333,2.6458333 9.2604167,2.38125 9.525,3.175 V 3.4395833 L 9.2604167,3.7041667 8.9533221,4.3987666 7.9375,3.175 8.4666667,2.9104167 Z"
+           sodipodi:nodetypes="ccccccccc" />
+        <path
+           id="rect4777-1-2-0-0-7-79-1"
+           style="fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+           d="M 8.0917381,3.3013926 7.9375,3.175 8.9958333,2.6458333 9.2604167,2.38125 9.2219971,2.6539526 9.0486324,2.8234823 Z"
+           sodipodi:nodetypes="ccccccc" />
+        <path
+           id="rect4777-1-3-0-1-8-4"
+           style="fill:#808080;fill-opacity:1;stroke-width:0.264999"
+           d="M 9.2604167,3.7041667 8.9533221,4.3987666 8.8531643,4.1538607 9.1284518,3.6481219 9.3616676,3.4172342 9.3589972,3.1778813 9.2219971,2.6539526 9.2604167,2.38125 9.525,3.175 v 0.2645833 z"
+           sodipodi:nodetypes="ccccccccccc" />
+      </g>
+      <g
+         id="g5045-6-4-6-7"
+         transform="matrix(12.017799,-2.6020534,-0.29773428,9.9906108,-165.82091,139.96194)"
+         style="display:inline;filter:url(#filter2708-9-4-8)">
+        <path
+           id="rect4569-45-2-9-4-7"
+           style="fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+           d="m 4.0708184,8.9065669 0.1647277,0.3368293 0.35469,0.4105957 0.658722,0.4219261 -0.089583,0.11054 -0.6614584,0.132292 -0.79375,0.529167 0.1322916,-1.7197918 z"
+           sodipodi:nodetypes="ccccccccc" />
+        <path
+           id="rect4777-1-14-34-0-9-7-7"
+           style="fill:#808080;fill-opacity:1;stroke-width:0.264999"
+           d="M 3.8364583,9.1281252 4.0708184,8.9065669 4.1972193,9.1146646 3.9881755,9.2754455 3.943272,10.413415 3.7041674,10.847922 Z"
+           sodipodi:nodetypes="ccccccc" />
+        <path
+           id="rect4777-1-2-00-6-9-8-6-6-3"
+           style="fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+           d="m 5.1160569,9.9814708 0.1329012,0.094447 -0.089583,0.11054 -0.6614584,0.132292 -0.79375,0.529167 L 3.943272,10.413415 4.4615287,10.09258 5.0792723,9.9718419 Z"
+           sodipodi:nodetypes="ccccccccc" />
+      </g>
+      <path
+         id="path4310"
+         style="display:inline;fill:#b3b3b3;fill-opacity:1;stroke-width:0.331248;stroke-opacity:0.919355"
+         d="m -101.59826,189.44355 a 15.875132,15.875003 0 0 0 -0.57814,0.0103 15.875132,15.875003 0 0 0 -15.29441,16.35672 15.875132,15.875003 0 0 0 16.27884,15.37761 l 0.32234,-0.0113 a 15.875132,15.875003 0 0 0 15.127755,-16.51096 15.875132,15.875003 0 0 0 -15.856385,-15.22197 z m -0.22479,7.93875 a 7.9375664,7.9361673 0 0 1 7.944666,7.60936 7.9375664,7.9361673 0 0 1 -7.563556,8.25457 l -0.16149,0.006 a 7.9375664,7.9361673 0 0 1 -8.13975,-7.68753 7.9375664,7.9361673 0 0 1 7.64752,-8.17706 7.9375664,7.9361673 0 0 1 0.27261,-0.005 z" />
+      <path
+         id="path4310-99"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.27604;stroke-opacity:0.919355"
+         d="m -101.59913,192.08936 a 13.229276,13.229169 0 0 0 -0.48177,0.009 13.229276,13.229169 0 0 0 -12.74535,13.6306 13.229276,13.229169 0 0 0 13.56571,12.81468 l 0.26861,-0.009 a 13.229276,13.229169 0 0 0 12.60646,-13.75914 13.229276,13.229169 0 0 0 -13.21366,-12.68497 z m -0.18732,6.61563 a 6.6146386,6.6134726 0 0 1 6.620561,6.34114 6.6146386,6.6134726 0 0 1 -6.302961,6.8788 l -0.13458,0.005 a 6.6146386,6.6134726 0 0 1 -6.78312,-6.40627 6.6146386,6.6134726 0 0 1 6.37293,-6.81422 6.6146386,6.6134726 0 0 1 0.22717,-0.004 z" />
+      <path
+         id="path4310-7"
+         style="display:inline;fill:#ececec;fill-opacity:1;stroke-width:0.220851;stroke-opacity:0.919355"
+         d="m -101.6,194.73333 a 10.583417,10.585197 0 0 0 -0.38541,0.007 10.583417,10.585197 0 0 0 -10.19628,10.9064 10.583417,10.585197 0 0 0 10.85257,10.25355 l 0.21489,-0.008 A 10.583417,10.585197 0 0 0 -91.029065,204.88298 10.583417,10.585197 0 0 0 -101.6,194.73321 Z m -0.14986,5.29344 a 5.291709,5.291709 0 0 1 5.29644,5.0738 5.291709,5.291709 0 0 1 -5.04236,5.50402 l -0.10762,0.004 a 5.291709,5.291709 0 0 1 -5.42649,-5.12592 5.291709,5.291709 0 0 1 5.09835,-5.45234 5.291709,5.291709 0 0 1 0.18172,-0.003 z" />
+    </g>
+    <g
+       id="g1044"
+       transform="translate(-4.2333355,137.58334)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         id="rect4569-45-2-9-2"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.1118846,8.5776224 4.5255133,9.3875828 5.0916554,9.7548053 5.408892,10.2701 4.9391419,10.197543 4.393135,10.346355 l -0.6222637,0.370181 -0.5942029,0.0015 0.5090464,-0.70177 0.1200029,-0.5348664 0.1054575,-0.608352 z"
+         sodipodi:nodetypes="cccccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,44.907022,-79.657507)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-14-34-0-9-6"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.103711,9.0859407 4.3044205,8.7905354 4.2763598,9.1592372 4.0677247,10.339379 3.7425625,10.70882 3.3692043,10.930929 3.8782507,10.229159 Z"
+         sodipodi:nodetypes="cccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,43.157456,-83.595512)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-2-00-6-9-8-6-7"
+         style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.533903,9.0653117 4.0641529,8.9927548 3.518146,9.1415669 2.8958823,9.511748 2.3016794,9.5132273 2.6750376,9.2911187 3.0965918,9.2163428 3.7188555,8.8461617 4.1404096,8.7713858 Z"
+         sodipodi:nodetypes="cccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,51.753324,-58.908493)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 63.499999,52.916666 -2.116666,4.233333 2.116666,10.583333 6.35,6.35 v 2.116667 l 4.233333,6.35 -2.116666,-8.466667 -6.35,-8.466666 -2.116667,-12.7 v 0"
+         id="path1038"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+    </g>
+    <g
+       id="g1044-9"
+       transform="matrix(0.77748443,-0.4369014,0.4624381,0.73455029,-33.061918,165.40774)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         id="rect4569-45-2-9-2-9"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.1118846,8.5776224 4.5255133,9.3875828 5.0916554,9.7548053 5.408892,10.2701 4.9391419,10.197543 4.393135,10.346355 l -0.6222637,0.370181 -0.5942029,0.0015 0.5090464,-0.70177 0.1200029,-0.5348664 0.1054575,-0.608352 z"
+         sodipodi:nodetypes="cccccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,44.907022,-79.657507)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-14-34-0-9-6-9"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.103711,9.0859407 4.3044205,8.7905354 4.2763598,9.1592372 4.0677247,10.339379 3.7425625,10.70882 3.3692043,10.930929 3.8782507,10.229159 Z"
+         sodipodi:nodetypes="cccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,43.157456,-83.595512)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-2-00-6-9-8-6-7-9"
+         style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.533903,9.0653117 4.0641529,8.9927548 3.518146,9.1415669 2.8958823,9.511748 2.3016794,9.5132273 2.6750376,9.2911187 3.0965918,9.2163428 3.7188555,8.8461617 4.1404096,8.7713858 Z"
+         sodipodi:nodetypes="cccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,51.753324,-58.908493)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 63.499999,52.916666 -2.116666,4.233333 2.116666,10.583333 6.35,6.35 v 2.116667 l 4.233333,6.35 -2.116666,-8.466667 -6.35,-8.466666 -2.116667,-12.7 v 0"
+         id="path1038-7"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+    </g>
+    <g
+       id="g1044-9-5"
+       transform="matrix(0.18537812,0.87235303,-0.83897878,0.22254828,48.111419,119.3842)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         id="rect4569-45-2-9-2-9-1"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.1118846,8.5776224 4.5255133,9.3875828 5.0916554,9.7548053 5.408892,10.2701 4.9391419,10.197543 4.393135,10.346355 l -0.6222637,0.370181 -0.5942029,0.0015 0.5090464,-0.70177 0.1200029,-0.5348664 0.1054575,-0.608352 z"
+         sodipodi:nodetypes="cccccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,44.907022,-79.657507)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-14-34-0-9-6-9-1"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.103711,9.0859407 4.3044205,8.7905354 4.2763598,9.1592372 4.0677247,10.339379 3.7425625,10.70882 3.3692043,10.930929 3.8782507,10.229159 Z"
+         sodipodi:nodetypes="cccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,43.157456,-83.595512)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-2-00-6-9-8-6-7-9-7"
+         style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.533903,9.0653117 4.0641529,8.9927548 3.518146,9.1415669 2.8958823,9.511748 2.3016794,9.5132273 2.6750376,9.2911187 3.0965918,9.2163428 3.7188555,8.8461617 4.1404096,8.7713858 Z"
+         sodipodi:nodetypes="cccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,51.753324,-58.908493)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 63.499999,52.916666 -2.116666,4.233333 2.116666,10.583333 6.35,6.35 v 2.116667 l 4.233333,6.35 -2.116666,-8.466667 -6.35,-8.466666 -2.116667,-12.7 v 0"
+         id="path1038-7-4"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+    </g>
+    <g
+       id="g1044-0"
+       transform="matrix(-0.23595518,0.91150586,-0.89197842,-0.24112078,25.496497,183.09379)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         id="rect4569-45-2-9-2-0"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.1118846,8.5776224 4.5255133,9.3875828 5.0916554,9.7548053 5.408892,10.2701 4.9391419,10.197543 4.393135,10.346355 l -0.6222637,0.370181 -0.5942029,0.0015 0.5090464,-0.70177 0.1200029,-0.5348664 0.1054575,-0.608352 z"
+         sodipodi:nodetypes="cccccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,44.907022,-79.657507)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-14-34-0-9-6-1"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.103711,9.0859407 4.3044205,8.7905354 4.2763598,9.1592372 4.0677247,10.339379 3.7425625,10.70882 3.3692043,10.930929 3.8782507,10.229159 Z"
+         sodipodi:nodetypes="cccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,43.157456,-83.595512)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-2-00-6-9-8-6-7-2"
+         style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.533903,9.0653117 4.0641529,8.9927548 3.518146,9.1415669 2.8958823,9.511748 2.3016794,9.5132273 2.6750376,9.2911187 3.0965918,9.2163428 3.7188555,8.8461617 4.1404096,8.7713858 Z"
+         sodipodi:nodetypes="cccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,51.753324,-58.908493)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 63.499999,52.916666 -2.116666,4.233333 2.116666,10.583333 6.35,6.35 v 2.116667 l 4.233333,6.35 -2.116666,-8.466667 -6.35,-8.466666 -2.116667,-12.7 v 0"
+         id="path1038-4"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+    </g>
+    <path
+       id="rect2984-6-7"
+       style="fill:#000000;fill-opacity:0.314516;stroke-width:0.599273"
+       d="m -49.802728,175.33056 12.7,2.11666 L -25.4,177.8 l 21.6144266,2.64583 10.4612193,-0.17638 h 6.3194671 14.012743 l 14.918411,0.88194 8.873735,-1.23472 v 8.46667 6.35 6.87917 l 2.03526,6.17361 v 6.87916 6.87917 l 2.19807,6.87917 2.116668,9.1975 -15.030378,-0.0253 -11.366892,-2.11667 -16.658575,2.11667 -3.510822,-0.52917 -15.1117825,-2.29305 -22.9882175,2.29305 h -14.012741 l -19.935336,0.70555 2.198077,-9.17222 v -6.87917 -6.87917 -7.40833 l 4.314745,-4.40971 v -6.87917 -6.87917 z"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.976082;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 43.535352,186.26667 C 50.26946,180.94064 63.5,165.1 63.5,165.1 v 0 0"
+       id="path3006-8"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.17851;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -38.099999,186.26667 c 0,0 -9.617395,-7.46503 -21.166668,-21.16667"
+       id="path3002-7"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2984-1"
+       style="fill:#9c782b;fill-opacity:1;stroke-width:0.576146"
+       d="m -48.683333,177.63131 14.002565,1.83418 11.397435,0.36683 21.6958356,2.20101 H 8.4666679 14.55208 28.045832 40.216667 l 12.7,-4.40202 -2.116665,11.00506 v 6.60303 l 2.11667,6.60305 v 6.60304 6.60302 6.60304 l 2.11666,6.60303 2.116668,9.01375 -14.552078,-0.2097 -10.847932,-2.20101 -16.139572,2.20101 -2.991831,-0.55025 -14.5520855,-2.20102 -22.4081685,2.20102 h -13.49375 l -19.314583,0.55025 2.116667,-8.80405 v -8.80405 -6.60303 -4.40202 -2.20101 l 2.116667,-8.80405 2.116666,-8.80405 z"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -52.916667,232.83334 c 0,0 -15.270238,14.55208 -19.05,21.16666"
+       id="path3010-5"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 48.683342,230.71667 c 0,0 17.31131,12.32202 27.51666,23.28333"
+       id="path3008-5"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2984-9-6"
+       style="fill:#b38a31;fill-opacity:1;stroke-width:0.591301"
+       d="m 52.916672,209.24666 v 11.59167 l 2.11666,6.955 2.116668,9.27334 -14.552078,0 L 31.75,234.95 15.610418,237.06667 12.618587,236.5375 -1.9334985,234.21917 -24.34167,236.5375 h -13.493747 l -19.314583,0.52917 2.11667,-9.27334 0,-9.07167 -3e-6,-11.79333 c 21.166668,-4.63667 90.941075,-2.02854 107.950005,2.31833 z"
+       sodipodi:nodetypes="cccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#d38d5f;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1610"
+       width="6.3499999"
+       height="19.049999"
+       x="182.03333"
+       y="129.11667"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\arm1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#d38d5f;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1610-9"
+       width="6.3499999"
+       height="19.049999"
+       x="177.79999"
+       y="156.63333" />
+    <rect
+       style="fill:#786721;fill-opacity:1;stroke:none;stroke-width:0.324037;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1608"
+       width="29.633335"
+       height="14.81667"
+       x="137.51353"
+       y="135.57233"
+       transform="matrix(0.9999998,-6.3205691e-4,4.6436808e-4,0.99999989,0,0)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#d38d5f;fill-opacity:1;stroke-width:0.920395"
+       id="path1571"
+       cx="148.79454"
+       cy="145.83194"
+       rx="12.7"
+       ry="10.758513"
+       transform="rotate(-1.5764555)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="path1571-2"
+       style="fill:#502d16;fill-opacity:1;stroke-width:1"
+       d="m 165.44537,141.33389 c 0.17641,6.40999 -5.36441,11.76272 -12.37577,11.95569 -7.01136,0.19295 -12.83819,-4.84692 -13.0146,-11.25692 -0.17641,-6.40997 -0.0542,-1.68887 12.64282,-2.25191 12.68932,-0.56273 12.57114,-4.85684 12.74755,1.55314 z"
+       sodipodi:nodetypes="sssss"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#d38d5f;fill-opacity:1;stroke-width:1"
+       id="rect1589"
+       width="4.2333331"
+       height="4.2333331"
+       x="146.67787"
+       y="133.13194"
+       transform="rotate(-1.5764555)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#ff6600;fill-opacity:1;stroke:#000000;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1591"
+       cx="107.10403"
+       cy="167.04669"
+       rx="4.2333331"
+       ry="1.0583333"
+       transform="rotate(-15.305592)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#ff6600;fill-opacity:1;stroke:#000000;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1591-0"
+       cx="-182.00763"
+       cy="96.537071"
+       rx="4.2333331"
+       ry="1.0583333"
+       transform="matrix(-0.97759008,-0.21051752,-0.21051752,0.97759008,0,0)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person1.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#782121;fill-opacity:1;stroke:none;stroke-width:0.324038;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1608-2"
+       width="29.633335"
+       height="14.81667"
+       x="137.13158"
+       y="214.37154"
+       transform="matrix(0.9999998,-6.3205783e-4,4.6436757e-4,0.99999989,0,0)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#d38d5f;fill-opacity:1;stroke-width:0.920395"
+       id="path1571-3"
+       cx="146.28146"
+       cy="224.59206"
+       rx="12.7"
+       ry="10.758513"
+       transform="rotate(-1.5764555)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#d38d5f;fill-opacity:1;stroke-width:1"
+       id="rect1589-6"
+       width="4.2333331"
+       height="4.2333331"
+       x="144.16479"
+       y="211.89206"
+       transform="rotate(-1.5764555)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#ff6600;fill-opacity:1;stroke:#000000;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1591-4"
+       cx="85.970444"
+       cy="242.96008"
+       rx="4.2333331"
+       ry="1.0583333"
+       transform="rotate(-15.305592)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <ellipse
+       style="fill:#ff6600;fill-opacity:1;stroke:#000000;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1591-0-7"
+       cx="-198.25867"
+       cy="173.64333"
+       rx="4.2333331"
+       ry="1.0583333"
+       transform="matrix(-0.97759008,-0.21051752,-0.21051752,0.97759008,0,0)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#c8ab37;fill-opacity:1;stroke:none;stroke-width:0.282843;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1657"
+       width="4.2333264"
+       height="16.933331"
+       x="150.28334"
+       y="215.89999"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\person2.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2853-8-6-2"
+       style="fill:#000000;fill-opacity:0.669355;fill-rule:nonzero;stroke-width:2.00389;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 279.77101,174.90357 1.76619,4.16039 0.8269,4.38521 0.98671,3.98297 1.10136,5.36124 -7.31651,0.59731 -7.13485,0.8498 -7.28736,1.13968 -7.27548,0.092 -0.83974,-3.57891 -0.77124,-4.07722 0.0463,-4.76389 -0.0522,-4.40754 6.52567,-1.02986 6.8549,-0.0946 7.1099,-1.4719 z"
+       sodipodi:nodetypes="ccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2853-0-7"
+       style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:2.02258;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 279.89146,174.20346 1.78753,4.15733 0.83013,4.38471 0.99386,3.98194 1.10785,5.36032 -7.45232,0.61689 -7.268,0.86899 -7.42407,1.1595 -7.40923,0.11127 -0.84558,-3.57808 -0.77448,-4.07682 0.0597,-4.76575 -0.0418,-4.40904 6.64811,-1.04752 6.98093,-0.11276 7.24422,-1.49127 z"
+       sodipodi:nodetypes="ccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.649193;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3365-7"
+       width="3.3325167"
+       height="1.3196435"
+       x="1.4866867"
+       y="7.9512687"
+       mask="url(#mask3382-2-45)"
+       transform="matrix(1.0686953,7.4123683,-5.474785,0.78933973,299.84871,155.22107)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.649193;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3365-1-98"
+       width="3.5333166"
+       height="0.83536148"
+       x="1.2858869"
+       y="8.4355507"
+       mask="url(#mask3382-4-2-7)"
+       transform="matrix(1.0686953,7.4123683,-5.474785,0.78933973,299.84871,155.22107)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.649193;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3365-1-9-5"
+       width="3.5124362"
+       height="0.49709848"
+       x="1.3067673"
+       y="8.7738132"
+       mask="url(#mask3382-4-1-8-8)"
+       transform="matrix(1.0686953,7.4123683,-5.474785,0.78933973,299.84871,155.22107)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.439516;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-5-1"
+       width="3.2600443"
+       height="1.7008929"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-4-2)"
+       transform="matrix(1.0686953,7.4123683,-5.474785,0.78933973,299.84871,155.22107)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-1-7-0"
+       width="3.2068915"
+       height="1.1398345"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-6-4-3)"
+       transform="matrix(1.0686953,7.4123683,-5.474785,0.78933973,299.84871,155.22107)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <rect
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-1-1-2-4"
+       width="3.2718561"
+       height="0.64964652"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-6-5-8-9)"
+       transform="matrix(1.0686953,7.4123683,-5.474785,0.78933973,299.84871,155.22107)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2853-8-6-2-4"
+       style="fill:#000000;fill-opacity:0.669355;fill-rule:nonzero;stroke-width:2.00389;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 268.31558,183.20254 4.39265,1.06435 4.01277,1.95233 3.78526,1.58411 4.95983,2.31429 -3.88524,6.2284 -3.57423,6.23323 -3.43256,6.52856 -4.26632,5.89403 -3.3733,-1.46103 -3.73237,-1.81327 -3.79578,-2.87903 -3.56854,-2.58741 3.06631,-5.85172 4.01334,-5.55804 3.06006,-6.58431 z"
+       sodipodi:nodetypes="ccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375"
+       inkscape:transform-center-x="-3.8564469"
+       inkscape:transform-center-y="2.2540153" />
+    <g
+       id="g1044-8"
+       transform="translate(260.35,158.75)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         id="rect4569-45-2-9-2-8"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.1118846,8.5776224 4.5255133,9.3875828 5.0916554,9.7548053 5.408892,10.2701 4.9391419,10.197543 4.393135,10.346355 l -0.6222637,0.370181 -0.5942029,0.0015 0.5090464,-0.70177 0.1200029,-0.5348664 0.1054575,-0.608352 z"
+         sodipodi:nodetypes="cccccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,44.907022,-79.657507)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-14-34-0-9-6-10"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.103711,9.0859407 4.3044205,8.7905354 4.2763598,9.1592372 4.0677247,10.339379 3.7425625,10.70882 3.3692043,10.930929 3.8782507,10.229159 Z"
+         sodipodi:nodetypes="cccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,43.157456,-83.595512)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-2-00-6-9-8-6-7-22"
+         style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.533903,9.0653117 4.0641529,8.9927548 3.518146,9.1415669 2.8958823,9.511748 2.3016794,9.5132273 2.6750376,9.2911187 3.0965918,9.2163428 3.7188555,8.8461617 4.1404096,8.7713858 Z"
+         sodipodi:nodetypes="cccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,51.753324,-58.908493)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 63.499999,52.916666 -2.116666,4.233333 2.116666,10.583333 6.35,6.35 v 2.116667 l 4.233333,6.35 -2.116666,-8.466667 -6.35,-8.466666 -2.116667,-12.7 v 0"
+         id="path1038-3"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+    </g>
+    <path
+       id="rect2853-0-7-8"
+       style="fill:#917c6f;fill-opacity:1;fill-rule:nonzero;stroke-width:2.02258;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 267.82554,182.68822 4.40293,1.0454 4.01429,1.94944 3.7887,1.57775 4.96296,2.30854 -3.95054,6.34908 -3.63826,6.35154 -3.49821,6.6501 -4.33064,6.01287 -3.37612,-1.45585 -3.73398,-1.81042 -3.78928,-2.8909 -3.56354,-2.59665 3.12518,-5.96053 4.07395,-5.67001 3.12464,-6.70367 z"
+       sodipodi:nodetypes="ccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375"
+       inkscape:transform-center-x="-3.2586619"
+       inkscape:transform-center-y="1.9624053" />
+    <rect
+       style="fill:#000000;fill-opacity:0.649193;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3365-7-4"
+       width="3.3325167"
+       height="1.3196435"
+       x="1.4866867"
+       y="7.9512687"
+       mask="url(#mask3382-2-45-1)"
+       transform="matrix(6.5865376,3.5641035,-2.6324517,4.8648255,264.49609,155.34708)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375"
+       inkscape:transform-center-x="4.2006717"
+       inkscape:transform-center-y="11.62778" />
+    <rect
+       style="fill:#000000;fill-opacity:0.649193;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3365-1-98-6"
+       width="3.5333166"
+       height="0.83536148"
+       x="1.2858869"
+       y="8.4355507"
+       mask="url(#mask3382-4-2-7-8)"
+       transform="matrix(6.5865376,3.5641035,-2.6324517,4.8648255,264.49609,155.34708)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375"
+       inkscape:transform-center-x="5.4993836"
+       inkscape:transform-center-y="12.447918" />
+    <rect
+       style="fill:#000000;fill-opacity:0.649193;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3365-1-9-5-7"
+       width="3.5124362"
+       height="0.49709848"
+       x="1.3067673"
+       y="8.7738132"
+       mask="url(#mask3382-4-1-8-8-4)"
+       transform="matrix(6.5865376,3.5641035,-2.6324517,4.8648255,264.49609,155.34708)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375"
+       inkscape:transform-center-x="5.875848"
+       inkscape:transform-center-y="13.307921" />
+    <rect
+       style="fill:#000000;fill-opacity:0.439516;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-5-1-1"
+       width="3.2600443"
+       height="1.7008929"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-4-2-1)"
+       transform="matrix(6.5865376,3.5641035,-2.6324517,4.8648255,264.49609,155.34708)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375"
+       inkscape:transform-center-x="-9.2554811"
+       inkscape:transform-center-y="-7.4649593" />
+    <rect
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-1-7-0-9"
+       width="3.2068915"
+       height="1.1398345"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-6-4-3-8)"
+       transform="matrix(6.5865376,3.5641035,-2.6324517,4.8648255,264.49609,155.34708)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375"
+       inkscape:transform-center-x="-9.8189142"
+       inkscape:transform-center-y="-8.924406" />
+    <rect
+       style="fill:#000000;fill-opacity:0.729839;fill-rule:nonzero;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3428-1-1-2-4-2"
+       width="3.2718561"
+       height="0.64964652"
+       x="1.8898809"
+       y="3.5671501"
+       mask="url(#mask3445-6-5-8-9-2)"
+       transform="matrix(6.5865376,3.5641035,-2.6324517,4.8648255,264.49609,155.34708)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375"
+       inkscape:transform-center-x="-10.678058"
+       inkscape:transform-center-y="-10.000975" />
+    <g
+       id="g1044-8-7"
+       transform="rotate(17.837338,-290.17019,1012.8507)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375">
+      <path
+         id="rect4569-45-2-9-2-8-8"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.1118846,8.5776224 4.5255133,9.3875828 5.0916554,9.7548053 5.408892,10.2701 4.9391419,10.197543 4.393135,10.346355 l -0.6222637,0.370181 -0.5942029,0.0015 0.5090464,-0.70177 0.1200029,-0.5348664 0.1054575,-0.608352 z"
+         sodipodi:nodetypes="cccccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,44.907022,-79.657507)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-14-34-0-9-6-10-8"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.103711,9.0859407 4.3044205,8.7905354 4.2763598,9.1592372 4.0677247,10.339379 3.7425625,10.70882 3.3692043,10.930929 3.8782507,10.229159 Z"
+         sodipodi:nodetypes="cccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,43.157456,-83.595512)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-2-00-6-9-8-6-7-22-3"
+         style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.533903,9.0653117 4.0641529,8.9927548 3.518146,9.1415669 2.8958823,9.511748 2.3016794,9.5132273 2.6750376,9.2911187 3.0965918,9.2163428 3.7188555,8.8461617 4.1404096,8.7713858 Z"
+         sodipodi:nodetypes="cccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,51.753324,-58.908493)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 63.499999,52.916666 -2.116666,4.233333 2.116666,10.583333 6.35,6.35 v 2.116667 l 4.233333,6.35 -2.116666,-8.466667 -6.35,-8.466666 -2.116667,-12.7 v 0"
+         id="path1038-3-1"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+    </g>
+    <path
+       id="rect2984-6-7-6"
+       style="fill:#000000;fill-opacity:0.314516;stroke-width:0.599273"
+       d="m 267.69727,166.86389 12.7,2.11666 11.70273,0.35278 21.61443,2.64583 10.46122,-0.17638 h 6.31946 14.01275 l 14.91841,0.88194 L 368.3,171.45 v 8.46667 6.35 6.87917 l 2.03526,6.17361 v 6.87917 6.87916 l 2.19807,6.87917 2.11667,9.19751 -15.03038,-0.0253 -11.36689,-2.11667 -16.65857,2.11667 -3.51083,-0.52917 -15.11178,-2.29305 -22.98822,2.29305 h -14.01274 l -19.93533,0.70555 2.19807,-9.17222 v -6.87918 -6.87917 -7.40833 l 4.31475,-4.40971 v -6.87917 -6.87917 z"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.976082;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 361.03535,177.8 C 367.76946,172.47397 381,156.63333 381,156.63333 v 0 0"
+       id="path3006-8-6"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.17851;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 279.4,177.8 c 0,0 -9.61739,-7.46503 -21.16667,-21.16667"
+       id="path3002-7-8"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2984-1-1"
+       style="fill:#9c782b;fill-opacity:1;stroke-width:0.576146"
+       d="m 268.81667,169.16464 14.00256,1.83418 11.39744,0.36683 21.69583,2.20101 h 10.05417 6.08541 13.49375 12.17084 l 12.7,-4.40202 L 368.3,180.1697 v 6.60303 l 2.11667,6.60305 v 6.60304 6.60302 6.60305 l 2.11666,6.60302 2.11667,9.01375 -14.55208,-0.2097 -10.84793,-2.20101 -16.13957,2.20101 -2.99183,-0.55025 -14.55209,-2.20102 -22.40817,2.20102 h -13.49375 l -19.31458,0.55025 2.11667,-8.80405 v -8.80405 -6.60303 -4.40202 -2.20101 l 2.11666,-8.80405 2.11667,-8.80405 z"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 264.58333,224.36667 c 0,0 -15.27024,14.55208 -19.05,21.16667"
+       id="path3010-5-4"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 366.18334,222.25 c 0,0 17.31131,12.32202 27.51666,23.28334"
+       id="path3008-5-0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+    <path
+       id="rect2984-9-6-6"
+       style="fill:#b38a31;fill-opacity:1;stroke-width:0.591301"
+       d="m 370.15207,200.25082 v 11.59167 l 2.11666,6.955 2.11667,9.27334 h -14.55208 l -10.84792,-2.11667 -16.13958,2.11667 -2.99183,-0.52917 -14.55209,-2.31833 -22.40817,2.31833 h -13.49375 l -19.31458,0.52917 2.11667,-9.27334 v -9.07166 -11.79334 c 21.16666,-4.63667 90.94107,-2.02854 107.95,2.31833 z"
+       sodipodi:nodetypes="cccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\camp\tents\sprites\tent3.png"
+       inkscape:export-xdpi="13.206375"
+       inkscape:export-ydpi="13.206375" />
+  </g>
+</svg>

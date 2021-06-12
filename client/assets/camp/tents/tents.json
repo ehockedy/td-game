@@ -1,0 +1,20 @@
+{"frames": {
+
+"tent1.png":
+{
+	"frame": {"x":0,"y":0,"w":95,"h":66},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":95,"h":66},
+	"sourceSize": {"w":95,"h":66}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "tents.png",
+	"format": "RGBA8888",
+	"size": {"w":95,"h":66},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:76919bd20cbe3d51f07ad06a4c778bdf:051a2357d0093789a8be9ac137b62663:4c9efa2d69789819756af5e38ebff175$"
+}
+}
