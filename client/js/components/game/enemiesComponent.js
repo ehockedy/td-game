@@ -46,6 +46,7 @@ export class EnemiesComponent extends BaseComponent {
 
     loadData() {
         return new Promise((resolve) => {
+            console.log("enemies")
             fetch("shared/json/enemies.json").then((response) => {
                 response.json().then((enemyJson) => {
                     // Load enemy sprite data once config loaded, instead of at start

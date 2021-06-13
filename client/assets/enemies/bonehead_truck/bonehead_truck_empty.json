@@ -1,0 +1,332 @@
+{"frames": {
+
+"bonehead_truck_empty_000.png":
+{
+	"frame": {"x":1,"y":1,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_001.png":
+{
+	"frame": {"x":90,"y":1,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_002.png":
+{
+	"frame": {"x":179,"y":1,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_003.png":
+{
+	"frame": {"x":268,"y":1,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_004.png":
+{
+	"frame": {"x":357,"y":1,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_005.png":
+{
+	"frame": {"x":1,"y":66,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_006.png":
+{
+	"frame": {"x":90,"y":66,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_007.png":
+{
+	"frame": {"x":179,"y":66,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_008.png":
+{
+	"frame": {"x":268,"y":66,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_009.png":
+{
+	"frame": {"x":357,"y":66,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_010.png":
+{
+	"frame": {"x":1,"y":131,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_011.png":
+{
+	"frame": {"x":90,"y":131,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_012.png":
+{
+	"frame": {"x":179,"y":131,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_013.png":
+{
+	"frame": {"x":268,"y":131,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_014.png":
+{
+	"frame": {"x":357,"y":131,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_015.png":
+{
+	"frame": {"x":1,"y":196,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_016.png":
+{
+	"frame": {"x":90,"y":196,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_017.png":
+{
+	"frame": {"x":179,"y":196,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_018.png":
+{
+	"frame": {"x":268,"y":196,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_019.png":
+{
+	"frame": {"x":357,"y":196,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_020.png":
+{
+	"frame": {"x":1,"y":261,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_021.png":
+{
+	"frame": {"x":90,"y":261,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_022.png":
+{
+	"frame": {"x":179,"y":261,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_023.png":
+{
+	"frame": {"x":268,"y":261,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_024.png":
+{
+	"frame": {"x":357,"y":261,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_025.png":
+{
+	"frame": {"x":1,"y":326,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_026.png":
+{
+	"frame": {"x":90,"y":326,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_027.png":
+{
+	"frame": {"x":179,"y":326,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_028.png":
+{
+	"frame": {"x":268,"y":326,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_029.png":
+{
+	"frame": {"x":357,"y":326,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_030.png":
+{
+	"frame": {"x":1,"y":391,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_031.png":
+{
+	"frame": {"x":90,"y":391,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_032.png":
+{
+	"frame": {"x":179,"y":391,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_033.png":
+{
+	"frame": {"x":268,"y":391,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_034.png":
+{
+	"frame": {"x":357,"y":391,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_035.png":
+{
+	"frame": {"x":1,"y":456,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_036.png":
+{
+	"frame": {"x":90,"y":456,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_037.png":
+{
+	"frame": {"x":179,"y":456,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_038.png":
+{
+	"frame": {"x":268,"y":456,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+},
+"bonehead_truck_empty_039.png":
+{
+	"frame": {"x":357,"y":456,"w":88,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":64},
+	"sourceSize": {"w":88,"h":64}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "bonehead_truck_empty.png",
+	"format": "RGBA8888",
+	"size": {"w":446,"h":521},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:157a8df79c8a179c0ea2b4483e14fea9:9dda6d91479da86e218391ddfc2d501f:4f713976d76fb4fd8c1c7bcd58f75707$"
+}
+}

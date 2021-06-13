@@ -13,5 +13,15 @@
         "textureAtlasFile": "client/assets/enemies/beetle_small/beetle_small.json",
         "speed": 3,
         "hp": 20
+    },
+    "boneheadTruckFull": {
+        "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_full.json",
+        "speed": 1,
+        "hp": 40
+    },
+    "boneheadTruckEmpty": {
+        "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_empty.json",
+        "speed": 1,
+        "hp": 40
     }
 }
