@@ -37,8 +37,14 @@ class Enemy {
     }
 
     step() {
-        this.steps += this.speed
-        if (this.steps < this.path.length) {
+        this.setPosition(this.steps + this.speed)
+        this.isHit = false  // Reset hit status
+        this.collisionAngles = []
+    }
+
+    setPosition(steps) {
+        this.steps = steps
+        if (steps < this.path.length) {
             this.position = this.path[this.steps]
 
             this.row = this.position.row
@@ -49,8 +55,6 @@ class Enemy {
             this.x = this.position.x
             this.y = this.position.y
         }
-        this.isHit = false  // Reset hit status
-        this.collisionAngles = []
     }
 
     // Given the type of tile the enemy is on determine if it needs to rotate itself to be facing a certain direction
@@ -59,7 +63,11 @@ class Enemy {
     // First direction is the direction of travel through the firt half of the square, second direction is direction through the second half od the square
     turn(tileType) {
         if (tileType.length != 2) return // No need to rotate if a straight path
+        this.forceTurn(tileType)
+    }
 
+    // Makes the enemy check change of direction no matter what
+    forceTurn(tileType) {
         let firstDir = this._rotationAngleSwitch(tileType[0])  // Direction the enemy sprite is facing when it enters it's current square
         let secondDir = this._rotationAngleSwitch(tileType[1]) // Direction enemy sprite faces when leasing the sqare i.e. moves from first to second angle
 

@@ -106,6 +106,21 @@ class Game {
     removeEnemy(enemy) {
         this.map.removeEnemy(enemy)
         this.enemiesRemaining -= 1
+
+        // Some enemis spawn new enemies when they are destroyed
+        // Add these here
+        let subEnemies = enemyConfig[enemy.type].subEnemies
+        if (subEnemies.length > 0) {
+            // Is there enough space to add the enemies behind where this enemy died?
+            // Most likely yes, so -1. If not enough steps to work backwards, the work forwards.
+            let enemyAddDirection = (enemy.steps < subEnemies.length) ? 30 : -30
+            let offset = 0
+            subEnemies.forEach((subEnemyType) => {
+                this.addEnemy(subEnemyType, enemy.steps + offset)
+                this.enemiesRemaining += 1
+                offset += enemyAddDirection
+            })
+        }
     }
 
     processEndOfPathEnemy(enemy) {
@@ -143,17 +158,25 @@ class Game {
     }
 
     /**
-     * Adds an enemy based
+     * Adds an enemy at the given number of steps down the path
      * @param {Number} enemyType type of enemy to add
+     * @param {Number} steps number of steps this enemy has taken
      */
-    addEnemy(enemyType) {
+    addEnemy(enemyType, steps) {
+        let enemyToAdd = new enemy.Enemy(enemyType, this.map.path, this.map.subgridSize)
+        enemyToAdd.setPosition(steps)
+        enemyToAdd.forceTurn(this.map.getGridValue(enemyToAdd.row, enemyToAdd.col))
+        this.map.addEnemy(enemyToAdd)
+    }
+
+    addEnemyToFront(enemyType) {
         this.map.addNewEnemy(new enemy.Enemy(enemyType, this.map.path, this.map.subgridSize))
     }
 
     shiftEnemyQueue() {
         if (this.enemyQueue.length > 0) {
             if (this.enemyQueue[0].stepsUntilGo == 0) {
-                this.addEnemy(this.enemyQueue.shift().type)
+                this.addEnemyToFront(this.enemyQueue.shift().type)
             } else {
                 this.enemyQueue[0].stepsUntilGo -= 1
             }
