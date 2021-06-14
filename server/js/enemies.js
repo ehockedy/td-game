@@ -2,6 +2,11 @@ const crypto = require('crypto');
 const fs = require('fs');
 
 let enemyConfig = JSON.parse(fs.readFileSync('shared/json/enemies.json'));
+const sizeMap = {
+    "small": 4,
+    "medium": 2,
+    "large": 1
+}
 
 class Enemy {
     /**
@@ -16,9 +21,9 @@ class Enemy {
         this.speed = enemyConfig[type].speed;
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
-        this.hitboxRadius = subgridSize/3
+        this.hitboxRadius = subgridSize/sizeMap[enemyConfig[type].size]
 
-        this.nearCentreRadius = subgridSize / 6  // Distance from centre point that is considered near. Used to determine when to turn
+        this.nearCentreRadius = this.hitboxRadius / 2  // Distance from centre point that is considered near. Used to determine when to turn.
         this.rotation = 0  // angle in radians that enemy is facing, starting at 0 which is right/east
 
         this.path = path // Reference to the object in map
