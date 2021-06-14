@@ -36,6 +36,12 @@ export class EnemiesComponent extends BaseComponent {
         this.enemyStateHashPrev = ""
         this.enemyTextures = {}
 
+        // Containers
+        this.enemySprites = new PIXI.Container()
+        this.deathSprites = new PIXI.Container()
+        this.addChild(this.enemySprites)
+        this.addChild(this.deathSprites)
+
         // Load textures for creating collision anmation
         let explosion1Textures = PIXI.Loader.shared.resources["client/assets/collisions/collision1/collision1.json"].textures
         this.collisionTextures = []
@@ -78,7 +84,7 @@ export class EnemiesComponent extends BaseComponent {
      * @param {Number} type Type of enemy
      */
     addEnemy(name, type) {
-        this.addChild(new Enemy(name, this.enemyTextures[type]))
+        this.enemySprites.addChild(new Enemy(name, this.enemyTextures[type]))
     }
 
     generateEnemyHitAnimation(angle) {
@@ -113,31 +119,32 @@ export class EnemiesComponent extends BaseComponent {
         if (enemyStateHash != this.enemyStateHashPrev) { // TODO further optimisation - hash of all added and removed enemies
             this.enemyStateHashPrev = enemyStateHash
 
-            for (let enemySpriteIdx = this.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
+            for (let enemySpriteIdx = this.enemySprites.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
                 let found = false
                 for (let nameIdx = 0; nameIdx < enemyStateObjects.length; nameIdx++) {
                     // Whether enemy is found in this.container, but not in server update
-                    found = (this.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
+                    found = (this.enemySprites.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
                     if (found) break; // Think this is ok
                 }
 
                 // An enemy is not present in update from server, must have been destroyed
                 // Remove it and put an explosion animation where it last was
                 if (!found) {
-                    let removedChild = this.removeChildAt(enemySpriteIdx)
+                    let removedChild = this.enemySprites.removeChildAt(enemySpriteIdx)
                     let finalExplosion = this.generateEnemyHitAnimation(0)
                     finalExplosion.position = removedChild.position
                     finalExplosion.scale.set(2)
-                    this.addChild(finalExplosion)
+                    finalExplosion.animationSpeed = 0.8
+                    this.deathSprites.addChild(finalExplosion)
                 }
             }
 
             // Add any enemies not present in container i.e. just spawned
             for (let nameIdx = 0; nameIdx < enemyStateObjects.length; nameIdx++) {
                 let found = false;
-                for (let enemySpriteIdx = this.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
+                for (let enemySpriteIdx = this.enemySprites.children.length - 1; enemySpriteIdx >= 0; enemySpriteIdx--) {
                     // Whether enemy if found in server update, but not in this.container
-                    found = (this.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
+                    found = (this.enemySprites.children[enemySpriteIdx].name == enemyStateObjects[nameIdx].name)
                     if (found) break;
                 }
                 if (!found) this.addEnemy(enemyStateObjects[nameIdx].name, enemyStateObjects[nameIdx].type)
@@ -147,7 +154,7 @@ export class EnemiesComponent extends BaseComponent {
         // Update state of enemies present in server update
         enemyStateObjects.forEach((enemy, idx) => {
             // Move the enemy
-            let enemyToUpdate = this.getChildByName(enemy.name)
+            let enemyToUpdate = this.enemySprites.getChildByName(enemy.name)
             let newpos = gridPosToMapPos(enemy.position, this.spriteSizeMap, enemy.position.subgridSize)
             enemyToUpdate.x = newpos[0]
             enemyToUpdate.y = newpos[1]
