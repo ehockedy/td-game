@@ -79,13 +79,13 @@
             "shootRange": 10,
             "damage": 5,
             "rateOfFire": 80,
-            "bulletSpeed": 12,
+            "bulletSpeed": 8,
             "numberOfBullets": 1,
             "turns": true,
             "piercing": true
         },
         "cost": 200,
-        "bulletType": "rock",
+        "bulletType": "spear",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/5-spear_launcher/spear_launcher.json"
     }

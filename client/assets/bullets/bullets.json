@@ -10,19 +10,27 @@
 },
 "shrapnel1.png":
 {
-	"frame": {"x":0,"y":16,"w":17,"h":15},
+	"frame": {"x":16,"y":0,"w":17,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":15},
 	"sourceSize": {"w":17,"h":15}
+},
+"spear1.png":
+{
+	"frame": {"x":33,"y":0,"w":103,"h":6},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":103,"h":6},
+	"sourceSize": {"w":103,"h":6}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "bullets.png",
 	"format": "RGBA8888",
-	"size": {"w":17,"h":31},
+	"size": {"w":136,"h":16},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:dac5c5a4547b18dfbc8569400c6bcb92:703f3da14f631a84ac3a83bc0b061229:878d09cf2bf4ec0dfb23d5bcf7e0eb82$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f38f474fbfb58102fb2ab49b9e358153:3db89a17bfc747617675c8c893429abe:878d09cf2bf4ec0dfb23d5bcf7e0eb82$"
 }
 }

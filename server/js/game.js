@@ -368,7 +368,8 @@ class Game {
                 state.objects.push({
                     "name": b.name,
                     "position": b.position,
-                    "type": b.type
+                    "type": b.type,
+                    "angle": b.angle,
                 })
             }
         })

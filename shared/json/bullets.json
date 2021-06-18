@@ -8,5 +8,10 @@
         "filenameKeyword": "shrapnel",
         "rotate": true,
         "rotationSpeed": 15
+    },
+    "spear": {
+        "filenameKeyword": "spear",
+        "rotate": false,
+        "rotationSpeed": 0
     }
 }

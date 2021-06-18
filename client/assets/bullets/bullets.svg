@@ -18,7 +18,216 @@
    inkscape:export-xdpi="12.8"
    inkscape:export-ydpi="12.8">
   <defs
-     id="defs911" />
+     id="defs911">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter390">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="1"
+         seed="36"
+         baseFrequency="0.247129 0.524025"
+         result="turbulence"
+         id="feTurbulence386" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="1.94611"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap388"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix404" />
+      <feTurbulence
+         id="feTurbulence406"
+         type="fractalNoise"
+         numOctaves="1"
+         seed="36"
+         baseFrequency="0.247129 0.524025"
+         result="turbulence"
+         in="fbSourceGraphic" />
+      <feDisplacementMap
+         in2="turbulence"
+         id="feDisplacementMap408"
+         in="fbSourceGraphic"
+         scale="1.94611"
+         yChannelSelector="G"
+         xChannelSelector="R" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter396">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="1"
+         seed="36"
+         baseFrequency="0.247129 0.524025"
+         result="turbulence"
+         id="feTurbulence392" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="1.94611"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap394"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix410" />
+      <feTurbulence
+         id="feTurbulence412"
+         type="fractalNoise"
+         numOctaves="1"
+         seed="36"
+         baseFrequency="0.247129 0.524025"
+         result="turbulence"
+         in="fbSourceGraphic" />
+      <feDisplacementMap
+         in2="turbulence"
+         id="feDisplacementMap414"
+         in="fbSourceGraphic"
+         scale="1.94611"
+         yChannelSelector="G"
+         xChannelSelector="R" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Roughen"
+       id="filter402">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="1"
+         seed="36"
+         baseFrequency="0.247129 0.524025"
+         result="turbulence"
+         id="feTurbulence398" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="turbulence"
+         scale="1.94611"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         id="feDisplacementMap400"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix416" />
+      <feTurbulence
+         id="feTurbulence418"
+         type="fractalNoise"
+         numOctaves="1"
+         seed="36"
+         baseFrequency="0.247129 0.524025"
+         result="turbulence"
+         in="fbSourceGraphic" />
+      <feDisplacementMap
+         in2="turbulence"
+         id="feDisplacementMap420"
+         in="fbSourceGraphic"
+         scale="1.94611"
+         yChannelSelector="G"
+         xChannelSelector="R" />
+    </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB;"
+       id="filter484">
+      <feTurbulence
+         baseFrequency="0.32332563510392609"
+         numOctaves="9"
+         type="turbulence"
+         result="result91"
+         id="feTurbulence478" />
+      <feDisplacementMap
+         scale="1.7660044150110374"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap480" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite482" />
+    </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB;"
+       id="filter492">
+      <feTurbulence
+         baseFrequency="0.015113350125944584"
+         numOctaves="5"
+         type="fractalNoise"
+         result="result91"
+         id="feTurbulence486" />
+      <feDisplacementMap
+         scale="5.518763796909492"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap488" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite490" />
+    </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB"
+       id="filter492-3">
+      <feTurbulence
+         baseFrequency="0.015113350125944584"
+         numOctaves="5"
+         type="fractalNoise"
+         result="result91"
+         id="feTurbulence486-9" />
+      <feDisplacementMap
+         scale="5.5187638"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap488-8"
+         yChannelSelector="A" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite490-0" />
+    </filter>
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -26,22 +235,32 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.52"
-     inkscape:cx="236.07039"
-     inkscape:cy="241.3221"
+     inkscape:zoom="0.53740115"
+     inkscape:cx="120.0567"
+     inkscape:cy="479.92773"
      inkscape:document-units="mm"
-     inkscape:current-layer="g1044"
+     inkscape:current-layer="layer3"
      inkscape:document-rotation="0"
      showgrid="true"
      units="px"
      objecttolerance="10000"
      guidetolerance="10000"
      inkscape:pagecheckerboard="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1002"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1">
+     inkscape:window-width="2400"
+     inkscape:window-height="1272"
+     inkscape:window-x="4792"
+     inkscape:window-y="754"
+     inkscape:window-maximized="1"
+     inkscape:snap-intersection-paths="false"
+     inkscape:object-paths="false"
+     inkscape:object-nodes="true"
+     inkscape:snap-smooth-nodes="false"
+     inkscape:snap-bbox="false"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-others="false"
+     inkscape:snap-nodes="false">
     <inkscape:grid
        type="xygrid"
        id="grid919"
@@ -64,7 +283,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:none">
+     style="display:inline">
     <g
        id="g859"
        transform="matrix(0.57142859,0,0,0.57142859,24.795238,27.638143)">
@@ -147,5 +366,195 @@
          inkscape:export-xdpi="12.8"
          inkscape:export-ydpi="12.8" />
     </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Spear">
+    <path
+       id="rect24"
+       style="fill:#483e37;stroke-width:12.5557"
+       d="m 235.4121,177.22324 c -7.368,9.1176 -147.359686,9.1176 -154.727655,-1e-5 7.367969,-9.1176 147.359655,-9.1176 154.727655,1e-5 z"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect24-8"
+       style="fill:#6c5d53;stroke-width:11.0368"
+       d="m 235.4121,177.22324 c -7.368,7.04512 -147.359686,7.04512 -154.727655,-1e-5 7.367969,-7.04509 147.359655,-7.04509 154.727655,1e-5 z"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect24-8-1"
+       style="fill:#917c6f;stroke-width:9.07033"
+       d="m 235.4121,177.21313 c -7.36801,4.75821 -147.359686,4.75821 -154.727655,-1e-5 7.367969,-4.7582 147.359645,-4.7582 154.727655,1e-5 z"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect24-8-1-0"
+       style="fill:#ac9d93;stroke-width:7.41931"
+       d="m 235.30967,177.33234 c -7.36798,3.18362 -147.359671,3.18362 -154.727641,0 7.36797,-3.18363 147.359661,-3.18363 154.727641,0 z"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect24-8-1-0-6"
+       style="fill:#ac9d93;stroke-width:3.83907"
+       d="m 16.933333,33.866667 c 1.43627,4.372761 1.43627,87.455213 0,91.827963 -1.43627,-4.37275 -1.43627,-87.455202 0,-91.827963 z"
+       sodipodi:nodetypes="ccc" />
+    <path
+       id="rect87-4-2"
+       style="fill:#483e37;stroke-width:6.58665"
+       d="m 225.26013,114.60638 v 17.25214 H 65.771743 l 3e-5,-17.25219 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect87-4"
+       style="fill:#6c5d53;stroke-width:5.62376"
+       d="M 225.26012,116.84621 V 129.423 H 65.771743 l 3e-5,-12.57683 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect89-0"
+       style="fill:#483e37;stroke-width:8.08778"
+       d="M 247.80511,123.07299 182.77915,146.7188 206.20396,123.14504 182.77915,99.427179 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect87"
+       style="fill:#917c6f;stroke-width:4.47808"
+       d="m 225.26016,119.08579 v 7.97441 H 65.771783 l 3e-5,-7.97443 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect89"
+       style="fill:#6c5d53;stroke-width:6.50818"
+       d="m 241.45511,123.07299 -52.32596,19.02762 18.84979,-18.96964 -18.84979,-19.0856 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect89-07-0"
+       style="fill:#917c6f;stroke-width:5.55223"
+       d="M 236.14761,123.02354 191.50733,139.25637 207.58845,123.073 191.50733,106.79071 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect89-07"
+       style="fill:#ac9d93;stroke-width:3.97265"
+       d="m 226.63845,123.01502 -31.94029,11.61465 11.5061,-11.57926 -11.5061,-11.65004 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <rect
+       style="fill:#552200;stroke-width:2.03804;filter:url(#filter492)"
+       id="rect168-0"
+       width="145.2399"
+       height="9.8467722"
+       x="46.179028"
+       y="211.84901"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(1.0079075,0,0,0.80623564,-0.94065498,42.002766)" />
+    <rect
+       style="fill:#803300;stroke-width:1.5947;filter:url(#filter492)"
+       id="rect168"
+       width="145.23988"
+       height="6.0286355"
+       x="46.279831"
+       y="213.94243"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(1.0079075,0,0,0.80623564,-0.94065498,42.002766)" />
+    <rect
+       style="fill:#aa4400;stroke-width:1.08938;filter:url(#filter492)"
+       id="rect168-7"
+       width="145.2399"
+       height="2.8133633"
+       x="46.495014"
+       y="215.43295"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(1.0079075,0,0,0.80623564,-0.94065498,42.002766)" />
+    <path
+       id="path200"
+       style="fill:#6c5d53;stroke-width:1.765;filter:url(#filter492)"
+       inkscape:transform-center-x="0.98054753"
+       inkscape:transform-center-y="-0.062860755"
+       d="m 207.91365,224.27516 -22.19819,-1.36331 -8.22495,-12.26692 22.57449,-3.91224 23.53631,6.21556 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(0.7745311,0,0,0.64684681,44.525427,76.687534)" />
+    <path
+       id="path200-4"
+       style="fill:#ac9d93;stroke-width:1.33923;filter:url(#filter492)"
+       inkscape:transform-center-x="0.7440096"
+       inkscape:transform-center-y="-0.047698666"
+       d="m 202.3053,222.25151 -16.84333,-1.03444 -6.24085,-9.30777 17.12885,-2.9685 17.85866,4.71619 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(0.7745311,0,0,0.64684681,44.525427,76.687534)" />
+    <path
+       id="path200-4-8"
+       style="fill:#ac9d93;stroke-width:1.33923;filter:url(#filter492-3)"
+       inkscape:transform-center-x="0.80693908"
+       inkscape:transform-center-y="-0.051733551"
+       d="m 196.12495,221.57875 -11.89905,-1.03444 -5.679,-9.57687 17.80307,-2.02664 22.5782,0.14145 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(0.84004299,0,0,0.70155882,33.869333,95.959938)" />
+    <rect
+       style="fill:#754a0e;fill-opacity:1;stroke-width:1.83064;filter:url(#filter492)"
+       id="rect494"
+       width="141.79352"
+       height="3.7074723"
+       x="47.756844"
+       y="245.18463"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect1346"
+       style="fill:#502d16;fill-opacity:1;stroke-width:1.765;filter:url(#filter492)"
+       d="m 125.76411,243.95627 h 32.81181 c 4.78687,4.8739 -1.21847,6.52755 -1.21847,6.52755 l -31.76741,0.34813 c 0,0 -6.78865,-1.82771 0.17407,-6.87568 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 54.419923,248.1066 c 1.655757,2.65761 31.551611,2.35485 64.540607,-0.57318"
+       id="path1351"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
   </g>
 </svg>

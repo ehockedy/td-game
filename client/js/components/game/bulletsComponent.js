@@ -51,7 +51,12 @@ export class BulletsComponent extends BaseComponent {
                 if (bulletNew.name == bullet.name) {
                     bullet.x = newpos[0]
                     bullet.y = newpos[1]
-                    if (this.bulletJson[bulletNew.type].rotate) bullet.angle += this.bulletJson[bulletNew.type].rotationSpeed
+                    if (this.bulletJson[bulletNew.type].rotate) {
+                        bullet.angle += this.bulletJson[bulletNew.type].rotationSpeed
+                    } else {
+                        bullet.rotation = bulletNew.angle
+                        
+                    }
                     bullet.toRemove = false
                     bulletFound = true
                     break
