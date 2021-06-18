@@ -136,8 +136,9 @@ class Game {
             for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
                 let bullet = bullets[bIdx]
                 if(bullet.collidesWith(enemy.position, enemy.hitboxRadius)) {
-                    enemy.handleCollision(bullet)
-                    this.map.removeBullet(bullet) // Remove that bullet
+                    if (enemy.handleCollision(bullet)) {
+                        this.map.removeBullet(bullet) // Remove that bullet
+                    }
                 }
 
                 if (enemy.hp <= 0) { // Enemy has been killed

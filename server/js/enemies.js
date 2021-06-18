@@ -39,6 +39,8 @@ class Enemy {
         // Update specific variables
         this.isHit = false  // Whether the enemy has been hit in that specific update
         this.collisionAngles = []  // Array of angles for bullet that collide during a given update
+
+        this.collidedBullets = []  // If a bullet is piercing, store its name here so does not register another hit
     }
 
     step() {
@@ -129,7 +131,12 @@ class Enemy {
         return this.path[futureStep]
     }
 
+    // Returns whether the bullet should be removed
     handleCollision(bullet) {
+        // Return immediately if bullet already hit this enemy and is still around
+        if (this.collidedBullets.includes(bullet.name)) return false
+        this.collidedBullets.push(bullet.name)
+
         this.isHit = true
         this.hp -= bullet.damage
 
@@ -138,6 +145,7 @@ class Enemy {
         const ydiff = bullet.position.y - this.y
         const angle = Math.atan2(ydiff, xdiff)
         this.collisionAngles.push(angle)
+        return bullet.collide()  // returns false if bullet continues to move
     }
 
 }

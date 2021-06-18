@@ -1,4 +1,7 @@
 const crypto = require('crypto');
+const fs = require('fs');
+
+let bulletConfig = JSON.parse(fs.readFileSync('shared/json/bullets.json'));
 
 class Bullet {
     constructor(position, angle, damage, speed, range, type) {
@@ -10,6 +13,7 @@ class Bullet {
         this.damage = damage
         this.range = range
         this.type = type
+        this.piercingCount = bulletConfig[this.type].piercingCount
         this.name = crypto.randomBytes(20).toString('hex');
 
         this.angle = angle
@@ -46,6 +50,12 @@ class Bullet {
             }
         }
         return false
+    }
+
+
+    collide() {
+        this.piercingCount -= 1
+        return this.piercingCount <= 0
     }
 
     positionInNTicks(n) {

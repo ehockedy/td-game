@@ -27,8 +27,7 @@
             "rateOfFire": 45,
             "bulletSpeed": 5,
             "numberOfBullets": 8,
-            "turns": false,
-            "piercing": false
+            "turns": false
         },
         "cost": 50,
         "shootPattern": "burst",
@@ -45,8 +44,7 @@
             "rateOfFire": 60,
             "bulletSpeed": 8,
             "numberOfBullets": 3,
-            "turns": true,
-            "piercing": false
+            "turns": true
         },
         "cost": 120,
         "bulletType": "rock",
@@ -63,8 +61,7 @@
             "rateOfFire": 240,
             "bulletSpeed": 15,
             "numberOfBullets": 1,
-            "turns": true,
-            "piercing": false
+            "turns": true
         },
         "cost": 200,
         "bulletType": "rock",
@@ -81,8 +78,7 @@
             "rateOfFire": 80,
             "bulletSpeed": 8,
             "numberOfBullets": 1,
-            "turns": true,
-            "piercing": true
+            "turns": true
         },
         "cost": 200,
         "bulletType": "spear",

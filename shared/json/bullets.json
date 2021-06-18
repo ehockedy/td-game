@@ -2,16 +2,19 @@
     "rock": {
         "filenameKeyword": "rock",
         "rotate": true,
-        "rotationSpeed": 5
+        "rotationSpeed": 5,
+        "piercingCount": 1
     },
     "shrapnel": {
         "filenameKeyword": "shrapnel",
         "rotate": true,
-        "rotationSpeed": 15
+        "rotationSpeed": 15,
+        "piercingCount": 1
     },
     "spear": {
         "filenameKeyword": "spear",
         "rotate": false,
-        "rotationSpeed": 0
+        "rotationSpeed": 0,
+        "piercingCount": 5
     }
 }
