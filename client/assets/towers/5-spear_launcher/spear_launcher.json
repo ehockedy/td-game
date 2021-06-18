@@ -1,0 +1,28 @@
+{"frames": {
+
+"spear_launcher.png":
+{
+	"frame": {"x":0,"y":0,"w":57,"h":98},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":57,"h":98},
+	"sourceSize": {"w":57,"h":98}
+},
+"spear_launcher_base.png":
+{
+	"frame": {"x":0,"y":98,"w":57,"h":98},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":57,"h":98},
+	"sourceSize": {"w":57,"h":98}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "spear_launcher.png",
+	"format": "RGBA8888",
+	"size": {"w":57,"h":196},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:dc50267a659a37fa0583638142499a43:427217934c01784080964e5fc4e2d5ed:d461a3b269f7a150868b416415a0daab$"
+}
+}

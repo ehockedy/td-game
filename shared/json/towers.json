@@ -70,5 +70,23 @@
         "bulletType": "rock",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"
+    },
+    "spear-launcher": {
+        "spriteSheetNum": 4,
+        "displayInfo": "Launches a sharp spear that pierces through enemies.",
+        "gameData": {
+            "seekRange": 6,
+            "shootRange": 10,
+            "damage": 5,
+            "rateOfFire": 80,
+            "bulletSpeed": 12,
+            "numberOfBullets": 1,
+            "turns": true,
+            "piercing": true
+        },
+        "cost": 200,
+        "bulletType": "rock",
+        "shootPattern": "single",
+        "textureAtlasFile": "client/assets/towers/5-spear_launcher/spear_launcher.json"
     }
 }
