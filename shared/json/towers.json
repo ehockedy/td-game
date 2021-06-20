@@ -84,5 +84,22 @@
         "bulletType": "spear",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/5-spear_launcher/spear_launcher.json"
+    },
+    "flamethrower": {
+        "spriteSheetNum": 5,
+        "displayInfo": "Continual flames that burn through all enemis in its path",
+        "gameData": {
+            "seekRange": 4,
+            "shootRange": 5,
+            "damage": 1,
+            "rateOfFire": 6,
+            "bulletSpeed": 4,
+            "numberOfBullets": 1,
+            "turns": true
+        },
+        "cost": 200,
+        "bulletType": "flame",
+        "shootPattern": "single",
+        "textureAtlasFile": "client/assets/towers/6-flamethrower/flamethrower.json"
     }
 }

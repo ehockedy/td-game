@@ -1,8 +1,16 @@
 {"frames": {
 
+"flame1.png":
+{
+	"frame": {"x":0,"y":0,"w":25,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":24},
+	"sourceSize": {"w":25,"h":24}
+},
 "rock1.png":
 {
-	"frame": {"x":0,"y":0,"w":16,"h":16},
+	"frame": {"x":25,"y":0,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -10,7 +18,7 @@
 },
 "shrapnel1.png":
 {
-	"frame": {"x":16,"y":0,"w":17,"h":15},
+	"frame": {"x":41,"y":0,"w":17,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":15},
@@ -18,7 +26,7 @@
 },
 "spear1.png":
 {
-	"frame": {"x":33,"y":0,"w":103,"h":6},
+	"frame": {"x":0,"y":24,"w":103,"h":6},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":103,"h":6},
@@ -29,8 +37,8 @@
 	"version": "1.0",
 	"image": "bullets.png",
 	"format": "RGBA8888",
-	"size": {"w":136,"h":16},
+	"size": {"w":103,"h":30},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f38f474fbfb58102fb2ab49b9e358153:3db89a17bfc747617675c8c893429abe:878d09cf2bf4ec0dfb23d5bcf7e0eb82$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1a5309ab35b43e502b03105808784fe0:24cf0e0801be4a26aeb1d13b1842b100:878d09cf2bf4ec0dfb23d5bcf7e0eb82$"
 }
 }

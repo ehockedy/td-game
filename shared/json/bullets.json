@@ -16,5 +16,11 @@
         "rotate": false,
         "rotationSpeed": 0,
         "piercingCount": 5
+    },
+    "flame": {
+        "filenameKeyword": "flame",
+        "rotate": false,
+        "rotationSpeed": 0,
+        "piercingCount": 5
     }
 }

@@ -1,0 +1,28 @@
+{"frames": {
+
+"flamethrower.png":
+{
+	"frame": {"x":0,"y":0,"w":83,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":83,"h":32},
+	"sourceSize": {"w":83,"h":32}
+},
+"flamethrower_base.png":
+{
+	"frame": {"x":83,"y":0,"w":83,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":83,"h":32},
+	"sourceSize": {"w":83,"h":32}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "flamethrower.png",
+	"format": "RGBA8888",
+	"size": {"w":166,"h":32},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a61151f8c6b8ab4f85f9fc6b5144e76a:3097e4b16d5ff983253eb8c4c39384e9:ebd4e62f996c879440540f922c063d2a$"
+}
+}

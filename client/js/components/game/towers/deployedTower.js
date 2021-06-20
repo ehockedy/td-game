@@ -1,5 +1,7 @@
 import { BaseInteractiveTower } from "./base/baseInteractiveTower.js"
 
+const pullBackDistance = 15  // Move back to this maximum during the first number of frames
+
 // Tower class that represnets a tower placed on the map
 export class DeployedTower extends BaseInteractiveTower {
     constructor(type, name, x, y, towerConfig, playerID, colour) {
@@ -54,6 +56,11 @@ export class DeployedTower extends BaseInteractiveTower {
                 this._initShrapnelBurst()
                 this.tickFn = this._tickShrapnelBurst
                 this.shootFn = this._shootShrapnelBurst
+                break
+            case "flamethrower":
+                this._init()
+                this.tickFn = this._tickFlamethrower
+                this.shootFn = this._shoot
                 break
             default:
                 this._init()
@@ -125,6 +132,18 @@ export class DeployedTower extends BaseInteractiveTower {
         }
     }
 
+    // Move and stay back whilst shooting
+    _tickFlamethrower() {
+        if (this.shootAnimationCount > 0) {
+            this.towerSpriteContainer.x = Math.cos(this._rotation) * -pullBackDistance
+            this.towerSpriteContainer.y = Math.sin(this._rotation) * -pullBackDistance
+            this.shootAnimationCount -= 1
+        } else {
+            this.towerSpriteContainer.x = 0
+            this.towerSpriteContainer.y = 0
+        }
+    }
+
     _rangeTick() {
         this.rangeCircle.angle += 0.1
     }
@@ -149,7 +168,6 @@ export class DeployedTower extends BaseInteractiveTower {
     // sharply moving back over the first few frames, and then slowly moving
     // forward
     _generateAnimationFrames() {
-        const pullBackDistance = 15  // Move back to this maximum during the first number of frames
         const pullBackFrames = 0.1 * this.shootAnimationCountMax // Pull back over this first proportion of frames
         const pushForwardFrames = this.shootAnimationCountMax - pullBackFrames
 
