@@ -14,7 +14,7 @@
    id="svg917"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="bullets.svg"
-   inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock1.png"
+   inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame3.png"
    inkscape:export-xdpi="12.8"
    inkscape:export-ydpi="12.8">
   <defs
@@ -227,6 +227,250 @@
          in2="result5"
          id="feComposite490-0" />
     </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB"
+       id="filter492-3-3">
+      <feTurbulence
+         baseFrequency="0.015113350125944584"
+         numOctaves="5"
+         type="fractalNoise"
+         result="result91"
+         id="feTurbulence486-9-6"
+         seed="255" />
+      <feDisplacementMap
+         scale="5.5187638"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap488-8-9"
+         yChannelSelector="A" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite490-0-1" />
+    </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB"
+       id="filter492-33">
+      <feTurbulence
+         baseFrequency="0.015113350125944584"
+         numOctaves="6"
+         type="fractalNoise"
+         result="result91"
+         id="feTurbulence486-8"
+         seed="208" />
+      <feDisplacementMap
+         scale="5.5187638"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap488-89"
+         yChannelSelector="A" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite490-4" />
+    </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB"
+       id="filter550">
+      <feTurbulence
+         baseFrequency="0.015113350125944584"
+         numOctaves="5"
+         type="fractalNoise"
+         result="result91"
+         id="feTurbulence544" />
+      <feDisplacementMap
+         scale="5.5187638"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap546"
+         yChannelSelector="A" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite548" />
+    </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB"
+       id="filter492-37">
+      <feTurbulence
+         baseFrequency="0.015113350125944584"
+         numOctaves="5"
+         type="fractalNoise"
+         result="result91"
+         id="feTurbulence486-96" />
+      <feDisplacementMap
+         scale="5.5187638"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap488-3"
+         yChannelSelector="A" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite490-1" />
+    </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB"
+       id="filter492-3-3-1">
+      <feTurbulence
+         baseFrequency="0.015113350125944584"
+         numOctaves="5"
+         type="fractalNoise"
+         result="result91"
+         id="feTurbulence486-9-6-0"
+         seed="255" />
+      <feDisplacementMap
+         scale="5.5187638"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap488-8-9-4"
+         yChannelSelector="A" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite490-0-1-3" />
+    </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB"
+       id="filter492-3-3-1-1">
+      <feTurbulence
+         baseFrequency="0.015113350125944584"
+         numOctaves="5"
+         type="fractalNoise"
+         result="result91"
+         id="feTurbulence486-9-6-0-6"
+         seed="255" />
+      <feDisplacementMap
+         scale="5.5187638"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap488-8-9-4-2"
+         yChannelSelector="A" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite490-0-1-3-3" />
+    </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB"
+       id="filter492-7">
+      <feTurbulence
+         baseFrequency="0.015113350125944584"
+         numOctaves="5"
+         type="fractalNoise"
+         result="result91"
+         id="feTurbulence486-2" />
+      <feDisplacementMap
+         scale="5.5187638"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap488-34"
+         yChannelSelector="A" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite490-42" />
+    </filter>
+    <filter
+       inkscape:label="Torn Edges"
+       inkscape:menu="Distort"
+       inkscape:menu-tooltip="Displace the outside of shapes and pictures without altering their content"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB"
+       id="filter492-7-0">
+      <feTurbulence
+         baseFrequency="0.015113350125944584"
+         numOctaves="5"
+         type="fractalNoise"
+         result="result91"
+         id="feTurbulence486-2-1" />
+      <feDisplacementMap
+         scale="5.5187638"
+         result="result5"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         in2="result91"
+         id="feDisplacementMap488-34-3"
+         yChannelSelector="A" />
+      <feComposite
+         in="SourceGraphic"
+         operator="atop"
+         in2="result5"
+         id="feComposite490-42-0" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -235,11 +479,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.1496046"
-     inkscape:cx="305.95042"
-     inkscape:cy="258.19947"
+     inkscape:zoom="0.53740115"
+     inkscape:cx="467.38897"
+     inkscape:cy="838.01836"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer3"
      inkscape:document-rotation="0"
      showgrid="true"
      units="px"
@@ -248,7 +492,7 @@
      inkscape:pagecheckerboard="true"
      inkscape:window-width="1536"
      inkscape:window-height="801"
-     inkscape:window-x="-8"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:snap-intersection-paths="false"
@@ -280,7 +524,7 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
+     inkscape:label="Rock"
      inkscape:groupmode="layer"
      id="layer1"
      style="display:none">
@@ -322,6 +566,174 @@
          d="m 61.383334,46.566666 c 0,0 0,4.233333 2.116666,6.35 2.116667,2.116667 2.116667,2.116667 2.116667,2.116667 l 2.11667,6.35 L 61.383334,57.149999 57.15,52.916666 v -4.233333 z"
          id="path850" />
     </g>
+    <path
+       id="path8-2"
+       style="fill:#999999;stroke-width:0.151428;stroke-opacity:0.919355"
+       d="m 40.61603,102.40333 -1.965974,1.17371 -6.134653,-2.4459 -5.603497,0.28796 -6.909007,-2.506085 -3.976708,-7.170109 -0.270054,-11.590939 3.793687,-3.175497 4.732342,-3.266764 9.899009,-0.126409 7.375024,0.830966 6.370687,7.592275 2.419047,8.466667 -7.608476,7.256977 z"
+       sodipodi:nodetypes="ccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 15.756137,80.151967 0.270054,11.590938 3.976707,7.170109 6.909007,2.506086 5.603498,-0.28796 6.134653,2.4459 -6.134653,-4.86495 -4.393973,-2.131089 v -4.838095 l -5.062943,-2.705437 z"
+       id="path838-1"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 19.549824,76.97647 4.732342,-3.266764 17.274033,0.704557 6.370687,7.592275 -7.710218,-7.196966 -15.828748,0.957374"
+       id="path840-2"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="fill:#c4c4c4;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 36.588097,100.20957 -4.838096,-4.838092 6.116749,-1.939118 -0.316804,-11.956978 -2.300681,-4.411878 6.176927,0.165116 4.081646,7.196965 3.02381,6.652382 -8.951074,8.035973 0.636094,1.09563 z"
+       id="path842-6"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="fill:#2b2b2b;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 16.026191,91.742905 0.600286,-4.072693 5.786518,5.813374 3.646475,3.697702 6.455933,3.949852 -13.121743,-2.30516 z"
+       id="path846-2"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 30.634527,78.968041 4.213234,8.797046 1.854153,2.406254 -1.036425,1.877394 -4.187858,1.169008 1.959181,-2.109641 -0.173705,-2.698993 -1.288044,-3.169311 z"
+       id="path848-0"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="fill:#c1c1c1;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 24.873558,78.756209 c 0,0 0,2.419048 1.209524,3.628572 l 1.209524,1.209524 -2.61997,4.150775 0.200922,-2.941252 -2.24498,-2.419047 v -2.419048 z"
+       id="path850-4"
+       sodipodi:nodetypes="cscccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path8-2-8"
+       style="display:inline;fill:#999999;stroke-width:0.151428;stroke-opacity:0.919355"
+       d="m 99.214272,120.35322 -1.96597,1.17371 -6.48279,0.0781 -5.255361,-2.23603 -3.862817,0.71417 -3.976708,-7.17011 -3.316244,-14.811191 3.793687,-3.175498 4.732342,-3.266764 7.375023,-1.344885 4.067729,0.134694 12.201967,9.507024 2.41905,8.46666 -7.60848,7.25698 z"
+       sodipodi:nodetypes="ccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 74.354382,98.101859 3.316244,15.594491 3.976707,7.17011 3.862817,-1.49747 5.081294,2.32306 6.656858,-0.16512 -6.134654,-4.86495 -4.393973,-2.13109 -3.220258,-5.18624 -2.016753,1.29813 z"
+       id="path838-1-5"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 78.148069,94.926361 4.732342,-3.266764 10.833514,-1.645361 12.811205,9.942194 -15.456243,-8.154341 -8.082722,1.914748"
+       id="path840-2-2"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#c4c4c4;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 95.186342,118.15946 -4.838096,-4.83809 6.116749,-1.93912 4.644135,-2.64434 1.70288,-6.58773 3.30481,-1.74963 1.29655,4.76002 -0.28348,3.86728 -8.951068,8.03598 0.63609,1.09563 z"
+       id="path842-6-6"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#2b2b2b;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 77.931728,113.52229 -1.749632,-8.33736 4.829145,6.24854 3.646474,3.69771 11.677973,6.21273 -15.03649,-0.73854 z"
+       id="path846-2-6"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 89.648358,94.862515 7.90457,5.714635 2.778562,1.22783 -0.0134,2.14444 -3.120266,3.02798 -3.41558,-0.54368 -1.442232,-2.28795 -2.64586,-2.16864 z"
+       id="path848-0-2"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#c1c1c1;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 77.042665,97.55721 c 0,0 1.877257,1.525676 3.57872,1.349888 l 1.701473,-0.175784 3.793287,7.019756 -2.91615,1.40858 -2.532786,-3.20304 -1.877249,-1.52568 z"
+       id="path850-4-3"
+       sodipodi:nodetypes="cscccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path8-2-8-3"
+       style="display:inline;fill:#999999;stroke-width:0.151428;stroke-opacity:0.919355"
+       d="m 42.064273,152.10322 -1.96597,1.17371 -6.48279,0.0781 -5.255361,-2.23603 -3.862817,0.71417 -3.976708,-7.17011 -1.9237,-14.28899 -0.122843,-1.69592 4.558274,-3.70193 10.508247,-0.12641 4.067729,0.1347 11.766797,6.72193 2.419051,8.46666 -7.60848,7.25698 z"
+       sodipodi:nodetypes="ccccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 18.596927,130.37406 1.9237,15.07229 3.976707,7.17011 3.862817,-1.49747 5.081294,2.32306 6.656858,-0.16512 -6.134654,-4.86495 -4.393973,-2.13109 -3.220258,-5.18624 -2.016753,1.29813 z"
+       id="path838-1-5-9"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 18.474084,128.67814 4.558274,-3.70193 13.966738,-0.42688 12.376035,7.1571 -15.021073,-5.36925 -11.215946,0.69627"
+       id="path840-2-2-7"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#c4c4c4;fill-opacity:1;stroke:none;stroke-width:0.139831px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 31.636201,145.47072 -4.443299,-4.50614 5.617612,-1.80607 4.265166,-2.46291 1.563921,-6.13573 -0.620296,-2.84806 4.846178,5.6519 -0.260347,3.60194 -8.220647,7.48461 0.584184,1.02046 z"
+       id="path842-6-6-6"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#575757;fill-opacity:1;stroke:none;stroke-width:0.154722px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 34.152278,152.05513 9.473737,-13.33603 1.464507,-2.89325 2.013154,0.29554 2.495486,3.8261 -0.893062,3.68301 -2.310897,1.2856 -5.553783,8.02032 z"
+       id="path848-0-2-1"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#2b2b2b;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20.781729,145.27229 -1.401496,-12.16686 2.131091,8.77253 3.646474,3.69771 14.027891,7.51824 -15.03649,-0.73854 z"
+       id="path846-2-6-1"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:#c1c1c1;fill-opacity:1;stroke:none;stroke-width:0.15119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 21.024108,131.8312 c 0,0 1.529121,-0.56314 3.230584,-0.73893 l 1.701473,-0.17579 3.793287,7.01976 -2.91615,1.40858 -2.532786,-3.20304 -1.877249,-1.52568 z"
+       id="path850-4-3-0"
+       sodipodi:nodetypes="cscccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\rock4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -366,160 +778,130 @@
          inkscape:export-xdpi="12.8"
          inkscape:export-ydpi="12.8" />
     </g>
+    <g
+       id="g1044-3"
+       transform="translate(0.72682418,34.21187)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8">
+      <path
+         id="rect4569-45-2-9-2-1"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+         d="m 3.936566,8.7023878 0.5889473,0.685195 0.5752225,0.1571268 0.2625671,0.1896031 -0.4150806,0.2531346 -0.5550873,0.3589077 -0.6320541,0.498822 -0.137551,-0.0238 0.062185,-0.805111 0.079461,-0.3854489 0.052629,-0.6203465 z"
+         sodipodi:nodetypes="cccccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,44.907022,-79.657507)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-14-34-0-9-6-9"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke-width:0.264999"
+         d="m 4.0103406,9.2233637 0.085379,-0.2779693 0.08727,0.3512658 -0.1322921,1.1756648 -0.2121362,0.609243 -0.067088,-0.05147 0.1067775,-0.800935 z"
+         sodipodi:nodetypes="cccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,43.157456,-83.595512)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-2-00-6-9-8-6-7-5"
+         style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.4911165,8.5380919 4.0732333,8.7826591 3.518146,9.1415669 2.8200299,9.6981887 2.7595258,9.6707141 2.8935662,9.3248723 3.0555118,9.3021892 3.5444586,8.8680319 4.14949,8.5612901 Z"
+         sodipodi:nodetypes="cccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,51.753324,-58.908493)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 59.930545,52.916666 -0.516566,5.21801 5.809205,7.875471 5.734577,5.611492 v 2.116667 l 5.587264,2.288206 -3.470597,-4.404873 -5.734577,-7.728158"
+         id="path1038-6"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8"
+         sodipodi:nodetypes="cccccccc" />
+    </g>
+    <g
+       id="g1044-6"
+       transform="matrix(0.91669514,0,0,0.91669514,45.32762,21.928493)"
+       style="display:inline"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8">
+      <path
+         id="rect4569-45-2-9-2-3"
+         style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.0078563,8.3717385 4.5023842,9.2421278 5.0019921,9.9067673 5.3757044,10.22471 4.9059543,10.152153 4.393135,10.346355 3.7708713,10.716536 3.1727041,11.01266 3.6061077,9.9715116 3.8721976,9.3599736 3.9111752,8.8730476 Z"
+         sodipodi:nodetypes="cccccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,44.907022,-79.657507)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-14-34-0-9-6-4"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.103711,9.0859407 4.2007181,8.5482726 4.2763598,9.1592372 3.8214681,10.173868 3.6715439,10.848662 3.36524,11.225553 3.6443866,10.157594 Z"
+         sodipodi:nodetypes="cccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,43.157456,-83.595512)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         id="rect4777-1-2-00-6-9-8-6-7-0"
+         style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999"
+         d="M 4.5007154,9.0199216 3.9749505,9.0932692 3.5240003,9.2916045 2.9017366,9.6617856 2.2977152,9.8078505 2.5807179,9.4473056 3.1024461,9.3663804 3.7247098,8.9961993 4.0512072,8.8719002 Z"
+         sodipodi:nodetypes="cccccccccc"
+         transform="matrix(14.237186,7.1543307,-4.6573149,12.026222,51.753324,-58.908493)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8" />
+      <path
+         style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 62.890761,49.609374 -1.507428,7.540625 2.464802,8.668585 4.386831,7.727611 0.123085,3.224429 5.464179,4.996069 -3.101343,-6.620397 -4.756085,-11.444378"
+         id="path1038-2"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel1.png"
+         inkscape:export-xdpi="12.8"
+         inkscape:export-ydpi="12.8"
+         sodipodi:nodetypes="cccccccc" />
+    </g>
+    <path
+       id="rect4569-45-2-9-2-3-1"
+       style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:3.47422"
+       d="m 103.05906,103.46828 7.00284,11.53327 -0.58177,11.90935 0.64785,3.7802 -2.94889,-1.70482 -6.9998,-0.52602 -8.135077,-0.43517 -9.071029,-0.6584 6.271938,-11.24663 4.517032,-6.56333 4.328234,-2.76251 z"
+       sodipodi:nodetypes="cccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect4777-1-14-34-0-9-6-4-2"
+       style="display:inline;fill:#808080;fill-opacity:1;stroke-width:3.47422"
+       d="m 98.090473,106.794 5.128157,-3.72464 -1.53418,4.7076 -12.096371,8.37641 -1.008113,9.06695 -5.606696,2.14615 4.373169,-12.55387 z"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="rect4777-1-2-00-6-9-8-6-7-0-8"
+       style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:3.47422"
+       d="m 110.12798,130.6911 -4.30287,-0.46368 -6.209976,-0.0747 -8.135079,-0.43517 -8.506779,-2.3511 5.232801,-2.11876 5.065839,2.26842 10.223894,0.69627 4.26964,0.0747 z"
+       sodipodi:nodetypes="cccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.242542px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 102.97928,103.3885 -1.29483,4.38846 6.43712,9.16493 -0.24329,8.38937 0.11283,2.95582 2.13687,2.40403 0.0291,-3.89304 -0.0952,-11.79652"
+       id="path1038-2-9"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel4.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       sodipodi:nodetypes="cccccccc" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Spear"
-     style="display:none">
-    <path
-       id="rect24"
-       style="fill:#483e37;stroke-width:12.5557"
-       d="m 235.4121,177.22324 c -7.368,9.1176 -147.359686,9.1176 -154.727655,-1e-5 7.367969,-9.1176 147.359655,-9.1176 154.727655,1e-5 z"
-       sodipodi:nodetypes="ccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <path
-       id="rect24-8"
-       style="fill:#6c5d53;stroke-width:11.0368"
-       d="m 235.4121,177.22324 c -7.368,7.04512 -147.359686,7.04512 -154.727655,-1e-5 7.367969,-7.04509 147.359655,-7.04509 154.727655,1e-5 z"
-       sodipodi:nodetypes="ccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <path
-       id="rect24-8-1"
-       style="fill:#917c6f;stroke-width:9.07033"
-       d="m 235.4121,177.21313 c -7.36801,4.75821 -147.359686,4.75821 -154.727655,-1e-5 7.367969,-4.7582 147.359645,-4.7582 154.727655,1e-5 z"
-       sodipodi:nodetypes="ccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <path
-       id="rect24-8-1-0"
-       style="fill:#ac9d93;stroke-width:7.41931"
-       d="m 235.30967,177.33234 c -7.36798,3.18362 -147.359671,3.18362 -154.727641,0 7.36797,-3.18363 147.359661,-3.18363 154.727641,0 z"
-       sodipodi:nodetypes="ccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <path
-       id="rect24-8-1-0-6"
-       style="fill:#ac9d93;stroke-width:3.83907"
-       d="m 16.933333,33.866667 c 1.43627,4.372761 1.43627,87.455213 0,91.827963 -1.43627,-4.37275 -1.43627,-87.455202 0,-91.827963 z"
-       sodipodi:nodetypes="ccc" />
-    <path
-       id="rect87-4-2"
-       style="fill:#483e37;stroke-width:6.58665"
-       d="m 225.26013,114.60638 v 17.25214 H 65.771743 l 3e-5,-17.25219 z"
-       sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <path
-       id="rect87-4"
-       style="fill:#6c5d53;stroke-width:5.62376"
-       d="M 225.26012,116.84621 V 129.423 H 65.771743 l 3e-5,-12.57683 z"
-       sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <path
-       id="rect89-0"
-       style="fill:#483e37;stroke-width:8.08778"
-       d="M 247.80511,123.07299 182.77915,146.7188 206.20396,123.14504 182.77915,99.427179 Z"
-       sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <path
-       id="rect87"
-       style="fill:#917c6f;stroke-width:4.47808"
-       d="m 225.26016,119.08579 v 7.97441 H 65.771783 l 3e-5,-7.97443 z"
-       sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <path
-       id="rect89"
-       style="fill:#6c5d53;stroke-width:6.50818"
-       d="m 241.45511,123.07299 -52.32596,19.02762 18.84979,-18.96964 -18.84979,-19.0856 z"
-       sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <path
-       id="rect89-07-0"
-       style="fill:#917c6f;stroke-width:5.55223"
-       d="M 236.14761,123.02354 191.50733,139.25637 207.58845,123.073 191.50733,106.79071 Z"
-       sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <path
-       id="rect89-07"
-       style="fill:#ac9d93;stroke-width:3.97265"
-       d="m 226.63845,123.01502 -31.94029,11.61465 11.5061,-11.57926 -11.5061,-11.65004 z"
-       sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
-    <rect
-       style="fill:#552200;stroke-width:2.03804;filter:url(#filter492)"
-       id="rect168-0"
-       width="145.2399"
-       height="9.8467722"
-       x="46.179028"
-       y="211.84901"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8"
-       transform="matrix(1.0079075,0,0,0.80623564,-0.94065498,42.002766)" />
-    <rect
-       style="fill:#803300;stroke-width:1.5947;filter:url(#filter492)"
-       id="rect168"
-       width="145.23988"
-       height="6.0286355"
-       x="46.279831"
-       y="213.94243"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8"
-       transform="matrix(1.0079075,0,0,0.80623564,-0.94065498,42.002766)" />
-    <rect
-       style="fill:#aa4400;stroke-width:1.08938;filter:url(#filter492)"
-       id="rect168-7"
-       width="145.2399"
-       height="2.8133633"
-       x="46.495014"
-       y="215.43295"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8"
-       transform="matrix(1.0079075,0,0,0.80623564,-0.94065498,42.002766)" />
-    <path
-       id="path200"
-       style="fill:#6c5d53;stroke-width:1.765;filter:url(#filter492)"
-       inkscape:transform-center-x="0.98054753"
-       inkscape:transform-center-y="-0.062860755"
-       d="m 207.91365,224.27516 -22.19819,-1.36331 -8.22495,-12.26692 22.57449,-3.91224 23.53631,6.21556 z"
-       sodipodi:nodetypes="cccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8"
-       transform="matrix(0.7745311,0,0,0.64684681,44.525427,76.687534)" />
-    <path
-       id="path200-4"
-       style="fill:#ac9d93;stroke-width:1.33923;filter:url(#filter492)"
-       inkscape:transform-center-x="0.7440096"
-       inkscape:transform-center-y="-0.047698666"
-       d="m 202.3053,222.25151 -16.84333,-1.03444 -6.24085,-9.30777 17.12885,-2.9685 17.85866,4.71619 z"
-       sodipodi:nodetypes="cccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8"
-       transform="matrix(0.7745311,0,0,0.64684681,44.525427,76.687534)" />
+     style="display:inline">
     <path
        id="path200-4-8"
        style="fill:#ac9d93;stroke-width:1.33923;filter:url(#filter492-3)"
@@ -530,59 +912,255 @@
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
        inkscape:export-xdpi="12.8"
        inkscape:export-ydpi="12.8"
-       transform="matrix(0.84004299,0,0,0.70155882,33.869333,95.959938)" />
+       transform="matrix(0.84004299,0,0,0.70155882,-21.272591,10.293021)" />
     <rect
        style="fill:#754a0e;fill-opacity:1;stroke-width:1.83064;filter:url(#filter492)"
        id="rect494"
        width="141.79352"
        height="3.7074723"
-       x="47.756844"
-       y="245.18463"
+       x="-7.3850803"
+       y="159.51772"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
        inkscape:export-xdpi="12.8"
        inkscape:export-ydpi="12.8" />
     <path
        id="rect1346"
        style="fill:#502d16;fill-opacity:1;stroke-width:1.765;filter:url(#filter492)"
-       d="m 125.76411,243.95627 h 32.81181 c 4.78687,4.8739 -1.21847,6.52755 -1.21847,6.52755 l -31.76741,0.34813 c 0,0 -6.78865,-1.82771 0.17407,-6.87568 z"
+       d="M 70.622186,158.28935 H 103.434 c 4.78687,4.8739 -1.21847,6.52755 -1.21847,6.52755 l -31.767414,0.34813 c 0,0 -6.78865,-1.82771 0.17407,-6.87568 z"
        sodipodi:nodetypes="ccccc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
        inkscape:export-xdpi="12.8"
        inkscape:export-ydpi="12.8" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 54.419923,248.1066 c 1.655757,2.65761 31.551611,2.35485 64.540607,-0.57318"
+       d="m -0.72200084,162.43968 c 1.655757,2.65761 31.55161084,2.35485 64.54060684,-0.57318"
        id="path1351"
        sodipodi:nodetypes="cc"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear1.png"
        inkscape:export-xdpi="12.8"
        inkscape:export-ydpi="12.8" />
+    <path
+       id="path200-4-8-0"
+       style="display:inline;fill:#ac9d93;stroke-width:1.33923;filter:url(#filter492-3-3)"
+       inkscape:transform-center-x="1.0054366"
+       inkscape:transform-center-y="-0.047306225"
+       d="m 196.12495,221.57875 -11.89905,-1.03444 -5.679,-9.57687 17.80307,-2.02664 22.5782,0.14145 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(1.0466894,0,0,0.64159302,-69.282815,67.435403)" />
+    <rect
+       style="display:inline;fill:#754a0e;fill-opacity:1;stroke-width:1.83064;filter:url(#filter492-33)"
+       id="rect494-1"
+       width="141.79352"
+       height="3.7074723"
+       x="-3.0124912"
+       y="200.09645"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="fill:none;stroke:#dcb45f;stroke-width:1.765;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 102.02843,203.41669 c 0,0 -1.06552,1.26818 2.62958,0.81551 0,0 2.82966,-0.22249 4.30668,-4.77663 0.58745,-0.17643 1.71737,-0.70022 1.86722,0.47956"
+       id="path602"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:none;stroke:#dcb45f;stroke-width:1.765;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 90.503726,203.81105 c 0,0 -0.63472,0.46813 3.06038,0.0155 0,0 1.72189,-0.65328 3.62971,-4.592 0.58745,-0.17643 2.27125,-0.76176 2.4211,0.41802"
+       id="path602-7"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:none;stroke:#dcb45f;stroke-width:1.765;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 42.444044,208.00989 c 0,0 11.785952,-3.31582 18.804342,-4.01466 0,0 2.82966,-0.22249 4.30668,-4.77663 0.58745,-0.17643 1.71737,-0.70022 1.86722,0.47956"
+       id="path602-1"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:none;stroke:#dcb45f;stroke-width:1.765;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 69.646026,203.30281 c 0,0 -0.63472,0.59121 3.06038,0.13854 0,0 3.62971,-2.37647 3.87588,-4.09966 0.58745,-0.17643 1.71737,-0.70022 1.86722,0.47956"
+       id="path602-8"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       style="display:inline;fill:none;stroke:#dcb45f;stroke-width:1.765;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 79.386686,203.59938 c 0,0 -0.0808,2.43748 2.62958,0.81551 0,0 3.322,-1.39179 4.12205,-4.96126 0.2182,-0.79185 1.902,-0.51559 2.05185,0.66419"
+       id="path602-9"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path200-4-8-0-4-9"
+       style="display:inline;fill:#917c6f;stroke-width:1.33923;filter:url(#filter492-3-3-1-1)"
+       inkscape:transform-center-x="0.86164095"
+       inkscape:transform-center-y="0.026621769"
+       d="m 196.12495,221.57875 -11.89905,-1.03444 -5.679,-9.57687 17.80307,-2.02664 22.5782,0.14145 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(0.8969943,0,0,-0.36115349,-41.384632,312.30474)" />
+    <rect
+       style="display:inline;fill:#754a0e;fill-opacity:1;stroke-width:1.83064;filter:url(#filter492-37)"
+       id="rect494-7"
+       width="141.79352"
+       height="3.7074723"
+       x="-0.14341921"
+       y="235.12071"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path200-4-8-0-4"
+       style="display:inline;fill:#ac9d93;stroke-width:1.33923;filter:url(#filter492-3-3-1)"
+       inkscape:transform-center-x="0.87893836"
+       inkscape:transform-center-y="-0.028693505"
+       d="m 196.12495,221.57875 -11.89905,-1.03444 -5.679,-9.57687 17.80307,-2.02664 22.5782,0.14145 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(0.91500219,0,0,0.38912624,-43.641107,156.47316)" />
+    <path
+       id="rect1346-6"
+       style="display:inline;fill:#502d16;fill-opacity:1;stroke-width:1.765;filter:url(#filter492-7)"
+       d="m 121.53078,354.02294 h 32.81181 c 4.78687,4.8739 -1.21847,6.52755 -1.21847,6.52755 l -31.76741,0.34813 c 0,0 -6.78865,-1.82771 0.17407,-6.87568 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(0.55270814,0,0,1.2756811,29.838265,-217.44496)" />
+    <path
+       id="rect1346-6-3"
+       style="display:inline;fill:#502d16;fill-opacity:1;stroke-width:1.765;filter:url(#filter492-7-0)"
+       d="m 121.53078,354.02294 h 32.81181 c 4.78687,4.8739 -1.21847,6.52755 -1.21847,6.52755 l -31.76741,0.34813 c 0,0 -6.78865,-1.82771 0.17407,-6.87568 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\spear3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8"
+       transform="matrix(0.55270813,0,0,1.2756811,-47.197261,-216.96453)" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer4"
-     inkscape:label="flame">
+     inkscape:label="flame"
+     style="display:none">
     <path
        id="path3112"
-       style="fill:#d43e00;fill-opacity:1;stroke-width:1.57527"
-       d="m 55.879339,40.096807 a 9.2378894,7.7244496 0 0 0 -9.23796,7.72428 9.2378894,7.7244496 0 0 0 1.065383,3.601581 7.8693132,6.3488623 0 0 0 -5.399223,6.027666 7.8693132,6.3488623 0 0 0 3.171734,5.093395 8.7816971,7.3011917 0 0 0 -0.206374,1.573112 8.7816971,7.3011917 0 0 0 8.781641,7.300901 8.7816971,7.3011917 0 0 0 6.72557,-2.606892 5.4743045,4.7616467 0 0 0 0.915511,0.06753 5.4743045,4.7616467 0 0 0 5.471528,-4.61271 6.8428808,6.6663055 0 0 0 4.409496,-4.873489 7.5271688,7.0895631 0 0 0 2.436258,-5.222227 7.5271688,7.0895631 0 0 0 -7.527123,-7.089438 7.5271688,7.0895631 0 0 0 -1.398167,0.123947 9.2378894,7.7244496 0 0 0 -9.208274,-7.107652 z"
+       style="fill:#d43e00;fill-opacity:1;stroke-width:2.24384"
+       d="M 19.797997,24.83431 A 13.158608,11.002839 0 0 0 6.6392887,35.836907 13.158608,11.002839 0 0 0 8.1568385,40.967061 11.209185,9.0434284 0 0 0 0.46609221,49.552972 11.209185,9.0434284 0 0 0 4.983965,56.808091 12.5088,10.399943 0 0 0 4.6900023,59.048858 12.5088,10.399943 0 0 0 17.198722,69.448387 a 12.5088,10.399943 0 0 0 9.580018,-3.713302 7.7976933,6.7825713 0 0 0 1.304069,0.09619 7.7976933,6.7825713 0 0 0 7.793739,-6.570423 9.7471169,9.4956 0 0 0 6.280962,-6.941881 10.721828,10.098495 0 0 0 3.470247,-7.43863 A 10.721828,10.098495 0 0 0 34.905994,34.782025 10.721828,10.098495 0 0 0 32.914421,34.958577 13.158608,11.002839 0 0 0 19.797997,24.834316 Z"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame1.png"
        inkscape:export-xdpi="19.200001"
        inkscape:export-ydpi="19.200001" />
     <path
        id="path3080-3"
-       style="fill:#ff7500;stroke-width:4.95511;fill-opacity:1"
-       d="M 238.0918 168.25 A 17.324567 23.199331 0 0 0 223.92773 178.08984 A 19.023053 18.629767 0 0 0 216.69141 176.6875 A 19.023053 18.629767 0 0 0 208.81055 178.36133 A 17.324568 23.199331 0 0 0 196.5625 171.56641 A 17.324568 23.199331 0 0 0 182.40039 181.40625 A 19.023054 18.629767 0 0 0 175.16211 180.00391 A 19.023054 18.629767 0 0 0 156.14062 198.63281 A 19.023054 18.629767 0 0 0 161.98828 212.07227 A 14.606988 21.090301 0 0 0 160.89453 220.07422 A 14.606988 21.090301 0 0 0 175.50195 241.16406 A 14.606988 21.090301 0 0 0 176.23633 241.13867 A 19.702449 22.847828 0 0 0 195.54492 259.44336 A 19.702449 22.847828 0 0 0 212.42969 248.36914 A 21.740633 29.526419 0 0 0 218.64453 249.60156 A 21.740633 29.526419 0 0 0 222.81836 249.05078 A 19.702449 22.847828 0 0 0 237.07227 256.12695 A 19.702449 22.847828 0 0 0 253.95703 245.05273 A 21.740633 29.526419 0 0 0 260.17188 246.28516 A 21.740633 29.526419 0 0 0 281.91211 216.75781 A 21.740633 29.526419 0 0 0 260.17188 187.23242 A 21.740633 29.526419 0 0 0 255.22266 188.00586 A 17.324567 23.199331 0 0 0 238.0918 168.25 z "
-       transform="scale(0.26458333)"
+       style="fill:#ff7500;fill-opacity:1;stroke-width:1.86747"
+       d="m 29.933839,31.129292 a 6.5292314,8.743295 0 0 0 -5.338113,3.708409 7.1693518,7.0211314 0 0 0 -2.727203,-0.528509 7.1693518,7.0211314 0 0 0 -2.970115,0.630828 6.5292319,8.743295 0 0 0 -4.616009,-2.56085 6.5292319,8.743295 0 0 0 -5.3373735,3.70841 7.1693522,7.0211314 0 0 0 -2.7279412,-0.52851 7.1693522,7.0211314 0 0 0 -7.16876278,7.020805 7.1693522,7.0211314 0 0 0 2.20384888,5.065024 5.5050383,7.9484502 0 0 0 -0.41220928,3.015751 5.5050383,7.9484502 0 0 0 5.50520108,7.948276 5.5050383,7.9484502 0 0 0 0.2767714,-0.0095 7.4254006,8.6108217 0 0 0 7.2769644,6.898618 7.4254006,8.6108217 0 0 0 6.363481,-4.173619 8.1935454,11.127829 0 0 0 2.34223,0.464469 8.1935454,11.127829 0 0 0 1.573021,-0.207576 7.4254006,8.6108217 0 0 0 5.371972,2.666847 7.4254006,8.6108217 0 0 0 6.363478,-4.173619 8.1935454,11.127829 0 0 0 2.342234,0.464473 8.1935454,11.127829 0 0 0 8.193393,-11.128179 8.1935454,11.127829 0 0 0 -8.193393,-11.127441 8.1935454,11.127829 0 0 0 -1.865247,0.291491 6.5292314,8.743295 0 0 0 -6.456228,-7.44553 z"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame1.png"
        inkscape:export-xdpi="19.200001"
        inkscape:export-ydpi="19.200001" />
     <path
        id="path3096"
-       style="fill:#ffb300;stroke-width:1.25448;fill-opacity:1"
-       d="m 62.650438,50.853654 a 2.3058436,2.1507362 0 0 0 -1.906344,0.972276 2.0176132,1.9914223 0 0 0 -1.626256,-0.812978 2.0176132,1.9914223 0 0 0 -1.992643,1.679212 2.3058435,2.1507361 0 0 0 -0.989603,0.785644 2.0176132,1.9914223 0 0 0 -1.626259,-0.812979 2.0176132,1.9914223 0 0 0 -1.668116,0.870476 2.6960911,2.9975834 50.692212 0 0 -1.40508,-2.226383 2.6960911,2.9975834 50.692212 0 0 -3.949113,1.373817 2.6960911,2.9975834 50.692212 0 0 0.181383,3.116182 3.2264626,3.8758538 40.122561 0 0 -2.333707,1.989324 3.2264626,3.8758538 40.122561 0 0 1.016476,4.743082 3.2264626,3.8758538 40.122561 0 0 4.85965,-1.927113 3.2264626,3.8758538 40.122561 0 0 0.336931,-0.729558 2.3487166,2.1114771 4.9956522 0 0 1.082622,0.246014 3.1705349,2.5490204 0 0 0 2.647384,1.147123 3.1705349,2.5490204 0 0 0 2.940904,-1.596265 4.1313033,3.0269617 0 0 0 1.876372,0.841257 3.1705349,2.5490204 0 0 0 -0.07441,0.548584 3.1705349,2.5490204 0 0 0 3.170349,2.549218 3.1705349,2.5490204 0 0 0 2.940388,-1.595794 4.1313033,3.0269617 0 0 0 3.016354,0.958606 4.1313033,3.0269617 0 0 0 4.131532,-3.027108 4.1313033,3.0269617 0 0 0 -3.536736,-2.995061 4.1313033,3.0269617 0 0 0 0.232026,-0.999611 4.1313033,3.0269617 0 0 0 -4.131529,-3.026635 4.1313033,3.0269617 0 0 0 -0.864547,0.06692 2.3058436,2.1507362 0 0 0 -2.305802,-2.138252 2.3058436,2.1507362 0 0 0 -0.02222,0 z"
+       style="fill:#ffb300;fill-opacity:1;stroke-width:1.7869"
+       d="m 29.442867,40.156547 a 3.2844832,3.0635456 0 0 0 -2.715429,1.384927 2.8739229,2.8366161 0 0 0 -2.316467,-1.15802 2.8739229,2.8366161 0 0 0 -2.838355,2.391898 3.2844831,3.0635454 0 0 0 -1.409607,1.119085 2.8739229,2.8366161 0 0 0 -2.316472,-1.158021 2.8739229,2.8366161 0 0 0 -2.376093,1.239921 3.8403584,4.2698092 50.692212 0 0 -2.00142,-3.171298 3.8403584,4.2698092 50.692212 0 0 -5.625184,1.956888 3.8403584,4.2698092 50.692212 0 0 0.258365,4.438743 4.5958287,5.5208327 40.122561 0 0 -3.3241723,2.833628 4.5958287,5.5208327 40.122561 0 0 1.4478859,6.756127 4.5958287,5.5208327 40.122561 0 0 6.9221684,-2.745013 4.5958287,5.5208327 40.122561 0 0 0.479931,-1.039195 3.3455522,3.0076242 4.9956522 0 0 1.542105,0.350427 4.5161643,3.6308684 0 0 0 3.770979,1.633982 4.5161643,3.6308684 0 0 0 4.189074,-2.273748 5.8846993,4.3116562 0 0 0 2.672737,1.198301 4.5161643,3.6308684 0 0 0 -0.105991,0.781413 4.5161643,3.6308684 0 0 0 4.5159,3.63115 4.5161643,3.6308684 0 0 0 4.188339,-2.273077 5.8846993,4.3116562 0 0 0 4.296546,1.365455 5.8846993,4.3116562 0 0 0 5.885025,-4.311865 5.8846993,4.3116562 0 0 0 -5.037787,-4.266216 5.8846993,4.3116562 0 0 0 0.330502,-1.423863 5.8846993,4.3116562 0 0 0 -5.885021,-4.311191 5.8846993,4.3116562 0 0 0 -1.231476,0.09532 3.2844832,3.0635456 0 0 0 -3.284424,-3.045763 3.2844832,3.0635456 0 0 0 -0.03165,0 z"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame1.png"
        inkscape:export-xdpi="19.200001"
        inkscape:export-ydpi="19.200001" />
+    <path
+       id="path160"
+       style="fill:#d43e00;fill-opacity:1;stroke-width:2.51664"
+       d="m 89.234876,61.049864 a 10.705567,10.705567 0 0 0 -10.706169,10.70543 10.705567,10.705567 0 0 0 0.163578,1.861977 12.987081,12.987081 0 0 0 -4.375309,9.721761 12.987081,12.987081 0 0 0 1.24451,5.547608 10.881068,10.881068 0 0 0 -1.946711,6.210756 10.881068,10.881068 0 0 0 10.881534,10.880794 10.881068,10.881068 0 0 0 10.491016,-7.994623 11.934074,11.934074 0 0 0 11.622055,9.222933 11.934074,11.934074 0 0 0 11.93372,-11.933739 11.934074,11.934074 0 0 0 -3.59647,-8.538408 13.689086,13.689086 0 0 0 5.70235,-11.118056 13.689086,13.689086 0 0 0 -13.68887,-13.688867 13.689086,13.689086 0 0 0 -9.110932,3.47269 10.705567,10.705567 0 0 0 -8.614302,-4.350256 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path92"
+       style="fill:#ff7500;fill-opacity:1;stroke-width:2.51664"
+       d="m 93.44652,63.507001 a 7.1955451,7.1955451 0 0 0 -5.138665,2.158919 5.0895318,5.0895318 0 0 0 -2.934064,-0.93062 5.0895318,5.0895318 0 0 0 -4.806357,3.41669 4.212026,4.212026 0 0 0 -0.876091,1.161985 6.1425389,6.1425389 0 0 0 -3.619319,5.600657 6.1425389,6.1425389 0 0 0 2.07492,4.602255 3.8610238,3.8610238 0 0 0 -0.495152,1.89145 3.8610238,3.8610238 0 0 0 0.758938,2.297441 7.5465474,7.5465474 0 0 0 -2.689439,5.775288 7.5465474,7.5465474 0 0 0 7.545896,7.546634 7.5465474,7.5465474 0 0 0 0.337468,-0.0081 5.967037,5.967037 0 0 0 4.4011,1.938603 5.967037,5.967037 0 0 0 5.320665,-3.265638 2.9835185,4.8274345 0 0 0 1.875235,1.072826 2.9835185,4.8274345 0 0 0 2.555336,-2.336494 8.2485521,8.2485521 0 0 0 7.447889,4.704671 8.2485521,8.2485521 0 0 0 8.24884,-8.248096 8.2485521,8.2485521 0 0 0 -0.017,-0.531994 6.8445431,6.8445431 0 0 0 5.08118,-5.019298 5.7915361,5.7915361 0 0 0 2.83312,-4.978774 5.7915361,5.7915361 0 0 0 -5.7915,-5.791499 5.7915361,5.7915361 0 0 0 -1.1104,0.107581 5.6160349,9.0869359 0 0 0 -5.20719,-5.684659 5.6160349,9.0869359 0 0 0 -1.9025,0.53715 4.9140307,4.9140307 0 0 0 -0.92915,-0.377993 5.4405342,5.4405342 0 0 0 -5.41718,-4.936774 5.4405342,5.4405342 0 0 0 -3.009964,0.908516 7.1955451,7.1955451 0 0 0 -4.536675,-1.610718 z m -2.248073,23.412838 a 10.506769,6.4935404 0 0 0 -0.01027,0.279997 10.506769,6.4935404 0 0 0 0.07958,0.79504 5.967037,5.967037 0 0 0 -0.690408,-0.388312 7.5465474,7.5465474 0 0 0 -0.179789,-0.596832 7.7220479,7.7220479 0 0 0 0.800936,-0.0899 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path78"
+       style="fill:#ffb300;fill-opacity:1;stroke-width:2.77863"
+       d="m 93.094376,71.756057 a 5.6832872,5.9954637 0 0 0 -4.745936,2.743228 8.8865945,7.4489093 0 0 0 -3.390164,-0.563676 8.8865945,7.4489093 0 0 0 -8.882509,7.263687 4.212026,3.8610237 0 0 0 -1.58345,3.016592 4.212026,3.8610237 0 0 0 4.212466,3.860998 4.212026,3.8610237 0 0 0 1.663768,-0.31389 8.8865945,7.4489093 0 0 0 4.589725,1.070617 8.8865945,7.4489093 0 0 0 5.644133,-1.694715 6.1999496,4.6328584 0 0 0 5.308876,2.239969 6.1999496,4.6328584 0 0 0 4.775405,-1.677764 6.4066149,6.3588254 0 0 0 -1.055139,3.494058 6.4066149,6.3588254 0 0 0 6.406749,6.358856 6.4066149,6.3588254 0 0 0 6.40676,-6.358856 6.4066149,6.3588254 0 0 0 -6.40676,-6.358861 6.4066149,6.3588254 0 0 0 -4.46667,1.801554 6.1999496,4.6328584 0 0 0 0.54009,-1.892186 6.1999496,4.6328584 0 0 0 -0.73904,-2.193548 7.8532691,5.8137827 0 0 0 4.04595,0.831145 7.8532691,5.8137827 0 0 0 2.85449,-0.398626 4.5466293,4.7236984 0 0 0 2.72553,0.943145 4.5466293,4.7236984 0 0 0 2.94439,-1.124406 4.5630284,4.5630284 0 0 0 0.24905,0.123054 3.3066399,2.9068915 0 0 0 -0.50694,1.547346 3.3066399,2.9068915 0 0 0 3.3069,2.906803 3.3066399,2.9068915 0 0 0 3.30616,-2.906803 3.3066399,2.9068915 0 0 0 -1.21872,-2.253969 4.5630284,4.5630284 0 0 0 1.56945,-3.443954 4.5630284,4.5630284 0 0 0 -4.56246,-4.5632 4.5630284,4.5630284 0 0 0 -2.76459,0.932092 4.5466293,4.7236984 0 0 0 -1.11041,-0.492201 7.8532691,5.8137827 0 0 0 -6.79285,-2.896489 7.8532691,5.8137827 0 0 0 -7.162011,3.427743 5.6832872,5.9954637 0 0 0 -5.134243,-3.427743 5.6832872,5.9954637 0 0 0 -0.028,0 z m 5.255086,8.346097 a 7.8532691,5.8137827 0 0 0 0.384626,0.51873 6.1999496,4.6328584 0 0 0 -0.533465,-0.180526 5.6832872,5.9954637 0 0 0 0.148839,-0.338204 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame2.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path235"
+       style="fill:#d43e00;fill-opacity:1;stroke-width:1.765"
+       d="m 18.377496,131.45439 a 16.493343,16.493343 0 0 0 -16.4082996,16.49357 16.493343,16.493343 0 0 0 14.1278186,16.32251 18.708866,18.708866 0 0 0 -0.09612,1.89394 18.708866,18.708866 0 0 0 18.708936,18.70894 18.708866,18.708866 0 0 0 13.26534,-5.51646 7.6312484,7.6312484 0 0 0 4.951119,1.82366 7.6312484,7.6312484 0 0 0 7.631576,-7.63106 7.6312484,7.6312484 0 0 0 -3.258199,-6.25388 13.78548,13.78548 0 0 0 8.427392,-12.70103 13.78548,13.78548 0 0 0 -13.785204,-13.78572 13.78548,13.78548 0 0 0 -10.017477,4.31498 16.001005,16.001005 0 0 0 -8.405172,-3.90881 16.493343,16.493343 0 0 0 -15.056445,-9.76064 16.493343,16.493343 0 0 0 -0.08527,0 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path201"
+       style="fill:#ff7500;fill-opacity:1;stroke-width:6.67087"
+       d="m 83.457031,519.16602 a 40.93776,40.93776 0 0 0 -35.113281,20.36328 42.798569,42.798569 0 0 0 -27.875,40.11132 42.798569,42.798569 0 0 0 34.921875,42.06641 29.772917,29.772917 0 0 0 -1.427734,9.10742 29.772917,29.772917 0 0 0 29.773437,29.77149 29.772917,29.772917 0 0 0 15.535156,-4.375 35.355338,35.355338 0 0 0 30.984376,18.33203 35.355338,35.355338 0 0 0 33.88281,-25.25781 31.633722,31.633722 0 0 0 28.45508,17.81445 31.633722,31.633722 0 0 0 31.63281,-31.63477 31.633722,31.633722 0 0 0 -14.95703,-26.8789 31.633722,31.633722 0 0 0 10.30664,-23.36133 31.633722,31.633722 0 0 0 -31.63476,-31.63477 31.633722,31.633722 0 0 0 -3.30274,0.17383 28.842514,28.842514 0 0 0 -28.33008,-23.43359 28.842514,28.842514 0 0 0 -28.84375,28.8418 28.842514,28.842514 0 0 0 0.60938,5.89257 34.424935,34.424935 0 0 0 -4.02734,2.16993 40.93776,40.93776 0 0 0 0.62695,-7.13086 40.93776,40.93776 0 0 0 -40.937502,-40.9375 40.93776,40.93776 0 0 0 -0.279297,0 z m 24.636719,73.83984 a 34.424935,34.424935 0 0 0 -0.16602,3.38281 34.424935,34.424935 0 0 0 2.71094,13.38672 35.355338,35.355338 0 0 0 -3.48633,2.65234 29.772917,29.772917 0 0 0 -9.169918,-7.75585 42.798569,42.798569 0 0 0 4.658198,-8.25782 40.93776,40.93776 0 0 0 5.45313,-3.4082 z m 55.10352,30.77734 a 31.633722,31.633722 0 0 0 -0.5,1.34766 35.355338,35.355338 0 0 0 -0.32813,-0.73633 34.424935,34.424935 0 0 0 0.82813,-0.61133 z"
+       transform="scale(0.26458333)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path185"
+       style="fill:#ffb300;fill-opacity:1;stroke-width:1.765"
+       d="m 34.46365,142.77836 a 7.3850787,7.3850787 0 0 0 -7.352006,6.68693 7.1389096,7.1389096 0 0 0 -2.002461,-0.2868 7.1389096,7.1389096 0 0 0 -3.89537,1.15652 8.1235866,8.1235866 0 0 0 -3.735689,-0.91002 8.1235866,8.1235866 0 0 0 -8.1235354,8.12353 8.1235866,8.1235866 0 0 0 8.1235354,8.12354 8.1235866,8.1235866 0 0 0 5.814632,-2.4505 7.1389096,7.1389096 0 0 0 0.867647,0.17157 9.3544331,9.3544331 0 0 0 -1.020609,4.24831 9.3544331,9.3544331 0 0 0 9.354467,9.35447 9.3544331,9.3544331 0 0 0 9.354467,-9.35447 9.3544331,9.3544331 0 0 0 -0.601511,-3.29953 9.1611375,7.6312484 0 0 0 8.232571,4.28397 9.1611375,7.6312484 0 0 0 9.161198,-7.63106 9.1611375,7.6312484 0 0 0 -9.161198,-7.63157 9.1611375,7.6312484 0 0 0 -3.705717,0.65319 6.1542323,6.1542323 0 0 0 0.01344,-0.4067 6.1542323,6.1542323 0 0 0 -4.353221,-5.88491 7.3850787,7.3850787 0 0 0 -6.970635,-4.94647 z m -2.269629,14.41256 a 7.3850787,7.3850787 0 0 0 2.269629,0.3576 7.3850787,7.3850787 0 0 0 0.430465,-0.0129 6.1542323,6.1542323 0 0 0 4.739247,2.22829 6.1542323,6.1542323 0 0 0 0.816485,-0.0548 9.1611375,7.6312484 0 0 0 -0.130741,1.28571 9.1611375,7.6312484 0 0 0 0.359669,2.1177 9.3544331,9.3544331 0 0 0 -8.184514,-4.82554 9.3544331,9.3544331 0 0 0 -0.527616,0.015 7.1389096,7.1389096 0 0 0 0.227376,-1.11105 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame3.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path3112-6"
+       style="fill:#d43e00;fill-opacity:1;stroke-width:2.43805"
+       d="m 182.882,87.335662 a 14.506307,11.783137 80.477263 0 0 -14.27413,-11.895286 14.506307,11.783137 80.477263 0 0 -5.07032,2.739038 12.356928,9.6850018 80.243123 0 0 -10.60492,-6.491837 12.356928,9.6850018 80.243123 0 0 -6.67923,6.441298 13.789886,11.137533 80.434553 0 0 -2.41282,0.160499 13.789886,11.137533 80.434553 0 0 -8.32442,15.764282 13.789886,11.137533 80.434553 0 0 5.88192,9.578284 8.5966617,7.2632963 80.852483 0 0 0.16914,1.43237 8.5966617,7.2632963 80.852483 0 0 8.51077,7.03396 10.750318,10.164367 84.898655 0 0 8.58731,5.31681 11.82257,10.812265 82.626949 0 0 8.52649,2.1677 11.82257,10.812265 82.626949 0 0 8.37842,-13.7653 11.82257,10.812265 82.626949 0 0 -0.59784,-2.11842 14.506307,11.783137 80.477263 0 0 7.90962,-16.363395 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame4.png"
+       inkscape:export-xdpi="13.40683"
+       inkscape:export-ydpi="13.40683" />
+    <path
+       id="path201-7"
+       style="fill:#ff7500;fill-opacity:1;stroke-width:1.67629"
+       d="m 150.3826,75.4641 a 10.201941,10.372826 0 0 0 -8.75045,5.159652 10.665666,10.844319 0 0 0 -6.94662,10.163425 10.665666,10.844319 0 0 0 8.70275,10.658813 7.4195936,7.5438736 0 0 0 -0.35581,2.30764 7.4195936,7.5438736 0 0 0 7.41973,7.54351 7.4195936,7.5438736 0 0 0 3.87145,-1.10854 8.8107672,8.9583498 0 0 0 7.7215,4.64498 8.8107672,8.9583498 0 0 0 8.44381,-6.39984 7.8833177,8.0153652 0 0 0 7.09118,4.51384 7.8833177,8.0153652 0 0 0 7.88309,-8.01563 7.8833177,8.0153652 0 0 0 -3.72739,-6.810601 7.8833177,8.0153652 0 0 0 2.56849,-5.919302 7.8833177,8.0153652 0 0 0 -7.88358,-8.015625 7.8833177,8.0153652 0 0 0 -0.82306,0.04405 7.1877315,7.3081278 0 0 0 -7.06004,-5.937615 7.1877315,7.3081278 0 0 0 -7.18804,7.307948 7.1877315,7.3081278 0 0 0 0.15186,1.493065 8.5789051,8.7226039 0 0 0 -1.00363,0.549811 10.201941,10.372826 0 0 0 0.15624,-1.806814 10.201941,10.372826 0 0 0 -10.20188,-10.37276 10.201941,10.372826 0 0 0 -0.0696,0 z m 6.13962,18.709569 a 8.5789051,8.7226039 0 0 0 -0.0413,0.85713 8.5789051,8.7226039 0 0 0 0.67559,3.39194 8.8107672,8.9583498 0 0 0 -0.86882,0.67204 7.4195936,7.5438736 0 0 0 -2.2852,-1.96518 10.665666,10.844319 0 0 0 1.16085,-2.09237 10.201941,10.372826 0 0 0 1.35895,-0.86356 z m 13.73214,7.798381 a 7.8833177,8.0153652 0 0 0 -0.12461,0.34147 8.8107672,8.9583498 0 0 0 -0.0817,-0.18657 8.5789051,8.7226039 0 0 0 0.20637,-0.1549 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame4.png"
+       inkscape:export-xdpi="13.40683"
+       inkscape:export-ydpi="13.40683" />
+    <path
+       id="path78-0"
+       style="fill:#ffb300;fill-opacity:1;stroke-width:2.90198"
+       d="m 160.90126,108.13441 a 5.9372762,6.2598346 72.278779 0 0 5.83693,-1.18874 9.6413805,7.4888742 11.744228 0 0 3.34168,1.55725 9.6413805,7.4888742 11.744228 0 0 11.62305,-4.25569 4.5758783,3.8765624 8.7284124 0 0 2.63683,-2.40064 4.5758783,3.8765624 8.7284124 0 0 -3.11531,-4.949217 4.5758783,3.8765624 8.7284124 0 0 -1.83371,-0.20107 9.6413805,7.4888742 11.744228 0 0 -4.42322,-2.40153 9.6413805,7.4888742 11.744228 0 0 -6.4273,-0.0814 6.7214631,4.661236 13.467731 0 0 -4.78767,-3.73303 6.7214631,4.661236 13.467731 0 0 -5.51803,0.16375 6.9836706,6.3628178 1.3202928 0 0 2.24391,-3.01491 6.9836706,6.3628178 1.3202928 0 0 -4.57845,-7.9914 6.9836706,6.3628178 1.3202928 0 0 -8.75078,4.1374 6.9836706,6.3628178 1.3202928 0 0 4.57845,7.99141 6.9836706,6.3628178 1.3202928 0 0 5.23748,-0.37466 6.7214631,4.661236 13.467731 0 0 -1.1826,1.64213 6.7214631,4.661236 13.467731 0 0 0.0492,2.31425 8.513507,5.8496311 13.560517 0 0 -3.93612,-2.00958 8.513507,5.8496311 13.560517 0 0 -3.10016,-0.4784 4.6975809,4.9868367 79.244372 0 0 -2.52581,-1.71924 4.6975809,4.9868367 79.244372 0 0 -3.43178,0.18674 4.9771518,4.5630285 0 0 0 -0.2187,-0.19227 3.5895236,2.9208325 10.458968 0 0 1.03498,-1.32321 3.5895236,2.9208325 10.458968 0 0 -2.48635,-3.76685 3.5895236,2.9208325 10.458968 0 0 -4.39287,1.7778 3.5895236,2.9208325 10.458968 0 0 0.5283,2.51615 4.9771518,4.5630285 0 0 0 -2.76249,2.81243 4.9771518,4.5630285 0 0 0 3.24904,5.72418 4.9771518,4.5630285 0 0 0 3.18165,-0.0574 4.6975809,4.9868367 79.244372 0 0 0.99362,0.80339 8.513507,5.8496311 13.560517 0 0 6.11599,4.805487 8.513507,5.8496311 13.560517 0 0 8.57483,-1.11486 5.9372762,6.2598346 72.278779 0 0 4.21633,4.81328 5.9372762,6.2598346 72.278779 0 0 0.0291,0.008 z m -2.72847,-9.540227 a 8.513507,5.8496311 13.560517 0 0 -0.22993,-0.6104 6.7214631,4.661236 13.467731 0 0 0.49572,0.33262 5.9372762,6.2598346 72.278779 0 0 -0.26579,0.27778 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame4.png"
+       inkscape:export-xdpi="13.40683"
+       inkscape:export-ydpi="13.40683" />
+    <path
+       id="path160-1"
+       style="fill:#d43e00;fill-opacity:1;stroke-width:2.75089"
+       d="m 99.435786,133.01653 a 11.894168,11.513033 0 0 0 -11.894836,11.51289 11.894168,11.513033 0 0 0 0.181739,2.00242 14.42899,13.96663 0 0 0 -4.861084,10.45502 14.42899,13.96663 0 0 0 1.382683,5.96603 12.089154,11.701771 0 0 0 -2.162847,6.6792 12.089154,11.701771 0 0 0 12.089672,11.70148 12.089154,11.701771 0 0 0 11.655797,-8.59762 13.259071,12.8342 0 0 0 12.91241,9.91858 13.259071,12.8342 0 0 0 13.25868,-12.83384 13.259071,12.8342 0 0 0 -3.99577,-9.18242 15.208936,14.721584 0 0 0 6.33546,-11.95664 15.208936,14.721584 0 0 0 -15.2087,-14.72134 15.208936,14.721584 0 0 0 -10.12249,3.73462 11.894168,11.513033 0 0 0 -9.570714,-4.67838 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame5.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path201-5"
+       style="fill:#ff7500;fill-opacity:1;stroke-width:1.765"
+       d="m 97.849655,137.41838 a 10.831449,10.831449 0 0 0 -9.29039,5.38778 11.323788,11.323788 0 0 0 -7.37526,10.61279 11.323788,11.323788 0 0 0 9.23974,11.13007 7.8774176,7.8774176 0 0 0 -0.37775,2.40967 7.8774176,7.8774176 0 0 0 7.87755,7.87704 7.8774176,7.8774176 0 0 0 4.110345,-1.15755 9.3544332,9.3544332 0 0 0 8.19795,4.85035 9.3544332,9.3544332 0 0 0 8.96482,-6.6828 8.3697556,8.3697556 0 0 0 7.52874,4.71341 8.3697556,8.3697556 0 0 0 8.36952,-8.37003 8.3697556,8.3697556 0 0 0 -3.95738,-7.11171 8.3697556,8.3697556 0 0 0 2.72696,-6.18102 8.3697556,8.3697556 0 0 0 -8.37003,-8.37003 8.3697556,8.3697556 0 0 0 -0.87385,0.046 7.6312485,7.6312485 0 0 0 -7.49567,-6.20014 7.6312485,7.6312485 0 0 0 -7.63157,7.63106 7.6312485,7.6312485 0 0 0 0.16123,1.55908 9.1082641,9.1082641 0 0 0 -1.06557,0.57412 10.831449,10.831449 0 0 0 0.16588,-1.8867 10.831449,10.831449 0 0 0 -10.831375,-10.83138 10.831449,10.831449 0 0 0 -0.0739,0 z m 6.518455,19.53679 a 9.1082641,9.1082641 0 0 0 -0.0439,0.89503 9.1082641,9.1082641 0 0 0 0.71727,3.54191 9.3544332,9.3544332 0 0 0 -0.92242,0.70176 7.8774176,7.8774176 0 0 0 -2.42621,-2.05207 11.323788,11.323788 0 0 0 1.23248,-2.18488 10.831449,10.831449 0 0 0 1.44281,-0.90175 z m 14.57947,8.14317 a 8.3697556,8.3697556 0 0 0 -0.13229,0.35657 9.3544332,9.3544332 0 0 0 -0.0868,-0.19482 9.1082641,9.1082641 0 0 0 0.21911,-0.16175 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame5.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+    <path
+       id="path3096-1"
+       style="fill:#ffb300;fill-opacity:1;stroke-width:2.18505"
+       d="m 104.03443,172.75722 a 3.8265581,3.9319263 81.934018 0 0 2.97581,-2.16887 3.5431092,3.4404356 81.934018 0 0 2.94861,1.04303 3.5431092,3.4404356 81.934018 0 0 2.94504,-3.43484 3.8265577,3.9319263 81.934018 0 0 1.47465,-1.62075 3.5431092,3.4404356 81.934018 0 0 2.94863,1.04303 3.5431092,3.4404356 81.934018 0 0 2.59902,-1.93253 4.6956868,5.2215976 31.036146 0 0 2.92804,3.58578 4.6956868,5.2215976 31.036146 0 0 6.32444,-3.36497 4.6956868,5.2215976 31.036146 0 0 -1.08416,-5.44602 5.5868234,6.7908753 25.792536 0 0 3.44344,-4.06274 5.5868234,6.7908753 25.792536 0 0 -2.90023,-8.11213 5.5868234,6.7908753 25.792536 0 0 -7.7236,4.55751 5.5868234,6.7908753 25.792536 0 0 -0.38672,1.36579 4.0071651,3.7547103 0.19069387 0 0 -1.88925,-0.17435 4.5351794,5.4063984 81.934018 0 0 -4.75603,-1.38733 4.5351794,5.4063984 81.934018 0 0 -4.56671,3.51561 5.3855256,7.0447013 81.934018 0 0 -3.37796,-1.03299 4.5351794,5.4063984 81.934018 0 0 -0.0113,-0.9842 4.5351794,5.4063984 81.934018 0 0 -5.989006,-3.73212 4.5351794,5.4063984 81.934018 0 0 -4.565967,3.51466 5.3855256,7.0447013 81.934018 0 0 -5.331905,-0.96696 5.3855256,7.0447013 81.934018 0 0 -6.219707,6.32102 5.3855256,7.0447013 81.934018 0 0 6.718885,4.42985 5.3855256,7.0447013 81.934018 0 0 -0.142189,1.81641 5.3855256,7.0447013 81.934018 0 0 7.730973,4.34314 5.3855256,7.0447013 81.934018 0 0 1.442934,-0.3247 3.8265581,3.9319263 81.934018 0 0 4.426762,3.21501 3.8265581,3.9319263 81.934018 0 0 0.0374,-0.005 z"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame5.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
   </g>
 </svg>

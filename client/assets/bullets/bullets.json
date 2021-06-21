@@ -2,43 +2,139 @@
 
 "flame1.png":
 {
-	"frame": {"x":0,"y":0,"w":25,"h":24},
+	"frame": {"x":57,"y":35,"w":25,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":24},
 	"sourceSize": {"w":25,"h":24}
 },
+"flame2.png":
+{
+	"frame": {"x":33,"y":35,"w":24,"h":23},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":23},
+	"sourceSize": {"w":24,"h":23}
+},
+"flame3.png":
+{
+	"frame": {"x":54,"y":59,"w":32,"h":27},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":27},
+	"sourceSize": {"w":32,"h":27}
+},
+"flame4.png":
+{
+	"frame": {"x":0,"y":59,"w":27,"h":25},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":27,"h":25},
+	"sourceSize": {"w":27,"h":25}
+},
+"flame5.png":
+{
+	"frame": {"x":27,"y":59,"w":27,"h":25},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":27,"h":25},
+	"sourceSize": {"w":27,"h":25}
+},
 "rock1.png":
 {
-	"frame": {"x":25,"y":0,"w":16,"h":16},
+	"frame": {"x":0,"y":35,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 	"sourceSize": {"w":16,"h":16}
 },
-"shrapnel1.png":
+"rock2.png":
 {
-	"frame": {"x":41,"y":0,"w":17,"h":15},
+	"frame": {"x":30,"y":20,"w":17,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":15},
 	"sourceSize": {"w":17,"h":15}
 },
+"rock3.png":
+{
+	"frame": {"x":16,"y":35,"w":17,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":16},
+	"sourceSize": {"w":17,"h":16}
+},
+"rock4.png":
+{
+	"frame": {"x":47,"y":20,"w":17,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":15},
+	"sourceSize": {"w":17,"h":15}
+},
+"shrapnel1.png":
+{
+	"frame": {"x":64,"y":20,"w":17,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":15},
+	"sourceSize": {"w":17,"h":15}
+},
+"shrapnel2.png":
+{
+	"frame": {"x":81,"y":20,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":15}
+},
+"shrapnel3.png":
+{
+	"frame": {"x":0,"y":20,"w":16,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":13},
+	"sourceSize": {"w":16,"h":13}
+},
+"shrapnel4.png":
+{
+	"frame": {"x":16,"y":20,"w":14,"h":14},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":14,"h":14},
+	"sourceSize": {"w":14,"h":14}
+},
 "spear1.png":
 {
-	"frame": {"x":0,"y":24,"w":103,"h":6},
+	"frame": {"x":0,"y":0,"w":103,"h":6},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":103,"h":6},
 	"sourceSize": {"w":103,"h":6}
+},
+"spear2.png":
+{
+	"frame": {"x":0,"y":6,"w":101,"h":7},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":101,"h":7},
+	"sourceSize": {"w":101,"h":7}
+},
+"spear3.png":
+{
+	"frame": {"x":0,"y":13,"w":100,"h":7},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":7},
+	"sourceSize": {"w":100,"h":7}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "bullets.png",
 	"format": "RGBA8888",
-	"size": {"w":103,"h":30},
+	"size": {"w":103,"h":86},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:1a5309ab35b43e502b03105808784fe0:24cf0e0801be4a26aeb1d13b1842b100:878d09cf2bf4ec0dfb23d5bcf7e0eb82$"
+	"smartupdate": "$TexturePacker:SmartUpdate:83cd4faa5f03889801068f27602d647d:976380ac0f2f2fa8e6f51f4e733087a5:878d09cf2bf4ec0dfb23d5bcf7e0eb82$"
 }
 }
