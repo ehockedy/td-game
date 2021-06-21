@@ -5,6 +5,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="480"
@@ -19,6 +20,18 @@
    inkscape:export-ydpi="12.8">
   <defs
      id="defs911">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1641">
+      <stop
+         style="stop-color:#241f1c;stop-opacity:1"
+         offset="0"
+         id="stop1637" />
+      <stop
+         style="stop-color:#917c6f;stop-opacity:1"
+         offset="1"
+         id="stop1639" />
+    </linearGradient>
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Roughen"
@@ -471,6 +484,17 @@
          in2="result5"
          id="feComposite490-42-0" />
     </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1641"
+       id="linearGradient1643"
+       x1="63.5"
+       y1="27.516666"
+       x2="63.5"
+       y2="38.099998"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       gradientTransform="matrix(1.0834798,0,0,1.1428571,-16.382481,19.919448)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -479,11 +503,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.53740115"
-     inkscape:cx="467.38897"
-     inkscape:cy="838.01836"
+     inkscape:zoom="0.76"
+     inkscape:cx="256.37045"
+     inkscape:cy="214.05794"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer5"
      inkscape:document-rotation="0"
      showgrid="true"
      units="px"
@@ -504,7 +528,7 @@
      inkscape:bbox-nodes="true"
      inkscape:snap-bbox-edge-midpoints="true"
      inkscape:snap-others="false"
-     inkscape:snap-nodes="false">
+     inkscape:snap-nodes="true">
     <inkscape:grid
        type="xygrid"
        id="grid919"
@@ -901,7 +925,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Spear"
-     style="display:inline">
+     style="display:none">
     <path
        id="path200-4-8"
        style="fill:#ac9d93;stroke-width:1.33923;filter:url(#filter492-3)"
@@ -1160,6 +1184,19 @@
        style="fill:#ffb300;fill-opacity:1;stroke-width:2.18505"
        d="m 104.03443,172.75722 a 3.8265581,3.9319263 81.934018 0 0 2.97581,-2.16887 3.5431092,3.4404356 81.934018 0 0 2.94861,1.04303 3.5431092,3.4404356 81.934018 0 0 2.94504,-3.43484 3.8265577,3.9319263 81.934018 0 0 1.47465,-1.62075 3.5431092,3.4404356 81.934018 0 0 2.94863,1.04303 3.5431092,3.4404356 81.934018 0 0 2.59902,-1.93253 4.6956868,5.2215976 31.036146 0 0 2.92804,3.58578 4.6956868,5.2215976 31.036146 0 0 6.32444,-3.36497 4.6956868,5.2215976 31.036146 0 0 -1.08416,-5.44602 5.5868234,6.7908753 25.792536 0 0 3.44344,-4.06274 5.5868234,6.7908753 25.792536 0 0 -2.90023,-8.11213 5.5868234,6.7908753 25.792536 0 0 -7.7236,4.55751 5.5868234,6.7908753 25.792536 0 0 -0.38672,1.36579 4.0071651,3.7547103 0.19069387 0 0 -1.88925,-0.17435 4.5351794,5.4063984 81.934018 0 0 -4.75603,-1.38733 4.5351794,5.4063984 81.934018 0 0 -4.56671,3.51561 5.3855256,7.0447013 81.934018 0 0 -3.37796,-1.03299 4.5351794,5.4063984 81.934018 0 0 -0.0113,-0.9842 4.5351794,5.4063984 81.934018 0 0 -5.989006,-3.73212 4.5351794,5.4063984 81.934018 0 0 -4.565967,3.51466 5.3855256,7.0447013 81.934018 0 0 -5.331905,-0.96696 5.3855256,7.0447013 81.934018 0 0 -6.219707,6.32102 5.3855256,7.0447013 81.934018 0 0 6.718885,4.42985 5.3855256,7.0447013 81.934018 0 0 -0.142189,1.81641 5.3855256,7.0447013 81.934018 0 0 7.730973,4.34314 5.3855256,7.0447013 81.934018 0 0 1.442934,-0.3247 3.8265581,3.9319263 81.934018 0 0 4.426762,3.21501 3.8265581,3.9319263 81.934018 0 0 0.0374,-0.005 z"
        inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\flame5.png"
+       inkscape:export-xdpi="12.8"
+       inkscape:export-ydpi="12.8" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="bullet">
+    <path
+       id="rect1634"
+       style="fill:url(#linearGradient1643);fill-opacity:1;stroke:none;stroke-width:1.96404;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 36.027895,55.086486 4.53845,-0.05315 v 2.419049 h 4.586731 V 55.033333 L 63.5,55.086487 c 37.07916,8.375815 0,16.88018 0,16.88018 l -18.346924,-10e-7 v -2.419048 h -4.586731 v 2.419048 h -4.53845 z"
+       sodipodi:nodetypes="ccccccccccccc"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\bullet1.png"
        inkscape:export-xdpi="12.8"
        inkscape:export-ydpi="12.8" />
   </g>

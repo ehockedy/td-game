@@ -11,6 +11,12 @@
         "rotationSpeed": 15,
         "piercingCount": 1
     },
+    "bullet": {
+        "filenameKeyword": "bullet",
+        "rotate": false,
+        "rotationSpeed": 0,
+        "piercingCount": 1
+    },
     "spear": {
         "filenameKeyword": "spear",
         "rotate": false,

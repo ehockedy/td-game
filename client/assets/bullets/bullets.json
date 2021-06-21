@@ -1,8 +1,16 @@
 {"frames": {
 
+"bullet1.png":
+{
+	"frame": {"x":0,"y":20,"w":22,"h":9},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":22,"h":9},
+	"sourceSize": {"w":22,"h":9}
+},
 "flame1.png":
 {
-	"frame": {"x":57,"y":35,"w":25,"h":24},
+	"frame": {"x":73,"y":35,"w":25,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":24},
@@ -10,7 +18,7 @@
 },
 "flame2.png":
 {
-	"frame": {"x":33,"y":35,"w":24,"h":23},
+	"frame": {"x":49,"y":35,"w":24,"h":23},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":23},
@@ -42,7 +50,7 @@
 },
 "rock1.png":
 {
-	"frame": {"x":0,"y":35,"w":16,"h":16},
+	"frame": {"x":16,"y":35,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -50,7 +58,7 @@
 },
 "rock2.png":
 {
-	"frame": {"x":30,"y":20,"w":17,"h":15},
+	"frame": {"x":52,"y":20,"w":17,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":15},
@@ -58,7 +66,7 @@
 },
 "rock3.png":
 {
-	"frame": {"x":16,"y":35,"w":17,"h":16},
+	"frame": {"x":32,"y":35,"w":17,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":16},
@@ -66,7 +74,7 @@
 },
 "rock4.png":
 {
-	"frame": {"x":47,"y":20,"w":17,"h":15},
+	"frame": {"x":69,"y":20,"w":17,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":15},
@@ -74,7 +82,7 @@
 },
 "shrapnel1.png":
 {
-	"frame": {"x":64,"y":20,"w":17,"h":15},
+	"frame": {"x":86,"y":20,"w":17,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":15},
@@ -82,7 +90,7 @@
 },
 "shrapnel2.png":
 {
-	"frame": {"x":81,"y":20,"w":16,"h":15},
+	"frame": {"x":0,"y":35,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":15},
@@ -90,7 +98,7 @@
 },
 "shrapnel3.png":
 {
-	"frame": {"x":0,"y":20,"w":16,"h":13},
+	"frame": {"x":22,"y":20,"w":16,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":13},
@@ -98,7 +106,7 @@
 },
 "shrapnel4.png":
 {
-	"frame": {"x":16,"y":20,"w":14,"h":14},
+	"frame": {"x":38,"y":20,"w":14,"h":14},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":14,"h":14},
@@ -135,6 +143,6 @@
 	"format": "RGBA8888",
 	"size": {"w":103,"h":86},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:83cd4faa5f03889801068f27602d647d:976380ac0f2f2fa8e6f51f4e733087a5:878d09cf2bf4ec0dfb23d5bcf7e0eb82$"
+	"smartupdate": "$TexturePacker:SmartUpdate:29312d4131be572170abb6f479f0c48c:92df5f8182d9b40004a6ebca7fe31491:878d09cf2bf4ec0dfb23d5bcf7e0eb82$"
 }
 }

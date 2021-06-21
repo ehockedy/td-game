@@ -57,14 +57,14 @@
         "gameData": {
             "seekRange": 10,
             "shootRange": 20,
-            "damage": 5,
+            "damage": 50,
             "rateOfFire": 240,
             "bulletSpeed": 15,
             "numberOfBullets": 1,
             "turns": true
         },
         "cost": 200,
-        "bulletType": "rock",
+        "bulletType": "bullet",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"
     },
