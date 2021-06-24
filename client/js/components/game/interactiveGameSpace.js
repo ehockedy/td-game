@@ -21,8 +21,8 @@ export class InteractiveGameSpace extends BaseComponent {
         // Add all the components that sit within this game area
         // Order placed here is order rendered back-to-front
         this.addChild(this.map)
-        this.addChild(this.towersComponent)
         this.addChild(enemiesComponent)
+        this.addChild(this.towersComponent)
         this.addChild(bulletsComponent)
         this.addChild(this.towerMenu)
 

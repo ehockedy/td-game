@@ -1,0 +1,4287 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="480"
+   height="480"
+   viewBox="0 0 127 127"
+   version="1.1"
+   id="svg917"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="buzzsaw.svg">
+  <defs
+     id="defs911">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2397">
+      <stop
+         style="stop-color:#241f1c;stop-opacity:1"
+         offset="0"
+         id="stop2393" />
+      <stop
+         style="stop-color:#ac9d93;stop-opacity:1"
+         offset="1"
+         id="stop2395" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2311">
+      <stop
+         style="stop-color:#241f1c;stop-opacity:1"
+         offset="0"
+         id="stop2307" />
+      <stop
+         style="stop-color:#ac9d93;stop-opacity:1"
+         offset="1"
+         id="stop2309" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient578">
+      <stop
+         style="stop-color:#ac9d93;stop-opacity:1"
+         offset="0"
+         id="stop574" />
+      <stop
+         style="stop-color:#241f1c;stop-opacity:1"
+         offset="1"
+         id="stop576" />
+    </linearGradient>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB;"
+       id="filter602">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072072072072135"
+         specularConstant="0.96846846846846846"
+         specularExponent="22.40990990990991"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592"
+         lighting-color="rgb(193,125,17)">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-8">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-9" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-1">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-9" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-6"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-4" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-9"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-6"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-0" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-0" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-8-7">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-9-2" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-1-9">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-9-7" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-6-7"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-4-4" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-9-6"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-6-8"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-0-3" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-0-4" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient578"
+       id="linearGradient755"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.2000003,0,0,1,738.29343,110.06666)"
+       x1="-241.30002"
+       y1="143.93333"
+       x2="-279.39999"
+       y2="143.93333"
+       spreadMethod="reflect" />
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-57">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-0" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-3">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-5" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-1"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-9" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-5"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-5"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-5" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-7" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-4">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-7" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-16">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-35" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-2"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-6" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-2"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-1"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-8" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-3" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter842">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence824" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting828">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight826" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting832"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight830" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite834"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite836"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite838" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap840" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-6">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-4" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-5">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-4" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-2"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-7" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-4"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-6"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-4" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-6" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-47">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-6" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-8">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-4" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-68"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-2" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-6"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-66"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-1" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-6" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-0">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-69" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-4">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-1" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-0"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-5" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-56"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-97"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-7" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-1" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-8-7-7">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-9-2-5" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-1-9-6">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-9-7-9" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-6-7-1"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-4-4-9" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-9-6-2"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-6-8-1"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-0-3-2" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-0-4-6" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-8-74">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-9-6" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-1-1">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-9-1" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-6-71"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-4-46" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-9-4"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-6-2"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-0-2" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-0-3" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-6-0">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-4-0" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-5-3">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-4-7" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-2-8"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-7-1" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-4-9"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-6-7"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-4-2" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-6-7" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient578"
+       id="linearGradient755-8"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.2000003,0,0,1,738.29343,110.06666)"
+       x1="-241.30002"
+       y1="143.93333"
+       x2="-279.39999"
+       y2="143.93333"
+       spreadMethod="reflect" />
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-64">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-8" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-9">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-2" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-3"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-1" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-49"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-64"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-8" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-3" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-57-3">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-0-5" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-3-3">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-5-4" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-1-7"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-9-3" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-5-9"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-5-6"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-5-5" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-7-8" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-48">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-3" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-5">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-8" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-17"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-88" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-4"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-663"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-53" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-31" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter1302">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence1284" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting1288">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight1286" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting1292"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight1290" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite1294"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite1296"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite1298" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap1300" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter1322">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence1304" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting1308">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight1306" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting1312"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight1310" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite1314"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite1316"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite1318" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap1320" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-6-2">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-4-5" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-5-8">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-4-4" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-2-4"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-7-7" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-4-3"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-6-75"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-4-8" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-6-0" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient578"
+       id="linearGradient755-2"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.2000003,0,0,1,738.29343,110.06666)"
+       x1="-241.30002"
+       y1="143.93333"
+       x2="-279.39999"
+       y2="143.93333"
+       spreadMethod="reflect" />
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-1">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-5" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-3">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-3" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-5"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-12" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-5"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-3"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-7" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-9" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-6-0-3">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-4-0-6" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-5-3-8">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-4-7-1" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-2-8-0"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-7-1-8" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-4-9-8"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-6-7-7"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-4-2-9" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-6-7-8" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-64-7">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-8-9" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-9-0">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-2-9" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-3-3"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-1-8" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-49-1"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-64-2"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-8-7" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-3-2" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-8-7-5">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-9-2-2" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-1-9-5">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-9-7-8" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-6-7-4"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-4-4-8" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-9-6-8"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-6-8-5"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-0-3-3" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-0-4-1" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-8-3">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-9-7" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-1-6">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-9-3" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-6-2"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-4-2" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-9-44"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-6-6"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-0-5" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-0-2" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-47-8">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-6-6" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-8-2">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-4-0" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-68-4"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-2-9" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-6-1"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-66-1"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-1-1" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-6-5" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter1423">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence1405" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting1409">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight1407" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting1413"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight1411" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite1415"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite1417"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite1419" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap1421" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-0-8">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-69-9" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-4-2">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-1-0" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-0-9"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-5-4" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-56-8"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-97-4"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-7-0" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-1-8" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter1453">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence1435" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting1439">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight1437" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting1443"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight1441" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite1445"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite1447"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite1449" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap1451" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-8-7-7-0">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-9-2-5-5" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-1-9-6-8">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-9-7-9-1" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-6-7-1-3"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-4-4-9-9" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-9-6-2-3"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-6-8-1-5"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-0-3-2-8" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-0-4-6-6" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-8-74-7">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-9-6-3" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-1-1-2">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-9-1-7" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-6-71-0"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-4-46-4" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-9-4-8"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-6-2-3"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-0-2-8" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-0-3-7" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient578"
+       id="linearGradient1874"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.2000003,0,0,1,738.29343,110.06666)"
+       x1="-241.30002"
+       y1="143.93333"
+       x2="-279.39999"
+       y2="143.93333"
+       spreadMethod="reflect" />
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-6-2-2">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-4-5-7" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-5-8-7">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-4-4-7" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-2-4-1"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-7-7-2" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-4-3-7"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-6-75-9"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-4-8-7" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-6-0-0" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient578"
+       id="linearGradient755-2-8"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.2000003,0,0,1,738.29343,110.06666)"
+       x1="-241.30002"
+       y1="143.93333"
+       x2="-279.39999"
+       y2="143.93333"
+       spreadMethod="reflect" />
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-1-7">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-5-1" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-3-7">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-3-8" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-5-5"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-12-8" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-5-8"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-3-7"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-7-9" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-9-9" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-8-7-7-0-0">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-9-2-5-5-8" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-1-9-6-8-9">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-9-7-9-1-3" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-6-7-1-3-6"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-4-4-9-9-9" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-9-6-2-3-5"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-6-8-1-5-9"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-0-3-2-8-4" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-0-4-6-6-6" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-8-74-7-0">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-9-6-3-9" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-1-1-2-1">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-9-1-7-7" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-6-71-0-9"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-4-46-4-0" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-9-4-8-3"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-6-2-3-1"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-0-2-8-1" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-0-3-7-0" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-6-0-3-6">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-4-0-6-2" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-5-3-8-1">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-4-7-1-3" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-2-8-0-4"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-7-1-8-8" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-4-9-8-2"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-6-7-7-3"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-4-2-9-2" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-6-7-8-6" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-64-7-9">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-8-9-1" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-9-0-2">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-2-9-5" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-3-3-8"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-1-8-1" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-49-1-4"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-64-2-9"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-8-7-9" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-3-2-1" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-47-8-7">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-6-6-1" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-8-2-8">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-4-0-0" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-68-4-7"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-2-9-0" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-6-1-4"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-66-1-3"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-1-1-9" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-6-5-3" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter1987">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence1969" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting1973">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight1971" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting1977"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight1975" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite1979"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite1981"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite1983" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap1985" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient578"
+       id="linearGradient2198"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.2000003,0,0,1,738.29343,110.06666)"
+       x1="-241.30002"
+       y1="143.93333"
+       x2="-279.39999"
+       y2="143.93333"
+       spreadMethod="reflect" />
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-6-2-2-4">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-4-5-7-4" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-5-8-7-7">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-4-4-7-4" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-2-4-1-1"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-7-7-2-0" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-4-3-7-6"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-6-75-9-3"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-4-8-7-5" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-6-0-0-8" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-1-7-8">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-5-1-5" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-3-7-8">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-3-8-7" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-5-5-8"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-12-8-8" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-5-8-0"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-3-7-8"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-7-9-9" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-9-9-5" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2397"
+       id="linearGradient2313"
+       x1="541.86664"
+       y1="1016"
+       x2="541.86664"
+       y2="1032.9333"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       gradientTransform="translate(118.53339,-321.73334)" />
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-5-6-0-3-6-8">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-99-4-0-6-2-9" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-18-5-3-8-1-6">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-3-4-7-1-3-7" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-9-2-8-0-4-2"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-8-7-1-8-8-8" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-8-4-9-8-2-1"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-9-6-7-7-3-8"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-6-4-2-9-2-9" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-2-6-7-8-6-5" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2311"
+       id="linearGradient2391"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(118.53339,-321.73334)"
+       x1="541.86664"
+       y1="1016"
+       x2="541.86664"
+       y2="1032.9333"
+       spreadMethod="reflect" />
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-0-8-5">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-69-9-6" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-4-2-9">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-1-0-2" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-0-9-9"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-5-4-4" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-56-8-1"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-97-4-9"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-7-0-9" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-1-8-2" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-48-9">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-3-0" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-5-6">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-8-8" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-17-8"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-88-5" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-4-5"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-663-3"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-53-5" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-31-8" />
+    </filter>
+    <filter
+       inkscape:label="Rough and Glossy"
+       inkscape:menu="Textures"
+       inkscape:menu-tooltip="Crumpled glossy paper effect which can be used for pictures as for objects"
+       style="color-interpolation-filters:sRGB"
+       id="filter602-0-8-0">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="7"
+         baseFrequency="0.02"
+         seed="55"
+         result="result0"
+         id="feTurbulence584-69-9-0" />
+      <feDiffuseLighting
+         surfaceScale="4"
+         diffuseConstant="1"
+         kernelUnitLength="1"
+         result="result1"
+         in="result0"
+         id="feDiffuseLighting588-4-2-2">
+        <feDistantLight
+           azimuth="235"
+           elevation="60"
+           id="feDistantLight586-1-0-9" />
+      </feDiffuseLighting>
+      <feSpecularLighting
+         in="result0"
+         surfaceScale="0.72072071"
+         specularConstant="0.96846849"
+         specularExponent="22.4099102"
+         kernelUnitLength="1"
+         result="result3"
+         id="feSpecularLighting592-0-9-7"
+         lighting-color="#c17d11">
+        <feDistantLight
+           azimuth="235"
+           elevation="55"
+           id="feDistantLight590-5-4-3" />
+      </feSpecularLighting>
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         result="result2"
+         id="feComposite594-56-8-5"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         in="result2"
+         in2="result3"
+         operator="arithmetic"
+         k2="1"
+         k3="1"
+         result="result4"
+         id="feComposite596-97-4-6"
+         k1="0"
+         k4="0" />
+      <feComposite
+         in2="SourceAlpha"
+         operator="in"
+         in="result4"
+         result="fbSourceGraphic"
+         id="feComposite598-7-0-1" />
+      <feDisplacementMap
+         scale="7"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in2="result0"
+         id="feDisplacementMap600-1-8-4" />
+    </filter>
+    <filter
+       inkscape:label="Eroded Metal"
+       inkscape:menu="Materials"
+       inkscape:menu-tooltip="Eroded metal texture with ridges, grooves, holes and bumps"
+       style="color-interpolation-filters:sRGB;"
+       id="filter794">
+      <feGaussianBlur
+         result="result0"
+         in="SourceGraphic"
+         stdDeviation="1"
+         id="feGaussianBlur770" />
+      <feTurbulence
+         type="turbulence"
+         baseFrequency="0.50442477876106195"
+         seed="4"
+         numOctaves="4"
+         result="result1"
+         id="feTurbulence772" />
+      <feDisplacementMap
+         xChannelSelector="R"
+         in2="result1"
+         result="result91"
+         id="feDisplacementMap774" />
+      <feComposite
+         result="result2"
+         operator="out"
+         in="result0"
+         in2="result91"
+         id="feComposite776" />
+      <feComposite
+         k1="0.1"
+         k3="1.2"
+         in2="result2"
+         in="SourceAlpha"
+         operator="arithmetic"
+         result="result5"
+         id="feComposite778" />
+      <feBlend
+         result="fbSourceGraphic"
+         mode="multiply"
+         in2="result5"
+         id="feBlend780" />
+      <feGaussianBlur
+         stdDeviation="3"
+         in="fbSourceGraphic"
+         result="result0"
+         id="feGaussianBlur782" />
+      <feSpecularLighting
+         in="result0"
+         result="result1"
+         lighting-color="rgb(211,215,207)"
+         surfaceScale="-1.9590643274853803"
+         specularConstant="0.61403508771929816"
+         specularExponent="15"
+         id="feSpecularLighting786">
+        <fePointLight
+           x="-5000"
+           y="-10000"
+           z="20000"
+           id="fePointLight784" />
+      </feSpecularLighting>
+      <feComposite
+         in2="fbSourceGraphic"
+         in="result1"
+         result="result2"
+         operator="in"
+         id="feComposite788" />
+      <feComposite
+         k1="-1"
+         in="fbSourceGraphic"
+         result="result4"
+         operator="arithmetic"
+         k2="2.5"
+         k3="3.5"
+         in2="result2"
+         id="feComposite790" />
+      <feBlend
+         mode="multiply"
+         in2="result4"
+         id="feBlend792" />
+    </filter>
+    <filter
+       inkscape:label="Eroded Metal"
+       inkscape:menu="Materials"
+       inkscape:menu-tooltip="Eroded metal texture with ridges, grooves, holes and bumps"
+       style="color-interpolation-filters:sRGB;"
+       id="filter820">
+      <feGaussianBlur
+         result="result0"
+         in="SourceGraphic"
+         stdDeviation="1"
+         id="feGaussianBlur796" />
+      <feTurbulence
+         type="turbulence"
+         baseFrequency="0.057"
+         seed="4"
+         numOctaves="4"
+         result="result1"
+         id="feTurbulence798" />
+      <feDisplacementMap
+         xChannelSelector="R"
+         in2="result1"
+         result="result91"
+         id="feDisplacementMap800" />
+      <feComposite
+         result="result2"
+         operator="out"
+         in="result0"
+         in2="result91"
+         id="feComposite802" />
+      <feComposite
+         k1="0.1"
+         k3="1.2"
+         in2="result2"
+         in="SourceAlpha"
+         operator="arithmetic"
+         result="result5"
+         id="feComposite804" />
+      <feBlend
+         result="fbSourceGraphic"
+         mode="multiply"
+         in2="result5"
+         id="feBlend806" />
+      <feGaussianBlur
+         stdDeviation="3"
+         in="fbSourceGraphic"
+         result="result0"
+         id="feGaussianBlur808" />
+      <feSpecularLighting
+         in="result0"
+         result="result1"
+         lighting-color="rgb(254,230,93)"
+         surfaceScale="3"
+         specularConstant="0.4"
+         specularExponent="15"
+         id="feSpecularLighting812">
+        <fePointLight
+           x="-5000"
+           y="-10000"
+           z="20000"
+           id="fePointLight810" />
+      </feSpecularLighting>
+      <feComposite
+         in2="fbSourceGraphic"
+         in="result1"
+         result="result2"
+         operator="in"
+         id="feComposite814" />
+      <feComposite
+         k1="-1"
+         in="fbSourceGraphic"
+         result="result4"
+         operator="arithmetic"
+         k2="2.5"
+         k3="3.5"
+         in2="result2"
+         id="feComposite816" />
+      <feBlend
+         mode="multiply"
+         in2="result4"
+         id="feBlend818" />
+    </filter>
+    <filter
+       inkscape:menu-tooltip="Bright metallic effect for any color"
+       inkscape:menu="Bevels"
+       inkscape:label="Bright Metal"
+       style="color-interpolation-filters:sRGB;"
+       id="filter869">
+      <feGaussianBlur
+         result="result6"
+         stdDeviation="8"
+         in="SourceGraphic"
+         id="feGaussianBlur849" />
+      <feComposite
+         in2="SourceGraphic"
+         in="result6"
+         operator="xor"
+         result="result10"
+         id="feComposite851" />
+      <feGaussianBlur
+         result="result2"
+         stdDeviation="8"
+         id="feGaussianBlur853" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="atop"
+         in="result10"
+         result="result91"
+         id="feComposite855" />
+      <feComposite
+         result="result4"
+         in="result2"
+         operator="xor"
+         in2="result91"
+         id="feComposite857" />
+      <feGaussianBlur
+         in="result4"
+         result="result3"
+         stdDeviation="4"
+         id="feGaussianBlur859" />
+      <feSpecularLighting
+         result="result5"
+         specularExponent="5.011695906432748"
+         specularConstant="4.064327485380117"
+         surfaceScale="-0.84795321637426913"
+         id="feSpecularLighting863"
+         lighting-color="rgb(186,189,182)"
+         kernelUnitLength="0.61808695652173917">
+        <fePointLight
+           id="fePointLight871"
+           x="1000"
+           y="700"
+           z="59" />
+      </feSpecularLighting>
+      <feComposite
+         in="result3"
+         k3="1.1"
+         k2="0.5"
+         operator="arithmetic"
+         result="result7"
+         in2="result5"
+         k1="0.5"
+         id="feComposite865" />
+      <feComposite
+         in="result7"
+         operator="atop"
+         in2="SourceGraphic"
+         result="result8"
+         id="feComposite867" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.175"
+     inkscape:cx="260.57823"
+     inkscape:cy="2753.5942"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     objecttolerance="10000"
+     guidetolerance="10000"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1002"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid919"
+       empspacing="8"
+       dotted="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata914">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:#483e37;stroke-width:0.325001"
+       id="path1737-2"
+       cx="36.307716"
+       cy="112.29346"
+       r="110.06664" />
+    <circle
+       style="fill:#ac9d93;fill-opacity:1;stroke-width:0.307054"
+       id="path1737-2-6"
+       cx="34.190895"
+       cy="109.11853"
+       r="103.98815" />
+    <circle
+       style="fill:#c8beb7;stroke-width:0.3"
+       id="path1737"
+       cx="120.97441"
+       cy="112.29346"
+       r="101.6" />
+    <ellipse
+       style="fill:#ac9d93;stroke-width:0.2"
+       id="path1758-8"
+       cx="-48.358971"
+       cy="125.84008"
+       rx="16.9333"
+       ry="15.522192" />
+    <path
+       id="path1713-0-5"
+       style="fill:#666666;stroke-width:0.337275"
+       d="m 84.666667,-17.838844 a 146.0201,139.61126 0 0 0 -91.8261443,126.397454 146.0201,139.61126 0 0 0 -0.017063,0.7975 L 32.054166,103.88944 A 111.94873,107.03529 0 0 1 94.334009,15.852197 Z" />
+    <g
+       id="g2065"
+       transform="rotate(-55.873703,491.12087,767.59406)">
+      <path
+         id="rect1739-2-3-5"
+         style="fill:#483e37;stroke-width:0.282506"
+         transform="rotate(57.952168)"
+         d="m 495.72166,-736.00286 21.52918,13.47792 -0.95913,163.12148 h -19.02013 z"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         id="rect1739-2-7"
+         style="fill:#6c5d53;stroke-width:0.264259"
+         d="M 889,29.633333 V 50.8 l -141.51903,88.96942 -8.83103,-14.10639 z"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         id="rect1739-9"
+         style="fill:#917c6f;stroke-width:0.218309"
+         transform="rotate(57.952168)"
+         d="m 500.88524,-740.262 12.55869,7.86213 -0.98327,172.99641 h -11.35809 z"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         id="rect1739-4-3"
+         style="fill:#ac9d93;stroke-width:0.152885"
+         d="m 503.84787,-749.90344 h 5.57042 v 190.49995 h -5.57042 z"
+         transform="rotate(57.952168)" />
+    </g>
+    <path
+       id="path1713-0-5-7"
+       style="fill:#4d4d4d;stroke-width:0.337275"
+       d="M 84.105513,-14.471754 A 146.0201,139.61126 0 0 0 -7.7206401,111.9257 a 146.0201,139.61126 0 0 0 -0.017085,0.7975 L 31.493002,107.25653 A 111.94873,107.03529 0 0 1 93.772856,19.219286 Z" />
+    <path
+       id="path1713-0"
+       style="fill:#f2f2f2;stroke-width:0.337275"
+       d="m 80.876979,-18.448101 a 146.0201,139.61126 0 0 0 -91.826143,126.397451 146.0201,139.61126 0 0 0 -0.01706,0.79739 l 39.230716,-5.46666 A 111.94873,107.03529 0 0 1 90.544321,15.242834 Z" />
+    <path
+       id="rect1739-2-3-5-9-7-9"
+       style="fill:#483e37;stroke-width:0.251275"
+       d="m 100.96429,117.9004 3.07676,24.0264 -107.3143907,68.3088 -10.5129913,-16.1804 z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="rect1739-2-7-4-1-7"
+       style="fill:#6c5d53;stroke-width:0.235045"
+       d="m 102.75957,118.0956 2.56396,20.022 -109.2539317,71.1067 -9.1988693,-14.1579 z"
+       sodipodi:nodetypes="ccccc" />
+    <ellipse
+       style="fill:#ac9d93;stroke-width:0.3"
+       id="path1758"
+       cx="2.4410768"
+       cy="195.37267"
+       rx="25.4"
+       ry="23.283333" />
+    <circle
+       style="fill:#483e37;fill-opacity:1;stroke-width:0.374999"
+       id="path2872"
+       cx="2.4410768"
+       cy="197.48924"
+       r="26.458334" />
+    <path
+       id="rect1739-9-4-7-9"
+       style="fill:#917c6f;stroke-width:0.194175"
+       d="m 106.60651,120.4882 1.79477,14.0154 -113.7921597,72.473 -6.2779523,-9.6624 z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="rect1739-2-3-5-9-7-6"
+       style="fill:#483e37;stroke-width:0.226591"
+       d="m 18.394688,204.5566 -22.7228087,5.7102 -56.7308313,-87.39 12.44128,-8.0775 z"
+       sodipodi:nodetypes="ccccc" />
+    <circle
+       style="fill:#483e37;fill-opacity:1;stroke-width:0.24"
+       id="path2872-9"
+       cx="-48.358971"
+       cy="125.84008"
+       r="16.933332" />
+    <path
+       id="rect1739-2-7-4-1-1"
+       style="fill:#6c5d53;stroke-width:0.211955"
+       d="m 16.26693,205.7574 -17.07773271,5.1477 -60.24814929,-88.0283 10.58333,-8.4667 z"
+       sodipodi:nodetypes="ccccc" />
+    <ellipse
+       style="fill:#917c6f;fill-opacity:1;stroke-width:0.3375"
+       id="path2872-2"
+       cx="3.4994264"
+       cy="198.54759"
+       rx="23.812508"
+       ry="23.8125" />
+    <path
+       id="rect1739-9-4-7-1"
+       style="fill:#917c6f;stroke-width:0.1751"
+       d="m 15.691678,209.8023 -13.2549797,3.3309 -61.3789803,-90.2564 6.35,-6.35 z"
+       sodipodi:nodetypes="ccccc" />
+    <ellipse
+       style="fill:#ac9d93;fill-opacity:1;stroke-width:0.3"
+       id="path2872-2-0"
+       cx="4.0286012"
+       cy="199.07678"
+       rx="21.166676"
+       ry="21.166664" />
+    <ellipse
+       style="fill:#917c6f;fill-opacity:1;stroke-width:0.215999"
+       id="path2872-2-4"
+       cx="-48.358971"
+       cy="125.84008"
+       rx="15.240005"
+       ry="15.239999" />
+    <ellipse
+       style="fill:#ac9d93;fill-opacity:1;stroke-width:0.192"
+       id="path2872-2-0-8"
+       cx="-48.358971"
+       cy="125.84008"
+       rx="13.546671"
+       ry="13.546665" />
+    <path
+       id="rect1739-4-3-9-1-6"
+       style="fill:#ac9d93;stroke-width:0.101196"
+       d="m -5.6603817,185.2088 -4.5985703,3.2847 -47.40899,-67.2385 5.07566,-2.6115 z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="rect1739-4-3-9-1-8"
+       style="fill:#ac9d93;stroke-width:0.135984"
+       d="m 114.55563,118.9229 3.07893,4.7387 -124.7070207,80.7268 -3.0789403,-4.7388 z" />
+    <circle
+       style="fill:#917c6f;fill-opacity:1;stroke-width:0.18"
+       id="path3060-8"
+       cx="112.50772"
+       cy="27.626825"
+       r="12.700003" />
+    <rect
+       style="fill:#483e37;fill-opacity:1;stroke-width:0.18"
+       id="rect3062-4"
+       width="5.0800009"
+       height="25.400005"
+       x="109.96774"
+       y="14.926752" />
+    <g
+       id="g3102"
+       transform="rotate(49.330316,197.73572,-902.2216)">
+      <circle
+         style="fill:#917c6f;fill-opacity:1;stroke-width:0.18"
+         id="path3060-8-4"
+         cx="869.95001"
+         cy="-107.95"
+         r="12.700003" />
+      <rect
+         style="fill:#483e37;fill-opacity:1;stroke-width:0.18"
+         id="rect3062-4-5"
+         width="5.0800009"
+         height="25.400005"
+         x="867.41003"
+         y="-120.65002" />
+    </g>
+    <g
+       id="g3102-5"
+       transform="rotate(109.0148,377.08313,-222.52396)">
+      <circle
+         style="fill:#917c6f;fill-opacity:1;stroke-width:0.18"
+         id="path3060-8-4-6"
+         cx="869.95001"
+         cy="-107.95"
+         r="12.700003" />
+      <rect
+         style="fill:#483e37;fill-opacity:1;stroke-width:0.18"
+         id="rect3062-4-5-5"
+         width="5.0800009"
+         height="25.400005"
+         x="867.41003"
+         y="-120.65002" />
+    </g>
+    <circle
+       style="fill:#483e37;stroke-width:1.765;filter:url(#filter602-57)"
+       id="path582-1"
+       cx="348.34286"
+       cy="388.55951"
+       r="135.46666"
+       transform="matrix(1.0558036,0,0,1.0558036,111.03866,-273.33951)" />
+    <circle
+       style="fill:#917c6f;stroke-width:1.765;filter:url(#filter602)"
+       id="path582"
+       cx="483.80954"
+       cy="134.55952"
+       r="135.46666" />
+    <path
+       id="path1713"
+       style="fill:#6c5d53;stroke-width:0.3;filter:url(#filter602)"
+       d="m 914.4,-93.133333 a 127,127 0 0 0 -126.8739,126.999998 127,127 0 0 0 127,126.999995 V 101.6 A 67.733359,67.733359 0 0 1 846.79276,33.866665 67.733359,67.733359 0 0 1 914.5261,-33.866667 v -59.266666 a 127,127 0 0 0 -0.1261,0 z"
+       transform="matrix(1.2546393,0,0,1.2546393,545.93295,-269.56297)" />
+    <path
+       id="path1713-3-7-7"
+       style="fill:#6c5d53;stroke-width:0.3;filter:url(#filter602)"
+       d="M 914.4,-92.604166 C 844.30906,-92.534588 787.6462,-35.695005 787.52607,34.395862 787.4,107.95 846.66667,169.33333 918.63333,169.33334 l -4.10723,-67.20413 c -37.40811,2e-5 -67.73339,-30.325235 -67.7334,-67.733348 0,-37.408117 30.32528,-67.733381 67.7334,-67.733359 v -59.266669 z"
+       sodipodi:nodetypes="ssccsccs"
+       transform="matrix(1.2546393,0,0,1.2546393,224.19961,126.4932)" />
+    <g
+       id="g1003"
+       transform="matrix(1.1986,0,0,1.1986,-98.306327,-14.018533)">
+      <path
+         id="path1713-3-7"
+         style="fill:#483e37;stroke-width:0.3;filter:url(#filter602)"
+         d="m 918.63333,-84.66666 c -70.09093,0.06958 -135.7911,54.682226 -135.79106,124.773193 10e-6,70.140167 65.77699,129.226837 135.91716,129.226817 v -59.26666 c -37.40811,2e-5 -67.73338,-30.325224 -67.7334,-67.73333 10e-6,-37.4081135 30.32529,-67.733372 67.7334,-67.73335 v -59.26667 z"
+         sodipodi:nodetypes="ssccsccs"
+         transform="matrix(1.2546393,0,0,1.2546393,-463.20755,71.388067)" />
+      <path
+         id="path1713-3"
+         style="fill:#ac9d93;stroke-width:0.3;filter:url(#filter602)"
+         d="m 914.4,-93.13333 a 127,127 0 0 0 -126.8739,127.00001 127,127 0 0 0 127,126.99999 V 101.60001 A 67.73336,67.73336 0 0 1 846.79276,33.86668 67.73336,67.73336 0 0 1 914.5261,-33.86666 v -59.26667 a 127,127 0 0 0 -0.1261,0 z"
+         transform="matrix(1.2546393,0,0,1.2546393,-461.60044,80.423195)" />
+    </g>
+    <path
+       id="rect2097"
+       style="fill:#806e62;fill-opacity:1;stroke-width:0.371772;filter:url(#filter602)"
+       d="m 914.4,-93.13333 4.23333,8.46667 v 59.26667 L 914.4,-33.86666 Z"
+       sodipodi:nodetypes="ccccc"
+       transform="matrix(1.2546393,0,0,1.2546393,811.71319,309.42612)" />
+    <path
+       id="rect2097-6"
+       style="fill:#806e62;fill-opacity:1;stroke-width:0.371771;filter:url(#filter602)"
+       d="m 914.4,101.6 4.23333,8.46667 v 59.26667 L 914.4,160.86667 Z"
+       sodipodi:nodetypes="ccccc"
+       transform="matrix(1.2546393,0,0,1.2546393,797.93523,247.37504)" />
+    <path
+       id="rect2097-3"
+       style="fill:#483e37;fill-opacity:1;stroke-width:0.34197;filter:url(#filter602)"
+       d="m 915.33603,-87.170371 2.46898,4.800305 v 55.335721 l -2.96912,-4.90904 z"
+       sodipodi:nodetypes="ccccc"
+       transform="matrix(1.2546393,0,0,1.2546393,739.7078,182.3207)" />
+    <path
+       id="rect2097-3-1"
+       style="fill:#483e37;fill-opacity:1;stroke-width:0.341969;filter:url(#filter602)"
+       d="m 915.06203,101.8646 3.6974,8.20209 v 57.41459 l -3.63058,-6.79892 z"
+       sodipodi:nodetypes="ccccc"
+       transform="matrix(1.2546393,0,0,1.2546393,730.04368,171.17502)" />
+    <g
+       id="g1083"
+       transform="matrix(0.90937102,0.2962156,-0.40435305,0.79431415,141.53629,-140.77099)"
+       inkscape:transform-center-x="22.866729"
+       inkscape:transform-center-y="3.7890775">
+      <rect
+         style="fill:#241f1c;fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-6)"
+         id="rect572-2-2"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(144.21596,452.13319,239.40012)" />
+      <rect
+         style="fill:url(#linearGradient755);fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5)"
+         id="rect572-2"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(145.67881,450.60292,245.53333)" />
+    </g>
+    <g
+       id="g1083-8"
+       transform="matrix(-0.17517545,0.94010225,-0.83703444,-0.29794715,813.81885,-117.06423)"
+       inkscape:transform-center-x="6.9571299"
+       inkscape:transform-center-y="-22.239299">
+      <rect
+         style="fill:#241f1c;fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-6-0)"
+         id="rect572-2-2-1"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(144.21596,452.13319,239.40012)" />
+      <rect
+         style="fill:url(#linearGradient755-8);fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-64)"
+         id="rect572-2-7"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(145.67881,450.60292,245.53333)" />
+    </g>
+    <g
+       id="g1079"
+       transform="translate(37.041667,-43.089286)">
+      <circle
+         style="fill:#483e37;stroke-width:1.765;filter:url(#filter602-8-7)"
+         id="path610-4-9"
+         cx="317.5538"
+         cy="306.78784"
+         r="33.866665"
+         transform="matrix(1.473509,0,0,1.473509,-68.991052,-309.28709)" />
+      <circle
+         style="fill:#6c5d53;stroke-width:1.765;filter:url(#filter602-8)"
+         id="path610-4"
+         cx="317.5538"
+         cy="306.78784"
+         r="33.866665"
+         transform="matrix(1.2893666,0,0,1.2893666,-9.5704596,-252.34311)" />
+    </g>
+    <g
+       id="g1015"
+       transform="matrix(1.1524924,0,0,1.1550333,-145.62152,-56.77943)">
+      <circle
+         style="fill:#6c5d53;stroke-width:1.765;filter:url(#filter602-47)"
+         id="path610-7"
+         cx="652.44067"
+         cy="235.12355"
+         r="33.866665"
+         transform="rotate(-31.283441,652.44068,236.09511)" />
+      <rect
+         style="fill:#483e37;stroke-width:1.765;filter:url(#filter602-47)"
+         id="rect999"
+         width="16.933332"
+         height="67.733337"
+         x="643.46667"
+         y="203.2"
+         transform="rotate(-31.283441,652.44068,236.09511)" />
+    </g>
+    <path
+       id="path1713-0-9-0"
+       style="fill:#241f1c;stroke-width:0.337275;filter:url(#filter602-0)"
+       d="m 633.79936,-67.557607 a 146.0201,139.61126 0 0 0 -91.82614,126.39745 146.0201,139.61126 0 0 0 -0.0171,0.79739 l 39.23071,-5.46666 a 111.94873,107.03529 0 0 1 62.27984,-88.03724 z"
+       transform="matrix(1.6598188,0,0,1.6598188,-388.93149,45.553331)" />
+    <path
+       id="path1713-0-9"
+       style="fill:#f2f2f2;stroke-width:0.337275;filter:url(#filter602)"
+       d="m 633.79936,-67.557607 a 146.0201,139.61126 0 0 0 -91.82614,126.39745 146.0201,139.61126 0 0 0 -0.0171,0.79739 l 39.23071,-5.46666 a 111.94873,107.03529 0 0 1 62.27984,-88.03724 z"
+       transform="matrix(1.6598188,0,0,1.6598188,-391.59209,44.400053)" />
+    <g
+       id="g1079-4"
+       transform="matrix(0.72227778,0,0,0.72227778,184.87432,153.49615)">
+      <circle
+         style="fill:#483e37;stroke-width:1.765;filter:url(#filter602-8-7-7)"
+         id="path610-4-9-4"
+         cx="317.5538"
+         cy="306.78784"
+         r="33.866665"
+         transform="matrix(1.473509,0,0,1.473509,-68.991052,-309.28709)" />
+      <circle
+         style="fill:#6c5d53;stroke-width:1.765;filter:url(#filter602-8-74)"
+         id="path610-4-7"
+         cx="317.5538"
+         cy="306.78784"
+         r="33.866665"
+         transform="matrix(1.2893666,0,0,1.2893666,-9.5704596,-252.34311)" />
+    </g>
+    <circle
+       style="fill:#483e37;stroke-width:1.765;filter:url(#filter602-57-3)"
+       id="path582-1-3"
+       cx="348.34286"
+       cy="388.55951"
+       r="135.46666"
+       transform="matrix(1.0558036,0,0,1.0558036,91.48787,276.38683)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917" />
+    <g
+       id="g875"
+       transform="translate(-1012.6187,-54.421534)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\blade.png"
+       inkscape:export-xdpi="3.2240517"
+       inkscape:export-ydpi="3.2240517">
+      <path
+         sodipodi:type="star"
+         style="fill:#c8beb7;stroke-width:1.66939"
+         id="path557"
+         sodipodi:sides="24"
+         sodipodi:cx="802.64484"
+         sodipodi:cy="680.35797"
+         sodipodi:r1="182.6107"
+         sodipodi:r2="147.91466"
+         sodipodi:arg1="0.66104317"
+         sodipodi:arg2="0.79194286"
+         inkscape:flatsided="false"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         inkscape:transform-center-x="-3.6319787e-06"
+         inkscape:transform-center-y="-3.8399998e-06"
+         d="m 946.789,792.4701 -40.23946,-6.8384 6.31111,40.32552 -37.09842,-17.02012 -4.34095,40.5849 -31.4292,-26.04195 -14.69717,38.07848 -23.61812,-33.28907 -24.05182,32.97708 -14.19751,-38.26759 -31.76737,25.62834 -3.80935,-40.63824 -37.31803,16.53308 6.83839,-40.23946 -40.32552,6.31112 17.02012,-37.09843 -40.58489,-4.34095 26.04195,-31.42919 -38.07848,-14.69718 33.28907,-23.61812 -32.97708,-24.05182 38.26759,-14.1975 -25.62835,-31.76737 40.63824,-3.80936 -16.53308,-37.31803 40.23946,6.8384 -6.31111,-40.32552 37.09843,17.02012 4.34094,-40.5849 31.4292,26.04195 14.69718,-38.07848 23.61812,33.28907 24.05181,-32.97708 14.19751,38.26759 31.76737,-25.62834 3.80936,40.63824 37.31802,-16.53308 -6.83839,40.23946 40.32552,-6.31111 -17.02012,37.09842 40.5849,4.34095 -26.04196,31.42919 38.07849,14.69718 -33.28907,23.61812 32.97708,24.05182 -38.2676,14.19751 25.62835,31.76737 -40.63824,3.80935 z" />
+      <path
+         sodipodi:type="star"
+         style="fill:#ac9d93;stroke-width:1.45855"
+         id="path557-8"
+         sodipodi:sides="24"
+         sodipodi:cx="802.90552"
+         sodipodi:cy="679.71869"
+         sodipodi:r1="159.54794"
+         sodipodi:r2="129.23383"
+         sodipodi:arg1="0.66104317"
+         sodipodi:arg2="0.79194286"
+         inkscape:flatsided="false"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         inkscape:transform-center-x="-3.6319787e-06"
+         inkscape:transform-center-y="-3.8399998e-06"
+         d="m 928.84504,777.67165 -35.15743,-5.97474 5.51405,35.23262 -32.41309,-14.87057 -3.79271,35.45924 -27.45985,-22.75299 -12.84101,33.26937 -20.63527,-29.08483 -21.0142,28.81225 -12.40444,-33.4346 -27.75532,22.39162 -3.32826,-35.50585 -32.60495,14.44504 5.97474,-35.15743 -35.23263,5.51405 14.87057,-32.41309 -35.45924,-3.79271 22.75299,-27.45985 -33.26937,-12.841 29.08484,-20.63528 -28.81225,-21.0142 33.4346,-12.40444 -22.39162,-27.75532 35.50584,-3.32826 -14.44503,-32.60495 35.15742,5.97474 -5.51405,-35.23262 32.41309,14.87056 3.79271,-35.45924 27.45986,22.753 12.841,-33.26938 20.63528,29.08484 21.0142,-28.81225 12.40444,33.4346 27.75532,-22.39162 3.32825,35.50584 32.60496,-14.44503 -5.97474,35.15743 35.23262,-5.51406 -14.87057,32.4131 35.45924,3.7927 -22.75299,27.45986 33.26937,12.841 -29.08483,20.63528 28.81224,21.0142 -33.43459,12.40444 22.39162,27.75532 -35.50585,3.32825 z" />
+    </g>
+    <circle
+       style="fill:#917c6f;stroke-width:1.765;filter:url(#filter602-48)"
+       id="path582-9"
+       cx="464.25876"
+       cy="684.28583"
+       r="135.46666"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917" />
+    <g
+       id="g1083-4"
+       transform="matrix(-0.93718311,0.19075408,-0.03994078,-0.89041624,928.4218,881.99032)"
+       inkscape:transform-center-x="-19.398904"
+       inkscape:transform-center-y="-15.561846"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <rect
+         style="fill:#241f1c;fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-6-2)"
+         id="rect572-2-2-8"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(144.21596,452.13319,239.40012)" />
+      <rect
+         style="fill:url(#linearGradient755-2);fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-1)"
+         id="rect572-2-6"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(145.67881,450.60292,245.53333)" />
+    </g>
+    <g
+       id="g1083-8-4"
+       transform="matrix(-0.50910833,0.80949824,-0.66845789,-0.58528898,1025.4379,592.11754)"
+       inkscape:transform-center-x="-1.889859"
+       inkscape:transform-center-y="-25.034315"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <rect
+         style="fill:#241f1c;fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-6-0-3)"
+         id="rect572-2-2-1-5"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(144.21596,452.13319,239.40012)" />
+      <rect
+         style="fill:url(#linearGradient1874);fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-64-7)"
+         id="rect572-2-7-0"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(145.67881,450.60292,245.53333)" />
+    </g>
+    <g
+       id="g1083-4-1"
+       transform="matrix(-0.93718311,-0.19075408,-0.03994078,0.89041624,928.42185,489.60969)"
+       inkscape:transform-center-x="-19.398904"
+       inkscape:transform-center-y="15.561846"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <rect
+         style="fill:#241f1c;fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-6-2-2)"
+         id="rect572-2-2-8-4"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(144.21596,452.13319,239.40012)" />
+      <rect
+         style="fill:url(#linearGradient755-2-8);fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-1-7)"
+         id="rect572-2-6-4"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(145.67881,450.60292,245.53333)" />
+    </g>
+    <g
+       id="g1015-9"
+       transform="matrix(1.1524924,0,0,1.1550333,-28.016759,550.31204)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <circle
+         style="fill:#6c5d53;stroke-width:1.765;filter:url(#filter602-47-8)"
+         id="path610-7-2"
+         cx="652.44067"
+         cy="235.12355"
+         r="33.866665"
+         transform="rotate(-31.283441,652.44068,236.09511)" />
+      <rect
+         style="fill:#483e37;stroke-width:1.765;filter:url(#filter602-47-8)"
+         id="rect999-4"
+         width="16.933332"
+         height="67.733337"
+         x="643.46667"
+         y="203.2"
+         transform="rotate(-31.283441,652.44068,236.09511)" />
+    </g>
+    <g
+       id="g1083-8-4-9"
+       transform="matrix(-0.50910834,-0.80949824,-0.66845789,0.58528897,1025.438,779.48246)"
+       inkscape:transform-center-x="-1.889859"
+       inkscape:transform-center-y="25.034315"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <rect
+         style="fill:#241f1c;fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-6-0-3-6)"
+         id="rect572-2-2-1-5-5"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(144.21596,452.13319,239.40012)" />
+      <rect
+         style="fill:url(#linearGradient2198);fill-opacity:1;stroke-width:1.93346;filter:url(#filter602-5-64-7-9)"
+         id="rect572-2-7-0-3"
+         width="50.800014"
+         height="160.86667"
+         x="423.33334"
+         y="169.33333"
+         transform="rotate(145.67881,450.60292,245.53333)" />
+    </g>
+    <g
+       id="g1015-9-8"
+       transform="matrix(1.1524924,0,0,-1.1550333,-52.488187,827.24611)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <circle
+         style="fill:#6c5d53;stroke-width:1.765;filter:url(#filter602-47-8-7)"
+         id="path610-7-2-2"
+         cx="652.44067"
+         cy="235.12355"
+         r="33.866665"
+         transform="rotate(-31.283441,652.44068,236.09511)" />
+      <rect
+         style="fill:#483e37;stroke-width:1.765;filter:url(#filter602-47-8-7)"
+         id="rect999-4-8"
+         width="16.933332"
+         height="67.733337"
+         x="643.46667"
+         y="203.2"
+         transform="rotate(-31.283441,652.44068,236.09511)" />
+    </g>
+    <g
+       id="g1079-4-1-0"
+       transform="matrix(0.72227779,0,0,-0.72227779,275.32202,656.90682)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <circle
+         style="fill:#483e37;stroke-width:1.765;filter:url(#filter602-8-7-7-0-0)"
+         id="path610-4-9-4-6-2"
+         cx="317.5538"
+         cy="306.78784"
+         r="33.866665"
+         transform="matrix(1.473509,0,0,1.473509,-68.991052,-309.28709)" />
+      <circle
+         style="fill:#6c5d53;stroke-width:1.765;filter:url(#filter602-8-74-7-0)"
+         id="path610-4-7-3-5"
+         cx="317.5538"
+         cy="306.78784"
+         r="33.866665"
+         transform="matrix(1.2893666,0,0,1.2893666,-9.5704596,-252.34311)" />
+    </g>
+    <g
+       id="g1079-4-1"
+       transform="matrix(0.72227779,0,0,0.72227779,275.32199,714.69318)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <circle
+         style="fill:#483e37;stroke-width:1.765;filter:url(#filter602-8-7-7-0)"
+         id="path610-4-9-4-6"
+         cx="317.5538"
+         cy="306.78784"
+         r="33.866665"
+         transform="matrix(1.473509,0,0,1.473509,-68.991052,-309.28709)" />
+      <circle
+         style="fill:#6c5d53;stroke-width:1.765;filter:url(#filter602-8-74-7)"
+         id="path610-4-7-3"
+         cx="317.5538"
+         cy="306.78784"
+         r="33.866665"
+         transform="matrix(1.2893666,0,0,1.2893666,-9.5704596,-252.34311)" />
+    </g>
+    <g
+       id="g1003-8"
+       transform="matrix(1.1986,0,0,1.1986,-33.190433,533.06186)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <path
+         id="path1713-3-7-0"
+         style="fill:#241f1c;stroke-width:0.3;filter:url(#filter602-48)"
+         d="m 918.63333,-84.66666 c -70.09093,0.06958 -135.7911,54.682226 -135.79106,124.773193 10e-6,70.140167 65.77699,129.226837 135.91716,129.226817 v -59.26666 c -37.40811,2e-5 -67.73338,-30.325224 -67.7334,-67.73333 10e-6,-37.4081135 30.32529,-67.733372 67.7334,-67.73335 v -59.26667 z"
+         sodipodi:nodetypes="ssccsccs"
+         transform="matrix(1.2546393,0,0,1.2546393,-463.20755,71.388067)" />
+      <path
+         id="path1713-3-78"
+         style="fill:#917c6f;stroke-width:0.3;filter:url(#filter602-48)"
+         d="m 914.4,-93.13333 a 127,127 0 0 0 -126.8739,127.00001 127,127 0 0 0 127,126.99999 V 101.60001 A 67.73336,67.73336 0 0 1 846.79276,33.86668 67.73336,67.73336 0 0 1 914.5261,-33.86666 v -59.26667 a 127,127 0 0 0 -0.1261,0 z"
+         transform="matrix(1.2546393,0,0,1.2546393,-461.60044,80.423195)" />
+    </g>
+    <g
+       id="g712"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <path
+         id="path1713-0-9-0-1"
+         style="fill:#333333;stroke-width:0.337275;filter:url(#filter602-0-8)"
+         d="m 633.79936,-67.557607 c -26.32202,5.191242 -84.63738,53.237246 -86.76238,102.949212 0,0 20.70547,0.787127 40.68493,0.598596 5.67203,-25.705481 19.59479,-50.525604 55.20345,-67.24748 z"
+         transform="matrix(1.693939,0.12173572,-0.12028279,1.6737217,-343.53606,515.91567)"
+         sodipodi:nodetypes="csccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw-body.png"
+         inkscape:export-xdpi="3.5937049"
+         inkscape:export-ydpi="3.5937049" />
+      <path
+         id="path1713-0-9-2"
+         style="fill:#f2f2f2;stroke-width:0.337275;filter:url(#filter602-48)"
+         d="M 633.79936,-67.557607 C 574.23969,-42.498329 547.36907,10.57388 549.01445,33.469147 l 35.9805,2.528358 C 593.1596,7.2831221 607.858,-17.144791 643.46667,-33.866667 Z"
+         transform="matrix(1.6555491,0.11897681,-0.11897681,1.6555491,-320.73832,518.50353)"
+         sodipodi:nodetypes="ccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw-body.png"
+         inkscape:export-xdpi="3.5937049"
+         inkscape:export-ydpi="3.5937049" />
+    </g>
+    <rect
+       style="fill:url(#linearGradient2313);fill-opacity:1;stroke-width:1.765;filter:url(#filter602-5-6-0-3-6)"
+       id="rect2305"
+       width="457.19998"
+       height="33.866665"
+       x="423.33337"
+       y="694.26672"
+       inkscape:transform-center-x="-192.01923"
+       inkscape:transform-center-y="-7.3498227"
+       transform="matrix(0.85103407,-0.03731734,0.04380732,0.99904,31.955793,16.592271)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917" />
+    <rect
+       style="fill:url(#linearGradient2391);fill-opacity:1;stroke-width:1.765;filter:url(#filter602-5-6-0-3-6-8)"
+       id="rect2305-3"
+       width="457.19998"
+       height="33.866665"
+       x="423.33337"
+       y="694.26672"
+       inkscape:transform-center-x="-192.01923"
+       inkscape:transform-center-y="7.3498227"
+       transform="matrix(0.85103406,0.03731734,0.04380732,-0.99904,32.752138,1350.3405)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917" />
+    <g
+       id="g1079-7"
+       transform="translate(35.548616,540.55838)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\towers\7-buzzsaw\sprites\buzzsaw.png"
+       inkscape:export-xdpi="3.1444917"
+       inkscape:export-ydpi="3.1444917">
+      <circle
+         style="fill:#483e37;stroke-width:1.765;filter:url(#filter602-8-7-5)"
+         id="path610-4-9-1"
+         cx="317.5538"
+         cy="306.78784"
+         r="33.866665"
+         transform="matrix(1.473509,0,0,1.473509,-68.991052,-309.28709)" />
+      <circle
+         style="fill:#6c5d53;stroke-width:1.765;filter:url(#filter602-8-3)"
+         id="path610-4-5"
+         cx="317.5538"
+         cy="306.78784"
+         r="33.866665"
+         transform="matrix(1.2893666,0,0,1.2893666,-9.5704596,-252.34311)" />
+    </g>
+  </g>
+</svg>

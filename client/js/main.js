@@ -10,6 +10,7 @@ function loadAssets() {
         .add("client/assets/towers/4-sniper/sniper.json")
         .add("client/assets/towers/5-spear_launcher/spear_launcher.json")
         .add("client/assets/towers/6-flamethrower/flamethrower.json")
+        .add("client/assets/towers/7-buzzsaw/buzzsaw.json")
         .add("client/assets/map/base_tiles/base_tiles.json")
         .add("client/assets/map/land_patterns/land_patterns.json")
         .add("client/assets/map/land_decorations/land_decorations.json")

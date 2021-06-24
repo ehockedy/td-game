@@ -28,5 +28,11 @@
         "rotate": false,
         "rotationSpeed": 0,
         "piercingCount": 5
+    },
+    "buzzsaw": {
+        "filenameKeyword": "",
+        "rotate": false,
+        "rotationSpeed": 0,
+        "piercingCount": 5
     }
 }

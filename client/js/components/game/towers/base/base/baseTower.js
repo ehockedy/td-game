@@ -39,6 +39,8 @@ export class BaseTower extends BaseComponent {
         switch (this.type) {
             case "shrapnel-burst":
                 return this._getSpriteShrapnelBurst(textures)
+            case "buzzsaw":
+                return this._getSpriteBuzzsaw(textures)
             default:
                 return this._getSpriteDefault(textures)
         }
@@ -79,6 +81,21 @@ export class BaseTower extends BaseComponent {
             if (textureName.includes("bottom")) this.bottomLayer = sprite
             else if (textureName.includes("middle")) this.middleLayer = sprite
             else if (textureName.includes("top")) this.topLayer = sprite
+            spriteContainer.addChild(sprite)
+        })
+        return spriteContainer
+    }
+
+    _getSpriteBuzzsaw(textures) {
+        let spriteContainer = new PIXI.Container()
+        textures.forEach((texture) => {
+            let textureName = texture.textureCacheIds[0]
+            let sprite = this._createSprite(texture)
+            if (textureName.includes("blade")) {
+                sprite.anchor.set(0.5)
+                this.blade = sprite
+                sprite.x = sprite.width*0.6
+            }
             spriteContainer.addChild(sprite)
         })
         return spriteContainer

@@ -34,6 +34,7 @@ export class BulletsComponent extends BaseComponent {
     }
 
     addBullet(name, type) {
+        if (type == "buzzsaw") return // Some bullet types are not shown
         let bulletSprite = new PIXI.Sprite(this.bulletTextures[type][Math.floor(Math.random() * this.bulletTextures[type].length)])
         bulletSprite.name = name
         bulletSprite.anchor.set(0.5)

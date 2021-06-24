@@ -62,6 +62,11 @@ export class DeployedTower extends BaseInteractiveTower {
                 this.tickFn = this._tickFlamethrower
                 this.shootFn = this._shoot
                 break
+            case "buzzsaw":
+                this._initBuzzsaw()
+                this.tickFn = this._tickBuzzsaw
+                this.shootFn = this._shootBuzzsaw
+                break
             default:
                 this._init()
                 this.tickFn = this._tick
@@ -106,6 +111,11 @@ export class DeployedTower extends BaseInteractiveTower {
         this.extraSpinAngleBot = 0
     }
 
+    _initBuzzsaw() {
+        this.shootCounterMax = 120
+        this.shootCounter = 0
+    }
+
     // Type specific tick functions
     _tick() {
         // Advance generic shoot animation
@@ -144,6 +154,16 @@ export class DeployedTower extends BaseInteractiveTower {
         }
     }
 
+    _tickBuzzsaw() {
+        // Move the blade - won't move if shootCounter is 0
+        this.blade.angle += (this.shootCounter > this.shootCounterMax/2) ? 10 : 10 * (this.shootCounter/this.shootCounterMax)
+        this.shootCounter -= (this.shootCounter > 0) ? 1 : 0
+
+        // Deployed tower is constantly placed over the
+        this.towerSpriteContainer.x = Math.cos(this._rotation) * 16
+        this.towerSpriteContainer.y = Math.sin(this._rotation) * 16
+    }
+
     _rangeTick() {
         this.rangeCircle.angle += 0.1
     }
@@ -160,6 +180,10 @@ export class DeployedTower extends BaseInteractiveTower {
             this.extraSpinAngleMid = Math.floor(Math.random()*5)
             this.extraSpinAngleBot = Math.floor(Math.random()*5)
         }
+    }
+
+    _shootBuzzsaw() {
+        this.shootCounter = this.shootCounterMax
     }
 
     // Some towers have animations when they shoot

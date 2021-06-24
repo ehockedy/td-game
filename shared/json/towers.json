@@ -101,5 +101,22 @@
         "bulletType": "flame",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/6-flamethrower/flamethrower.json"
+    },
+    "buzzsaw": {
+        "spriteSheetNum": 6,
+        "displayInfo": "Lethal buzzsaw that slices through anything in its reach",
+        "gameData": {
+            "seekRange": 1.5,
+            "shootRange": 1.5,
+            "damage": 5,
+            "rateOfFire": 6,
+            "bulletSpeed": 10,
+            "numberOfBullets": 1,
+            "turns": true
+        },
+        "cost": 200,
+        "bulletType": "buzzsaw",
+        "shootPattern": "single",
+        "textureAtlasFile": "client/assets/towers/7-buzzsaw/buzzsaw.json"
     }
 }
