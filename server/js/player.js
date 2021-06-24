@@ -6,7 +6,7 @@ class Player {
 
         this.stats = {
             "points": 0,
-            "money": 200
+            "money": 2000
         }
     }
 
