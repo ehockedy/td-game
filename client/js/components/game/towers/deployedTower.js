@@ -129,9 +129,9 @@ export class DeployedTower extends BaseInteractiveTower {
 
     _tickShrapnelBurst() {
         if (this.isSpinning) {
-            this.bottomLayer.angle += 15 + this.extraSpinAngleBot
-            this.middleLayer.angle -= 20 + this.extraSpinAngleMid
-            this.topLayer.angle += 25 + this.extraSpinAngleTop
+            this.bottomLayer.angle += (15 + this.extraSpinAngleBot) % 360
+            this.middleLayer.angle -= (20 + this.extraSpinAngleMid) % 360
+            this.topLayer.angle += (25 + this.extraSpinAngleTop) % 360
 
             this.spinTickCount += 1
 
@@ -156,7 +156,8 @@ export class DeployedTower extends BaseInteractiveTower {
 
     _tickBuzzsaw() {
         // Move the blade - won't move if shootCounter is 0
-        this.blade.angle += (this.shootCounter > this.shootCounterMax/2) ? 10 : 10 * (this.shootCounter/this.shootCounterMax)
+        this.blade.angle += ((this.shootCounter > this.shootCounterMax/2) ? 10 : 10 * (this.shootCounter/this.shootCounterMax)) % 360
+
         this.shootCounter -= (this.shootCounter > 0) ? 1 : 0
 
         // Deployed tower is constantly placed over the
