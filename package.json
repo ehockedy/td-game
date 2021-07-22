@@ -12,7 +12,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "jest --silent"
+    "test": "jest --silent",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

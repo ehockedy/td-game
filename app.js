@@ -1,11 +1,11 @@
 const http = require('http')
 const io = require('socket.io');
 const session = require('./server/js/session.js')
-const networking = require('./server/js/networking.js')
 const os = require('os');
 const fs = require('fs');
+const express = require('express');
+const app = express();
 
-networking.setRootDir(__dirname) // Set the location to get files from
 
 /**
  * Searches the available server interfaces for the public IPv4 address
@@ -49,7 +49,8 @@ function parseGameConfig(config) {
 
 function runServer() {
   // First set up http server to serve index.html and its included files
-  const http_server = http.createServer(networking.requestListener);
+  app.use(express.static(__dirname));
+  const http_server = http.createServer(app);
   http_server.listen(8000, () => {
     console.log('HTTP server listening on ' + getServerListeningPublicAddress() + ':8000');
   });
