@@ -4,3 +4,4 @@ package-lock.json
 client/img/unused/*
 client/assets/fonts/*
 backups/*
+build/

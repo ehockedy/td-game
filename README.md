@@ -23,3 +23,10 @@ This is a snapshot of gameplay as of 10/05/2021
 Note that frame rate in the .gif is not representative of actual game frame rate.
 
 ![](docs/demo.gif)
+
+**Deploying app for development**
+Start webpack to dynamically build code during editing
+`npx webpack -w`
+
+Separately, start the server
+`npm start`

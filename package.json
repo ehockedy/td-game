@@ -4,13 +4,29 @@
   "description": "A multiplayer cooperative and competitive tower defence game",
   "main": "app.js",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
     "express": "^4.17.1",
     "jest": "^26.4.2",
     "pixi-text-input": "^1.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "seedrandom": "^3.0.5",
     "socket.io": "^2.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "react-hot-loader": "^4.13.0",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.46.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
   "scripts": {
     "test": "jest --silent",
     "start": "node app.js"
@@ -24,5 +40,9 @@
   "bugs": {
     "url": "https://github.com/ehockedy/td-game/issues"
   },
-  "homepage": "https://github.com/ehockedy/td-game#readme"
+  "homepage": "https://github.com/ehockedy/td-game#readme",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": []
 }

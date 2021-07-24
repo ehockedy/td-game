@@ -5,6 +5,7 @@ const os = require('os');
 const fs = require('fs');
 const express = require('express');
 const app = express();
+const path = require('path');
 
 
 /**
@@ -49,7 +50,7 @@ function parseGameConfig(config) {
 
 function runServer() {
   // First set up http server to serve index.html and its included files
-  app.use(express.static(__dirname));
+  app.use(express.static(path.resolve(__dirname, 'build/')));
   const http_server = http.createServer(app);
   http_server.listen(8000, () => {
     console.log('HTTP server listening on ' + getServerListeningPublicAddress() + ':8000');
