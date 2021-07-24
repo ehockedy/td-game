@@ -1,5 +1,6 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 
 module.exports = {
     entry: './client/index.js',
@@ -28,6 +29,11 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html'
+        }),
+        new webpack.ProvidePlugin({
+            React: "react",
+            ReactDOM: "react-dom",
+            PIXI: "pixi.js"
         })
     ]
 }

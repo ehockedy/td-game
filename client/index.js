@@ -1,7 +1,4 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import "./include/pixi/pixi.min.js"  // TODO try importing this
-
+import { BaseComponent } from "./js/components/game/base/baseComponent.js"
 import { MainMenu } from "./js/views/main_menu_react.js"
 
 
