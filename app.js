@@ -1,5 +1,5 @@
 const http = require('http')
-const io = require('socket.io');
+const { Server } = require('socket.io');
 const session = require('./server/js/session.js')
 const os = require('os');
 const fs = require('fs');
@@ -57,7 +57,7 @@ function runServer() {
   });
 
   // From then on can connect over WebSocket using socket.io client
-  const web_sockets_server = io(http_server)
+  const web_sockets_server = new Server(http_server)
 
   // Keep track of current games
   let games = {}
