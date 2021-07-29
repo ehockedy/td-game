@@ -1,4 +1,3 @@
-import React from "react"
 import { setGameID } from "../state.js"
 import { randomAlphaCharString } from "../tools.js"
 
@@ -38,28 +37,12 @@ class MenuOption extends React.Component {
 }
 
 class JoinGameTextBox extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { value: '' };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.props.onSubmit.bind(this);
-        this.handleClose = this.props.onClose.bind(this);
-    }
-
-    handleChange(event) {
-        this.setState({ value: event.target.value });
-    }
-
     render() {
         return (
             <form
-                onSubmit={this.handleSubmit}
-                onClose={this.handleClose}
+                onSubmit={this.props.onSubmit}
                 style={{
                     visibility:this.props.isVisible? "visible" : "hidden",
-                        // width: "50%",  /// width of element. % is percentage of the containing block
-                        // textAlign: "center",
                     position: "absolute",  // positioned relative to nearest ancestor
                     left: this.props.leftPos + "%",  // sets position from left edge
                     top: this.props.topPos + "%",  // sets position from top edge
@@ -67,14 +50,11 @@ class JoinGameTextBox extends React.Component {
                 }}>
                 <div>Enter game code below:</div>
                 <label>
-                    <input type="text" maxLength="4" value={this.state.value} onChange={this.handleChange} style={{ textTransform: "uppercase", margin: "1px"}} />
+                    <input type="text" maxLength="4" value={this.props.text} onChange={(event) => {this.props.onChange(event.target.value)}} />
                 </label>
                 <input type="submit" value="Submit" />
-                <button type="button" onClick={() => {
-                    this.handleClose()
-                    this.setState({ value: '' });
-                }}>
-                Close
+                <button type="button" onClick={this.props.onClose}>
+                    Close
                 </button>
 
             </form>
@@ -86,8 +66,9 @@ export class MainMenu extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            joinGameText: "",
             joinGameTextBoxVisible: false,
-            buttonsDisabled: false
+            buttonsDisabled: false,
         }
     }
 
@@ -122,7 +103,7 @@ export class MainMenu extends React.Component {
                 <JoinGameTextBox leftPos="66" topPos="75"
                     onSubmit={(event) => {
                         event.preventDefault();  // Prevent page reloading after submit
-                        this.props.socketClient.emit("server/session/verify", { "gameID": "OK" }, (response) => {
+                        this.props.socketClient.emit("server/session/verify", { "gameID": this.state.joinGameText }, (response) => {
                             if (response["response"] == "fail") { // Game does not exist
                                 alert("Game not found")
                                 //setTimeout(() => { _this.joinGameResponseText.text = "" }, 2000);
@@ -137,9 +118,17 @@ export class MainMenu extends React.Component {
                         this.setState({
                             joinGameTextBoxVisible : false,
                             buttonsDisabled: false,
+                            joinGameText: "",
+                        })
+                    }}
+                    onChange={(val) => {
+                        this.setState({
+                            // Enforce upper case, less change of mistaking letters in game code
+                            joinGameText: val.toUpperCase(),
                         })
                     }}
                     isVisible={this.state.joinGameTextBoxVisible}
+                    text={this.state.joinGameText}
                 ></JoinGameTextBox>
             </div>
         )
