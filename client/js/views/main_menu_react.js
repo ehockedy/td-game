@@ -56,7 +56,8 @@ class JoinGameTextBox extends React.Component {
                 <button type="button" onClick={this.props.onClose}>
                     Close
                 </button>
-
+                <br/><br/>
+                <div>{this.props.responseMessage}</div>
             </form>
         );
     }
@@ -69,6 +70,8 @@ export class MainMenu extends React.Component {
             joinGameText: "",
             joinGameTextBoxVisible: false,
             buttonsDisabled: false,
+            responseMessage: "",
+            responseMessageTimeoutFn: null,
         }
     }
 
@@ -105,12 +108,25 @@ export class MainMenu extends React.Component {
                         event.preventDefault();  // Prevent page reloading after submit
                         this.props.socketClient.emit("server/session/verify", { "gameID": this.state.joinGameText }, (response) => {
                             if (response["response"] == "fail") { // Game does not exist
-                                alert("Game not found")
-                                //setTimeout(() => { _this.joinGameResponseText.text = "" }, 2000);
+                                // Remove any existing timeout that may override new message output
+                                if (this.state.responseMessageTimeoutFn) {
+                                    clearTimeout(this.state.responseMessageTimeoutFn)
+                                }
+
+                                // Set the new message to disappear after two seconds
+                                let timeoutFn = setTimeout(() => {
+                                    this.setState({responseMessage: ""})
+                                    this.state.responseMessageTimeoutFn = null
+                                }, 2000);
+
+                                // Display that the game code did not match an existing game
+                                this.setState({
+                                    responseMessage: "Game not found",
+                                    responseMessageTimeoutFn: timeoutFn,
+                                })
                             } else if (response["response"] == "success") { // Game exists
-                                alert("Game found")
-                                //this.socket.emit("sever/session/join", { "gameID": userInput })
-                                //setGameID(userInput)
+                                this.socket.emit("sever/session/join", { "gameID": this.state.joinGameText })
+                                setGameID(this.state.joinGameText)
                             }
                         })
                     }}
@@ -129,6 +145,7 @@ export class MainMenu extends React.Component {
                     }}
                     isVisible={this.state.joinGameTextBoxVisible}
                     text={this.state.joinGameText}
+                    responseMessage={this.state.responseMessage}
                 ></JoinGameTextBox>
             </div>
         )
