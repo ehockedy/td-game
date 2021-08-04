@@ -51,6 +51,8 @@ function parseGameConfig(config) {
 function runServer() {
   // First set up http server to serve index.html and its included files
   app.use(express.static(path.resolve(__dirname, 'build/')));
+  app.use(express.static(path.resolve(__dirname, './')));  // TODO change?
+
   const http_server = http.createServer(app);
   http_server.listen(8000, () => {
     console.log('HTTP server listening on ' + getServerListeningPublicAddress() + ':8000');

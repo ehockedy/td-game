@@ -88,7 +88,7 @@ export class MainMenu extends React.Component {
 
                 <MenuOption text="Start Game" leftPos="33" topPos="66"
                     onClick={() => {
-                        this.props.socketClient.emit("server/session/join", startGameData)
+                        this.props.socket.emit("server/session/join", startGameData)
                     }}
                     disabled={this.state.buttonsDisabled}
                 ></MenuOption>
@@ -106,7 +106,7 @@ export class MainMenu extends React.Component {
                 <JoinGameTextBox leftPos="66" topPos="75"
                     onSubmit={(event) => {
                         event.preventDefault();  // Prevent page reloading after submit
-                        this.props.socketClient.emit("server/session/verify", { "gameID": this.state.joinGameText }, (response) => {
+                        this.props.socket.emit("server/session/verify", { "gameID": this.state.joinGameText }, (response) => {
                             if (response["response"] == "fail") { // Game does not exist
                                 // Remove any existing timeout that may override new message output
                                 if (this.state.responseMessageTimeoutFn) {

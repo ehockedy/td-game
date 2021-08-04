@@ -8,7 +8,10 @@ export class Lobby extends React.Component {
 
     render() {
         return (
-            <div>Lobby</div>
+            <div>
+                Lobby
+                <button onClick={()=>{this.props.socket.emit("server/game/start")}}>Start game</button>
+            </div>
         )
     }
 }
