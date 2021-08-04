@@ -16,15 +16,15 @@ import { COLOURS } from "../components/ui_common/style.js"
  * It also takes updates from the server and passes the update data to the relevant components
  */
 export class GameRenderer {
-    constructor(socket, spriteHandler, config) {
+    constructor(socket, spriteHandler, config, thisPlayerID) {
         this.spriteHandler = spriteHandler
         this.socket = socket
         this.round = 1
 
-        this.thisPlayerID = config.PLAYER_ID
+        this.thisPlayerID = thisPlayerID
         this.playerData = {}
-        this.playerData[config.PLAYER_ID] = {  // TODO this should probably be passed in from Lobby
-            "colour": config.COLOUR,
+        this.playerData[this.thisPlayerID] = {
+            "colour": "0x0066AA",  // TODO CHANGE ME
             "isThisPlayer": true
         }
 

@@ -83,7 +83,7 @@ function Application(props) {
                     <Lobby socket={socket} gameID={gameID} thisPlayer={playerID} players={playerIDs}></Lobby>
                 ) :
                 view === "game" ? (
-                    <Game socket={socket}></Game>
+                    <Game socket={socket} config={props.config} thisPlayer={playerID} players={playerIDs}></Game>
                 ) :
                 console.log("INVALID VIEW")
                 // TODO add page not found page
