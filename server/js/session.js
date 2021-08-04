@@ -17,6 +17,8 @@ class Session {
     }
 
     addSocket(socket, playerID) {
+        socket.join(this.gameID)
+        this.sockets[playerID] = socket
         if (this.hasStarted) {
             if (this.game.playerExists(playerID)) {
                 socket.emit("client/view/game")
@@ -24,9 +26,13 @@ class Session {
                 socket.emit("client/player/notFound")
             }
         } else {
+            // Send to self and all others in room
+            socket.emit("client/players/set", Object.keys(this.sockets))
+            socket.to(this.gameID).emit("client/players/set", Object.keys(this.sockets))
+            
+            // Make socket just joined go to lobby
             socket.emit("client/view/lobby")
         }
-        this.sockets[playerID] = socket
         this.setUpEvents(socket)
     }
 

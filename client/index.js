@@ -53,8 +53,9 @@ function loadFonts() {
 function Application(props) {
     const [view, setView] = useState("main-menu")
     const [socket, setSocket] = useState()
-    const [playerID, setPlayerID] = useState()
     const [gameID, setGameID] = useState()
+    const [playerID, setPlayerID] = useState()
+    const [playerIDs, setPlayerIDs] = useState()
 
     useEffect(() => {
         const socket = io()
@@ -63,6 +64,9 @@ function Application(props) {
         })
         socket.on("client/view/game", () => {
             setView("game")
+        })
+        socket.on("client/players/set", (players) => {
+            setPlayerIDs(players)
         })
         setSocket(socket)
         return () => socket.close()
@@ -76,7 +80,7 @@ function Application(props) {
                     <MainMenu socket={socket} setPlayerIDHandler={setPlayerID} setGameIDHandler={setGameID}></MainMenu>
                 ) :
                 view === "lobby" ? (
-                    <Lobby socket={socket}></Lobby>
+                    <Lobby socket={socket} gameID={gameID} thisPlayer={playerID} players={playerIDs}></Lobby>
                 ) :
                 view === "game" ? (
                     <Game socket={socket}></Game>

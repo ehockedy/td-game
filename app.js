@@ -76,16 +76,16 @@ function runServer() {
   web_sockets_server.on('connection', (socket) => {
     // Player has started or joined game. Create a room with the game ID if one does not exist and send that client the game info.
     socket.on("server/session/join", (data, callback) => {
-      console.log("Client at" + socket.handshake.address + " joining game " + data.gameID)
+      console.log("Client at " + socket.handshake.address + " joining game " + data.gameID)
       socket.playerID = socket.handshake.address + data.gameID
-      games[data.gameID].addSocket(socket, data.playerID)
+      games[data.gameID].addSocket(socket, socket.playerID)
       callback(data.gameID, socket.playerID)
     });
 
     socket.on("server/session/start", (callback) => {
       const gameID = randomAlphaCharString(4)
       while(gameID in games) gameID = randomAlphaCharString(4)  // Generate new ID if one already exists
-      console.log("Client at" + socket.handshake.address + " starting game " + gameID)
+      console.log("Client at " + socket.handshake.address + " starting game " + gameID)
       socket.playerID = socket.handshake.address + gameID
       games[gameID] = new session.Session(socket, gameID, socket.playerID, config)
       callback(gameID, socket.playerID)
