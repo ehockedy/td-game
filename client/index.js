@@ -70,9 +70,10 @@ function Application(props) {
 
     return (
         <div>
+            Game: {gameID}
             {
                 view === "main-menu" ? (
-                    <MainMenu socket={socket}></MainMenu>
+                    <MainMenu socket={socket} setPlayerIDHandler={setPlayerID} setGameIDHandler={setGameID}></MainMenu>
                 ) :
                 view === "lobby" ? (
                     <Lobby socket={socket}></Lobby>

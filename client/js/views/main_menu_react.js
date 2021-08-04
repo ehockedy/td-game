@@ -1,5 +1,3 @@
-import { setGameID } from "../state.js"
-import { randomAlphaCharString } from "../tools.js"
 
 class Title extends React.Component {
     render() {
@@ -76,19 +74,16 @@ export class MainMenu extends React.Component {
     }
 
     render() {
-        const gameID = randomAlphaCharString(4)
-        const startGameData = {
-            "gameID": gameID
-        }
-
-        setGameID(gameID)
         return (
             <div>
                 <Title text="Tower Defence" leftPos="50" topPos="33"></Title>
 
                 <MenuOption text="Start Game" leftPos="33" topPos="66"
                     onClick={() => {
-                        this.props.socket.emit("server/session/join", startGameData)
+                        this.props.socket.emit("server/session/start", (gameID, playerID) => {
+                            this.props.setGameIDHandler(gameID)
+                            this.props.setPlayerIDHandler(playerID)
+                        })
                     }}
                     disabled={this.state.buttonsDisabled}
                 ></MenuOption>
@@ -125,8 +120,10 @@ export class MainMenu extends React.Component {
                                     responseMessageTimeoutFn: timeoutFn,
                                 })
                             } else if (response["response"] == "success") { // Game exists
-                                this.socket.emit("sever/session/join", { "gameID": this.state.joinGameText })
-                                setGameID(this.state.joinGameText)
+                                this.props.socket.emit("server/session/join", { "gameID": this.state.joinGameText }, (gameID, playerID) => {
+                                    this.props.setGameIDHandler(gameID)
+                                    this.props.setPlayerIDHandler(playerID)
+                                })
                             }
                         })
                     }}
