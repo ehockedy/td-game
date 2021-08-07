@@ -1,0 +1,32 @@
+.display-box {
+    /* move so that is centered based on centre of element, not top left corner */
+    -ms-transform: skewX(-25deg) translate(-50%, -50%);
+    -webkit-transform: skewX(-25deg) translate(-50%, -50%);
+    transform: skewX(-25deg) translate(-50%, -50%);
+    border-width: 5px;
+    box-shadow: 5px 3px;
+    display:inline-block;
+
+}
+
+.button {
+    cursor: pointer;
+}
+
+.button:active {
+    transform: skewX(-25deg) translate(-50%, -50%) scale(0.95, 0.95); /* TODO de-duplicate */
+}
+
+/* un-comment this to make text not skew*/
+/* .button-text {
+    display:inline-block; 
+    transform: skewX(25deg);
+} */
+
+.button-main-menu {
+    width: 20%;  /* width of element. % is percentage of the containing block */
+    left: 50%;  /* sets position from left edge */
+    text-align: center;
+    position: relative; /* positioned relative to parent */
+    font-size: 2em;
+}
