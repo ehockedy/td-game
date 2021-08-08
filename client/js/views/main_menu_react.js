@@ -17,38 +17,38 @@ class Title extends React.Component {
     }
 }
 
-function MenuOption() {
+function MenuOption(props) {
     return (
         <Button
-            onClick={() => this.props.onClick()}
-            content={this.props.text}
+            onClick={() => props.onClick()}
+            content={props.text}
             classNames="button-main-menu"
         ></Button>
     )
 }
 
 
-function JoinGameTextBox() {
+function JoinGameTextBox(props) {
     return (
         <form
-            onSubmit={this.props.onSubmit}
+            onSubmit={props.onSubmit}
             style={{
-                visibility:this.props.isVisible? "visible" : "hidden",
+                visibility:props.isVisible? "visible" : "hidden",
                 position: "absolute",  // positioned relative to nearest ancestor
-                left: this.props.leftPos + "%",  // sets position from left edge
-                top: this.props.topPos + "%",  // sets position from top edge
+                left: props.leftPos + "%",  // sets position from left edge
+                top: props.topPos + "%",  // sets position from top edge
                 transform: "translate(-50%, -50%)",  // move so that is centered based on centre of element, not top left corner
             }}>
             <div>Enter game code below:</div>
             <label>
-                <input type="text" maxLength="4" value={this.props.text} onChange={(event) => {this.props.onChange(event.target.value)}} />
+                <input type="text" maxLength="4" value={props.text} onChange={(event) => {props.onChange(event.target.value)}} />
             </label>
             <input type="submit" value="Submit" />
-            <button type="button" onClick={this.props.onClose}>
+            <button type="button" onClick={props.onClose}>
                 Close
             </button>
             <br/><br/>
-            <div>{this.props.responseMessage}</div>
+            <div>{props.responseMessage}</div>
         </form>
     );
 }
@@ -68,7 +68,7 @@ export class MainMenu extends React.Component {
     render() {
         return (
             <div>
-                <Title text="Tower Defence" leftPos="50" topPos="33"></Title>
+                <img className="main-menu-logo" src="client/assets/logo/logo.png"></img>
 
                 <div className="main-menu-options">
                     <MenuOption text="Start Game" leftPos="33" topPos="66"

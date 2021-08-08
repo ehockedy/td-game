@@ -1,6 +1,32 @@
 
-.main-menu-options {
-    width: 100%;
-    top: 66%;
+.main-menu-logo {
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    max-width:100%;
+    height:auto;
     position: absolute;
 }
+
+.main-menu-options {
+    width: 100%;
+    top: 75%;
+    position: absolute;
+}
+
+/* The below makes the menu logo bounce
+    However seems to be some sort of bug where it does not load 10% of the time, so leaving out for now/
+*/
+
+/* @keyframes bounce {
+    from {transform: translate(-50%, -1%);}
+    to {transform: translate(-50%, 1%);}
+} */
+
+/* .main-menu-logo-bounce {
+    animation-name : bounce;
+    animation-iteration-count : infinite;
+    animation-direction : alternate;
+    animation-duration : 2s; 
+} */
+
