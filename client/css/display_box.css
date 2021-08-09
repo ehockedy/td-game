@@ -6,16 +6,23 @@
     border-width: 5px;
     box-shadow: 5px 3px;
     display:inline-block;
-
+    border-style: inset;
 }
 
 .button {
     cursor: pointer;
+    border-style: ridge;
+}
+
+/* Note, hover must appear first, since hover always comes before active when the button is interacted with */
+.button:hover, .button:focus {
+    transform: skewX(-25deg) translate(-50%, -50%) scale(1.05, 1.05);
 }
 
 .button:active {
     transform: skewX(-25deg) translate(-50%, -50%) scale(0.95, 0.95); /* TODO de-duplicate */
 }
+
 
 /* un-comment this to make text not skew*/
 /* .button-text {
