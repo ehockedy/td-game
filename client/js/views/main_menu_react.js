@@ -67,10 +67,10 @@ export class MainMenu extends React.Component {
 
     render() {
         return (
-            <div>
-                <img className="main-menu-logo" src="client/assets/logo/logo.png"></img>
+            <div className="noselect">
+                <img className="main-menu-logo noselect" src="client/assets/logo/logo.png"></img>
 
-                <div className="main-menu-options">
+                <div className="main-menu-options noselect">
                     <MenuOption text="Start Game" leftPos="33" topPos="66"
                         onClick={() => {
                             this.props.socket.emit("server/session/start", (gameID, playerID) => {
