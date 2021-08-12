@@ -1,5 +1,6 @@
 import { Button } from "../components/ui_common/display_box.js"
 import "../../css/main_menu.css"
+import "../../css/common.css"
 
 class Title extends React.Component {
     render() {
@@ -31,10 +32,10 @@ function TextBoxForm(props) {
     return (
         <form className="noselect join-game-form" onSubmit={props.onSubmit}>
             <span className="join-game-title">Enter game code:</span>
-            <input className="join-game-input slanted" type="text" maxLength="4" value={props.text} spellCheck="false" onChange={(event) => {props.onChange(event.target.value)}} />
+            <input className="join-game-input slanted display-box" type="text" maxLength="4" value={props.text} spellCheck="false" onChange={(event) => {props.onChange(event.target.value)}} />
             <span className="join-game-button-container slanted">
-                <input className="join-game-button button-inline join-game-button-green" type="submit" value="Submit" />
-                <button className="join-game-button button-inline join-game-button-red" type="button" onClick={props.onClose}>
+                <input className="join-game-button button-inline join-game-button-green display-box" type="submit" value="Submit" />
+                <button className="join-game-button button-inline join-game-button-red display-box" type="button" onClick={props.onClose}>
                     Cancel
                 </button>
             </span>
@@ -59,7 +60,7 @@ export class MainMenu extends React.Component {
 
     render() {
         return (
-            <div className="noselect">
+            <div className="noselect main-menu">
                 <img className="main-menu-logo noselect" src="client/assets/logo/logo.png"></img>
 
                 <div className="main-menu-options noselect">

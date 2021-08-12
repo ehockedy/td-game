@@ -1,50 +1,37 @@
-.main-menu-logo {
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    max-width:100%;
-    height:auto;
-    position: absolute;
+/* Root element for the main menu */
+.main-menu {
+    text-align: center;
 }
 
+/* Game logo that sits on the main page */
+.main-menu-logo {
+    top: 5%;
+    max-width:100%;
+    height:auto;
+}
+
+/* Space that holds the start/join game buttons and join game text box */
 .main-menu-options {
     width: 100%;
     top: 75%;
     position: absolute;
 }
 
+/* Startgame or join game buttons */
 .button-main-menu {
-    width: 20%;  /* width of element. % is percentage of the containing block */
-    left: 50%;  /* sets position from left edge */
-    text-align: center;
-    position: relative; /* positioned relative to parent */
+    width: 20%;
+    position: relative;
     font-size: 2em;
 }
 
-.slanted {
-    -ms-transform: skewX(-25deg);
-    -webkit-transform: skewX(-25deg);
-    transform: skewX(-25deg);
-}
-
+/* Root element that holds the form to join the game */
 .join-game-form {
-    left: 42%;
-    width: 30%;
-    position: relative;
-    margin: 0;
     display: inline-block;
 }
 
-.join-game-button-container {
-    display: inline-block;
-    vertical-align: middle;
-}
-
+/* Text box to input the join game code */
 .join-game-input {
     background-color: rgb(255, 255, 255);
-    border-style: ridge;
-    border-width: 5px;
-    box-shadow: 5px 3px;
     font-size: 2.5em;
     height: 1.5em;
     letter-spacing: 0.2em;
@@ -55,11 +42,20 @@
     width: 5em;
 }
 
+/* Description of the form */
 .join-game-title {
     display: block;
-    padding-left: 1em;;
+    padding-left: 1em;
+    text-align: left;
 }
 
+/* Holds the submit/cancel buttons in the join game form */
+.join-game-button-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Button to submit/cancel the game code */
 .join-game-button {
     border-width: 3px;
     box-shadow: 5px 3px;
@@ -69,10 +65,10 @@
     width: 6em;
 }
 
+/* Background colours for the join game buttons */
 .join-game-button-green {
     background-color: rgb(146, 201, 146);
 }
-
 .join-game-button-red {
     background-color: rgb(201, 146, 146);
 }
