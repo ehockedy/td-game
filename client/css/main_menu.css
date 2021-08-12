@@ -1,4 +1,3 @@
-
 .main-menu-logo {
     top: 5%;
     left: 50%;
@@ -13,6 +12,71 @@
     top: 75%;
     position: absolute;
 }
+
+.button-main-menu {
+    width: 20%;  /* width of element. % is percentage of the containing block */
+    left: 50%;  /* sets position from left edge */
+    text-align: center;
+    position: relative; /* positioned relative to parent */
+    font-size: 2em;
+}
+
+.slanted {
+    -ms-transform: skewX(-25deg);
+    -webkit-transform: skewX(-25deg);
+    transform: skewX(-25deg);
+}
+
+.join-game-form {
+    left: 42%;
+    width: 30%;
+    position: relative;
+    margin: 0;
+    display: inline-block;
+}
+
+.join-game-button-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.join-game-input {
+    background-color: rgb(255, 255, 255);
+    border-style: ridge;
+    border-width: 5px;
+    box-shadow: 5px 3px;
+    font-size: 2.5em;
+    height: 1.5em;
+    letter-spacing: 0.2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    text-align: center;
+    vertical-align: middle;
+    width: 5em;
+}
+
+.join-game-title {
+    display: block;
+    padding-left: 1em;;
+}
+
+.join-game-button {
+    border-width: 3px;
+    box-shadow: 5px 3px;
+    display: block;
+    height: 2.5em;
+    margin: 1em;
+    width: 6em;
+}
+
+.join-game-button-green {
+    background-color: rgb(146, 201, 146);
+}
+
+.join-game-button-red {
+    background-color: rgb(201, 146, 146);
+}
+
 
 /* The below makes the menu logo bounce
     However seems to be some sort of bug where it does not load 10% of the time, so leaving out for now/

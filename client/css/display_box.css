@@ -6,7 +6,8 @@
     border-width: 5px;
     box-shadow: 5px 3px;
     display:inline-block;
-    border-style: inset;
+    border-style: ridge;
+    border-color: rgb(118, 118, 118);
 }
 
 .noselect {
@@ -34,16 +35,24 @@
 }
 
 
+/* Button that is inline positioned, usually as part of a group */
+.button-inline {
+    cursor: pointer;
+    border-style: ridge;
+}
+
+.button-inline:hover, .button-inline:focus {
+    transform: scale(1.05, 1.05);
+}
+
+.button-inline:active {
+    transform: scale(0.95, 0.95); /* TODO de-duplicate */
+}
+
+
 /* un-comment this to make text not skew*/
 /* .button-text {
     display:inline-block; 
     transform: skewX(25deg);
 } */
 
-.button-main-menu {
-    width: 20%;  /* width of element. % is percentage of the containing block */
-    left: 50%;  /* sets position from left edge */
-    text-align: center;
-    position: relative; /* positioned relative to parent */
-    font-size: 2em;
-}
