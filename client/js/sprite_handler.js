@@ -11,15 +11,16 @@ export class SpriteHandler {
             height: this.height_px
         });
 
-        //Add the canvas that Pixi automatically created to the HTML document
-        document.body.appendChild(this.app.view);
-
         // Sprite that focus is currently on
         this.activeClickable
 
         // View scaling
         this.margin = 20 // The margin to include in every aspect ration calculation, to ensure scaled view does not quite touch the window edges
         this.globalResizeMultiplier = 1 // The scale of the view, relative to the previous scale
+    }
+
+    getCanvas() {
+        return this.app.view
     }
 
     render() {

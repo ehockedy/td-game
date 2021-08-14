@@ -2,6 +2,7 @@ import { MainMenu } from "./js/views/main_menu_react.js"
 import { Lobby } from "./js/views/lobby_react.js"
 import { Game } from "./js/views/game_react.js"
 import { io } from "socket.io-client";
+import { GameMap } from "./js/components/ui_common/map.js"
 import React, { useEffect, useState } from "react";
 
 function loadAssets() {
@@ -75,6 +76,7 @@ function Application(props) {
     return (
         <div>
             Game: {gameID}
+            <GameMap></GameMap>
             {
                 view === "main-menu" ? (
                     <MainMenu socket={socket} setPlayerIDHandler={setPlayerID} setGameIDHandler={setGameID}></MainMenu>

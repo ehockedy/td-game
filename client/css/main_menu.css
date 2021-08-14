@@ -5,7 +5,7 @@
 
 /* Game logo that sits on the main page */
 .main-menu-logo {
-    top: 5%;
+    margin-top: 20px;
     max-width:100%;
     height:auto;
 }
