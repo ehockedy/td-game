@@ -9,7 +9,7 @@ export class GameMap extends React.Component {
         // TODO do not use - use html canvas element and initialise pixi app with it
         
         let grid = []  // 2d array that stores the row and column values
-        for (let row=0; row < 24; row++) {
+        for (let row=0; row < 16; row++) {
             grid.push(new Array(30).fill({"value":'x'}));
         };
 

@@ -165,7 +165,8 @@ export class MapComponent extends BaseComponent {
                 10, 1.2,
                 false
             )
-        }
+        } 
+        tileContainer.hasDecoration = addDecoration
         return tileContainer
     }
 
@@ -200,13 +201,25 @@ export class MapComponent extends BaseComponent {
 
 
         for (let r = 0 - border; r < this.rows + border; r++) {
+            this.mapSpriteGrid.push([])  // Start a new row
             for (let c = 0 - border; c < this.cols + border; c++) {
                 const gridValue = this.getGridValue(mapStructure, r, c)
                 if (gridValue == 'x') {
-                    let landTile = this.createLandTile(Math.random() < 0.1)
+                    let addObjectChance = 0.01 // Chance to add a decoration to any land tile
+                    let distanceToCluster = 2 // If the land tile is within this number of tiles from a cluster,have a higher chance of adding decoration
+
+                    // Calculate whether this tile is near to a cluster - if so increase the chance of adding a decoration
+                    objectClusterPoints.forEach((point) => {
+                        if (isNearToPoint(r, c, point.r, point.c, distanceToCluster)) addObjectChance = 0.4
+                    })
+
+                    let landTile = this.createLandTile(Math.random() < addObjectChance)
                     landTile.x = c * this.mapSpriteSize
                     landTile.y = r * this.mapSpriteSize
                     this.landTiles.addChild(landTile)
+
+                    // Add sprite to the end of the new row
+                    this.mapSpriteGrid[this.mapSpriteGrid.length - 1].push(landTile)
                     continue;
                 }
                 // Determine the sprite to used, based on tile type
@@ -319,16 +332,15 @@ export class MapComponent extends BaseComponent {
 
                 // Add texture to the land
                 // Even path tiles have these added, so that it is not sparse near path tiles. They are rendered under path, so is acceptable.
-                randomlyPlaceObjects(
-                    this.mapFeaturesTextures, 20, this.landFeatureTiles, false,
-                    this.mapSpriteSize, this.mapSpriteSize,
-                    map_square_sprite.x, map_square_sprite.y,
-                    180, 0,
-                    false
-                )
+                // randomlyPlaceObjects(
+                //     this.mapFeaturesTextures, 20, this.landFeatureTiles, false,
+                //     this.mapSpriteSize, this.mapSpriteSize,
+                //     map_square_sprite.x, map_square_sprite.y,
+                //     180, 0,
+                //     false
+                // )
             }
         }
-
 
         // The map contains a lot of sprites, none of which move
         // As such can set this to cache as a bitmap to save processing
@@ -559,9 +571,93 @@ export class MapComponent extends BaseComponent {
     }
 
     tick() {
+        // The tick for the map makes the land tiles move to the north east direction. This is used by
+        // the main menu. Ideally would have some other specific tick for this, but until it requires another
+        // tick can just leave it as it.
+        // It works by checking if the top and left most row/column have disappeared from view. If they have,
+        // then remove all the tiles in those arrays. Then, add tiles on the opposite side of the screen to give
+        // the illusion of a continuous map
+        // To avoid checking every child in land tiles, references to the sprites are kept in a 2d array which
+        // represents their positions the map.
+
+        const speed = 0.5
         this.landTiles.children.forEach((tile) => {
-            tile.x -= 1
-            tile.y -= 1
+            tile.x -= speed
+            tile.y -= speed
         })
+
+        if (this.mapSpriteGrid.length == 0) return;
+        else if (this.mapSpriteGrid[0].length == 0) return;
+        else {
+            const baseAddDecorationChance = 0.01
+            const fadeClusterOutDecorationChance = 0.1
+            const clusterAddDecorationChance = 0.3
+            if (this.mapSpriteGrid[0][0].y <= -this.mapSpriteSize) {
+                // Remove everything from the row
+                let removed = this.mapSpriteGrid.splice(0, 1)
+                removed.forEach((row) => {
+                    row.forEach((tile) => {
+                        this.landTiles.removeChild(tile)
+                    })
+                })
+
+                // Add a new row
+                let newRow = []  // Insert the new row at the end of the existing rows
+                this.mapSpriteGrid[this.mapSpriteGrid.length - 1].forEach((tile, idx) => {  // Iterate over everything in the previously last row
+                    // Decide whether to add a decoration based off nearby decorations. We want them to cluster so they look more natural.
+                    // As such, if there was a decoration in any of the (up to) three directly preceeding squares, then have an increased chance
+                    // to add one.
+                    let decorationChance = baseAddDecorationChance
+                    let adjacentDecorations = 0
+                    for (let i = Math.max(idx-1, 0); i <= Math.min(idx+1, this.mapSpriteGrid[this.mapSpriteGrid.length - 1].length-1); i++) {
+                        if (this.mapSpriteGrid[this.mapSpriteGrid.length - 1][i].hasDecoration) {
+                            decorationChance = clusterAddDecorationChance
+                            adjacentDecorations++
+                        }
+                    }
+                    if (adjacentDecorations == 1 || adjacentDecorations == 2) decorationChance = clusterAddDecorationChance
+                    else if (adjacentDecorations == 3) decorationChance = fadeClusterOutDecorationChance
+
+                    // Add new tile directly under the one this is based off
+                    let newTile = this.createLandTile(Math.random() < decorationChance)
+                    newTile.x = tile.x
+                    newTile.y = tile.y + this.mapSpriteSize
+                    newRow.push(newTile)
+                    this.landTiles.addChild(newTile)
+                })
+                this.mapSpriteGrid.push(newRow)
+
+            }
+            if (this.mapSpriteGrid.length > 0 && this.mapSpriteGrid[0][0].x <= -this.mapSpriteSize) {
+                // Remove everything from the column
+                this.mapSpriteGrid.forEach((row) => {
+                    let removed = row.splice(0, 1)
+                    removed.forEach((tile) => {
+                        this.landTiles.removeChild(tile)
+                    })
+                })
+
+                // Add new tile at the end of each row
+                this.mapSpriteGrid.forEach((row, idx) => {
+                    const tile = row[row.length - 1]
+                    let decorationChance = baseAddDecorationChance
+                    let adjacentDecorations=0
+                    for (let i = Math.max(idx-1, 0); i <= Math.min(idx+1, this.mapSpriteGrid.length-1); i++) {
+                        if (this.mapSpriteGrid[i][this.mapSpriteGrid[i].length - 1].hasDecoration) {
+                            decorationChance = clusterAddDecorationChance
+                            adjacentDecorations++
+                        }
+                    }
+                    if (adjacentDecorations == 1 || adjacentDecorations == 2) decorationChance = clusterAddDecorationChance
+                    else if (adjacentDecorations == 3) decorationChance = fadeClusterOutDecorationChance
+
+                    let newTile = this.createLandTile(Math.random() < decorationChance)
+                    newTile.x = tile.x + this.mapSpriteSize
+                    newTile.y = tile.y
+                    row.push(newTile)
+                    this.landTiles.addChild(newTile)
+                })
+            }
+        }
     }
 }
