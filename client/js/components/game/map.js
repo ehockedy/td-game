@@ -39,6 +39,9 @@ export class MapComponent extends BaseComponent {
         this.width_px = 0 //this.mapSpriteSize*this.scalingFactor*this.cols
         this.height_px = 0 //this.mapSpriteSize*this.scalingFactor*this.rows
         //this.scale.set(scalingFactor)  // TODO set this in construct
+        this.mapStructure = [[]]
+        this.rows = 0
+        this.cols = 0
 
         this.mapSpriteGrid = []
 
@@ -167,8 +170,9 @@ export class MapComponent extends BaseComponent {
     }
 
     constructMap(mapStructure, includeBase=false, scaleFactor=1, border=0) {
-        const rows = mapStructure.length
-        const cols = mapStructure[0].length
+        this.mapStructure = mapStructure
+        this.rows = mapStructure.length
+        this.cols = mapStructure[0].length
 
         // TODO make set as Bitmap external function to call
         this.children.forEach((container) => {
@@ -180,23 +184,23 @@ export class MapComponent extends BaseComponent {
         let objectClusterPoints = []
         for (let ocIdx=0; ocIdx < objectClusterCount; ocIdx += 1) {
             objectClusterPoints.push({
-                "r": Math.floor(Math.random() * rows),
-                "c": Math.floor(Math.random() * cols)
+                "r": Math.floor(Math.random() * this.rows),
+                "c": Math.floor(Math.random() * this.cols)
             })
         }
 
         // Add the base camp container, if configured to do so.
         if (includeBase) {
             let baseCampContainer = this.createBaseCampSprite(border)
-            baseCampContainer.x = cols * this.mapSpriteSize
-            baseCampContainer.y = Math.floor(rows / 2) * this.mapSpriteSize
+            baseCampContainer.x = this.cols * this.mapSpriteSize
+            baseCampContainer.y = Math.floor(this.rows / 2) * this.mapSpriteSize
             baseCampContainer.doNotCacheAsBitmap = true
             this.baseCamp.addChild(baseCampContainer)
         }
 
 
-        for (let r = 0 - border; r < rows + border; r++) {
-            for (let c = 0 - border; c < cols + border; c++) {
+        for (let r = 0 - border; r < this.rows + border; r++) {
+            for (let c = 0 - border; c < this.cols + border; c++) {
                 const gridValue = this.getGridValue(mapStructure, r, c)
                 if (gridValue == 'x') {
                     let landTile = this.createLandTile(Math.random() < 0.1)
@@ -248,7 +252,7 @@ export class MapComponent extends BaseComponent {
                     // Add the wall of the valley. These sprites go on the tiles adjacent to the path, so there is enough room for enemy sprites.
                     // Rotate based on direction of the path.
                     let direction = this.getGridValue(mapStructure, r, c)
-                    let midCol = cols / 2
+                    let midCol = this.cols / 2
                     let shiftX = map_square_sprite.x
                     let shiftY = map_square_sprite.y
                     let minimumScale = 0.6
@@ -300,7 +304,7 @@ export class MapComponent extends BaseComponent {
                     })
 
                     // If RNG chance is met, and not adjacent to the valley path (because may overlap with valley path sprites) or near the camp then add decoration
-                    if (Math.random() <= addObjectChance && !this.isNextToPath(mapStructure, c, r, cols, rows)) {
+                    if (Math.random() <= addObjectChance && !this.isNextToPath(mapStructure, c, r, this.cols, this.rows)) {
                         if (!includeBase || !baseCampContainer.getBounds().contains(map_square_sprite.x, map_square_sprite.y)) {
                             randomlyPlaceObjects(
                                 this.mapDecorationsTextures, 1, this.landDecorations, true,
@@ -468,6 +472,7 @@ export class MapComponent extends BaseComponent {
     }
 
     getGridValue(mapStructure, r, c) {
+        if (r < 0 || c < 0 || r >= mapStructure.length || c >= mapStructure[0].length) return 'x'
         return mapStructure[r][c]["value"]
     }
 
@@ -485,6 +490,50 @@ export class MapComponent extends BaseComponent {
             "x": c * this.mapSpriteSize + this.mapSpriteSize / 2,
             "y": r * this.mapSpriteSize + this.mapSpriteSize / 2
         }
+    }
+
+    isUnoccupied(row, col) {
+        return this.getGridValue(this.mapStructure, row, col) == 'x'
+    }
+
+    getNearestNonOccupiedSquare(x, y) {
+        // Returns the closest square that is empty i.e. no path, no tower
+        let rc = this.xy2rc(x, y)  // Get the row and colum this position maps to
+        let closest_rc = rc
+        if (!this.isUnoccupied(rc.row, rc.col)) {  // If occupied, start checking, otherwise just return the given position
+            let offset = 1
+            let found = false
+            while (!found) {
+                let currentShortestDistance = this.mapSpriteSize * offset * 2  // If any are viable, they will be shorter than this distance
+                for (let r = -offset; r <= offset; r++) {
+                    for (let c = -offset; c <= offset; c++) {
+                        let xy_tester = this.rc2xy(rc.row + r, rc.col + c)
+                        // Only do the check if for a square on the outer most check path
+                        // Otherwise would be repeating all the squares done in the previous iteration
+                        // x x x x x
+                        // x y y y x
+                        // x y z y x
+                        // x y y y x
+                        // x x x x x
+                        // i.e. if offset is 2, then only check y squares becuase already checked x and z
+                        if (Math.abs(r) == offset || Math.abs(c) == offset) {
+                            let distance = distToPoint(x, y, xy_tester.x, xy_tester.y)
+                            if (this.isUnoccupied(rc.row + r, rc.col + c) && distance < currentShortestDistance) {  // A viable space, check the distance
+                                found = true  // At least one of the squares at this distance is viable
+                                closest_rc = this.xy2rc(xy_tester.x, xy_tester.y)
+                                currentShortestDistance = distance
+                            }
+                        }
+                    }
+                }
+                offset += 1  // Try squares further away if one not found at current distance
+            }
+        }
+        return closest_rc
+    }
+
+    updateMapStructure(mapStructure) {
+        this.mapStructure = mapStructure
     }
 
     update(towerUpdate) {

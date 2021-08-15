@@ -42,7 +42,7 @@ export class GameRenderer {
         this.ec = new EnemiesComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
         this.bc = new BulletsComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
         this.perRoundUpdateText = new OnScreenMessage(config.MAP_WIDTH/2, config.MAP_HEIGHT/2, "Round 1", 30)
-        this.map = new MapComponent(config.MAP_COLS, config.MAP_ROWS, config.SPRITE_SIZE_MAP)
+        this.map = new MapComponent(config.SPRITE_SIZE_MAP)
 
         this.gameSpace = new InteractiveGameSpace(
             this.map, this.tm, this.tc, this.ec, this.bc,
@@ -106,7 +106,7 @@ export class GameRenderer {
         })
 
         this.socket.on("client/map/update", (grid) => {
-            this.map.setGridValues(grid);
+            this.map.updateMapStructure(grid);
         })
 
         this.socket.on("client/player/ready", (playerData) => {
@@ -169,8 +169,7 @@ export class GameRenderer {
 
     startRendering() {
         this.socket.emit("server/map/get", (map) => {
-            this.map.setGridValues(map);
-            this.map.constructMap(this.maxBorderSize)
+            this.map.constructMap(map, true, 1, this.maxBorderSize);
         })
 
         this.spriteHandler.registerContainer(this.gameSpace)

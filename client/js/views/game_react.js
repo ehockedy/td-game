@@ -11,18 +11,26 @@ export class Game extends React.Component {
         let clientConfig = generateClientConfig(this.props.config)
 
         // This holds the PIXI application and all the sprites
-        let spriteHandler = new SpriteHandler(clientConfig.APP_WIDTH, clientConfig.APP_HEIGHT)
+        this.spriteHandler = new SpriteHandler(clientConfig.APP_WIDTH, clientConfig.APP_HEIGHT)
 
         // View is the scene that user is currently on
-        this.view = new GameRenderer(this.props.socket, spriteHandler, clientConfig, this.props.thisPlayer)
+        this.view = new GameRenderer(this.props.socket, this.spriteHandler, clientConfig, this.props.thisPlayer)
         this.view.loadAssets().then(()=>{
             this.view.startRendering()
         })
     }
+    updatePixiCnt= (element) => {
+        // the element is the DOM object that we will use as container to add pixi stage(canvas)
+        this.pixi_cnt = element;
+        //now we are adding the application to the DOM element which we got from the Ref.
+        if(this.pixi_cnt && this.pixi_cnt.children.length<=0) {
+           this.pixi_cnt.appendChild(this.spriteHandler.getCanvas());
+        }
+     };
 
     render() {
         return (
-            <div></div>
+            <div ref={this.updatePixiCnt}></div>
         )
     }
 }
