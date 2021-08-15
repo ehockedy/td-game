@@ -6,14 +6,18 @@ export class GameMap extends React.Component {
     constructor(props) {
         super(props)
         this.state = {}
-        // TODO do not use - use html canvas element and initialise pixi app with it
-        
-        let grid = []  // 2d array that stores the row and column values
-        for (let row=0; row < 16; row++) {
-            grid.push(new Array(30).fill({"value":'x'}));
-        };
+        const mapSpriteSize = props.mapSpriteSize
 
-        const mapSpriteSize = 64
+        let grid = []  // 2d array that stores the row and column values
+        // Adjust number of rows based on screen size.
+        // TODO a few cases to address in the future:
+        // - mobile browser does not seem to fill the screen
+        // - if zoomed out, does not fill the screen
+        const rows = Math.floor(screen.height / mapSpriteSize) + 2  // Add 2 so bit of a buffer when generating the map
+        const cols = Math.floor(screen.availWidth / mapSpriteSize) + 2
+        for (let row=0; row < rows; row++) {
+            grid.push(new Array(cols).fill({"value":'x'}));
+        };
         this.spriteHandler = new SpriteHandler(grid[0].length * mapSpriteSize, grid.length * mapSpriteSize)
         let map = new MapComponent(mapSpriteSize)
         map.constructMap(grid)

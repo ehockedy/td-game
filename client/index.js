@@ -4,6 +4,8 @@ import { Game } from "./js/views/game_react.js"
 import { io } from "socket.io-client";
 import { GameMap } from "./js/components/ui_common/map.js"
 import React, { useEffect, useState } from "react";
+import { generateClientConfig } from "./js/constants.js"
+import { setConfig } from "react-hot-loader";
 
 function loadAssets() {
     return new Promise((resolve) => {
@@ -57,6 +59,7 @@ function Application(props) {
     const [gameID, setGameID] = useState()
     const [playerID, setPlayerID] = useState()
     const [playerIDs, setPlayerIDs] = useState()
+    const config = generateClientConfig(props.config)
 
     useEffect(() => {
         const socket = io()
@@ -78,7 +81,7 @@ function Application(props) {
             Game: {gameID}
             {
                 view == "main-menu" || view == "lobby" ? (
-                    <GameMap></GameMap>
+                    <GameMap mapSpriteSize={config.SPRITE_SIZE_MAP}></GameMap>
                 ) : <div></div>
             }
             {
@@ -89,7 +92,7 @@ function Application(props) {
                     <Lobby socket={socket} gameID={gameID} thisPlayer={playerID} players={playerIDs}></Lobby>
                 ) :
                 view === "game" ? (
-                    <Game socket={socket} config={props.config} thisPlayer={playerID} players={playerIDs}></Game>
+                    <Game socket={socket} config={config} thisPlayer={playerID} players={playerIDs}></Game>
                 ) :
                 console.log("INVALID VIEW")
                 // TODO add page not found page

@@ -1,14 +1,13 @@
 import React from "react";
 import { GameRenderer} from "./game.js"
 import { SpriteHandler } from "../sprite_handler.js"
-import { generateClientConfig } from "../constants.js"
 
 export class Game extends React.Component {
     constructor(props) {
         super(props)
         this.state = {}
 
-        let clientConfig = generateClientConfig(this.props.config)
+        let clientConfig = this.props.config
 
         // This holds the PIXI application and all the sprites
         this.spriteHandler = new SpriteHandler(clientConfig.APP_WIDTH, clientConfig.APP_HEIGHT)
