@@ -17,7 +17,7 @@ export class GameMap extends React.Component {
         this.spriteHandler = new SpriteHandler(grid[0].length * mapSpriteSize, grid.length * mapSpriteSize)
         let map = new MapComponent(mapSpriteSize)
         map.constructMap(grid)
-        this.spriteHandler.registerContainer(map)
+        this.spriteHandler.registerDynamicContainer(map, map.menuBackgroundAnimationTick)
     }
 
     // Ref: https://medium.com/@peeyush.pathak18/pixijs-with-react-3cd40738180

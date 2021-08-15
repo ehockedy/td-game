@@ -13,9 +13,122 @@
    version="1.1"
    id="svg917"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="desert_objects.svg">
+   sodipodi:docname="land_patterns.svg">
   <defs
-     id="defs911" />
+     id="defs911">
+    <filter
+       inkscape:label="Speckle"
+       inkscape:menu="Overlays"
+       inkscape:menu-tooltip="Fill object with sparse translucent specks"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB"
+       id="filter932">
+      <feColorMatrix
+         in="SourceGraphic"
+         result="result1"
+         type="luminanceToAlpha"
+         id="feColorMatrix910" />
+      <feComposite
+         in2="result1"
+         in="SourceGraphic"
+         result="result2"
+         operator="out"
+         id="feComposite912" />
+      <feGaussianBlur
+         stdDeviation="0.7"
+         result="result10"
+         id="feGaussianBlur914" />
+      <feBlend
+         in2="result10"
+         mode="screen"
+         in="result10"
+         result="fbSourceGraphic"
+         id="feBlend916" />
+      <feGaussianBlur
+         stdDeviation="3"
+         result="result8"
+         in="fbSourceGraphic"
+         id="feGaussianBlur918" />
+      <feTurbulence
+         seed="0"
+         result="result7"
+         type="fractalNoise"
+         numOctaves="1"
+         baseFrequency="0.3"
+         id="feTurbulence920" />
+      <feColorMatrix
+         result="result9"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1.2 -0.2 "
+         id="feColorMatrix922" />
+      <feComposite
+         in2="result8"
+         result="result6"
+         operator="atop"
+         in="result8"
+         id="feComposite924" />
+      <feDisplacementMap
+         in="result9"
+         in2="result6"
+         xChannelSelector="R"
+         yChannelSelector="A"
+         scale="100"
+         result="result4"
+         id="feDisplacementMap926" />
+      <feComposite
+         in2="result4"
+         result="result2"
+         operator="arithmetic"
+         in="result8"
+         k1="2"
+         id="feComposite928"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feComposite
+         result="fbSourceGraphic"
+         in="fbSourceGraphic"
+         operator="in"
+         in2="result2"
+         id="feComposite930" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix934" />
+      <feTurbulence
+         id="feTurbulence936"
+         result="result1"
+         numOctaves="1"
+         baseFrequency="0.21"
+         type="fractalNoise" />
+      <feColorMatrix
+         id="feColorMatrix938"
+         result="result0"
+         in="fbSourceGraphic"
+         type="luminanceToAlpha" />
+      <feColorMatrix
+         id="feColorMatrix940"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.8 0"
+         result="result2" />
+      <feComposite
+         in2="result2"
+         id="feComposite942"
+         in="result1"
+         operator="over" />
+      <feColorMatrix
+         id="feColorMatrix944"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -14"
+         result="result91" />
+      <feComposite
+         in2="result91"
+         id="feComposite946"
+         operator="out"
+         in="fbSourceGraphic" />
+    </filter>
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -23,9 +136,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="125.6879"
-     inkscape:cy="436.51085"
+     inkscape:zoom="0.7"
+     inkscape:cx="-42.300159"
+     inkscape:cy="187.46622"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -34,9 +147,9 @@
      objecttolerance="10000"
      guidetolerance="10000"
      inkscape:pagecheckerboard="true"
-     inkscape:window-width="2400"
-     inkscape:window-height="1272"
-     inkscape:window-x="4792"
+     inkscape:window-width="1920"
+     inkscape:window-height="1002"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:object-paths="true"
@@ -56,7 +169,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -131,11 +244,12 @@
        inkscape:rounded="0"
        inkscape:randomized="0.5"
        d="m -80.768356,-36.967139 8.994354,-50.897439 -56.237908,59.850795 -2.26084,-33.446219 -27.51487,-9.688372 42.95879,-30.759166 -26.32616,-25.36083 31.82431,2.1374 55.40096,-21.6752 2.260845,33.44622 28.351819,25.725893 -18.5523,5.823244 z"
-       inkscape:transform-center-x="-0.11999236"
-       inkscape:transform-center-y="0.11178433"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\features\spikey6.png"
-       inkscape:export-xdpi="9.6000023"
-       inkscape:export-ydpi="9.6000023" />
+       inkscape:transform-center-x="-0.11332948"
+       inkscape:transform-center-y="0.12030517"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\land_patterns\sprites\spikey3.png"
+       inkscape:export-xdpi="12.796325"
+       inkscape:export-ydpi="12.796325"
+       transform="matrix(0.94444456,0,0,1.0761954,-82.434946,100.83079)" />
     <path
        sodipodi:type="star"
        style="fill:#cf895d;fill-opacity:1;stroke:none;stroke-width:1.32292"
@@ -160,22 +274,23 @@
        sodipodi:type="star"
        style="fill:#cf895d;fill-opacity:1;stroke:none;stroke-width:1.32292"
        id="path2167"
-       sodipodi:sides="6"
+       sodipodi:sides="18"
        sodipodi:cx="160.86665"
        sodipodi:cy="-84.666664"
        sodipodi:r1="61.054001"
        sodipodi:r2="30.527"
        sodipodi:arg1="0.98279372"
-       sodipodi:arg2="1.5063925"
+       sodipodi:arg2="1.1573266"
        inkscape:flatsided="false"
        inkscape:rounded="0"
        inkscape:randomized="0.5"
-       d="m 216.54279,-60.95433 -36.90823,11.836505 -72.76346,36.427769 14.76728,-31.619758 -13.30659,-17.273218 -0.3831,-25.996117 -6.15564,-49.761371 77.12161,16.82684 38.19028,-26.79179 -41.31094,16.70944 74.3596,71.567021 -60.60708,-23.023343 z"
-       inkscape:transform-center-x="3.3947664"
-       inkscape:transform-center-y="2.0971789"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\features\spikey4.png"
-       inkscape:export-xdpi="9.6000023"
-       inkscape:export-ydpi="9.6000023" />
+       d="m 216.54279,-60.95433 -34.14351,-9.148273 22.38362,39.034352 -25.14834,-18.049575 -9.77686,-5.293421 9.01986,-16.031844 -72.00646,57.753035 14.06525,-19.454988 25.94164,-20.545436 -25.23961,8.380667 11.13095,-25.285703 -28.31889,-7.696024 3.88135,15.708508 -7.20504,-33.061385 12.73107,17.681006 -5.90913,-10.615736 -6.90396,-9.542914 20.36005,-31.878999 -19.61173,-8.33946 74.29307,25.77708 -22.38363,-39.03435 25.21217,30.08411 9.71304,-6.74111 -9.01986,16.03184 37.4971,-36.08252 -44.84383,12.59698 38.3409,-17.60264 -34.80801,21.71509 48.97951,0.4643 -32.73512,68.75002 58.11521,2.352711 -53.78612,-22.718267 48.32195,36.612801 -55.14291,-36.917878 6.90397,9.542914 -21.42928,-3.491113 z"
+       inkscape:transform-center-x="2.9005704"
+       inkscape:transform-center-y="1.9780309"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\land_patterns\sprites\spikey4.png"
+       inkscape:export-xdpi="12.803298"
+       inkscape:export-ydpi="12.803298"
+       transform="matrix(0.85442393,0,0,0.94318533,-14.735933,372.94293)" />
     <path
        sodipodi:type="star"
        style="fill:#d18b5e;fill-opacity:1;stroke:none;stroke-width:1.32292"
@@ -193,23 +308,6 @@
        d="m 259.2251,72.038429 -2.33838,-13.606159 -44.66304,1.303075 30.50645,-17.125454 -31.43209,-7.394889 32.8089,-6.535019 -14.58713,-21.2433699 30.15646,26.1515659 17.41982,-35.4148196 -2.68837,29.6708606 -1.59496,23.507576 2.10007,6.535019 z"
        inkscape:transform-center-x="7.6282029"
        inkscape:transform-center-y="-14.004909" />
-    <path
-       sodipodi:type="star"
-       style="fill:#d18b5e;fill-opacity:1;stroke:none;stroke-width:1.32292"
-       id="path2171"
-       sodipodi:sides="6"
-       sodipodi:cx="169.33333"
-       sodipodi:cy="33.866665"
-       sodipodi:r1="49.368725"
-       sodipodi:r2="24.684362"
-       sodipodi:arg1="2.1112158"
-       sodipodi:arg2="2.6348146"
-       inkscape:flatsided="false"
-       inkscape:rounded="0"
-       inkscape:randomized="0.5"
-       d="m 125.51701,64.307249 -2.10665,-32.56527 -11.91457,1.047672 42.10376,-18.974693 12.22524,-26.454919 25.56246,-1.320649 20.66699,-8.857279 -13.93227,25.2432625 8.44015,56.0336795 -21.72665,-7.650459 28.91232,38.383051 -63.98777,-32.924548 z"
-       inkscape:transform-center-x="10.427948"
-       inkscape:transform-center-y="5.7724304" />
     <path
        sodipodi:type="star"
        style="fill:#cf895d;fill-opacity:1;stroke:none;stroke-width:1.32292"
@@ -231,13 +329,12 @@
        inkscape:export-xdpi="9.6000023"
        inkscape:export-ydpi="9.6000023" />
     <path
-       style="fill:#d18b5e;fill-opacity:1;stroke:none;stroke-width:10.1015"
-       d="m 683.55068,271.77798 c -63.65055,-32.73654 -116.79395,-59.521 -118.09645,-59.521 -1.30251,0 -21.74477,6.45855 -45.42726,14.35231 -23.68248,7.89378 -43.4383,13.97308 -43.90182,13.50956 -0.46352,-0.46352 -2.21486,-22.1501 -3.89187,-48.19242 -1.67701,-26.04232 -3.59405,-53.10669 -4.2601,-60.14305 l -1.21099,-12.7934 -17.49903,1.41993 c -9.62447,0.78097 -17.00969,0.89686 -16.41159,0.25755 0.5981,-0.63932 34.23618,-16.0711 74.75129,-34.292845 L 581.2667,53.244161 604.05552,4.0640868 c 12.53386,-27.0490408 23.17639,-49.5676378 23.65008,-50.0413248 0.47369,-0.473689 22.4931,-2.027008 48.932,-3.45182 l 48.07076,-2.590571 36.05319,-15.487899 c 19.82927,-8.518344 36.2985,-15.195844 36.59829,-14.838889 0.29979,0.356955 -10.74762,20.999427 -24.54978,45.872159 L 747.71521,8.7488934 763.33716,112.50363 c 8.59207,57.06509 15.13495,104.24172 14.53973,104.83695 -0.59522,0.59522 -18.04803,-4.92026 -38.78402,-12.25661 -20.73599,-7.33635 -38.4752,-13.04208 -39.42048,-12.67935 -0.94528,0.3627 21.42493,31.41687 49.71159,69.00925 28.28663,37.59239 51.08481,68.69525 50.6626,69.11745 -0.4222,0.4222 -52.84536,-26.0168 -116.4959,-58.75334 z"
+       style="fill:#d18b5e;fill-opacity:1;stroke:none;stroke-width:3.29804"
+       d="m -132.57564,236.13078 c -22.01334,-10.08993 -40.39281,-18.34533 -40.84328,-18.34533 -0.45047,0 -7.52036,1.99063 -15.71087,4.42361 -8.19051,2.43299 -15.02299,4.30673 -15.1833,4.16387 -0.16031,-0.14287 -0.766,-6.82702 -1.34599,-14.85367 -0.57999,-8.02666 -1.24299,-16.36833 -1.47334,-18.53705 l -0.41882,-3.94313 -6.05199,0.43764 c -3.32859,0.24071 -5.88274,0.27643 -5.67589,0.0794 0.20685,-0.19704 11.84047,-4.95336 25.85249,-10.5696 l 25.4764,-10.21133 7.88144,-15.15808 c 4.3348,-8.33694 8.01548,-15.27753 8.17931,-15.42353 0.16382,-0.146 7.77916,-0.62476 16.92297,-1.06391 l 16.62512,-0.79845 12.46888,-4.77362 c 6.85789,-2.62549 12.55372,-4.6836 12.6574,-4.57358 0.10369,0.11002 -3.71703,6.47236 -8.49046,14.13853 l -8.67897,13.9385 5.4028,31.97886 c 2.97154,17.58837 5.23437,32.12896 5.02852,32.31242 -0.20586,0.18346 -6.24185,-1.5165 -13.41333,-3.77768 -7.17148,-2.26118 -13.30653,-4.01978 -13.63345,-3.90798 -0.32692,0.11178 7.40973,9.68318 17.1926,21.26975 9.78284,11.58658 17.66751,21.17297 17.52149,21.30309 -0.14601,0.13013 -18.27639,-8.01878 -40.28973,-18.1087 z"
        id="path2175"
-       transform="scale(0.26458333)"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\features\spikey1.png"
-       inkscape:export-xdpi="9.6000023"
-       inkscape:export-ydpi="9.6000023" />
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\land_patterns\sprites\spikey1.png"
+       inkscape:export-xdpi="12.796324"
+       inkscape:export-ydpi="12.796324" />
     <path
        style="fill:#d18b5e;fill-opacity:1;stroke:none;stroke-width:10.1015"
        d="m 979.66188,264.24681 c -0.57008,-2.48197 -2.61388,-13.50637 -4.54176,-24.49867 l -3.50524,-19.98601 -43.65121,1.31524 c -24.00817,0.72337 -60.92482,1.84014 -82.03701,2.4817 -38.21061,1.16117 -38.35813,1.14907 -32.32488,-2.64948 3.3335,-2.09878 27.88021,-15.96793 54.54824,-30.82031 54.29055,-30.23637 50.52432,-27.98652 49.1499,-29.36094 -0.56156,-0.56155 -25.2198,-6.734 -54.79609,-13.71654 -29.57629,-6.98255 -54.24909,-13.16956 -54.82845,-13.74892 -0.57936,-0.57936 24.15464,-5.90273 54.96444,-11.82972 30.8098,-5.92699 57.16009,-11.366 58.5562,-12.0867 1.74377,-0.90017 -4.75846,-11.961598 -20.77161,-35.336118 -12.82049,-18.714171 -23.05413,-34.266952 -22.74142,-34.561739 0.3127,-0.294785 23.47929,19.374623 51.4813,43.709798 28.00202,24.335169 51.48215,44.245769 52.17808,44.245769 0.69593,0 15.24778,-28.410541 32.33743,-63.134535 17.0897,-34.723994 31.1077,-61.3162595 31.1513,-59.0939239 0.043,2.2223356 -2.1301,28.5873169 -4.8302,58.5888479 -2.7001,30.00153 -6.0126,71.906071 -7.3611,93.121201 -2.2021,34.64634 -2.1128,39.56744 0.877,48.34214 1.8308,5.37304 3.3287,10.76994 3.3287,11.99311 0,1.94863 -43.46338,42.41108 -52.68365,49.0461 -2.94789,2.12134 -3.61774,1.8206 -4.49997,-2.0203 z"
@@ -281,10 +378,28 @@
        inkscape:rounded="0"
        inkscape:randomized="0.5"
        d="m 29.312501,205.40173 -71.524635,9.88924 -19.781403,44.22917 5.939972,-85.08581 -59.876195,19.88054 -24.149,-66.38327 20.92971,-38.63262 53.816896,11.78552 2.943622,-82.396498 10.899211,45.735309 82.278982,56.893149 -80.725608,20.19204 z"
-       inkscape:transform-center-x="22.349351"
-       inkscape:transform-center-y="6.2497328"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\img\map\features\spikey7.png"
-       inkscape:export-xdpi="9.6000023"
-       inkscape:export-ydpi="9.6000023" />
+       inkscape:transform-center-x="16.616183"
+       inkscape:transform-center-y="3.300493"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\map\land_patterns\sprites\spikey2.png"
+       inkscape:export-xdpi="12.796325"
+       inkscape:export-ydpi="12.796325"
+       transform="matrix(0.74347554,0,0,0.52810158,38.281051,105.67795)" />
+    <path
+       sodipodi:type="star"
+       style="fill:#d18a5e;fill-opacity:1;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path854"
+       sodipodi:sides="18"
+       sodipodi:cx="97.366667"
+       sodipodi:cy="55.033333"
+       sodipodi:r1="11.973674"
+       sodipodi:r2="104.72688"
+       sodipodi:arg1="0.78539801"
+       sodipodi:arg2="1.0891325"
+       inkscape:flatsided="false"
+       inkscape:rounded="1.0408341e-17"
+       inkscape:randomized="0.5"
+       d="M 59.543626,86.539307 182.63764,148.97128 51.739843,72.119076 144.43308,203.75518 71.829794,44.067406 108.70961,112.59864 62.098119,34.386023 0.52224263,181.8648 92.262125,54.914627 -0.34749899,80.199491 59.654562,59.851524 -28.702831,99.512228 118.70282,85.986187 30.11892,87.030072 119.09336,39.491529 -28.630566,26.179649 59.025519,88.841051 43.600838,-38.260471 40.430035,78.71067 -2.7633061,-11.996244 93.656797,4.932762 58.436793,-75.984371 109.87353,14.064048 139.58324,-73.02597 140.87785,90.83609 139.12254,-45.875452 53.134515,22.137211 190.19961,3.9983385 85.742078,17.200314 163.2586,6.7895009 131.4207,95.792534 209.16542,30.867522 83.882613,85.730584 212.05846,71.979668 138.3047,92.76988 l 19.23807,21.63767 z"
+       inkscape:transform-center-x="4.3359331"
+       inkscape:transform-center-y="1.7333491" />
   </g>
 </svg>

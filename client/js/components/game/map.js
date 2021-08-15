@@ -40,6 +40,8 @@ export class MapComponent extends BaseComponent {
         this.height_px = 0 //this.mapSpriteSize*this.scalingFactor*this.rows
         //this.scale.set(scalingFactor)  // TODO set this in construct
 
+        this.mapSpriteGrid = []
+
         this.pathTiles = new PIXI.Container()
         this.sideWalls = new PIXI.Container()
         this.topWalls = new PIXI.Container()
@@ -141,6 +143,29 @@ export class MapComponent extends BaseComponent {
         this.baseCamp.cacheAsBitmap = false
     }
 
+    createLandTile(addDecoration) {
+        let tileContainer = new PIXI.Container()
+        let textureName = "land_1.png"
+        tileContainer.addChild(new PIXI.Sprite(this.mapTextures[textureName]))
+        randomlyPlaceObjects(
+            this.mapFeaturesTextures, 1, tileContainer, false,
+            0, 0,
+            0, 0,
+            0, 0,
+            false
+        )
+        if (addDecoration) {
+            randomlyPlaceObjects(
+                this.mapDecorationsTextures, 1, tileContainer, true,
+                this.mapSpriteSize, this.mapSpriteSize,
+                0, 0,
+                10, 1.2,
+                false
+            )
+        }
+        return tileContainer
+    }
+
     constructMap(mapStructure, includeBase=false, scaleFactor=1, border=0) {
         const rows = mapStructure.length
         const cols = mapStructure[0].length
@@ -172,6 +197,14 @@ export class MapComponent extends BaseComponent {
 
         for (let r = 0 - border; r < rows + border; r++) {
             for (let c = 0 - border; c < cols + border; c++) {
+                const gridValue = this.getGridValue(mapStructure, r, c)
+                if (gridValue == 'x') {
+                    let landTile = this.createLandTile(Math.random() < 0.1)
+                    landTile.x = c * this.mapSpriteSize
+                    landTile.y = r * this.mapSpriteSize
+                    this.landTiles.addChild(landTile)
+                    continue;
+                }
                 // Determine the sprite to used, based on tile type
                 let textureName = "land_1.png" // Default to land
                 switch(this.getGridValue(mapStructure, r, c)) {
@@ -295,7 +328,7 @@ export class MapComponent extends BaseComponent {
 
         // The map contains a lot of sprites, none of which move
         // As such can set this to cache as a bitmap to save processing
-        this.enableCacheAsBitmap()
+        // this.enableCacheAsBitmap()
     }
 
     generateMapWallSprite(texture, shiftX, shiftY, scaleX, scaleY, rotation) {
@@ -474,6 +507,12 @@ export class MapComponent extends BaseComponent {
 
         }
         this.towerHash = towerUpdate.hash
+    }
 
+    tick() {
+        this.landTiles.children.forEach((tile) => {
+            tile.x -= 1
+            tile.y -= 1
+        })
     }
 }

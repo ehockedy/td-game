@@ -2,75 +2,67 @@
 
 "spikey1.png":
 {
-	"frame": {"x":24,"y":0,"w":37,"h":41},
+	"frame": {"x":0,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":41},
-	"sourceSize": {"w":37,"h":41}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 },
 "spikey2.png":
 {
-	"frame": {"x":0,"y":0,"w":24,"h":26},
+	"frame": {"x":64,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":26},
-	"sourceSize": {"w":24,"h":26}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 },
 "spikey3.png":
 {
-	"frame": {"x":61,"y":0,"w":41,"h":41},
+	"frame": {"x":128,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":41},
-	"sourceSize": {"w":41,"h":41}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 },
 "spikey4.png":
 {
-	"frame": {"x":0,"y":86,"w":56,"h":51},
+	"frame": {"x":192,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":51},
-	"sourceSize": {"w":56,"h":51}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 },
 "spikey5.png":
 {
-	"frame": {"x":0,"y":41,"w":57,"h":43},
+	"frame": {"x":256,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":57,"h":43},
-	"sourceSize": {"w":57,"h":43}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 },
 "spikey6.png":
 {
-	"frame": {"x":57,"y":41,"w":51,"h":45},
+	"frame": {"x":320,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":51,"h":45},
-	"sourceSize": {"w":51,"h":45}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 },
 "spikey7.png":
 {
-	"frame": {"x":0,"y":156,"w":65,"h":91},
+	"frame": {"x":384,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":65,"h":91},
-	"sourceSize": {"w":65,"h":91}
-},
-"spikey8.png":
-{
-	"frame": {"x":56,"y":86,"w":56,"h":70},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":70},
-	"sourceSize": {"w":56,"h":70}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "land_patterns.png",
 	"format": "RGBA8888",
-	"size": {"w":112,"h":247},
+	"size": {"w":448,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:7daaa2a8f3250cb48801d25e618b99b4:c19aebd46dead91928973aa3995c3876:3ee9f1e80b68656c7efb5417b78c8850$"
+	"smartupdate": "$TexturePacker:SmartUpdate:4558602b2b938274733deba2d99ce13d:256d891e43056ca4b6d57d535f349ff7:3ee9f1e80b68656c7efb5417b78c8850$"
 }
 }
