@@ -1,6 +1,6 @@
-# Valley Tower Defence
+# Defence of Karragarra Valley
 **Overview**\
-Valley Tower Defence (name not final) is an online, browser based, 2D, cooperative and competitive tower defence game. Work with up to three friends to defend your towns from the monsters and bandits that attack via the winding valley. Construct towers to kill enemies, then loot the enemies and use that loot to upgrade and buy more towers.
+Defence of Karragarra Valley (name not final) is an online, browser based, 2D, cooperative and competitive tower defence game. Work with up to three friends to defend your towns from the monsters and bandits that attack via the winding valley. Construct towers to kill enemies, then loot the enemies and use that loot to upgrade and buy more towers.
 
 If enough enemies get through your defences, then everyone loses. But if you manage to hold out for enough rounds then whoever has the most points is the winner!
 
@@ -18,7 +18,7 @@ Sprites are all hand created as vector images using [Inkscape](https://inkscape.
 * Save game functionality (coming soon)
 
 **Progress Update**\
-This is a snapshot of gameplay as of 10/05/2021
+This is a snapshot of gameplay as of 16/08/2021
 
 Note that frame rate in the .gif is not representative of actual game frame rate.
 
