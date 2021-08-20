@@ -58,6 +58,13 @@ class Session {
             this.broadcast("client/map/set", this.map.getMapStructure())
         })
 
+        socket.on("server/player/set/name", (playerID, playerName) => {
+            // TODO check if name already chosen on submitm not now?
+            this.players[playerID].displayName = playerName
+            socket.emit("client/players/set", this.players)
+            socket.to(this.gameID).emit("client/players/set", this.players)
+        })
+
         socket.on("server/game/start", ()=> {
             if (!this.hasStarted) {
                 this.game = new game.Game(this.map)

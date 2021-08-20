@@ -7,9 +7,10 @@ export function NamePlace(props) {
                 className="namePlace slanted-backwards display-box noselect"
                 type="text"
                 maxLength="10"
-                value={props.initialValue}//{props.text}
+                value={props.text}
                 spellCheck="false"
                 onChange={(event) => {props.onChange(event.target.value)}}
+                disabled={!props.enabled}
             />
 }
 

@@ -18,7 +18,14 @@ export class Lobby extends React.Component {
                 <br/>
                 <button onClick={()=>{this.props.socket.emit("server/game/start")}}>Start game</button>
                 <span className="player-names-container noselect">
-                    { Object.keys(this.props.players).map((playerID) => <NamePlace key={playerID} initialValue={this.props.players[playerID].displayName}></NamePlace>) }
+                    { Object.keys(this.props.players).map((playerID) =>
+                        <NamePlace
+                            key={playerID}
+                            text={this.props.players[playerID].displayName}
+                            onChange={(value) => { this.props.socket.emit("server/player/set/name", playerID, value) }}
+                            enabled={playerID === this.props.thisPlayer}
+                        ></NamePlace>
+                    ) }
                     { Array(this.props.maxPlayers - Object.keys(this.props.players).length).fill(0).map((_, idx) => <NamePlaceEmpty key={idx} initialValue="Waiting for players..."></NamePlaceEmpty>) }
                 </span>
                 
