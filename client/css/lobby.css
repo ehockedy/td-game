@@ -1,12 +1,20 @@
+.lobby-grid {
+    display: grid;
+    grid-template-areas: 
+        "title gameCode"
+        "map players"
+        "options start";
+    grid-template-columns: 1fr 1fr;
+}
+
 .namePlace {
     background-color: rgb(230, 230, 230);
     display: block;
     font-size: 2.5em;
     height: 1.5em;
     letter-spacing: 0.1em;
-    margin: 10%;
+    margin: 2%;
     text-align: center;
-    width: 10em;
 }
 
 .namePlaceEmpty {
@@ -15,9 +23,8 @@
     font-size: 2.5em;
     height: 1.5em;
     letter-spacing: 0.1em;
-    margin: 10%;
+    margin: 2%;
     text-align: center;
-    width: 10em;
 }
 
 .namePlaceEmptyText {
@@ -25,8 +32,20 @@
 }
 
 .player-names-container {
-    display: inline-block;
-    vertical-align: middle;
+    grid-area: "players";
+    display: grid;
+    grid-template-columns: 1fr;
+    right: 90%;
+    width: 80%;
+}
+
+.title {
+    grid-area: "title";
+}
+
+.start-game {
+    grid-area: start;
+    width: 30%;
 }
 
 .colourPicker {

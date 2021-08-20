@@ -9,26 +9,20 @@ export class Lobby extends React.Component {
 
     render() {
         return (
-            <div>
-                Lobby
-                <br/>
-                You: {this.props.thisPlayer}
-                <br/><br/>
-                Players: {Object.keys(this.props.players).map((playerID) => <li key={playerID}>{this.props.players[playerID].displayName}</li>)}
-                <br/>
-                <button onClick={()=>{this.props.socket.emit("server/game/start")}}>Start game</button>
-                <span className="player-names-container noselect">
+            <div className="lobby-grid">
+                <div className="title">Lobby</div>
+                <div className="player-names-container noselect">
                     { Object.keys(this.props.players).map((playerID) =>
                         <NamePlace
-                            key={playerID}
-                            text={this.props.players[playerID].displayName}
-                            onChange={(value) => { this.props.socket.emit("server/player/set/name", playerID, value) }}
-                            enabled={playerID === this.props.thisPlayer}
+                        key={playerID}
+                        text={this.props.players[playerID].displayName}
+                        onChange={(value) => { this.props.socket.emit("server/player/set/name", playerID, value) }}
+                        enabled={playerID === this.props.thisPlayer}
                         ></NamePlace>
-                    ) }
+                        ) }
                     { Array(this.props.maxPlayers - Object.keys(this.props.players).length).fill(0).map((_, idx) => <NamePlaceEmpty key={idx} initialValue="Waiting for players..."></NamePlaceEmpty>) }
-                </span>
-                
+                </div>
+                <button className="start-game button display-box slanted" onClick={()=>{this.props.socket.emit("server/game/start")}}>Start game</button>                
             </div>
         )
     }
