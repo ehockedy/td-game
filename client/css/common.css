@@ -16,6 +16,12 @@
     transform: skewX(-25deg);
 }
 
+.slanted-backwards {
+    -ms-transform: skewX(25deg);
+    -webkit-transform: skewX(25deg);
+    transform: skewX(25deg);
+}
+
 /* Standard styling for an element that can be seen e.g. button, text box */
 .display-box {
     border-color: rgb(118, 118, 118);
@@ -54,8 +60,8 @@
 
 
 /* un-comment this to make text not skew*/
-/* .button-text {
+.text-straight-backwards {
     display:inline-block; 
-    transform: skewX(25deg);
-} */
+    transform: skewX(-25deg);
+}
 

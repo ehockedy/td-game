@@ -41,5 +41,6 @@ export function generateClientConfig(config) {
         LOBBY_WINDOW_HEIGHT: LOBBY_WINDOW_HEIGHT,
         GAME_CODE_LEN: GAME_CODE_LEN,
         COLOUR: "0x" + randomHexString(6),  // TODO the player should be able to config re this - make the config object a class and have a set colour option
+        MAX_PLAYERS: config.MAX_PLAYERS,
     }
 }

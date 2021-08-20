@@ -4,8 +4,9 @@ const mapGenerator = require("./mapGenerator.js")
 class Session {
     constructor(socket, gameID, playerID, config) {
         this.sockets = {}  // All the connected players/ TODO I dont think this actually needs to be a map. Just keep ID as socket property.
+        this.players = {}
         this.gameID = gameID
-        this.maxConnections = 4
+        this.maxConnections = config.MAX_PLAYERS  // TODO enforce this
         this.config = config
 
         this.mapGenerator = new mapGenerator.MapGenerator(config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
@@ -19,6 +20,10 @@ class Session {
     addSocket(socket, playerID) {
         socket.join(this.gameID)
         this.sockets[playerID] = socket
+        this.players[playerID] = {
+            displayName: "Player " + (Object.keys(this.players).length + 1).toString(),
+            colour: "red",  // todo change
+        }
         if (this.hasStarted) {
             if (this.game.playerExists(playerID)) {
                 socket.emit("client/view/game")
@@ -27,9 +32,9 @@ class Session {
             }
         } else {
             // Send to self and all others in room
-            socket.emit("client/players/set", Object.keys(this.sockets))
-            socket.to(this.gameID).emit("client/players/set", Object.keys(this.sockets))
-            
+            socket.emit("client/players/set", this.players)
+            socket.to(this.gameID).emit("client/players/set", this.players)
+
             // Make socket just joined go to lobby
             socket.emit("client/view/lobby")
         }
