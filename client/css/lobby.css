@@ -1,10 +1,18 @@
 .lobby-grid {
     display: grid;
     grid-template-areas: 
-        "title gameCode"
-        "map players"
-        "options start";
+    "title gameCode"
+    "map players"
+    "options start";
     grid-template-columns: 1fr 1fr;
+}
+
+.title {
+    grid-area: "title";
+}
+
+.game-code {
+    grid-area: "gameCode"
 }
 
 .namePlace {
@@ -31,16 +39,28 @@
     margin: auto;
 }
 
+.map-container {
+    grid-area: "map";
+    /* text-align: center; */
+}
+
+.map-select {
+    width: 70%;
+
+    border-color: rgb(118, 118, 118);
+    border-style: ridge;
+    border-width: 5px;
+    box-shadow: 5px 3px;
+
+    /* transform: scale(0.2, 0.2) */
+}
+
 .player-names-container {
     grid-area: "players";
     display: grid;
     grid-template-columns: 1fr;
     right: 90%;
     width: 80%;
-}
-
-.title {
-    grid-area: "title";
 }
 
 .start-game {

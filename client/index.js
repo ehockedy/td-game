@@ -2,10 +2,9 @@ import { MainMenu } from "./js/views/main_menu_react.js"
 import { Lobby } from "./js/views/lobby_react.js"
 import { Game } from "./js/views/game_react.js"
 import { io } from "socket.io-client";
-import { GameMap } from "./js/components/ui_common/map.js"
+import { GameMapBackground } from "./js/components/ui_common/map.js"
 import React, { useEffect, useState } from "react";
 import { generateClientConfig } from "./js/constants.js"
-import { setConfig } from "react-hot-loader";
 
 function loadAssets() {
     return new Promise((resolve) => {
@@ -59,6 +58,7 @@ function Application(props) {
     const [gameID, setGameID] = useState()
     const [playerID, setPlayerID] = useState()
     const [players, setPlayers] = useState()
+    const [map, setMap] = useState()
     const config = generateClientConfig(props.config)
 
     useEffect(() => {
@@ -72,6 +72,9 @@ function Application(props) {
         socket.on("client/players/set", (players) => {
             setPlayers(players)
         })
+        socket.on("client/map/set", (map) => {
+            setMap(map)
+        })
         setSocket(socket)
         return () => socket.close()
     }, [])
@@ -81,7 +84,7 @@ function Application(props) {
             Game: {gameID}
             {
                 view == "main-menu" || view == "lobby" ? (
-                    <GameMap mapSpriteSize={config.SPRITE_SIZE_MAP}></GameMap>
+                    <GameMapBackground mapSpriteSize={config.SPRITE_SIZE_MAP}></GameMapBackground>
                 ) : <div></div>
             }
             {
@@ -89,7 +92,7 @@ function Application(props) {
                     <MainMenu socket={socket} setPlayerIDHandler={setPlayerID} setGameIDHandler={setGameID}></MainMenu>
                 ) :
                 view === "lobby" ? (
-                    <Lobby socket={socket} gameID={gameID} thisPlayer={playerID} players={players} maxPlayers={config.MAX_PLAYERS}></Lobby>
+                    <Lobby socket={socket} gameID={gameID} thisPlayer={playerID} players={players} config={config} mapStructure={map}></Lobby>
                 ) :
                 view === "game" ? (
                     <Game socket={socket} config={config} thisPlayer={playerID} players={players}></Game>
