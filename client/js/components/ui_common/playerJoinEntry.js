@@ -4,7 +4,7 @@ import "../../../css/lobby.css"
 
 export function NamePlace(props) {
     return <input
-                className="namePlace slanted-backwards display-box noselect"
+                className="name-place name-place-colour-active slanted-backwards display-box noselect"
                 type="text"
                 maxLength="10"
                 value={props.text}
@@ -15,7 +15,7 @@ export function NamePlace(props) {
 }
 
 export function NamePlaceEmpty(props) {
-    return <div className="namePlaceEmpty slanted-backwards display-box noselect">
-        <span className="namePlaceEmptyText">{props.initialValue}</span>
+    return <div className="name-place name-place-colour-waiting slanted-backwards display-box noselect">
+        <span className="name-place-text-waiting">{props.initialValue}</span>
     </div>
 }

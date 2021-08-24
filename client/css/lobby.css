@@ -15,30 +15,6 @@
     grid-area: "gameCode"
 }
 
-.namePlace {
-    background-color: rgb(230, 230, 230);
-    display: block;
-    font-size: 2.5em;
-    height: 1.5em;
-    letter-spacing: 0.1em;
-    margin: 2%;
-    text-align: center;
-}
-
-.namePlaceEmpty {
-    background-color: rgb(150, 150, 150);
-    display: block;
-    font-size: 2.5em;
-    height: 1.5em;
-    letter-spacing: 0.1em;
-    margin: 2%;
-    text-align: center;
-}
-
-.namePlaceEmptyText {
-    margin: auto;
-}
-
 /* Holds everything to do with the map generation */
 .map-regenerate-container {
     grid-area: "map";
@@ -72,12 +48,42 @@
     grid-column-start: 2;
 }
 
+/* Colour to use for name place of player in the lobby */
+.name-place-colour-active {
+    background-color: rgb(230, 230, 230);
+}
+
+/* Colour to use for name place when waiting for player to arrive */
+.name-place-colour-waiting {
+    background-color: rgb(150, 150, 150);
+}
+
+/* Generic name place styling */
+.name-place {
+    display: block;
+
+    font-size: 2.5em;
+    letter-spacing: 0.1em;
+    margin: 2%;
+
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+
+    height: 1.5em;
+    width: 60%;
+}
+
+/* Styling for the text in a name place waiting for player to join */
+.name-place-text-waiting {
+    margin: auto;
+}
+
+/* Container that holds all the name places */
 .player-names-container {
     grid-area: "players";
     display: grid;
     grid-template-columns: 1fr;
-    right: 90%;
-    width: 80%;
 }
 
 .start-game {
