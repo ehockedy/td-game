@@ -39,20 +39,37 @@
     margin: auto;
 }
 
-.map-container {
+/* Holds everything to do with the map generation */
+.map-regenerate-container {
     grid-area: "map";
-    /* text-align: center; */
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
 }
 
+/* Holds the map canvas */
+.map-container {
+    grid-column-start: 2;
+}
+
+/* The map canvas itself */
 .map-select {
-    width: 70%;
+    display: block;
+    width: 100%;
 
     border-color: rgb(118, 118, 118);
     border-style: ridge;
     border-width: 5px;
     box-shadow: 5px 3px;
+}
 
-    /* transform: scale(0.2, 0.2) */
+/* Button used to generate a new map layout */
+.map-regenerate-button {
+    display: block;
+    width: 20%;
+    height: 60%;
+    justify-self: end;
+    align-self: center;
+    grid-column-start: 2;
 }
 
 .player-names-container {

@@ -19,7 +19,8 @@ export class Lobby extends React.Component {
             <div className="lobby-grid">
                 <div className="title">Lobby</div>
                 <div className="game-code">GXRV</div>
-                <div className="map-container">
+                <div className="map-regenerate-container">
+                    <button className="map-regenerate-button slanted display-box button noselect" onClick={this.getNewMap}>Regenerate map</button>
                     <GameMapSelection
                         mapStructure={this.props.mapStructure} socket={this.props.socket}
                         height={this.props.config.MAP_HEIGHT}
@@ -39,7 +40,6 @@ export class Lobby extends React.Component {
                     { Array(this.props.config.MAX_PLAYERS - Object.keys(this.props.players).length).fill(0).map((_, idx) => <NamePlaceEmpty key={idx} initialValue="Waiting for players..."></NamePlaceEmpty>) }
                 </div>
                 <button className="start-game button display-box slanted" onClick={()=>{this.props.socket.emit("server/game/start")}}>Start game</button>
-                <button onClick={this.getNewMap}>Change map</button>
             </div>
         )
     }
