@@ -81,7 +81,6 @@ function Application(props) {
 
     return (
         <div>
-            Game: {gameID}
             {
                 view == "main-menu" || view == "lobby" ? (
                     <GameMapBackground mapSpriteSize={config.SPRITE_SIZE_MAP}></GameMapBackground>

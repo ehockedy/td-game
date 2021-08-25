@@ -17,16 +17,16 @@ export class Lobby extends React.Component {
     render() {
         return (
             <div className="lobby-grid">
-                <div className="title">Lobby</div>
-                <div className="game-code">GXRV</div>
+                <div className="game-code">Game code: {this.props.gameID}</div>
+                <div className="title"></div>
                 <div className="map-regenerate-container">
-                    <button className="map-regenerate-button slanted display-box button noselect" onClick={this.getNewMap}>Regenerate map</button>
                     <GameMapSelection
                         mapStructure={this.props.mapStructure} socket={this.props.socket}
                         height={this.props.config.MAP_HEIGHT}
                         width={this.props.config.MAP_WIDTH}
                         mapSpriteSize={this.props.config.SPRITE_SIZE_MAP}
                     ></GameMapSelection>
+                    <button className="map-regenerate-button slanted display-box button noselect" onClick={this.getNewMap}>Regenerate map</button>
                 </div>
                 <div className="player-names-container noselect">
                     { Object.keys(this.props.players).map((playerID) =>
@@ -39,7 +39,7 @@ export class Lobby extends React.Component {
                         ) }
                     { Array(this.props.config.MAX_PLAYERS - Object.keys(this.props.players).length).fill(0).map((_, idx) => <NamePlaceEmpty key={idx} initialValue="Waiting for players..."></NamePlaceEmpty>) }
                 </div>
-                <button className="start-game button display-box slanted" onClick={()=>{this.props.socket.emit("server/game/start")}}>Start game</button>
+                <button className="start-game button display-box slanted noselect" onClick={()=>{this.props.socket.emit("server/game/start")}}>Start game</button>
             </div>
         )
     }
