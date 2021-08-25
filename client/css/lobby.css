@@ -28,13 +28,14 @@ div, button, input {
 
 .game-code {
     grid-area: "gameCode";
-    font-size: 5em;
+    font-size: 4vw;
     justify-self: start;
     align-self: center;
     margin-top: 4%;
-    margin-left: 15%;
+    margin-left: 14%;
     color: #784421;
     text-shadow: 4px 4px black;
+    letter-spacing: 0.05em;
 }
 
 /* Holds everything to do with the map generation */
@@ -66,11 +67,12 @@ div, button, input {
 /* Button used to generate a new map layout */
 .map-regenerate-button {
     display: block;
-    width: 20%;
-    height: 60%;
+    /* width: 20%; */
+    /* height: 50%; */
     justify-self: end;
     align-self: top;
     grid-column-start: 2;
+    font-size: 2vw;
 }
 
 /* Colour to use for name place of player in the lobby */
@@ -87,7 +89,7 @@ div, button, input {
 .name-place {
     display: block;
 
-    font-size: 2.5em;
+    font-size: 2vw;
     letter-spacing: 0.1em;
     margin-right: 5%;
     margin-bottom: 6%;
@@ -96,8 +98,9 @@ div, button, input {
     align-self: center;
     justify-self: center;
 
-    height: 1.5em;
+    /* height: 1.5em; */
     width: 60%;
+    /* height: 40%; */
 }
 
 /* Styling for the text in a name place waiting for player to join */
@@ -118,7 +121,7 @@ div, button, input {
     height: 50%;
     align-self: center;
     justify-self: center;
-    font-size: 2.5em;
+    font-size: 2vw;
 }
 
 .colourPicker {
