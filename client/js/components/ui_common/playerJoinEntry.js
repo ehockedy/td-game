@@ -9,7 +9,7 @@ export function NamePlace(props) {
                 maxLength="10"
                 value={props.text}
                 spellCheck="false"
-                onChange={(event) => {props.onChange(event.target.value)}}
+                onChange={(event) => {props.onChange(event.target.value.toUpperCase())}}
                 disabled={!props.enabled}
             />
 }

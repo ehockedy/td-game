@@ -2,22 +2,6 @@ import { Button } from "../components/ui_common/display_box.js"
 import "../../css/main_menu.css"
 import "../../css/common.css"
 
-class Title extends React.Component {
-    render() {
-        return <h1 style={{
-            width: "50%",  /// width of element. % is percentage of the containing block
-            textAlign: "center",
-            position: "absolute",  // positioned relative to nearest ancestor
-            left: this.props.leftPos + "%",  // sets position from left edge
-            top: this.props.topPos + "%",  // sets position from top edge
-            transform: "translate(-50%, -50%)"  // move so that is centered based on centre of element, not top left corner
-        }}
-        >
-            {this.props.text}
-        </h1>
-    }
-}
-
 function MenuOption(props) {
     return (
         <Button

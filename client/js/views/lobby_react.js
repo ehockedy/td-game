@@ -32,7 +32,7 @@ export class Lobby extends React.Component {
                     { Object.keys(this.props.players).map((playerID) =>
                         <NamePlace
                         key={playerID}
-                        text={this.props.players[playerID].displayName}
+                        text={this.props.players[playerID].displayName.toUpperCase()}
                         onChange={(value) => { this.props.socket.emit("server/player/set/name", playerID, value) }}
                         enabled={playerID === this.props.thisPlayer}
                         ></NamePlace>

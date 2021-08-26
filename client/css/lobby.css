@@ -67,8 +67,7 @@ div, button, input {
 /* Button used to generate a new map layout */
 .map-regenerate-button {
     display: block;
-    /* width: 20%; */
-    /* height: 50%; */
+    height: 2em;
     justify-self: end;
     align-self: top;
     grid-column-start: 2;
@@ -91,8 +90,8 @@ div, button, input {
 
     font-size: 2vw;
     letter-spacing: 0.1em;
-    margin-right: 5%;
-    margin-bottom: 6%;
+    margin-right: 1em;
+    margin-bottom: 1.5em;
 
     text-align: center;
     align-self: center;
@@ -118,7 +117,7 @@ div, button, input {
 .start-game {
     grid-area: start;
     width: 30%;
-    height: 50%;
+    height: 2em;
     align-self: center;
     justify-self: center;
     font-size: 2vw;
