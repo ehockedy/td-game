@@ -1,0 +1,21 @@
+.colour-picker-container {
+    display: inline-grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+
+    width: 16%;
+    background-color: rgb(230, 230, 230);
+    padding: 1%;
+    border-radius: 4px;
+    border-style: ridge;
+    border-color: rgb(118,118,118);
+    border-width: 5px;
+    box-shadow: 5px 3px;
+}
+
+.colour-picker-colour {
+    width: 100%;
+    padding-top: 100%;
+    align-self: top;
+    justify-self: center;
+}

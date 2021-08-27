@@ -31,10 +31,10 @@ export class Lobby extends React.Component {
                 <div className="player-names-container noselect">
                     { Object.keys(this.props.players).map((playerID) =>
                         <NamePlace
-                        key={playerID}
-                        text={this.props.players[playerID].displayName.toUpperCase()}
-                        onChange={(value) => { this.props.socket.emit("server/player/set/name", playerID, value) }}
-                        enabled={playerID === this.props.thisPlayer}
+                            key={playerID}
+                            text={this.props.players[playerID].displayName.toUpperCase()}
+                            onChange={(value) => { this.props.socket.emit("server/player/set/name", playerID, value) }}
+                            enabled={playerID === this.props.thisPlayer}
                         ></NamePlace>
                         ) }
                     { Array(this.props.config.MAX_PLAYERS - Object.keys(this.props.players).length).fill(0).map((_, idx) => <NamePlaceEmpty key={idx} initialValue="Waiting for players..."></NamePlaceEmpty>) }
