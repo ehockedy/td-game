@@ -1,9 +1,7 @@
+/* Contains everyting in the colour picker */
 .colour-picker-container {
-    display: inline-grid;
-    align-items: center;
-    grid-template-columns: repeat(3, 1fr);
+    width: 20%;
 
-    width: 16%;
     background-color: rgb(230, 230, 230);
     padding: 1%;
     border-radius: 4px;
@@ -11,11 +9,27 @@
     border-color: rgb(118,118,118);
     border-width: 5px;
     box-shadow: 5px 3px;
+
+    margin-left: 5%;
+    text-align: center; 
 }
 
+/* Container for the colour squares */
+.colour-picker-colour-container {
+    display: inline-grid;
+    align-items: center;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* An individual colour square */
 .colour-picker-colour {
     width: 100%;
     padding-top: 100%;
     align-self: top;
     justify-self: center;
+}
+
+.colour-picker-colour-name {
+    font-size: 1vw;
 }

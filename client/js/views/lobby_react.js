@@ -18,16 +18,6 @@ export class Lobby extends React.Component {
         return (
             <div className="lobby-grid">
                 <div className="game-code">Game code: {this.props.gameID}</div>
-                <div className="title"></div>
-                <div className="map-regenerate-container">
-                    <GameMapSelection
-                        mapStructure={this.props.mapStructure} socket={this.props.socket}
-                        height={this.props.config.MAP_HEIGHT}
-                        width={this.props.config.MAP_WIDTH}
-                        mapSpriteSize={this.props.config.SPRITE_SIZE_MAP}
-                    ></GameMapSelection>
-                    <button className="map-regenerate-button slanted display-box button noselect" onClick={this.getNewMap}>Regenerate map</button>
-                </div>
                 <div className="player-names-container noselect">
                     { Object.keys(this.props.players).map((playerID) =>
                         <NamePlace
@@ -38,6 +28,15 @@ export class Lobby extends React.Component {
                         ></NamePlace>
                         ) }
                     { Array(this.props.config.MAX_PLAYERS - Object.keys(this.props.players).length).fill(0).map((_, idx) => <NamePlaceEmpty key={idx} initialValue="Waiting for players..."></NamePlaceEmpty>) }
+                </div>
+                <div className="map-regenerate-container">
+                    <GameMapSelection
+                        mapStructure={this.props.mapStructure} socket={this.props.socket}
+                        height={this.props.config.MAP_HEIGHT}
+                        width={this.props.config.MAP_WIDTH}
+                        mapSpriteSize={this.props.config.SPRITE_SIZE_MAP}
+                    ></GameMapSelection>
+                    <button className="map-regenerate-button slanted display-box button noselect" onClick={this.getNewMap}>Regenerate map</button>
                 </div>
                 <button className="start-game button display-box slanted noselect" onClick={()=>{this.props.socket.emit("server/game/start")}}>Start game</button>
             </div>

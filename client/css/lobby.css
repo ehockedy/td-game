@@ -15,10 +15,12 @@ div, button, input {
     margin-right: 7%;
     margin-top: 2%;
     margin-bottom: 2%;
+
+    row-gap: 0px;
 }
 
 .title {
-    grid-area: "title";
+    grid-area: title;
     font-size: 4em;
     margin-left: 16%;
     margin-top: 4%;
@@ -27,7 +29,7 @@ div, button, input {
 }
 
 .game-code {
-    grid-area: "gameCode";
+    grid-area: gameCode;
     font-size: 4vw;
     justify-self: start;
     align-self: center;
@@ -40,7 +42,7 @@ div, button, input {
 
 /* Holds everything to do with the map generation */
 .map-regenerate-container {
-    grid-area: "map";
+    grid-area: map;
     display: grid;
     grid-template-columns: 15% 80% 5%;
 }
@@ -91,26 +93,19 @@ div, button, input {
 
     font-size: 2vw;
     letter-spacing: 0.1em;
-    margin-bottom: 1.5em;
 
-    align-self: center;
-    justify-self: left;
     text-align: center;
-
-    /* height: 1.5em; */
     width: 70%;
-    /* height: 40%; */
 }
 
+/* Name place for the user where they can enter their name an pick colour.
+   Contains name place and colour picker */
 .name-place-user {
+    display: flex;
     grid-column-start: 2;
-    display: inline;
-
-}
-
-.colour-picker {
-    /* width: 100%; */
-    transform: rotate(270deg) scaleX(-1);
+    align-items: center;
+    justify-content: left;
+    width: 100%;
 }
 
 /* Styling for the text in a name place waiting for player to join */
@@ -120,9 +115,13 @@ div, button, input {
 
 /* Container that holds all the name places */
 .player-names-container {
-    grid-area: "players";
+    grid-area: players;
     display: grid;
     grid-template-columns: 10% 90%;
+    grid-auto-rows: 1fr;
+    align-items: center;
+    justify-items: left;
+    margin-top: 10%;
 }
 
 .start-game {
@@ -133,7 +132,3 @@ div, button, input {
     justify-self: center;
     font-size: 2vw;
 }
-
-/* .colourPicker {
-    transform: rotate(270deg) scaleX(-1);
-} */
