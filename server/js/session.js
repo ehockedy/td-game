@@ -65,6 +65,12 @@ class Session {
             socket.to(this.gameID).emit("client/players/set", this.players)
         })
 
+        socket.on("server/player/set/colour", (playerID, colour) => {
+            this.players[playerID].colour = colour
+            socket.emit("client/players/set", this.players)
+            socket.to(this.gameID).emit("client/players/set", this.players)
+        })
+
         socket.on("server/game/start", ()=> {
             if (!this.hasStarted) {
                 this.game = new game.Game(this.map)

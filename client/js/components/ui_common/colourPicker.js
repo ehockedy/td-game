@@ -26,7 +26,7 @@ export class ColourPicker extends React.Component {
     }
 
     handleMouseClick(colour) {
-        console.log(colour)
+        this.props.onChange(colour)
     }
 
     render() {
