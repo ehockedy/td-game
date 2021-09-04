@@ -5,8 +5,6 @@ import  "../../../css/common.css"
 export class ColourPicker extends React.Component {
     constructor(props) {
         super(props)
-        this.colours = ["#CC3344", "#44CC11", "#2244DD", "#22DDDD",
-                        "#DDDD33", "#90B4A8", "#99B270", "#17EEDD"]
         this.activeColourName = "Pick a colour"
 
         this.handleMouseOver = this.handleMouseOver.bind(this);
@@ -33,14 +31,15 @@ export class ColourPicker extends React.Component {
         return (
             <span className="colour-picker-container">
                 <span className="colour-picker-colour-container">
-                    {this.colours.map((colour) => {
+                    {this.props.colours.map((colour) => {
                         return <div
-                        className="colour-picker-colour"
-                        onMouseOver={this.handleMouseOver}
-                        onMouseLeave={this.handleMouseLeave}
-                        onClick={()=>{this.handleMouseClick(colour)}}
-                        key={colour}
-                        style={{backgroundColor:colour}}></div>
+                            className="colour-picker-colour"
+                            onMouseOver={this.handleMouseOver}
+                            onMouseLeave={this.handleMouseLeave}
+                            onClick={()=>{this.handleMouseClick(colour.code)}}
+                            key={colour.name}
+                            style={{backgroundColor:colour.code}}>
+                        </div>
                     })}
                 </span>
                 <div className="colour-picker-colour-name">{this.activeColourName}</div>

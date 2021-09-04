@@ -2,5 +2,11 @@
     "MAP_HEIGHT": 12,
     "MAP_WIDTH": 26,
     "SUBGRID_SIZE": 95,
-    "MAX_PLAYERS": 4
+    "MAX_PLAYERS": 4,
+    "colours": [
+        {
+            "name": "red",
+            "code": "#FF0000"
+        }
+    ]
 }

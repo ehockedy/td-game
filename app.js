@@ -57,7 +57,7 @@ function randomAlphaCharString(len) {
   return randomString
 }
 
-function runServer() {
+function runServer(gameConfig) {
   // First set up http server to serve index.html and its included files
   app.use(express.static(path.resolve(__dirname, 'build/')));
   app.use(express.static(path.resolve(__dirname, './')));  // TODO change?
@@ -87,7 +87,7 @@ function runServer() {
       while(gameID in games) gameID = randomAlphaCharString(4)  // Generate new ID if one already exists
       console.log("Client at " + socket.handshake.address + " starting game " + gameID)
       socket.playerID = socket.handshake.address + gameID
-      games[gameID] = new session.Session(socket, gameID, socket.playerID, config)
+      games[gameID] = new session.Session(socket, gameID, socket.playerID, gameConfig)
       callback(gameID, socket.playerID)
     });
 
@@ -117,9 +117,9 @@ function runServer() {
 }
 
 // Main entry point to server code
-let config = loadGameConfig()
-if (parseGameConfig(config)) {
-  runServer()
+let gameConfig = loadGameConfig()
+if (parseGameConfig(gameConfig)) {
+  runServer(gameConfig)
 } else {
   console.log("Config not valid, exiting")
   process.exit(1)

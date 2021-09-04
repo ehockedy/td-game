@@ -17,12 +17,16 @@ class Session {
         this.addSocket(socket, playerID)
     }
 
+    getPlayerCount() {
+        return Object.keys(this.players).length
+    }
+
     addSocket(socket, playerID) {
         socket.join(this.gameID)
         this.sockets[playerID] = socket
         this.players[playerID] = {
-            displayName: "Player " + (Object.keys(this.players).length + 1).toString(),
-            colour: "red",  // todo change
+            displayName: "Player " + (this.getPlayerCount() + 1).toString(),
+            colour: this.config.colours[this.getPlayerCount()].code,
         }
         if (this.hasStarted) {
             if (this.game.playerExists(playerID)) {

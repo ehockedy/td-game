@@ -17,6 +17,7 @@ export function NamePlace(props) {
             ></input>
             <ColourPicker
                 onChange={props.onColourChange}
+                colours={props.colours}
             ></ColourPicker>
         </div>
 }

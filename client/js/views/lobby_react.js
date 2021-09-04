@@ -27,6 +27,7 @@ export class Lobby extends React.Component {
                             onColourChange={(colour) => {this.props.socket.emit("server/player/set/colour", playerID, colour)}}
                             enabled={playerID === this.props.thisPlayer}
                             colour={this.props.players[playerID].colour}
+                            colours={this.props.config.COLOURS}
                         ></NamePlace>
                         ) }
                     { Array(this.props.config.MAX_PLAYERS - Object.keys(this.props.players).length).fill(0).map((_, idx) => <NamePlaceEmpty key={idx} initialValue="Waiting for players..."></NamePlaceEmpty>) }
