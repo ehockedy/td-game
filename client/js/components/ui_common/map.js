@@ -20,8 +20,6 @@ class GameMap extends React.Component {
             this.pixi_cnt.appendChild(canvas);
         }
     };
-
-
 }
 
 // Used as the background for the main menu and lobby

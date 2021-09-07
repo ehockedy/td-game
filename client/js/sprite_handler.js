@@ -15,7 +15,8 @@ export class SpriteHandler {
         this.activeClickable
 
         // View scaling
-        this.margin = 20 // The margin to include in every aspect ration calculation, to ensure scaled view does not quite touch the window edges
+        this.margin = 16 // The margin to include in every aspect ration calculation, to ensure scaled view does not quite touch the window edges
+                         //  If it does, a scrollbar appears
         this.globalResizeMultiplier = 1 // The scale of the view, relative to the previous scale
     }
 
@@ -44,7 +45,7 @@ export class SpriteHandler {
             this.height_px *= resizeMultiplier
             this.globalResizeMultiplier = resizeMultiplier
 
-            // Editing the CSS seems to be the simplets way - all the sprites scale too
+            // Editing the CSS seems to be the simplest way - all the sprites scale too
             this.app.view.style.width = this.width_px + 'px'
             this.app.view.style.height = this.height_px + 'px'
         }

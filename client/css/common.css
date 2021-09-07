@@ -30,6 +30,13 @@
     box-shadow: 5px 3px;
 }
 
+/* Like a rare pokemon card */
+.display-box-shadowless {
+    border-color: rgb(118, 118, 118);
+    border-style: ridge;
+    border-width: 5px;
+}
+
 /* Explicitly decide button (or button-like element) behaviour */
 .button {
     cursor: pointer;
