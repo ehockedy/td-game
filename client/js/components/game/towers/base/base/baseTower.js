@@ -15,7 +15,8 @@ export class BaseTower extends BaseComponent {
             else spriteTextures.push(textures[textureName])
         }
 
-        this.colour = colour
+        // PIXI requires 0x format for colours, so convert if colour given in # format
+        this.colour = colour.replace('#', '0x')
 
         // Create the sprites from the loaded textures
         // Store them all in their own containers for consistency

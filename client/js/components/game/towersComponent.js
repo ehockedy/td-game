@@ -17,9 +17,10 @@ export class TowersComponent extends BaseComponent {
     }
 
     // Setter for tower config
-    setData(towerConfig, playerConfig) {
+    setData(towerConfig, playerConfig, thisPlayer) {
         this.towerConfig = towerConfig
         this.playerConfig = playerConfig
+        this.thisPlayer = thisPlayer
     }
 
 
@@ -31,7 +32,7 @@ export class TowersComponent extends BaseComponent {
         const x = col * this.mapSpriteSize + this.mapSpriteSize / 2;
         const y = row * this.mapSpriteSize + this.mapSpriteSize / 2;
         let sprite = new DeployedTower(type, name, x, y, this.towerConfig, playerID, this.playerConfig[playerID].colour)
-        if (this.playerConfig[playerID].isThisPlayer) { // TODO check if the playerID exist
+        if (playerID == this.thisPlayer) { // TODO check if the playerID exist
             this.observers.forEach((observer) => {sprite.subscribe(observer)})
         } else {
             sprite.disableInteractivity()
@@ -87,7 +88,7 @@ export class TowersComponent extends BaseComponent {
             }
 
             // Update the tower statsistics, but only store stats for towers a playerID owns
-            if (tower.playerID == this.playerConfig[tower.playerID].isThisPlayer) {
+            if (tower.playerID == this.thisPlayer) {
                 towerToUpdate.update(tower.stats)
             }
         })

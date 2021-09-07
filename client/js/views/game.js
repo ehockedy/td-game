@@ -16,17 +16,13 @@ import { COLOURS } from "../components/ui_common/style.js"
  * It also takes updates from the server and passes the update data to the relevant components
  */
 export class GameRenderer {
-    constructor(socket, spriteHandler, config, thisPlayerID) {
+    constructor(socket, spriteHandler, config, thisPlayerID, players) {
         this.spriteHandler = spriteHandler
         this.socket = socket
         this.round = 1
 
         this.thisPlayerID = thisPlayerID
-        this.playerData = {}
-        this.playerData[this.thisPlayerID] = {
-            "colour": "0x0066AA",  // TODO CHANGE ME
-            "isThisPlayer": true
-        }
+        this.players = players
 
         // Calculate the border around the play area. This ara will be renedered but path/towers will not be placed here
         // but the map will be rendered there.
@@ -68,8 +64,8 @@ export class GameRenderer {
         return new Promise((resolve) => {
             fetch("shared/json/towers.json").then((response) => {
                 response.json().then((towerData) => {
-                    this.tm.setData(towerData, this.thisPlayerID, this.playerData[this.thisPlayerID].colour),
-                    this.tc.setData(towerData, this.playerData),
+                    this.tm.setData(towerData, this.thisPlayerID, this.players[this.thisPlayerID].colour),
+                    this.tc.setData(towerData, this.players, this.thisPlayerID),
                     resolve()
                 })
             })
