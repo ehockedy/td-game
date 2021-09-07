@@ -5,8 +5,36 @@
     "MAX_PLAYERS": 4,
     "colours": [
         {
-            "name": "red",
-            "code": "#FF0000"
+            "name": "deep-coral",
+            "code": "#e85538"
+        },
+        {
+            "name": "banana-skin",
+            "code": "#e6d265"
+        },
+        {
+            "name": "cool-mint",
+            "code": "#6bf291"
+        },
+        {
+            "name": "nice-day",
+            "code": "#4bbcdb"
+        },
+        {
+            "name": "easter-egg",
+            "code": "#99714e"
+        },
+        {
+            "name": "lime-time",
+            "code": "#abd152"
+        },
+        {
+            "name": "fresh-flower",
+            "code": "#e879b8"
+        },
+        {
+            "name": "chocolate-wrapper",
+            "code": "#8563b0"
         }
     ]
 }
