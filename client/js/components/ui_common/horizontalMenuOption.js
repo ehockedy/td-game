@@ -95,6 +95,16 @@ class HorizontalMenuOption extends BaseComponent {
                 this.baseContentOffsetX = -this.menuSprite.width
                 break
             //   _________
+            //   \        |
+            //    \_______|
+            //
+            case "right-flipped":
+                this._generateSprite(width_px, tint, filename, flatEndSize_px, slopedEndSize_px, 0, -xDiff_px)
+                this.menuSprite.scale.set(-1, 1)
+                this.shadowSprite.scale.set(-1, 1)
+                this.baseContentOffsetX = -this.menuSprite.width
+                break
+            //   _________
             //  /        /
             // /________/
             //

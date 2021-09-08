@@ -67,6 +67,10 @@ export function getPositionWithinEquallySpacedObjects(objectNumber, totalObjects
     return (spacing + objectWidth/2) + ((spacing + objectWidth) * ((objectNumber-1) % totalObjects))
 }
 
+export function colourHash2Hex(colour_code) {
+    return colour_code.replace("#", "0x")
+}
+
 // TODO add tests
 function combineColourHexValues(v1, v2, combinationFn) {
     let result = "0x"  // Assum e hex string starts with '0x', might be '#'

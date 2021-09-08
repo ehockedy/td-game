@@ -27,13 +27,18 @@ export class GameRenderer {
         // Calculate the border around the play area. This ara will be renedered but path/towers will not be placed here
         // but the map will be rendered there.
         this.maxBorderSize = Math.max(config.BORDER_L, config.BORDER_R, config.BORDER_T, config.BORDER_B) / config.SPRITE_SIZE_MAP
+        const rhs = config.MAP_WIDTH + config.BORDER_R;
+        const top_bottom_gap = 10
 
-        let toolbarY = config.MAP_HEIGHT + config.BORDER_B/4 - 10
+        let toolbarY = config.MAP_HEIGHT + config.BORDER_B/4 - top_bottom_gap
         this.tm = new TowerMenu(
             config.MAP_WIDTH, config.MAP_HEIGHT + config.TOWER_MENU_HEIGHT, 0, 0, // Component w, h, x, y
             config.TOWER_MENU_WIDTH, config.TOWER_MENU_HEIGHT, -config.BORDER_L, toolbarY // Toolbar w, h, x, y
         )
-        this.ut = new PlayersToolbar(config.PLAYER_TOOLBAR_WIDTH, config.PLAYER_TOOLBAR_HEIGHT, 0, 0)
+        this.ut = new PlayersToolbar(this.players)
+        this.ut.x = rhs
+        this.ut.y = top_bottom_gap
+
         this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_MAP)
         this.ec = new EnemiesComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
         this.bc = new BulletsComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
@@ -48,12 +53,12 @@ export class GameRenderer {
         this.gameSpace.x = config.BORDER_L
         this.gameSpace.y = config.BORDER_T
 
-        this.startRoundButton = new StartRoundButton(config.MAP_WIDTH + config.BORDER_R, toolbarY)
+        this.startRoundButton = new StartRoundButton(rhs, toolbarY)
 
-        this.moneyCounter = new Counter(config.MAP_WIDTH + config.BORDER_R, toolbarY, 180, "Money", 0, COLOURS.MONEY)
+        this.moneyCounter = new Counter(rhs, toolbarY, 180, "Money", 0, COLOURS.MONEY)
         this.moneyCounter.y -= (this.moneyCounter.height + 10)
 
-        this.livesCounter = new Counter(config.MAP_WIDTH + config.BORDER_R, this.moneyCounter.y, 160, "Lives", 100)
+        this.livesCounter = new Counter(rhs, this.moneyCounter.y, 160, "Lives", 100)
         this.livesCounter.y -= (this.livesCounter.height + 10)
 
         this.setServerEventListeners()
@@ -169,7 +174,7 @@ export class GameRenderer {
         })
 
         this.spriteHandler.registerContainer(this.gameSpace)
-        //this.spriteHandler.registerContainer(this.ut)
+        this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.startRoundButton)
         this.spriteHandler.registerContainer(this.livesCounter)
         this.spriteHandler.registerContainer(this.moneyCounter)
