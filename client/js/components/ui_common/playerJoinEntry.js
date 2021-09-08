@@ -15,10 +15,13 @@ export function NamePlace(props) {
                 disabled={!props.enabled}
                 style={{backgroundColor: props.colour}}
             ></input>
-            <ColourPicker
-                onChange={props.onColourChange}
-                colours={props.colours}
-            ></ColourPicker>
+            {/* If enabled then means it's the user, so need to have a colour picker */}
+            {props.enabled ?
+                <ColourPicker
+                    onChange={props.onColourChange}
+                    colours={props.colours}
+                ></ColourPicker> : null
+            }
         </div>
 }
 
