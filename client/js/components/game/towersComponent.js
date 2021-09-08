@@ -23,7 +23,6 @@ export class TowersComponent extends BaseComponent {
         this.thisPlayer = thisPlayer
     }
 
-
     subscribe(observer) {
         this.observers.push(observer)
     }
@@ -31,11 +30,10 @@ export class TowersComponent extends BaseComponent {
     addPlacedTower(type, name, playerID, row, col) {
         const x = col * this.mapSpriteSize + this.mapSpriteSize / 2;
         const y = row * this.mapSpriteSize + this.mapSpriteSize / 2;
-        let sprite = new DeployedTower(type, name, x, y, this.towerConfig, playerID, this.playerConfig[playerID].colour)
-        if (playerID == this.thisPlayer) { // TODO check if the playerID exist
+        const isThisPlayer = (playerID == this.thisPlayer)
+        let sprite = new DeployedTower(type, name, x, y, this.towerConfig, playerID, this.playerConfig[playerID].colour, isThisPlayer)
+        if (isThisPlayer) { // TODO check if the playerID exist
             this.observers.forEach((observer) => {sprite.subscribe(observer)})
-        } else {
-            sprite.disableInteractivity()
         }
         this.addChild(sprite)
     }

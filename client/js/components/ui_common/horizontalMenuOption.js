@@ -184,12 +184,12 @@ export class ButtonHorizontalMenuOption extends HorizontalMenuOption {
         this.menuSprite
             .on("mouseover", () => { this._lighten() })
             .on("mouseout", () => { this._resetColour() })
-            .on("mousedown", () => { this._press() })
-            .on("mouseup", () => {
+            .on("pointerdown", () => { this._press() })
+            .on("pointerup", () => {
                 this._release()
                 this._select()
             })
-            .on("mouseupoutside", () => {
+            .on("pointerupoutside", () => {
                 this._release()
             })
     }

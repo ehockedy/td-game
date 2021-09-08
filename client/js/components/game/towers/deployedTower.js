@@ -4,8 +4,8 @@ const pullBackDistance = 15  // Move back to this maximum during the first numbe
 
 // Tower class that represnets a tower placed on the map
 export class DeployedTower extends BaseInteractiveTower {
-    constructor(type, name, x, y, towerConfig, playerID, colour) {
-        super(type, name, towerConfig, colour)
+    constructor(type, name, x, y, towerConfig, playerID, colour, isThisPlayer) {
+        super(type, name, towerConfig, colour, isThisPlayer)
         this.playerID = playerID
 
         this.shootAnimationCount = 0
@@ -21,16 +21,14 @@ export class DeployedTower extends BaseInteractiveTower {
         this._rotation = 0
 
         // Interaction behaviours
-        this.towerSprite
+        if (isThisPlayer) {
+            this.towerSprite
              .on("click", () => { this._onClick() })
+             .on("tap", () => { this._onClick() })
+        }
         this.selected = false  // Whether this tower has been clicked on
 
         this.init()
-    }
-
-    disableInteractivity() {
-        this.interactive = false
-        this.buttonMode = false
     }
 
     setActive() {

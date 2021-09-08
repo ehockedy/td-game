@@ -2,15 +2,17 @@ import { BaseTower } from "./base/baseTower.js"
 
 // Base tower class the contains functionality for all interactive towers
 export class BaseInteractiveTower extends BaseTower {
-    constructor(type, name, towerConfig, colour) {
-        super(type, name, towerConfig, colour)
+    constructor(type, name, towerConfig, colour, isThisPlayer) {
+        super(type, name, towerConfig, colour, isThisPlayer)
 
         // Set the interactive elements
         // The towerSprite is the bit that is to be clicked
-        this.interactive = true
-        this.towerSprite.interactive = true
-        this.towerSprite.buttonMode = true
+        if (isThisPlayer) {
+            this.interactive = true
+            this.towerSprite.interactive = true
+            this.towerSprite.buttonMode = true
 
+        }
         // Add a circle that shows the range the tower can detect enemies in
         let range = towerConfig[type].gameData.seekRange
         this.rangeCircle = this.generateRangeSprite(range, this.textureSize)

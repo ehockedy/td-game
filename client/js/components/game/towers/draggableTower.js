@@ -2,12 +2,11 @@ import { BaseInteractiveTower } from "./base/baseInteractiveTower.js"
 import { PlaceTowerMenu } from "../ui/placeTowerMenu.js"
 import { avgColourHexValues } from "../../../tools.js"
 import { COLOURS } from "../../ui_common/style.js"
-import { StaticHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
 
 // Tower class that represents a tower in the menu the user can drag around and buy
 export class DraggableTower extends BaseInteractiveTower {
     constructor(type, name, towerConfig, originX, originY, colour) {
-        super(type, name, towerConfig, colour)
+        super(type, name, towerConfig, colour, true)
         this.cost = towerConfig[type].cost
 
         // The coordinates that the tower is bound to
