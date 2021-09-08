@@ -55,11 +55,8 @@ export class GameRenderer {
 
         this.startRoundButton = new StartRoundButton(rhs, toolbarY)
 
-        this.moneyCounter = new Counter(rhs, toolbarY, 180, "Money", 0, COLOURS.MONEY)
-        this.moneyCounter.y -= (this.moneyCounter.height + 10)
-
-        this.livesCounter = new Counter(rhs, this.moneyCounter.y, 160, "Lives", 100)
-        this.livesCounter.y -= (this.livesCounter.height + 10)
+        this.moneyCounter = new Counter(config.TOWER_MENU_WIDTH, toolbarY, 200, "Money", 0, COLOURS.MENU_SANDY)
+        this.livesCounter = new Counter(config.TOWER_MENU_WIDTH + this.moneyCounter.width, toolbarY, 200, "Lives", 100, COLOURS.MENU_SANDY)
 
         this.setServerEventListeners()
         this.localEventEmitter = this.setServerEventEmitter()

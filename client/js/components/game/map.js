@@ -194,7 +194,17 @@ export class MapComponent extends BaseComponent {
         if (includeBase) {
             let baseCampContainer = this.createBaseCampSprite(border)
             baseCampContainer.x = this.cols * this.mapSpriteSize
-            baseCampContainer.y = Math.floor(this.rows / 2) * this.mapSpriteSize
+
+            let finalRow
+            for (let r = 0; r < this.rows; r++) {
+                if (this.getGridValue(mapStructure, r, this.cols-1) == 'r') {
+                    // Have find the final row - only one path sprite present and it's a right tile
+                    finalRow = r
+                    break
+                }
+            }
+
+            baseCampContainer.y = finalRow * this.mapSpriteSize
             baseCampContainer.doNotCacheAsBitmap = true
             this.baseCamp.addChild(baseCampContainer)
         }

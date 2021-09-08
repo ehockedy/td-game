@@ -21,12 +21,17 @@ class MapGenerator {
      */
     resetGrid() {
         // First square on the path
-        this.row_start = Math.floor(this.height/2)
+        this.row_start = Math.floor(1 * this.height / 4)
+        if (this.row_start % 2 == 1) this.row_start -= 1  // ensure is even
+
         this.col_start = 0
 
         // The current position whilst generating the map
         this.row = this.row_start
         this.col = this.col_start
+
+        this.finalRow = Math.floor(3 * this.height / 4)
+        if (this.finalRow % 2 == 1) this.finalRow -= 1  // ensure is even
 
         this.map = []
         for (var i = 0; i < this.height; i++) {
@@ -63,7 +68,7 @@ class MapGenerator {
         var left_penalty = 0 // Value removed to max distance moved left (so paths don't go too far back on themselves)
 
         if (this.col == this.width - 1) { // In the final column, so move one to the right and finish
-            if (this.row == Math.floor(this.height/2)) return [['r', 1]]
+            if (this.row == this.finalRow) return [['r', 1]]
             else return []
         }
 
@@ -178,8 +183,8 @@ class MapGenerator {
     }
 
     isComplete() {
-        // True if in the final column the middle row
-        return this.map[Math.floor(this.height/2)][this.width - 1]["value"] != 'x'
+        // True if in the final column the designated end row
+        return this.map[this.finalRow][this.width - 1]["value"] != 'x'
     }
 
     evaluatePathDistribution() {
@@ -394,7 +399,7 @@ class MapGenerator {
         // Reset the current state
         this.resetGrid()
 
-        // Produce paths until conpletion conditions met
+        // Produce paths until completion conditions met
         var undos = 1
         while (!this.isComplete()) {
             var valid_moves = (this.move_history.length) ? this.getValidDirs() : [['r', 1]]
