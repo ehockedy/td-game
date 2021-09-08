@@ -18,11 +18,12 @@ Sprites are all hand created as vector images using [Inkscape](https://inkscape.
 * Save game functionality (coming soon)
 
 **Progress Update**\
-This is a snapshot of gameplay as of 16/08/2021
+This is a snapshot of gameplay as of 08/09/2021
 
 Note that frame rate in the .gif is not representative of actual game frame rate.
 
-![](docs/demo.gif)
+![](docs/menu_demo.gif)
+![](docs/game_demo.gif)
 
 **Deploying app for development**
 Start webpack to dynamically build code during editing

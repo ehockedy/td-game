@@ -28,8 +28,8 @@ export class GameMapBackground extends GameMap {
         const width = screen.width + props.mapSpriteSize
         const height = screen.height + props.mapSpriteSize
 
-        const cols = Math.floor(width / props.mapSpriteSize)
-        const rows = Math.floor(height / props.mapSpriteSize)
+        const cols = Math.floor(width / props.mapSpriteSize) + 1
+        const rows = Math.floor(height / props.mapSpriteSize) + 1
 
         super(props, width, height)
 
