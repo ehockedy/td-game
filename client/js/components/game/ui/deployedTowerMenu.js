@@ -2,6 +2,8 @@ import { SwitchMenu, ButtonMenu } from "./horizontalOptionsMenu.js"
 import { BaseComponent } from "../base/baseComponent.js"
 import { boldTextStyle, plainTextStyle, COLOURS } from "../../ui_common/style.js"
 
+const buttonFontSize = 60
+
 class DeployedTowerMainMenu extends ButtonMenu {
     constructor(x, y) {
         super("deployedTowerMainMenu", x, y, "right", -20)
@@ -10,15 +12,15 @@ class DeployedTowerMainMenu extends ButtonMenu {
 
         // Select this option to open the aiming menu
         this.aimOption = this.addOption(260, COLOURS.AIM_RED, "selected-aim")
-        this.aimOption.addTextCentral("Aim", boldTextStyle(COLOURS.AIM_RED))
+        this.aimOption.addTextCentral("Aim", boldTextStyle(COLOURS.AIM_RED, buttonFontSize))
 
         // Select this option to open the upgrades menu
         this.upgradeOption = this.addOption(260, COLOURS.UPGRADE_GREEN, "selected-upgrade")
-        this.upgradeOption.addTextCentral("Upgrade", boldTextStyle(COLOURS.UPGRADE_GREEN))
+        this.upgradeOption.addTextCentral("Upgrade", boldTextStyle(COLOURS.UPGRADE_GREEN, buttonFontSize))
 
         // Select this option to open the selling menu
         this.sellOption = this.addOption(260, COLOURS.MONEY, "selected-sell")
-        this.sellOption.addTextCentral("Sell", boldTextStyle(COLOURS.MONEY))
+        this.sellOption.addTextCentral("Sell", boldTextStyle(COLOURS.MONEY, buttonFontSize))
 
         this.addCancelButton()
         this.populateWithTowerInfo()
@@ -27,7 +29,7 @@ class DeployedTowerMainMenu extends ButtonMenu {
     // Initialise the information displayed on the deployed tower menu
     populateWithTowerInfo() {
         // Fill the menu to have info relevant to the specified tower
-        let fontSize = 36
+        let fontSize = 30
         this.nameAndLevel = new PIXI.Text("", plainTextStyle(COLOURS.BLACK, fontSize))
         this.nameAndLevel.anchor.set(0, 0.5)
         this.menuRoot.addText(this.nameAndLevel, 0.02, 0.33)
@@ -44,14 +46,15 @@ class DeployedTowerMainMenu extends ButtonMenu {
     }
 }
 
-let aimRootWidth = 430
+let aimRootWidth = 360
 class DeployedTowerAimMenu extends SwitchMenu {
     constructor(x, y) {
         super("deployedTowerAimMenu", x, y, "right", -20)
         this.menuRoot = this.addRoot(aimRootWidth, COLOURS.INFO_LIGHT_GREY)
 
-        let optionWidth = 220
-        let textStyle = boldTextStyle(COLOURS.AIM_RED, 56)
+        const optionWidth = 180
+        const fontSize = 46
+        let textStyle = boldTextStyle(COLOURS.AIM_RED, fontSize)
 
         // Aim at the emeny closest to the end of the track and in range
         this.firstOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-first", true)
@@ -63,11 +66,11 @@ class DeployedTowerAimMenu extends SwitchMenu {
 
         // Aim at the enemy closest to the tower and in range
         this.closestOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-closest", false)
-        this.closestOption.addTextCentral("Closest", textStyle)
+        this.closestOption.addTextCentral("Close", textStyle)
 
         // Aim at the enemy with the highest speed that is in range
         this.fastestOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-fastest", false)
-        this.fastestOption.addTextCentral("Fastest", textStyle)
+        this.fastestOption.addTextCentral("Fast", textStyle)
 
         this.addBackButton()
         this.addCancelButton()
@@ -76,12 +79,12 @@ class DeployedTowerAimMenu extends SwitchMenu {
 
     // Initialise the information displayed on the root menu component of the aim menu
     setRootInfo() {
-        let fontSize = 36
+        let fontSize = 30
         let style =  plainTextStyle(COLOURS.BLACK, fontSize)
         style.wordWrap = true
-        style.wordWrapWidth = aimRootWidth - 30
+        style.wordWrapWidth = aimRootWidth - 10
 
-        this.nameAndLevel = new PIXI.Text("Aim sets how the tower selects which enemy to shoot", style)
+        this.nameAndLevel = new PIXI.Text("Aim decides which enemy the tower will shoot", style)
         this.nameAndLevel.anchor.set(0, 0.5)
         this.menuRoot.addText(this.nameAndLevel, 0.02, 0.5)
     }
@@ -115,7 +118,7 @@ class DeployedTowerSellMenu extends ButtonMenu {
 
         // Confirm the selling of the tower in exchange for the displayed amount of money
         this.yesOption = this.addOption(260, COLOURS.MONEY, "selected-sell-yes")
-        this.yesOption.addTextCentral("Confirm", boldTextStyle(COLOURS.MONEY))
+        this.yesOption.addTextCentral("Confirm", boldTextStyle(COLOURS.MONEY, 54))
 
         this.addBackButton()
         this.addCancelButton()
@@ -125,7 +128,7 @@ class DeployedTowerSellMenu extends ButtonMenu {
     // Initialise the information displayed on the deployed tower menu
     populateWithTowerInfo() {
         // Fill the menu to have info relevant to the specified tower
-        let fontSize = 48
+        let fontSize = 40
         this.sellPriceText = new PIXI.Text("", plainTextStyle(COLOURS.BLACK, fontSize))
         this.sellPriceText.anchor.set(0, 0.5)
         this.menuRoot.addText(this.sellPriceText, 0.02, 0.5)

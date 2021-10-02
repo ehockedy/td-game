@@ -3,9 +3,10 @@ function generateBaseTextStyle(tint, fontSize=64) {
     return {
         "fill": tint,
         "fontSize": fontSize,
-        "fontFamily": "MarbleWasteland",
+        "fontFamily": "Turtles",
         "fontVariant": "small-caps",
         "letterSpacing": 0,
+        "lineHeight" : Math.floor(fontSize*0.8),
         "padding": 5,
     }
 }

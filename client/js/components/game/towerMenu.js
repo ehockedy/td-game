@@ -87,9 +87,9 @@ export class TowerMenu extends BaseComponent {
             const typeText = "Type:    " + towerType.toUpperCase()
 
             // A crude way to scale the info box with the length of it's contents
-            const descWidth = descText.length * 12.5
-            const costWidth = costText.length * 16
-            const typeWidth = typeText.length * 15
+            const descWidth = descText.length * 18
+            const costWidth = costText.length * 24
+            const typeWidth = typeText.length * 24
 
             let descBox = this._createTowerMenuInfoBox("desc", 0, descWidth, COLOURS.MENU_SANDY, descText, style)
             let costBox = this._createTowerMenuInfoBox("cost", 0, costWidth, COLOURS.MENU_SANDY, costText, style)
