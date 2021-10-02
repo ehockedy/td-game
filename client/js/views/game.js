@@ -6,6 +6,7 @@ import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { StartRoundButton } from "../components/game/ui/startRoundButton.js"
+import { RoundCounter } from "../components/game/ui/roundCounter.js"
 import { Counter } from "../components/game/ui/counter.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { randomHexString } from "../tools.js"
@@ -20,6 +21,7 @@ export class GameRenderer {
         this.spriteHandler = spriteHandler
         this.socket = socket
         this.round = 1
+        this.maxRounds = config.ROUNDS
 
         this.thisPlayerID = thisPlayerID
         this.players = players
@@ -55,8 +57,12 @@ export class GameRenderer {
 
         this.startRoundButton = new StartRoundButton(rhs, toolbarY)
 
-        this.moneyCounter = new Counter(config.TOWER_MENU_WIDTH, toolbarY, 200, "Money", 0, COLOURS.MENU_SANDY)
-        this.livesCounter = new Counter(config.TOWER_MENU_WIDTH + this.moneyCounter.width, toolbarY, 200, "Lives", 100, COLOURS.MENU_SANDY)
+        const counterWidth = 200
+        this.roundCounter = new RoundCounter(rhs, toolbarY, counterWidth-20, this.round, this.maxRounds, COLOURS.MENU_SANDY)
+        this.roundCounter.y -= (this.roundCounter.height + top_bottom_gap)
+
+        this.moneyCounter = new Counter(config.TOWER_MENU_WIDTH, toolbarY, counterWidth, "Money", 0, COLOURS.MENU_SANDY)
+        this.livesCounter = new Counter(config.TOWER_MENU_WIDTH + this.moneyCounter.width, toolbarY, counterWidth, "Lives", 100, COLOURS.MENU_SANDY)
 
         this.setServerEventListeners()
         this.localEventEmitter = this.setServerEventEmitter()
@@ -180,6 +186,7 @@ export class GameRenderer {
         this.spriteHandler.registerContainer(this.livesCounter)
         this.spriteHandler.registerContainer(this.moneyCounter)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
+        this.spriteHandler.registerContainer(this.roundCounter)
 
         // Load towers into the menu
         this.tm.addTowers()
@@ -225,7 +232,6 @@ export class GameRenderer {
         this.bc.update(serverUpdate.bullets)
         this.ec.update(serverUpdate.enemies)
         this.livesCounter.update(serverUpdate.worldState.lives)
-        //this.git.update(serverUpdate["worldState"])
         this.tc.tick()
 
         serverUpdate.players.objects.forEach((player) => {
@@ -238,6 +244,7 @@ export class GameRenderer {
         if (serverUpdate.worldState.round != this.round) {
             this.round = serverUpdate.worldState.round
             this.startNextRound()
+            this.roundCounter.update(this.round)
         }
     }
 
