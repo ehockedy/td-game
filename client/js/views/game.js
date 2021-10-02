@@ -42,7 +42,7 @@ export class GameRenderer {
         this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_MAP)
         this.ec = new EnemiesComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
         this.bc = new BulletsComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
-        this.perRoundUpdateText = new OnScreenMessage(config.MAP_WIDTH/2, config.MAP_HEIGHT/2, "Round 1", 30)
+        this.perRoundUpdateText = new OnScreenMessage(config.MAP_WIDTH/2, config.MAP_HEIGHT/2, "Round 1", 80)
         this.map = new MapComponent(config.SPRITE_SIZE_MAP)
 
         this.gameSpace = new InteractiveGameSpace(
@@ -202,11 +202,12 @@ export class GameRenderer {
     }
 
     startNextRound() {
-        let timePerFade = 1000
-        let timeBetweenFade = 2000
+        let timePerFade = 200
+        let timeBetweenFade = 4000
         let timeBetweenMessages = 2000
         this.perRoundUpdateText.updateText("Round Complete")
         this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
+
         setTimeout(()=>{
             this.perRoundUpdateText.updateText("Round " + this.round.toString())
             this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)

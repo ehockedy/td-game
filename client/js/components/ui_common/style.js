@@ -42,4 +42,5 @@ export const COLOURS = {
     MENU_SANDY:      "0xCCBB88",
     MONEY:           "0xDDAA11",
     UPGRADE_GREEN:   "0x229933",
+    WHITE:           "0xFFFFFF",
 }
