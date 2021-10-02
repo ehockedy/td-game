@@ -25,6 +25,8 @@ export class DeployedTower extends BaseInteractiveTower {
             this.towerSprite
              .on("click", () => { this._onClick() })
              .on("tap", () => { this._onClick() })
+             .on("pointerover", () => { this.towerSpriteContainer.scale.set(1.1) })
+             .on("pointerout", () => { this.towerSpriteContainer.scale.set(1) })
         }
         this.selected = false  // Whether this tower has been clicked on
 
