@@ -26,7 +26,7 @@ class Session {
         this.sockets[playerID] = socket
         this.players[playerID] = {
             id: playerID,
-            displayName: "Player " + (this.getPlayerCount() + 1).toString(),
+            displayName: "PLAYER " + (this.getPlayerCount() + 1).toString(),
             colour: this.config.colours[this.getPlayerCount()].code,
         }
         if (this.hasStarted) {
