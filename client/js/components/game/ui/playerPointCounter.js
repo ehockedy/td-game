@@ -13,11 +13,26 @@ export class PlayerPointCounter extends StaticHorizontalMenuOption {
         this.value.anchor.set(0, 0.5)
         this.addText(this.value, 0.8, 0.62)
         this.update(defaultValue)  // Populate with initial number
+
+        this.readyText = new PIXI.Text("Ready!", plainTextStyle(COLOURS.BLACK, 40))
+        this.readyText.anchor.set(0.5)
+        this.unsetReady()
+        this.addText(this.readyText, 0.1, 0.5)
     }
 
     update(newValue) {
         if (!(this.value.text === newValue.toString())) {
             this.value.text = newValue.toString()
         }
+    }
+
+    setReady() {
+        // Angle randomly so looks different for each player
+        this.readyText.angle = -15 + (Math.random() * 30)
+        this.readyText.visible = true
+    }
+
+    unsetReady() {
+        this.readyText.visible = false
     }
 }

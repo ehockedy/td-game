@@ -109,9 +109,13 @@ export class GameRenderer {
 
         this.socket.on("client/player/ready", (playerData) => {
             this.ut.setPlayerReady(playerData.playerID)
+            if (playerData.playerID == this.thisPlayerID) {
+                this.startRoundButton.stopInteraction()
+            }
         })
 
         this.socket.on("client/game/round/start", () => {
+            this.ut.unsetAllPlayers()
             this.startRoundButton.stopInteraction()
         })
     }
@@ -130,7 +134,7 @@ export class GameRenderer {
         })
 
         // Player has chosen where to place a tower, update the server which will tell all other players
-        eventEmitter.on(("confirmTowerPlace"), (tower) => {
+        eventEmitter.on("confirmTowerPlace", (tower) => {
             this.socket.emit("server/tower/set",
             {
                 "name": randomHexString(6),
@@ -207,7 +211,6 @@ export class GameRenderer {
             this.perRoundUpdateText.updateText("Round " + this.round.toString())
             this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
         }, timePerFade*2 + timeBetweenMessages)
-        //this.ut.unsetAllPlayers()
         this.startRoundButton.startInteraction()
         this.startRoundButton.update(this.round.toString())
     }

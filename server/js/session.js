@@ -137,10 +137,13 @@ class Session {
         socket.on("server/game/round/start", ()=>{
             this.game.getPlayerByName(socket.playerID).setReady()
             if (this.game.ready()) {
-              this.game.startRound()
-              this.broadcast("client/game/round/start")
+                // If all players ready, begin the game
+                this.game.startRound()
+                this.broadcast("client/game/round/start")
+            } else {
+                // If still some players not ready, alert all players that this player is ready
+                this.broadcast("client/player/ready", this.game.getPlayerInfo(socket.playerID))
             }
-            this.broadcast("client/player/ready", this.game.getPlayerInfo(socket.playerID))
           })
     }
 

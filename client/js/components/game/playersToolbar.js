@@ -16,28 +16,16 @@ export class PlayersToolbar extends BaseComponent {
         }
     }
 
-    // setPlayerReady(playerID) {
-    //     this._setReadiness(playerID, true)
-    // }
+    // Setting ready just displays a "Ready!" text over the players info box
+    setPlayerReady(playerID) {
+        this.getChildByName(playerID).setReady()
+    }
 
-    // unsetPlayerReady() {
-    //     this._setReadiness(playerID, false)
-    // }
-
-    // unsetAllPlayers() {
-    //     // TODO this could be done more nicely
-    //     this.children.forEach((child) => {
-    //         let readyIcon = child.getChildByName("readyIcon")
-    //         if (readyIcon) readyIcon.visible = false
-    //     })
-    // }
-
-    // _setReadiness(playerID, readiness) {
-    //     let playerInfoContainer = this.playersContainer.getChildByName(playerID)
-    //     if (playerInfoContainer) {
-    //         playerInfoContainer.getChildByName("readyIcon").visible = readiness
-    //     }
-    // }
+    unsetAllPlayers() {
+        this.children.forEach((child) => {
+            child.unsetReady()
+        })
+    }
 
     update(playersData) {
         // Order stores the player indexes in the order of how many points they have (highest first)
