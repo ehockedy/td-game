@@ -69,8 +69,8 @@ class Enemy {
     // <direction> can be u, d, l, or r.
     // First direction is the direction of travel through the firt half of the square, second direction is direction through the second half od the square
     turn(tileType) {
-        if (tileType.length != 2) return // No need to rotate if a straight path
-        this.forceTurn(tileType)
+        if (tileType.length != 2) this.rotation = this._rotationAngleSwitch(tileType[0])
+        else this.forceTurn(tileType)
     }
 
     // Makes the enemy check change of direction no matter what
