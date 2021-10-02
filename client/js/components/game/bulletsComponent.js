@@ -33,13 +33,16 @@ export class BulletsComponent extends BaseComponent {
         })
     }
 
-    addBullet(name, type) {
+    addBullet(name, type, x, y) {
         if (type == "buzzsaw") return // Some bullet types are not shown
         let bulletSprite = new PIXI.Sprite(this.bulletTextures[type][Math.floor(Math.random() * this.bulletTextures[type].length)])
         bulletSprite.name = name
         bulletSprite.anchor.set(0.5)
         bulletSprite.toRemove = false
+        bulletSprite.x = x
+        bulletSprite.y = y
         this.addChild(bulletSprite)
+        return bulletSprite
     }
 
     update(bulletUpdate) {
@@ -64,7 +67,7 @@ export class BulletsComponent extends BaseComponent {
                 }
             }
             if (!bulletFound) {
-                this.addBullet(bulletNew.name, bulletNew.type) // New bullet
+                this.addBullet(bulletNew.name, bulletNew.type, newpos[0], newpos[1])
             }
         })
 
