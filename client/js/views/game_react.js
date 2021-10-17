@@ -14,7 +14,7 @@ export class Game extends React.Component {
         this.spriteHandler = new SpriteHandler(clientConfig.APP_WIDTH, clientConfig.APP_HEIGHT)
 
         // View is the scene that user is currently on
-        this.view = new GameRenderer(this.props.socket, this.spriteHandler, clientConfig, this.props.thisPlayer, this.props.players)
+        this.view = new GameRenderer(this.props.socket, this.spriteHandler, clientConfig, this.props.thisPlayer, this.props.players, this.props.gameSettings)
         this.view.loadAssets().then(()=>{
             this.view.startRendering()
         })

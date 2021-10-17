@@ -25,9 +25,17 @@ function getServerListeningPublicAddress() {
   return listeningAddress
 }
 
-function loadGameConfig() {
-  let configJson = fs.readFileSync('shared/json/gameConfig.json');
+function loadConfig(filename) {
+  let configJson = fs.readFileSync(filename);
   return JSON.parse(configJson);
+}
+
+function loadGameConfig() {
+  return loadConfig('shared/json/gameConfig.json');
+}
+
+function loadRoundConfig() {
+  return loadConfig('shared/json/rounds.json');
 }
 
 function parseGameConfig(config) {
@@ -57,7 +65,7 @@ function randomAlphaCharString(len) {
   return randomString
 }
 
-function runServer(gameConfig) {
+function runServer(gameConfig, roundConfig) {
   // First set up http server to serve index.html and its included files
   app.use(express.static(path.resolve(__dirname, 'build/')));
   app.use(express.static(path.resolve(__dirname, './')));  // TODO change?
@@ -87,7 +95,7 @@ function runServer(gameConfig) {
       while(gameID in games) gameID = randomAlphaCharString(4)  // Generate new ID if one already exists
       console.log("Client at " + socket.handshake.address + " starting game " + gameID)
       socket.playerID = socket.handshake.address + gameID
-      games[gameID] = new session.Session(socket, gameID, socket.playerID, gameConfig)
+      games[gameID] = new session.Session(socket, gameID, socket.playerID, gameConfig, roundConfig)
       callback(gameID, socket.playerID)
     });
 
@@ -118,8 +126,9 @@ function runServer(gameConfig) {
 
 // Main entry point to server code
 let gameConfig = loadGameConfig()
+let roundConfig = loadRoundConfig()
 if (parseGameConfig(gameConfig)) {
-  runServer(gameConfig)
+  runServer(gameConfig, roundConfig)
 } else {
   console.log("Config not valid, exiting")
   process.exit(1)

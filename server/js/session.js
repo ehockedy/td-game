@@ -2,14 +2,20 @@ const game = require('./game.js')
 const mapGenerator = require("./mapGenerator.js")
 
 class Session {
-    constructor(socket, gameID, playerID, config) {
+    constructor(socket, gameID, playerID, gameConfig, roundConfig) {        
+        this.gameID = gameID
+        this.maxConnections = gameConfig.MAX_PLAYERS  // TODO enforce this
+        this.gameConfig = gameConfig
+        this.roundConfig = roundConfig
+
         this.sockets = {}  // All the connected players/ TODO I dont think this actually needs to be a map. Just keep ID as socket property.
         this.players = {}
-        this.gameID = gameID
-        this.maxConnections = config.MAX_PLAYERS  // TODO enforce this
-        this.config = config
+        this.gameSettings = {
+            // "numRounds": gameConfig.numRoundOptions[0]  // Default to lowest number of rounds
+            "numRounds": roundConfig.rounds.length  // TODO use actual numbers from config once enough rounds added
+        }
 
-        this.mapGenerator = new mapGenerator.MapGenerator(config.MAP_HEIGHT, config.MAP_WIDTH, config.SUBGRID_SIZE)
+        this.mapGenerator = new mapGenerator.MapGenerator(gameConfig.MAP_HEIGHT, gameConfig.MAP_WIDTH, gameConfig.SUBGRID_SIZE)
         this.map = this.mapGenerator.generateMap()
 
         this.hasStarted = false
@@ -27,7 +33,7 @@ class Session {
         this.players[playerID] = {
             id: playerID,
             displayName: "PLAYER " + (this.getPlayerCount() + 1).toString(),
-            colour: this.config.colours[this.getPlayerCount()].code,
+            colour: this.gameConfig.colours[this.getPlayerCount()].code,
         }
         if (this.hasStarted) {
             if (this.game.playerExists(playerID)) {
@@ -37,8 +43,8 @@ class Session {
             }
         } else {
             // Send to self and all others in room
-            socket.emit("client/players/set", this.players)
-            socket.to(this.gameID).emit("client/players/set", this.players)
+            this.broadcast("client/players/set", this.players)
+            this.broadcast("client/gameSettings/set", this.gameSettings)
 
             // Make socket just joined go to lobby
             socket.emit("client/view/lobby")
@@ -78,7 +84,7 @@ class Session {
 
         socket.on("server/game/start", ()=> {
             if (!this.hasStarted) {
-                this.game = new game.Game(this.map)
+                this.game = new game.Game(this.map, this.roundConfig.rounds, this.gameSettings)
                 this.hasStarted = true
                 for (const [id, socket] of Object.entries(this.sockets)) {
                     this.game.addPlayer(id)
@@ -152,7 +158,7 @@ class Session {
     updateGameAndSend() {
         this.game.updateGameState() // Advance the game by one tick
         this.broadcast("client/game/update", this.game.getGameState())
-  }
+    }
 }
 
 module.exports = {

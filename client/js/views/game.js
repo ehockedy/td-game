@@ -17,11 +17,11 @@ import { COLOURS } from "../components/ui_common/style.js"
  * It also takes updates from the server and passes the update data to the relevant components
  */
 export class GameRenderer {
-    constructor(socket, spriteHandler, config, thisPlayerID, players) {
+    constructor(socket, spriteHandler, config, thisPlayerID, players, gameSettings) {
         this.spriteHandler = spriteHandler
         this.socket = socket
         this.round = 1
-        this.maxRounds = config.ROUNDS
+        this.maxRounds = gameSettings.numRounds
 
         this.thisPlayerID = thisPlayerID
         this.players = players

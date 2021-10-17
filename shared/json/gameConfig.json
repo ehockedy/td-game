@@ -3,6 +3,7 @@
     "MAP_WIDTH": 26,
     "SUBGRID_SIZE": 95,
     "MAX_PLAYERS": 4,
+    "num_rounds_options": [30, 50],
     "colours": [
         {
             "name": "deep-coral",

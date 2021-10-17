@@ -43,6 +43,6 @@ export function generateClientConfig(config) {
         COLOUR: "0x" + randomHexString(6),  // TODO the player should be able to config re this - make the config object a class and have a set colour option
         MAX_PLAYERS: config.MAX_PLAYERS,
         COLOURS: config.colours,
-        ROUNDS: 50,  // Change this to be configurable in future
+        NUM_ROUNDS_OPTIONS: config.num_rounds_options,
     }
 }

@@ -59,6 +59,7 @@ function Application(props) {
     const [playerID, setPlayerID] = useState()
     const [players, setPlayers] = useState()
     const [map, setMap] = useState()
+    const [gameSettings, setGameSettings] = useState()
     const config = generateClientConfig(props.config)
 
     useEffect(() => {
@@ -74,6 +75,9 @@ function Application(props) {
         })
         socket.on("client/map/set", (map) => {
             setMap(map)
+        })
+        socket.on("client/gameSettings/set", (gameSettings) => {
+            setGameSettings(gameSettings)
         })
         setSocket(socket)
         return () => socket.close()
@@ -91,10 +95,10 @@ function Application(props) {
                     <MainMenu socket={socket} setPlayerIDHandler={setPlayerID} setGameIDHandler={setGameID}></MainMenu>
                 ) :
                 view === "lobby" ? (
-                    <Lobby socket={socket} gameID={gameID} thisPlayer={playerID} players={players} config={config} mapStructure={map}></Lobby>
+                    <Lobby socket={socket} gameID={gameID} thisPlayer={playerID} players={players} config={config} mapStructure={map} gameSettings={gameSettings}></Lobby>
                 ) :
                 view === "game" ? (
-                    <Game socket={socket} config={config} thisPlayer={playerID} players={players}></Game>
+                    <Game socket={socket} config={config} thisPlayer={playerID} players={players} gameSettings={gameSettings}></Game>
                 ) :
                 console.log("INVALID VIEW")
                 // TODO add page not found page

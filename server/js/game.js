@@ -8,14 +8,18 @@ const fs = require('fs');
 let enemyConfig = JSON.parse(fs.readFileSync('shared/json/enemies.json'));
 
 class Game {
-    constructor(map) {
+    constructor(map, rounds, settings) {
         this.map = map
         this.towers = []
         this.players = []
 
         this.hasStarted = false
         this.roundActive = false
+
         this.round = 1
+        this.maxRounds = settings.numRounds
+        this.rounds = rounds
+
         this.lives = 100
 
         this.enemyQueue = []
