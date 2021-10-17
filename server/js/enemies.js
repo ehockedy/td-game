@@ -1,11 +1,32 @@
 const crypto = require('crypto');
 const fs = require('fs');
 
-let enemyConfig = JSON.parse(fs.readFileSync('shared/json/enemies.json'));
 const sizeMap = {
     "small": 4,
     "medium": 2,
     "large": 1
+}
+
+// Simple factory class to produce an enemy of a given type without having to pass through
+// the config and path etc. each time, just the type
+class EnemyFactory {
+    constructor(enemyConfig, path, subgridSize) {
+        this.enemyConfig = enemyConfig
+        this.path = path
+        this.subgridSize = subgridSize
+    }
+
+    createEnemy(enemyType) {
+        return new Enemy(enemyType, this.path, this.subgridSize, this.enemyConfig[enemyType].hp, this.enemyConfig[enemyType].speed, this.enemyConfig[enemyType].size)
+    }
+
+    getSubEnemyTypes(enemyType) {
+        return this.enemyConfig[enemyType].subEnemies
+    }
+
+    getSpeed(enemyType) {
+        return this.enemyConfig[enemyType].speed
+    }
 }
 
 class Enemy {
@@ -15,13 +36,13 @@ class Enemy {
      * @param {Object} path Array of coordinates that tht enemy will follow
      * @param {Object} subgridSize Size of the subgrid of the map
      */
-    constructor(type, path, subgridSize) {
+    constructor(type, path, subgridSize, hp, speed, size) {
         this.type = type
-        this.hp = enemyConfig[type].hp;
-        this.speed = enemyConfig[type].speed;
+        this.hp = hp;
+        this.speed = speed;
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
-        this.hitboxRadius = subgridSize/sizeMap[enemyConfig[type].size]
+        this.hitboxRadius = subgridSize/sizeMap[size]
 
         this.nearCentreRadius = this.hitboxRadius / 2  // Distance from centre point that is considered near. Used to determine when to turn.
         this.rotation = 0  // angle in radians that enemy is facing, starting at 0 which is right/east
@@ -151,5 +172,6 @@ class Enemy {
 }
 
 module.exports = {
-    Enemy: Enemy
+    Enemy: Enemy,
+    EnemyFactory: EnemyFactory,
 }

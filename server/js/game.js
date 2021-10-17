@@ -4,11 +4,11 @@ const playerImport = require('./player.js')
 const towerImport = require("./tower.js");
 const point = require('./point.js');
 const fs = require('fs');
+const { EnemyFactory } = require('./enemies.js');
 
-let enemyConfig = JSON.parse(fs.readFileSync('shared/json/enemies.json'));
 
 class Game {
-    constructor(map, rounds, settings) {
+    constructor(map, rounds, settings, enemyConfig) {
         this.map = map
         this.towers = []
         this.players = []
@@ -22,6 +22,7 @@ class Game {
 
         this.lives = 100
 
+        this.enemyFactory = new EnemyFactory(enemyConfig, this.map.path, this.map.subgridSize)
         this.enemyQueue = []
         this.enemyKillCount = 0
         this.enemiesRemaining = 0
@@ -111,9 +112,9 @@ class Game {
         this.map.removeEnemy(enemy)
         this.enemiesRemaining -= 1
 
-        // Some enemis spawn new enemies when they are destroyed
+        // Some enemies spawn new enemies when they are destroyed
         // Add these here
-        let subEnemies = enemyConfig[enemy.type].subEnemies
+        let subEnemies = this.enemyFactory.getSubEnemyTypes(enemy.type)
         if (subEnemies.length > 0) {
             // Is there enough space to add the enemies behind where this enemy died?
             // Most likely yes, so -1. If not enough steps to work backwards, the work forwards.
@@ -168,14 +169,14 @@ class Game {
      * @param {Number} steps number of steps this enemy has taken
      */
     addEnemy(enemyType, steps) {
-        let enemyToAdd = new enemy.Enemy(enemyType, this.map.path, this.map.subgridSize)
+        let enemyToAdd = this.enemyFactory.createEnemy(enemyType)
         enemyToAdd.setPosition(steps)
         enemyToAdd.forceTurn(this.map.getGridValue(enemyToAdd.row, enemyToAdd.col))
         this.map.addEnemy(enemyToAdd)
     }
 
     addEnemyToFront(enemyType) {
-        this.map.addNewEnemy(new enemy.Enemy(enemyType, this.map.path, this.map.subgridSize))
+        this.map.addNewEnemy(this.enemyFactory.createEnemy(enemyType))
     }
 
     shiftEnemyQueue() {
@@ -266,14 +267,18 @@ class Game {
 
         // Generate the enemy queue
         this.enemyQueue = []
-        for (let i=0; i < 28; i+=1) {
-            let randEnemyIdx = Math.floor(Math.random() * Object.keys(enemyConfig).length) // Random enemy type for now
-            let enemyType = Object.keys(enemyConfig)[randEnemyIdx]
-            this.enemyQueue.push({
-                "stepsUntilGo": 10*Math.floor(Math.random()*15 + 5), // Beween 1 and 300 ticks
-                "type": enemyType
-            })
-        }
+        this.rounds[this.round-1].forEach((enemyData) => {
+            for (let i=0; i < enemyData.count; i++) {
+                // For each enemy, calculate how many game ticks are required until the "enemisPerSquarePerTimeUnit" number is met
+                // This ensures a consistent flow of enemies
+                enemyData.enemies.forEach((enemyType) => {
+                    this.enemyQueue.push({
+                        "type": enemyType,
+                        "stepsUntilGo": Math.floor(enemyData.enemiesPerSquarePerTimeUnit * this.subgridSize / this.enemyFactory.getSpeed(enemyType))
+                    })
+                })
+            }
+        })
 
         // This is how we determine if the round is over - this many enemies have been killed or got to end
         this.enemiesRemaining = this.enemyQueue.length

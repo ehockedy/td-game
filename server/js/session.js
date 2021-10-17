@@ -2,11 +2,12 @@ const game = require('./game.js')
 const mapGenerator = require("./mapGenerator.js")
 
 class Session {
-    constructor(socket, gameID, playerID, gameConfig, roundConfig) {        
+    constructor(socket, gameID, playerID, gameConfig, roundConfig, enemyConfig) {        
         this.gameID = gameID
         this.maxConnections = gameConfig.MAX_PLAYERS  // TODO enforce this
         this.gameConfig = gameConfig
         this.roundConfig = roundConfig
+        this.enemyConfig = enemyConfig
 
         this.sockets = {}  // All the connected players/ TODO I dont think this actually needs to be a map. Just keep ID as socket property.
         this.players = {}
@@ -84,7 +85,7 @@ class Session {
 
         socket.on("server/game/start", ()=> {
             if (!this.hasStarted) {
-                this.game = new game.Game(this.map, this.roundConfig.rounds, this.gameSettings)
+                this.game = new game.Game(this.map, this.roundConfig.rounds, this.gameSettings, this.enemyConfig)
                 this.hasStarted = true
                 for (const [id, socket] of Object.entries(this.sockets)) {
                     this.game.addPlayer(id)
