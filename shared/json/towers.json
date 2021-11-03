@@ -3,16 +3,16 @@
         "spriteSheetNum": 0,
         "displayInfo": "Simple tower that shoots rocks one at a time.",
         "gameData": {
-            "seekRange": 5,
-            "shootRange": 8,
+            "seekRange": 3,
+            "shootRange": 4,
             "damage": 5,
             "rateOfFire": 60,
-            "bulletSpeed": 8,
+            "bulletSpeed": 6,
             "numberOfBullets": 1,
             "turns": true,
             "piercing": false
         },
-        "cost": 50,
+        "cost": 100,
         "shootPattern": "single",
         "bulletType": "rock",
         "textureAtlasFile": "client/assets/towers/1-rock_thrower/rock_thrower.json"
@@ -23,13 +23,13 @@
         "gameData": {
             "seekRange": 1.6,
             "shootRange": 1.6,
-            "damage": 5,
-            "rateOfFire": 45,
-            "bulletSpeed": 5,
+            "damage": 2,
+            "rateOfFire": 30,
+            "bulletSpeed": 6,
             "numberOfBullets": 8,
             "turns": false
         },
-        "cost": 50,
+        "cost": 100,
         "shootPattern": "burst",
         "bulletType": "shrapnel",
         "textureAtlasFile": "client/assets/towers/2-shrapnel_burst/shrapnel_burst.json"
@@ -38,49 +38,49 @@
         "spriteSheetNum": 2,
         "displayInfo": "Multi-shot! Like three basic towers shoved together.",
         "gameData": {
-            "seekRange": 5,
-            "shootRange": 8,
-            "damage": 5,
+            "seekRange": 3,
+            "shootRange": 4,
+            "damage": 10,
             "rateOfFire": 60,
-            "bulletSpeed": 8,
+            "bulletSpeed": 7,
             "numberOfBullets": 3,
             "turns": true
         },
-        "cost": 120,
+        "cost": 400,
         "bulletType": "rock",
         "shootPattern": "scatter",
         "textureAtlasFile": "client/assets/towers/3-rock_scatter/rock_scatter.json"
     },
     "sniper": {
-        "spriteSheetNum": 3,
+        "spriteSheetNum": 4,
         "displayInfo": "Shoots infrequently, but hurts when it does. Also has a huge range.",
         "gameData": {
-            "seekRange": 10,
-            "shootRange": 20,
+            "seekRange": 6,
+            "shootRange": 8,
             "damage": 50,
-            "rateOfFire": 240,
+            "rateOfFire": 180,
             "bulletSpeed": 15,
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 200,
+        "cost": 900,
         "bulletType": "bullet",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"
     },
     "spear-launcher": {
-        "spriteSheetNum": 4,
+        "spriteSheetNum": 3,
         "displayInfo": "Launches a sharp spear that pierces through enemies.",
         "gameData": {
-            "seekRange": 6,
-            "shootRange": 10,
-            "damage": 5,
-            "rateOfFire": 80,
+            "seekRange": 3,
+            "shootRange": 4,
+            "damage": 15,
+            "rateOfFire": 60,
             "bulletSpeed": 8,
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 200,
+        "cost": 750,
         "bulletType": "spear",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/5-spear_launcher/spear_launcher.json"
@@ -89,15 +89,15 @@
         "spriteSheetNum": 5,
         "displayInfo": "Continual flames that burn through all enemis in its path",
         "gameData": {
-            "seekRange": 4,
-            "shootRange": 5,
-            "damage": 1,
+            "seekRange": 3,
+            "shootRange": 4,
+            "damage": 3,
             "rateOfFire": 6,
             "bulletSpeed": 4,
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 200,
+        "cost": 1200,
         "bulletType": "flame",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/6-flamethrower/flamethrower.json"
@@ -108,13 +108,13 @@
         "gameData": {
             "seekRange": 1.5,
             "shootRange": 1.5,
-            "damage": 3,
-            "rateOfFire": 6,
+            "damage": 30,
+            "rateOfFire": 5,
             "bulletSpeed": 10,
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 200,
+        "cost": 1800,
         "bulletType": "buzzsaw",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/7-buzzsaw/buzzsaw.json"

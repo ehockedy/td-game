@@ -27,12 +27,12 @@
         "filenameKeyword": "flame",
         "rotate": false,
         "rotationSpeed": 0,
-        "piercingCount": 5
+        "piercingCount": 4
     },
     "buzzsaw": {
         "filenameKeyword": "",
         "rotate": false,
         "rotationSpeed": 0,
-        "piercingCount": 5
+        "piercingCount": 2
     }
 }

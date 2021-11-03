@@ -14,6 +14,7 @@ class EnemyFactory {
         this.enemyConfig = enemyConfig
         this.path = path
         this.subgridSize = subgridSize
+        this.tickStepSize = subgridSize/60  // Number of steps to take to mode through a square in 60 ticks
     }
 
     createEnemy(enemyType) {
@@ -25,7 +26,9 @@ class EnemyFactory {
     }
 
     getSpeed(enemyType) {
-        return this.enemyConfig[enemyType].speed
+        // Speed is in squares completed per second (60 ticks)
+        // This will not necessarily be an integer 
+        return this.enemyConfig[enemyType].speed * this.tickStepSize
     }
 }
 
@@ -73,7 +76,7 @@ class Enemy {
     setPosition(steps) {
         this.steps = steps
         if (steps < this.path.length) {
-            this.position = this.path[this.steps]
+            this.position = this.path[Math.floor(this.steps)]  // steps is not necessarily integer, so snap to path position
 
             this.row = this.position.row
             this.col = this.position.col

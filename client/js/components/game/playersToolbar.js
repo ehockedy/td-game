@@ -53,7 +53,9 @@ export class PlayersToolbar extends BaseComponent {
         // Adjust the player info so that the highest scoring player appears first
         order.forEach((playerIdx, posIdx) => {
             let player = this.getChildByName(playersData.objects[playerIdx].playerID)
-            player.y = posIdx * (player.height + this.gap)
+            if (player) {
+                player.y = posIdx * (player.height + this.gap)
+            }
         })
     }
 }
