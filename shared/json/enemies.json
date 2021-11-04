@@ -23,7 +23,7 @@
     "boneheadTruckFull": {
         "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_full.json",
         "speed": 1.6,
-        "hp": 160,
+        "hp": 240,
         "subEnemies": [
             "boneheadBandit",
             "boneheadBandit",
@@ -35,7 +35,7 @@
     "boneheadTruckEmpty": {
         "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_empty.json",
         "speed": 1.6,
-        "hp": 240,
+        "hp": 160,
         "subEnemies": [],
         "size": "large"
     }
