@@ -4,19 +4,36 @@
             {
                 "enemies": ["boneheadBandit"],
                 "count": 20,
-                "enemiesPerSquarePerTimeUnit": 1
+                "enemiesPerSquarePerTimeUnit": 0.5
             }
         ],
         [
             {
                 "enemies": ["boneheadBandit"],
                 "count": 16,
-                "enemiesPerSquarePerTimeUnit": 0.5
+                "enemiesPerSquarePerTimeUnit": 1
             },
             {
                 "enemies": ["greenBeetle"],
                 "count": 10,
                 "enemiesPerSquarePerTimeUnit": 1
+            }
+        ],
+        [
+            {
+                "enemies": ["greenBeetle"],
+                "count": 10,
+                "enemiesPerSquarePerTimeUnit": 1.2
+            },
+            {
+                "enemies": ["boneheadBandit"],
+                "count": 10,
+                "enemiesPerSquarePerTimeUnit": 1
+            },
+            {
+                "enemies": ["blueBeetle"],
+                "count": 10,
+                "enemiesPerSquarePerTimeUnit": 0.75
             }
         ]
     ]

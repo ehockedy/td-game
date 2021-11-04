@@ -274,7 +274,7 @@ class Game {
                 enemyData.enemies.forEach((enemyType) => {
                     this.enemyQueue.push({
                         "type": enemyType,
-                        "stepsUntilGo": Math.floor(enemyData.enemiesPerSquarePerTimeUnit * this.subgridSize / this.enemyFactory.getSpeed(enemyType))
+                        "stepsUntilGo": Math.floor((1/enemyData.enemiesPerSquarePerTimeUnit) * this.subgridSize / this.enemyFactory.getSpeed(enemyType))
                     })
                 })
             }
