@@ -25,11 +25,10 @@ class EnemyFactory {
         return this.enemyConfig[enemyType].subEnemies
     }
 
-    // todo remove from this class
     getSpeed(enemyType) {
         // Speed is in squares completed per second (60 ticks)
-        // This will not necessarily be an integer 
-        return this.enemyConfig[enemyType].speed * this.tickStepSize
+        // This will not necessarily be an integer
+        return this.enemyConfig[enemyType].speed
     }
 }
 

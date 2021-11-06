@@ -1,28 +1,28 @@
 {
     "boneheadBandit": {
         "textureAtlasFile": "client/assets/enemies/bonehead1/bonehead1.json",
-        "speed": 2,
+        "speed": 1.5,
         "hp": 15,
         "subEnemies": [],
         "size": "medium"
     },
     "blueBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle1/beetle1.json",
-        "speed": 5,
+        "speed": 2,
         "hp": 20,
         "subEnemies": [],
         "size": "medium"
     },
     "greenBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle_small/beetle_small.json",
-        "speed": 6,
+        "speed": 3,
         "hp": 4,
         "subEnemies": [],
         "size": "small"
     },
     "boneheadTruckFull": {
         "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_full.json",
-        "speed": 1.6,
+        "speed": 1,
         "hp": 240,
         "subEnemies": [
             "boneheadBandit",
@@ -34,7 +34,7 @@
     },
     "boneheadTruckEmpty": {
         "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_empty.json",
-        "speed": 1.6,
+        "speed": 1,
         "hp": 160,
         "subEnemies": [],
         "size": "large"

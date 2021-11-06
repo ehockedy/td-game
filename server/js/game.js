@@ -181,10 +181,10 @@ class Game {
 
     shiftEnemyQueue() {
         if (this.enemyQueue.length > 0) {
-            if (this.enemyQueue[0].stepsUntilGo == 0) {
+            if (this.enemyQueue[0].ticksUntilGo == 0) {
                 this.addEnemyToFront(this.enemyQueue.shift().type)
             } else {
-                this.enemyQueue[0].stepsUntilGo -= 1
+                this.enemyQueue[0].ticksUntilGo -= 1
             }
         }
     }
@@ -274,7 +274,9 @@ class Game {
                 enemyData.enemies.forEach((enemyType) => {
                     this.enemyQueue.push({
                         "type": enemyType,
-                        "stepsUntilGo": Math.floor((1/enemyData.enemiesPerSquarePerTimeUnit) * this.subgridSize / this.enemyFactory.getSpeed(enemyType))  // todo make this ticks until go
+                        // 60/speed is number of ticks to complete one square, so divide that by the number of enemies to introduce
+                        // per second to get the number of ticks between each enemy.
+                        "ticksUntilGo": Math.floor((1/enemyData.enemiesPerSquarePerSecond) * (60/this.enemyFactory.getSpeed(enemyType)))
                     })
                 })
             }

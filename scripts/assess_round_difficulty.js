@@ -49,11 +49,11 @@ rounds.forEach((round, idx) => {
     }
     round.forEach((enemyGroup) => {
         // Check to see if enemies spaced out - this can skew result
-        if (enemyGroup.enemiesPerSquarePerTimeUnit <= 0.1) console.log("Warning: more than 10 square between enemies within group")
+        if (enemyGroup.enemiesPerSquarePerSecond <= 0.1) console.log("Warning: more than 10 square between enemies within group")
         enemyGroup.enemies.forEach((enemyName) => {
             // Here we calulate the damage per second coming through, and the damage over a 10 second period
-            dps = calculateDPS(enemyName, enemyGroup.enemiesPerSquarePerTimeUnit)
-            dp10s = calculateDP10S(enemyName, enemyGroup.enemiesPerSquarePerTimeUnit, enemyGroup.count)
+            dps = calculateDPS(enemyName, enemyGroup.enemiesPerSquarePerSecond)
+            dp10s = calculateDP10S(enemyName, enemyGroup.enemiesPerSquarePerSecond, enemyGroup.count)
 
             dpsMeasures.totalDPS += dps
             dpsMeasures.totalDP10S += dp10s
