@@ -25,6 +25,7 @@ class EnemyFactory {
         return this.enemyConfig[enemyType].subEnemies
     }
 
+    // todo remove from this class
     getSpeed(enemyType) {
         // Speed is in squares completed per second (60 ticks)
         // This will not necessarily be an integer 
@@ -46,6 +47,7 @@ class Enemy {
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
         this.hitboxRadius = subgridSize/sizeMap[size]
+        this.tickStepSize = subgridSize/60  // Number of steps to take to mode through a square in 60 ticks
 
         this.nearCentreRadius = this.hitboxRadius / 2  // Distance from centre point that is considered near. Used to determine when to turn.
         this.rotation = 0  // angle in radians that enemy is facing, starting at 0 which is right/east
@@ -67,8 +69,16 @@ class Enemy {
         this.collidedBullets = []  // If a bullet is piercing, store its name here so does not register another hit
     }
 
+    getSpeed() {
+        // Speed is in squares completed per second (60 ticks)
+        // This will not necessarily be an integer
+        // Cannot just use the speed config in the enemy config, since if the subgrid size changes,
+        // then the enemis will move at different speeds.
+        return Math.floor(this.speed * this.tickStepSize)
+    }
+
     step() {
-        this.setPosition(this.steps + this.speed)
+        this.setPosition(this.steps + this.getSpeed())
         this.isHit = false  // Reset hit status
         this.collisionAngles = []
     }
@@ -150,7 +160,7 @@ class Enemy {
     }
 
     positionInNSteps(n) {
-        let futureStep = this.steps + (this.speed * n)
+        let futureStep = this.steps + (this.getSpeed() * n)
         if (futureStep >= this.path.length) return this.path[this.path.length - 1]
         return this.path[futureStep]
     }

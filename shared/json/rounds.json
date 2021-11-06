@@ -21,9 +21,9 @@
         ],
         [
             {
-                "enemies": ["greenBeetle"],
+                "enemies": ["slimeSmall"],
                 "count": 10,
-                "enemiesPerSquarePerTimeUnit": 1.2
+                "enemiesPerSquarePerTimeUnit": 1
             },
             {
                 "enemies": ["boneheadBandit"],

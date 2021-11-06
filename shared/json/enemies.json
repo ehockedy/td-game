@@ -38,5 +38,12 @@
         "hp": 160,
         "subEnemies": [],
         "size": "large"
+    },
+    "slimeSmall": {
+        "textureAtlasFile": "client/assets/enemies/slime_small/slime_small.json",
+        "speed": 0.9,
+        "hp": 30,
+        "subEnemies": [],
+        "size": "small"
     }
 }
