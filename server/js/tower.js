@@ -11,7 +11,7 @@ class Tower {
      * @param {String} player Who the tower belongs to
      * @param {Point} position Point object that described the position in global and grid/subgrid coordinates
      */
-    constructor(name, type, player, position) {
+    constructor(name, type, player, position, subgridSize) {
         this.name = name;
         this.type = type
 
@@ -20,6 +20,7 @@ class Tower {
         this.col = position.col
         this.x = position.x
         this.y = position.y
+        this.tickStepSize = subgridSize/60  // Number of steps to take to move through a square in 60 ticks
 
         this.fireTick = 0 // Ticks since last bullet
         this.target
@@ -107,7 +108,7 @@ class Tower {
             position,
             angle,
             this.state.damage,
-            this.state.bulletSpeed,
+            Math.floor(this.state.bulletSpeed * this.tickStepSize),
             this.state.shootRange,
             this.bulletType
         )

@@ -46,7 +46,7 @@ class Enemy {
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
         this.hitboxRadius = subgridSize/sizeMap[size]
-        this.tickStepSize = subgridSize/60  // Number of steps to take to mode through a square in 60 ticks
+        this.tickStepSize = subgridSize/60  // Number of steps to take to move through a square in 60 ticks
 
         this.nearCentreRadius = this.hitboxRadius / 2  // Distance from centre point that is considered near. Used to determine when to turn.
         this.rotation = 0  // angle in radians that enemy is facing, starting at 0 which is right/east

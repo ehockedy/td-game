@@ -40,10 +40,38 @@
         "size": "large"
     },
     "slimeSmall": {
-        "textureAtlasFile": "client/assets/enemies/slime_small/slime_small.json",
+        "textureAtlasFile": "client/assets/enemies/slime/small/slime.json",
         "speed": 0.9,
         "hp": 30,
         "subEnemies": [],
         "size": "small"
+    },
+    "slimeMedium": {
+        "textureAtlasFile": "client/assets/enemies/slime/medium/slime.json",
+        "speed": 0.8,
+        "hp": 60,
+        "subEnemies": ["slimeSmall", "slimeSmall"],
+        "size": "small"
+    },
+    "slimeLarge": {
+        "textureAtlasFile": "client/assets/enemies/slime/large/slime.json",
+        "speed": 0.7,
+        "hp": 120,
+        "subEnemies": ["slimeMedium", "slimeMedium"],
+        "size": "small"
+    },
+    "slimeGiant": {
+        "textureAtlasFile": "client/assets/enemies/slime/giant/slime.json",
+        "speed": 0.6,
+        "hp": 360,
+        "subEnemies": ["slimeLarge", "slimeLarge"],
+        "size": "large"
+    },
+    "slimeUber": {
+        "textureAtlasFile": "client/assets/enemies/slime/uber/slime.json",
+        "speed": 0.5,
+        "hp": 1080,
+        "subEnemies": ["slimeGiant", "slimeGiant"],
+        "size": "large"
     }
 }

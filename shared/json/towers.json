@@ -7,7 +7,7 @@
             "shootRange": 4,
             "damage": 5,
             "rateOfFire": 60,
-            "bulletSpeed": 6,
+            "bulletSpeed": 3,
             "numberOfBullets": 1,
             "turns": true,
             "piercing": false
@@ -25,7 +25,7 @@
             "shootRange": 1.6,
             "damage": 2,
             "rateOfFire": 30,
-            "bulletSpeed": 6,
+            "bulletSpeed": 3,
             "numberOfBullets": 8,
             "turns": false
         },
@@ -42,7 +42,7 @@
             "shootRange": 4,
             "damage": 10,
             "rateOfFire": 60,
-            "bulletSpeed": 7,
+            "bulletSpeed": 4,
             "numberOfBullets": 3,
             "turns": true
         },
@@ -59,7 +59,7 @@
             "shootRange": 8,
             "damage": 50,
             "rateOfFire": 180,
-            "bulletSpeed": 15,
+            "bulletSpeed": 8,
             "numberOfBullets": 1,
             "turns": true
         },
@@ -76,7 +76,7 @@
             "shootRange": 4,
             "damage": 15,
             "rateOfFire": 60,
-            "bulletSpeed": 8,
+            "bulletSpeed": 3,
             "numberOfBullets": 1,
             "turns": true
         },
@@ -93,7 +93,7 @@
             "shootRange": 4,
             "damage": 3,
             "rateOfFire": 6,
-            "bulletSpeed": 4,
+            "bulletSpeed": 2,
             "numberOfBullets": 1,
             "turns": true
         },

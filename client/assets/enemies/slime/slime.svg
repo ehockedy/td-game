@@ -13,7 +13,7 @@
    version="1.1"
    id="svg917"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="slime_small.svg">
+   sodipodi:docname="slime.svg">
   <defs
      id="defs911" />
   <sodipodi:namedview
@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="144.23137"
-     inkscape:cy="151.76584"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="-133.71908"
+     inkscape:cy="851.08786"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -34,8 +34,8 @@
      objecttolerance="10000"
      guidetolerance="10000"
      inkscape:pagecheckerboard="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1002"
+     inkscape:window-width="2400"
+     inkscape:window-height="1272"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1">
@@ -53,7 +53,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -206,5 +206,165 @@
        transform="matrix(-0.72201531,0.69187708,0.55931354,0.82895619,0,0)"
        inkscape:export-xdpi="80"
        inkscape:export-ydpi="80" />
+    <ellipse
+       style="fill:#164450;fill-opacity:1;stroke-width:2.27949;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-2-6-8"
+       cx="101.90958"
+       cy="235.43015"
+       rx="29.628635"
+       ry="38.073814"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\medium\slime_4.png" />
+    <ellipse
+       style="fill:#2c89a0;fill-opacity:1;stroke-width:1.7271;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-7-7"
+       cx="135.58151"
+       cy="186.52185"
+       rx="20.541473"
+       ry="31.525711"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\medium\slime_2.png" />
+    <ellipse
+       style="fill:#37abc8;fill-opacity:1;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-9"
+       cx="39.30201"
+       cy="188.74596"
+       rx="16.933332"
+       ry="27.516666"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\medium\slime_1.png" />
+    <ellipse
+       style="fill:#216778;fill-opacity:1;stroke-width:1.98066;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-2-7"
+       cx="62.066975"
+       cy="233.98973"
+       rx="24.149611"
+       ry="35.267483"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\medium\slime_3.png" />
+    <ellipse
+       style="fill:#501616;fill-opacity:1;stroke-width:2.27949;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-2-6-8-0"
+       cx="-253.69041"
+       cy="210.03015"
+       rx="29.628635"
+       ry="38.073814"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\large\slime_4.png" />
+    <ellipse
+       style="fill:#a02c2c;fill-opacity:1;stroke-width:1.7271;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-7-7-5"
+       cx="-220.01849"
+       cy="161.12187"
+       rx="20.541473"
+       ry="31.525713"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\large\slime_2.png" />
+    <ellipse
+       style="fill:#d35f5f;fill-opacity:1;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-9-8"
+       cx="-316.298"
+       cy="163.34596"
+       rx="16.933332"
+       ry="27.516666"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\large\slime_1.png" />
+    <ellipse
+       style="fill:#782121;fill-opacity:1;stroke-width:1.98066;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-2-7-8"
+       cx="-293.53302"
+       cy="208.58975"
+       rx="24.149611"
+       ry="35.267483"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\large\slime_3.png" />
+    <ellipse
+       style="fill:#241c1f;fill-opacity:1;stroke-width:2.27949;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-2-6-8-3"
+       cx="-85.25425"
+       cy="285.86752"
+       rx="29.628635"
+       ry="38.073814"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\uber\slime_4.png" />
+    <ellipse
+       style="fill:#6c535d;fill-opacity:1;stroke-width:1.7271;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-7-7-2"
+       cx="-51.582321"
+       cy="236.95924"
+       rx="20.541473"
+       ry="31.525713"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\uber\slime_2.png" />
+    <ellipse
+       style="fill:#916f7c;fill-opacity:1;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-9-89"
+       cx="-147.86182"
+       cy="239.18335"
+       rx="16.933332"
+       ry="27.516666"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\uber\slime_1.png" />
+    <ellipse
+       style="fill:#48373e;fill-opacity:1;stroke-width:1.98066;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-2-7-6"
+       cx="-125.09686"
+       cy="284.42712"
+       rx="24.149611"
+       ry="35.267483"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\uber\slime_3.png" />
+    <ellipse
+       style="fill:#000000;fill-opacity:1;stroke-width:2.27949;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-2-6-8-3-4"
+       cx="-305.38757"
+       cy="412.86752"
+       rx="29.628635"
+       ry="38.073814"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\uber\slime_4.png" />
+    <ellipse
+       style="fill:#333333;fill-opacity:1;stroke-width:1.7271;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-7-7-2-2"
+       cx="-271.71567"
+       cy="363.95923"
+       rx="20.541473"
+       ry="31.525717"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\uber\slime_2.png" />
+    <ellipse
+       style="fill:#4d4d4d;fill-opacity:1;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-9-89-3"
+       cx="-367.99515"
+       cy="366.18335"
+       rx="16.933332"
+       ry="27.516666"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\uber\slime_1.png" />
+    <ellipse
+       style="fill:#1a1a1a;fill-opacity:1;stroke-width:1.98066;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path3731-2-7-6-5"
+       cx="-345.23019"
+       cy="411.42712"
+       rx="24.149611"
+       ry="35.267483"
+       inkscape:export-xdpi="80"
+       inkscape:export-ydpi="80"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\slime\uber\slime_3.png" />
   </g>
 </svg>

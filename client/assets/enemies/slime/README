@@ -1,0 +1,6 @@
+This directory stores all the slime sprites. The animation folder can be placed in the directory of each of the slime types. To change the size, export with different scale as follows:
+Small - 10%
+Medium - 12%
+Large - 14%
+Giant - 16%
+Uber - 18%

@@ -191,7 +191,7 @@ class Game {
 
     addTower(name, type, playerID, row, col) {
         let player = this.getPlayerByName(playerID)
-        let newTower = new towerImport.Tower(name, type, player, new point.Point(this.map.subgridSize, col, row, this.subgridMidpoint, this.subgridMidpoint))
+        let newTower = new towerImport.Tower(name, type, player, new point.Point(this.map.subgridSize, col, row, this.subgridMidpoint, this.subgridMidpoint), this.subgridSize)
         newTower.calculateShootPath(this.map.mainPath)
         this.towers.push(newTower)
         player.reduceMoney(newTower.getCost()) // Keep player implementation simple and let client determine whether player can afford tower

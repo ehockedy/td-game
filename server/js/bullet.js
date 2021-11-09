@@ -4,12 +4,12 @@ const fs = require('fs');
 let bulletConfig = JSON.parse(fs.readFileSync('shared/json/bullets.json'));
 
 class Bullet {
-    constructor(position, angle, damage, speed, range, type) {
+    constructor(position, angle, damage, speedSquaresPerSecond, range, type) {
         this.position = position.getCopy()
         this.bulletPosStart = position.getCopy()  // TODO replace this with cumulative dist travelled
         this.positionPrev = position.getCopy()
 
-        this.speed = speed
+        this.speed = speedSquaresPerSecond
         this.damage = damage
         this.range = range
         this.type = type
