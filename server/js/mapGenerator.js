@@ -213,6 +213,7 @@ class MapGenerator {
             var line = ""
             for (var j = 0; j < this.map[i].length; j++) {
                 line += this.map[i][j]["value"].toString() + " "
+                if (this.map[i][j]["value"].length == 1) line += " "
             }
             console.log(line)
         }

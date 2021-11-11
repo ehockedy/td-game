@@ -6,7 +6,7 @@ class Player {
 
         this.stats = {
             "points": 0,
-            "money": 2000
+            "money": 200
         }
     }
 
@@ -33,6 +33,10 @@ class Player {
 
     increaseMoney(amount) {
         this.stats.money += amount
+    }
+
+    getMoney() {
+        return this.stats.money
     }
 }
 

@@ -220,6 +220,7 @@ class Game {
     addPlayer(playerID) {
         let newPlayer = new playerImport.Player(playerID, this.players.length)
         this.players.push(newPlayer)
+        return newPlayer
     }
 
     getPlayerByName(playerID) {
@@ -302,6 +303,18 @@ class Game {
         }
     }
 
+    isRoundActive() {
+        return this.roundActive
+    }
+
+    isVictory() {
+        return this.round > this.maxRounds
+    }
+
+    isLoss() {
+        return this.lives <= 0
+    }
+
     updateGameObjects() {
         // Update the state of existing enemies
         this.moveEnemies();
@@ -325,6 +338,9 @@ class Game {
             this.updateGameObjects()
             this.checkForRoundEnd()
         }
+        if (this.isVictory()) return "win"
+        if (this.isLoss()) return "lose"
+        return "in_progress"
     }
 
     getGameStateEnemies() {

@@ -175,6 +175,22 @@ class GameMap {
       }
     }
   }
+
+  // Count the number of squares in the range of a point that are on the path
+  getNumberOfPathSquaresInRange(row, col, range) {
+    let pathSquareCount = 0
+    range = Math.ceil(range)
+    for (let r = Math.max(row-range, 0); r < Math.min(this.height - 1, row+range); r += 1) {
+      for (let c = Math.max(col-range, 0); c < Math.min(this.width - 1, col+range); c += 1) {
+        if (this.getGridValue(r, c) != 'x' && this.getGridValue(r, c) != 't') {
+          if (Math.sqrt(Math.pow(Math.abs(row - r), 2) + Math.pow(Math.abs(col - c), 2)) <= range) {
+            pathSquareCount += 1
+          }
+        }
+      }
+    }
+    return pathSquareCount
+  }
 }
 
 
