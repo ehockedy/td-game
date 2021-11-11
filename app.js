@@ -6,7 +6,7 @@ const fs = require('fs');
 const express = require('express');
 const app = express();
 const path = require('path');
-
+const sim = require("./server/scripts/simulaton.js")
 
 /**
  * Searches the available server interfaces for the public IPv4 address
@@ -57,18 +57,22 @@ function randomAlphaCharString(len) {
   return randomString
 }
 
-function runServer(gameConfig, roundConfig, enemyConfig) {
+function createServer() {
   // First set up http server to serve index.html and its included files
   app.use(express.static(path.resolve(__dirname, 'build/')));
   app.use(express.static(path.resolve(__dirname, './')));  // TODO change?
-
+  
   const http_server = http.createServer(app);
   http_server.listen(8000, () => {
     console.log('HTTP server listening on ' + getServerListeningPublicAddress() + ':8000');
   });
-
+  
   // From then on can connect over WebSocket using socket.io client
-  const web_sockets_server = new Server(http_server)
+  return new Server(http_server)
+}
+
+function runServer(gameConfig, roundConfig, enemyConfig) {
+  const web_sockets_server = createServer()
 
   // Keep track of current games
   let games = {}
@@ -116,12 +120,35 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
   });
 }
 
+function runSmulation(gameConfig, roundConfig, enemyConfig, towerConfig) {
+  let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
+  console.log(simulation.runSimulation(1))
+}
+
+function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig) {
+  // TODO
+}
+
 // Main entry point to server code
 let gameConfig = loadConfig('shared/json/gameConfig.json')
 let roundConfig = loadConfig('shared/json/rounds.json')
-let enemyConfig = loadConfig('shared/json/enemies.json');
+let enemyConfig = loadConfig('shared/json/enemies.json')
+let towerConfig = loadConfig('shared/json/towers.json')
+let argv = process.argv
 if (parseGameConfig(gameConfig)) {
-  runServer(gameConfig, roundConfig, enemyConfig)
+  // No args, start game as default
+  if (argv.length == 2) {
+    runServer(gameConfig, roundConfig, enemyConfig)
+  } else if (argv[2] == 's' || argv[2] == "simulation") {
+    runSmulation(gameConfig, roundConfig, enemyConfig, towerConfig)
+  } else if (argv[2] == 'ws' || argv[2] == "simulation_watch") {
+    runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig)
+  } else {
+    console.log("Usage:")
+    console.log("  Start normal game server:       npm start")
+    console.log("  Start simulation:               npm start s|simulation")
+    console.log("  Start simulation and watch it:  npm start sw|simulation_watch")
+  }
 } else {
   console.log("Config not valid, exiting")
   process.exit(1)

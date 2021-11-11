@@ -1,20 +1,7 @@
 const game = require('../js/game.js')
 const mapGenerator = require("../js/mapGenerator.js")
-const fs = require('fs');
 
 // Run simulations of the game to assess difficulty
-
-
-function loadConfig(filename) {  // todo de duplicate this from other files
-    let configJson = fs.readFileSync(filename);
-    return JSON.parse(configJson);
-}
-
-let gameConfig = loadConfig('shared/json/gameConfig.json')
-let roundConfig = loadConfig('shared/json/rounds.json')
-let towerConfig = loadConfig('shared/json/towers.json')
-let enemyConfig = loadConfig('shared/json/enemies.json')
-
 class Simulator {
     constructor(gameConfig, roundConfig, enemyConfig, towerConfig) {
         this.mapGenerator = new mapGenerator.MapGenerator(gameConfig.MAP_HEIGHT, gameConfig.MAP_WIDTH, gameConfig.SUBGRID_SIZE)
@@ -124,5 +111,6 @@ class Simulator {
     }
 }
 
-let simulation = new Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
-console.log(simulation.runSimulation(1))
+module.exports = {
+    Simulator: Simulator
+}  

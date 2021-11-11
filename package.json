@@ -31,7 +31,9 @@
   },
   "scripts": {
     "test": "jest --silent",
-    "start": "node app.js"
+    "start": "node app.js",
+    "simulate": "node app.js s",
+    "watch_sim": "node app.js ws"
   },
   "repository": {
     "type": "git",
