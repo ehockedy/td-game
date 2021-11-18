@@ -1,6 +1,7 @@
 import { MainMenu } from "./js/views/main_menu_react.js"
 import { Lobby } from "./js/views/lobby_react.js"
 import { Game } from "./js/views/game_react.js"
+import { SimulationView } from "./js/views/simulation_view.js"
 import { io } from "socket.io-client";
 import { GameMapBackground } from "./js/components/ui_common/map.js"
 import React, { useEffect, useState } from "react";
@@ -70,6 +71,9 @@ function Application(props) {
         socket.on("client/view/game", () => {
             setView("game")
         })
+        socket.on("client/view/simulation", () => {
+            setView("simulation")
+        })
         socket.on("client/players/set", (players) => {
             setPlayers(players)
         })
@@ -99,6 +103,9 @@ function Application(props) {
                 ) :
                 view === "game" ? (
                     <Game socket={socket} config={config} thisPlayer={playerID} players={players} gameSettings={gameSettings}></Game>
+                ) :
+                view === "simulation" ? (
+                    <SimulationView socket={socket} config={config}></SimulationView>
                 ) :
                 console.log("INVALID VIEW")
                 // TODO add page not found page

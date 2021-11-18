@@ -122,11 +122,22 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
 
 function runSmulation(gameConfig, roundConfig, enemyConfig, towerConfig) {
   let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
-  console.log(simulation.runSimulation(1))
+  simulation.runSimulation(1)
 }
 
 function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig) {
   // TODO
+  const web_sockets_server = createServer()
+  web_sockets_server.on('connection', (socket) => {
+    socket.emit("client/view/simulation")
+
+    let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
+    socket.on("server/simulation/start", () => {
+      socket.emit("client/gameSettings/set", {"numRounds": roundConfig.rounds.length})
+      simulation.setSocket(socket)
+      simulation.runSimulationWithView(1)
+    });
+  })
 }
 
 // Main entry point to server code

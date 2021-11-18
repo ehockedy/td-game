@@ -14,6 +14,7 @@ export class TowersComponent extends BaseComponent {
 
         this.observers = [this]
         this.setEventListeners()
+        this.isSimulation = false
     }
 
     // Setter for tower config
@@ -21,6 +22,10 @@ export class TowersComponent extends BaseComponent {
         this.towerConfig = towerConfig
         this.playerConfig = playerConfig
         this.thisPlayer = thisPlayer
+    }
+
+    setSimulation() {
+        this.isSimulation = true
     }
 
     subscribe(observer) {
@@ -31,7 +36,8 @@ export class TowersComponent extends BaseComponent {
         const x = col * this.mapSpriteSize + this.mapSpriteSize / 2;
         const y = row * this.mapSpriteSize + this.mapSpriteSize / 2;
         const isThisPlayer = (playerID == this.thisPlayer)
-        let sprite = new DeployedTower(type, name, x, y, this.towerConfig, playerID, this.playerConfig[playerID].colour, isThisPlayer)
+        const colour = (!this.isSimulation) ? this.playerConfig[playerID].colour : "#FFFFFF"
+        let sprite = new DeployedTower(type, name, x, y, this.towerConfig, playerID, colour, isThisPlayer)
         if (isThisPlayer) { // TODO check if the playerID exist
             this.observers.forEach((observer) => {sprite.subscribe(observer)})
         }

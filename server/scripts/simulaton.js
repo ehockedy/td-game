@@ -15,51 +15,101 @@ class Simulator {
         this.gameSettings = {
             "numRounds": roundConfig.rounds.length
         }
-        this.playerID = 1
+        this.playerID = "sim_player"  // Name set in simulation client
+        this.sendToClient = false  // Whether there is a client that can receive updates via a connected socket
+    }
+
+    // Must be called if want to visualise updates
+    setSocket(socket) {
+        this.socket = socket
+    }
+
+    setupSimulation(seed) {
+        this.seed = seed
+        this.map = this.mapGenerator.generateMap(seed.toString())   
+        this.game = new game.Game(this.map, this.roundConfig.rounds, this.gameSettings, this.enemyConfig)
+        this.player = this.game.addPlayer(this.playerID)
+        this.round = 0
+        this.simulationSummary = {}
     }
 
     // Sets up a game using the given seed. Having this seed ensures can re-run with the same maps and tower choices (if random) over and over again
     runSimulation(seed) {
-        this.seed = seed
-        this.map = this.mapGenerator.generateMap(seed.toString())
-        this.game = new game.Game(this.map, this.roundConfig.rounds, this.gameSettings, this.enemyConfig)
-        this.player = this.game.addPlayer(this.playerID)
+        this.setupSimulation(seed)
+        this.fullSpeedLoop()
+        this.processResults()
+    }
 
-        this.simulationSummary = {}
+    async runSimulationWithView(seed) {
+        this.setupSimulation(seed)
+        this.socket.emit("client/map/set", this.map.getMapStructure())
+        return this.visualisedLoop()
+    }
 
-        this.round = 0
-        let gameState = "in_progress"
-        while (gameState == "in_progress") {            
-            // If round is not active, immediately start it
-            if (!this.game.isRoundActive()) {
-                // Record the state at the start of the round
-                this.simulationSummary[this.round] = {
-                    "livesRemaining": this.game.getGameStateWorld().lives,
-                    "towersBought": []
-                }
-
-                // Attempt to buy towers between rounds
-                this._buyTowersMostExpensive()  // TODO put in switch with other tower buying methods
-                
-                // Start next round
-                this.round += 1
-                this.game.startRound()
-
-                //this.mapGenerator.printMap()
-            }
-
-            // Update state
-            gameState = this.game.updateGameState()
-        }
-
-        // Summary at end
-        this.simulationSummary[this.round] = {
+    getCurrentSummaryEmpty() {
+        return {
             "livesRemaining": this.game.getGameStateWorld().lives,
             "towersBought": []
         }
-        return this.simulationSummary
     }
 
+    // Checks if the round has changed and records the current state if so, does any tower buying,
+    // and then immediately starts the next round
+    checkForRoundChange() {
+        // If round is not active, immediately start it
+        if (!this.game.isRoundActive()) {
+            // Record the state at the start of the round
+            this.simulationSummary[this.round] = this.getCurrentSummaryEmpty()
+    
+            // Attempt to buy towers between rounds
+            this._buyTowersMostExpensive()  // TODO put in switch with other tower buying methods
+            
+            // Start next round
+            this.round += 1
+            this.game.startRound()
+        }
+
+    }
+
+    fullSpeedLoop() {
+        // Speed thorough the game as fast as possible
+        let gameState = "in_progress"
+        while (gameState == "in_progress") {
+            this.checkForRoundChange()
+            gameState = this.game.updateGameState()
+        }
+        // Summary at end
+        this.simulationSummary[this.round] = this.getCurrentSummaryEmpty()
+    }
+
+    async visualisedLoop() {
+        const perLoopIterations = 20
+        const loopPeriod_ms = 1
+        // Starts a periodic loop that every iteration updates the game state, and possibly sends
+        // an update to the client. The reason an update is not sent on every iteration
+        // is becasue the game would move too fast that the client could not render fast enough.
+        let gameState = "in_progress"
+        let loopIdx = 0
+        while(gameState == "in_progress") {
+            this.checkForRoundChange()
+            gameState = this.game.updateGameState()                  
+
+            if (loopIdx == 0) {
+                // Send update for client to render
+                this.socket.emit("client/game/update", this.game.getGameState())
+
+                // Sleep so client not overloaded. Not very Javascript-y, but this is a simulation test script
+                // so not too fussed.
+                await new Promise(r => setTimeout(r, loopPeriod_ms));
+            }
+            loopIdx = (loopIdx + 1) % perLoopIterations
+        }
+        // Summary at end
+        this.simulationSummary[this.round] = this.getCurrentSummaryEmpty()
+    }
+
+    // Iterates over the tower config and adds the towers that the player can afford to a list, which gets returned.
+    // Assumes towers are in price order.
     getAffordableTowers() {
         let availableTowers = []
         for (let towerIdx = 0; towerIdx < this.towerKeys.length; towerIdx += 1) {
@@ -102,12 +152,16 @@ class Simulator {
                     }
                 }
             }
-            this.game.addTower("name", mostExpensiveTowerType, this.playerID, currentBest.row, currentBest.col)
-            this.simulationSummary[this.round].towersBought.push(mostExpensiveTowerType)
+            this.game.addTower(Math.random().toString(36).substr(2, 5), mostExpensiveTowerType, this.playerID, currentBest.row, currentBest.col)
+            this.simulationSummary[this.round].towersBought.push(mostExpensiveTowerType)  // TODO return this and keep summary scope function local
 
             // Calculate the available towers
             availableTowers = this.getAffordableTowers()
         }
+    }
+
+    processResults() {
+        console.log(this.simulationSummary)
     }
 }
 
