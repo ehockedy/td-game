@@ -132,11 +132,16 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
     socket.emit("client/view/simulation")
 
     let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
-    socket.on("server/simulation/start", () => {
+    socket.on("server/simulation/visualise", () => {
       socket.emit("client/gameSettings/set", {"numRounds": roundConfig.rounds.length})
       simulation.setSocket(socket)
       simulation.runSimulationWithView(1)
     });
+
+    socket.on("server/simulation/start", () => {
+      simulation.runSimulation(1)
+      // Send result
+    })
   })
 }
 

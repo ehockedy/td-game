@@ -17,6 +17,8 @@ class Simulator {
         }
         this.playerID = "sim_player"  // Name set in simulation client
         this.sendToClient = false  // Whether there is a client that can receive updates via a connected socket
+
+        this.results = {}
     }
 
     // Must be called if want to visualise updates
@@ -24,13 +26,40 @@ class Simulator {
         this.socket = socket
     }
 
-    setupSimulation(seed) {
+    setupSimulation(seed, towerPurchaseMethod) {
         this.seed = seed
         this.map = this.mapGenerator.generateMap(seed.toString())   
         this.game = new game.Game(this.map, this.roundConfig.rounds, this.gameSettings, this.enemyConfig)
         this.player = this.game.addPlayer(this.playerID)
         this.round = 0
-        this.simulationSummary = {}
+        this.towerPurchaseMethod = towerPurchaseMethod
+
+        // Holds all the important stats about this one game, added to master results list at end of simulation
+        // Use arrays where each index is the round
+        this.simulationSummary = {
+            "seed": seed,
+            "livesRemaining": [],  // Array that holds the number of lives at the start of each round
+            "towersBought": []  // Array that holds an array for each round with teh names of the towers purchased before the round started
+        }
+        // Results example
+        // {
+        //     "mostExpensive": [
+        //         {
+        //             "seed": 1,
+        //             "livesRemaining": [100, 100, 90, 90, 85],
+        //             "towersBought": [["shrapnel-burst", "shrapnel-burst"], [], [], [], ["rock-scatter"]]
+        //         }
+        //     ]
+        // }
+    }
+
+    recordCurrentState(lives, towers) {
+        if (this.simulationSummary.livesRemaining.length == this.round) {
+            this.simulationSummary.livesRemaining.push(lives)
+            this.simulationSummary.towersBought.push(towers)
+        } else {
+            console.log("WARNING: setting current round info for a round that has already been done")
+        }
     }
 
     // Sets up a game using the given seed. Having this seed ensures can re-run with the same maps and tower choices (if random) over and over again
@@ -46,29 +75,21 @@ class Simulator {
         return this.visualisedLoop()
     }
 
-    getCurrentSummaryEmpty() {
-        return {
-            "livesRemaining": this.game.getGameStateWorld().lives,
-            "towersBought": []
-        }
-    }
-
     // Checks if the round has changed and records the current state if so, does any tower buying,
     // and then immediately starts the next round
     checkForRoundChange() {
         // If round is not active, immediately start it
-        if (!this.game.isRoundActive()) {
-            // Record the state at the start of the round
-            this.simulationSummary[this.round] = this.getCurrentSummaryEmpty()
-    
+        if (!this.game.isRoundActive()) {            
             // Attempt to buy towers between rounds
-            this._buyTowersMostExpensive()  // TODO put in switch with other tower buying methods
+            let towersBought = this._buyTowersMostExpensive()  // TODO put in switch with other tower buying methods
+
+            // Record the state at the start of the round
+            this.recordCurrentState(this.game.getGameStateWorld().lives, towersBought)
             
             // Start next round
             this.round += 1
             this.game.startRound()
         }
-
     }
 
     fullSpeedLoop() {
@@ -79,7 +100,7 @@ class Simulator {
             gameState = this.game.updateGameState()
         }
         // Summary at end
-        this.simulationSummary[this.round] = this.getCurrentSummaryEmpty()
+        this.recordCurrentState(this.game.getGameStateWorld().lives, [])
     }
 
     async visualisedLoop() {
@@ -105,7 +126,7 @@ class Simulator {
             loopIdx = (loopIdx + 1) % perLoopIterations
         }
         // Summary at end
-        this.simulationSummary[this.round] = this.getCurrentSummaryEmpty()
+        this.recordCurrentState(this.game.getGameStateWorld().lives, [])
     }
 
     // Iterates over the tower config and adds the towers that the player can afford to a list, which gets returned.
@@ -126,6 +147,7 @@ class Simulator {
     // Spends all the money buying the most expensive available tower each time
     _buyTowersMostExpensive() {
         let availableTowers = this.getAffordableTowers()
+        let boughtTowers = []
         while (availableTowers.length > 0) {
             let mostExpensiveTowerType = availableTowers[availableTowers.length - 1]
             let currentBest = {
@@ -153,11 +175,12 @@ class Simulator {
                 }
             }
             this.game.addTower(Math.random().toString(36).substr(2, 5), mostExpensiveTowerType, this.playerID, currentBest.row, currentBest.col)
-            this.simulationSummary[this.round].towersBought.push(mostExpensiveTowerType)  // TODO return this and keep summary scope function local
+            boughtTowers.push(mostExpensiveTowerType)
 
             // Calculate the available towers
             availableTowers = this.getAffordableTowers()
         }
+        return boughtTowers
     }
 
     processResults() {

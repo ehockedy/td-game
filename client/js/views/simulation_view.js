@@ -20,8 +20,16 @@ export class SimulationView extends React.Component {
         this.view.loadAssets().then(()=>{
             this.view.startRendering()
             this.simulationStarted = true
-            this.props.socket.emit("server/simulation/start"); 
+            this.props.socket.emit("server/simulation/visualise"); 
         })
+    }
+
+    startSimulationWaitForResult() {
+        this.props.socket.emit("server/simulation/start"); 
+
+        // send via socket
+        // wait for results
+        // render results
     }
 
     updatePixiCnt = (element) => {
@@ -40,11 +48,20 @@ export class SimulationView extends React.Component {
         return (
             <div> 
                 {
-                    !this.simulationStarted ? <Button
-                        onClick={() => {this.beginRenderingSimulation()}}
-                        content="Begin simulations"
-                        classNames="button-main-menu"
-                    ></Button> :
+                    !this.simulationStarted ? 
+                    <div>
+                        <Button
+                            onClick={() => {this.beginRenderingSimulation()}}
+                            content="Watch simulations live"
+                            classNames="button-main-menu"
+                        ></Button>
+                        <Button
+                            onClick={() => {this.startSimulationWaitForResult()}}
+                            content="Run simulations, display results"
+                            classNames="button-main-menu"
+                        ></Button>
+                    </div>
+                     :
                     <div ref={this.updatePixiCnt}></div>
                 }
             </div>
