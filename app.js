@@ -122,7 +122,7 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
 
 function runSmulation(gameConfig, roundConfig, enemyConfig, towerConfig) {
   let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
-  simulation.runSimulation(1)
+  simulation.runSimulation(1, "mostExpensive")
 }
 
 function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig) {
@@ -135,12 +135,16 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
     socket.on("server/simulation/visualise", () => {
       socket.emit("client/gameSettings/set", {"numRounds": roundConfig.rounds.length})
       simulation.setSocket(socket)
-      simulation.runSimulationWithView(1)
+      simulation.runSimulationWithView(1, "mostExpensive")
     });
 
-    socket.on("server/simulation/start", () => {
-      simulation.runSimulation(1)
-      // Send result
+    socket.on("server/simulation/start", (callback) => {
+      simulation.runSimulation(1, "mostExpensive")
+
+      // Send results for all runs
+      callback({
+        "results" : simulation.getResults()
+      })
     })
   })
 }

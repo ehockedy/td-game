@@ -25,7 +25,9 @@ export class SimulationView extends React.Component {
     }
 
     startSimulationWaitForResult() {
-        this.props.socket.emit("server/simulation/start"); 
+        this.props.socket.emit("server/simulation/start", (response) => {
+            console.log(response.results)
+        });
 
         // send via socket
         // wait for results
