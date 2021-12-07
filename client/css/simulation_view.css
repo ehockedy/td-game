@@ -1,0 +1,9 @@
+
+.button-simulation-view {
+    width: 20vw;
+    height: 10vh;
+    position: relative;
+    font-size: 2em;
+    margin: 10px;
+    vertical-align: middle;
+}
