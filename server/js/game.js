@@ -1,5 +1,4 @@
 const crypto = require('crypto');
-const enemy = require("./enemies.js");
 const playerImport = require('./player.js')
 const towerImport = require("./tower.js");
 const point = require('./point.js');
@@ -294,10 +293,15 @@ class Game {
 
     // Checks whether the round is currently in progress
     // Determined by whether there are enemies left to kill and bullets on the map
-    // If round is over (and was not at the start) increment the round number
+    // If round is over (and was not at the start) increment the round number and reward players their money
     checkForRoundEnd() {
         if (!this.roundActive) return
         if (this.enemiesRemaining == 0 && this.map.numBullets == 0) {
+            // Reward players with money for the round
+            this.players.forEach((player) => {
+                player.increaseMoney(50 + this.round*5)
+            })
+
             this.round += 1
             this.roundActive = false
         }
