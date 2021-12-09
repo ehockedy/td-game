@@ -20,6 +20,12 @@ class Simulator {
         this.sendToClient = false  // Whether there is a client that can receive updates via a connected socket
 
         this.results = {}
+
+        this.towerBuyingMap = {
+            "mostExpensive": this._buyTowersMostExpensive,
+            "mostExpensiveEveryOtherRound": this._buyTowersMostExpensiveEveryOtherRound,
+            "randomEveryOtherRound": this._buyTowersRandomEveryOtherRound,
+        }
     }
 
     // Must be called if want to visualise updates
@@ -61,6 +67,14 @@ class Simulator {
         }
     }
 
+    // Iterates over all the methods of purchasing a tower and runs the simulation with the given seed
+    runSimulationAllTypes(seed) {
+        for (let type in this.towerBuyingMap) {
+            this.runSimulation(seed, type)
+        }
+
+    }
+
     // Sets up a game using the given seed. Having this seed ensures can re-run with the same maps and tower choices (if random) over and over again
     runSimulation(seed, towerPurchaseMethod) {
         console.log("Starting simulation with seed:", seed, ", and tower purchase method:", towerPurchaseMethod)
@@ -81,17 +95,7 @@ class Simulator {
         // If round is not active, immediately start it
         if (!this.game.isRoundActive()) {            
             // Attempt to buy towers between rounds
-            let towersBought
-            switch(towerPurchaseMethod) {
-                case "mostExpensive":
-                    towersBought = this._buyTowersMostExpensive()
-                    break
-                case "mostExpensiveEveryOther":
-                    towersBought = this._buyTowersMostExpensiveEveryOtherRound()
-                    break;
-                default:
-                    console.log("WARNING: towerPurchaseMethod not found")
-            }
+            let towersBought = this.towerBuyingMap[towerPurchaseMethod].call(this)
 
             // Record the state at the start of the round
             this.recordCurrentState(this.game.getGameStateWorld().lives, towersBought)
@@ -154,41 +158,43 @@ class Simulator {
         return availableTowers
     }
 
+    getBestPlaceForTower(towerType) {
+        let currentBest = {
+            "row": 0,
+            "col": 0,
+            "squares": 0,
+        }
+        // TODO ensure map not full of towers, and 0,0 not taken
+
+        // Iterate over all the available squares and identify the one gives the tower the most number of
+        // path squares in its sights
+        for (let r = 0; r < this.gameConfig.MAP_HEIGHT; r += 1) {
+            for (let c = 0; c < this.gameConfig.MAP_WIDTH; c += 1) {
+                // Check if is unoccupied space
+                if (this.map.getGridValue(r, c) == 'x') {
+                    let numberOfSquares = this.map.getNumberOfPathSquaresInRange(r, c, this.towerConfig[towerType].gameData.seekRange)
+                    if (numberOfSquares > currentBest.squares) {
+                        currentBest = {
+                            "row": r,
+                            "col": c,
+                            "squares": numberOfSquares
+                        }
+                    }
+                }
+            }
+        }
+        return currentBest
+    }
+
     // Spends all the money buying the most expensive available tower each time
     _buyTowersMostExpensive() {
         let availableTowers = this.getAffordableTowers()
         let boughtTowers = []
         if (availableTowers.length > 0) {
             let mostExpensiveTowerType = availableTowers[availableTowers.length - 1]
-            let currentBest = {
-                "row": 0,
-                "col": 0,
-                "squares": 0,
-            }
-            // TODO ensure map not full of towers, and 0,0 not taken
-
-            // Iterate over all the available squares and identify the one gives the tower the most number of
-            // path squares in its sights
-            for (let r = 0; r < this.gameConfig.MAP_HEIGHT; r += 1) {
-                for (let c = 0; c < this.gameConfig.MAP_WIDTH; c += 1) {
-                    // Check if is unoccupied space
-                    if (this.map.getGridValue(r, c) == 'x') {
-                        let numberOfSquares = this.map.getNumberOfPathSquaresInRange(r, c, this.towerConfig[mostExpensiveTowerType].gameData.seekRange)
-                        if (numberOfSquares > currentBest.squares) {
-                            currentBest = {
-                                "row": r,
-                                "col": c,
-                                "squares": numberOfSquares
-                            }
-                        }
-                    }
-                }
-            }
-            this.game.addTower(Math.random().toString(36).substr(2, 5), mostExpensiveTowerType, this.playerID, currentBest.row, currentBest.col)
+            let bestPlace = this.getBestPlaceForTower(mostExpensiveTowerType)
+            this.game.addTower(Math.random().toString(36).substr(2, 5), mostExpensiveTowerType, this.playerID, bestPlace.row, bestPlace.col)
             boughtTowers.push(mostExpensiveTowerType)
-
-            // Calculate the available towers
-            //availableTowers = this.getAffordableTowers()
         }
         return boughtTowers
     }
@@ -198,6 +204,21 @@ class Simulator {
             return this._buyTowersMostExpensive()
         }
         return []
+    }
+
+    _buyTowersRandomEveryOtherRound() {
+        if (this.round % 2 != 0) return []
+
+        let availableTowers = this.getAffordableTowers()
+        let boughtTowers = []
+        // TODO this is very similar code to most expensive, could de-duplicate
+        if (availableTowers.length > 0) {
+            let randomTower = availableTowers[Math.floor(Math.random() * availableTowers.length)]
+            let bestPlace = this.getBestPlaceForTower(randomTower)
+            this.game.addTower(Math.random().toString(36).substr(2, 5), randomTower, this.playerID, bestPlace.row, bestPlace.col)
+            boughtTowers.push(randomTower)
+        }
+        return boughtTowers
     }
 
     processResults(towerPurchaseMethod) {

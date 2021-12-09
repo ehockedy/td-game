@@ -143,8 +143,7 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
     socket.on("server/simulation/start", (callback) => {
       let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
       for (let i=0; i < 8; i+=1) {
-        simulation.runSimulation(i, "mostExpensive")
-        simulation.runSimulation(i, "mostExpensiveEveryOther")
+        simulation.runSimulationAllTypes(i)
       }
 
       // Send results for all runs
