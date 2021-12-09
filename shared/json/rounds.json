@@ -35,6 +35,28 @@
                 "count": 10,
                 "enemiesPerSquarePerSecond": 0.75
             }
+        ],
+        [
+            {
+                "enemies": ["boneheadBandit"],
+                "count": 15,
+                "enemiesPerSquarePerSecond": 1.2
+            },
+            {
+                "enemies": ["greenBeetle"],
+                "count": 15,
+                "enemiesPerSquarePerSecond": 1.2
+            },
+            {
+                "enemies": ["slimeSmall"],
+                "count": 15,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["blueBeetle"],
+                "count": 15,
+                "enemiesPerSquarePerSecond": 1
+            }
         ]
     ]
 }
