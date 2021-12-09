@@ -63,6 +63,7 @@ class Simulator {
 
     // Sets up a game using the given seed. Having this seed ensures can re-run with the same maps and tower choices (if random) over and over again
     runSimulation(seed, towerPurchaseMethod) {
+        console.log("Starting simulation with seed:", seed, ", and tower purchase method:", towerPurchaseMethod)
         this.setupSimulation(seed)
         this.fullSpeedLoop(towerPurchaseMethod)
         this.processResults(towerPurchaseMethod)
@@ -85,6 +86,9 @@ class Simulator {
                 case "mostExpensive":
                     towersBought = this._buyTowersMostExpensive()
                     break
+                case "mostExpensiveEveryOther":
+                    towersBought = this._buyTowersMostExpensiveEveryOtherRound()
+                    break;
                 default:
                     console.log("WARNING: towerPurchaseMethod not found")
             }
@@ -154,7 +158,7 @@ class Simulator {
     _buyTowersMostExpensive() {
         let availableTowers = this.getAffordableTowers()
         let boughtTowers = []
-        while (availableTowers.length > 0) {
+        if (availableTowers.length > 0) {
             let mostExpensiveTowerType = availableTowers[availableTowers.length - 1]
             let currentBest = {
                 "row": 0,
@@ -184,9 +188,16 @@ class Simulator {
             boughtTowers.push(mostExpensiveTowerType)
 
             // Calculate the available towers
-            availableTowers = this.getAffordableTowers()
+            //availableTowers = this.getAffordableTowers()
         }
         return boughtTowers
+    }
+
+    _buyTowersMostExpensiveEveryOtherRound() {
+        if (this.round % 2 == 0) {
+            return this._buyTowersMostExpensive()
+        }
+        return []
     }
 
     processResults(towerPurchaseMethod) {
@@ -194,7 +205,6 @@ class Simulator {
             this.results[towerPurchaseMethod] = []
         }
         this.results[towerPurchaseMethod].push(this.simulationSummary)
-        console.log(this.results)
     }
 
     getResults() {

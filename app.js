@@ -122,11 +122,13 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
 
 function runSmulation(gameConfig, roundConfig, enemyConfig, towerConfig) {
   let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
-  simulation.runSimulation(1, "mostExpensive")
+  for (let i=0; i < 10; i+=1) {
+    simulation.runSimulation(i, "mostExpensive")
+  }
+  console.dir(simulation.getResults(), {depth :100})
 }
 
 function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig) {
-  // TODO
   const web_sockets_server = createServer()
   web_sockets_server.on('connection', (socket) => {
     socket.emit("client/view/simulation")
@@ -140,8 +142,9 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
 
     socket.on("server/simulation/start", (callback) => {
       let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
-      for (let i=0; i < 2; i+=1) {
+      for (let i=0; i < 8; i+=1) {
         simulation.runSimulation(i, "mostExpensive")
+        simulation.runSimulation(i, "mostExpensiveEveryOther")
       }
 
       // Send results for all runs
