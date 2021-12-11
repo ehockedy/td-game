@@ -1,9 +1,57 @@
+.simulation-view-title {
+    margin-left: 1%;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+}
 
-.button-simulation-view {
-    width: 20vw;
-    height: 10vh;
-    position: relative;
+.simulation-view-simulation-options {
+    display: grid;
+    grid-template-areas: 
+        "simulation-view-seed simulation-view-tower-method simulation-view-buttons";
+    grid-template-columns: 1fr 4fr 2fr;
+}
+
+.holder {
+    margin-left: 32px;
+    margin-right: 32px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.simulation-view-button {
+    width: 45%;
+    height: 64px;
+    display: inline;
+    font-size: 1.5vw;
+    margin-left: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.simulation-view-subtitle {
+    margin: 5px;
+}
+
+.simulation-view-seed-input {
+    width: 90%;
+    height: 48px;
     font-size: 2em;
-    margin: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.simulation-view-tower-method-input {
+    margin-right: 20px;
+    white-space: nowrap;
+}
+
+.simulation-view-tower-method-checkbox {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.simulation-view-tower-method-label {
+    font-size: 1.5em;
     vertical-align: middle;
 }
