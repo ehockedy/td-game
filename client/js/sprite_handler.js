@@ -2,9 +2,10 @@
  * This is the class that holds all the sprites and interaction with those sprites
  */
 export class SpriteHandler {
-    constructor(width_px, height_px) {
+    constructor(width_px, height_px, resizeFactor=1) {
         this.width_px = width_px
         this.height_px = height_px
+        this.resizeFactor = resizeFactor
 
         this.app = new PIXI.Application({
             width: this.width_px,
@@ -38,7 +39,7 @@ export class SpriteHandler {
 
     resizeView() {
         // Keep ratio the same, so see if width or height needs to be scaled the most to be visible
-        let resizeMultiplier = Math.min((window.innerWidth - this.margin) / this.width_px, (window.innerHeight - this.margin) / this.height_px)
+        let resizeMultiplier = Math.min((window.innerWidth - this.margin) / this.width_px, (window.innerHeight - this.margin) / this.height_px) * this.resizeFactor
         if (resizeMultiplier != this.globalResizeMultiplier) { // If a resize has occurred, scale the canvas and everything in it
             // Update measurements
             this.width_px *= resizeMultiplier

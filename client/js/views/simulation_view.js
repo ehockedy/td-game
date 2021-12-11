@@ -14,7 +14,7 @@ export class SimulationView extends React.Component {
         this.state = {}
 
         // This holds the PIXI application and all the sprites
-        this.spriteHandler = new SpriteHandler(this.props.config.APP_WIDTH, this.props.config.APP_HEIGHT)
+        this.spriteHandler = new SpriteHandler(this.props.config.APP_WIDTH, this.props.config.APP_HEIGHT, 0.7)
 
         // Simulation options
        // this.startingSeedValue = "1"
@@ -172,8 +172,11 @@ export class SimulationView extends React.Component {
         //now we are adding the application to the DOM element which we got from the Ref.
         if(this.pixi_cnt && this.pixi_cnt.children.length<=0) {
             let canvas = this.spriteHandler.getCanvas();
-            canvas.classList.add("game-canvas")
+            canvas.classList.add("game-canvas-simulation")
             canvas.classList.add("display-box-shadowless")
+            canvas.style.width = "80vw"
+            canvas.style.height = "75vh"
+            canvas.style.margin = '0px auto'
             this.pixi_cnt.appendChild(canvas)
         }
      };
@@ -182,50 +185,50 @@ export class SimulationView extends React.Component {
         return (
             <div> 
                 {
-                    this.displayMode == "menu" ?
-                        <div className="noselect">
-                            <h1 className="simulation-view-title">Simulator</h1>
-                            <div className="simulation-view-simulation-options">
-                                <span className="holder simulation-view-seed">
-                                    <h2 className="simulation-view-subtitle">Seed:</h2>
-                                    <input
-                                        className="display-box noselect simulation-view-seed-input"
-                                        type="text"
-                                        maxLength="5"
-                                        spellCheck="false"
-                                    ></input>
-                                </span>
-                                <span className="holder simulation-view-tower-method">
-                                    <h2 className="simulation-view-subtitle">Tower purchase methods:</h2>
-                                    {/* These are the tower purchase methods copied from the simulation code server side */}
-                                    {['mostExpensive', 'mostExpensiveEveryOtherRound', 'randomEveryOtherRound'].map((method) => 
-                                        <span key={method} className="noselect simulation-view-tower-method-input">
-                                            <input className="simulation-view-tower-method-checkbox" type="checkbox" id={method} name={method} defaultChecked="true"></input>
-                                            <label className="simulation-view-tower-method-label" htmlFor={method}>{method}</label>
-                                        </span>
-                                    )}
-                                </span>
-                                <span className="holder simulation-view-buttons">
-                                    <h2 className="simulation-view-subtitle">Start simulation:</h2>
-                                    <Button
-                                        onClick={() => {this.beginRenderingSimulation()}}
-                                        content="Watch live"
-                                        classNames="simulation-view-button"
-                                    ></Button>
-                                    {/* <br/> */}
-                                    <Button
-                                        onClick={() => {this.startSimulationWaitForResult()}}
-                                        content="Create graph"
-                                        classNames="simulation-view-button"
-                                    ></Button>
-                                </span>
-                            </div>
-                            <br/><br/>
-                            <div id="chartDiv" className="noselect" style={{width: "80vw", height: "70vh", margin: '0px auto'}}></div>
+                    <div className="noselect">
+                        <h1 className="simulation-view-title">Simulator</h1>
+                        <div className="simulation-view-simulation-options">
+                            <span className="holder simulation-view-seed">
+                                <h2 className="simulation-view-subtitle">Seed:</h2>
+                                <input
+                                    className="display-box noselect simulation-view-seed-input"
+                                    type="text"
+                                    maxLength="5"
+                                    spellCheck="false"
+                                ></input>
+                            </span>
+                            <span className="holder simulation-view-tower-method">
+                                <h2 className="simulation-view-subtitle">Tower purchase methods:</h2>
+                                {/* These are the tower purchase methods copied from the simulation code server side */}
+                                {['mostExpensive', 'mostExpensiveEveryOtherRound', 'randomEveryOtherRound'].map((method) => 
+                                    <span key={method} className="noselect simulation-view-tower-method-input">
+                                        <input className="simulation-view-tower-method-checkbox" type="checkbox" id={method} name={method} defaultChecked="true"></input>
+                                        <label className="simulation-view-tower-method-label" htmlFor={method}>{method}</label>
+                                    </span>
+                                )}
+                            </span>
+                            <span className="holder simulation-view-buttons">
+                                <h2 className="simulation-view-subtitle">Start simulation:</h2>
+                                <Button
+                                    onClick={() => {this.beginRenderingSimulation()}}
+                                    content="Watch live"
+                                    classNames="simulation-view-button"
+                                ></Button>
+                                {/* <br/> */}
+                                <Button
+                                    onClick={() => {this.startSimulationWaitForResult()}}
+                                    content="Create graph"
+                                    classNames="simulation-view-button"
+                                ></Button>
+                            </span>
                         </div>
-                    : this.displayMode == "simulationView" ?
-                        <div ref={this.updatePixiCnt}></div>
-                    : null
+                        <br/><br/>
+                        { this.displayMode == "simulationView" ?
+                            <div ref={this.updatePixiCnt}></div>
+                            :
+                            <div id="chartDiv" className="noselect" style={{width: "80vw", height: "70vh", margin: '0px auto'}}></div>
+                        }
+                    </div>
                 }
             </div>
         )

@@ -22,9 +22,9 @@
     width: 45%;
     height: 64px;
     display: inline;
-    font-size: 1.5vw;
-    margin-left: 10px;
-    margin-right: 10px;
+    font-size: 1.4vw;
+    margin-left: 5px;
+    margin-right: 5px;
     vertical-align: middle;
 }
 
@@ -54,4 +54,10 @@
 .simulation-view-tower-method-label {
     font-size: 1.5em;
     vertical-align: middle;
+}
+
+.game-canvas-simulation {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0%);
 }
