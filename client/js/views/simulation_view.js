@@ -49,12 +49,12 @@ export class SimulationView extends React.Component {
                 // Specify that want to combine all points for a given x-value
                 defaultTooltip: {
                     combined: true,
-                    label_text: '<b>Round %xValue</b><hr> %points'
+                    label_text: '<b>Round %xValue</b><hr>%points'
                 },
 
                 // Config to apply to each series
                 defaultSeries: {
-                    defaultPoint_tooltip: '<b>%seriesName:</b> %yValue %icon',
+                    defaultPoint_tooltip: '<b>%seriesName:</b> {%yValue:n0}  %icon  %towersBought',
                     events: {
                         legendEntryClick: function() {
                             // No series is in focus, or different series has been chosen to be in focus
@@ -116,6 +116,9 @@ export class SimulationView extends React.Component {
                         graphPoints.push({
                             'x': i,  // round
                             'y': run.livesRemaining[i],  // lives
+                            attributes: [
+                                ['towersBought', run.towersBought[i]]
+                            ]
                         })
                         livesSums[i] += run.livesRemaining[i]  // add to the total so avg can be calclulated
                     }
@@ -125,7 +128,6 @@ export class SimulationView extends React.Component {
                         name: towerPurchaseMethod + '-' + idx.toString(),
                         id: towerPurchaseMethod,
                         points: graphPoints,
-                        mouseTracking_enabled: false,  // Ignore hovering over non-averaged points
                         legendEntry_visible: false,
                         color: towerPurchaseMethodColour,
                         opacity: 0.2,
@@ -137,7 +139,10 @@ export class SimulationView extends React.Component {
                 let livesSumsAvg = livesSums.map((totalLivesCount, idx) => {
                     return {
                         'x': idx,
-                        'y': totalLivesCount/results[towerPurchaseMethod].length
+                        'y': totalLivesCount/results[towerPurchaseMethod].length,
+                        attributes: [
+                            ['towersBought', '-']
+                        ]
                     }
                 })
 
