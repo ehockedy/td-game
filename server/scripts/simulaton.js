@@ -168,8 +168,10 @@ class Simulator {
 
         // Iterate over all the available squares and identify the one gives the tower the most number of
         // path squares in its sights
-        for (let r = 0; r < this.gameConfig.MAP_HEIGHT; r += 1) {
-            for (let c = 0; c < this.gameConfig.MAP_WIDTH; c += 1) {
+        // Go through each column left to right, so that is multiple squares are the same, it pick the one
+        // closest to the start of the track.
+        for (let c = 0; c < this.gameConfig.MAP_WIDTH; c += 1) {
+            for (let r = 0; r < this.gameConfig.MAP_HEIGHT; r += 1) {
                 // Check if is unoccupied space
                 if (this.map.getGridValue(r, c) == 'x') {
                     let numberOfSquares = this.map.getNumberOfPathSquaresInRange(r, c, this.towerConfig[towerType].gameData.seekRange)
