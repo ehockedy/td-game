@@ -24,6 +24,7 @@ class Simulator {
         this.towerBuyingMap = {
             "mostExpensive": this._buyTowersMostExpensive,
             "mostExpensiveEveryOtherRound": this._buyTowersMostExpensiveEveryOtherRound,
+            "random": this._buyTowersRandom,
             "randomEveryOtherRound": this._buyTowersRandomEveryOtherRound,
         }
     }
@@ -208,9 +209,7 @@ class Simulator {
         return []
     }
 
-    _buyTowersRandomEveryOtherRound() {
-        if (this.round % 2 != 0) return []
-
+    _buyTowersRandom() {
         let availableTowers = this.getAffordableTowers()
         let boughtTowers = []
         // TODO this is very similar code to most expensive, could de-duplicate
@@ -221,6 +220,13 @@ class Simulator {
             boughtTowers.push(randomTower)
         }
         return boughtTowers
+    }
+
+    _buyTowersRandomEveryOtherRound() {
+        if (this.round % 2 == 0) {
+            return this._buyTowersRandom()
+        }
+        return []
     }
 
     processResults(towerPurchaseMethod) {

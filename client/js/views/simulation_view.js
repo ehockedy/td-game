@@ -20,6 +20,7 @@ export class SimulationView extends React.Component {
             selectedTowerPurchaseMethods: {
                 'mostExpensive': true,
                 'mostExpensiveEveryOtherRound': true,
+                'random': true,
                 'randomEveryOtherRound': true,
             },
             seed: '1',
