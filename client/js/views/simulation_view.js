@@ -226,6 +226,19 @@ export class SimulationView extends React.Component {
                                     onChange={this.handleInputChange}
                                 ></input>
                             </span>
+                            <span className="holder simulation-view-runs">
+                                <h2 className="simulation-view-subtitle">Runs:</h2>
+                                <input
+                                    // Use same class so inheret same style as seed input
+                                    className="display-box noselect simulation-view-seed-input"
+                                    type="number"
+                                    maxLength="2"
+                                    spellCheck="false"
+                                    name="runs"
+                                    value={this.state.runs}
+                                    onChange={this.handleInputChange}
+                                ></input>
+                            </span>
                             <span className="holder simulation-view-tower-method">
                                 <h2 className="simulation-view-subtitle">Tower purchase methods:</h2>
                                 {Object.keys(this.state.selectedTowerPurchaseMethods).map((method) =>
