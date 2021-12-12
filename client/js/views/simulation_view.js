@@ -11,13 +11,39 @@ export class SimulationView extends React.Component {
     constructor(props) {
         super(props)
         this.displayMode = "menu"  // "simulationView", "simulationResults"
-        this.state = {}
 
         // This holds the PIXI application and all the sprites
         this.spriteHandler = new SpriteHandler(this.props.config.APP_WIDTH, this.props.config.APP_HEIGHT, 0.7)
 
-        // Simulation options
-       // this.startingSeedValue = "1"
+        this.state = {
+            // These are the tower purchase methods copied from the simulation code server side
+            selectedTowerPurchaseMethods: {
+                'mostExpensive': true,
+                'mostExpensiveEveryOtherRound': true,
+                'randomEveryOtherRound': true,
+            },
+            seed: '1',
+            runs: 3,
+        }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleTowerMethodSelect = this.handleTowerMethodSelect.bind(this);
+    }
+
+    handleTowerMethodSelect(event) {
+        const target = event.target;
+        const name = target.name;
+        const value = target.checked;
+        this.setState((previousState) => {
+            previousState.selectedTowerPurchaseMethods[name] = value;
+            return previousState;
+        })
+    }
+
+    handleInputChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
     }
     
     beginRenderingSimulation() {
@@ -195,14 +221,23 @@ export class SimulationView extends React.Component {
                                     type="text"
                                     maxLength="5"
                                     spellCheck="false"
+                                    name="seed"
+                                    value={this.state.seed}
+                                    onChange={this.handleInputChange}
                                 ></input>
                             </span>
                             <span className="holder simulation-view-tower-method">
                                 <h2 className="simulation-view-subtitle">Tower purchase methods:</h2>
-                                {/* These are the tower purchase methods copied from the simulation code server side */}
-                                {['mostExpensive', 'mostExpensiveEveryOtherRound', 'randomEveryOtherRound'].map((method) => 
+                                {Object.keys(this.state.selectedTowerPurchaseMethods).map((method) =>
                                     <span key={method} className="noselect simulation-view-tower-method-input">
-                                        <input className="simulation-view-tower-method-checkbox" type="checkbox" id={method} name={method} defaultChecked="true"></input>
+                                        <input
+                                            className="simulation-view-tower-method-checkbox"
+                                            type="checkbox"
+                                            id={method}
+                                            name={method}
+                                            checked={this.state.selectedTowerPurchaseMethods[method]}
+                                            onChange={this.handleTowerMethodSelect}
+                                        ></input>
                                         <label className="simulation-view-tower-method-label" htmlFor={method}>{method}</label>
                                     </span>
                                 )}
@@ -214,7 +249,6 @@ export class SimulationView extends React.Component {
                                     content="Watch live"
                                     classNames="simulation-view-button"
                                 ></Button>
-                                {/* <br/> */}
                                 <Button
                                     onClick={() => {this.startSimulationWaitForResult()}}
                                     content="Create graph"
