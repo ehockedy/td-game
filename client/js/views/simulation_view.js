@@ -10,7 +10,6 @@ import "../../css/simulation_view.css"
 export class SimulationView extends React.Component {
     constructor(props) {
         super(props)
-        this.displayMode = "menu"  // "simulationView", "simulationResults"
 
         // This holds the PIXI application and all the sprites
         this.spriteHandler = new SpriteHandler(this.props.config.APP_WIDTH, this.props.config.APP_HEIGHT, 0.7)
@@ -25,6 +24,7 @@ export class SimulationView extends React.Component {
             },
             seed: '1',
             runs: 3,
+            displayMode: "simulationGraph", // This state is only used by the client
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -46,19 +46,29 @@ export class SimulationView extends React.Component {
             [event.target.name]: event.target.value
         });
     }
+
+    cleanUpExistingState() {
+        // Used to ensure exsting canvas or graph are rmoved before adding another
+        if (this.chart) this.chart.dispose()
+    }
     
     beginRenderingSimulation() {
+        this.cleanUpExistingState()
+
         // View is the scene that user is currently on
         this.view = new SimulationRender(this.props.socket, this.spriteHandler, this.props.config)
         this.view.loadAssets().then(()=>{
             this.view.startRendering()
-            this.displayMode = "simulationView"
+            this.setState({displayMode: "simulationView"})
             this.props.socket.emit("server/simulation/visualise", this.state);
         })
     }
 
     startSimulationWaitForResult() {
+        this.cleanUpExistingState()
+
         this.props.socket.emit("server/simulation/start", this.state, (response) => {
+            this.setState({displayMode: "simulationGraph"})
             // Set up the graph
             let chart = JSC.Chart("chartDiv", {
                 // debug: true,
@@ -190,6 +200,7 @@ export class SimulationView extends React.Component {
             // Make the non-average lines invisible
             // TODO find out why directly setting this attribute on creation causes errors
             chart.series(s => !s.userOptions.isAvgLine).options({visible: false})
+            this.chart = chart
         });
     }
 
@@ -199,6 +210,7 @@ export class SimulationView extends React.Component {
         //now we are adding the application to the DOM element which we got from the Ref.
         if(this.pixi_cnt && this.pixi_cnt.children.length<=0) {
             let canvas = this.spriteHandler.getCanvas();
+            canvas.id = "game-canvas"
             canvas.classList.add("game-canvas-simulation")
             canvas.classList.add("display-box-shadowless")
             canvas.style.width = "80vw"
@@ -271,7 +283,7 @@ export class SimulationView extends React.Component {
                             </span>
                         </div>
                         <br/><br/>
-                        { this.displayMode == "simulationView" ?
+                        { this.state.displayMode == "simulationView" ?
                             <div ref={this.updatePixiCnt}></div>
                             :
                             <div id="chartDiv" className="noselect" style={{width: "80vw", height: "70vh", margin: '0px auto'}}></div>
