@@ -52,12 +52,12 @@ export class SimulationView extends React.Component {
         this.view.loadAssets().then(()=>{
             this.view.startRendering()
             this.displayMode = "simulationView"
-            this.props.socket.emit("server/simulation/visualise"); 
+            this.props.socket.emit("server/simulation/visualise", this.state);
         })
     }
 
     startSimulationWaitForResult() {
-        this.props.socket.emit("server/simulation/start", (response) => {
+        this.props.socket.emit("server/simulation/start", this.state, (response) => {
             // Set up the graph
             let chart = JSC.Chart("chartDiv", {
                 // debug: true,

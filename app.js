@@ -7,6 +7,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const sim = require("./server/scripts/simulaton.js")
+const crypto = require('crypto');
 
 /**
  * Searches the available server interfaces for the public IPv4 address
@@ -133,17 +134,36 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
   web_sockets_server.on('connection', (socket) => {
     socket.emit("client/view/simulation")
 
-    socket.on("server/simulation/visualise", () => {
+    socket.on("server/simulation/visualise", (settings) => {
       let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
       socket.emit("client/gameSettings/set", {"numRounds": roundConfig.rounds.length})
       simulation.setSocket(socket)
-      simulation.runSimulationWithView(1, "mostExpensive")
+
+      // Currently only do one visual simulation, so pick the first method that has been selected
+      let firstTowerMethod = undefined
+      for (const [method, isSelected] of Object.entries(settings.selectedTowerPurchaseMethods)) {
+        if (isSelected) {
+          firstTowerMethod = method
+          break
+        }
+      }
+
+      if (firstTowerMethod) {
+        simulation.runSimulationWithView(settings.seed, firstTowerMethod)
+      }
     });
 
-    socket.on("server/simulation/start", (callback) => {
+    socket.on("server/simulation/start", (settings, callback) => {
       let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
-      for (let i=0; i < 8; i+=1) {
-        simulation.runSimulationAllTypes(i)
+      for (let run=0; run < settings.runs; run+=1) {
+        // Use the same seed for each tower purchase type, but different one for each run
+        let seed = crypto.createHash("sha256").update(settings.seed + run).digest('hex')
+        for (const [method, isSelected] of Object.entries(settings.selectedTowerPurchaseMethods)) {
+          if (isSelected) {
+            simulation.runSimulation(seed, method)
+
+          }
+        }
       }
 
       // Send results for all runs
