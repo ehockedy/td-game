@@ -32,9 +32,9 @@ export class SimulationRender {
 
         const counterWidth = 200
         
-        this.moneyCounter = new Counter(config.TOWER_MENU_WIDTH, config.MAP_HEIGHT, counterWidth, "Money", 0, COLOURS.MENU_SANDY)
-        this.livesCounter = new Counter(config.TOWER_MENU_WIDTH + this.moneyCounter.width, config.MAP_HEIGHT, counterWidth, "Lives", 100, COLOURS.MENU_SANDY)
-        this.roundCounter = new Counter(this.livesCounter.x + this.livesCounter.width, config.MAP_HEIGHT, counterWidth, "Round", this.round, COLOURS.MENU_SANDY)
+        this.moneyCounter = new Counter(config.TOWER_MENU_WIDTH, config.MAP_HEIGHT, counterWidth, "Money", 0, COLOURS.MENU_SANDY, true)
+        this.livesCounter = new Counter(config.TOWER_MENU_WIDTH + this.moneyCounter.width, config.MAP_HEIGHT, counterWidth, "Lives", 100, COLOURS.MENU_SANDY, true)
+        this.roundCounter = new Counter(this.livesCounter.x + this.livesCounter.width, config.MAP_HEIGHT, counterWidth, "Round", this.round, COLOURS.MENU_SANDY, true)
 
         this.setServerEventListeners()
     }

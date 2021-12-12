@@ -2,8 +2,9 @@ import { StaticHorizontalMenuOption } from "../../ui_common/horizontalMenuOption
 import { boldTextStyle, plainTextStyle, COLOURS } from "../../ui_common/style.js"
 
 export class Counter extends StaticHorizontalMenuOption {
-    constructor(x, y, width, label, defaultValue, colour=COLOURS.INFO_MID_GREY) {
+    constructor(x, y, width, label, defaultValue, colour=COLOURS.INFO_MID_GREY, disableAnimation=false) {
         super(label, x, y, width, colour, "none")
+        this.disableAnimation = disableAnimation  // May want to not show the changes
 
         this.label = new PIXI.Text(label, plainTextStyle(COLOURS.BLACK, 36))
         this.label.anchor.set(0.5)
@@ -17,7 +18,7 @@ export class Counter extends StaticHorizontalMenuOption {
 
     update(newValue) {
         if (this.value.text != newValue && !isNaN(newValue)) {
-            if (!isNaN(this.value.text)) {
+            if (!isNaN(this.value.text) && !this.disableAnimation) {
                 this.valueChangeAnimation(parseInt(newValue) - parseInt(this.value.text))
             }
             this.value.text = newValue.toString()
