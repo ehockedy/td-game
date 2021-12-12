@@ -134,8 +134,12 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
   web_sockets_server.on('connection', (socket) => {
     socket.emit("client/view/simulation")
 
-    socket.on("server/simulation/visualise", (settings) => {
+    socket.on("server/simulation/visualise", (settings, callback) => {
+      // Only display one simulation at a time
+      if (settings.simulationInProgress) return
+
       let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
+      simulationInProgress = true
       socket.emit("client/gameSettings/set", {"numRounds": roundConfig.rounds.length})
       simulation.setSocket(socket)
 
@@ -149,7 +153,9 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
       }
 
       if (firstTowerMethod) {
-        simulation.runSimulationWithView(settings.seed, firstTowerMethod)
+        simulation.runSimulationWithView(settings.seed, firstTowerMethod).then(() => {
+          callback()
+        })
       }
     });
 
