@@ -26,6 +26,7 @@ class Simulator {
             "mostExpensiveEveryOtherRound": this._buyTowersMostExpensiveEveryOtherRound,
             "random": this._buyTowersRandom,
             "randomEveryOtherRound": this._buyTowersRandomEveryOtherRound,
+            "mostRecentlyUnlockedMaxTwo": this._buyMostRecentlyUnlockedMaxTwo,
         }
     }
 
@@ -39,6 +40,9 @@ class Simulator {
         this.game = new game.Game(this.map, this.roundConfig.rounds, this.gameSettings, this.enemyConfig)
         this.player = this.game.addPlayer(this.playerID)
         this.round = 0
+
+        // Members used by specific tower buying methods
+        this.towerTypesBought = {}
 
         // Holds all the important stats about this one game, added to master results list at end of simulation
         // Use arrays where each index is the round
@@ -97,6 +101,11 @@ class Simulator {
         if (!this.game.isRoundActive()) {            
             // Attempt to buy towers between rounds
             let towersBought = this.towerBuyingMap[towerPurchaseMethod].call(this)
+            towersBought.forEach((towerType) => {
+                let bestPlace = this.getBestPlaceForTower(towerType)
+                this.game.addTower(Math.random().toString(36).substr(2, 5), towerType, this.playerID, bestPlace.row, bestPlace.col)
+            })
+
 
             // Record the state at the start of the round
             this.recordCurrentState(this.game.getGameStateWorld().lives, towersBought)
@@ -192,14 +201,8 @@ class Simulator {
     // Spends all the money buying the most expensive available tower each time
     _buyTowersMostExpensive() {
         let availableTowers = this.getAffordableTowers()
-        let boughtTowers = []
-        if (availableTowers.length > 0) {
-            let mostExpensiveTowerType = availableTowers[availableTowers.length - 1]
-            let bestPlace = this.getBestPlaceForTower(mostExpensiveTowerType)
-            this.game.addTower(Math.random().toString(36).substr(2, 5), mostExpensiveTowerType, this.playerID, bestPlace.row, bestPlace.col)
-            boughtTowers.push(mostExpensiveTowerType)
-        }
-        return boughtTowers
+        if (availableTowers.length > 0) return [availableTowers[availableTowers.length - 1]]
+        return []
     }
 
     _buyTowersMostExpensiveEveryOtherRound() {
@@ -211,15 +214,8 @@ class Simulator {
 
     _buyTowersRandom() {
         let availableTowers = this.getAffordableTowers()
-        let boughtTowers = []
-        // TODO this is very similar code to most expensive, could de-duplicate
-        if (availableTowers.length > 0) {
-            let randomTower = availableTowers[Math.floor(Math.random() * availableTowers.length)]
-            let bestPlace = this.getBestPlaceForTower(randomTower)
-            this.game.addTower(Math.random().toString(36).substr(2, 5), randomTower, this.playerID, bestPlace.row, bestPlace.col)
-            boughtTowers.push(randomTower)
-        }
-        return boughtTowers
+        if (availableTowers.length > 0) return [availableTowers[Math.floor(Math.random() * availableTowers.length)]]
+        return []
     }
 
     _buyTowersRandomEveryOtherRound() {
@@ -227,6 +223,34 @@ class Simulator {
             return this._buyTowersRandom()
         }
         return []
+    }
+
+    // Saves for the next type of tower that has not been bought yet. If cannot afford it yet, will
+    // buy the next most expensive, with a limit of two of each type.
+    _buyMostRecentlyUnlockedMaxTwo() {
+        let targetIdx = Math.min(Object.keys(this.towerTypesBought).length, Object.keys(this.towerConfig).length-1)  // Only up to the maximum possible tower idx
+        const nextUnpurchasedTowerIdx = targetIdx
+        let availableTowers = this.getAffordableTowers()
+        let boughtTowers = []
+        const max = 2
+        if (availableTowers.length > 0) {  // Can afford a tower
+            while (targetIdx >= 0) {
+                if (targetIdx < availableTowers.length) { // The desired tower to buy is affordable
+                    let towerType = Object.keys(this.towerConfig)[targetIdx]
+                    if (targetIdx == nextUnpurchasedTowerIdx) {  // The target tower is the next unpurchased tower and is yet to be purchased
+                        this.towerTypesBought[towerType] = 1
+                        boughtTowers.push(towerType)
+                        break
+                    } else if (this.towerTypesBought[towerType] < max) {  // The target tower is below the maximum number of purchases
+                        this.towerTypesBought[towerType] += 1
+                        boughtTowers.push(towerType)
+                        break
+                    }
+                }
+                targetIdx -= 1  // Go to the next most expensive tower
+            }
+        }
+        return boughtTowers
     }
 
     processResults(towerPurchaseMethod) {
