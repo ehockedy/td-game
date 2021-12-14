@@ -157,7 +157,6 @@ export class SimulationView extends React.Component {
 
             // Create an array that stores the total number of lives for each round across all the runs
             let livesSums = new Array( results[towerPurchaseMethod][0].livesRemaining.length).fill(0);
-            //let newSeries = chart.series.add({})
 
             // Iterate over each run and each round in that run and record a point on the graph
             results[towerPurchaseMethod].forEach((run, idx) => {

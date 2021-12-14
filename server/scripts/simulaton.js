@@ -30,18 +30,14 @@ class SimulatedGame {
         // Use arrays where each index is the round
         this.simulationSummary = {
             "seed": seed,
-            "livesRemaining": [],  // Array that holds the number of lives at the start of each round
-            "towersBought": []  // Array that holds an array for each round with teh names of the towers purchased before the round started
+            "livesRemaining": new Array(this.game.maxRounds + 1).fill(0),  // Array that holds the number of lives at the start of each round. Add 1 because extra entry after final round is added.
+            "towersBought": new Array(this.game.maxRounds + 1).fill([]) // Array that holds an array for each round with the names of the towers purchased before the round started
         }
     }
 
     recordCurrentState(lives, towers) {
-        if (this.simulationSummary.livesRemaining.length == this.round) {
-            this.simulationSummary.livesRemaining.push(lives)
-            this.simulationSummary.towersBought.push(towers)
-        } else {
-            console.log("WARNING: setting current round info for a round that has already been done")
-        }
+        this.simulationSummary.livesRemaining[this.round] = lives
+        this.simulationSummary.towersBought[this.round] = towers
     }
 
 
@@ -81,7 +77,6 @@ class SimulatedGame {
             gameState = this.game.updateGameState()
 
             // To avoid blocking event loop
-            //await new Promise(res => setTimeout(() => res(), 0));
             if (loopIdx == 0) {
                 // Send update for client to render
                 if (socket) {
