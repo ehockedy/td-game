@@ -141,7 +141,6 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
       let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
       simulationInProgress = true
       socket.emit("client/gameSettings/set", {"numRounds": roundConfig.rounds.length})
-      simulation.setSocket(socket)
 
       // Currently only do one visual simulation, so pick the first method that has been selected
       let firstTowerMethod = undefined
@@ -153,7 +152,7 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
       }
 
       if (firstTowerMethod) {
-        simulation.runSimulationWithView(settings.seed, firstTowerMethod).then(() => {
+        simulation.runSimulationWithView(settings.seed, firstTowerMethod, socket).then(() => {
           callback()
         })
       }
@@ -161,21 +160,60 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
 
     socket.on("server/simulation/start", (settings, callback) => {
       let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
+
+      // Results example
+      // {
+      //     "mostExpensive": [
+      //         {
+      //             "seed": "0123456789abcdef",
+      //             "livesRemaining": [100, 100, 90, 90, 85],
+      //             "towersBought": [["shrapnel-burst", "shrapnel-burst"], [], [], [], ["rock-scatter"]]
+      //         }
+      //     ]
+      // }
+      let results = {}
+
+      // Synchronously create a list of all the simulations, which will be run asynchronously
+      let runParams = []
       for (let run=0; run < settings.runs; run+=1) {
         // Use the same seed for each tower purchase type, but different one for each run
         let seed = crypto.createHash("sha256").update(settings.seed + run).digest('hex')
         for (const [method, isSelected] of Object.entries(settings.selectedTowerPurchaseMethods)) {
           if (isSelected) {
-            simulation.runSimulation(seed, method)
-
+            runParams.push({
+              "seed": seed,
+              "towerPurchaseMethod": method
+            })
           }
         }
       }
 
-      // Send results for all runs
-      callback({
-        "results" : simulation.getResults()
-      })
+      async function runSim(runIdx) {
+        // There are no more simulations to run, so send results to client and exit
+        if (runIdx >= runParams.length) {
+          callback({
+            "results": results
+          })
+          return
+        }
+
+        // Get the setup parameters for the given run index
+        const seed = runParams[runIdx].seed
+        const method = runParams[runIdx].towerPurchaseMethod
+        simulation.runSimulation(seed, method).then((result) => {
+          // When finished, record the results and trigger the next simulation
+          if (!(method in results)) {
+            results[method] = []
+          }
+          results[method].push(result)
+          runSim(runIdx+1)
+        })
+      }
+
+      // Trigger the first run of the recursive simulation loop
+      // Run the recursively so that it is asynchronous, but so that they are run one
+      // at a time.
+      runSim(0)
     })
   })
 }

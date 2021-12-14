@@ -69,143 +69,145 @@ export class SimulationView extends React.Component {
         })
     }
 
+    generateGraph(results) {
+        let chart = JSC.Chart("chartDiv", {
+            // debug: true,
+            yAxis: {
+                alternateGridFill: 'none',
+                defaultTick_label_text: '%value',
+                scale_range: [0, 100]
+            },
+            xAxis: {
+                crosshair_enabled: true,
+                scale : {
+                    interval: 1,
+                    minInterval: 1
+                }
+            },
+
+            // Tooltip config for the tool tip as a whole
+            // Specify that want to combine all points for a given x-value
+            defaultTooltip: {
+                combined: true,
+                label_text: '<b>Round %xValue</b><hr>%points'
+            },
+
+            // Config to apply to each series
+            defaultSeries: {
+                defaultPoint_tooltip: '<b>%seriesName:</b> {%yValue:n0}  %icon  %towersBought',
+                events: {
+                    legendEntryClick: function() {
+                        // No series is in focus, or different series has been chosen to be in focus
+                        // therefore all the average series are currently visible.
+                        // Want to make them all disappear and show only the lines that make up the
+                        // this series.
+                        if (chart.focussedSeriesName != this.userOptions.name) {
+                            chart.series(s => s.userOptions.id === this.userOptions.id).options({visible: true})
+                            chart.series(s => s.userOptions.id !== this.userOptions.id).options({visible: false})
+                            chart.focussedSeriesName = this.userOptions.name
+                        // If this series is clicked on but is already the focus, then restore all the
+                        // average lines to be visible.
+                        } else {
+                            chart.series(s => s.userOptions.isAvgLine).options({visible: true})
+                            chart.series(s => !s.userOptions.isAvgLine).options({visible: false})
+                            chart.focussedSeriesName = undefined
+                        }
+
+                        // return false to disable default behaviour of hiding clicked series
+                        return false
+                    }
+                  }
+            },
+
+            // Content applied to each point
+            defaultPoint: {
+                marker: {
+                    type: 'circle'
+                }
+            },
+
+            legend: {
+                template: '%icon %name'
+            },
+
+            // Set the look of the box the grid sits in
+            box: {
+                padding: 10
+            }
+        });
+
+        // Additional custom chart properties
+        chart.focussedSeriesName = undefined
+
+        // Generate the data points
+        let colourPaletteIdx = 0
+        for (let towerPurchaseMethod in results) {
+            const towerPurchaseMethodColour = JSC.getPalette("default")[colourPaletteIdx]
+
+            // Create an array that stores the total number of lives for each round across all the runs
+            let livesSums = new Array( results[towerPurchaseMethod][0].livesRemaining.length).fill(0);
+            //let newSeries = chart.series.add({})
+
+            // Iterate over each run and each round in that run and record a point on the graph
+            results[towerPurchaseMethod].forEach((run, idx) => {
+                let graphPoints = []
+                for (let i = 0; i < run.livesRemaining.length; i++) {
+                    graphPoints.push({
+                        'x': i,  // round
+                        'y': run.livesRemaining[i],  // lives
+                        attributes: [
+                            ['towersBought', run.towersBought[i]]
+                        ]
+                    })
+                    livesSums[i] += run.livesRemaining[i]  // add to the total so avg can be calclulated
+                }
+
+                // Record the points as greyed out, non-interactable point to show the distribution
+                chart.series.add({
+                    name: towerPurchaseMethod + '-' + idx.toString(),
+                    id: towerPurchaseMethod,
+                    points: graphPoints,
+                    legendEntry_visible: false,
+                    color: towerPurchaseMethodColour,
+                    opacity: 0.2,
+                    isAvgLine: false,  // custom attribute to determine if this is a main line
+                    // todo make colour slightly greyed-out version of main colour https://jscharting.com/tutorials/types/js-series-point-colors-chart/#color-adjustment-settings
+                })
+            })
+            // Divide each value by the total number of runs for that tower buying type
+            let livesSumsAvg = livesSums.map((totalLivesCount, idx) => {
+                return {
+                    'x': idx,
+                    'y': totalLivesCount/results[towerPurchaseMethod].length,
+                    attributes: [
+                        ['towersBought', '-']
+                    ]
+                }
+            })
+
+            // Add the average line through all the runs for this tower purchasing method
+            chart.series.add({
+                name: towerPurchaseMethod,
+                id: towerPurchaseMethod,
+                points: livesSumsAvg,
+                color: towerPurchaseMethodColour,
+                isAvgLine: true  // custom attribute to determine if this is a main line
+            })
+            colourPaletteIdx += 1
+        }
+
+        // Make the non-average lines invisible
+        // TODO find out why directly setting this attribute on creation causes errors
+        chart.series(s => !s.userOptions.isAvgLine).options({visible: false})
+        return chart
+    }
+
     startSimulationWaitForResult() {
         this.cleanUpExistingState()
 
         this.props.socket.emit("server/simulation/start", this.state, (response) => {
             this.setState({displayMode: "simulationGraph"})
-            // Set up the graph
-            let chart = JSC.Chart("chartDiv", {
-                // debug: true,
-                yAxis: {
-                    alternateGridFill: 'none',
-                    defaultTick_label_text: '%value',
-                    scale_range: [0, 100]
-                },
-                xAxis: {
-                    crosshair_enabled: true,
-                    scale : {
-                        interval: 1,
-                        minInterval: 1
-                    }
-                },
-
-                // Tooltip config for the tool tip as a whole
-                // Specify that want to combine all points for a given x-value
-                defaultTooltip: {
-                    combined: true,
-                    label_text: '<b>Round %xValue</b><hr>%points'
-                },
-
-                // Config to apply to each series
-                defaultSeries: {
-                    defaultPoint_tooltip: '<b>%seriesName:</b> {%yValue:n0}  %icon  %towersBought',
-                    events: {
-                        legendEntryClick: function() {
-                            // No series is in focus, or different series has been chosen to be in focus
-                            // therefore all the average series are currently visible.
-                            // Want to make them all disappear and show only the lines that make up the
-                            // this series.
-                            if (chart.focussedSeriesName != this.userOptions.name) {
-                                chart.series(s => s.userOptions.id === this.userOptions.id).options({visible: true})
-                                chart.series(s => s.userOptions.id !== this.userOptions.id).options({visible: false})
-                                chart.focussedSeriesName = this.userOptions.name
-                            // If this series is clicked on but is already the focus, then restore all the
-                            // average lines to be visible.
-                            } else {
-                                chart.series(s => s.userOptions.isAvgLine).options({visible: true})
-                                chart.series(s => !s.userOptions.isAvgLine).options({visible: false})
-                                chart.focussedSeriesName = undefined
-                            }
-
-                            // return false to disable default behaviour of hiding clicked series
-                            return false
-                        }
-                      }
-                },
-
-                // Content applied to each point
-                defaultPoint: {
-                    marker: {
-                        type: 'circle'
-                    }
-                },
-
-                legend: {
-                    template: '%icon %name'
-                },
-
-                // Set the look of the box the grid sits in
-                box: {
-                    padding: 10
-                }
-            });
-
-            // Additional custom chart properties
-            chart.focussedSeriesName = undefined
-
-            // Generate the data points
-            const results = response.results
-            let colourPaletteIdx = 0
-            for (let towerPurchaseMethod in results) {
-                const towerPurchaseMethodColour = JSC.getPalette("default")[colourPaletteIdx]
-
-                // Create an array that stores the total number of lives for each round across all the runs
-                let livesSums = new Array( results[towerPurchaseMethod][0].livesRemaining.length).fill(0);
-                //let newSeries = chart.series.add({})
-
-                // Iterate over each run and each round in that run and record a point on the graph
-                results[towerPurchaseMethod].forEach((run, idx) => {
-                    let graphPoints = []
-                    for (let i = 0; i < run.livesRemaining.length; i++) {
-                        graphPoints.push({
-                            'x': i,  // round
-                            'y': run.livesRemaining[i],  // lives
-                            attributes: [
-                                ['towersBought', run.towersBought[i]]
-                            ]
-                        })
-                        livesSums[i] += run.livesRemaining[i]  // add to the total so avg can be calclulated
-                    }
-
-                    // Record the points as greyed out, non-interactable point to show the distribution
-                    chart.series.add({
-                        name: towerPurchaseMethod + '-' + idx.toString(),
-                        id: towerPurchaseMethod,
-                        points: graphPoints,
-                        legendEntry_visible: false,
-                        color: towerPurchaseMethodColour,
-                        opacity: 0.2,
-                        isAvgLine: false,  // custom attribute to determine if this is a main line
-                        // todo make colour slightly greyed-out version of main colour https://jscharting.com/tutorials/types/js-series-point-colors-chart/#color-adjustment-settings
-                    })
-                })
-                // Divide each value by the total number of runs for that tower buying type
-                let livesSumsAvg = livesSums.map((totalLivesCount, idx) => {
-                    return {
-                        'x': idx,
-                        'y': totalLivesCount/results[towerPurchaseMethod].length,
-                        attributes: [
-                            ['towersBought', '-']
-                        ]
-                    }
-                })
-
-                // Add the average line through all the runs for this tower purchasing method
-                chart.series.add({
-                    name: towerPurchaseMethod,
-                    id: towerPurchaseMethod,
-                    points: livesSumsAvg,
-                    color: towerPurchaseMethodColour,
-                    isAvgLine: true  // custom attribute to determine if this is a main line
-                })
-                colourPaletteIdx += 1
-            }
-
-            // Make the non-average lines invisible
-            // TODO find out why directly setting this attribute on creation causes errors
-            chart.series(s => !s.userOptions.isAvgLine).options({visible: false})
-            this.chart = chart
+            this.chart = this.generateGraph(response.results)
         });
     }
 

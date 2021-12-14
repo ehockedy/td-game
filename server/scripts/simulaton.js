@@ -1,25 +1,19 @@
 const game = require('../js/game.js')
 const mapGenerator = require("../js/mapGenerator.js")
-const tower = require('../js/tower.js')
 
-// Run simulations of the game to assess difficulty
-class Simulator {
-    constructor(gameConfig, roundConfig, enemyConfig, towerConfig) {
-        this.mapGenerator = new mapGenerator.MapGenerator(gameConfig.MAP_HEIGHT, gameConfig.MAP_WIDTH, gameConfig.SUBGRID_SIZE)
+// Represents a single instance of a simulated run
+class SimulatedGame {
+    constructor(game, seed, gameConfig, towerConfig) {
+        this.game = game
+        this.map = this.game.map
 
         this.gameConfig = gameConfig
-        this.roundConfig = roundConfig
-        this.enemyConfig = enemyConfig
         this.towerConfig = towerConfig
         this.towerKeys = Object.keys(this.towerConfig)
 
-        this.gameSettings = {
-            "numRounds": roundConfig.rounds.length
-        }
         this.playerID = "sim_player"  // Name set in simulation client
-        this.sendToClient = false  // Whether there is a client that can receive updates via a connected socket
-
-        this.results = {}
+        this.player = this.game.addPlayer(this.playerID)
+        this.round = 0
 
         this.towerBuyingMap = {
             "mostExpensive": this._buyTowersMostExpensive,
@@ -28,18 +22,6 @@ class Simulator {
             "randomEveryOtherRound": this._buyTowersRandomEveryOtherRound,
             "mostRecentlyUnlockedMaxTwo": this._buyMostRecentlyUnlockedMaxTwo,
         }
-    }
-
-    // Must be called if want to visualise updates
-    setSocket(socket) {
-        this.socket = socket
-    }
-
-    setupSimulation(seed) {
-        this.map = this.mapGenerator.generateMap(seed.toString())   
-        this.game = new game.Game(this.map, this.roundConfig.rounds, this.gameSettings, this.enemyConfig)
-        this.player = this.game.addPlayer(this.playerID)
-        this.round = 0
 
         // Members used by specific tower buying methods
         this.towerTypesBought = {}
@@ -51,16 +33,6 @@ class Simulator {
             "livesRemaining": [],  // Array that holds the number of lives at the start of each round
             "towersBought": []  // Array that holds an array for each round with teh names of the towers purchased before the round started
         }
-        // Results example
-        // {
-        //     "mostExpensive": [
-        //         {
-        //             "seed": 1,
-        //             "livesRemaining": [100, 100, 90, 90, 85],
-        //             "towersBought": [["shrapnel-burst", "shrapnel-burst"], [], [], [], ["rock-scatter"]]
-        //         }
-        //     ]
-        // }
     }
 
     recordCurrentState(lives, towers) {
@@ -72,27 +44,6 @@ class Simulator {
         }
     }
 
-    // Iterates over all the methods of purchasing a tower and runs the simulation with the given seed
-    runSimulationAllTypes(seed) {
-        for (let type in this.towerBuyingMap) {
-            this.runSimulation(seed, type)
-        }
-
-    }
-
-    // Sets up a game using the given seed. Having this seed ensures can re-run with the same maps and tower choices (if random) over and over again
-    runSimulation(seed, towerPurchaseMethod) {
-        console.log("Starting simulation with seed:", seed, ", and tower purchase method:", towerPurchaseMethod)
-        this.setupSimulation(seed)
-        this.fullSpeedLoop(towerPurchaseMethod)
-        this.processResults(towerPurchaseMethod)
-    }
-
-    async runSimulationWithView(seed, towerPurchaseMethod) {
-        this.setupSimulation(seed)
-        this.socket.emit("client/map/set", this.map.getMapStructure())
-        return this.visualisedLoop(towerPurchaseMethod)
-    }
 
     // Checks if the round has changed and records the current state if so, does any tower buying,
     // and then immediately starts the next round
@@ -116,32 +67,26 @@ class Simulator {
         }
     }
 
-    fullSpeedLoop(towerPurchaseMethod) {
-        // Speed thorough the game as fast as possible
+    async simulationLoop(towerPurchaseMethod, perLoopIterations=1000, loopPeriod_ms=0, socket=undefined) {
+        // Starts a periodic loop that every iteration updates the game state, and possibly sends
+        // an update to the client. The reason an update is not sent on every iteration
+        // is becasue the game would move too fast that the client could not render fast enough.
+        // Even if update not sent (non-visual simulation) still need to have an occasional timeaout
+        // to ensure the event loop is not blocked
+        
+        let loopIdx = 0
         let gameState = "in_progress"
         while (gameState == "in_progress") {
             this.checkForRoundChange(towerPurchaseMethod)
             gameState = this.game.updateGameState()
-        }
-        // Summary at end
-        this.recordCurrentState(this.game.getGameStateWorld().lives, [])
-    }
 
-    async visualisedLoop(towerPurchaseMethod) {
-        const perLoopIterations = 20
-        const loopPeriod_ms = 1
-        // Starts a periodic loop that every iteration updates the game state, and possibly sends
-        // an update to the client. The reason an update is not sent on every iteration
-        // is becasue the game would move too fast that the client could not render fast enough.
-        let gameState = "in_progress"
-        let loopIdx = 0
-        while(gameState == "in_progress") {
-            this.checkForRoundChange(towerPurchaseMethod)
-            gameState = this.game.updateGameState()                  
-
+            // To avoid blocking event loop
+            //await new Promise(res => setTimeout(() => res(), 0));
             if (loopIdx == 0) {
                 // Send update for client to render
-                this.socket.emit("client/game/update", this.game.getGameState())
+                if (socket) {
+                    socket.emit("client/game/update", this.game.getGameState())
+                }
 
                 // Sleep so client not overloaded. Not very Javascript-y, but this is a simulation test script
                 // so not too fussed.
@@ -151,6 +96,7 @@ class Simulator {
         }
         // Summary at end
         this.recordCurrentState(this.game.getGameStateWorld().lives, [])
+        return this.simulationSummary
     }
 
     // Iterates over the tower config and adds the towers that the player can afford to a list, which gets returned.
@@ -253,15 +199,48 @@ class Simulator {
         return boughtTowers
     }
 
-    processResults(towerPurchaseMethod) {
-        if (!(towerPurchaseMethod in this.results)) {
-            this.results[towerPurchaseMethod] = []
+}
+
+
+// Run simulations of the game to assess difficulty
+class Simulator {
+    constructor(gameConfig, roundConfig, enemyConfig, towerConfig) {
+        this.mapGenerator = new mapGenerator.MapGenerator(gameConfig.MAP_HEIGHT, gameConfig.MAP_WIDTH, gameConfig.SUBGRID_SIZE)
+
+        this.gameConfig = gameConfig
+        this.roundConfig = roundConfig
+        this.enemyConfig = enemyConfig
+        this.towerConfig = towerConfig
+
+        this.gameSettings = {
+            "numRounds": roundConfig.rounds.length
         }
-        this.results[towerPurchaseMethod].push(this.simulationSummary)
     }
 
-    getResults() {
-        return this.results
+    setupSimulation(seed) {
+        let map = this.mapGenerator.generateMap(seed.toString())   
+        return new game.Game(map, this.roundConfig.rounds, this.gameSettings, this.enemyConfig)
+    }
+
+    // Sets up a game using the given seed. Having this seed ensures can re-run with the same maps and tower choices (if random) over and over again
+    async runSimulation(seed, towerPurchaseMethod) {
+        console.log("Starting simulation with seed:", seed, ", and tower purchase method:", towerPurchaseMethod)
+        let gameSimulation = new SimulatedGame(this.setupSimulation(seed), seed, this.gameConfig, this.towerConfig)
+
+        // Run simulation with very infrequent timeout stops, and as short as possible. This is so that
+        // simulations are run quickly, but still break to allow event loop to process
+        // Pass socket as undefined
+        return gameSimulation.simulationLoop(towerPurchaseMethod, 1000, 0, undefined)
+    }
+
+    async runSimulationWithView(seed, towerPurchaseMethod, socket) {
+        let game = this.setupSimulation(seed)
+        socket.emit("client/map/set", game.map.getMapStructure())
+        let gameSimulation = new SimulatedGame(game, seed, this.gameConfig, this.towerConfig)
+
+        // Have frequent, but very quick breaks when sending the update to client. Every 20 frames are sent with
+        // this configuraition.
+        return gameSimulation.simulationLoop(towerPurchaseMethod, 20, 1, socket)
     }
 }
 
