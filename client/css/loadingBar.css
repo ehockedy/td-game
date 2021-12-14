@@ -1,0 +1,11 @@
+.loading-bar {
+    height: 32px;
+}
+
+.loading-bar-container {
+    background-color: rgb(243, 243, 243);
+}
+
+.loading-bar-bar {
+    background-color: rgb(21, 110, 228);
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import * as JSC from "jscharting";
 import { Button } from "../components/ui_common/display_box.js"
+import { LoadingBar } from "../components/ui_common/loadingBar.js"
 import { SimulationRender} from "./simulation_renderer.js"
 import { SpriteHandler } from "../sprite_handler.js"
 import "../../css/simulation_view.css"
@@ -25,12 +26,21 @@ export class SimulationView extends React.Component {
             },
             seed: '1',
             runs: 3,
-            displayMode: "simulationGraph", // This state is only used by the client
-            simulationInProgress: false
+            displayMode: "emptyView", // This state is only used by the client
+            simulationInProgress: false,
+            simulationsCompleted: 0,
+            simulationsToComplete: 0,
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleTowerMethodSelect = this.handleTowerMethodSelect.bind(this);
+
+        // Add socket event to register a completed simulation
+        this.props.socket.on("client/simulation/simulation_complete", () => {
+            this.setState({
+                simulationsCompleted: Math.min(this.state.simulationsCompleted + 1, this.state.simulationsToComplete)
+            })
+        })
     }
 
     handleTowerMethodSelect(event) {
@@ -52,6 +62,7 @@ export class SimulationView extends React.Component {
     cleanUpExistingState() {
         // Used to ensure exsting canvas or graph are rmoved before adding another
         if (this.chart) this.chart.dispose()
+        this.setState({simulationsCompleted: 0})
     }
     
     beginRenderingSimulation() {
@@ -204,9 +215,18 @@ export class SimulationView extends React.Component {
 
     startSimulationWaitForResult() {
         this.cleanUpExistingState()
+        this.setState({displayMode: "loadingView"})
 
+        // Count how many simulations we are expecting to complete
+        let simsToDo = 0
+        Object.entries(this.state.selectedTowerPurchaseMethods).forEach(([method, isSelected]) => {
+            if (isSelected) simsToDo += parseInt(this.state.runs)
+        })
+        this.setState({simulationsToComplete: simsToDo})
+
+        // Send command to server to start the simulations
         this.props.socket.emit("server/simulation/start", this.state, (response) => {
-            this.setState({displayMode: "simulationGraph"})
+            this.setState({displayMode: "graphView"})
             this.chart = this.generateGraph(response.results)
         });
     }
@@ -292,8 +312,11 @@ export class SimulationView extends React.Component {
                         <br/><br/>
                         { this.state.displayMode == "simulationView" ?
                             <div ref={this.updatePixiCnt}></div>
-                            :
+                        : this.state.displayMode == "loadingView" ?
+                            <LoadingBar width="400px" style={{display: "flex", justifyContent: "center"}} completed={`${this.state.simulationsCompleted/this.state.simulationsToComplete*100}`}></LoadingBar>
+                        : this.state.displayMode == "graphView" ?
                             <div id="chartDiv" className="noselect" style={{width: "80vw", height: "70vh", margin: '0px auto'}}></div>
+                        : null
                         }
                     </div>
                 }

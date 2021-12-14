@@ -207,6 +207,7 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
           }
           results[method].push(result)
           runSim(runIdx+1)
+          socket.emit("client/simulation/simulation_complete")
         })
       }
 
