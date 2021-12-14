@@ -234,6 +234,7 @@ class Simulator {
     }
 
     async runSimulationWithView(seed, towerPurchaseMethod, socket) {
+        console.log("Starting simulation with seed:", seed, ", and tower purchase method:", towerPurchaseMethod)
         let game = this.setupSimulation(seed)
         socket.emit("client/map/set", game.map.getMapStructure())
         let gameSimulation = new SimulatedGame(game, seed, this.gameConfig, this.towerConfig)

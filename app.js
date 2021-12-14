@@ -152,7 +152,8 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
       }
 
       if (firstTowerMethod) {
-        simulation.runSimulationWithView(settings.seed, firstTowerMethod, socket).then(() => {
+        let seed = crypto.createHash("sha256").update(settings.seed).digest('hex')
+        simulation.runSimulationWithView(seed, firstTowerMethod, socket).then(() => {
           callback()
         })
       }
@@ -175,9 +176,10 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
 
       // Synchronously create a list of all the simulations, which will be run asynchronously
       let runParams = []
+      let lastSeed = settings.seed
       for (let run=0; run < settings.runs; run+=1) {
         // Use the same seed for each tower purchase type, but different one for each run
-        let seed = crypto.createHash("sha256").update(settings.seed + run).digest('hex')
+        let seed = crypto.createHash("sha256").update(lastSeed).digest('hex')
         for (const [method, isSelected] of Object.entries(settings.selectedTowerPurchaseMethods)) {
           if (isSelected) {
             runParams.push({
@@ -186,6 +188,7 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
             })
           }
         }
+        lastSeed = seed
       }
 
       async function runSim(runIdx) {
