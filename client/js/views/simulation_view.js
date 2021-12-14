@@ -240,9 +240,6 @@ export class SimulationView extends React.Component {
             canvas.id = "game-canvas"
             canvas.classList.add("game-canvas-simulation")
             canvas.classList.add("display-box-shadowless")
-            canvas.style.width = "80vw"
-            canvas.style.height = "75vh"
-            canvas.style.margin = '0px auto'
             this.pixi_cnt.appendChild(canvas)
         }
      };
@@ -315,7 +312,7 @@ export class SimulationView extends React.Component {
                         : this.state.displayMode == "loadingView" ?
                             <LoadingBar width="400px" style={{display: "flex", justifyContent: "center"}} completed={`${this.state.simulationsCompleted/this.state.simulationsToComplete*100}`}></LoadingBar>
                         : this.state.displayMode == "graphView" ?
-                            <div id="chartDiv" className="noselect" style={{width: "80vw", height: "70vh", margin: '0px auto'}}></div>
+                            <div id="chartDiv" className="noselect display-box" style={{width: "80vw", height: "70vh", margin: '0px auto'}}></div>
                         : null
                         }
                     </div>

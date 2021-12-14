@@ -8,7 +8,7 @@
     display: grid;
     grid-template-areas: 
         "simulation-view-seed simulation-view-runs simulation-view-tower-method simulation-view-buttons";
-    grid-template-columns: 1fr 0.5fr 4fr 1fr;
+    grid-template-columns: 1fr 0.5fr 4fr 1.5fr;
 }
 
 .holder {
@@ -19,8 +19,8 @@
 }
 
 .simulation-view-button {
-    width: 90%;
-    height: 50px;
+    width: 200px;
+    height: 45px;
     display: block;
     font-size: 1.4vw;
     margin-left: 5px;
@@ -57,7 +57,7 @@
 }
 
 .game-canvas-simulation {
-    position: fixed;
+    position: relative;
     left: 50%;
     transform: translate(-50%, 0%);
 }
