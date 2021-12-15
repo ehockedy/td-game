@@ -292,9 +292,49 @@
         [
             {
                 "enemies": ["boneheadTruckFull", "boneheadTruckEmpty"],
+                "count": 50,
+                "enemiesPerSquarePerSecond": 1
+            }
+        ],
+        [
+            {
+                "enemies": ["slimeMedium"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["boneheadTruckFull", "slimeMedium"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["boneheadTruckFull", "slimeLarge"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["greenBeetle"],
                 "count": 40,
-                "enemiesPerSquarePerSecond": 0.75
+                "enemiesPerSquarePerSecond": 4
+            }
+        ],
+        [
+            {
+                "enemies": ["redBeetle"],
+                "count": 50,
+                "enemiesPerSquarePerSecond": 1.25
+            },
+            {
+                "enemies": ["redBeetle"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 1.5
+            },
+            {
+                "enemies": ["redBeetle"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 2
             }
         ]
+
     ]
 }

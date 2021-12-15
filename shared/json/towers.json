@@ -96,7 +96,7 @@
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 1200,
+        "cost": 1500,
         "bulletType": "flame",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/6-flamethrower/flamethrower.json"
@@ -113,7 +113,7 @@
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 1800,
+        "cost": 2400,
         "bulletType": "buzzsaw",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/7-buzzsaw/buzzsaw.json"
