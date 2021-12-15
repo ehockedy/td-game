@@ -7,21 +7,45 @@
         "size": "medium",
         "reward": 2
     },
+    "greenBeetle": {
+        "textureAtlasFile": "client/assets/enemies/beetle/beetle_small/beetle_small.json",
+        "speed": 3,
+        "hp": 4,
+        "subEnemies": [],
+        "size": "small",
+        "reward": 2
+    },
     "blueBeetle": {
-        "textureAtlasFile": "client/assets/enemies/beetle1/beetle1.json",
+        "textureAtlasFile": "client/assets/enemies/beetle/beetle_medium/beetle_medium.json",
         "speed": 2,
         "hp": 20,
         "subEnemies": [],
         "size": "medium",
         "reward": 3
     },
-    "greenBeetle": {
-        "textureAtlasFile": "client/assets/enemies/beetle_small/beetle_small.json",
-        "speed": 3,
-        "hp": 4,
+    "redBeetle": {
+        "textureAtlasFile": "client/assets/enemies/beetle/beetle_large/beetle_large.json",
+        "speed": 2,
+        "hp": 120,
         "subEnemies": [],
-        "size": "small",
-        "reward": 2
+        "size": "medium",
+        "reward": 5
+    },
+    "purpleBeetle": {
+        "textureAtlasFile": "client/assets/enemies/beetle/beetle_giant/beetle_giant.json",
+        "speed": 1.5,
+        "hp": 600,
+        "subEnemies": [],
+        "size": "medium",
+        "reward": 15
+    },
+    "blackBeetle": {
+        "textureAtlasFile": "client/assets/enemies/beetle/beetle_uber/beetle_uber.json",
+        "speed": 1.5,
+        "hp": 1200,
+        "subEnemies": [],
+        "size": "medium",
+        "reward": 30
     },
     "boneheadTruckFull": {
         "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_full.json",

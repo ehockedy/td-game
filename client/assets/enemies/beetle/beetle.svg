@@ -1,0 +1,3542 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="480"
+   height="480"
+   viewBox="0 0 127 127"
+   version="1.1"
+   id="svg917"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="beetle_small.svg">
+  <defs
+     id="defs911">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Colorize"
+       id="filter2507">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2493" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2495" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(30,141,37)"
+         result="flood1"
+         id="feFlood2497" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2499" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2501" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2503" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         k2="1"
+         result="fbSourceGraphic"
+         id="feComposite2505" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2557" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2559"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix2561"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feFlood
+         id="feFlood2563"
+         flood-opacity="1"
+         flood-color="rgb(30,141,37)"
+         result="flood1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2565"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2567"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2569"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2571"
+         in="colormatrix2"
+         operator="in"
+         k2="1"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Colorize"
+       id="filter2523">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2509" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2511" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(30,141,37)"
+         result="flood1"
+         id="feFlood2513" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2515" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2517" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2519" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         k2="1"
+         result="fbSourceGraphic"
+         id="feComposite2521" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2573" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2575"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix2577"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feFlood
+         id="feFlood2579"
+         flood-opacity="1"
+         flood-color="rgb(30,141,37)"
+         result="flood1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2581"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2583"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2585"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2587"
+         in="colormatrix2"
+         operator="in"
+         k2="1"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Colorize"
+       id="filter2539">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2525" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2527" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(30,141,37)"
+         result="flood1"
+         id="feFlood2529" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2531" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2533" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2535" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         k2="1"
+         result="fbSourceGraphic"
+         id="feComposite2537" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2589" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2591"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix2593"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feFlood
+         id="feFlood2595"
+         flood-opacity="1"
+         flood-color="rgb(30,141,37)"
+         result="flood1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2597"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2599"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2601"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2603"
+         in="colormatrix2"
+         operator="in"
+         k2="1"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Colorize"
+       id="filter2555">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2541" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2543" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(30,141,37)"
+         result="flood1"
+         id="feFlood2545" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2547" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2549" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2551" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         k2="1"
+         result="fbSourceGraphic"
+         id="feComposite2553" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2605" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2607"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix2609"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feFlood
+         id="feFlood2611"
+         flood-opacity="1"
+         flood-color="rgb(30,141,37)"
+         result="flood1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2613"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2615"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2617"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2619"
+         in="colormatrix2"
+         operator="in"
+         k2="1"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2507-6">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2493-3"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2495-9" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(239,41,41)"
+         result="flood1"
+         id="feFlood2497-9" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2499-4" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2501-1" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2503-1" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2505-4" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2557-1" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2559-0"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2561-1"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2565-9"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2567-2"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2569-2"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2571-2"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2539-8">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2525-8"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2527-9" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(239,41,41)"
+         result="flood1"
+         id="feFlood2529-2" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2531-8" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2533-9" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2535-5" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2537-7" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2589-4" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2591-5"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2593-4"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2597-1"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2599-3"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2601-8"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2603-8"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2555-1">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2541-6"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2543-7" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(239,41,41)"
+         result="flood1"
+         id="feFlood2545-3" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2547-7" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2549-1" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2551-0" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2553-8" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2605-4" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2607-9"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2609-2"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2613-0"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2615-8"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2617-1"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2619-4"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2523-6">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2509-8"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2511-2" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(239,41,41)"
+         result="flood1"
+         id="feFlood2513-5" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2515-4" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2517-3" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2519-8" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2521-2" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2573-1" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2575-6"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2577-3"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2581-0"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2583-8"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2585-6"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2587-6"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2507-6-8">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2493-3-8"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2495-9-9" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2497-9-9" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2499-4-0" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2501-1-9" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2503-1-8" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2505-4-0" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2557-1-2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2559-0-4"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2561-1-0"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2565-9-4"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2567-2-6"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2569-2-6"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2571-2-5"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2539-8-5">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2525-8-3"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2527-9-9" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2529-2-5" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2531-8-2" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2533-9-5" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2535-5-5" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2537-7-6" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2589-4-5" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2591-5-5"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2593-4-4"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2597-1-2"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2599-3-4"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2601-8-8"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2603-8-8"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2555-1-0">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2541-6-4"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2543-7-7" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2545-3-4" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2547-7-0" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2549-1-0" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2551-0-0" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2553-8-2" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2605-4-4" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2607-9-1"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2609-2-5"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2613-0-7"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2615-8-5"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2617-1-5"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2619-4-7"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2523-6-8">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2509-8-8"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2511-2-4" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2513-5-1" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2515-4-5" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2517-3-3" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2519-8-5" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2521-2-2" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2573-1-4" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2575-6-5"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2577-3-9"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2581-0-7"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2583-8-7"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2585-6-2"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2587-6-0"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2523-6-8-2">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2509-8-8-1"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2511-2-4-3" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2513-5-1-8" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2515-4-5-9" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2517-3-3-4" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2519-8-5-8" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2521-2-2-2" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2573-1-4-4" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2575-6-5-2"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2577-3-9-4"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2581-0-7-6"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2583-8-7-4"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2585-6-2-2"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2587-6-0-6"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2555-1-0-9">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2541-6-4-2"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2543-7-7-2" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2545-3-4-1" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2547-7-0-3" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2549-1-0-4" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2551-0-0-3" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2553-8-2-3" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2605-4-4-9" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2607-9-1-2"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2609-2-5-1"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2613-0-7-3"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2615-8-5-6"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2617-1-5-6"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2619-4-7-8"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2539-8-5-0">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2525-8-3-4"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2527-9-9-3" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2529-2-5-7" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2531-8-2-8" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2533-9-5-7" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2535-5-5-3" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2537-7-6-5" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2589-4-5-0" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2591-5-5-8"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2593-4-4-0"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2597-1-2-8"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2599-3-4-2"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2601-8-8-2"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2603-8-8-5"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2507-6-8-3">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2493-3-8-8"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2495-9-9-6" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2497-9-9-0" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2499-4-0-3" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2501-1-9-8" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2503-1-8-6" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2505-4-0-9" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2557-1-2-9" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2559-0-4-4"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2561-1-0-5"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2565-9-4-2"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2567-2-6-8"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2569-2-6-0"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2571-2-5-6"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2507-6-8-3-7">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2493-3-8-8-2"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2495-9-9-6-6" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(177,56,56)"
+         result="flood1"
+         id="feFlood2497-9-9-0-5" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2499-4-0-3-8" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2501-1-9-8-7" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2503-1-8-6-6" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2505-4-0-9-4" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2557-1-2-9-7" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2559-0-4-4-0"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2561-1-0-5-4"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2565-9-4-2-7"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2567-2-6-8-5"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2569-2-6-0-5"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2571-2-5-6-9"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2094">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2066"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2068" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2070" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2072" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2074" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2076" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2078" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2080" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2082"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2084"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2086"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2088"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2090"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2092"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2124">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2096"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2098" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2100" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2102" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2104" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2106" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2108" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2110" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2112"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2114"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2116"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2118"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2120"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2122"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2154">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2126"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2128" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2130" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2132" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2134" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2136" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2138" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2140" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2142"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2144"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2146"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2148"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2150"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2152"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2507-6-8-3-0">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2493-3-8-8-4"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2495-9-9-6-9" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(85,87,83)"
+         result="flood1"
+         id="feFlood2497-9-9-0-7" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2499-4-0-3-6" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2501-1-9-8-9" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2503-1-8-6-1" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2505-4-0-9-5" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2557-1-2-9-3" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2559-0-4-4-3"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2561-1-0-5-9"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2565-9-4-2-1"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2567-2-6-8-6"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2569-2-6-0-7"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2571-2-5-6-4"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2388">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2360"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2362" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2364" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2366" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2368" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2370" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2372" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2374" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2376"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2378"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2380"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2382"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2384"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2386"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2418">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2390"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2392" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2394" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2396" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2398" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2400" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2402" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2404" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2406"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2408"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2410"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2412"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2414"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2416"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter2448">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         id="feComposite2420"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix2422" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(117,80,123)"
+         result="flood1"
+         id="feFlood2424" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="multiply"
+         result="blend1"
+         id="feBlend2426" />
+      <feBlend
+         in2="blend1"
+         mode="screen"
+         result="blend2"
+         id="feBlend2428" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix2430" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="fbSourceGraphic"
+         id="feComposite2432" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2434" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2436"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         result="composite1"
+         in="fbSourceGraphic"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         id="feColorMatrix2438"
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1" />
+      <feBlend
+         in2="colormatrix1"
+         id="feBlend2440"
+         in="flood1"
+         mode="multiply"
+         result="blend1" />
+      <feBlend
+         in2="blend1"
+         id="feBlend2442"
+         mode="screen"
+         result="blend2" />
+      <feColorMatrix
+         id="feColorMatrix2444"
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite2446"
+         in="colormatrix2"
+         operator="in"
+         result="composite2" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-38.180028"
+     inkscape:cy="825.90999"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     objecttolerance="10000"
+     guidetolerance="10000"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="585"
+     inkscape:window-maximized="1"
+     showguides="false"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-object-midpoints="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid919"
+       empspacing="8"
+       dotted="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata914">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g1367">
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)" />
+      <path
+         id="rect1210-0-8-3"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)" />
+      <path
+         id="rect1210-0-4"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)" />
+      <path
+         id="rect1210-5"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss" />
+    </g>
+    <path
+       style="fill:#00112b;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 85.955339,74.851841 c 13.243817,13.243809 32.163531,13.243809 32.163531,-1.891975 -5.67589,3.783947 -3.78394,3.783947 -13.24378,5.675922 7.56789,-1.891975 5.67591,-5.675922 5.67591,-5.675922 -7.56789,3.783947 -9.45988,1.891976 -20.811709,-1.891972 z"
+       id="path867-0-3"
+       sodipodi:nodetypes="cccccc" />
+    <g
+       id="g1367-2"
+       transform="rotate(19.221753,48.895701,107.26135)">
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8-7"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)" />
+      <path
+         id="rect1210-0-8-3-8"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0-1"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)" />
+      <path
+         id="rect1210-0-4-0"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210-1"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)" />
+      <path
+         id="rect1210-5-3"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss" />
+    </g>
+    <path
+       id="path831-6-8"
+       style="fill:#504416;stroke-width:0.505023"
+       d="m 86.901328,63.499998 c 3e-6,13.061347 -42.569384,30.271572 -64.28484,13.243816 0,0 31.17532,-5.675921 31.17532,-13.243812 0,-7.567889 -31.116193,-13.328272 -31.116193,-13.328272 17.872386,-15.051318 64.225713,0.266923 64.225713,13.328268 z"
+       sodipodi:nodetypes="sssss" />
+    <g
+       id="g1367-9"
+       transform="rotate(52.024634,47.432563,84.309756)"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199">
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8-30"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)" />
+      <path
+         id="rect1210-0-8-3-83"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0-2"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)" />
+      <path
+         id="rect1210-0-4-8"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210-6"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)" />
+      <path
+         id="rect1210-5-9"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss" />
+    </g>
+    <g
+       id="g1579"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199">
+      <path
+         style="fill:#00112b;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955345,52.148167 c 13.243811,-13.243809 32.163525,-13.243809 32.163525,1.891973 -5.67589,-3.783946 -3.78395,-3.783946 -13.24378,-5.675917 7.56789,1.891971 5.6759,5.675917 5.6759,5.675917 -7.56788,-3.783946 -9.45987,-1.891974 -20.811699,1.891974 z"
+         id="path867-0"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955344,52.148166 c 8.406789,-7.954924 32.163526,-11.992492 32.163526,1.891974 -3.78395,-3.783946 -5.67589,-5.675917 -13.24378,-5.675917 7.56789,3.783944 5.6759,5.675917 5.6759,5.675917 -6.69764,-6.25626 -13.355487,-1.123044 -20.811699,1.891974 z"
+         id="path867"
+         sodipodi:nodetypes="cccccc" />
+    </g>
+    <path
+       style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 85.955339,74.851842 c 8.406794,7.954925 32.163531,11.992494 32.163531,-1.891976 -3.78394,3.783947 -5.67589,5.675922 -13.24378,5.675922 7.56789,-3.783947 5.67591,-5.675922 5.67591,-5.675922 -6.69765,6.256263 -13.355497,1.123045 -20.811709,-1.891972 z"
+       id="path867-6"
+       sodipodi:nodetypes="cccccc" />
+    <g
+       id="g1367-1"
+       transform="matrix(1,0,0,-1,-0.82226341,126.9996)">
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8-71"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)" />
+      <path
+         id="rect1210-0-8-3-0"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0-03"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)" />
+      <path
+         id="rect1210-0-4-2"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210-7"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)" />
+      <path
+         id="rect1210-5-2"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss" />
+    </g>
+    <g
+       id="g1367-2-7"
+       transform="matrix(0.94425144,-0.32922517,-0.32922517,-0.94425144,37.216739,137.11763)">
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8-7-2"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)" />
+      <path
+         id="rect1210-0-8-3-8-1"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0-1-5"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)" />
+      <path
+         id="rect1210-0-4-0-2"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210-1-7"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)" />
+      <path
+         id="rect1210-5-3-6"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss" />
+    </g>
+    <g
+       id="g1367-9-2"
+       transform="matrix(0.61532262,-0.78827538,-0.78827538,-0.61532262,83.883277,131.95747)">
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8-30-4"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)" />
+      <path
+         id="rect1210-0-8-3-83-2"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0-2-0"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)" />
+      <path
+         id="rect1210-0-4-8-2"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210-6-7"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)" />
+      <path
+         id="rect1210-5-9-4"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss" />
+    </g>
+    <g
+       id="g1508"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199">
+      <ellipse
+         style="fill:#c8ab37;stroke-width:0.505023"
+         id="path831"
+         cx="46.223907"
+         cy="63.500004"
+         rx="35.001495"
+         ry="23.649662" />
+      <path
+         id="path831-6"
+         style="fill:#786721;stroke-width:0.505023"
+         d="m 81.22541,63.499998 c 10e-7,13.061351 -52.029248,39.731432 -69.057003,5.675924 0,0 9.459862,1.891972 37.839455,-5.67592 C 21.628269,55.932114 12.168407,57.824086 12.168407,57.824086 21.88166,30.96483 81.22541,50.438654 81.22541,63.499998 Z"
+         sodipodi:nodetypes="sscss" />
+      <path
+         id="path831-6-2"
+         style="fill:#2b2200;stroke-width:0.505023"
+         d="m 67.035618,63.500002 c 3e-6,13.061348 -37.839456,32.163539 -51.083267,11.351839 0,0 11.351837,0 39.731429,-11.351839 C 27.304188,52.148167 15.952351,52.148167 15.952351,52.148167 25.412216,33.228439 67.035618,50.438657 67.035618,63.500002 Z"
+         sodipodi:nodetypes="sscss" />
+    </g>
+    <g
+       id="g1513"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199">
+      <path
+         style="fill:#00112b;stroke-width:0.408772"
+         id="path863-5"
+         sodipodi:type="arc"
+         sodipodi:cx="79.334106"
+         sodipodi:cy="63.307373"
+         sodipodi:rx="16.0818"
+         sodipodi:ry="21.473219"
+         sodipodi:start="0.0089706895"
+         sodipodi:end="0.0026416575"
+         sodipodi:arc-type="arc"
+         d="M 95.41526,63.5 A 16.0818,21.473219 0 0 1 79.215288,84.780006 16.0818,21.473219 0 0 1 63.252577,63.182697 16.0818,21.473219 0 0 1 79.402034,41.834346 16.0818,21.473219 0 0 1 95.415851,63.364098"
+         sodipodi:open="true" />
+      <path
+         id="path863"
+         style="fill:#214478;stroke-width:0.408772"
+         d="m 78.387453,84.311704 c -1.89197,0 -11.403286,-8.965862 -11.351835,-20.811702 0.05143,-11.845834 9.459865,-20.811698 11.351835,-20.811698 3.783945,0 15.159392,8.897607 15.135784,20.811698 -0.07988,11.913659 -13.243811,20.811702 -15.135784,20.811702 z"
+         sodipodi:nodetypes="ssscs" />
+      <path
+         id="path863-98"
+         style="fill:#3771c8;stroke-width:0.408772"
+         d="m 78.387453,82.419733 c -1.89197,0 -5.675919,-5.181808 -5.675919,-17.027755 0,-11.351839 3.783949,-20.811703 5.675919,-20.811703 1.891973,0 11.351838,5.675919 11.351838,18.919727 0,13.243811 -9.459865,18.919731 -11.351838,18.919731 z"
+         sodipodi:nodetypes="ssscs" />
+    </g>
+    <g
+       id="g1503">
+      <path
+         id="path1015-4"
+         style="fill:#3771c8;stroke-width:0.472403"
+         d="m 76.711777,60.317487 c 0,0 -16.238541,4.881881 -36.24692,10.862115 C 20.456483,77.159839 4.2023967,81.989569 4.2023967,81.989569 8.5627909,96.540482 27.939688,102.53724 47.956605,96.585791 67.97352,90.634358 80.825784,74.34485 76.711777,60.317487"
+         sodipodi:nodetypes="csssc" />
+      <path
+         id="path1015-6-4"
+         style="fill:#214478;stroke-width:0.472403"
+         d="m 76.742706,60.421832 c 0,0 0.689222,15.48063 -21.058926,21.997901 C 30.31094,90.023213 4.2333324,82.093914 4.2333324,82.093914 8.3885422,96.109035 27.970623,102.64157 47.987542,96.690148 68.004455,90.738694 80.856715,74.449196 76.742706,60.421832"
+         sodipodi:nodetypes="csssc" />
+      <path
+         id="path1015-6-1-2"
+         style="fill:#00112b;stroke-width:0.472403"
+         d="m 76.823507,60.284127 c 0,0 1.931012,20.113886 -17.698064,27.029538 C 21.609289,100.53124 4.3141309,81.956213 4.3141309,81.956213 8.5627909,96.540482 28.051418,102.50389 48.06834,96.552442 68.085251,90.60099 80.937514,74.311496 76.823507,60.284127"
+         sodipodi:nodetypes="csssc" />
+    </g>
+    <g
+       id="g1518">
+      <path
+         id="path1015"
+         style="fill:#3771c8;stroke-width:0.472403"
+         d="m 76.711776,66.682524 c 0,0 -16.23854,-4.881881 -36.246917,-10.862116 C 20.456484,49.840169 4.2023976,45.010439 4.2023976,45.010439 8.5627916,30.459524 27.939688,24.462768 47.956605,30.414211 c 20.016915,5.951443 32.900111,22.1366 28.786102,36.163965"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="path1015-6"
+         style="fill:#214478;stroke-width:0.472403"
+         d="m 76.742707,66.578176 c 0,0 0.689221,-15.480631 -21.058927,-21.997901 C 30.310941,36.976795 4.2333333,44.906094 4.2333333,44.906094 8.3885435,30.890976 27.970623,24.35842 47.987541,30.309868 68.004455,36.261315 80.856714,52.550813 76.742707,66.578176"
+         sodipodi:nodetypes="csssc" />
+      <path
+         id="path1015-6-1"
+         style="fill:#00112b;stroke-width:0.472403"
+         d="m 76.823507,66.715876 c 0,0 1.931012,-20.113879 -17.698064,-27.029532 C 21.60929,26.468777 4.3141325,45.043793 4.3141325,45.043793 8.5627916,30.459524 28.05142,24.496119 48.06834,30.447566 c 20.016912,5.951452 32.869174,22.240945 28.755167,36.26831"
+         sodipodi:nodetypes="csssc" />
+    </g>
+    <g
+       id="g1518-0"
+       transform="rotate(-16.559688,166.27959,-407.31585)"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       style="filter:url(#filter2507)">
+      <path
+         id="path1015-67"
+         style="fill:#3771c8;stroke-width:0.472403"
+         d="m 76.711776,66.682524 c 0,0 -16.23854,-4.881881 -36.246917,-10.862116 C 20.456484,49.840169 4.2023976,45.010439 4.2023976,45.010439 8.5627916,30.459524 27.939688,24.462768 47.956605,30.414211 c 20.016915,5.951443 32.900111,22.1366 28.786102,36.163965"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png" />
+      <path
+         id="path1015-6-2"
+         style="fill:#214478;stroke-width:0.472403"
+         d="m 76.742707,66.578176 c 0,0 0.689221,-15.480631 -21.058927,-21.997901 C 30.310941,36.976795 4.2333333,44.906094 4.2333333,44.906094 8.3885435,30.890976 27.970623,24.35842 47.987541,30.309868 68.004455,36.261315 80.856714,52.550813 76.742707,66.578176"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="path1015-6-1-7"
+         style="fill:#00112b;stroke-width:0.472403"
+         d="m 76.823507,66.715876 c 0,0 1.931012,-20.113879 -17.698064,-27.029532 C 21.60929,26.468777 4.3141325,45.043793 4.3141325,45.043793 8.5627916,30.459524 28.05142,24.496119 48.06834,30.447566 c 20.016912,5.951452 32.869174,22.240945 28.755167,36.26831"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1367-2-2"
+       transform="rotate(52.039647,17.451549,193.90098)"
+       style="filter:url(#filter2523)">
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8-7-5"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-0-8-3-8-3"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0-1-6"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-0-4-0-4"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210-1-1"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-5-3-9"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1579-4"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       transform="translate(46.566666,-27.516666)"
+       style="filter:url(#filter2539)">
+      <path
+         style="fill:#00112b;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955345,52.148167 c 13.243811,-13.243809 32.163525,-13.243809 32.163525,1.891973 -5.67589,-3.783946 -3.78395,-3.783946 -13.24378,-5.675917 7.56789,1.891971 5.6759,5.675917 5.6759,5.675917 -7.56788,-3.783946 -9.45987,-1.891974 -20.811699,1.891974 z"
+         id="path867-0-38"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\pincer.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955344,52.148166 c 8.406789,-7.954924 32.163526,-11.992492 32.163526,1.891974 -3.78395,-3.783946 -5.67589,-5.675917 -13.24378,-5.675917 7.56789,3.783944 5.6759,5.675917 5.6759,5.675917 -6.69764,-6.25626 -13.355487,-1.123044 -20.811699,1.891974 z"
+         id="path867-66"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\pincer.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1403"
+       style="filter:url(#filter2555)">
+      <g
+         id="g1513-3"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199"
+         transform="translate(112.33732,38.099996)">
+        <path
+           style="fill:#00112b;stroke-width:0.408772"
+           id="path863-5-7"
+           sodipodi:type="arc"
+           sodipodi:cx="79.334106"
+           sodipodi:cy="63.307373"
+           sodipodi:rx="16.0818"
+           sodipodi:ry="21.473219"
+           sodipodi:start="0.0089706895"
+           sodipodi:end="0.0026416575"
+           sodipodi:arc-type="arc"
+           d="M 95.41526,63.5 A 16.0818,21.473219 0 0 1 79.215288,84.780006 16.0818,21.473219 0 0 1 63.252577,63.182697 16.0818,21.473219 0 0 1 79.402034,41.834346 16.0818,21.473219 0 0 1 95.415851,63.364098"
+           sodipodi:open="true"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+        <path
+           id="path863-4"
+           style="fill:#214478;stroke-width:0.408772"
+           d="m 78.387453,84.311704 c -1.89197,0 -11.403286,-8.965862 -11.351835,-20.811702 0.05143,-11.845834 9.459865,-20.811698 11.351835,-20.811698 3.783945,0 15.159392,8.897607 15.135784,20.811698 -0.07988,11.913659 -13.243811,20.811702 -15.135784,20.811702 z"
+           sodipodi:nodetypes="ssscs"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+        <path
+           id="path863-98-5"
+           style="fill:#3771c8;stroke-width:0.408772"
+           d="m 78.387453,82.419733 c -1.89197,0 -5.675919,-5.181808 -5.675919,-17.027755 0,-11.351839 3.783949,-20.811703 5.675919,-20.811703 1.891973,0 11.351838,5.675919 11.351838,18.919727 0,13.243811 -9.459865,18.919731 -11.351838,18.919731 z"
+           sodipodi:nodetypes="ssscs"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+      </g>
+    </g>
+    <g
+       id="g1518-0-5"
+       transform="rotate(-16.559687,1484.2993,-734.57994)"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       style="filter:url(#filter2507-6)">
+      <path
+         id="path1015-67-9"
+         style="fill:#3771c8;stroke-width:0.472403"
+         d="m 76.711776,66.682524 c 0,0 -16.23854,-4.881881 -36.246917,-10.862116 C 20.456484,49.840169 4.2023976,45.010439 4.2023976,45.010439 8.5627916,30.459524 27.939688,24.462768 47.956605,30.414211 c 20.016915,5.951443 32.900111,22.1366 28.786102,36.163965"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png" />
+      <path
+         id="path1015-6-2-3"
+         style="fill:#214478;stroke-width:0.472403"
+         d="m 76.742707,66.578176 c 0,0 0.689221,-15.480631 -21.058927,-21.997901 C 30.310941,36.976795 4.2333333,44.906094 4.2333333,44.906094 8.3885435,30.890976 27.970623,24.35842 47.987541,30.309868 68.004455,36.261315 80.856714,52.550813 76.742707,66.578176"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="path1015-6-1-7-9"
+         style="fill:#00112b;stroke-width:0.472403"
+         d="m 76.823507,66.715876 c 0,0 1.931012,-20.113879 -17.698064,-27.029532 C 21.60929,26.468777 4.3141325,45.043793 4.3141325,45.043793 8.5627916,30.459524 28.05142,24.496119 48.06834,30.447566 c 20.016912,5.951452 32.869174,22.240945 28.755167,36.26831"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1579-4-0"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       transform="translate(194.50856,334.56361)"
+       style="filter:url(#filter2539-8)">
+      <path
+         style="fill:#00112b;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955345,52.148167 c 13.243811,-13.243809 32.163525,-13.243809 32.163525,1.891973 -5.67589,-3.783946 -3.78395,-3.783946 -13.24378,-5.675917 7.56789,1.891971 5.6759,5.675917 5.6759,5.675917 -7.56788,-3.783946 -9.45987,-1.891974 -20.811699,1.891974 z"
+         id="path867-0-38-6"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\pincer.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955344,52.148166 c 8.406789,-7.954924 32.163526,-11.992492 32.163526,1.891974 -3.78395,-3.783946 -5.67589,-5.675917 -13.24378,-5.675917 7.56789,3.783944 5.6759,5.675917 5.6759,5.675917 -6.69764,-6.25626 -13.355487,-1.123044 -20.811699,1.891974 z"
+         id="path867-66-3"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\pincer.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1403-6"
+       transform="translate(147.94189,362.08027)"
+       style="filter:url(#filter2555-1)">
+      <g
+         id="g1513-3-9"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199"
+         transform="translate(112.33732,38.099996)">
+        <path
+           style="fill:#00112b;stroke-width:0.408772"
+           id="path863-5-7-8"
+           sodipodi:type="arc"
+           sodipodi:cx="79.334106"
+           sodipodi:cy="63.307373"
+           sodipodi:rx="16.0818"
+           sodipodi:ry="21.473219"
+           sodipodi:start="0.0089706895"
+           sodipodi:end="0.0026416575"
+           sodipodi:arc-type="arc"
+           d="M 95.41526,63.5 A 16.0818,21.473219 0 0 1 79.215288,84.780006 16.0818,21.473219 0 0 1 63.252577,63.182697 16.0818,21.473219 0 0 1 79.402034,41.834346 16.0818,21.473219 0 0 1 95.415851,63.364098"
+           sodipodi:open="true"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+        <path
+           id="path863-4-8"
+           style="fill:#214478;stroke-width:0.408772"
+           d="m 78.387453,84.311704 c -1.89197,0 -11.403286,-8.965862 -11.351835,-20.811702 0.05143,-11.845834 9.459865,-20.811698 11.351835,-20.811698 3.783945,0 15.159392,8.897607 15.135784,20.811698 -0.07988,11.913659 -13.243811,20.811702 -15.135784,20.811702 z"
+           sodipodi:nodetypes="ssscs"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+        <path
+           id="path863-98-5-9"
+           style="fill:#3771c8;stroke-width:0.408772"
+           d="m 78.387453,82.419733 c -1.89197,0 -5.675919,-5.181808 -5.675919,-17.027755 0,-11.351839 3.783949,-20.811703 5.675919,-20.811703 1.891973,0 11.351838,5.675919 11.351838,18.919727 0,13.243811 -9.459865,18.919731 -11.351838,18.919731 z"
+           sodipodi:nodetypes="ssscs"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+      </g>
+    </g>
+    <g
+       id="g1367-2-2-6"
+       transform="rotate(52.039646,-296.28983,513.41307)"
+       style="filter:url(#filter2523-6)">
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8-7-5-5"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-0-8-3-8-3-4"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0-1-6-8"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-0-4-0-4-5"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <rect
+         style="fill:#3771c8;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210-1-1-9"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-5-3-9-2"
+         style="fill:#0b1728;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1518-0-5-4-0"
+       transform="rotate(-16.559687,849.45802,820.52807)"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       style="filter:url(#filter2507-6-8-3)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_giant\animation\wing.png">
+      <path
+         id="path1015-67-9-2-9"
+         style="fill:#e6e6e6;stroke-width:0.472403"
+         d="m 76.711776,66.682524 c 0,0 -16.23854,-4.881881 -36.246917,-10.862116 C 20.456484,49.840169 4.2023976,45.010439 4.2023976,45.010439 8.5627916,30.459524 27.939688,24.462768 47.956605,30.414211 c 20.016915,5.951443 32.900111,22.1366 28.786102,36.163965"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png" />
+      <path
+         id="path1015-6-2-3-6-1"
+         style="fill:#666666;stroke-width:0.472403"
+         d="m 76.742707,66.578176 c 0,0 0.689221,-15.480631 -21.058927,-21.997901 C 30.310941,36.976795 4.2333333,44.906094 4.2333333,44.906094 8.3885435,30.890976 27.970623,24.35842 47.987541,30.309868 68.004455,36.261315 80.856714,52.550813 76.742707,66.578176"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="path1015-6-1-7-9-4-0"
+         style="fill:#333333;stroke-width:0.472403"
+         d="m 76.823507,66.715876 c 0,0 1.931012,-20.113879 -17.698064,-27.029532 C 21.60929,26.468777 4.3141325,45.043793 4.3141325,45.043793 8.5627916,30.459524 28.05142,24.496119 48.06834,30.447566 c 20.016912,5.951452 32.869174,22.240945 28.755167,36.26831"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1579-4-0-7-5"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       transform="translate(-275.05013,218.12562)"
+       style="filter:url(#filter2507-6-8-3)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_giant\animation\pincer.png">
+      <path
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955345,52.148167 c 13.243811,-13.243809 32.163525,-13.243809 32.163525,1.891973 -5.67589,-3.783946 -3.78395,-3.783946 -13.24378,-5.675917 7.56789,1.891971 5.6759,5.675917 5.6759,5.675917 -7.56788,-3.783946 -9.45987,-1.891974 -20.811699,1.891974 z"
+         id="path867-0-38-6-5-1"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\pincer.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955344,52.148166 c 8.406789,-7.954924 32.163526,-11.992492 32.163526,1.891974 -3.78395,-3.783946 -5.67589,-5.675917 -13.24378,-5.675917 7.56789,3.783944 5.6759,5.675917 5.6759,5.675917 -6.69764,-6.25626 -13.355487,-1.123044 -20.811699,1.891974 z"
+         id="path867-66-3-4-9"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\pincer.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1403-6-5-9"
+       transform="translate(-321.61679,245.64228)"
+       style="filter:url(#filter2507-6-8-3)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_giant\animation\head.png"
+       inkscape:export-xdpi="9.8000002"
+       inkscape:export-ydpi="9.8000002">
+      <g
+         id="g1513-3-9-3-0"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199"
+         transform="translate(112.33732,38.099996)">
+        <path
+           style="fill:#333333;stroke-width:0.408772"
+           id="path863-5-7-8-8-8"
+           sodipodi:type="arc"
+           sodipodi:cx="79.334106"
+           sodipodi:cy="63.307373"
+           sodipodi:rx="16.0818"
+           sodipodi:ry="21.473219"
+           sodipodi:start="0.0089706895"
+           sodipodi:end="0.0026416575"
+           sodipodi:arc-type="arc"
+           d="M 95.41526,63.5 A 16.0818,21.473219 0 0 1 79.215288,84.780006 16.0818,21.473219 0 0 1 63.252577,63.182697 16.0818,21.473219 0 0 1 79.402034,41.834346 16.0818,21.473219 0 0 1 95.415851,63.364098"
+           sodipodi:open="true"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+        <path
+           id="path863-4-8-1-4"
+           style="fill:#666666;stroke-width:0.408772"
+           d="m 78.387453,84.311704 c -1.89197,0 -11.403286,-8.965862 -11.351835,-20.811702 0.05143,-11.845834 9.459865,-20.811698 11.351835,-20.811698 3.783945,0 15.159392,8.897607 15.135784,20.811698 -0.07988,11.913659 -13.243811,20.811702 -15.135784,20.811702 z"
+           sodipodi:nodetypes="ssscs"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+        <path
+           id="path863-98-5-9-2-0"
+           style="fill:#e6e6e6;stroke-width:0.408772"
+           d="m 78.387453,82.419733 c -1.89197,0 -5.675919,-5.181808 -5.675919,-17.027755 0,-11.351839 3.783949,-20.811703 5.675919,-20.811703 1.891973,0 11.351838,5.675919 11.351838,18.919727 0,13.243811 -9.459865,18.919731 -11.351838,18.919731 z"
+           sodipodi:nodetypes="ssscs"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+      </g>
+    </g>
+    <g
+       id="g1367-2-2-6-7-9"
+       transform="rotate(52.039646,-411.80729,-25.752523)"
+       style="filter:url(#filter2507-6-8-3)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_giant\animation\leg.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199">
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8-7-5-5-0-3"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-0-8-3-8-3-4-3-1"
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0-1-6-8-2-0"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-0-4-0-4-5-8-1"
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210-1-1-9-3-3"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-5-3-9-2-1-4"
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1518-0-5-4-0-4"
+       transform="rotate(-16.559687,711.1098,-272.7244)"
+       inkscape:export-xdpi="9.8000002"
+       inkscape:export-ydpi="9.8000002"
+       style="filter:url(#filter2507-6-8-3-7)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_large\animation\wing.png">
+      <path
+         id="path1015-67-9-2-9-4"
+         style="fill:#e6e6e6;stroke-width:0.472403"
+         d="m 76.711776,66.682524 c 0,0 -16.23854,-4.881881 -36.246917,-10.862116 C 20.456484,49.840169 4.2023976,45.010439 4.2023976,45.010439 8.5627916,30.459524 27.939688,24.462768 47.956605,30.414211 c 20.016915,5.951443 32.900111,22.1366 28.786102,36.163965"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png" />
+      <path
+         id="path1015-6-2-3-6-1-9"
+         style="fill:#666666;stroke-width:0.472403"
+         d="m 76.742707,66.578176 c 0,0 0.689221,-15.480631 -21.058927,-21.997901 C 30.310941,36.976795 4.2333333,44.906094 4.2333333,44.906094 8.3885435,30.890976 27.970623,24.35842 47.987541,30.309868 68.004455,36.261315 80.856714,52.550813 76.742707,66.578176"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="path1015-6-1-7-9-4-0-0"
+         style="fill:#333333;stroke-width:0.472403"
+         d="m 76.823507,66.715876 c 0,0 1.931012,-20.113879 -17.698064,-27.029532 C 21.60929,26.468777 4.3141325,45.043793 4.3141325,45.043793 8.5627916,30.459524 28.05142,24.496119 48.06834,30.447566 c 20.016912,5.951452 32.869174,22.240945 28.755167,36.26831"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1579-4-0-7-5-1"
+       inkscape:export-xdpi="9.8000002"
+       inkscape:export-ydpi="9.8000002"
+       transform="translate(30.803937,133.35)"
+       style="filter:url(#filter2507-6-8-3-7)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_large\animation\pincer.png">
+      <path
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955345,52.148167 c 13.243811,-13.243809 32.163525,-13.243809 32.163525,1.891973 -5.67589,-3.783946 -3.78395,-3.783946 -13.24378,-5.675917 7.56789,1.891971 5.6759,5.675917 5.6759,5.675917 -7.56788,-3.783946 -9.45987,-1.891974 -20.811699,1.891974 z"
+         id="path867-0-38-6-5-1-3"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\pincer.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955344,52.148166 c 8.406789,-7.954924 32.163526,-11.992492 32.163526,1.891974 -3.78395,-3.783946 -5.67589,-5.675917 -13.24378,-5.675917 7.56789,3.783944 5.6759,5.675917 5.6759,5.675917 -6.69764,-6.25626 -13.355487,-1.123044 -20.811699,1.891974 z"
+         id="path867-66-3-4-9-5"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\pincer.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1403-6-5-9-2"
+       transform="translate(-15.762733,160.86667)"
+       style="filter:url(#filter2507-6-8-3-7)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_large\animation\head.png"
+       inkscape:export-xdpi="9.8000002"
+       inkscape:export-ydpi="9.8000002">
+      <g
+         id="g1513-3-9-3-0-0"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199"
+         transform="translate(112.33732,38.099996)">
+        <path
+           style="fill:#333333;stroke-width:0.408772"
+           id="path863-5-7-8-8-8-5"
+           sodipodi:type="arc"
+           sodipodi:cx="79.334106"
+           sodipodi:cy="63.307373"
+           sodipodi:rx="16.0818"
+           sodipodi:ry="21.473219"
+           sodipodi:start="0.0089706895"
+           sodipodi:end="0.0026416575"
+           sodipodi:arc-type="arc"
+           d="M 95.41526,63.5 A 16.0818,21.473219 0 0 1 79.215288,84.780006 16.0818,21.473219 0 0 1 63.252577,63.182697 16.0818,21.473219 0 0 1 79.402034,41.834346 16.0818,21.473219 0 0 1 95.415851,63.364098"
+           sodipodi:open="true"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+        <path
+           id="path863-4-8-1-4-9"
+           style="fill:#666666;stroke-width:0.408772"
+           d="m 78.387453,84.311704 c -1.89197,0 -11.403286,-8.965862 -11.351835,-20.811702 0.05143,-11.845834 9.459865,-20.811698 11.351835,-20.811698 3.783945,0 15.159392,8.897607 15.135784,20.811698 -0.07988,11.913659 -13.243811,20.811702 -15.135784,20.811702 z"
+           sodipodi:nodetypes="ssscs"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+        <path
+           id="path863-98-5-9-2-0-6"
+           style="fill:#e6e6e6;stroke-width:0.408772"
+           d="m 78.387453,82.419733 c -1.89197,0 -5.675919,-5.181808 -5.675919,-17.027755 0,-11.351839 3.783949,-20.811703 5.675919,-20.811703 1.891973,0 11.351838,5.675919 11.351838,18.919727 0,13.243811 -9.459865,18.919731 -11.351838,18.919731 z"
+           sodipodi:nodetypes="ssscs"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+      </g>
+    </g>
+    <g
+       id="g1367-2-2-6-7-9-9"
+       transform="rotate(52.039646,-172.04862,245.13142)"
+       style="filter:url(#filter2507-6-8-3-7)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_large\animation\leg.png"
+       inkscape:export-xdpi="9.8000002"
+       inkscape:export-ydpi="9.8000002">
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8-7-5-5-0-3-9"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-0-8-3-8-3-4-3-1-1"
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0-1-6-8-2-0-2"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-0-4-0-4-5-8-1-9"
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210-1-1-9-3-3-9"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-5-3-9-2-1-4-5"
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1518-0-5-4-0-1"
+       transform="rotate(-16.559687,342.85228,828.90506)"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       style="filter:url(#filter2507-6-8-3-0)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_uber\animation\wing.png">
+      <path
+         id="path1015-67-9-2-9-9"
+         style="fill:#e6e6e6;stroke-width:0.472403"
+         d="m 76.711776,66.682524 c 0,0 -16.23854,-4.881881 -36.246917,-10.862116 C 20.456484,49.840169 4.2023976,45.010439 4.2023976,45.010439 8.5627916,30.459524 27.939688,24.462768 47.956605,30.414211 c 20.016915,5.951443 32.900111,22.1366 28.786102,36.163965"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png" />
+      <path
+         id="path1015-6-2-3-6-1-7"
+         style="fill:#666666;stroke-width:0.472403"
+         d="m 76.742707,66.578176 c 0,0 0.689221,-15.480631 -21.058927,-21.997901 C 30.310941,36.976795 4.2333333,44.906094 4.2333333,44.906094 8.3885435,30.890976 27.970623,24.35842 47.987541,30.309868 68.004455,36.261315 80.856714,52.550813 76.742707,66.578176"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="path1015-6-1-7-9-4-0-5"
+         style="fill:#333333;stroke-width:0.472403"
+         d="m 76.823507,66.715876 c 0,0 1.931012,-20.113879 -17.698064,-27.029532 C 21.60929,26.468777 4.3141325,45.043793 4.3141325,45.043793 8.5627916,30.459524 28.05142,24.496119 48.06834,30.447566 c 20.016912,5.951452 32.869174,22.240945 28.755167,36.26831"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\wing.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1579-4-0-7-5-5"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199"
+       transform="translate(-298.44999,74.083334)"
+       style="filter:url(#filter2507-6-8-3-0)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_uber\animation\pincer.png">
+      <path
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955345,52.148167 c 13.243811,-13.243809 32.163525,-13.243809 32.163525,1.891973 -5.67589,-3.783946 -3.78395,-3.783946 -13.24378,-5.675917 7.56789,1.891971 5.6759,5.675917 5.6759,5.675917 -7.56788,-3.783946 -9.45987,-1.891974 -20.811699,1.891974 z"
+         id="path867-0-38-6-5-1-32"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\pincer.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.236494px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 85.955344,52.148166 c 8.406789,-7.954924 32.163526,-11.992492 32.163526,1.891974 -3.78395,-3.783946 -5.67589,-5.675917 -13.24378,-5.675917 7.56789,3.783944 5.6759,5.675917 5.6759,5.675917 -6.69764,-6.25626 -13.355487,-1.123044 -20.811699,1.891974 z"
+         id="path867-66-3-4-9-57"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\pincer.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1403-6-5-9-3"
+       transform="translate(-345.01666,101.6)"
+       style="filter:url(#filter2507-6-8-3-0)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_uber\animation\head.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199">
+      <g
+         id="g1513-3-9-3-0-03"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199"
+         transform="translate(112.33732,38.099996)">
+        <path
+           style="fill:#333333;stroke-width:0.408772"
+           id="path863-5-7-8-8-8-0"
+           sodipodi:type="arc"
+           sodipodi:cx="79.334106"
+           sodipodi:cy="63.307373"
+           sodipodi:rx="16.0818"
+           sodipodi:ry="21.473219"
+           sodipodi:start="0.0089706895"
+           sodipodi:end="0.0026416575"
+           sodipodi:arc-type="arc"
+           d="M 95.41526,63.5 A 16.0818,21.473219 0 0 1 79.215288,84.780006 16.0818,21.473219 0 0 1 63.252577,63.182697 16.0818,21.473219 0 0 1 79.402034,41.834346 16.0818,21.473219 0 0 1 95.415851,63.364098"
+           sodipodi:open="true"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+        <path
+           id="path863-4-8-1-4-4"
+           style="fill:#666666;stroke-width:0.408772"
+           d="m 78.387453,84.311704 c -1.89197,0 -11.403286,-8.965862 -11.351835,-20.811702 0.05143,-11.845834 9.459865,-20.811698 11.351835,-20.811698 3.783945,0 15.159392,8.897607 15.135784,20.811698 -0.07988,11.913659 -13.243811,20.811702 -15.135784,20.811702 z"
+           sodipodi:nodetypes="ssscs"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+        <path
+           id="path863-98-5-9-2-0-8"
+           style="fill:#e6e6e6;stroke-width:0.408772"
+           d="m 78.387453,82.419733 c -1.89197,0 -5.675919,-5.181808 -5.675919,-17.027755 0,-11.351839 3.783949,-20.811703 5.675919,-20.811703 1.891973,0 11.351838,5.675919 11.351838,18.919727 0,13.243811 -9.459865,18.919731 -11.351838,18.919731 z"
+           sodipodi:nodetypes="ssscs"
+           inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\head.png"
+           inkscape:export-xdpi="9.8840199"
+           inkscape:export-ydpi="9.8840199" />
+      </g>
+    </g>
+    <g
+       id="g1367-2-2-6-7-9-2"
+       transform="rotate(52.039646,-275.97157,-121.74104)"
+       style="filter:url(#filter2507-6-8-3-0)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_uber\animation\leg.png"
+       inkscape:export-xdpi="9.8840199"
+       inkscape:export-ydpi="9.8840199">
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         id="rect1210-0-8-7-5-5-0-3-3"
+         width="3.3072884"
+         height="8.9958553"
+         x="14.255989"
+         y="18.359718"
+         ry="1.1244811"
+         transform="rotate(-7.9513147)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-0-8-3-8-3-4-3-1-5"
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.257382"
+         d="m 17.772336,16.055602 1.048145,-0.146399 c 0.616972,-0.08617 -1.245984,0.416857 -1.15981,1.033827 l 0.933309,6.682028 c 0.08617,0.616973 2.087883,1.107338 1.470912,1.193513 l -1.048145,0.1464 c -0.616982,0.08618 -1.183055,-0.341145 -1.269231,-0.958118 l -0.933309,-6.682029 c -0.08617,-0.616973 0.341147,-1.183046 0.958129,-1.269222 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.41181"
+         id="rect1210-0-1-6-8-2-0-5"
+         width="4.4979148"
+         height="16.933338"
+         x="8.442564"
+         y="28.252804"
+         ry="2.1166656"
+         transform="rotate(-18.418089)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-0-4-0-4-5-8-1-99"
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.411811"
+         d="m 18.944776,23.469418 0.251037,-0.0836 c 1.112565,-0.370488 -0.900118,0.957968 -0.515482,2.065724 l 4.347115,12.519724 c 0.384596,1.107769 2.630995,1.110011 1.518431,1.480502 l -0.251036,0.0836 c -1.112565,0.370488 -2.306503,-0.226921 -2.676994,-1.339485 l -4.01255,-12.049467 c -0.370488,-1.112566 0.226916,-2.306507 1.339479,-2.676998 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.489303"
+         id="rect1210-1-1-9-3-3-8"
+         width="6.3500023"
+         height="16.933336"
+         x="12.281645"
+         y="40.33963"
+         ry="2.1166656"
+         transform="rotate(-12.172216)"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+      <path
+         id="rect1210-5-3-9-2-1-4-1"
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.489302"
+         d="m 22.580252,36.396831 2.069083,-0.446301 c 1.146277,-0.247253 -2.783793,0.581651 -2.529294,1.726334 l 3.105581,13.968467 c 0.25409,1.14477 4.140388,0.610593 2.994111,0.857845 l -2.069084,0.446302 c -1.146267,0.24725 -2.268123,-0.47651 -2.515374,-1.622779 L 20.957468,38.912212 c -0.24725,-1.14627 0.476506,-2.268129 1.622774,-2.515379 z"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle_small\animation\leg.png"
+         inkscape:export-xdpi="9.8840199"
+         inkscape:export-ydpi="9.8840199" />
+    </g>
+    <g
+       id="g1508-5"
+       inkscape:export-xdpi="9.8000002"
+       inkscape:export-ydpi="9.8000002"
+       transform="translate(-29.763575,282.04317)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\beetle\beetle_large\animation\body.png">
+      <ellipse
+         style="fill:#c8ab37;stroke-width:0.505023"
+         id="path831-9"
+         cx="46.223907"
+         cy="63.500004"
+         rx="35.001495"
+         ry="23.649662" />
+      <path
+         id="path831-6-1"
+         style="fill:#786721;stroke-width:0.505023"
+         d="m 81.22541,63.499998 c 10e-7,13.061351 -52.029248,39.731432 -69.057003,5.675924 0,0 9.459862,1.891972 37.839455,-5.67592 C 21.628269,55.932114 12.168407,57.824086 12.168407,57.824086 21.88166,30.96483 81.22541,50.438654 81.22541,63.499998 Z"
+         sodipodi:nodetypes="sscss" />
+      <path
+         id="path831-6-2-2"
+         style="fill:#2b2200;stroke-width:0.505023"
+         d="m 67.035618,63.500002 c 3e-6,13.061348 -37.839456,32.163539 -51.083267,11.351839 0,0 11.351837,0 39.731429,-11.351839 C 27.304188,52.148167 15.952351,52.148167 15.952351,52.148167 25.412216,33.228439 67.035618,50.438657 67.035618,63.500002 Z"
+         sodipodi:nodetypes="sscss" />
+    </g>
+  </g>
+</svg>

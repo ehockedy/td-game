@@ -229,6 +229,23 @@
                 "count": 5,
                 "enemiesPerSquarePerSecond": 1
             }
+        ],
+        [
+            {
+                "enemies": ["greenBeetle"],
+                "count": 40,
+                "enemiesPerSquarePerSecond": 2
+            },
+            {
+                "enemies": ["blueBeetle"],
+                "count": 40,
+                "enemiesPerSquarePerSecond": 2
+            },
+            {
+                "enemies": ["redBeetle"],
+                "count": 40,
+                "enemiesPerSquarePerSecond": 1
+            }
         ]
     ]
 }
