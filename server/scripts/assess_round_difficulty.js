@@ -29,7 +29,7 @@ function calculateDPS(enemyName, eps) {
 }
 
 function calculateDP10S(enemyName, eps, enemyCount) {
-    return calculateDPS(enemyName, eps) * Math.min(eps*10, enemyCount)
+    return calculateDPS(enemyName, eps) * Math.min(10, enemyCount)
 }
 
 let previousDPSmeasures = {
@@ -51,6 +51,7 @@ rounds.forEach((round, idx) => {
         // Check to see if enemies spaced out - this can skew result
         if (enemyGroup.enemiesPerSquarePerSecond <= 0.1) console.log("Warning: more than 10 square between enemies within group")
         enemyGroup.enemies.forEach((enemyName) => {
+            if (enemyName == "gap") return
             // Here we calulate the damage per second coming through, and the damage over a 10 second period
             dps = calculateDPS(enemyName, enemyGroup.enemiesPerSquarePerSecond)
             dp10s = calculateDP10S(enemyName, enemyGroup.enemiesPerSquarePerSecond, enemyGroup.count)
@@ -68,14 +69,14 @@ rounds.forEach((round, idx) => {
 
     let avgDps = dpsMeasures.totalDPS / dpsMeasures.enemies
     let avgDpsPrev = previousDPSmeasures.totalDPS / previousDPSmeasures.enemies
-    console.log(" Avg dps  :", avgDps, idx>0?'('+((avgDps-avgDpsPrev)/avgDpsPrev*100).toString()+'%)':"(-)")
+    console.log(" Avg dps  :", avgDps, idx>0?'('+((avgDps-avgDpsPrev)/avgDpsPrev*100).toFixed(0).toString()+'%)':"(-)")
 
-    console.log(" Max dps  :", dpsMeasures.maxDPS, idx>0?'('+((dpsMeasures.maxDPS-previousDPSmeasures.maxDPS)/previousDPSmeasures.maxDPS*100).toString()+'%)':"(-)")
+    console.log(" Max dps  :", dpsMeasures.maxDPS, idx>0?'('+((dpsMeasures.maxDPS-previousDPSmeasures.maxDPS)/previousDPSmeasures.maxDPS*100).toFixed(0).toString()+'%)':"(-)")
 
     let avgDp10s = dpsMeasures.totalDP10S / dpsMeasures.enemies
     let avgDp10sPrev = previousDPSmeasures.totalDP10S / previousDPSmeasures.enemies
-    console.log(" Avg dp10s:", avgDp10s, idx>0?'('+((avgDp10s-avgDp10sPrev)/avgDp10sPrev*100).toString()+'%)':"(-)")
-    console.log(" Max dp10s:", dpsMeasures.maxDP10S, idx>0?'('+((dpsMeasures.maxDP10S-previousDPSmeasures.maxDP10S)/previousDPSmeasures.maxDP10S*100).toString()+'%)':"(-)")
+    console.log(" Avg dp10s:", avgDp10s, idx>0?'('+((avgDp10s-avgDp10sPrev)/avgDp10sPrev*100).toFixed(0).toString()+'%)':"(-)")
+    console.log(" Max dp10s:", dpsMeasures.maxDP10S, idx>0?'('+((dpsMeasures.maxDP10S-previousDPSmeasures.maxDP10S)/previousDPSmeasures.maxDP10S*100).toFixed(0).toString()+'%)':"(-)")
 
     previousDPSmeasures = dpsMeasures
 })

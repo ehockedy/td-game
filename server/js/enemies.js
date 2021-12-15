@@ -30,6 +30,10 @@ class EnemyFactory {
         // This will not necessarily be an integer
         return this.enemyConfig[enemyType].speed
     }
+
+    getReward(enemyType) {
+        return this.enemyConfig[enemyType].reward
+    }
 }
 
 class Enemy {

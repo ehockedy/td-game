@@ -74,7 +74,6 @@ class Tower {
 
     registerKill() {
         this.stats.kills += 1
-        this.player.registerKill()
     }
 
     getCost() {

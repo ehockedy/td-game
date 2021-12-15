@@ -146,8 +146,10 @@ class Game {
                 }
 
                 if (enemy.hp <= 0) { // Enemy has been killed
-                    this.removeEnemy(enemy)
+                    let reward = this.enemyFactory.getReward(enemy.type)
+                    bullet.originTower.player.registerKill(reward, reward)
                     bullet.originTower.registerKill()
+                    this.removeEnemy(enemy)
                     break // If enemy has been killed, even if it is removed the enemy object still exiest. This can cause a double kill, so skip to next enemy
                 }
             }
@@ -175,6 +177,7 @@ class Game {
     }
 
     addEnemyToFront(enemyType) {
+        if (enemyType == "gap") return  // This enemy type is used to signify a gap in the enemy flow
         this.map.addNewEnemy(this.enemyFactory.createEnemy(enemyType))
     }
 
@@ -266,24 +269,33 @@ class Game {
         this.roundActive = true
 
         // Generate the enemy queue
+        let enemiesThisRound = 0
         this.enemyQueue = []
         this.rounds[this.round-1].forEach((enemyData) => {
             for (let i=0; i < enemyData.count; i++) {
                 // For each enemy, calculate how many game ticks are required until the "enemisPerSquarePerTimeUnit" number is met
                 // This ensures a consistent flow of enemies
                 enemyData.enemies.forEach((enemyType) => {
-                    this.enemyQueue.push({
-                        "type": enemyType,
-                        // 60/speed is number of ticks to complete one square, so divide that by the number of enemies to introduce
-                        // per second to get the number of ticks between each enemy.
-                        "ticksUntilGo": Math.floor((1/enemyData.enemiesPerSquarePerSecond) * (60/this.enemyFactory.getSpeed(enemyType)))
-                    })
+                    if (enemyType == "gap") {
+                        this.enemyQueue.push({
+                            "type": enemyType,
+                            "ticksUntilGo" : enemyData.enemiesPerSquarePerSecond*60
+                        })
+                    } else {
+                        this.enemyQueue.push({
+                            "type": enemyType,
+                            // 60/speed is number of ticks to complete one square, so divide that by the number of enemies to introduce
+                            // per second to get the number of ticks between each enemy.
+                            "ticksUntilGo": Math.floor((1/enemyData.enemiesPerSquarePerSecond) * (60/this.enemyFactory.getSpeed(enemyType)))
+                        })
+                        enemiesThisRound += 1
+                    }
                 })
             }
         })
 
         // This is how we determine if the round is over - this many enemies have been killed or got to end
-        this.enemiesRemaining = this.enemyQueue.length
+        this.enemiesRemaining = enemiesThisRound
 
         // Reset players ready status
         this.players.forEach((player) => {
@@ -299,7 +311,7 @@ class Game {
         if (this.enemiesRemaining == 0 && this.map.numBullets == 0) {
             // Reward players with money for the round
             this.players.forEach((player) => {
-                player.increaseMoney(50 + this.round*5)
+                player.increaseMoney(50 + (this.round-1)*5)
             })
 
             this.round += 1

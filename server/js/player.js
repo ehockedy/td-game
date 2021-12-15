@@ -6,13 +6,13 @@ class Player {
 
         this.stats = {
             "points": 0,
-            "money": 200
+            "money": 150
         }
     }
 
-    registerKill() {
-        this.stats.points += 1
-        this.stats.money += 1
+    registerKill(points, money) {
+        this.stats.points += points
+        this.stats.money += money
     }
 
     setReady() {

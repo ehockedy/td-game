@@ -5,9 +5,9 @@
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
-            "damage": 5,
-            "rateOfFire": 60,
-            "bulletSpeed": 3,
+            "damage": 7,
+            "rateOfFire": 45,
+            "bulletSpeed": 5,
             "numberOfBullets": 1,
             "turns": true,
             "piercing": false
@@ -24,12 +24,12 @@
             "seekRange": 1.6,
             "shootRange": 1.6,
             "damage": 2,
-            "rateOfFire": 30,
-            "bulletSpeed": 3,
+            "rateOfFire": 35,
+            "bulletSpeed": 7,
             "numberOfBullets": 8,
             "turns": false
         },
-        "cost": 100,
+        "cost": 150,
         "shootPattern": "burst",
         "bulletType": "shrapnel",
         "textureAtlasFile": "client/assets/towers/2-shrapnel_burst/shrapnel_burst.json"
@@ -46,27 +46,10 @@
             "numberOfBullets": 3,
             "turns": true
         },
-        "cost": 400,
+        "cost": 350,
         "bulletType": "rock",
         "shootPattern": "scatter",
         "textureAtlasFile": "client/assets/towers/3-rock_scatter/rock_scatter.json"
-    },
-    "sniper": {
-        "spriteSheetNum": 4,
-        "displayInfo": "Shoots infrequently, but hurts when it does. Also has a huge range.",
-        "gameData": {
-            "seekRange": 6,
-            "shootRange": 8,
-            "damage": 50,
-            "rateOfFire": 180,
-            "bulletSpeed": 8,
-            "numberOfBullets": 1,
-            "turns": true
-        },
-        "cost": 900,
-        "bulletType": "bullet",
-        "shootPattern": "single",
-        "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"
     },
     "spear-launcher": {
         "spriteSheetNum": 3,
@@ -84,6 +67,23 @@
         "bulletType": "spear",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/5-spear_launcher/spear_launcher.json"
+    },
+    "sniper": {
+        "spriteSheetNum": 4,
+        "displayInfo": "Shoots infrequently, but hurts when it does. Also has a huge range.",
+        "gameData": {
+            "seekRange": 6,
+            "shootRange": 8,
+            "damage": 50,
+            "rateOfFire": 180,
+            "bulletSpeed": 8,
+            "numberOfBullets": 1,
+            "turns": true
+        },
+        "cost": 900,
+        "bulletType": "bullet",
+        "shootPattern": "single",
+        "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"
     },
     "flamethrower": {
         "spriteSheetNum": 5,

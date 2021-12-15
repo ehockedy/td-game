@@ -3,58 +3,230 @@
         [
             {
                 "enemies": ["boneheadBandit"],
+                "count": 15,
+                "enemiesPerSquarePerSecond": 0.25
+            }
+        ],
+        [
+            {
+                "enemies": ["boneheadBandit"],
+                "count": 15,
+                "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["gap"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["greenBeetle"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 0.5
+            }
+        ],
+        [
+            {
+                "enemies": ["slimeSmall"],
+                "count": 12,
+                "enemiesPerSquarePerSecond": 0.5
+            },
+            {
+                "enemies": ["gap"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["greenBeetle"],
+                "count": 12,
+                "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["gap"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["boneheadBandit"],
+                "count": 12,
+                "enemiesPerSquarePerSecond": 1
+            }
+        ],
+        [
+            {
+                "enemies": ["boneheadBandit"],
+                "count": 15,
+                "enemiesPerSquarePerSecond": 1.2
+            },
+            {
+                "enemies": ["gap"],
+                "count": 8,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["greenBeetle"],
+                "count": 25,
+                "enemiesPerSquarePerSecond": 1.2
+            },
+            {
+                "enemies": ["slimeSmall"],
+                "count": 15,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["gap"],
+                "count": 8,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["blueBeetle"],
                 "count": 20,
                 "enemiesPerSquarePerSecond": 0.5
             }
         ],
         [
             {
-                "enemies": ["boneheadBandit"],
-                "count": 16,
-                "enemiesPerSquarePerSecond": 1
+                "enemies": ["blueBeetle"],
+                "count": 25,
+                "enemiesPerSquarePerSecond": 0.75
             },
             {
-                "enemies": ["greenBeetle"],
-                "count": 10,
+                "enemies": ["slimeMedium"],
+                "count": 12,
+                "enemiesPerSquarePerSecond": 0.5
+            },
+            {
+                "enemies": ["gap"],
+                "count": 3,
                 "enemiesPerSquarePerSecond": 1
             }
         ],
         [
             {
-                "enemies": ["slimeSmall"],
-                "count": 10,
-                "enemiesPerSquarePerSecond": 0.5
+                "enemies": ["greenBeetle"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 2
             },
             {
                 "enemies": ["slimeMedium"],
-                "count": 10,
+                "count": 8,
                 "enemiesPerSquarePerSecond": 1
             },
             {
+                "enemies": ["gap"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["boneheadBandit"],
+                "count": 30,
+                "enemiesPerSquarePerSecond": 1.5
+            },
+            {
+                "enemies": ["gap"],
+                "count": 2,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["boneheadTruckEmpty"],
+                "count": 1,
+                "enemiesPerSquarePerSecond": 1
+            }
+        ],
+        [
+            {
+                "enemies": ["boneheadBandit"],
+                "count": 30,
+                "enemiesPerSquarePerSecond": 2
+            },
+            {
                 "enemies": ["blueBeetle"],
-                "count": 10,
+                "count": 30,
+                "enemiesPerSquarePerSecond": 2
+            },
+            {
+                "enemies": ["boneheadTruckEmpty"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 0.5
+            }
+        ],
+        [
+            {
+                "enemies": ["blueBeetle"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 1.5
+            },
+            {
+                "enemies": ["slimeMedium"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 0.5
+            },
+            {
+                "enemies": ["boneheadTruckEmpty"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["gap"],
+                "count": 3,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["boneheadTruckEmpty"],
+                "count": 5,
                 "enemiesPerSquarePerSecond": 0.75
             }
         ],
         [
             {
-                "enemies": ["boneheadBandit"],
-                "count": 15,
-                "enemiesPerSquarePerSecond": 1.2
-            },
-            {
-                "enemies": ["greenBeetle"],
-                "count": 15,
-                "enemiesPerSquarePerSecond": 1.2
-            },
-            {
                 "enemies": ["slimeSmall"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["gap"],
+                "count": 3,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["slimeMedium"],
+                "count": 15,
+                "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["gap"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["slimeLarge"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 0.5
+            }
+        ],
+        [
+            {
+                "enemies": ["boneheadBandit"],
+                "count": 50,
+                "enemiesPerSquarePerSecond": 2
+            },
+            {
+                "enemies": ["gap"],
+                "count": 3,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["boneheadTruckEmpty"],
                 "count": 15,
                 "enemiesPerSquarePerSecond": 1
             },
             {
-                "enemies": ["blueBeetle"],
-                "count": 15,
+                "enemies": ["gap"],
+                "count": 2,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["boneheadTruckFull"],
+                "count": 5,
                 "enemiesPerSquarePerSecond": 1
             }
         ]

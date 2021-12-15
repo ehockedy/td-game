@@ -4,74 +4,84 @@
         "speed": 1.5,
         "hp": 15,
         "subEnemies": [],
-        "size": "medium"
+        "size": "medium",
+        "reward": 2
     },
     "blueBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle1/beetle1.json",
         "speed": 2,
         "hp": 20,
         "subEnemies": [],
-        "size": "medium"
+        "size": "medium",
+        "reward": 3
     },
     "greenBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle_small/beetle_small.json",
         "speed": 3,
         "hp": 4,
         "subEnemies": [],
-        "size": "small"
+        "size": "small",
+        "reward": 2
     },
     "boneheadTruckFull": {
         "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_full.json",
         "speed": 1,
-        "hp": 240,
+        "hp": 300,
         "subEnemies": [
             "boneheadBandit",
             "boneheadBandit",
             "boneheadBandit",
             "boneheadBandit"
         ],
-        "size": "large"
+        "size": "large",
+        "reward": 12
     },
     "boneheadTruckEmpty": {
         "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_empty.json",
         "speed": 1,
-        "hp": 160,
+        "hp": 200,
         "subEnemies": [],
-        "size": "large"
+        "size": "large",
+        "reward": 10
     },
     "slimeSmall": {
         "textureAtlasFile": "client/assets/enemies/slime/small/slime.json",
         "speed": 0.9,
         "hp": 30,
         "subEnemies": [],
-        "size": "small"
+        "size": "small",
+        "reward": 2
     },
     "slimeMedium": {
         "textureAtlasFile": "client/assets/enemies/slime/medium/slime.json",
         "speed": 0.8,
         "hp": 60,
         "subEnemies": ["slimeSmall", "slimeSmall"],
-        "size": "small"
+        "size": "small",
+        "reward": 3
     },
     "slimeLarge": {
         "textureAtlasFile": "client/assets/enemies/slime/large/slime.json",
         "speed": 0.7,
         "hp": 120,
         "subEnemies": ["slimeMedium", "slimeMedium"],
-        "size": "small"
+        "size": "small",
+        "reward": 10
     },
     "slimeGiant": {
         "textureAtlasFile": "client/assets/enemies/slime/giant/slime.json",
         "speed": 0.6,
         "hp": 360,
         "subEnemies": ["slimeLarge", "slimeLarge"],
-        "size": "large"
+        "size": "large",
+        "reward": 50
     },
     "slimeUber": {
         "textureAtlasFile": "client/assets/enemies/slime/uber/slime.json",
         "speed": 0.5,
         "hp": 1080,
         "subEnemies": ["slimeGiant", "slimeGiant"],
-        "size": "large"
+        "size": "large",
+        "reward": 200
     }
 }
