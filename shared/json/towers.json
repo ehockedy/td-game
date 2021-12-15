@@ -9,8 +9,7 @@
             "rateOfFire": 45,
             "bulletSpeed": 5,
             "numberOfBullets": 1,
-            "turns": true,
-            "piercing": false
+            "turns": true
         },
         "cost": 100,
         "shootPattern": "single",
@@ -23,7 +22,7 @@
         "gameData": {
             "seekRange": 1.6,
             "shootRange": 1.6,
-            "damage": 2,
+            "damage": 3,
             "rateOfFire": 35,
             "bulletSpeed": 7,
             "numberOfBullets": 8,
@@ -41,12 +40,12 @@
             "seekRange": 3,
             "shootRange": 4,
             "damage": 10,
-            "rateOfFire": 60,
-            "bulletSpeed": 4,
+            "rateOfFire": 50,
+            "bulletSpeed": 5,
             "numberOfBullets": 3,
             "turns": true
         },
-        "cost": 350,
+        "cost": 400,
         "bulletType": "rock",
         "shootPattern": "scatter",
         "textureAtlasFile": "client/assets/towers/3-rock_scatter/rock_scatter.json"
@@ -63,7 +62,7 @@
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 750,
+        "cost": 700,
         "bulletType": "spear",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/5-spear_launcher/spear_launcher.json"
@@ -74,7 +73,7 @@
         "gameData": {
             "seekRange": 6,
             "shootRange": 8,
-            "damage": 50,
+            "damage": 100,
             "rateOfFire": 180,
             "bulletSpeed": 8,
             "numberOfBullets": 1,

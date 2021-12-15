@@ -69,8 +69,13 @@
             },
             {
                 "enemies": ["slimeSmall"],
-                "count": 15,
+                "count": 10,
                 "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["slimeSmall"],
+                "count": 6,
+                "enemiesPerSquarePerSecond": 1.25
             },
             {
                 "enemies": ["gap"],
@@ -79,15 +84,30 @@
             },
             {
                 "enemies": ["blueBeetle"],
-                "count": 20,
+                "count": 10,
                 "enemiesPerSquarePerSecond": 0.5
+            },
+            {
+                "enemies": ["blueBeetle"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["blueBeetle"],
+                "count": 6,
+                "enemiesPerSquarePerSecond": 1
             }
         ],
         [
             {
                 "enemies": ["blueBeetle"],
-                "count": 25,
+                "count": 15,
                 "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["blueBeetle"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 1
             },
             {
                 "enemies": ["slimeMedium"],
@@ -103,7 +123,7 @@
         [
             {
                 "enemies": ["greenBeetle"],
-                "count": 20,
+                "count": 30,
                 "enemiesPerSquarePerSecond": 2
             },
             {
@@ -242,9 +262,38 @@
                 "enemiesPerSquarePerSecond": 2
             },
             {
+                "enemies": ["gap"],
+                "count": 6,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
                 "enemies": ["redBeetle"],
                 "count": 40,
+                "enemiesPerSquarePerSecond": 0.5
+            }
+        ],
+        [
+            {
+                "enemies": ["slimeMedium", "slimeLarge"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["gap"],
+                "count": 6,
                 "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["blueBeetle", "redBeetle"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 1
+            }
+        ],
+        [
+            {
+                "enemies": ["boneheadTruckFull", "boneheadTruckEmpty"],
+                "count": 40,
+                "enemiesPerSquarePerSecond": 0.75
             }
         ]
     ]
