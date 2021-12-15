@@ -57,7 +57,6 @@ export class DraggableTower extends BaseInteractiveTower {
 
     disableInteractivity() {
         if (this.availiableToBuy) {
-            this.towerSprite.interactive = false
             this.towerSprite.buttonMode = false
             this.setTint(COLOURS.CANNOT_BUY_GREY)  // Darken to show cannot be bought
             this.availiableToBuy = false
@@ -66,7 +65,6 @@ export class DraggableTower extends BaseInteractiveTower {
 
     enableInteractivity() {
         if (!this.availiableToBuy) {
-            this.towerSprite.interactive = true
             this.towerSprite.buttonMode = true
             this.resetTint()
             this.availiableToBuy = true
@@ -92,10 +90,12 @@ export class DraggableTower extends BaseInteractiveTower {
     }
 
     _onPointerDown() {
-        this.dragging = true
-        this.towerSpriteContainer.scale.set(0.8)
-        this.placeTowerButtons.visible = false
-        this.observers.forEach((o) => { o.emit("pressDownTower", this) })
+        if (this.availiableToBuy) {
+            this.dragging = true
+            this.towerSpriteContainer.scale.set(0.8)
+            this.placeTowerButtons.visible = false
+            this.observers.forEach((o) => { o.emit("pressDownTower", this) })
+        }
     }
 
     _onPointerUp() {
@@ -106,7 +106,7 @@ export class DraggableTower extends BaseInteractiveTower {
     }
 
     _onPointerMove(event) { // Remove this, and just have set position functions?
-        if (this.dragging) {
+        if (this.dragging && this.availiableToBuy) {
             this.inMenu = false
             this.observers.forEach((o) => { o.emit("clickAndDragTower", event, this) })
         }
