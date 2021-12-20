@@ -163,10 +163,10 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "bonehead1.png",
+	"image": "boneheadBandit.png",
 	"format": "RGBA8888",
 	"size": {"w":1280,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:59c1ccb692b5daf04ba15ff57656cfd7:7a71c605cae02bafb4ecbe45e1b799ee:347ab6c156c07aa01c2936622e5892c8$"
+	"smartupdate": "$TexturePacker:SmartUpdate:8b6b81eb5e21a6b523f19906e9048bc9:7a71c605cae02bafb4ecbe45e1b799ee:71d82741095b26ceb662064df5181662$"
 }
 }

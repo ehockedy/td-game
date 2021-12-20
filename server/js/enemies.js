@@ -18,7 +18,17 @@ class EnemyFactory {
     }
 
     createEnemy(enemyType) {
-        return new Enemy(enemyType, this.path, this.subgridSize, this.enemyConfig[enemyType].hp, this.enemyConfig[enemyType].speed, this.enemyConfig[enemyType].size)
+        return new Enemy(
+            enemyType,
+            this.path,
+            this.subgridSize,
+            this.enemyConfig[enemyType].hp,
+            this.enemyConfig[enemyType].speed,
+            this.enemyConfig[enemyType].size,
+            this.enemyConfig[enemyType].weaknesses,
+            this.enemyConfig[enemyType].resistances,
+            this.enemyConfig[enemyType].blockPiercing,
+        )
     }
 
     getSubEnemyTypes(enemyType) {
@@ -43,10 +53,14 @@ class Enemy {
      * @param {Object} path Array of coordinates that tht enemy will follow
      * @param {Object} subgridSize Size of the subgrid of the map
      */
-    constructor(type, path, subgridSize, hp, speed, size) {
+    constructor(type, path, subgridSize, hp, speed, size, weaknesses, resistances, blockPiercing) {
         this.type = type
         this.hp = hp;
         this.speed = speed;
+        this.weaknesses = weaknesses
+        this.resistances = resistances
+        this.blockPiercing = blockPiercing
+
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
         this.hitboxRadius = subgridSize/sizeMap[size]
@@ -175,7 +189,15 @@ class Enemy {
         this.collidedBullets.push(bullet.name)
 
         this.isHit = true
-        this.hp -= bullet.damage
+
+        // Do double damage if enemy is weak to bullet type, half damage if resists
+        let multiplier = 1
+        if (this.weaknesses.includes(bullet.type)) {
+            multiplier = 2
+        } else if (this.resistances.includes(bullet.type)) {
+            multiplier = 0.5
+        }
+        this.hp -= Math.floor(bullet.damage * multiplier)
 
         // get angle from enemy centre to bullet
         const xdiff = bullet.position.x - this.x

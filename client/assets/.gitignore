@@ -2,6 +2,7 @@ unused/
 reference/
 */sprites/
 */*/sprites/
+*/*/*/sprites/
 */*.tps
 */*/*.tps
 */animation/

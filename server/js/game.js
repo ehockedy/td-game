@@ -140,7 +140,7 @@ class Game {
             for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
                 let bullet = bullets[bIdx]
                 if(bullet.collidesWith(enemy.position, enemy.hitboxRadius)) {
-                    if (enemy.handleCollision(bullet)) {
+                    if (enemy.handleCollision(bullet) || enemy.blockPiercing) {
                         this.map.removeBullet(bullet) // Remove that bullet
                     }
                 }
@@ -150,7 +150,7 @@ class Game {
                     bullet.originTower.player.registerKill(reward, reward)
                     bullet.originTower.registerKill()
                     this.removeEnemy(enemy)
-                    break // If enemy has been killed, even if it is removed the enemy object still exiest. This can cause a double kill, so skip to next enemy
+                    break // If enemy has been killed, even if it is removed the enemy object still exist. This can cause a double kill, so skip to next enemy
                 }
             }
         })
