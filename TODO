@@ -17,16 +17,18 @@ Use volatile events for server -> client state updates - if miss one no need to 
 
 Other towers:
  - support ones like money/points booster if enemy killed in its range?
+ - slow
  - machine gun
 
 Main features:
  - game over/victory screen - React overlaid on canvas
  - specific enemy distribution per round
- - plan out properties of towers dmg/cost/rof etc.
  - save game behaviour
  - player leaves game behaviour
  - game stats/graph
  - upgrades
+ - different modes - competitive i.e. multipler but with no lives, just points, and then survival.
 
 Enemies:
- - slime monster that stops any penetrating shots
+ - bonehead tank
+ - golden beetle
