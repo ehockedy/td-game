@@ -311,12 +311,16 @@ class Game {
         if (this.enemiesRemaining == 0 && this.map.numBullets == 0) {
             // Reward players with money for the round
             this.players.forEach((player) => {
-                player.increaseMoney(50 + (this.round-1)*5)
+                player.increaseMoney(this.getEndOfRoundReward())
             })
 
             this.round += 1
             this.roundActive = false
         }
+    }
+
+    getEndOfRoundReward() {
+        return 100 + (this.round-1)*5
     }
 
     isRoundActive() {

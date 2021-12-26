@@ -21,6 +21,8 @@ class SimulatedGame {
             "random": this._buyTowersRandom,
             "randomEveryOtherRound": this._buyTowersRandomEveryOtherRound,
             "mostRecentlyUnlockedMaxTwo": this._buyMostRecentlyUnlockedMaxTwo,
+            "mostRecentlyUnlockedMaxThree": this._buyMostRecentlyUnlockedMaxThree,
+            "mostRecentlyUnlockedMaxFour": this._buyMostRecentlyUnlockedMaxFour,
         }
 
         // Members used by specific tower buying methods
@@ -146,11 +148,19 @@ class SimulatedGame {
         return []
     }
 
+    // Every other round, spend all the money
     _buyTowersMostExpensiveEveryOtherRound() {
+        let towers = []
         if (this.round % 2 == 0) {
-            return this._buyTowersMostExpensive()
+            let mostExpensiveTower = this._buyTowersMostExpensive()
+            let money = this.player.stats.money
+            while (mostExpensiveTower != [] && money >= this.towerConfig[mostExpensiveTower[0]].cost) {
+                towers = towers.concat(mostExpensiveTower)
+                money -= this.towerConfig[mostExpensiveTower[0]].cost
+                mostExpensiveTower = this._buyTowersMostExpensive()
+            }
         }
-        return []
+        return towers
     }
 
     _buyTowersRandom() {
@@ -168,12 +178,11 @@ class SimulatedGame {
 
     // Saves for the next type of tower that has not been bought yet. If cannot afford it yet, will
     // buy the next most expensive, with a limit of two of each type.
-    _buyMostRecentlyUnlockedMaxTwo() {
+    _buyMostRecentlyUnlockedMaxN(max) {
         let targetIdx = Math.min(Object.keys(this.towerTypesBought).length, Object.keys(this.towerConfig).length-1)  // Only up to the maximum possible tower idx
         const nextUnpurchasedTowerIdx = targetIdx
         let availableTowers = this.getAffordableTowers()
         let boughtTowers = []
-        const max = 2
         if (availableTowers.length > 0) {  // Can afford a tower
             while (targetIdx >= 0) {
                 if (targetIdx < availableTowers.length) { // The desired tower to buy is affordable
@@ -192,6 +201,18 @@ class SimulatedGame {
             }
         }
         return boughtTowers
+    }
+
+    _buyMostRecentlyUnlockedMaxTwo() {
+        return this._buyMostRecentlyUnlockedMaxN(2)
+    }
+
+    _buyMostRecentlyUnlockedMaxThree() {
+        return this._buyMostRecentlyUnlockedMaxN(3)
+    }
+
+    _buyMostRecentlyUnlockedMaxFour() {
+        return this._buyMostRecentlyUnlockedMaxN(4)
     }
 
 }

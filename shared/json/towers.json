@@ -20,15 +20,15 @@
         "spriteSheetNum": 1,
         "displayInfo": "A tasty explosion of shrapnel in all directions.",
         "gameData": {
-            "seekRange": 1.6,
-            "shootRange": 1.6,
+            "seekRange": 1.5,
+            "shootRange": 1.5,
             "damage": 3,
             "rateOfFire": 35,
             "bulletSpeed": 7,
-            "numberOfBullets": 8,
+            "numberOfBullets": 6,
             "turns": false
         },
-        "cost": 150,
+        "cost": 120,
         "shootPattern": "burst",
         "bulletType": "shrapnel",
         "textureAtlasFile": "client/assets/towers/2-shrapnel_burst/shrapnel_burst.json"
@@ -39,13 +39,13 @@
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
-            "damage": 10,
+            "damage": 12,
             "rateOfFire": 50,
             "bulletSpeed": 5,
             "numberOfBullets": 3,
             "turns": true
         },
-        "cost": 400,
+        "cost": 300,
         "bulletType": "rock",
         "shootPattern": "scatter",
         "textureAtlasFile": "client/assets/towers/3-rock_scatter/rock_scatter.json"
@@ -57,8 +57,8 @@
             "seekRange": 3,
             "shootRange": 4,
             "damage": 15,
-            "rateOfFire": 60,
-            "bulletSpeed": 3,
+            "rateOfFire": 45,
+            "bulletSpeed": 4,
             "numberOfBullets": 1,
             "turns": true
         },
@@ -74,12 +74,12 @@
             "seekRange": 6,
             "shootRange": 8,
             "damage": 100,
-            "rateOfFire": 180,
+            "rateOfFire": 100,
             "bulletSpeed": 8,
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 900,
+        "cost": 1000,
         "bulletType": "bullet",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"

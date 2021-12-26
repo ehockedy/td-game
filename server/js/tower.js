@@ -25,6 +25,7 @@ class Tower {
         this.fireTick = 0 // Ticks since last bullet
         this.target
         this.shootFunction = this._getShootBehaviour(towerJson[type]["shootPattern"])
+        this.bulletCount = towerJson[type]["gameData"]["numberOfBullets"]
         this.shootRangePath = [] // Main grid squares that the bullets can reach that are on the path
         this.angle = 0 // Angle in radians, 0 is East, goes clockwise
         this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
@@ -170,8 +171,8 @@ class Tower {
 
     _allDirShot() {
         let bullets = []
-        for (let a = 0; a < 8; a++) {
-            bullets.push(this._getBullet(this.position, (Math.PI/4)*a))
+        for (let a = 0; a < this.bulletCount; a++) {
+            bullets.push(this._getBullet(this.position, (2*Math.PI/this.bulletCount)*a))
         }
         return bullets
     }
