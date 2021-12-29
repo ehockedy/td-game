@@ -107,9 +107,13 @@ class Game {
         })
     }
 
-    removeEnemy(enemy) {
+    removeEnemyDontProcessSubEnemies(enemy) {
         this.map.removeEnemy(enemy)
         this.enemiesRemaining -= 1
+    }
+
+    removeEnemy(enemy) {
+        this.removeEnemyDontProcessSubEnemies(enemy)
 
         // Some enemies spawn new enemies when they are destroyed
         // Add these here
@@ -117,19 +121,18 @@ class Game {
         if (subEnemies.length > 0) {
             // Is there enough space to add the enemies behind where this enemy died?
             // Most likely yes, so -1. If not enough steps to work backwards, the work forwards.
-            let enemyAddDirection = (enemy.steps < subEnemies.length) ? 30 : -30
-            let offset = 0
-            subEnemies.forEach((subEnemyType) => {
-                this.addEnemy(subEnemyType, enemy.steps + offset)
+            let distanceBetweenSubEnemy = Math.floor(this.subgridSize/4)  // this is pretty arbitrary
+            let enemyOffset = ((enemy.steps < subEnemies.length*distanceBetweenSubEnemy) ? 1 : -1) * distanceBetweenSubEnemy
+            subEnemies.forEach((subEnemyType, idx) => {
+                this.addEnemy(subEnemyType, enemy.steps + (enemyOffset * idx))
                 this.enemiesRemaining += 1
-                offset += enemyAddDirection
             })
         }
     }
 
     processEndOfPathEnemy(enemy) {
         this.lives -= 1 // TODO dependent on enemy type?
-        this.removeEnemy(enemy)
+        this.removeEnemyDontProcessSubEnemies(enemy)
     }
 
     resolveInteractions() {
