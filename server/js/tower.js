@@ -69,8 +69,12 @@ class Tower {
     }
 
     update(property, value) {
-        this.state[property] = value
-        console.log(this.name, this.player.id, "Updating property", property, "to", value)
+        if (property in this.state) {
+            this.state[property] = value
+            console.log(this.name, this.player.id, "Updating property", property, "to", value)
+        } else {
+            console.log(property, "is not a valid tower property")
+        }
     }
 
     registerKill() {
