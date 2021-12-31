@@ -10,13 +10,24 @@
         "weaknesses": [],
         "blockPiercing": false
     },
+    "boneheadThug": {
+        "textureAtlasFile": "client/assets/enemies/boneheads/boneheadThug/boneheadThug.json",
+        "speed": 1.5,
+        "hp": 60,
+        "subEnemies": [],
+        "size": "medium",
+        "reward": 1,
+        "resistances": ["rock", "flame"],
+        "weaknesses": [],
+        "blockPiercing": false
+    },
     "boneheadShield": {
         "textureAtlasFile": "client/assets/enemies/boneheads/boneheadShield/boneheadShield.json",
         "speed": 1.5,
-        "hp": 100,
+        "hp": 150,
         "subEnemies": [],
         "size": "medium",
-        "reward": 3,
+        "reward": 2,
         "resistances": ["rock", "flame"],
         "weaknesses": [],
         "blockPiercing": false
@@ -24,10 +35,10 @@
     "bonelord": {
         "textureAtlasFile": "client/assets/enemies/boneheads/bonelord/bonelord.json",
         "speed": 1.5,
-        "hp": 750,
+        "hp": 800,
         "subEnemies": [],
         "size": "large",
-        "reward": 4,
+        "reward": 6,
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": false
@@ -35,7 +46,7 @@
     "greenBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle/beetle_small/beetle_small.json",
         "speed": 3,
-        "hp": 4,
+        "hp": 5,
         "subEnemies": [],
         "size": "small",
         "reward": 1,
@@ -46,7 +57,7 @@
     "blueBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle/beetle_medium/beetle_medium.json",
         "speed": 2,
-        "hp": 20,
+        "hp": 25,
         "subEnemies": [],
         "size": "medium",
         "reward": 1,
@@ -57,7 +68,7 @@
     "redBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle/beetle_large/beetle_large.json",
         "speed": 2,
-        "hp": 120,
+        "hp": 125,
         "subEnemies": [],
         "size": "medium",
         "reward": 2,
@@ -71,7 +82,7 @@
         "hp": 600,
         "subEnemies": [],
         "size": "medium",
-        "reward": 15,
+        "reward": 3,
         "resistances": [],
         "weaknesses": ["flame"],
         "blockPiercing": false
@@ -82,7 +93,7 @@
         "hp": 1200,
         "subEnemies": [],
         "size": "medium",
-        "reward": 30,
+        "reward": 3,
         "resistances": [],
         "weaknesses": ["flame"],
         "blockPiercing": false
@@ -90,7 +101,7 @@
     "boneheadTruckFull": {
         "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_full.json",
         "speed": 1.2,
-        "hp": 280,
+        "hp": 300,
         "subEnemies": [
             "boneheadBandit",
             "boneheadBandit",
@@ -98,7 +109,7 @@
             "boneheadBandit"
         ],
         "size": "large",
-        "reward": 4,
+        "reward": 2,
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": false
@@ -106,10 +117,21 @@
     "boneheadTruckEmpty": {
         "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_empty.json",
         "speed": 1.2,
-        "hp": 180,
+        "hp": 200,
         "subEnemies": [],
         "size": "large",
-        "reward": 3,
+        "reward": 2,
+        "resistances": [],
+        "weaknesses": [],
+        "blockPiercing": false
+    },
+    "boneheadTank": {
+        "textureAtlasFile": "client/assets/enemies/slime/uber/slime.json",
+        "speed": 1.2,
+        "hp": 2500,
+        "subEnemies": ["boneheadShield", "boneheadShield", "boneheadShield", "boneheadShield", "bonelord"],
+        "size": "large",
+        "reward": 5,
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": false
@@ -152,17 +174,6 @@
         "speed": 0.9,
         "hp": 360,
         "subEnemies": ["slimeLarge", "slimeLarge"],
-        "size": "large",
-        "reward": 2,
-        "resistances": [],
-        "weaknesses": [],
-        "blockPiercing": true
-    },
-    "slimeUber": {
-        "textureAtlasFile": "client/assets/enemies/slime/uber/slime.json",
-        "speed": 0.8,
-        "hp": 1080,
-        "subEnemies": ["slimeGiant", "slimeGiant"],
         "size": "large",
         "reward": 2,
         "resistances": [],
