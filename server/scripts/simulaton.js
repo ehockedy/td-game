@@ -15,18 +15,51 @@ class SimulatedGame {
         this.player = this.game.addPlayer(this.playerID)
         this.round = 0
 
+        this.loopTick = 0
+        this.purchaseMidRoundTrigger = 100  // Once every N ticks, can attempt to make a purchase
+
         this.towerBuyingMap = {
-            "mostExpensive": this._buyTowersMostExpensive,
-            "mostExpensiveEveryOtherRound": this._buyTowersMostExpensiveEveryOtherRound,
-            "random": this._buyTowersRandom,
-            "randomEveryOtherRound": this._buyTowersRandomEveryOtherRound,
-            "mostRecentlyUnlockedMaxTwo": this._buyMostRecentlyUnlockedMaxTwo,
-            "mostRecentlyUnlockedMaxThree": this._buyMostRecentlyUnlockedMaxThree,
-            "mostRecentlyUnlockedMaxFour": this._buyMostRecentlyUnlockedMaxFour,
+            "mostExpensive": {
+                "fn": this._buyTowersMostExpensive,
+                "purchaseMidRound": false
+            },
+            "mostExpensiveEveryOtherRound": {
+                "fn": this._buyTowersMostExpensiveEveryOtherRound,
+                "purchaseMidRound": false
+            },
+            "random": {
+                "fn": this._buyTowersRandom,
+                "purchaseMidRound": false
+            },
+            "randomEveryOtherRound": {
+                "fn": this._buyTowersRandomEveryOtherRound,
+                "purchaseMidRound": false
+            },
+            "mostRecentlyUnlockedMaxThree": {
+                "fn": this._buyMostRecentlyUnlockedMaxThree,
+                "purchaseMidRound": false
+            },
+            "mostRecentlyUnlockedMaxFour": {
+                "fn": this._buyMostRecentlyUnlockedMaxFour,
+                "purchaseMidRound": false
+            },
+            "mostRecentlyUnlockedMaxFive": {
+                "fn": this._buyMostRecentlyUnlockedMaxFive,
+                "purchaseMidRound": false
+            },
+            "mostRecentlyUnlockedMaxFourMidRound": {
+                "fn": this._buyMostRecentlyUnlockedMaxFour,
+                "purchaseMidRound": true
+            },
+            "mostRecentlyUnlockedMaxFiveMidRound": {
+                "fn": this._buyMostRecentlyUnlockedMaxFive,
+                "purchaseMidRound": true
+            }
         }
 
         // Members used by specific tower buying methods
         this.towerTypesBought = {}
+        this.towersBoughtThisRound = []
 
         // Holds all the important stats about this one game, added to master results list at end of simulation
         // Use arrays where each index is the round
@@ -46,23 +79,39 @@ class SimulatedGame {
     // Checks if the round has changed and records the current state if so, does any tower buying,
     // and then immediately starts the next round
     checkForRoundChange(towerPurchaseMethod) {
-        // If round is not active, immediately start it
-        if (!this.game.isRoundActive()) {            
+        // Buy towers if end of round, or mid-round purchase is triggered
+        // If end of round, immediately start next one
+        const isEndOfRound = !this.game.isRoundActive()
+        const canPurchaseTowers = (this.towerBuyingMap[towerPurchaseMethod].purchaseMidRound && this.loopTick == this.purchaseMidRoundTrigger)
+        if (isEndOfRound || canPurchaseTowers) {
+            this.loopTick = 0
+
             // Attempt to buy towers between rounds
-            let towersBought = this.towerBuyingMap[towerPurchaseMethod].call(this)
+            let towersBought = this.towerBuyingMap[towerPurchaseMethod].fn.call(this)
             towersBought.forEach((towerType) => {
                 let bestPlace = this.getBestPlaceForTower(towerType)
-                this.game.addTower(Math.random().toString(36).substr(2, 5), towerType, this.playerID, bestPlace.row, bestPlace.col)
+                let towerName = Math.random().toString(36).substr(2, 5)
+                this.game.addTower(towerName, towerType, this.playerID, bestPlace.row, bestPlace.col)
+
+                // I think some tpwers are better when set to have specific aim properties
+                if (towerType == "spear-launcher") {
+                    this.game.updateTower(towerName, "aimBehaviour", "last")
+                }
+                this.towersBoughtThisRound.push(towerType)
             })
 
-
-            // Record the state at the start of the round
-            this.recordCurrentState(this.game.getGameStateWorld().lives, towersBought)
-            
-            // Start next round
-            this.round += 1
-            this.game.startRound()
+            // Only need to record state is end of round
+            if (isEndOfRound) {
+                // Record the state at the start of the round
+                this.recordCurrentState(this.game.getGameStateWorld().lives, this.towersBoughtThisRound)
+                this.towersBoughtThisRound = []
+                
+                // Start next round
+                this.round += 1
+                this.game.startRound()
+            }
         }
+        this.loopTick += 1
     }
 
     async simulationLoop(towerPurchaseMethod, perLoopIterations=1000, loopPeriod_ms=0, socket=undefined) {
@@ -111,7 +160,89 @@ class SimulatedGame {
         return availableTowers
     }
 
-    getBestPlaceForTower(towerType) {
+    getBestPlaceForRockScatter() {
+        let currentBest = {
+            "row": 0,
+            "col": 0,
+            "squares1": 0,
+            "squares2": 0,
+        }
+        for (let c = 0; c < this.gameConfig.MAP_WIDTH; c += 1) {
+            for (let r = 0; r < this.gameConfig.MAP_HEIGHT; r += 1) {
+                // Check if is unoccupied space
+                if (this.map.getGridValue(r, c) == 'x') {
+                    // I think rock scatter works best in places where there are lots of adjacent track squares,
+                    // to ensure all the rocks hit
+                    let potentialBest = {
+                        "row": r,
+                        "col": c,
+                        "squares1": this.map.getNumberOfPathSquaresInRange(r, c, 1),
+                        "squares2": this.map.getNumberOfPathSquaresInRange(r, c, 2),
+                    }
+
+                    if (potentialBest.squares1 > currentBest.squares1) {
+                        // More squares in immediate area, overall better
+                        currentBest = potentialBest
+                    } else if (potentialBest.squares1 == currentBest.squares1) {
+                        // Equal to best number of squares, check at a distance of 2 away
+                        if (potentialBest.squares2 > currentBest.squares2) {
+                            currentBest = potentialBest
+                        }
+                    }
+                }
+            }
+        }
+        return currentBest
+    }
+
+    getBestPlaceForSpearLauncher() {
+        let currentBest = {
+            "row": 0,
+            "col": 0,
+            "squares": 0,
+        }
+        for (let c = 0; c < this.gameConfig.MAP_WIDTH; c += 1) {
+            for (let r = 0; r < this.gameConfig.MAP_HEIGHT; r += 1) {
+                // Check if is unoccupied space
+                if (this.map.getGridValue(r, c) == 'x') {
+                    // Keeping the row the same, look up and down the row and record how many of the tiles
+                    // are path tiles. Do it up to the current row/column, since shooting left or up is much
+                    // preferred, otherwise enemies are moving away from you.
+                    let colMin = Math.max(0, c - this.towerConfig["spear-launcher"].gameData.shootRange)
+                    //let colMax = Math.min(this.gameConfig.MAP_WIDTH, c + this.towerConfig[towerType].gameData.shootRange)
+                    let colPathLen = 0
+                    for (let col = colMin; col <= c; col++) {
+                        // This is a bit cheeky, but just checks if the given tile is a path - returns 1 if so (because only 1 tile checked)
+                        // and 0 otherwise.
+                        colPathLen += this.map.getNumberOfPathSquaresInRange(r, col, 0)
+                    }
+
+                    // Do the same looking across the row
+                    let rowMin = Math.max(0, r - this.towerConfig["spear-launcher"].gameData.shootRange)
+                    //let rowMax = Math.min(this.gameConfig.MAP_HEIGHT, r + this.towerConfig[towerType].gameData.shootRange)
+                    let rowPathLen = 0
+                    for (let row = rowMin; row <= r; row++) {
+                        rowPathLen += this.map.getNumberOfPathSquaresInRange(row, c, 0)
+                    }
+
+                    let pathSquares = Math.max(colPathLen, rowPathLen)
+                    if (pathSquares > currentBest.squares) {
+                        currentBest = {
+                            "row": r,
+                            "col": c,
+                            "squares": pathSquares,
+                        }
+                    }
+                }
+            }
+        }
+
+        // Might have run out of decent spaces, so just give one with best coverage
+        if (currentBest.squares <= 1) return this.getBestPlaceForTowerDefault("spear-launcher")
+        return currentBest
+    }
+
+    getBestPlaceForTowerDefault(towerType) {
         let currentBest = {
             "row": 0,
             "col": 0,
@@ -139,6 +270,17 @@ class SimulatedGame {
             }
         }
         return currentBest
+    }
+
+    getBestPlaceForTower(towerType) {
+        switch(towerType) {
+            case "rock-scatter":
+                return this.getBestPlaceForRockScatter()
+            case "spear-launcher":
+                return this.getBestPlaceForSpearLauncher()
+            default:
+                return this.getBestPlaceForTowerDefault(towerType)
+        }
     }
 
     // Spends all the money buying the most expensive available tower each time
@@ -170,10 +312,19 @@ class SimulatedGame {
     }
 
     _buyTowersRandomEveryOtherRound() {
+        let towers = []
         if (this.round % 2 == 0) {
-            return this._buyTowersRandom()
+            //return this._buyTowersRandom()
+            // todo deduplicate code
+            let mostExpensiveTower = this._buyTowersRandom()
+            let money = this.player.stats.money
+            while (mostExpensiveTower != [] && money >= this.towerConfig[mostExpensiveTower[0]].cost) {
+                towers = towers.concat(mostExpensiveTower)
+                money -= this.towerConfig[mostExpensiveTower[0]].cost
+                mostExpensiveTower = this._buyTowersRandom()
+            }
         }
-        return []
+        return towers
     }
 
     // Saves for the next type of tower that has not been bought yet. If cannot afford it yet, will
@@ -203,18 +354,17 @@ class SimulatedGame {
         return boughtTowers
     }
 
-    _buyMostRecentlyUnlockedMaxTwo() {
-        return this._buyMostRecentlyUnlockedMaxN(2)
-    }
-
     _buyMostRecentlyUnlockedMaxThree() {
         return this._buyMostRecentlyUnlockedMaxN(3)
     }
-
+    
     _buyMostRecentlyUnlockedMaxFour() {
         return this._buyMostRecentlyUnlockedMaxN(4)
     }
-
+    
+    _buyMostRecentlyUnlockedMaxFive() {
+        return this._buyMostRecentlyUnlockedMaxN(5)
+    }
 }
 
 

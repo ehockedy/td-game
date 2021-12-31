@@ -22,9 +22,11 @@ export class SimulationView extends React.Component {
                 'mostExpensiveEveryOtherRound': true,
                 'random': true,
                 'randomEveryOtherRound': false,
-                'mostRecentlyUnlockedMaxTwo': false,
                 'mostRecentlyUnlockedMaxThree': true,
                 'mostRecentlyUnlockedMaxFour': true,
+                'mostRecentlyUnlockedMaxFive': true,
+                'mostRecentlyUnlockedMaxFourMidRound': true,
+                'mostRecentlyUnlockedMaxFiveMidRound': true
             },
             seed: '1',
             runs: 3,
