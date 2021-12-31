@@ -6,7 +6,7 @@
             "seekRange": 3,
             "shootRange": 4,
             "damage": 7,
-            "rateOfFire": 45,
+            "rateOfFire": 50,
             "bulletSpeed": 5,
             "numberOfBullets": 1,
             "turns": true
@@ -23,7 +23,7 @@
             "seekRange": 1.5,
             "shootRange": 1.5,
             "damage": 3,
-            "rateOfFire": 35,
+            "rateOfFire": 40,
             "bulletSpeed": 7,
             "numberOfBullets": 6,
             "turns": false
@@ -56,13 +56,13 @@
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
-            "damage": 15,
+            "damage": 14,
             "rateOfFire": 45,
             "bulletSpeed": 4,
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 700,
+        "cost": 550,
         "bulletType": "spear",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/5-spear_launcher/spear_launcher.json"
@@ -73,13 +73,13 @@
         "gameData": {
             "seekRange": 6,
             "shootRange": 8,
-            "damage": 100,
+            "damage": 80,
             "rateOfFire": 100,
             "bulletSpeed": 8,
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 1000,
+        "cost": 800,
         "bulletType": "bullet",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"
@@ -90,13 +90,13 @@
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
-            "damage": 3,
+            "damage": 4,
             "rateOfFire": 6,
             "bulletSpeed": 2,
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 1500,
+        "cost": 1200,
         "bulletType": "flame",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/6-flamethrower/flamethrower.json"
@@ -113,7 +113,7 @@
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 2400,
+        "cost": 2000,
         "bulletType": "buzzsaw",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/7-buzzsaw/buzzsaw.json"
