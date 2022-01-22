@@ -90,10 +90,10 @@
     "blackBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle/beetle_uber/beetle_uber.json",
         "speed": 1.5,
-        "hp": 1200,
+        "hp": 1800,
         "subEnemies": [],
         "size": "medium",
-        "reward": 3,
+        "reward": 4,
         "resistances": [],
         "weaknesses": ["flame"],
         "blockPiercing": false
@@ -126,12 +126,12 @@
         "blockPiercing": false
     },
     "boneheadTank": {
-        "textureAtlasFile": "client/assets/enemies/slime/uber/slime.json",
+        "textureAtlasFile": "client/assets/enemies/boneheads/boneheadTank/boneheadTank.json",
         "speed": 1.2,
         "hp": 2500,
         "subEnemies": ["boneheadShield", "boneheadShield", "boneheadShield", "boneheadShield", "bonelord"],
         "size": "large",
-        "reward": 5,
+        "reward": 10,
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": false

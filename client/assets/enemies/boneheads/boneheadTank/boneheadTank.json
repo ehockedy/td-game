@@ -1,0 +1,332 @@
+{"frames": {
+
+"boneheadTank_000.png":
+{
+	"frame": {"x":0,"y":0,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_001.png":
+{
+	"frame": {"x":126,"y":0,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_002.png":
+{
+	"frame": {"x":0,"y":99,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_003.png":
+{
+	"frame": {"x":126,"y":99,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_004.png":
+{
+	"frame": {"x":0,"y":198,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_005.png":
+{
+	"frame": {"x":126,"y":198,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_006.png":
+{
+	"frame": {"x":0,"y":297,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_007.png":
+{
+	"frame": {"x":126,"y":297,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_008.png":
+{
+	"frame": {"x":0,"y":396,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_009.png":
+{
+	"frame": {"x":126,"y":396,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_010.png":
+{
+	"frame": {"x":0,"y":495,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_011.png":
+{
+	"frame": {"x":126,"y":495,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_012.png":
+{
+	"frame": {"x":0,"y":594,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_013.png":
+{
+	"frame": {"x":126,"y":594,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_014.png":
+{
+	"frame": {"x":0,"y":693,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_015.png":
+{
+	"frame": {"x":126,"y":693,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_016.png":
+{
+	"frame": {"x":0,"y":792,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_017.png":
+{
+	"frame": {"x":126,"y":792,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_018.png":
+{
+	"frame": {"x":0,"y":891,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_019.png":
+{
+	"frame": {"x":126,"y":891,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_020.png":
+{
+	"frame": {"x":0,"y":990,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_021.png":
+{
+	"frame": {"x":126,"y":990,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_022.png":
+{
+	"frame": {"x":0,"y":1089,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_023.png":
+{
+	"frame": {"x":126,"y":1089,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_024.png":
+{
+	"frame": {"x":0,"y":1188,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_025.png":
+{
+	"frame": {"x":126,"y":1188,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_026.png":
+{
+	"frame": {"x":0,"y":1287,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_027.png":
+{
+	"frame": {"x":126,"y":1287,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_028.png":
+{
+	"frame": {"x":0,"y":1386,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_029.png":
+{
+	"frame": {"x":126,"y":1386,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_030.png":
+{
+	"frame": {"x":0,"y":1485,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_031.png":
+{
+	"frame": {"x":126,"y":1485,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_032.png":
+{
+	"frame": {"x":0,"y":1584,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_033.png":
+{
+	"frame": {"x":126,"y":1584,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_034.png":
+{
+	"frame": {"x":0,"y":1683,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_035.png":
+{
+	"frame": {"x":126,"y":1683,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_036.png":
+{
+	"frame": {"x":0,"y":1782,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_037.png":
+{
+	"frame": {"x":126,"y":1782,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_038.png":
+{
+	"frame": {"x":0,"y":1881,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+},
+"boneheadTank_039.png":
+{
+	"frame": {"x":126,"y":1881,"w":126,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":99},
+	"sourceSize": {"w":126,"h":99}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "boneheadTank.png",
+	"format": "RGBA8888",
+	"size": {"w":252,"h":1980},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d79034a141e6950113ad7f0feaaf62ab:f6f86b30155eb62f9ebc426ac212a387:984f4a349374b1531051438cb399029b$"
+}
+}

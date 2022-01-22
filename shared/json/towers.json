@@ -73,13 +73,13 @@
         "gameData": {
             "seekRange": 6,
             "shootRange": 8,
-            "damage": 80,
+            "damage": 70,
             "rateOfFire": 100,
             "bulletSpeed": 8,
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 800,
+        "cost": 750,
         "bulletType": "bullet",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"
@@ -91,12 +91,12 @@
             "seekRange": 3,
             "shootRange": 4,
             "damage": 4,
-            "rateOfFire": 6,
-            "bulletSpeed": 2,
+            "rateOfFire": 4,
+            "bulletSpeed": 3,
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 1200,
+        "cost": 1000,
         "bulletType": "flame",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/6-flamethrower/flamethrower.json"
@@ -113,7 +113,7 @@
             "numberOfBullets": 1,
             "turns": true
         },
-        "cost": 2000,
+        "cost": 1500,
         "bulletType": "buzzsaw",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/7-buzzsaw/buzzsaw.json"

@@ -1,0 +1,1325 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="480"
+   height="480"
+   viewBox="0 0 127 127"
+   version="1.1"
+   id="svg917"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="boneheadTank.svg"
+   inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\boneheadTank.png"
+   inkscape:export-xdpi="24"
+   inkscape:export-ydpi="24">
+  <defs
+     id="defs911">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1299">
+      <stop
+         style="stop-color:#191919;stop-opacity:1"
+         offset="0"
+         id="stop1295" />
+      <stop
+         style="stop-color:#6c5d53;stop-opacity:1"
+         offset="1"
+         id="stop1297" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1198">
+      <stop
+         style="stop-color:#1e1e1e;stop-opacity:0.59677422"
+         offset="0"
+         id="stop1194" />
+      <stop
+         style="stop-color:#f2efd0;stop-opacity:0"
+         offset="1"
+         id="stop1196" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1156">
+      <stop
+         style="stop-color:#1e1e1e;stop-opacity:1"
+         offset="0"
+         id="stop1152" />
+      <stop
+         style="stop-color:#f2efd0;stop-opacity:0"
+         offset="1"
+         id="stop1154" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1056">
+      <stop
+         style="stop-color:#1e1e1e;stop-opacity:1"
+         offset="0"
+         id="stop1052" />
+      <stop
+         style="stop-color:#f2efd0;stop-opacity:0.29435483"
+         offset="1"
+         id="stop1054" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient992">
+      <stop
+         style="stop-color:#1e1e1e;stop-opacity:1"
+         offset="0"
+         id="stop988" />
+      <stop
+         style="stop-color:#f2efd0;stop-opacity:1"
+         offset="1"
+         id="stop990" />
+    </linearGradient>
+    <filter
+       y="-0.15"
+       height="1.3"
+       x="-0.15"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB;"
+       id="filter1094">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1080" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1082" />
+      <feDiffuseLighting
+         lighting-color="rgb(233,230,215)"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1086">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1084" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1088" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1090" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1092" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1094-3">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1080-1" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1082-7" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1086-4">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1084-1" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1088-3" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1090-5"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1092-2" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1094-8">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1080-2" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1082-1" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1086-0">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1084-3" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1088-1" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1090-6"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1092-5" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1321">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1307" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1309" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1313">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1311" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1315" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1317"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1319" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1337">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1323" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1325" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1329">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1327" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1331" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1333"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1335" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1094-3-6">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1080-1-2" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1082-7-9" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1086-4-3">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1084-1-3" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1088-3-3" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1090-5-1"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1092-2-1" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1361">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1347" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1349" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1353">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1351" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1355" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1357"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1359" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1094-1">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1080-0" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1082-0" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1086-08">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1084-8" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1088-6" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1090-59"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1092-7" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1094-1-9">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1080-0-3" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1082-0-4" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1086-08-2">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1084-8-4" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1088-6-9" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1090-59-2"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1092-7-5" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1094-1-6">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1080-0-0" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1082-0-0" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1086-08-6">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1084-8-0" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1088-6-2" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1090-59-5"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1092-7-1" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1094-1-9-6">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1080-0-3-3" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1082-0-4-5" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1086-08-2-6">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1084-8-4-1" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1088-6-9-8" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1090-59-2-7"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1092-7-5-8" />
+    </filter>
+    <filter
+       y="-0.15000001"
+       height="1.3"
+       x="-0.15000001"
+       width="1.3"
+       inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects"
+       inkscape:menu="Textures"
+       inkscape:label="Rough Paper"
+       style="color-interpolation-filters:sRGB"
+       id="filter1094-31">
+      <feTurbulence
+         type="fractalNoise"
+         baseFrequency="0.023255813953488372"
+         numOctaves="5"
+         seed="0"
+         result="result4"
+         id="feTurbulence1080-4" />
+      <feDisplacementMap
+         in="SourceGraphic"
+         in2="result4"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         scale="2"
+         result="result3"
+         id="feDisplacementMap1082-76" />
+      <feDiffuseLighting
+         lighting-color="#e9e6d7"
+         diffuseConstant="1"
+         surfaceScale="2"
+         result="result1"
+         in="result4"
+         id="feDiffuseLighting1086-48">
+        <feDistantLight
+           azimuth="235"
+           elevation="40"
+           id="feDistantLight1084-10" />
+      </feDiffuseLighting>
+      <feComposite
+         operator="in"
+         in="result3"
+         in2="result1"
+         result="result2"
+         id="feComposite1088-2" />
+      <feComposite
+         in2="result1"
+         result="result5"
+         operator="arithmetic"
+         k1="1.7"
+         id="feComposite1090-68"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in="result5"
+         in2="result3"
+         mode="normal"
+         id="feBlend1092-22" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1056"
+       id="linearGradient994-5"
+       x1="152.40002"
+       y1="10.583333"
+       x2="158.75002"
+       y2="23.283333"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1.5650434,-0.24610417,-0.24610417,1.5650434,687.82215,5.8211113)"
+       spreadMethod="reflect" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient992"
+       id="linearGradient994-1"
+       x1="186.26668"
+       y1="35.983334"
+       x2="171.45001"
+       y2="16.933334"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(177.8,23.283333)"
+       spreadMethod="reflect" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient992"
+       id="linearGradient994-6"
+       x1="215.89999"
+       y1="-6.3499999"
+       x2="186.26666"
+       y2="16.933332"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1.5650434,0.24610417,-0.24610417,-1.5650434,650.63964,100.62625)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1056"
+       id="linearGradient994-5-5"
+       x1="152.40002"
+       y1="10.583333"
+       x2="158.75002"
+       y2="23.283333"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1.5650434,0.24610417,-0.24610417,-1.5650434,649.81148,100.75648)"
+       spreadMethod="reflect" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1156"
+       id="linearGradient994-55"
+       x1="212.57143"
+       y1="-3.5027964"
+       x2="186.26666"
+       y2="16.933332"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1.2906975,-0.60428661,-0.62194277,1.4530224,342.73588,58.551702)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1198"
+       id="linearGradient994-55-1"
+       x1="184.04099"
+       y1="23.117476"
+       x2="175.76535"
+       y2="6.9390082"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1.2906975,-0.60428661,-0.62194277,1.4530224,342.73588,58.551692)"
+       spreadMethod="pad" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1156"
+       id="linearGradient1245"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1.2906975,-0.60428661,-0.62194277,1.4530224,342.73588,58.551702)"
+       x1="212.57143"
+       y1="-3.5027964"
+       x2="186.26666"
+       y2="16.933332" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1198"
+       id="linearGradient1247"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1.2906975,-0.60428661,-0.62194277,1.4530224,342.73588,58.551692)"
+       x1="184.04099"
+       y1="23.117476"
+       x2="175.76535"
+       y2="6.9390082"
+       spreadMethod="pad" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1156"
+       id="linearGradient1289"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1.2906975,-0.60428661,-0.62194277,1.4530224,342.73588,58.551702)"
+       x1="212.57143"
+       y1="-3.5027964"
+       x2="186.26666"
+       y2="16.933332" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1198"
+       id="linearGradient1291"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1.2906975,-0.60428661,-0.62194277,1.4530224,342.73588,58.551692)"
+       x1="184.04099"
+       y1="23.117476"
+       x2="175.76535"
+       y2="6.9390082"
+       spreadMethod="pad" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1299"
+       id="linearGradient1301"
+       x1="-12.7"
+       y1="4.2333331"
+       x2="-12.7"
+       y2="8.4666662"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       gradientTransform="matrix(1.6052946,0,0,1.0119392,90.018119,39.192847)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1299"
+       id="linearGradient1301-1"
+       x1="-12.7"
+       y1="4.2333331"
+       x2="-12.7"
+       y2="8.4666662"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       gradientTransform="matrix(1.6041596,0,0,0.88593097,63.846027,-78.765894)" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.76042185"
+     inkscape:cx="-433.4012"
+     inkscape:cy="-8.4343253"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     objecttolerance="10000"
+     guidetolerance="10000"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="409"
+     inkscape:window-maximized="1"
+     inkscape:snap-bbox="false"
+     inkscape:bbox-nodes="false"
+     inkscape:snap-global="true"
+     inkscape:snap-intersection-paths="false"
+     inkscape:object-paths="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid919"
+       empspacing="8"
+       dotted="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata914">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#28170b;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-1-6)"
+       id="rect938-1-0-0"
+       width="25.4"
+       height="8.4666662"
+       x="19.049999"
+       y="86.783333"
+       ry="1.3229172"
+       transform="matrix(1.6018921,0,0,1.6018921,-123.64938,38.782465)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24" />
+    <rect
+       style="fill:#28170b;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-1-9-6)"
+       id="rect938-1-0-6-1"
+       width="25.4"
+       height="8.4666662"
+       x="19.049999"
+       y="86.783333"
+       ry="1.3229172"
+       transform="matrix(1.1515055,0,0,1.1515055,41.948917,73.635182)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24" />
+    <rect
+       style="fill:#784421;stroke-width:1.30349;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       id="rect938-1-3-6-4"
+       width="20.108332"
+       height="8.4666662"
+       x="47.625004"
+       y="47.095833"
+       ry="1.3229173"
+       transform="matrix(1.8406612,0,0,1.8406612,-35.046358,-66.305898)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <path
+       id="rect834"
+       style="fill:#c8c4b7;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       d="m 51.898287,43.296792 11.377083,4.497917 -0.264583,-1.322917 10.054166,6.085417 0.264584,-1.852083 10.014213,8.296957 V 57.679167 L 88.9,63.5 C 88.81181,63.059028 88.723612,62.618055 88.635417,62.177083 L 95.25,69.85 H 65.616667 L 55.033333,61.383333 Z"
+       sodipodi:nodetypes="ccccccccccccc"
+       transform="matrix(1.8406612,0,0,1.8406612,-35.046358,-66.305898)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <rect
+       style="fill:#28170b;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-1-9)"
+       id="rect938-1-0-6"
+       width="25.4"
+       height="8.4666662"
+       x="19.049999"
+       y="86.783333"
+       ry="1.3229172"
+       transform="matrix(1.1515055,0,0,1.1515055,-42.717749,89.285768)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24" />
+    <rect
+       style="fill:#552200;stroke-width:1.30349;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       id="rect938-1-3-6"
+       width="20.108332"
+       height="8.4666662"
+       x="49.212502"
+       y="84.137505"
+       ry="1.3229173"
+       transform="matrix(1.8406612,0,0,1.8406612,-35.046358,-66.305898)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <path
+       id="rect834-5"
+       style="fill:#ac9d93;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       d="m 53.18626,96.592894 11.377083,-4.497917 -0.264583,1.322917 10.054166,-6.085417 0.264584,1.852083 8.726239,-8.486643 v 1.322916 L 88.899999,76.2 c -0.08819,0.440972 -0.176388,0.881945 -0.264583,1.322917 L 95.25,69.85 H 65.616666 l -10.583334,8.466667 z"
+       sodipodi:nodetypes="ccccccccccccc"
+       transform="matrix(1.8406612,0,0,1.8406612,-35.046358,-66.305898)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <rect
+       style="fill:#784421;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       id="rect938-1-3"
+       width="25.4"
+       height="8.4666662"
+       x="19.049999"
+       y="44.450001"
+       ry="1.3229173"
+       transform="matrix(1.8406612,0,0,1.8406612,-35.046358,-66.305898)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <rect
+       style="fill:#28170b;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-1)"
+       id="rect938-1-0"
+       width="25.4"
+       height="8.4666662"
+       x="19.049999"
+       y="86.783333"
+       ry="1.3229172"
+       transform="matrix(1.6018921,0,0,1.6018921,-72.849377,16.753111)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24" />
+    <path
+       id="rect831"
+       style="fill:#aa4400;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       d="m 21.166667,48.683333 c 27.516667,-2.116667 27.516666,-2.116666 61.383333,12.7 L 88.9,69.85 82.55,78.316667 c -33.866667,14.816666 -33.866666,14.816666 -61.383333,12.7 L 14.816667,82.55 C 12.7,74.083333 12.7,63.5 14.816667,57.15 Z"
+       sodipodi:nodetypes="cccccccc"
+       transform="matrix(1.8406612,0,0,1.8406612,-35.046358,-66.305898)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <rect
+       style="fill:#552200;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       id="rect938-1"
+       width="25.4"
+       height="8.4666662"
+       x="19.049999"
+       y="86.783333"
+       ry="1.3229172"
+       transform="matrix(1.8406612,0,0,1.8406612,-35.046358,-66.305898)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <path
+       id="rect831-68"
+       style="fill:#803300;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-31)"
+       d="m 21.166667,48.683333 c 6.819234,-3.853961 -13.7883326,16.753606 0,42.333334 L 14.816667,82.55 C 12.7,74.083333 12.7,63.5 14.816667,57.15 Z"
+       sodipodi:nodetypes="ccccc"
+       transform="matrix(1.8406612,0,0,1.8406612,-34.513478,-66.462145)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <path
+       id="rect831-6"
+       style="fill:#803300;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       d="m 88.9,69.849999 -6.35,8.466668 C 48.683334,93.133333 48.683334,93.133333 21.166667,91.016663 l -6.35,-8.46666 c -0.79375,-3.70417 -1.5875,-6.614586 -1.5875,-12.700003 0,0 16.404166,-2.116667 75.670833,-10e-7 z"
+       sodipodi:nodetypes="cccccc"
+       transform="matrix(1.8406612,0,0,1.8406612,-35.046358,-66.305898)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <ellipse
+       style="fill:#6c5d53;stroke-width:1.4568;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       id="path1231-2"
+       cx="-5.8338304"
+       cy="87.50647"
+       rx="8.3721724"
+       ry="7.4083333"
+       transform="matrix(1.120026,0,0,1.120026,-78.221348,-8.1933176)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\exhaust_bottom.png" />
+    <rect
+       style="fill:#6c5d53;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       id="rect1248"
+       width="8.4666662"
+       height="4.2333331"
+       x="-79.586678"
+       y="73.659996"
+       ry="1.3229166"
+       transform="matrix(1.1334882,-0.82129088,0.85011632,1.0950543,13.237816,-54.545303)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <ellipse
+       style="fill:#917c6f;stroke-width:1.4568;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094)"
+       id="path1231"
+       cx="-6.0665174"
+       cy="86.102974"
+       rx="8.3721724"
+       ry="7.4083333"
+       transform="matrix(1.120026,0,0,1.120026,-78.221348,-8.1933176)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\exhaust_bottom.png" />
+    <path
+       id="rect905"
+       style="fill:#afdde9;stroke-width:3.34463;stroke-linejoin:round;paint-order:markers fill stroke"
+       d="m 116.03652,57.013751 0.38015,8.602916 -14.87742,15.559228 -14.755917,3.490772 -16.933333,2.116666 16.933333,-6.35 12.7,-6.35 6.349997,-6.35 v -12.7 l -6.349997,-6.35 -12.7,-6.35 L 69.85,35.983333 86.783333,38.1 101.53925,42.516464 Z"
+       sodipodi:nodetypes="ccccccccccccccc"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <path
+       id="rect905-1"
+       style="fill:#87aade;stroke-width:3.34463;stroke-linejoin:round;paint-order:markers fill stroke"
+       d="M 116.41667,65.616667 101.53925,81.175885 86.783333,84.666667 69.85,86.783333 l 16.933333,-6.35 12.7,-6.35 z"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <path
+       id="rect905-12"
+       style="fill:#87aade;stroke-width:3.34463;stroke-linejoin:round;paint-order:markers fill stroke"
+       d="m 198.96667,165.1 v 8.46667 12.7 l -31.3412,10.03305 h -3.62433 L 198.96667,184.15 198.30682,164.36466 167.62547,149.25188 h 3.02026 l 28.32094,13.73145 z"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24" />
+    <circle
+       style="fill:#6c5d53;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-3)"
+       id="path1250-4"
+       cx="-5.2916665"
+       cy="85.724998"
+       r="3.175"
+       transform="matrix(1.1599692,0,0,1.2071107,-79.523521,-15.80775)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\exhaust_bottom.png" />
+    <circle
+       style="fill:#4b413a;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094);fill-opacity:1"
+       id="path1250"
+       cx="-5.2916665"
+       cy="85.724998"
+       r="3.175"
+       transform="matrix(1.1599692,0,0,1.2071107,-79.844671,-16.910745)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\exhaust_bottom.png" />
+    <ellipse
+       style="fill:#6c5d53;stroke-width:1.4568;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-8)"
+       id="path1231-2-6"
+       cx="-18.533831"
+       cy="59.989803"
+       rx="8.3721724"
+       ry="7.4083333"
+       transform="matrix(0.48428016,0.3151623,-0.3151623,0.48428016,-53.853734,22.733311)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <rect
+       style="fill:#6c5d53;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-8)"
+       id="rect1248-5"
+       width="8.4666662"
+       height="4.2333331"
+       x="-79.586678"
+       y="73.659996"
+       ry="1.3229166"
+       transform="matrix(0.72120268,-0.03616178,0.05944026,0.71269565,38.666576,20.102676)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <ellipse
+       style="fill:#917c6f;stroke-width:1.4568;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-8)"
+       id="path1231-0"
+       cx="-18.766518"
+       cy="58.586308"
+       rx="8.3721724"
+       ry="7.4083333"
+       transform="matrix(0.48428016,0.3151623,-0.3151623,0.48428016,-54.099767,22.733311)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <circle
+       style="fill:#6c5d53;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-3-6)"
+       id="path1250-4-5"
+       cx="-5.2916665"
+       cy="85.724998"
+       r="3.175"
+       transform="matrix(0.50155091,0.32640184,-0.33966692,0.52193411,-32.86526,-3.4181445)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <circle
+       style="fill:#241f1c;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1094-8)"
+       id="path1250-45"
+       cx="-5.2916665"
+       cy="85.724998"
+       r="3.175"
+       transform="matrix(0.50155091,0.32640184,-0.33966692,0.52193411,-32.60426,-3.5623885)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png" />
+    <path
+       style="fill:url(#linearGradient994-5);fill-opacity:1;stroke:none;stroke-width:0.419172px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 440.26667,4.2333333 -15.42796,0.968535 -15.42796,0.968534 c -3.49982,-20.9178933 -1.7499,-10.458947 -7.33342,-18.1261403 0,0 0.88314,-16.409754 2.6046,-16.563377 14.14398,1.799826 23.18873,3.646444 35.58474,32.7524483 z"
+       id="path986-1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       style="fill:url(#linearGradient994-1);fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 332.31668,46.566666 351.36668,50.8 C 359.83334,25.4 381.00001,46.566666 389.46667,16.933333 368.30001,44.45 353.48334,12.7 332.31668,46.566666 Z"
+       id="path986-4"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:url(#linearGradient994-6);fill-opacity:1;stroke:none;stroke-width:0.419171px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 403.08421,102.21402 -30.85592,-1.93706 c -6.99964,41.83578 -45.33562,13.91824 -51.29343,62.37937 26.35479,-48.27398 57.35734,-2.2303 82.14935,-60.44231 z"
+       id="path986-5"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:url(#linearGradient994-5-5);fill-opacity:1;stroke:none;stroke-width:0.419171px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 402.25601,102.34426 -15.42796,-0.96853 -15.42796,-0.96854 c -3.49982,20.91789 -1.7499,10.45895 -7.33342,18.12614 0,0 0.88314,16.40975 2.6046,16.56338 14.14398,-1.79983 23.18873,-3.64645 35.58474,-32.75245 z"
+       id="path986-1-3"
+       sodipodi:nodetypes="cccccc" />
+    <g
+       id="g1203"
+       transform="matrix(0.77160146,0,0,0.77160146,-27.594708,55.699669)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png">
+      <path
+         style="fill:#f2efd0;fill-opacity:1;stroke:none;stroke-width:0.396984px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 124.88333,-2.1166667 101.60002,-6.349985 c 4.86945,-42.023058 -35.614783,-24.058154 -28.112448,-72.232337 10.205976,52.773062 45.139138,14.465908 51.395758,76.4656553 z"
+         id="path986"
+         sodipodi:nodetypes="cccc" />
+      <path
+         style="fill:url(#linearGradient994-55);fill-opacity:1;stroke:none;stroke-width:0.396983px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 124.88333,-2.1166667 101.60001,-6.349988 c 4.86945,-42.023059 -35.614772,-24.058152 -28.112438,-72.232334 10.205966,52.773058 45.139138,14.465908 51.395758,76.4656553 z"
+         id="path986-46"
+         sodipodi:nodetypes="cccc" />
+      <path
+         style="fill:url(#linearGradient994-55-1);fill-opacity:1;stroke:none;stroke-width:0.396983px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 124.88333,-2.1166667 101.6,-6.35 c 4.86945,-42.023059 -35.61476,-24.058149 -28.112428,-72.232322 10.205959,52.773048 45.139128,14.465917 51.395758,76.4656553 z"
+         id="path986-46-2"
+         sodipodi:nodetypes="cccc" />
+    </g>
+    <g
+       id="g1203-5"
+       transform="matrix(1,0,0,-1,-334.43335,14.816682)">
+      <path
+         style="fill:#f2efd0;fill-opacity:1;stroke:none;stroke-width:0.396984px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 124.88333,-2.1166667 101.60002,-6.349985 c 4.86945,-42.023058 -35.614783,-24.058154 -28.112448,-72.232337 10.205976,52.773062 45.139138,14.465908 51.395758,76.4656553 z"
+         id="path986-7"
+         sodipodi:nodetypes="cccc" />
+      <path
+         style="fill:url(#linearGradient1245);fill-opacity:1;stroke:none;stroke-width:0.396983px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 124.88333,-2.1166667 101.60001,-6.349988 c 4.86945,-42.023059 -35.614772,-24.058152 -28.112438,-72.232334 10.205966,52.773058 45.139138,14.465908 51.395758,76.4656553 z"
+         id="path986-46-9"
+         sodipodi:nodetypes="cccc" />
+      <path
+         style="fill:url(#linearGradient1247);fill-opacity:1;stroke:none;stroke-width:0.396983px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 124.88333,-2.1166667 101.6,-6.35 c 4.86945,-42.023059 -35.61476,-24.058149 -28.112428,-72.232322 10.205959,52.773048 45.139128,14.465917 51.395758,76.4656553 z"
+         id="path986-46-2-4"
+         sodipodi:nodetypes="cccc" />
+    </g>
+    <g
+       id="g1203-9"
+       transform="matrix(0.77160146,0,0,-0.77160146,-27.594708,62.833664)"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png">
+      <path
+         style="fill:#f2efd0;fill-opacity:1;stroke:none;stroke-width:0.396984px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 124.88333,-2.1166667 101.60002,-6.349985 c 4.86945,-42.023058 -35.614783,-24.058154 -28.112448,-72.232337 10.205976,52.773062 45.139138,14.465908 51.395758,76.4656553 z"
+         id="path986-48"
+         sodipodi:nodetypes="cccc" />
+      <path
+         style="fill:url(#linearGradient1289);fill-opacity:1;stroke:none;stroke-width:0.396983px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 124.88333,-2.1166667 101.60001,-6.349988 c 4.86945,-42.023059 -35.614772,-24.058152 -28.112438,-72.232334 10.205966,52.773058 45.139138,14.465908 51.395758,76.4656553 z"
+         id="path986-46-8"
+         sodipodi:nodetypes="cccc" />
+      <path
+         style="fill:url(#linearGradient1291);fill-opacity:1;stroke:none;stroke-width:0.396983px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 124.88333,-2.1166667 101.6,-6.35 c 4.86945,-42.023059 -35.61476,-24.058149 -28.112428,-72.232322 10.205959,52.773048 45.139128,14.465917 51.395758,76.4656553 z"
+         id="path986-46-2-9"
+         sodipodi:nodetypes="cccc" />
+    </g>
+    <path
+       id="rect1293"
+       style="fill:url(#linearGradient1301);fill-opacity:1;stroke:none;stroke-width:1.86721;stroke-linejoin:round;paint-order:markers fill stroke"
+       d="m 61.325352,46.196766 c 7.594506,1.36037 17.160434,-0.578102 17.160434,-0.578102 0.741646,0 1.338711,0.597065 1.338711,1.338711 v 1.606453 c 0,0.741646 -0.597065,1.338712 -1.338711,1.338712 0,0 -9.067855,2.25449 -17.709819,0 -0.739598,-0.192944 -1.338711,-0.597066 -1.338711,-1.338712 l 0,-1.606453 c 0,-0.741646 1.142399,-0.894182 1.888096,-0.760609 z"
+       sodipodi:nodetypes="sssssssss"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       transform="matrix(0.99708462,0.07630375,-0.19521612,0.98076025,0,0)" />
+    <path
+       id="rect1293-3"
+       style="fill:url(#linearGradient1301-1);fill-opacity:1;stroke:none;stroke-width:1.74647;stroke-linejoin:round;paint-order:markers fill stroke"
+       d="m 34.458798,-73.140221 c 12.314217,1.659157 18.028802,0 18.028802,0 0.649295,0 1.172013,0.522718 1.172013,1.172013 v 1.406416 c 0,0.649295 -0.547103,1.068617 -1.172013,1.172012 -10.088379,1.669189 -18.028802,0 -18.028802,0 -0.649295,0 -1.172013,-0.522717 -1.172013,-1.172012 l 0,-1.406416 c 0,-0.649295 0.514667,-1.260581 1.172013,-1.172013 z"
+       sodipodi:nodetypes="sssssssss"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\enemies\boneheads\boneheadTank\sprites\boneheadTank.png"
+       inkscape:export-xdpi="24"
+       inkscape:export-ydpi="24"
+       transform="matrix(0.9977901,-0.06644483,-0.22298221,-0.97482251,0,0)" />
+  </g>
+</svg>
