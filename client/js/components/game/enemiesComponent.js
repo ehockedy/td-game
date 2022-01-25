@@ -15,8 +15,9 @@ for (let i=-3; i <= 0; i++) {
 }
 
 class Enemy extends BaseComponent {
-    constructor(name, textures) {
+    constructor(name, textures, type) {
         super(name)
+        this.type = type
         this.animatedEnemySprite = new PIXI.AnimatedSprite(textures)
         this.animatedEnemySprite.loop = true
         this.animatedEnemySprite.anchor.set(0.5)
@@ -39,8 +40,10 @@ export class EnemiesComponent extends BaseComponent {
         // Containers
         this.enemySprites = new PIXI.Container()
         this.deathSprites = new PIXI.Container()
+        this.endOfPathEnemies = new PIXI.Container()
         this.addChild(this.enemySprites)
         this.addChild(this.deathSprites)
+        this.addChild(this.endOfPathEnemies)
 
         // Load textures for creating collision anmation
         let explosion1Textures = PIXI.Loader.shared.resources["client/assets/collisions/collision1/collision1.json"].textures
@@ -48,6 +51,7 @@ export class EnemiesComponent extends BaseComponent {
         for (const texture of Object.values(explosion1Textures)) {
             this.collisionTextures.push(texture)
         }
+        this.enemyConfig = {}
     }
 
     loadData() {
@@ -55,6 +59,7 @@ export class EnemiesComponent extends BaseComponent {
             console.log("enemies")
             fetch("shared/json/enemies.json").then((response) => {
                 response.json().then((enemyJson) => {
+                    this.enemyConfig = enemyJson
                     // Load enemy sprite data once config loaded, instead of at start
                     let loader = new PIXI.Loader()
 
@@ -84,7 +89,7 @@ export class EnemiesComponent extends BaseComponent {
      * @param {Number} type Type of enemy
      */
     addEnemy(name, type) {
-        this.enemySprites.addChild(new Enemy(name, this.enemyTextures[type]))
+        this.enemySprites.addChild(new Enemy(name, this.enemyTextures[type], type))
     }
 
     generateEnemyHitAnimation(angle) {
@@ -107,9 +112,6 @@ export class EnemiesComponent extends BaseComponent {
         // If enemy is not present, it has either been killed or reached the end of the path - so remove from container
         // We do this instead of a "kill this enemy" update in case the message does not come through or have two
         // server messages and one client render
-
-        if (enemyUpdate.length == 0) return;
-
         let enemyStateObjects = enemyUpdate["objects"];
         let enemyStateHash = enemyUpdate["hash"];
 
@@ -152,7 +154,22 @@ export class EnemiesComponent extends BaseComponent {
         }
 
         // Update state of enemies present in server update
-        enemyStateObjects.forEach((enemy, idx) => {
+        enemyStateObjects.forEach((enemy) => {
+            // This enemy has reached the end of the path without getting killed, so remove the sprite without a death animation.
+            // Move it to a separate container that holds all the enemies that reached the end of the path.
+            if (enemy.hasReachedEnd) {
+                let existingEnemySprite = this.enemySprites.removeChild(this.enemySprites.getChildByName(enemy.name))
+
+                // Position the enemy
+                let newpos = gridPosToMapPos(enemy.position, this.spriteSizeMap, enemy.position.subgridSize)
+                existingEnemySprite.x = newpos[0]
+                existingEnemySprite.y = newpos[1]
+                existingEnemySprite.angle = Math.random() * Math.PI/4 - (Math.PI/8)  // Random angle that goes into the camp
+                existingEnemySprite.animatedEnemySprite.rotation = existingEnemySprite.angle
+                this.endOfPathEnemies.addChild(existingEnemySprite)
+                return  // Don't need to do anything else for this enemy
+            }
+
             // Move the enemy
             let enemyToUpdate = this.enemySprites.getChildByName(enemy.name)
             let newpos = gridPosToMapPos(enemy.position, this.spriteSizeMap, enemy.position.subgridSize)
@@ -184,5 +201,18 @@ export class EnemiesComponent extends BaseComponent {
                 enemyToUpdate.animatedEnemySprite.tint = 0xFFFFFF
             }
         })
+    }
+
+    updateEndOfPathEnemies(edgeX) {
+        // Update the sprites that move regardless of state coming from server
+        // Update positions of enemies that have reached the camp
+        for (let enemyIdx = this.endOfPathEnemies.children.length - 1; enemyIdx >= 0; enemyIdx--) {
+            let enemy = this.endOfPathEnemies.getChildAt(enemyIdx)
+            enemy.x += Math.cos(enemy.angle) * this.enemyConfig[enemy.type].speed
+            enemy.y += Math.sin(enemy.angle) * this.enemyConfig[enemy.type].speed
+            if (enemy.x > edgeX + enemy.animatedEnemySprite.width) {
+                this.endOfPathEnemies.removeChildAt(enemyIdx)
+            }
+        }
     }
 }

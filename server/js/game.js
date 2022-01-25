@@ -25,6 +25,7 @@ class Game {
         this.enemyQueue = []
         this.enemyKillCount = 0
         this.enemiesRemaining = 0
+        this.endOfPathEnemies = []  // Holds the enemies that have reached the end of the path without dying
 
         this.subgridSize = this.map.subgridSize
         this.subgridMidpoint = Math.floor(this.subgridSize/2)
@@ -35,6 +36,12 @@ class Game {
         // Iterate backwards so that we do not double move enemies that move to the next square on the path
         let prevEnemySteps = -1 // TODO can set to total path length (number of steps)+1 and remove the >0 check below
         this.map.forEachEnemyInReverse((enemy) => {
+            // This enemy was determined to have reached the end of the path last update, so can be safely removed now
+            if (enemy.hasReachedEnd) {
+                this.processEndOfPathEnemy(enemy)
+                return
+            }
+
             let startPos = enemy.position
             enemy.step()
             enemy.turn(this.map.getGridValue(startPos.row, startPos.col))
@@ -133,6 +140,11 @@ class Game {
     processEndOfPathEnemy(enemy) {
         this.lives -= 1 // TODO dependent on enemy type?
         this.removeEnemyDontProcessSubEnemies(enemy)
+        this.endOfPathEnemies.push(enemy)
+    }
+
+    markEnemyAsAcrossFinish(enemy) {
+        enemy.hasReachedEnd = true
     }
 
     resolveInteractions() {
@@ -159,10 +171,12 @@ class Game {
         })
 
         // Check if enemy reached end of path
-        // We must iterate through the enemies in reverse, since removing one would mess up the indexing
+        // This does not remove the enemy, but records the fact that it has reached the end of the path
+        // This enemy will be sent to the client so that the sprite can be removed and the animation of it
+        // breaching the base can trigger. After this has happened, it can be removed.
         this.map.forEachEnemyInReverse((enemy) => {
             if (enemy.steps > this.map.path.length) {
-                this.processEndOfPathEnemy(enemy)
+                this.markEnemyAsAcrossFinish(enemy)
             }
         })
     }
@@ -377,6 +391,7 @@ class Game {
                 "rotation": e.rotation,
                 "type": e.type,
                 "collisionAngles": e.collisionAngles,
+                "hasReachedEnd": e.hasReachedEnd
             })
             hash.update(e.name)
         })

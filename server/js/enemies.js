@@ -82,8 +82,9 @@ class Enemy {
         // Update specific variables
         this.isHit = false  // Whether the enemy has been hit in that specific update
         this.collisionAngles = []  // Array of angles for bullet that collide during a given update
-
         this.collidedBullets = []  // If a bullet is piercing, store its name here so does not register another hit
+
+        this.hasReachedEnd = false  // If this is true, the enemy has reached the end of the path without getting killed. It will be removed once the client has been informed.
     }
 
     getSpeed() {

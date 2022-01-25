@@ -31,6 +31,7 @@ export class GameRenderer {
         this.maxBorderSize = Math.max(config.BORDER_L, config.BORDER_R, config.BORDER_T, config.BORDER_B) / config.SPRITE_SIZE_MAP
         const rhs = config.MAP_WIDTH + config.BORDER_R;
         const top_bottom_gap = 10
+        this.rightBoundary = rhs
 
         let toolbarY = config.MAP_HEIGHT + config.BORDER_B/4 - top_bottom_gap
         this.tm = new TowerMenu(
@@ -231,6 +232,7 @@ export class GameRenderer {
         this.gameSpace.updateTowers(serverUpdate.towers)
         this.bc.update(serverUpdate.bullets)
         this.ec.update(serverUpdate.enemies)
+        this.ec.updateEndOfPathEnemies(this.rightBoundary)
         this.livesCounter.update(serverUpdate.worldState.lives)
         this.tc.tick()
 
