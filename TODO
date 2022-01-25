@@ -27,8 +27,10 @@ Main features:
  - player leaves game behaviour
  - game stats/graph
  - upgrades
- - different modes - competitive i.e. multipler but with no lives, just points, and then survival.
+ - different modes
+    - survival - no individual points, just team with set number of lives
+    - competitive - each player has points, no lives
+    - competitive survival - each player gets indivdual points, and team lives
 
 Enemies:
- - bonehead tank
  - golden beetle
