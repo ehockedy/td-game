@@ -38,17 +38,19 @@ export class SpriteHandler {
     }
 
     resizeView() {
-        // Keep ratio the same, so see if width or height needs to be scaled the most to be visible
-        let resizeMultiplier = Math.min((window.innerWidth - this.margin) / this.width_px, (window.innerHeight - this.margin) / this.height_px) * this.resizeFactor
+        // We only want to resize if the browser window is made smaller than the game view. If not, then sprites become too big and look slightly blurry. 
+        let resizeMultiplier = 1
+        if (window.innerHeight < this.height_px || window.innerWidth < this.width_px) {
+            // Keep ratio the same, so see if width or height needs to be scaled the most to be visible
+            resizeMultiplier = Math.min((window.innerWidth - this.margin) / this.width_px, (window.innerHeight - this.margin) / this.height_px) * this.resizeFactor
+        }
+
         if (resizeMultiplier != this.globalResizeMultiplier) { // If a resize has occurred, scale the canvas and everything in it
-            // Update measurements
-            this.width_px *= resizeMultiplier
-            this.height_px *= resizeMultiplier
             this.globalResizeMultiplier = resizeMultiplier
 
             // Editing the CSS seems to be the simplest way - all the sprites scale too
-            this.app.view.style.width = this.width_px + 'px'
-            this.app.view.style.height = this.height_px + 'px'
+            this.app.view.style.width = this.width_px * resizeMultiplier + 'px'
+            this.app.view.style.height = this.height_px * resizeMultiplier + 'px'
         }
     }
 
