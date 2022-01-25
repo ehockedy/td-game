@@ -179,5 +179,16 @@
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": true
+    },
+    "slimeUber": {
+        "textureAtlasFile": "client/assets/enemies/slime/uber/slime.json",
+        "speed": 0.8,
+        "hp": 1080,
+        "subEnemies": ["slimeGiant", "slimeGiant"],
+        "size": "large",
+        "reward": 4,
+        "resistances": [],
+        "weaknesses": [],
+        "blockPiercing": true
     }
 }

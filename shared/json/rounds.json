@@ -865,6 +865,84 @@
                 "count": 10,
                 "enemiesPerSquarePerSecond": 1.5
             }
+        ],
+        [
+            {
+                "enemies": ["blackBeetle"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["blackBeetle"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["blackBeetle", "slimeGiant"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["blackBeetle", "slimeGiant"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["slimeUber"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 0.5
+            }
+        ],
+        [
+            {
+                "enemies": ["boneheadTank"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 0.5
+            },
+            {
+                "enemies": ["bonelord", "slimeGiant"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["gap"],
+                "count": 4,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["slimeGiant", "slimeUber"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 0.5
+            }
+        ],
+        [
+            {
+                "enemies": ["slimeGiant"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["slimeUber"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 0.5
+            },
+            {
+                "enemies": ["slimeUber"],
+                "count": 10,
+                "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["slimeUber"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 1
+            }
+        ],
+        [
+            {
+                "enemies": ["boneheadTank"],
+                "count": 20,
+                "enemiesPerSquarePerSecond": 0.75
+            }
         ]
     ]
 }
