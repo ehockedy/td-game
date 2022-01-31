@@ -20,6 +20,7 @@ class Session {
         this.map = this.mapGenerator.generateMap()
 
         this.hasStarted = false
+        this.gameState = "active"  // Can be active, over.victory, or over.loss
 
         this.addSocket(socket, playerID)
     }
@@ -157,8 +158,17 @@ class Session {
     // Main processing loop
     // Updates the game state and sends the update to all connected clients in that game room
     updateGameAndSend() {
-        this.game.updateGameState() // Advance the game by one tick
+        this.game.update() // Advance the game by one tick
         this.broadcast("client/game/update", this.game.getGameState())
+
+        // Check to see if the state of the game has changed. This will happen
+        // if there is victory/completion or loss
+        let state = this.game.getState()
+        if (state != this.gameState) {
+            // state has changed, update the client
+            this.broadcast("client/game/state/set", state)
+            this.gameState = state
+        }
     }
 }
 

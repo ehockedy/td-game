@@ -369,15 +369,18 @@ class Game {
         this.shiftEnemyQueue();
     }
 
-    updateGameState() {
+    update() {
         // Only update the entities in the game if the round is active
         if (this.roundActive) {
             this.updateGameObjects()
             this.checkForRoundEnd()
         }
-        if (this.isVictory()) return "win"
-        if (this.isLoss()) return "lose"
-        return "in_progress"
+    }
+
+    getState() {
+        if (this.isVictory()) return "over.victory"
+        if (this.isLoss()) return "over.loss"
+        return "active"
     }
 
     getGameStateEnemies() {

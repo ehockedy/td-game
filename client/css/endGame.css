@@ -1,0 +1,19 @@
+.end-game-modal-background {
+    z-index: 1; /* Sit on top */
+    /* width: 50%;
+    height: 50%; */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(143, 101, 38); /* Fallback color */
+}
+
+.grow-animation {
+    animation: grow 1s forwards;
+    -webkit-animation: grow 1s forwards;
+    -moz-animation: grow 1s forwards;
+    -o-animation: grow 1s forwards;
+    -ms-animation: grow 1s forwards;
+}
+@keyframes grow {
+    0% {width:0%; height:0%;}
+    100% {width:50%; height:50%;}
+}

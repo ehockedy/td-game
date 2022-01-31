@@ -122,10 +122,11 @@ class SimulatedGame {
         // to ensure the event loop is not blocked
         
         let loopIdx = 0
-        let gameState = "in_progress"
-        while (gameState == "in_progress") {
+        let gameState = "active"
+        while (gameState == "active") {
             this.checkForRoundChange(towerPurchaseMethod)
-            gameState = this.game.updateGameState()
+            this.game.update()
+            gameState = this.game.getState()
 
             // To avoid blocking event loop
             if (loopIdx == 0) {
