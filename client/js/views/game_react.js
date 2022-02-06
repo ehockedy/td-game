@@ -11,10 +11,10 @@ export class Game extends React.Component {
             gameState : "active",
             width_px: this.props.config.APP_WIDTH,
             height_px: this.props.config.APP_HEIGHT,
+            globalResizeMultiplier: 1
         }
         this.width_px_original = this.props.config.APP_WIDTH
         this.height_px_original = this.props.config.APP_HEIGHT
-        this.globalResizeMultiplier = 1
         this.margin = 24 // in px
         this.resizeFactor = 1  // todo pass in via props
     }
@@ -58,8 +58,8 @@ export class Game extends React.Component {
             resizeMultiplier = Math.min((window.innerWidth - this.margin) / this.width_px_original, (window.innerHeight - this.margin) / this.height_px_original) * this.resizeFactor
         }
 
-        if (resizeMultiplier != this.globalResizeMultiplier) { // If a resize has occurred, scale the canvas and everything in it
-            this.globalResizeMultiplier = resizeMultiplier
+        if (resizeMultiplier != this.state.globalResizeMultiplier) { // If a resize has occurred, scale the canvas and everything in it
+            this.state.globalResizeMultiplier = resizeMultiplier
         }
 
         return {
@@ -84,8 +84,8 @@ export class Game extends React.Component {
         return (
             <span className="game-canvas" style={{width: this.state.width_px, height: this.state.height_px}}>
                 <canvas id="gameCanvas" className="game-canvas" style={{width: this.state.width_px + "px", height:this.state.height_px + "px"}}/> 
-                {this.state.gameState != "active" &&
-                    <EndGameModal gameState={this.state.gameState}/>
+                { this.state.gameState != "active" &&
+                    <EndGameModal gameState={this.state.gameState} scale={this.state.globalResizeMultiplier}/>
                 }
             </span>
         )
