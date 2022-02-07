@@ -3657,7 +3657,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="-441.65046"
+     inkscape:cx="36.622264"
      inkscape:cy="230.56054"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -3687,7 +3687,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -3766,7 +3766,7 @@
        inkscape:export-xdpi="277.37222"
        inkscape:export-ydpi="277.37222" />
     <rect
-       style="fill:#c8beb7;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1107-3-1-0-3-6-3)"
+       style="fill:#c8beb7;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1107-3-1-0-3-6-3);fill-opacity:1"
        id="rect831-9-7-9-6"
        width="97.366669"
        height="69.849998"
@@ -3777,7 +3777,7 @@
        inkscape:export-xdpi="277.37222"
        inkscape:export-ydpi="277.37222" />
     <rect
-       style="fill:#917c6f;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1107-3-1-0)"
+       style="fill:#c3a392;stroke-width:1.465;stroke-linejoin:round;paint-order:markers fill stroke;filter:url(#filter1107-3-1-0);fill-opacity:1"
        id="rect831-9"
        width="97.366669"
        height="69.849998"

@@ -5,9 +5,14 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    text-align: center;
     height: 100%;
     width: 100%;
+}
+
+.end-game-modal-content {
+    margin: 0 auto;
+    text-align: justify;
+    width: 55%;
 }
 
 .slide-up-animation {
@@ -23,12 +28,6 @@
     100% { top: 50% }
 }
 
-.background {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
 /* These text colours must come before the other header text properties */
 .victory-text {
     background: -webkit-linear-gradient(#fcfbb6, #e6a80a);
@@ -41,12 +40,11 @@
 }
 
 .shadow-text {
-    background: -webkit-linear-gradient(#555555, #555555);
+    background: -webkit-linear-gradient(#222222, #222222);
     transform: translate(-50%, 3%);
 }
 
 .end-game-modal-header-text {
-    font-size: 50px;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -56,4 +54,9 @@
 
 .end-game-modal-text-container {
     position: relative;
+}
+
+.game-summary-text {
+    color: #333333;
+    line-height: 0.8;
 }
