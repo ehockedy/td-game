@@ -1,6 +1,7 @@
 import React from "react";
 import "../../../../css/endGame.css"
 import "../../../../css/game.css"
+import { subtractColourHexValues } from "../../../tools.js"
 
 function Title(props) {
     const titleBaseFontSizePx = 120
@@ -42,6 +43,98 @@ function GameSummaryMessage(props) {
     </div>
 }
 
+function playerPositionToClass(pos) {
+    switch(pos) {
+        case 1:
+            return "first"
+        case 2:
+            return "second"
+        case 3:
+            return "third"
+        case 4:
+        default:
+            return "fourth"
+    }
+}
+
+function playerPositionToOrdinal(pos) {
+    switch(pos) {
+        case 1:
+            return "st"
+        case 2:
+            return "nd"
+        case 3:
+            return "rd"
+        case 4:
+        default:
+            return "th"
+    }
+}
+
+function PlayerPosition(props) {
+    return <span
+        style={{
+            paddingRight: "2%",
+            fontSize: `${props.fontSize}px`,
+        }}
+        className={`playerPosition ${playerPositionToClass(props.position)}`}
+    >
+        {props.position}
+        <span style={{
+            fontSize: `${props.fontSize*0.5}px`
+        }}>
+            {playerPositionToOrdinal(props.position)}
+        </span>
+    </span>
+}
+
+function PlayerScore(props) {
+    const darkenedBorderColour = subtractColourHexValues(props.colour, "#222222").replace('0x', '#')  // have to replace colour first character for css
+    const positionFontSizeMultipler = props.position === 1 ? 1.5 : 1;  // The first place score is larger
+    const baseNameFontSize = 30 * props.scale * positionFontSizeMultipler
+    const basePositionFontSize = 80 * props.scale * positionFontSizeMultipler
+    const baseNamePaddingSides = 10 * props.scale * positionFontSizeMultipler
+    const baseNamePaddingTops = 0 * props.scale * positionFontSizeMultipler
+    const baseNameMarginTop = 20 * props.scale * positionFontSizeMultipler
+    const baseNameBorderSize = 6 * props.scale * positionFontSizeMultipler
+    const baseNameWidth = 160 * props.scale * positionFontSizeMultipler
+    return <div className="playerScoreContainer">
+        <PlayerPosition position={props.position} fontSize={basePositionFontSize}/>
+        <div
+            style={{
+                backgroundColor: props.colour,
+                border: `${baseNameBorderSize}px solid ${darkenedBorderColour}`,
+                fontSize: `${baseNameFontSize}px`,
+                paddingTop: `${baseNamePaddingTops}px`,
+                paddingBottom: `${baseNamePaddingTops}px`,
+                paddingLeft: `${baseNamePaddingSides}px`,
+                paddingRight: `${baseNamePaddingSides}px`,  // more padding on the right
+                marginTop: `${baseNameMarginTop}px`,
+                width: `${baseNameWidth}px`,
+                textAlign: "center",
+            }}
+            className="nameDisplay"
+        >
+            {props.name}
+        </div>
+    </div>
+}
+
+function PlayerScores(props) {
+    return <div>
+        {props.playerState.map((player, idx) =>
+            <PlayerScore
+                key={idx}
+                position={idx+1}
+                name={props.playerConfig[player.id].displayName}
+                colour={props.playerConfig[player.id].colour}
+                scale={props.scale}
+            />
+        )}
+    </div>
+}
+
+
 export function EndGameModal(props) {
     // Immediately slides up from bootom into position when rendered
     return (
@@ -49,6 +142,7 @@ export function EndGameModal(props) {
             <div className="end-game-modal-content">
                 <Title content={props.gameState == "over.victory" ? "Victory!" : "Defeat..."} scale={props.scale} />
                 <GameSummaryMessage victory={props.gameState == "over.victory"} scale={props.scale} />
+                <PlayerScores playerState={props.playerState} playerConfig={props.playerConfig} scale={props.scale}/>
             </div>
         </span>
     )

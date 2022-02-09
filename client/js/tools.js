@@ -98,6 +98,10 @@ export function addColourHexValues(v1, v2) {
     return combineColourHexValues(v1, v2, (a, b)=>{ return a + b})
 }
 
+export function subtractColourHexValues(v1, v2) {
+    return combineColourHexValues(v1, v2, (a, b)=>{ return a - b})
+}
+
 export function avgColourHexValues(v1, v2) {
     return combineColourHexValues(v1, v2, (a, b)=>{ return (a + b)/2})
 }

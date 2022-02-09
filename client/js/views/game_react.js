@@ -9,6 +9,7 @@ export class Game extends React.Component {
         super(props)
         this.state = {
             gameState : "active",
+            playerState: {},  // Holds game info such as money and score, is not updated regularly though - only when gameState
             width_px: this.props.config.APP_WIDTH,
             height_px: this.props.config.APP_HEIGHT,
             globalResizeMultiplier: 1
@@ -21,8 +22,11 @@ export class Game extends React.Component {
 
     componentDidMount() {
         // TODO remove this on object removal
-        this.props.socket.on("client/game/state/set", (newState) => {
-            this.setState({gameState: newState})
+        this.props.socket.on("client/game/state/set", (newGameState, newPlayerState) => {
+            this.setState({
+                gameState: newGameState,
+                playerState: newPlayerState
+            })
         })
 
         let clientConfig = this.props.config
@@ -85,7 +89,7 @@ export class Game extends React.Component {
             <span className="game-canvas" style={{width: this.state.width_px, height: this.state.height_px}}>
                 <canvas id="gameCanvas" className="game-canvas" style={{width: this.state.width_px + "px", height:this.state.height_px + "px"}}/> 
                 { this.state.gameState != "active" &&
-                    <EndGameModal gameState={this.state.gameState} scale={this.state.globalResizeMultiplier}/>
+                    <EndGameModal gameState={this.state.gameState} scale={this.state.globalResizeMultiplier} playerConfig={this.props.players} playerState={this.state.playerState}/>
                 }
             </span>
         )

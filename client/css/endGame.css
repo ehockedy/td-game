@@ -60,3 +60,38 @@
     color: #333333;
     line-height: 0.8;
 }
+
+.nameDisplay{
+    transform: skewX(-15deg);
+    display: inline-block;
+}
+
+.first {
+    background: -webkit-linear-gradient(#fcfbb6, #e6a80a);
+}
+
+.second {
+    background: -webkit-linear-gradient(#b8b8b8, #464646);
+}
+
+.third {
+    background: -webkit-linear-gradient(#7e7e7e, #2e2e2e);
+}
+
+.fourth {
+    background: -webkit-linear-gradient(#575757, #141414);
+}
+
+.playerPosition {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0px 2px #222);
+}
+
+.playerScoreContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -2%;
+}

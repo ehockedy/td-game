@@ -489,6 +489,29 @@ class Game {
         return state;
     }
 
+    getPlayerFinalResults() {
+        // Array that stores the players in order of score from highest to lowest
+        let results = []
+        this.players.forEach((player) => {
+            let i = 0
+            let result = {
+                id: player.id,
+                points: player.stats.points,
+                money: player.stats.money
+            }
+
+            // Loop over and record the position where the player fits in
+            for (i; i < results.length; i += 1) {
+                if (player.stats.points > results[i].points ||
+                    (player.stats.points == results[i].points) && (player.stats.money > results[i].money)) {
+                        break
+                }
+            }
+            results.splice(i, 0, result)
+        })
+        return results
+    }
+
     start() {
         this.hasStarted = true
     }

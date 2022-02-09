@@ -166,7 +166,7 @@ class Session {
         let state = this.game.getState()
         if (state != this.gameState) {
             // state has changed, update the client
-            this.broadcast("client/game/state/set", state)
+            this.broadcast("client/game/state/set", state, this.game.getPlayerFinalResults())
             this.gameState = state
         }
     }
