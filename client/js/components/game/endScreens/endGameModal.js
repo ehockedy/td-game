@@ -77,7 +77,7 @@ function PlayerPosition(props) {
             paddingRight: "2%",
             fontSize: `${props.fontSize}px`,
         }}
-        className={`playerPosition ${playerPositionToClass(props.position)}`}
+        className={`scoreGradientText ${playerPositionToClass(props.position)}`}
     >
         {props.position}
         <span style={{
@@ -98,7 +98,7 @@ function PlayerScore(props) {
     const baseNameMarginTop = 20 * props.scale * positionFontSizeMultipler
     const baseNameBorderSize = 6 * props.scale * positionFontSizeMultipler
     const baseNameWidth = 160 * props.scale * positionFontSizeMultipler
-    return <div className="playerScoreContainer">
+    return <div className="scoreContainer">
         <PlayerPosition position={props.position} fontSize={basePositionFontSize}/>
         <div
             style={{
@@ -108,7 +108,7 @@ function PlayerScore(props) {
                 paddingTop: `${baseNamePaddingTops}px`,
                 paddingBottom: `${baseNamePaddingTops}px`,
                 paddingLeft: `${baseNamePaddingSides}px`,
-                paddingRight: `${baseNamePaddingSides}px`,  // more padding on the right
+                paddingRight: `${baseNamePaddingSides}px`,
                 marginTop: `${baseNameMarginTop}px`,
                 width: `${baseNameWidth}px`,
                 textAlign: "center",
@@ -116,6 +116,28 @@ function PlayerScore(props) {
             className="nameDisplay"
         >
             {props.name}
+        </div>
+    </div>
+}
+
+function FinalScore(props) {
+    const baseFontSizeText = 80
+    const baseFontSizeValue = 96
+    return <div className="scoreContainer finalScoreContainer">
+        <div className="scoreGradientText finalScoreTextColour"
+            style={{
+                fontSize: baseFontSizeText * props.scale
+            }}
+        >
+            {"Final Score:"}
+        </div>
+        <div className="scoreGradientText finalScoreValueColour"
+            style={{
+                fontSize: baseFontSizeValue * props.scale,
+                marginTop: `${-baseFontSizeValue* props.scale * 0.2}px`,
+            }}
+        >
+            {props.score}
         </div>
     </div>
 }
@@ -142,7 +164,11 @@ export function EndGameModal(props) {
             <div className="end-game-modal-content">
                 <Title content={props.gameState == "over.victory" ? "Victory!" : "Defeat..."} scale={props.scale} />
                 <GameSummaryMessage victory={props.gameState == "over.victory"} scale={props.scale} />
-                <PlayerScores playerState={props.playerState} playerConfig={props.playerConfig} scale={props.scale}/>
+                {props.playerState.length == 1 ?
+                    // If only a single player, just show their final score not the leaderboard as only one of them
+                    <FinalScore score={props.playerState[0].points} scale={props.scale}/> :
+                    <PlayerScores playerState={props.playerState} playerConfig={props.playerConfig} scale={props.scale}/>
+                }
             </div>
         </span>
     )
