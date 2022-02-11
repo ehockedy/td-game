@@ -121,10 +121,10 @@ function PlayerScore(props) {
 }
 
 function FinalScore(props) {
-    const baseFontSizeText = 80
+    const baseFontSizeText = 48
     const baseFontSizeValue = 96
     return <div className="scoreContainer finalScoreContainer">
-        <div className="scoreGradientText finalScoreTextColour"
+        <div className="finalScoreTextColour"
             style={{
                 fontSize: baseFontSizeText * props.scale
             }}
