@@ -242,6 +242,15 @@ class Game {
         return newPlayer
     }
 
+    removePlayer(playerID) {
+        const playerIdx = this.players.findIndex((player) => player.id == playerID, 1)
+        const playerFound = playerIdx >= 0
+        if (playerFound) {
+            this.players.splice(playerIdx, 1)
+        }
+        return playerFound
+    }
+
     getPlayerByName(playerID) {
         for (let playerIdx=0; playerIdx < this.players.length; playerIdx+=1) {
             if (this.players[playerIdx].id == playerID) {

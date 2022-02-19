@@ -87,6 +87,20 @@ function Application(props) {
         return () => socket.close()
     }, [])
 
+    const resetState = () => {
+        setGameID()
+        setPlayerID()
+        setPlayers()
+        setMap()
+        setGameSettings()
+    }
+
+    const returnToMainMenu = () => {
+        setView("main-menu")
+        socket.emit("server/player/disconnect", playerID)
+        resetState()
+    }
+
     return (
         <div>
             {
@@ -102,7 +116,7 @@ function Application(props) {
                     <Lobby socket={socket} gameID={gameID} thisPlayer={playerID} players={players} config={config} mapStructure={map} gameSettings={gameSettings}></Lobby>
                 ) :
                 view === "game" ? (
-                    <Game socket={socket} config={config} thisPlayer={playerID} players={players} gameSettings={gameSettings}></Game>
+                    <Game socket={socket} config={config} thisPlayer={playerID} players={players} gameSettings={gameSettings} returnToMainMenuFn={returnToMainMenu}></Game>
                 ) :
                 view === "simulation" ? (
                     <SimulationView socket={socket} config={config}></SimulationView>

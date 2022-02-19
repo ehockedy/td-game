@@ -78,11 +78,24 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
   // Keep track of current games
   let games = {}
 
+  // Periodically check for any games that have finished and clear out ones that have
+  // Every 10s, no need to be frequent
+  setInterval(() => {
+    for (let gameID in games) {
+      if (games[gameID].isSessionOver()) {
+        games[socket.gameID].cleanUpSession()
+        delete games[gameID]
+        console.log("Removed game", gameID)
+      }
+    }
+  }, 10000)
+
   web_sockets_server.on('connection', (socket) => {
     // Player has started or joined game. Create a room with the game ID if one does not exist and send that client the game info.
     socket.on("server/session/join", (data, callback) => {
       console.log("Client at " + socket.handshake.address + " joining game " + data.gameID)
       socket.playerID = socket.handshake.address + data.gameID
+      socket.gameID = data.gameID
       games[data.gameID].addSocket(socket, socket.playerID)
       callback(data.gameID, socket.playerID)
     });
@@ -92,6 +105,7 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
       while(gameID in games) gameID = randomAlphaCharString(4)  // Generate new ID if one already exists
       console.log("Client at " + socket.handshake.address + " starting game " + gameID)
       socket.playerID = socket.handshake.address + gameID
+      socket.gameID = gameID
       games[gameID] = new session.Session(socket, gameID, socket.playerID, gameConfig, roundConfig, enemyConfig)
       callback(gameID, socket.playerID)
     });
@@ -107,15 +121,15 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
       }
     })
 
-    // TODO moveinto a store of disconnected players within the session, and then just mve back if the player comes back
+    // TODO moveinto a store of disconnected players within the session, and then just mve back if the player comes back?
     socket.on('disconnect', function() {
       if (socket.playerID != undefined) {
         console.log("DISCONNCETED", socket.playerID)
 
-        // TODO REMV PLAYER
-
-        //socket.to(socket.gameID).emit(MSG_TYPES.REMOVE_PLAYER, games[socket.gameID].game.getPlayerInfo(socket.playerID))
         // For now we leave the player in the game, but they are not used. This is becuase want to keep track of their scores etc if they come back later.
+        if (socket.gameID) {
+          games[socket.gameID].removePlayer(socket.playerID)
+        }
       }
     })
   });

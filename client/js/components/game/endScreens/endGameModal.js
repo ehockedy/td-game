@@ -2,6 +2,7 @@ import React from "react";
 import "../../../../css/endGame.css"
 import "../../../../css/game.css"
 import { subtractColourHexValues } from "../../../tools.js"
+import { Button } from "../../ui_common/display_box.js"
 
 function Title(props) {
     const titleBaseFontSizePx = 120
@@ -156,11 +157,27 @@ function PlayerScores(props) {
     </div>
 }
 
+function ReturnToMenuButton(props) {
+    // Position is fixed, not ideal really, but easiest way to do it given changing number of players in scores components
+    return <Button
+            content={"Back to menu"}
+            onClick={props.onClick}
+            style={{
+                position: "fixed",
+                right: "25%",
+                bottom: "10%",
+                fontSize: `${40*props.scale}px`,
+                borderWidth: `${Math.floor(10*props.scale)}px`,
+                boxShadow: `${Math.floor(3*props.scale)}px ${Math.floor(5*props.scale)}px`,
+            }}
+        />
+}
+
 
 export function EndGameModal(props) {
     // Immediately slides up from bootom into position when rendered
     return (
-        <span className="end-game-modal-background slide-up-animation game-canvas">
+        <span className="end-game-modal-background slide-up-animation game-canvas noselect">
             <div className="end-game-modal-content">
                 <Title content={props.gameState == "over.victory" ? "Victory!" : "Defeat..."} scale={props.scale} />
                 <GameSummaryMessage victory={props.gameState == "over.victory"} scale={props.scale} />
@@ -169,6 +186,7 @@ export function EndGameModal(props) {
                     <FinalScore score={props.playerState[0].points} scale={props.scale}/> :
                     <PlayerScores playerState={props.playerState} playerConfig={props.playerConfig} scale={props.scale}/>
                 }
+                <ReturnToMenuButton onClick={props.returnToMainMenuFn} scale={props.scale}/>
             </div>
         </span>
     )

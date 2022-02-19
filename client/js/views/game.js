@@ -69,6 +69,16 @@ export class GameRenderer {
         this.localEventEmitter = this.setServerEventEmitter()
     }
 
+    destructor() {
+        this.socket.off("client/player/add")
+        this.socket.off("client/player/addSelf")
+        this.socket.off("client/player/remove")
+        this.socket.off("client/player/ready")
+        this.socket.off("client/map/update")
+        this.socket.off("client/game/round/start")
+        this.socket.off("client/game/update")
+    }
+
     loadData() {
         return new Promise((resolve) => {
             fetch("shared/json/towers.json").then((response) => {

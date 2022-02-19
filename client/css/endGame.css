@@ -13,6 +13,7 @@
     margin: 0 auto;
     text-align: justify;
     width: 55%;
+    position: relative;
 }
 
 .slide-up-animation {
@@ -107,4 +108,9 @@
 .finalScoreContainer {
     flex-direction: column;
     margin-top: 5%;
+}
+
+.returnToMenuButton {
+    margin-top: 20%;
+    right: 80%;
 }

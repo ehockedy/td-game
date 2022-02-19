@@ -42,9 +42,9 @@ export class Game extends React.Component {
         const spriteHandler = new SpriteHandler(clientConfig.APP_WIDTH, clientConfig.APP_HEIGHT, 1, gameCanvas)
 
         // View is the scene that user is currently on
-        const view = new GameRenderer(this.props.socket, spriteHandler, clientConfig, this.props.thisPlayer, this.props.players, this.props.gameSettings)
-        view.loadAssets().then(()=>{
-            view.startRendering()
+        this.view = new GameRenderer(this.props.socket, spriteHandler, clientConfig, this.props.thisPlayer, this.props.players, this.props.gameSettings)
+        this.view.loadAssets().then(()=>{
+            this.view.startRendering()
         })
 
         // Listen for window resize event
@@ -52,6 +52,11 @@ export class Game extends React.Component {
 
         // Trigger the reisze so that intial render is right dimensions
         this.handleResize()
+    }
+
+    componentWillUnmount() {
+        this.view.destructor()
+        this.props.socket.off("client/game/state/set")
     }
 
     getGameDimensions = () => {

@@ -1,3 +1,4 @@
+const { Server } = require('socket.io')
 const game = require('./game.js')
 const mapGenerator = require("./mapGenerator.js")
 
@@ -94,9 +95,13 @@ class Session {
                     else this.broadcast("client/player/add", this.game.getPlayerInfo(id))
                 }
                 this.game.start()
-                setInterval(()=>{this.updateGameAndSend()}, 50*0.2);  // 20 "fps"
+                this.gameLoop = setInterval(()=>{this.updateGameAndSend()}, 50*0.2);  // 20 "fps"
                 this.broadcast("client/view/game")
             }
+        })
+
+        socket.on("server/player/disconnect", (playerID) => {
+            this.removePlayer(playerID)
         })
 
         /**
@@ -169,6 +174,25 @@ class Session {
             this.broadcast("client/game/state/set", state, this.game.getPlayerFinalResults())
             this.gameState = state
         }
+    }
+
+    removePlayer(playerID) {
+        // This removes a player from the session. Once this happens they cannot rejoin the game if it has started.
+        this.game.removePlayer(playerID)
+        if (playerID in this.players) {
+            delete this.players[playerID]
+            delete this.sockets[playerID]
+        }
+    }
+
+    // If all the players have left, then the session is considered over and can be deleted
+    isSessionOver() {
+        return Object.keys(this.players).length === 0
+    }
+
+    // Stops game loop and removes any event listeners for the socket.
+    cleanUpSession() {
+        clearInterval(this.gameLoop)
     }
 }
 
