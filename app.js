@@ -83,7 +83,7 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
   setInterval(() => {
     for (let gameID in games) {
       if (games[gameID].isSessionOver()) {
-        games[socket.gameID].cleanUpSession()
+        games[gameID].cleanUpSession()
         delete games[gameID]
         console.log("Removed game", gameID)
       }
