@@ -15,8 +15,9 @@ class DeployedTowerMainMenu extends ButtonMenu {
         this.aimOption.addTextCentral("Aim", boldTextStyle(COLOURS.AIM_RED, buttonFontSize))
 
         // Select this option to open the upgrades menu
-        this.upgradeOption = this.addOption(260, COLOURS.UPGRADE_GREEN, "selected-upgrade")
-        this.upgradeOption.addTextCentral("Upgrade", boldTextStyle(COLOURS.UPGRADE_GREEN, buttonFontSize))
+        // Upgrades are disabled for now
+        //this.upgradeOption = this.addOption(260, COLOURS.UPGRADE_GREEN, "selected-upgrade")
+        //this.upgradeOption.addTextCentral("Upgrade", boldTextStyle(COLOURS.UPGRADE_GREEN, buttonFontSize))
 
         // Select this option to open the selling menu
         this.sellOption = this.addOption(260, COLOURS.MONEY, "selected-sell")
@@ -30,9 +31,9 @@ class DeployedTowerMainMenu extends ButtonMenu {
     populateWithTowerInfo() {
         // Fill the menu to have info relevant to the specified tower
         let fontSize = 30
-        this.nameAndLevel = new PIXI.Text("", plainTextStyle(COLOURS.BLACK, fontSize))
-        this.nameAndLevel.anchor.set(0, 0.5)
-        this.menuRoot.addText(this.nameAndLevel, 0.02, 0.33)
+        this.name = new PIXI.Text("", plainTextStyle(COLOURS.BLACK, fontSize))
+        this.name.anchor.set(0, 0.5)
+        this.menuRoot.addText(this.name, 0.02, 0.33)
 
         this.kills = new PIXI.Text("", plainTextStyle(COLOURS.BLACK, fontSize))
         this.kills.anchor.set(0, 0.5)
@@ -41,7 +42,7 @@ class DeployedTowerMainMenu extends ButtonMenu {
 
     // Update just the contents of the info created in populateWithTowerInfo to ensure kill stats is up to date
     updateTowerInfo(tower) {
-        this.nameAndLevel.text = "Level " + tower.level + " " + tower.type
+        this.name.text = tower.type.toUpperCase()
         this.kills.text = "Kills: " + tower.stats.kills
     }
 }
