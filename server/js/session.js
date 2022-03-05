@@ -178,7 +178,9 @@ class Session {
 
     removePlayer(playerID) {
         // This removes a player from the session. Once this happens they cannot rejoin the game if it has started.
-        this.game.removePlayer(playerID)
+        if (this.game) {
+            this.game.removePlayer(playerID)
+        }
         if (playerID in this.players) {
             delete this.players[playerID]
             delete this.sockets[playerID]
