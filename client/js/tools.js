@@ -87,8 +87,8 @@ function combineColourHexValues(v1, v2, combinationFn) {
         let v2_hex = v2.slice(v2_start + offset, v2_start + offset+2)
         let v2_dec = parseInt(v2_hex, 16);
 
-        let sum_dec = combinationFn(v1_dec, v2_dec)
-        let sum_hex = (sum_dec > Math.pow(16, 2)) ? "FF" : sum_dec.toString(16)
+        let sum_dec = Math.max(Math.floor(combinationFn(v1_dec, v2_dec)), 0)  // Make integer and > 0
+        let sum_hex = (sum_dec > Math.pow(16, 2)) ? "FF" : sum_dec.toString(16).padStart(2, '0')
         result += sum_hex
     }
     return result

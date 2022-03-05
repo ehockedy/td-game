@@ -25,7 +25,6 @@ class Tower {
         this.fireTick = 0 // Ticks since last bullet
         this.target
         this.shootFunction = this._getShootBehaviour(towerJson[type]["shootPattern"])
-        this.bulletCount = towerJson[type]["gameData"]["numberOfBullets"]
         this.shootRangePath = [] // Main grid squares that the bullets can reach that are on the path
         this.angle = 0 // Angle in radians, 0 is East, goes clockwise
         this.turns = towerJson[type]["gameData"]["turns"] // Whether it turns to face an enemy or not
@@ -43,6 +42,7 @@ class Tower {
             "shootRange": towerJson[type]["gameData"]["shootRange"], // How far bullet can travel once fired
             "bulletSpeed": towerJson[type]["gameData"]["bulletSpeed"],
             "damage": towerJson[type]["gameData"]["damage"],
+            "bulletCount": towerJson[type]["gameData"]["numberOfBullets"],
             "aimBehaviour": "first", // Which enemy to shoot at from all those in it's range
         }
 
@@ -50,6 +50,18 @@ class Tower {
         this.stats = {
             "kills": 0
         }
+
+        // Load the upgrades config into a map so can keep track
+        this.upgrades = {}
+        console.log(type, towerJson[type])
+        towerJson[type]["upgrades"].forEach((upgrade) => {
+            this.upgrades[upgrade.type] = {
+                "cost": upgrade.cost,
+                "fn": this._typeToUpgradeFn(upgrade.type),
+                "purchased": false
+            }
+        })
+        this.purchased = []  // Quick access store for the purchased ones
     }
 
     /**
@@ -77,12 +89,28 @@ class Tower {
         }
     }
 
+    upgrade(type, availableMoney) {
+        if (this.upgrades[type].purchased) return 0
+        if (availableMoney < this.upgrades[type].cost) return 0
+        this.upgrades[type].fn()
+        this.level += 1
+        this.upgrades[type].purchased = true
+        this.purchased.push(type)
+        return this.upgrades[type].cost
+    }
+
     registerKill() {
         this.stats.kills += 1
     }
 
     getCost() {
         return this.cost
+    }
+
+    // rather than returning state of all upgrades, client view just wants to know which
+    // have been bought
+    getPurchasedUpgrades() {
+        return this.purchased
     }
 
     /**
@@ -175,10 +203,40 @@ class Tower {
 
     _allDirShot() {
         let bullets = []
-        for (let a = 0; a < this.bulletCount; a++) {
-            bullets.push(this._getBullet(this.position, (2*Math.PI/this.bulletCount)*a))
+        for (let a = 0; a < this.state.bulletCount; a++) {
+            bullets.push(this._getBullet(this.position, (2*Math.PI/this.state.bulletCount)*a))
         }
         return bullets
+    }
+
+    _typeToUpgradeFn(type) {
+        switch(type) {
+            case "dmg-up":
+                return () => {this._stateUpBy20("damage")}
+            case "rof-up":
+                return () => {this._stateDownBy20("rateOfFire")}
+            case "range-up":
+                return () => {
+                    this._stateUpBy20("seekRange")
+                    this._stateUpBy20("shootRange")
+                }
+            case "bullets-up":
+                return () => {
+                    this._stateUpBy20("bulletCount")
+                }
+            default:
+                return () => {}
+        }
+    }
+
+    _stateUpBy20(prop) {
+        // Increases a given property by 20% (minimum of 1)
+        this.state[prop] = Math.ceil(this.state[prop] * 1.2)
+    }
+
+    _stateDownBy20(prop) {
+        // Decrease a given property by 20% (minimum of 1)
+        this.state[prop] = Math.ceil(this.state[prop] * 0.8)
     }
 }
 

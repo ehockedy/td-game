@@ -30,6 +30,18 @@ export class DeployedTower extends BaseInteractiveTower {
         }
         this.selected = false  // Whether this tower has been clicked on
 
+        // Each tower keeps track of it's own upgrade status. This is to minimise the
+        // amount of data sent from server
+        this.upgrades = {}
+        towerConfig[type].upgrades.forEach((upgrade) => {
+            this.upgrades[upgrade.type] = {
+                "description": upgrade.description,  // TODO there should probably just be some type -> desc function/lookup
+                "description_long": upgrade.description_long,
+                "cost": upgrade.cost,
+                "purchased": false,
+            }
+        })
+
         this.init()
     }
 
@@ -46,6 +58,10 @@ export class DeployedTower extends BaseInteractiveTower {
     setRotation(rotation) {
         this._rotation = rotation
         this.towerSpriteContainer.rotation = rotation
+    }
+
+    getUpgradeState() {
+        return this.upgrades
     }
 
     init() {
@@ -91,8 +107,13 @@ export class DeployedTower extends BaseInteractiveTower {
         })
     }
 
-    update(stats) {
+    update(stats, upgrades) {
         this.stats = stats
+        upgrades.forEach((purchasedUpgrade) => {
+            if (purchasedUpgrade in this.upgrades) {
+                this.upgrades[purchasedUpgrade].purchased = true
+            }
+        })
     }
 
 

@@ -125,12 +125,12 @@ export class InteractiveGameSpace extends BaseComponent {
         this.deployedTowerMainMenu.subscribe(observer)
     }
 
-    updateTowers(towers) {
+    updateTowers(towers, playerMoney) {
         // Get updates from the server so info displayed on the tower menu can be up to date
         if (this.activeTower) {
             towers["objects"].forEach((tower) => {
                 if (tower.name == this.activeTower.name) {
-                    this.deployedTowerMainMenu.updateTowerInfo(tower)
+                    this.deployedTowerMainMenu.updateTowerInfo(tower, this.activeTower, playerMoney)
                 }
             })
         }

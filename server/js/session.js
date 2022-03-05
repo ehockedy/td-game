@@ -124,8 +124,7 @@ class Session {
          * {
          *   "name": "FFFFFF",
          *   "operation": "upgrade",
-         *   "property": "upgrade",
-         *   "value": "range1"
+         *   "value": "dmg-up"
          * }
          *
          * {
@@ -144,6 +143,8 @@ class Session {
             } else if (data.operation == "sell") {
                 this.game.sellTower(data.name)
                 this.broadcast("client/map/update", this.map.getMapStructure())
+            } else if (data.operation == "upgrade") {
+                this.game.upgradeTower(data.name, data.type)
             }
         })
 

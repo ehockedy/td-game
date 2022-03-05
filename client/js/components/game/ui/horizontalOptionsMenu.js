@@ -111,8 +111,12 @@ export class ButtonMenu extends InteractiveMenu {
         // "selected" is a generic event emitted by the clickable options - forward the specific event to the subscribers to this menu
         // this means the buttons do not need any subscribers other than this menu
         this.on("selected", (option) => {
-            this.observers.forEach((observer) => { observer.emit(option.onSelectEventName) })
+            this.observers.forEach((observer) => { observer.emit(option.onSelectEventName, option.params) })
         })
+    }
+
+    addInteractionEvent(event, fn) {
+        this.on(event, fn)
     }
 }
 

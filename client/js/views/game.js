@@ -183,6 +183,15 @@ export class GameRenderer {
             })
         })
 
+        eventEmitter.on("upgrade-tower", (tower, operation, type) => {
+            this.socket.emit("server/tower/set",
+            {
+               "name": tower.name,
+               "operation": operation,
+               "type": type,
+            })
+        })
+
         return eventEmitter
     }
 
@@ -233,24 +242,25 @@ export class GameRenderer {
         this.startRoundButton.startInteraction()
         this.startRoundButton.update(this.round.toString())
     }
-
+    
     update(serverUpdate) {
+        let thisPlayerMoney = 0
+        serverUpdate.players.objects.forEach((player) => {
+            if (player.playerID == this.thisPlayerID) {
+                thisPlayerMoney = player.stats.money
+                this.moneyCounter.update(player.stats.money)
+            }
+        })
         this.tc.update(serverUpdate.towers)
         this.map.update(serverUpdate.towers)
         this.tm.update(serverUpdate.players)
         this.ut.update(serverUpdate.players)
-        this.gameSpace.updateTowers(serverUpdate.towers)
+        this.gameSpace.updateTowers(serverUpdate.towers, thisPlayerMoney)
         this.bc.update(serverUpdate.bullets)
         this.ec.update(serverUpdate.enemies)
         this.ec.updateEndOfPathEnemies(this.rightBoundary)
         this.livesCounter.update(serverUpdate.worldState.lives)
         this.tc.tick()
-
-        serverUpdate.players.objects.forEach((player) => {
-            if (player.playerID == this.thisPlayerID) {
-                this.moneyCounter.update(player.stats.money)
-            }
-        })
 
         // Check if the round has finished and therefor changed
         if (serverUpdate.worldState.round != this.round) {
