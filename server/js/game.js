@@ -162,8 +162,22 @@ class Game {
 
                 if (enemy.hp <= 0) { // Enemy has been killed
                     let reward = this.enemyFactory.getReward(enemy.type)
-                    bullet.originTower.player.registerKill(reward, reward)
                     bullet.originTower.registerKill()
+
+                    const mostDamagingPlayerId = enemy.getMostDamagingPlayerId()
+                    // Give money to each player. This is the best way to ensure winning player does not
+                    // continue to win. Points reflect the number of kills/damage.
+                    this.players.forEach((player) => {
+                        player.increaseMoney(reward)
+
+                        // Give full reward to player that got kill, and half points to player that did most damage.
+                        // Same player can be both.
+                        if (mostDamagingPlayerId && player.id == mostDamagingPlayerId) {
+                            player.increasePoints(Math.ceil(reward/2))
+                        }
+                    })
+                    bullet.originTower.player.increasePoints(reward)
+
                     this.removeEnemy(enemy)
                     break // If enemy has been killed, even if it is removed the enemy object still exist. This can cause a double kill, so skip to next enemy
                 }

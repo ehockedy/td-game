@@ -86,6 +86,11 @@ class Bullet {
     setOriginTower(originTower) {
         this.originTower = originTower // Reference to the tower that shot the bullet
     }
+
+    getPlayer() {
+        if (!this.originTower) return ""
+        return this.originTower.player
+    }
 }
 
 module.exports = {

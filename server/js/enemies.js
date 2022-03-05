@@ -85,6 +85,9 @@ class Enemy {
         this.collidedBullets = []  // If a bullet is piercing, store its name here so does not register another hit
 
         this.hasReachedEnd = false  // If this is true, the enemy has reached the end of the path without getting killed. It will be removed once the client has been informed.
+
+        // Keep track of how much damage each player has done
+        this.dmgPerPlayer = {}
     }
 
     getSpeed() {
@@ -198,7 +201,17 @@ class Enemy {
         } else if (this.resistances.includes(bullet.type)) {
             multiplier = 0.5
         }
-        this.hp -= Math.floor(bullet.damage * multiplier)
+
+        const dmg = Math.floor(bullet.damage * multiplier)
+        this.hp -= dmg
+
+        // Keep track of how much damage each player has done to this enemy
+        const playerID = bullet.getPlayer().id
+        if (playerID in this.dmgPerPlayer) {
+            this.dmgPerPlayer[playerID] += dmg
+        } else {
+            this.dmgPerPlayer[playerID] = dmg
+        }
 
         // get angle from enemy centre to bullet
         const xdiff = bullet.position.x - this.x
@@ -208,6 +221,17 @@ class Enemy {
         return bullet.collide()  // returns false if bullet continues to move
     }
 
+    getMostDamagingPlayerId() {
+        let mostDamaging = null
+        let highestDmg = 0
+        for (const [key, value] of Object.entries(this.dmgPerPlayer)) {
+            if (value > mostDamaging) {
+                highestDmg = value
+                mostDamaging = key
+            }
+        }
+        return mostDamaging  // playerId
+    }
 }
 
 module.exports = {

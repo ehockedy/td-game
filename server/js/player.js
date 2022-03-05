@@ -2,17 +2,12 @@ class Player {
     constructor(id, index) {
         this.id = id;
         this.index = index // Which player number are they
-        this.ready = false // Whether they are ready to start teh round i.e. have spent money, edited toweers etc.
+        this.ready = false // Whether they are ready to start teh round i.e. have spent money, edited towers etc.
 
         this.stats = {
             "points": 0,
             "money": 150
         }
-    }
-
-    registerKill(points, money) {
-        this.stats.points += points
-        this.stats.money += money
     }
 
     setReady() {
@@ -33,6 +28,10 @@ class Player {
 
     increaseMoney(amount) {
         this.stats.money += amount
+    }
+
+    increasePoints(amount) {
+        this.stats.points += amount
     }
 
     getMoney() {
