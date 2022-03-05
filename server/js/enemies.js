@@ -15,6 +15,7 @@ class EnemyFactory {
         this.path = path
         this.subgridSize = subgridSize
         this.tickStepSize = subgridSize/60  // Number of steps to take to mode through a square in 60 ticks
+        this.playerCount = 1 // Number of players, use this to scale HP
     }
 
     createEnemy(enemyType) {
@@ -22,7 +23,7 @@ class EnemyFactory {
             enemyType,
             this.path,
             this.subgridSize,
-            this.enemyConfig[enemyType].hp,
+            this.enemyConfig[enemyType].hp * this.playerCount,
             this.enemyConfig[enemyType].speed,
             this.enemyConfig[enemyType].size,
             this.enemyConfig[enemyType].weaknesses,
@@ -43,6 +44,10 @@ class EnemyFactory {
 
     getReward(enemyType) {
         return this.enemyConfig[enemyType].reward
+    }
+
+    updatePlayerCount(count) {
+        this.playerCount = count
     }
 }
 

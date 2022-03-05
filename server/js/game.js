@@ -253,6 +253,7 @@ class Game {
     addPlayer(playerID) {
         let newPlayer = new playerImport.Player(playerID, this.players.length)
         this.players.push(newPlayer)
+        this.enemyFactory.updatePlayerCount(this.players.length)
         return newPlayer
     }
 
