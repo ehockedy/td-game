@@ -151,7 +151,14 @@ class Game {
         // Check all relevant game objects and see how they interact
         // Check collision between enemies and bullets
         this.map.forEachEnemyInReverse((enemy) => { // TODO forEachEnemyAndBullet
-            let bullets = this.map.map[enemy.position.row][enemy.position.col].bullets
+            // Get bullets in surrounding squares. Cannot just use single square because we check a line the bullet had moved
+            // over for collision, so point of collision may actually be out of the square.
+            let bullets = []
+            for (let r = Math.max(0, enemy.position.row - 1); r <= Math.min(enemy.position.row + 1, this.map.height - 1); r += 1) {
+                for (let c = Math.max(0, enemy.position.col - 1); c <= Math.min(enemy.position.col + 1, this.map.width - 1); c += 1) {
+                    bullets = bullets.concat(this.map.map[r][c].bullets)
+                }
+            }
             for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
                 let bullet = bullets[bIdx]
                 if(bullet.collidesWith(enemy.position, enemy.hitboxRadius)) {
