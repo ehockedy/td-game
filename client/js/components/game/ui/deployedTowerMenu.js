@@ -46,34 +46,33 @@ class DeployedTowerMainMenu extends ButtonMenu {
     }
 }
 
-let aimRootWidth = 360
+let aimRootWidth = 400
 class DeployedTowerAimMenu extends SwitchMenu {
     constructor(x, y) {
         super("deployedTowerAimMenu", x, y, "right", -20)
         this.menuRoot = this.addRoot(aimRootWidth, COLOURS.INFO_LIGHT_GREY)
 
-        const optionWidth = 180
-        const fontSize = 46
+        const optionWidth = 190
+        const fontSize = 36
         let textStyle = boldTextStyle(COLOURS.AIM_RED, fontSize)
 
         // Aim at the emeny closest to the end of the track and in range
         this.firstOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-first", true)
-        this.firstOption.addTextCentral("First", textStyle)
+        this.firstOption.addTextCentral("FIRST", textStyle)
 
         // Aim at the enemy closest to the start of the track and in range
         this.lastOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-last", false)
-        this.lastOption.addTextCentral("Last", textStyle)
+        this.lastOption.addTextCentral("LAST", textStyle)
 
         // Aim at the enemy closest to the tower and in range
         this.closestOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-closest", false)
-        this.closestOption.addTextCentral("Close", textStyle)
+        this.closestOption.addTextCentral("CLOSE", textStyle)
 
         // Aim at the enemy with the highest speed that is in range
         this.fastestOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-fastest", false)
-        this.fastestOption.addTextCentral("Fast", textStyle)
+        this.fastestOption.addTextCentral("FAST", textStyle)
 
-        this.addBackButton()
-        this.addCancelButton()
+        this.addBackAndCancelButtons()
         this.setRootInfo()
     }
 
@@ -84,7 +83,7 @@ class DeployedTowerAimMenu extends SwitchMenu {
         style.wordWrap = true
         style.wordWrapWidth = aimRootWidth - 10
 
-        this.aimDescription = new PIXI.Text("Aim decides which enemy the tower will shoot", style)
+        this.aimDescription = new PIXI.Text("Aim determines which enemy the tower will shoot", style)
         this.aimDescription.anchor.set(0, 0.5)
         this.menuRoot.addText(this.aimDescription, 0.02, 0.5)
     }
@@ -118,10 +117,9 @@ class DeployedTowerSellMenu extends ButtonMenu {
 
         // Confirm the selling of the tower in exchange for the displayed amount of money
         this.yesOption = this.addOption(260, COLOURS.MONEY, "selected-sell-yes")
-        this.yesOption.addTextCentral("Confirm", boldTextStyle(COLOURS.MONEY, 54))
+        this.yesOption.addTextCentral("CONFIRM", boldTextStyle(COLOURS.MONEY, 42))
 
-        this.addBackButton()
-        this.addCancelButton()
+        this.addBackAndCancelButtons()
         this.populateWithTowerInfo()
     }
 
@@ -151,7 +149,7 @@ class DeployedTowerUpgradeMenu extends ButtonMenu {
         this.menuRoot.addText(menuRootText, 0.02, 0.5)
 
         const numberOfUpgrades = 3
-        const width = 240
+        const width = 250
         this.options = []
         for (let optIdx = 0; optIdx < numberOfUpgrades; optIdx += 1) {
             let upgradeOption = this.addOption(width, COLOURS.UPGRADE_GREEN, "selected-upgrade-option")
@@ -171,8 +169,7 @@ class DeployedTowerUpgradeMenu extends ButtonMenu {
             this.options.push(upgradeOption)
         }
 
-        this.addBackButton()
-        this.addCancelButton()
+        this.addBackAndCancelButtons()
     }
 
     updateTowerInfo(upgradeState, playerMoney) {
@@ -190,8 +187,6 @@ class DeployedTowerUpgradeMenu extends ButtonMenu {
             } else {
                 option.enableClick()
             }
-            // TODO update root menu with full description
-            // TODO disable if bought or cannot afford
             upgradeIdx += 1
         }
     }

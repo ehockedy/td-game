@@ -49,37 +49,48 @@ class InteractiveMenu extends Menu {
     }
 
     addCancelButton() {
-        let width = 120
+        let width = 90
         let tint = COLOURS.CANCEL_RED
         let option = new ButtonHorizontalMenuOption(this.name + "_cancel",
-            this._getNextXPosition(width), 0,
-            width, tint, "none")
+            this._getNextXPosition(width) - (this.gap*0.5), 0,
+            width, tint, "none", "half")
         option.setSelectEventName("cancel")
         this.addChild(option)
         option.subscribe(this)
-        option.addTextCentral("\u{2717}", boldTextStyle(COLOURS.BLACK, 32))
+        option.addTextCentral("\u{2715}", boldTextStyle(COLOURS.BLACK, 32))
 
         let scale = 0.8
-        option.y += option.height * (1-scale) / 2
         option.setDefaultScale(scale)
         return option
     }
 
-    addBackButton() {
-        let width = 120
+    addBackAndCancelButtons() {
+        const width = 90
+        const fontSize = 32
         let tint = COLOURS.CANCEL_RED
-        let option = new ButtonHorizontalMenuOption(this.name + "_back",
-            this._getNextXPosition(width), 0,
-            width, tint, "none")
-        option.setSelectEventName("back")
-        this.addChild(option)
-        option.subscribe(this)
-        option.addTextCentral("\u{1f814}", boldTextStyle(COLOURS.BLACK, 40))
+        let xPos = this._getNextXPosition(width)
+
+        let backOption = new ButtonHorizontalMenuOption(this.name + "_back",
+            xPos - (this.gap*0.5), 0,
+            width, tint, "none", "half")
+        backOption.setSelectEventName("back")
+        backOption.addTextCentral("\u{1f814}", boldTextStyle(COLOURS.BLACK, fontSize))
+        backOption.subscribe(this)
+        this.addChild(backOption)
+
+        let cancelOption = new ButtonHorizontalMenuOption(this.name + "_cancel",
+            xPos - (this.gap*0.5), 0,
+            width, tint, "none", "half")
+        cancelOption.setSelectEventName("cancel")
+        cancelOption.addTextCentral("\u{2715}", boldTextStyle(COLOURS.BLACK, fontSize))
+        cancelOption.subscribe(this)
+        this.addChild(cancelOption)
 
         let scale = 0.8
-        option.y += option.height * (1-scale) / 2
-        option.setDefaultScale(scale)
-        return option
+        cancelOption.setDefaultScale(scale)
+        backOption.setDefaultScale(scale)
+        backOption.y += backOption.height
+        backOption.x += this.gap
     }
 
     // A special interaction setup to listen for the cancel event
