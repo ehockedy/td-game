@@ -257,6 +257,23 @@ class Game {
         }
     }
 
+    upgradeTower(towerName, upgradeType) {
+        this.towers.forEach((tower) => {
+            const player = this.getPlayerByName(tower.player.id)
+            if (tower.name == towerName && player) {
+                const playerMoney = player.getMoney()
+                const amountSpent = tower.upgrade(upgradeType, playerMoney)
+                if (amountSpent !== 0) {
+                    // Successful upgrade
+                    player.reduceMoney(amountSpent)
+                    return true
+                }
+                return false
+            }
+        })
+        return false
+    }
+
     addPlayer(playerID) {
         let newPlayer = new playerImport.Player(playerID, this.players.length)
         this.players.push(newPlayer)
@@ -450,6 +467,7 @@ class Game {
                 "level": t.level,
                 "aim": t.state.aimBehaviour,
                 "sellPrice": t.sellPrice,
+                "upgrades": t.getPurchasedUpgrades()
             })
             hash.update(t.name)
         })

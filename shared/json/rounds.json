@@ -3,7 +3,7 @@
         [
             {
                 "enemies": ["boneheadBandit"],
-                "count": 12,
+                "count": 1,
                 "enemiesPerSquarePerSecond": 0.25
             }
         ],

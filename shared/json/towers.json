@@ -11,6 +11,26 @@
             "numberOfBullets": 1,
             "turns": true
         },
+        "upgrades": [
+            {
+                "type": "dmg-up",
+                "description": "Damage up",
+                "description_long": "Damage up by 20%",
+                "cost": 100
+            },
+            {
+                "type": "range-up",
+                "description": "Range up",
+                "description_long": "Range up by 20%",
+                "cost": 75
+            },
+            {
+                "type": "rof-up",
+                "description": "Rate up",
+                "description_long": "Rate of fire up 20%",
+                "cost": 150
+            }
+        ],
         "cost": 100,
         "shootPattern": "single",
         "bulletType": "rock",
@@ -28,6 +48,26 @@
             "numberOfBullets": 6,
             "turns": false
         },
+        "upgrades": [
+            {
+                "type": "bullets-up",
+                "description": "More shrapnel",
+                "description_long": "Shoots 2 extra shrapnel",
+                "cost": 60
+            },
+            {
+                "type": "bullet-size-up",
+                "description": "Bigger shrapnel",
+                "description_long": "More likely to hit enemies",
+                "cost": 80
+            },
+            {
+                "type": "range-up",
+                "description": "Range up",
+                "description_long": "Range up by 20%",
+                "cost": 150
+            }
+        ],
         "cost": 120,
         "shootPattern": "burst",
         "bulletType": "shrapnel",
@@ -45,6 +85,26 @@
             "numberOfBullets": 3,
             "turns": true
         },
+        "upgrades": [
+            {
+                "type": "bullets-up",
+                "description": "More rocks",
+                "description_long": "Increase to 5 rocks",
+                "cost": 150
+            },
+            {
+                "type": "range-up",
+                "description": "Range up",
+                "description_long": "Range up by 20%",
+                "cost": 100
+            },
+            {
+                "type": "double-shot",
+                "description": "Double shot",
+                "description_long": "Twice the number of rocks each shot",
+                "cost": 350
+            }
+        ],
         "cost": 300,
         "bulletType": "rock",
         "shootPattern": "scatter",
@@ -62,6 +122,26 @@
             "numberOfBullets": 1,
             "turns": true
         },
+        "upgrades": [
+            {
+                "type": "piercing-up",
+                "description": "More piercing",
+                "description_long": "Can pierce through one extra enemy",
+                "cost": 200
+            },
+            {
+                "type": "range-up",
+                "description": "Range up",
+                "description_long": "Range up",
+                "cost": 100
+            },
+            {
+                "type": "dmg-stack",
+                "description": "Stacking damage",
+                "description_long": "Damage increases with each pierced enemy",
+                "cost": 350
+            }
+        ],
         "cost": 550,
         "bulletType": "spear",
         "shootPattern": "single",
@@ -79,6 +159,26 @@
             "numberOfBullets": 1,
             "turns": true
         },
+        "upgrades": [
+            {
+                "type": "rate-up",
+                "description": "Rate up",
+                "description_long": "Rate of fire up",
+                "cost": 200
+            },
+            {
+                "type": "dmg-up",
+                "description": "Damage up",
+                "description_long": "Damage up",
+                "cost": 200
+            },
+            {
+                "type": "finisher",
+                "description": "Finisher",
+                "description_long": "More damage to enemies on low health",
+                "cost": 400
+            }
+        ],
         "cost": 750,
         "bulletType": "bullet",
         "shootPattern": "single",
@@ -96,6 +196,7 @@
             "numberOfBullets": 1,
             "turns": true
         },
+        "upgrades": [],
         "cost": 1000,
         "bulletType": "flame",
         "shootPattern": "single",
@@ -113,6 +214,7 @@
             "numberOfBullets": 1,
             "turns": true
         },
+        "upgrades": [],
         "cost": 1500,
         "bulletType": "buzzsaw",
         "shootPattern": "single",

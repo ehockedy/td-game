@@ -1,5 +1,5 @@
 import { BaseComponent } from "../game/base/baseComponent.js"
-import { addColourHexValues } from "../../tools.js"
+import { addColourHexValues, subtractColourHexValues } from "../../tools.js"
 
 /**
  * An element that exists in a menu on the game UI
@@ -31,14 +31,25 @@ class HorizontalMenuOption extends BaseComponent {
         text.x = x_percent * this.menuSprite.width
         text.y = y_percent * this.menuSprite.height
         text.baseTint = text.style.fill  // Add this property to record the original colour
+        text.name = "text"
         this.text.addChild(text)
+    }
+
+    updateText(message) {
+        this.text.getChildByName("text").text = message
     }
 
     // Given a string, render it in the given style in the middle of the element
     addTextCentral(message, style) {
-        let text = new PIXI.Text(message, style)
-        text.anchor.set(0.5, 0.5)
-        this.addText(text, 0.5, 0.5)
+        // Only display one message at a time
+        if (this.text.children.length > 0) {
+            this.updateText(message)
+        } else {
+            let text = new PIXI.Text(message, style)
+            text.name = "text"
+            text.anchor.set(0.5, 0.5)
+            this.addText(text, 0.5, 0.5)
+        }
     }
 
     // Override the name of the event to emit when selected
@@ -142,6 +153,13 @@ class HorizontalMenuOption extends BaseComponent {
         this.text.children.forEach((text) => { text.style.fill = addColourHexValues(text.baseTint, colourDiff)})
     }
 
+    _darken() {
+        let colourDiff = "0x555555"
+        this.menuSprite.tint = subtractColourHexValues(this.baseTint, colourDiff)
+        console.log(this.menuSprite.tint)
+        this.text.children.forEach((text) => { text.style.fill = subtractColourHexValues(text.baseTint, colourDiff)})
+    }
+
     _resetColour() {
         this.menuSprite.tint = this.baseTint
         this.text.children.forEach((text) => { text.style.fill = text.baseTint})
@@ -186,22 +204,61 @@ export class ButtonHorizontalMenuOption extends HorizontalMenuOption {
     constructor (name, x, y, width_px, tint, wallAttachment, verticalSize) {
         super(name, x, y, width_px, tint, wallAttachment, verticalSize)
         this._setUpInteractions()
+        this.params = {}
+        this.clickEnabled = true
     }
 
     _setUpInteractions() {
         this.menuSprite.interactive = true
         this.menuSprite.buttonMode = true
         this.menuSprite
-            .on("mouseover", () => { this._lighten() })
-            .on("mouseout", () => { this._resetColour() })
-            .on("pointerdown", () => { this._press() })
-            .on("pointerup", () => {
-                this._release()
-                this._select()
+            .on("mouseover", () => {
+                if (this.clickEnabled) {
+                    this._lighten()
+                }
             })
+            .on("mouseout", () => { 
+                if (this.clickEnabled) {
+                    this._resetColour()
+                }
+            })
+            .on("pointerdown", () => {
+                if (this.clickEnabled) this._press()
+             })
+            .on("pointerup", () => { 
+                if (this.clickEnabled) {
+                    this._release()
+                    this._select()
+                }
+             })
             .on("pointerupoutside", () => {
-                this._release()
+                if (this.clickEnabled) {
+                    this._release()
+                }
             })
+    }
+
+    disableClick() {
+        if (this.clickEnabled) {
+            this._darken()
+            this.clickEnabled = false
+        }
+    }
+
+    enableClick() {
+        if (!this.clickEnabled) {
+            this._resetColour()
+            this.clickEnabled = true
+        }
+    }
+
+    addInteractionEvent(eventName, fn) {
+        this.menuSprite.on(eventName, fn)
+    }
+
+    // Set the parameters to be sent when button is clicked
+    setParams(params) {
+        this.params = params
     }
 }
 

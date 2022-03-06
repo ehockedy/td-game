@@ -93,7 +93,7 @@ export class TowersComponent extends BaseComponent {
 
             // Update the tower statsistics, but only store stats for towers a playerID owns
             if (tower.playerID == this.thisPlayer) {
-                towerToUpdate.update(tower.stats)
+                towerToUpdate.update(tower.stats, tower.upgrades)
             }
         })
     }
