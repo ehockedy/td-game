@@ -2,7 +2,7 @@ import { SwitchMenu, ButtonMenu } from "./horizontalOptionsMenu.js"
 import { BaseComponent } from "../base/baseComponent.js"
 import { boldTextStyle, plainTextStyle, COLOURS } from "../../ui_common/style.js"
 
-const buttonFontSize = 60
+const buttonFontSize = 40
 
 class DeployedTowerMainMenu extends ButtonMenu {
     constructor(x, y) {
@@ -12,15 +12,15 @@ class DeployedTowerMainMenu extends ButtonMenu {
 
         // Select this option to open the aiming menu
         this.aimOption = this.addOption(260, COLOURS.AIM_RED, "selected-aim")
-        this.aimOption.addTextCentral("Aim", boldTextStyle(COLOURS.AIM_RED, buttonFontSize))
+        this.aimOption.addTextCentral("AIM", boldTextStyle(COLOURS.AIM_RED, buttonFontSize))
 
         // Select this option to open the upgrades menu
         this.upgradeOption = this.addOption(260, COLOURS.UPGRADE_GREEN, "selected-upgrade")
-        this.upgradeOption.addTextCentral("Upgrade", boldTextStyle(COLOURS.UPGRADE_GREEN, buttonFontSize))
+        this.upgradeOption.addTextCentral("UPGRADE", boldTextStyle(COLOURS.UPGRADE_GREEN, buttonFontSize))
 
         // Select this option to open the selling menu
         this.sellOption = this.addOption(260, COLOURS.MONEY, "selected-sell")
-        this.sellOption.addTextCentral("Sell", boldTextStyle(COLOURS.MONEY, buttonFontSize))
+        this.sellOption.addTextCentral("SELL", boldTextStyle(COLOURS.MONEY, buttonFontSize))
 
         this.addCancelButton()
         this.populateWithTowerInfo()

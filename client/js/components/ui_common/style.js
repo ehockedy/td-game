@@ -16,6 +16,7 @@ export function boldTextStyle(tint, fontSize=64) {
     const base = generateBaseTextStyle(tint, fontSize)
     const options = {
         "strokeThickness": Math.ceil(fontSize/10),
+        "lineJoin": "round",
     }
     return {
         ...base,
