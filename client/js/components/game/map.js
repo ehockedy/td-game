@@ -5,7 +5,7 @@ function getRandomObject(jsonObject) {
     return jsonObject[randKey]
 }
 
-function randomlyPlaceObjects(textureArray, maxCount, targetContainer, strictlyWithinSquare, xMax, yMax, xOffset, yOffset, angleVariation, sizeVariation, allowZeroObjects) {
+function randomlyPlaceObjects(textureArray, maxCount, targetContainer, strictlyWithinSquare, xMax, yMax, xOffset, yOffset, angleVariation, sizeVariation, allowZeroObjects, central) {
     let objectCount = Math.ceil(Math.random() * maxCount)
     if (allowZeroObjects) objectCount -= 1 // Prevents maximum being reached, but means that theres a possibility of 0 objects being added
     for (let objectIdx=0; objectIdx < objectCount; objectIdx += 1) {
@@ -14,8 +14,15 @@ function randomlyPlaceObjects(textureArray, maxCount, targetContainer, strictlyW
         let scale = sizeVariation > 0 ? (1 + Math.random() * (sizeVariation - 1)) : 1
         objectSprite.scale.set(scale, scale)
         objectSprite.angle = (angleVariation * Math.random()) * (Math.random() > 0.5 ? 1 : -1)
-        objectSprite.x = xOffset + Math.floor(Math.random() * (strictlyWithinSquare ? xMax - objectSprite.width : xMax))
-        objectSprite.y = yOffset + Math.floor(Math.random() * (strictlyWithinSquare ? yMax - objectSprite.height : yMax))
+        if (central) {
+            objectSprite.anchor.set(0.5)
+            objectSprite.x = (xOffset + xMax) / 2
+            objectSprite.y = (yOffset + yMax) / 2
+
+        } else {
+            objectSprite.x = xOffset + Math.floor(Math.random() * (strictlyWithinSquare ? xMax - objectSprite.width : xMax))
+            objectSprite.y = yOffset + Math.floor(Math.random() * (strictlyWithinSquare ? yMax - objectSprite.height : yMax))
+        }
         targetContainer.addChild(objectSprite);
     }
 }
@@ -146,7 +153,7 @@ export class MapComponent extends BaseComponent {
         this.baseCamp.cacheAsBitmap = false
     }
 
-    createLandTile(addDecoration) {
+    createLandTile(addDecoration, isNextToPath=false) {
         let tileContainer = new PIXI.Container()
         let textureName = "land_1.png"
         tileContainer.addChild(new PIXI.Sprite(this.mapTextures[textureName]))
@@ -155,7 +162,7 @@ export class MapComponent extends BaseComponent {
             0, 0,
             0, 0,
             0, 0,
-            false
+            false, false
         )
         if (addDecoration) {
             randomlyPlaceObjects(
@@ -163,7 +170,7 @@ export class MapComponent extends BaseComponent {
                 this.mapSpriteSize, this.mapSpriteSize,
                 0, 0,
                 10, 1.2,
-                false
+                false, isNextToPath
             )
         } 
         tileContainer.hasDecoration = addDecoration
@@ -181,7 +188,7 @@ export class MapComponent extends BaseComponent {
         })
         this.disableCacheAsBitmap()
 
-        let objectClusterCount = 5
+        let objectClusterCount = 4
         let objectClusterPoints = []
         for (let ocIdx=0; ocIdx < objectClusterCount; ocIdx += 1) {
             objectClusterPoints.push({
@@ -216,14 +223,16 @@ export class MapComponent extends BaseComponent {
                 const gridValue = this.getGridValue(mapStructure, r, c)
                 if (gridValue == 'x') {
                     let addObjectChance = 0.01 // Chance to add a decoration to any land tile
-                    let distanceToCluster = 2 // If the land tile is within this number of tiles from a cluster,have a higher chance of adding decoration
 
                     // Calculate whether this tile is near to a cluster - if so increase the chance of adding a decoration
                     objectClusterPoints.forEach((point) => {
-                        if (isNearToPoint(r, c, point.r, point.c, distanceToCluster)) addObjectChance = 0.4
+                        // If the land tile is within this number of tiles from a cluster, have a higher chance of adding decoration
+                        if (isNearToPoint(r, c, point.r, point.c, 1)) addObjectChance = 1
+                        if (isNearToPoint(r, c, point.r, point.c, 2)) addObjectChance = 0.6
+                        if (isNearToPoint(r, c, point.r, point.c, 3)) addObjectChance = 0.2
                     })
 
-                    let landTile = this.createLandTile(Math.random() < addObjectChance)
+                    let landTile = this.createLandTile(Math.random() < addObjectChance, this.isNextToPath(mapStructure, c, r, this.cols, this.rows))
                     landTile.x = c * this.mapSpriteSize
                     landTile.y = r * this.mapSpriteSize
                     this.landTiles.addChild(landTile)
@@ -314,41 +323,7 @@ export class MapComponent extends BaseComponent {
                             this.sideWalls.addChild(this.generateMapWallSprite(texture, shiftX + this.mapSpriteSize, shiftY + this.mapSpriteSize, 1, scale, -Math.PI/2))
                         }
                     }
-                } else {
-                    this.landTiles.addChild(map_square_sprite)
-
-                    // Add decorations to the land tiles. These decorations could be a cactus, some rocks etc.
-                    let addObjectChance = 0.01 // Chance to add a decoration to any land tile
-                    let distanceToCluster = 2 // If the land tile is within this number of tiles from a cluster,have a higher chance of adding decoration
-
-                    // Calculate whether this tile is near to a cluster - if so increase the chance of adding a decoration
-                    objectClusterPoints.forEach((point) => {
-                        if (isNearToPoint(r, c, point.r, point.c, distanceToCluster)) addObjectChance = 0.5
-                    })
-
-                    // If RNG chance is met, and not adjacent to the valley path (because may overlap with valley path sprites) or near the camp then add decoration
-                    if (Math.random() <= addObjectChance && !this.isNextToPath(mapStructure, c, r, this.cols, this.rows)) {
-                        if (!includeBase || !baseCampContainer.getBounds().contains(map_square_sprite.x, map_square_sprite.y)) {
-                            randomlyPlaceObjects(
-                                this.mapDecorationsTextures, 1, this.landDecorations, true,
-                                this.mapSpriteSize, this.mapSpriteSize,
-                                map_square_sprite.x, map_square_sprite.y,
-                                10, 1.5,
-                                false
-                            )
-                        }
-                    }
                 }
-
-                // Add texture to the land
-                // Even path tiles have these added, so that it is not sparse near path tiles. They are rendered under path, so is acceptable.
-                // randomlyPlaceObjects(
-                //     this.mapFeaturesTextures, 20, this.landFeatureTiles, false,
-                //     this.mapSpriteSize, this.mapSpriteSize,
-                //     map_square_sprite.x, map_square_sprite.y,
-                //     180, 0,
-                //     false
-                // )
             }
         }
 
@@ -392,7 +367,6 @@ export class MapComponent extends BaseComponent {
             flag.x = x
             flag.y = y
             flag.pivot.set(0.5)
-            const angleRange = 30
             flag.angle = angle
             flag.scale.set(scale)
             baseCampContainer.addChild(flag)
