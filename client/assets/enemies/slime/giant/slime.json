@@ -1,6 +1,6 @@
 {"frames": {
 
-"slime_000.png":
+"slime_giant_000.png":
 {
 	"frame": {"x":0,"y":0,"w":85,"h":83},
 	"rotated": false,
@@ -8,7 +8,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_001.png":
+"slime_giant_001.png":
 {
 	"frame": {"x":85,"y":0,"w":85,"h":83},
 	"rotated": false,
@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_002.png":
+"slime_giant_002.png":
 {
 	"frame": {"x":170,"y":0,"w":85,"h":83},
 	"rotated": false,
@@ -24,7 +24,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_003.png":
+"slime_giant_003.png":
 {
 	"frame": {"x":0,"y":83,"w":85,"h":83},
 	"rotated": false,
@@ -32,7 +32,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_004.png":
+"slime_giant_004.png":
 {
 	"frame": {"x":85,"y":83,"w":85,"h":83},
 	"rotated": false,
@@ -40,7 +40,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_005.png":
+"slime_giant_005.png":
 {
 	"frame": {"x":170,"y":83,"w":85,"h":83},
 	"rotated": false,
@@ -48,7 +48,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_006.png":
+"slime_giant_006.png":
 {
 	"frame": {"x":0,"y":166,"w":85,"h":83},
 	"rotated": false,
@@ -56,7 +56,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_007.png":
+"slime_giant_007.png":
 {
 	"frame": {"x":85,"y":166,"w":85,"h":83},
 	"rotated": false,
@@ -64,7 +64,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_008.png":
+"slime_giant_008.png":
 {
 	"frame": {"x":170,"y":166,"w":85,"h":83},
 	"rotated": false,
@@ -72,7 +72,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_009.png":
+"slime_giant_009.png":
 {
 	"frame": {"x":0,"y":249,"w":85,"h":83},
 	"rotated": false,
@@ -80,7 +80,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_010.png":
+"slime_giant_010.png":
 {
 	"frame": {"x":85,"y":249,"w":85,"h":83},
 	"rotated": false,
@@ -88,7 +88,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_011.png":
+"slime_giant_011.png":
 {
 	"frame": {"x":170,"y":249,"w":85,"h":83},
 	"rotated": false,
@@ -96,7 +96,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_012.png":
+"slime_giant_012.png":
 {
 	"frame": {"x":0,"y":332,"w":85,"h":83},
 	"rotated": false,
@@ -104,7 +104,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_013.png":
+"slime_giant_013.png":
 {
 	"frame": {"x":85,"y":332,"w":85,"h":83},
 	"rotated": false,
@@ -112,7 +112,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_014.png":
+"slime_giant_014.png":
 {
 	"frame": {"x":170,"y":332,"w":85,"h":83},
 	"rotated": false,
@@ -120,7 +120,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_015.png":
+"slime_giant_015.png":
 {
 	"frame": {"x":0,"y":415,"w":85,"h":83},
 	"rotated": false,
@@ -128,7 +128,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_016.png":
+"slime_giant_016.png":
 {
 	"frame": {"x":85,"y":415,"w":85,"h":83},
 	"rotated": false,
@@ -136,7 +136,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_017.png":
+"slime_giant_017.png":
 {
 	"frame": {"x":170,"y":415,"w":85,"h":83},
 	"rotated": false,
@@ -144,7 +144,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_018.png":
+"slime_giant_018.png":
 {
 	"frame": {"x":0,"y":498,"w":85,"h":83},
 	"rotated": false,
@@ -152,7 +152,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_019.png":
+"slime_giant_019.png":
 {
 	"frame": {"x":85,"y":498,"w":85,"h":83},
 	"rotated": false,
@@ -160,7 +160,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_020.png":
+"slime_giant_020.png":
 {
 	"frame": {"x":170,"y":498,"w":85,"h":83},
 	"rotated": false,
@@ -168,7 +168,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_021.png":
+"slime_giant_021.png":
 {
 	"frame": {"x":0,"y":581,"w":85,"h":83},
 	"rotated": false,
@@ -176,7 +176,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_022.png":
+"slime_giant_022.png":
 {
 	"frame": {"x":85,"y":581,"w":85,"h":83},
 	"rotated": false,
@@ -184,7 +184,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_023.png":
+"slime_giant_023.png":
 {
 	"frame": {"x":170,"y":581,"w":85,"h":83},
 	"rotated": false,
@@ -192,7 +192,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_024.png":
+"slime_giant_024.png":
 {
 	"frame": {"x":0,"y":664,"w":85,"h":83},
 	"rotated": false,
@@ -200,7 +200,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_025.png":
+"slime_giant_025.png":
 {
 	"frame": {"x":85,"y":664,"w":85,"h":83},
 	"rotated": false,
@@ -208,7 +208,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_026.png":
+"slime_giant_026.png":
 {
 	"frame": {"x":170,"y":664,"w":85,"h":83},
 	"rotated": false,
@@ -216,7 +216,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_027.png":
+"slime_giant_027.png":
 {
 	"frame": {"x":0,"y":747,"w":85,"h":83},
 	"rotated": false,
@@ -224,7 +224,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_028.png":
+"slime_giant_028.png":
 {
 	"frame": {"x":85,"y":747,"w":85,"h":83},
 	"rotated": false,
@@ -232,7 +232,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_029.png":
+"slime_giant_029.png":
 {
 	"frame": {"x":170,"y":747,"w":85,"h":83},
 	"rotated": false,
@@ -240,7 +240,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_030.png":
+"slime_giant_030.png":
 {
 	"frame": {"x":0,"y":830,"w":85,"h":83},
 	"rotated": false,
@@ -248,7 +248,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_031.png":
+"slime_giant_031.png":
 {
 	"frame": {"x":85,"y":830,"w":85,"h":83},
 	"rotated": false,
@@ -256,7 +256,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_032.png":
+"slime_giant_032.png":
 {
 	"frame": {"x":170,"y":830,"w":85,"h":83},
 	"rotated": false,
@@ -264,7 +264,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_033.png":
+"slime_giant_033.png":
 {
 	"frame": {"x":0,"y":913,"w":85,"h":83},
 	"rotated": false,
@@ -272,7 +272,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_034.png":
+"slime_giant_034.png":
 {
 	"frame": {"x":85,"y":913,"w":85,"h":83},
 	"rotated": false,
@@ -280,7 +280,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_035.png":
+"slime_giant_035.png":
 {
 	"frame": {"x":170,"y":913,"w":85,"h":83},
 	"rotated": false,
@@ -288,7 +288,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_036.png":
+"slime_giant_036.png":
 {
 	"frame": {"x":0,"y":996,"w":85,"h":83},
 	"rotated": false,
@@ -296,7 +296,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_037.png":
+"slime_giant_037.png":
 {
 	"frame": {"x":85,"y":996,"w":85,"h":83},
 	"rotated": false,
@@ -304,7 +304,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_038.png":
+"slime_giant_038.png":
 {
 	"frame": {"x":170,"y":996,"w":85,"h":83},
 	"rotated": false,
@@ -312,7 +312,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":83},
 	"sourceSize": {"w":85,"h":83}
 },
-"slime_039.png":
+"slime_giant_039.png":
 {
 	"frame": {"x":0,"y":1079,"w":85,"h":83},
 	"rotated": false,
@@ -327,6 +327,6 @@
 	"format": "RGBA8888",
 	"size": {"w":255,"h":1162},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:29d0f85809f5304fe0035f92669d0786:9d7ca3be712dd9fb3af0bdf4e575f042:5969a7bd39dc609f49b3bb3f3e71107a$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a5ae55f3d9476c6cbdbe47d15b168a2c:9d7ca3be712dd9fb3af0bdf4e575f042:5969a7bd39dc609f49b3bb3f3e71107a$"
 }
 }
