@@ -53,7 +53,6 @@ class Tower {
 
         // Load the upgrades config into a map so can keep track
         this.upgrades = {}
-        console.log(type, towerJson[type])
         towerJson[type]["upgrades"].forEach((upgrade) => {
             this.upgrades[upgrade.type] = {
                 "cost": upgrade.cost,
