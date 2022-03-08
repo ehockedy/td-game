@@ -34,9 +34,9 @@ div, button, input {
     justify-self: start;
     align-self: center;
     margin-top: 4%;
-    margin-left: 10%;
+    margin-left: 5%;
     color: #784421;
-    text-shadow: 4px 4px black;
+    text-shadow: 1px 2px black;
     letter-spacing: 0.05em;
 }
 
