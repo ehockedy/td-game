@@ -507,16 +507,16 @@
      inkscape:cx="256.37045"
      inkscape:cy="214.05794"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer2"
      inkscape:document-rotation="0"
      showgrid="true"
      units="px"
      objecttolerance="10000"
      guidetolerance="10000"
      inkscape:pagecheckerboard="true"
-     inkscape:window-width="1536"
-     inkscape:window-height="801"
-     inkscape:window-x="1912"
+     inkscape:window-width="1920"
+     inkscape:window-height="1002"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:snap-intersection-paths="false"
@@ -763,10 +763,13 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Shrapnel"
-     style="display:none">
+     style="display:inline">
     <g
        id="g1044"
-       transform="translate(2.5371324,-4.6958055)">
+       transform="translate(2.5371324,-4.6958055)"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel-large1.png"
+       inkscape:export-xdpi="20"
+       inkscape:export-ydpi="20">
       <path
          id="rect4569-45-2-9-2"
          style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
@@ -806,9 +809,9 @@
        id="g1044-3"
        transform="translate(0.72682418,34.21187)"
        style="display:inline"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel3.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8">
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel-large3.png"
+       inkscape:export-xdpi="20"
+       inkscape:export-ydpi="20">
       <path
          id="rect4569-45-2-9-2-1"
          style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
@@ -849,9 +852,9 @@
        id="g1044-6"
        transform="matrix(0.91669514,0,0,0.91669514,45.32762,21.928493)"
        style="display:inline"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel2.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8">
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel-large2.png"
+       inkscape:export-xdpi="20"
+       inkscape:export-ydpi="20">
       <path
          id="rect4569-45-2-9-2-3"
          style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:0.264999"
@@ -893,32 +896,32 @@
        style="display:inline;fill:#cccccc;fill-opacity:1;stroke-width:3.47422"
        d="m 103.05906,103.46828 7.00284,11.53327 -0.58177,11.90935 0.64785,3.7802 -2.94889,-1.70482 -6.9998,-0.52602 -8.135077,-0.43517 -9.071029,-0.6584 6.271938,-11.24663 4.517032,-6.56333 4.328234,-2.76251 z"
        sodipodi:nodetypes="cccccccccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel4.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel-large4.png"
+       inkscape:export-xdpi="20"
+       inkscape:export-ydpi="20" />
     <path
        id="rect4777-1-14-34-0-9-6-4-2"
        style="display:inline;fill:#808080;fill-opacity:1;stroke-width:3.47422"
        d="m 98.090473,106.794 5.128157,-3.72464 -1.53418,4.7076 -12.096371,8.37641 -1.008113,9.06695 -5.606696,2.14615 4.373169,-12.55387 z"
        sodipodi:nodetypes="cccccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel4.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel-large4.png"
+       inkscape:export-xdpi="20"
+       inkscape:export-ydpi="20" />
     <path
        id="rect4777-1-2-00-6-9-8-6-7-0-8"
        style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:3.47422"
        d="m 110.12798,130.6911 -4.30287,-0.46368 -6.209976,-0.0747 -8.135079,-0.43517 -8.506779,-2.3511 5.232801,-2.11876 5.065839,2.26842 10.223894,0.69627 4.26964,0.0747 z"
        sodipodi:nodetypes="cccccccccc"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel4.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8" />
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel-large4.png"
+       inkscape:export-xdpi="20"
+       inkscape:export-ydpi="20" />
     <path
        style="fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:0.242542px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 102.97928,103.3885 -1.29483,4.38846 6.43712,9.16493 -0.24329,8.38937 0.11283,2.95582 2.13687,2.40403 0.0291,-3.89304 -0.0952,-11.79652"
        id="path1038-2-9"
-       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel4.png"
-       inkscape:export-xdpi="12.8"
-       inkscape:export-ydpi="12.8"
+       inkscape:export-filename="C:\Users\edhoc\Documents\Programming\td_game\client\assets\bullets\sprites\shrapnel-large4.png"
+       inkscape:export-xdpi="20"
+       inkscape:export-ydpi="20"
        sodipodi:nodetypes="cccccccc" />
   </g>
   <g
@@ -1190,7 +1193,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer5"
-     inkscape:label="bullet">
+     inkscape:label="bullet"
+     style="display:none">
     <path
        id="rect1634"
        style="fill:url(#linearGradient1643);fill-opacity:1;stroke:none;stroke-width:1.96404;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"

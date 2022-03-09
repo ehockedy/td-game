@@ -1,10 +1,9 @@
 const crypto = require('crypto');
-const fs = require('fs');
 
 const sizeMap = {
     "small": 4,
-    "medium": 2,
-    "large": 1
+    "medium": 3,
+    "large": 2
 }
 
 // Simple factory class to produce an enemy of a given type without having to pass through

@@ -3,36 +3,49 @@
         "filenameKeyword": "rock",
         "rotate": true,
         "rotationSpeed": 5,
-        "piercingCount": 1
+        "piercingCount": 1,
+        "radius": 2
     },
-    "shrapnel": {
-        "filenameKeyword": "shrapnel",
+    "shrapnel-small": {
+        "filenameKeyword": "shrapnel-small",
         "rotate": true,
         "rotationSpeed": 15,
-        "piercingCount": 1
+        "piercingCount": 1,
+        "radius": 1
+    },
+    "shrapnel-large": {
+        "filenameKeyword": "shrapnel-large",
+        "rotate": true,
+        "rotationSpeed": 15,
+        "piercingCount": 1,
+        "radius": 2
     },
     "bullet": {
         "filenameKeyword": "bullet",
         "rotate": false,
         "rotationSpeed": 0,
-        "piercingCount": 1
+        "piercingCount": 1,
+        "radius": 1
     },
     "spear": {
         "filenameKeyword": "spear",
         "rotate": false,
         "rotationSpeed": 0,
-        "piercingCount": 5
+        "piercingCount": 5,
+        "radius": 1
     },
     "flame": {
         "filenameKeyword": "flame",
         "rotate": false,
         "rotationSpeed": 0,
-        "piercingCount": 4
+        "piercingCount": 4,
+        "radius": 1
     },
     "buzzsaw": {
         "filenameKeyword": "",
         "rotate": false,
         "rotationSpeed": 0,
-        "piercingCount": 2
+        "piercingCount": 2,
+        "radius": 2
     }
 }

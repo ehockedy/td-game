@@ -161,7 +161,7 @@ class Game {
             }
             for (let bIdx = bullets.length-1; bIdx >= 0; bIdx--) {
                 let bullet = bullets[bIdx]
-                if(bullet.collidesWith(enemy.position, enemy.hitboxRadius)) {
+                if (bullet.collidesWith(enemy.position, enemy.hitboxRadius, bullet.hitCircleRadius)) {
                     if (enemy.handleCollision(bullet) || enemy.blockPiercing) {
                         this.map.removeBullet(bullet) // Remove that bullet
                     }

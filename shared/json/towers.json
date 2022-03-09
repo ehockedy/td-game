@@ -15,7 +15,7 @@
             {
                 "type": "dmg-up",
                 "description": "Damage up",
-                "description_long": "Damage up by 20%",
+                "description_long": "Damage up by 50%",
                 "cost": 100
             },
             {
@@ -27,7 +27,7 @@
             {
                 "type": "rof-up",
                 "description": "Rate up",
-                "description_long": "Rate of fire up 20%",
+                "description_long": "Rate of fire up 50%",
                 "cost": 150
             }
         ],
@@ -59,18 +59,18 @@
                 "type": "bullet-size-up",
                 "description": "Bigger shrapnel",
                 "description_long": "More likely to hit enemies",
-                "cost": 80
+                "cost": 60
             },
             {
-                "type": "range-up",
-                "description": "Range up",
-                "description_long": "Range up by 20%",
-                "cost": 150
+                "type": "rof-up",
+                "description": "Rate up",
+                "description_long": "Range up by 50%",
+                "cost": 120
             }
         ],
         "cost": 120,
         "shootPattern": "burst",
-        "bulletType": "shrapnel",
+        "bulletType": "shrapnel-small",
         "textureAtlasFile": "client/assets/towers/2-shrapnel_burst/shrapnel_burst.json"
     },
     "rock-scatter": {

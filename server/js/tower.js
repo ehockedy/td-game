@@ -14,6 +14,7 @@ class Tower {
     constructor(name, type, player, position, subgridSize) {
         this.name = name;
         this.type = type
+        this.subgridSize = subgridSize
 
         this.position = position
         this.row = position.row
@@ -141,7 +142,8 @@ class Tower {
             this.state.damage,
             Math.floor(this.state.bulletSpeed * this.tickStepSize),
             this.state.shootRange,
-            this.bulletType
+            this.bulletType,
+            this.subgridSize,
         )
         newBullet.setOriginTower(this)
         return newBullet
@@ -179,7 +181,7 @@ class Tower {
             let nextAngle = Math.atan2(nextPos.y-this.y, nextPos.x-this.x) // The angle of the tower to that position
             newBullet.updateAngleAndSpeeds(nextAngle)
             let bulletFuturePos = newBullet.positionInNTicks(ticks) // See where bullet will be, when travelling at that angle, when the enemy is in that position
-            if (newBullet.willCollideWith(nextPos, bulletFuturePos, this.target.hitboxRadius)){
+            if (newBullet.willCollideWith(nextPos, bulletFuturePos, this.target.hitboxRadius, 0)) {  // Treat aiming as point bullet, so always shoots centrally
                 isHit = true
                 if (this.turns) this.angle = nextAngle
             }
@@ -211,31 +213,30 @@ class Tower {
     _typeToUpgradeFn(type) {
         switch(type) {
             case "dmg-up":
-                return () => {this._stateUpBy20("damage")}
+                return () => {this._stateMultiplier("damage", 1.5)}
             case "rof-up":
-                return () => {this._stateDownBy20("rateOfFire")}
+                return () => {this._stateMultiplier("rateOfFire", 0.5)}
             case "range-up":
                 return () => {
-                    this._stateUpBy20("seekRange")
-                    this._stateUpBy20("shootRange")
+                    this._stateMultiplier("seekRange", 1.2)
+                    this._stateMultiplier("shootRange", 1.2)
                 }
             case "bullets-up":
                 return () => {
-                    this._stateUpBy20("bulletCount")
+                    this._stateMultiplier("bulletCount", 1.5)
+                }
+            case "bullet-size-up":
+                return () => {
+                    this.bulletType = "shrapnel-large"  // TODO change if not shrapnel burst?
                 }
             default:
                 return () => {}
         }
     }
 
-    _stateUpBy20(prop) {
-        // Increases a given property by 20% (minimum of 1)
-        this.state[prop] = Math.ceil(this.state[prop] * 1.2)
-    }
-
-    _stateDownBy20(prop) {
-        // Decrease a given property by 20% (minimum of 1)
-        this.state[prop] = Math.ceil(this.state[prop] * 0.8)
+    _stateMultiplier(prop, multiplier) {
+        // Increases a given property by given multiplication (minimum of 1)
+        this.state[prop] = Math.ceil(this.state[prop] * multiplier)
     }
 }
 
