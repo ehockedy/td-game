@@ -6,6 +6,13 @@
         "piercingCount": 1,
         "radius": 2
     },
+    "rock-reinforced": {
+        "filenameKeyword": "reinforced",
+        "rotate": true,
+        "rotationSpeed": 5,
+        "piercingCount": 1,
+        "radius": 2
+    },
     "shrapnel-small": {
         "filenameKeyword": "shrapnel-small",
         "rotate": true,

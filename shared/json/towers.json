@@ -99,9 +99,9 @@
                 "cost": 100
             },
             {
-                "type": "double-shot",
-                "description": "Double shot",
-                "description_long": "Twice the number of rocks each shot",
+                "type": "no-resistance",
+                "description": "No resistance",
+                "description_long": "Removes resistance against metal enemies",
                 "cost": 350
             }
         ],

@@ -160,7 +160,7 @@ class Tower {
             func = this._allDirShot;
             break;
           case "scatter":
-            func = this._tripleShot;
+            func = this._spreadShot;
             break;
           default:
             func = this._normalShot;
@@ -190,16 +190,20 @@ class Tower {
         return [newBullet]
     }
 
-    _tripleShot() {
-        let mainBullet = this._normalShot()[0]
-        let leftBullet = this._normalShot()[0] // TODO add a "make default bullet" private function to avoid this
-        let rightBullet = this._normalShot()[0]
-
+    // Starts with a middle shot then adds bullets going slowly outwards
+    _spreadShot() {
+        let bullets = []
         let angleVariation = Math.PI/8
-        leftBullet.updateAngleAndSpeeds(mainBullet.angle - angleVariation)
-        rightBullet.updateAngleAndSpeeds(mainBullet.angle + angleVariation)
+        let angle = 0
+        for (let i=0; i < this.state.bulletCount; i += 1) {
+            let bullet = this._normalShot()[0] // TODO add a "make default bullet" private function to avoid this
+            bullet.updateAngleAndSpeeds(bullet.angle + angle)
+            bullets.push(bullet)
+            angle *= -1  // switch sides
+            if(i % 2 == 0) angle += angleVariation  // increase angle every other bullet
+        }
 
-        return [leftBullet, mainBullet, rightBullet]
+        return bullets
     }
 
     _allDirShot() {
@@ -223,11 +227,19 @@ class Tower {
                 }
             case "bullets-up":
                 return () => {
-                    this._stateMultiplier("bulletCount", 1.5)
+                    if (this.type == 'shrapnel-burst') {
+                        this.state.bulletCount = 8
+                    } else if (this.type == 'rock-scatter') {
+                        this.state.bulletCount = 5
+                    }
                 }
             case "bullet-size-up":
                 return () => {
                     this.bulletType = "shrapnel-large"  // TODO change if not shrapnel burst?
+                }
+            case "no-resistance":
+                return () => {
+                    this.bulletType = "rock-reinforced"
                 }
             default:
                 return () => {}
