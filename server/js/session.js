@@ -1,4 +1,3 @@
-const { Server } = require('socket.io')
 const game = require('./game.js')
 const mapGenerator = require("./mapGenerator.js")
 
@@ -14,14 +13,19 @@ class Session {
         this.players = {}
         this.gameSettings = {
             // "numRounds": gameConfig.numRoundOptions[0]  // Default to lowest number of rounds
-            "numRounds": roundConfig.rounds.length  // TODO use actual numbers from config once enough rounds added
+            "numRounds": roundConfig.rounds.length,  // TODO use actual numbers from config once enough rounds added
         }
 
         this.mapGenerator = new mapGenerator.MapGenerator(gameConfig.MAP_HEIGHT, gameConfig.MAP_WIDTH, gameConfig.SUBGRID_SIZE)
         this.map = this.mapGenerator.generateMap()
 
         this.hasStarted = false
-        this.gameState = "active"  // Can be active, over.victory, or over.loss
+        this.gameLoopActive = false
+
+        // Update frequencies
+        this.baseUpdateFrequency_ms = 1000 / 40  // 40 updates per second
+        this.fastForwardUpdateFrequency = this.baseUpdateFrequency_ms / 10  // speed up
+        this.updateFrequency_ms = this.baseUpdateFrequency_ms
 
         this.addSocket(socket, playerID)
     }
@@ -95,7 +99,8 @@ class Session {
                     else this.broadcast("client/player/add", this.game.getPlayerInfo(id))
                 }
                 this.game.start()
-                this.gameLoop = setInterval(()=>{this.updateGameAndSend()}, 50*0.2);  // 20 "fps"
+                this.gameLoopActive = true
+                this.gameLoop = this.updateGameAndSendLoop();
                 this.broadcast("client/view/game")
             }
         })
@@ -158,23 +163,53 @@ class Session {
                 // If still some players not ready, alert all players that this player is ready
                 this.broadcast("client/player/ready", this.game.getPlayerInfo(socket.playerID))
             }
-          })
+        })
+
+        socket.on("server/game/round/toggleFastForward", () => {
+            // TODO this works fine, things to sort out:
+            // - should updates actually be sent on each update in this ff state
+            if (this.updateFrequency_ms == this.fastForwardUpdateFrequency) {
+                this.updateFrequency_ms = this.baseUpdateFrequency_ms
+            } else {
+                this.updateFrequency_ms = this.fastForwardUpdateFrequency
+            }
+            this.broadcast("client/game/round/toggleFastForward")
+        })
     }
 
-    // Main processing loop
+    // Main processing step
     // Updates the game state and sends the update to all connected clients in that game room
     updateGameAndSend() {
+        const round = this.game.getRound()
+        const state = this.game.getState()
         this.game.update() // Advance the game by one tick
         this.broadcast("client/game/update", this.game.getGameState())
 
         // Check to see if the state of the game has changed. This will happen
         // if there is victory/completion or loss
-        let state = this.game.getState()
-        if (state != this.gameState) {
+        const updatedState = this.game.getState()
+        if (state != updatedState) {
             // state has changed, update the client
-            this.broadcast("client/game/state/set", state, this.game.getPlayerFinalResults())
-            this.gameState = state
+            this.broadcast("client/game/state/set", updatedState, this.game.getPlayerFinalResults())
         }
+
+        // Round changed, reset the frequency
+        if (round != this.game.getRound()) {
+            this.updateFrequency_ms = this.baseUpdateFrequency_ms
+        }
+    }
+
+    // Main processing loop
+    updateGameAndSendLoop() {
+        // After timeout, calls update function then calls this function again
+        // Doing it this way rather than setInterval allows update frequency to change
+        return setTimeout(() => {
+                if (this.gameLoopActive) {
+                    this.updateGameAndSend()
+                    this.updateGameAndSendLoop()
+                }
+            },
+            this.updateFrequency_ms)
     }
 
     removePlayer(playerID) {
@@ -195,6 +230,7 @@ class Session {
 
     // Stops game loop and removes any event listeners for the socket.
     cleanUpSession() {
+        this.gameLoopActive = false
         clearInterval(this.gameLoop)
     }
 }

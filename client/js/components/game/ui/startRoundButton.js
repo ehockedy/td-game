@@ -9,14 +9,8 @@ export class StartRoundButton extends ButtonHorizontalMenuOption {
         this.gameRoundText = new PIXI.Text("I'M READY!" , plainTextStyle(COLOURS.BLACK, fontSize))
         this.gameRoundText.anchor.set(0, 0.5)
         this.addText(this.gameRoundText, 0.15, 0.5)
-        this.update("1")  // Populate with expected text for round 1
 
         this.setSelectEventName("start-round")
-    }
-
-    update(roundNumberString) {
-        // Not sure this is the final text I want here, might be better with a dedicated round box
-        //this.gameRoundText.text = "Start Round " + roundNumberString
     }
 
     // Override

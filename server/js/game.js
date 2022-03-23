@@ -431,6 +431,10 @@ class Game {
         return "active"
     }
 
+    getRound() {
+        return this.round
+    }
+
     getGameStateEnemies() {
         let hash = crypto.createHash("sha256")
         let objects = []

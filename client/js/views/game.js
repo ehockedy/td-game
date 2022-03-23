@@ -6,6 +6,7 @@ import { TowersComponent } from "../components/game/towersComponent.js"
 import { EnemiesComponent } from "../components/game/enemiesComponent.js"
 import { BulletsComponent } from "../components/game/bulletsComponent.js"
 import { StartRoundButton } from "../components/game/ui/startRoundButton.js"
+import { FastForwardButton } from "../components/game/ui/fastForwardButton.js"
 import { RoundCounter } from "../components/game/ui/roundCounter.js"
 import { Counter } from "../components/game/ui/counter.js"
 import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
@@ -57,6 +58,8 @@ export class GameRenderer {
         this.gameSpace.y = config.BORDER_T
 
         this.startRoundButton = new StartRoundButton(rhs, toolbarY)
+        this.fastForwardButton = new FastForwardButton(rhs, toolbarY)
+        this.fastForwardButton.visible = false
 
         const counterWidth = 200
         this.roundCounter = new RoundCounter(rhs, toolbarY, counterWidth-20, this.round, this.maxRounds, COLOURS.MENU_SANDY)
@@ -76,6 +79,7 @@ export class GameRenderer {
         this.socket.off("client/player/ready")
         this.socket.off("client/map/update")
         this.socket.off("client/game/round/start")
+        this.socket.off("client/game/round/toggleFastForward")
         this.socket.off("client/game/update")
     }
 
@@ -134,6 +138,13 @@ export class GameRenderer {
         this.socket.on("client/game/round/start", () => {
             this.ut.unsetAllPlayers()
             this.startRoundButton.stopInteraction()
+            this.startRoundButton.visible = false
+            this.fastForwardButton.visible = true
+        })
+
+        this.socket.on("client/game/round/toggleFastForward", () => {
+            console.log("Toggled")
+            this.fastForwardButton.toggleFastForward()
         })
     }
 
@@ -148,6 +159,11 @@ export class GameRenderer {
         // Confirm that this player is ready to begin the round
         eventEmitter.on("start-round", () => {
             this.socket.emit("server/game/round/start")
+        })
+
+        // Fast forward the round - does this for all players
+        eventEmitter.on("toggle-fast-forward", () => {
+            this.socket.emit("server/game/round/toggleFastForward")
         })
 
         // Player has chosen where to place a tower, update the server which will tell all other players
@@ -203,6 +219,7 @@ export class GameRenderer {
         this.spriteHandler.registerContainer(this.gameSpace)
         this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.startRoundButton)
+        this.spriteHandler.registerContainer(this.fastForwardButton)
         this.spriteHandler.registerContainer(this.livesCounter)
         this.spriteHandler.registerContainer(this.moneyCounter)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
@@ -220,6 +237,7 @@ export class GameRenderer {
         // Subscribe componenets to get updated when draggable towers are updated
         this.tm.subscribeToAllTowers(this.localEventEmitter)
         this.startRoundButton.subscribe(this.localEventEmitter)
+        this.fastForwardButton.subscribe(this.localEventEmitter)
         this.gameSpace.subscribeToDeployedTowerMenu(this.localEventEmitter)
 
         // Begin the rendering loop
@@ -239,8 +257,10 @@ export class GameRenderer {
             this.perRoundUpdateText.updateText("Round " + this.round.toString())
             this.perRoundUpdateText.fadeInThenOut(timePerFade, timeBetweenFade)
         }, timePerFade*2 + timeBetweenMessages)
+        this.fastForwardButton.visible = false
+        this.fastForwardButton.reset()
+        this.startRoundButton.visible = true
         this.startRoundButton.startInteraction()
-        this.startRoundButton.update(this.round.toString())
     }
     
     update(serverUpdate) {
