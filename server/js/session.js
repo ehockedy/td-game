@@ -9,24 +9,25 @@ class Session {
         this.roundConfig = roundConfig
         this.enemyConfig = enemyConfig
 
+        this.mapGenerator = new mapGenerator.MapGenerator(gameConfig.MAP_HEIGHT, gameConfig.MAP_WIDTH, gameConfig.SUBGRID_SIZE)
+        this.map = this.mapGenerator.generateMap()
+        
+        this.hasStarted = false
+        this.gameLoopActive = false
+        
+        // Update frequencies
+        this.ticksPerSecond = 40  // This does not affect the speed of the game, just the frequency of updates.
+        this.baseUpdateFrequency_ms = 1000 / this.ticksPerSecond
+        this.fastForwardUpdateFrequency = this.baseUpdateFrequency_ms / 5  // speed up
+        this.updateFrequency_ms = this.baseUpdateFrequency_ms
+        
         this.sockets = {}  // All the connected players/ TODO I dont think this actually needs to be a map. Just keep ID as socket property.
         this.players = {}
         this.gameSettings = {
             // "numRounds": gameConfig.numRoundOptions[0]  // Default to lowest number of rounds
             "numRounds": roundConfig.rounds.length,  // TODO use actual numbers from config once enough rounds added
+            "ticksPerSecond": this.ticksPerSecond,
         }
-
-        this.mapGenerator = new mapGenerator.MapGenerator(gameConfig.MAP_HEIGHT, gameConfig.MAP_WIDTH, gameConfig.SUBGRID_SIZE)
-        this.map = this.mapGenerator.generateMap()
-
-        this.hasStarted = false
-        this.gameLoopActive = false
-
-        // Update frequencies
-        this.baseUpdateFrequency_ms = 1000 / 40  // 40 updates per second
-        this.fastForwardUpdateFrequency = this.baseUpdateFrequency_ms / 10  // speed up
-        this.updateFrequency_ms = this.baseUpdateFrequency_ms
-
         this.addSocket(socket, playerID)
     }
 

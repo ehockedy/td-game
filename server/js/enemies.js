@@ -9,11 +9,11 @@ const sizeMap = {
 // Simple factory class to produce an enemy of a given type without having to pass through
 // the config and path etc. each time, just the type
 class EnemyFactory {
-    constructor(enemyConfig, path, subgridSize) {
+    constructor(enemyConfig, path, subgridSize, ticksPerSecond) {
         this.enemyConfig = enemyConfig
         this.path = path
         this.subgridSize = subgridSize
-        this.tickStepSize = subgridSize/60  // Number of steps to take to mode through a square in 60 ticks
+        this.tickStepSize = Math.ceil(subgridSize/ticksPerSecond)   // Number of steps to take to mode through a square in ticksPerSecond ticks
         this.playerCount = 1 // Number of players, use this to scale HP
     }
 
@@ -23,7 +23,7 @@ class EnemyFactory {
             this.path,
             this.subgridSize,
             this.enemyConfig[enemyType].hp * this.playerCount,
-            this.enemyConfig[enemyType].speed,
+            Math.ceil(this.enemyConfig[enemyType].speed * this.tickStepSize),
             this.enemyConfig[enemyType].size,
             this.enemyConfig[enemyType].weaknesses,
             this.enemyConfig[enemyType].resistances,
@@ -68,7 +68,6 @@ class Enemy {
         this.steps = 0  // How many steps taken through the map path
         this.name = crypto.randomBytes(20).toString('hex');
         this.hitboxRadius = subgridSize/sizeMap[size]
-        this.tickStepSize = subgridSize/60  // Number of steps to take to move through a square in 60 ticks
 
         this.nearCentreRadius = this.hitboxRadius / 2  // Distance from centre point that is considered near. Used to determine when to turn.
         this.rotation = 0  // angle in radians that enemy is facing, starting at 0 which is right/east
@@ -99,7 +98,7 @@ class Enemy {
         // This will not necessarily be an integer
         // Cannot just use the speed config in the enemy config, since if the subgrid size changes,
         // then the enemis will move at different speeds.
-        return Math.floor(this.speed * this.tickStepSize)
+        return Math.floor(this.speed)
     }
 
     step() {

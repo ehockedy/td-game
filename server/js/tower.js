@@ -11,17 +11,18 @@ class Tower {
      * @param {String} player Who the tower belongs to
      * @param {Point} position Point object that described the position in global and grid/subgrid coordinates
      */
-    constructor(name, type, player, position, subgridSize) {
+    constructor(name, type, player, position, subgridSize, ticksPerSecond) {
         this.name = name;
         this.type = type
         this.subgridSize = subgridSize
+        this.ticksPerSecond = ticksPerSecond
 
         this.position = position
         this.row = position.row
         this.col = position.col
         this.x = position.x
         this.y = position.y
-        this.tickStepSize = subgridSize/60  // Number of steps to take to move through a square in 60 ticks
+        this.tickStepSize = subgridSize/ticksPerSecond  // Number of steps to take to move through a square in ticksPerSecond ticks
 
         this.fireTick = 0 // Ticks since last bullet
         this.target
@@ -38,7 +39,7 @@ class Tower {
 
         // These values can change based on user actions
         this.state = {
-            "rateOfFire" : towerJson[type]["gameData"]["rateOfFire"], // ticks between bullets
+            "rateOfFire" : Math.ceil(this.ticksPerSecond / towerJson[type]["gameData"]["rateOfFire"]), // ticks between bullets = ticks per second / bullets per second
             "seekRange": towerJson[type]["gameData"]["seekRange"],
             "shootRange": towerJson[type]["gameData"]["shootRange"], // How far bullet can travel once fired
             "bulletSpeed": towerJson[type]["gameData"]["bulletSpeed"],

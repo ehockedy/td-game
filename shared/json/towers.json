@@ -6,7 +6,7 @@
             "seekRange": 3,
             "shootRange": 4,
             "damage": 7,
-            "rateOfFire": 50,
+            "rateOfFire": 1.2,
             "bulletSpeed": 5,
             "numberOfBullets": 1,
             "turns": true
@@ -43,7 +43,7 @@
             "seekRange": 1.5,
             "shootRange": 1.5,
             "damage": 3,
-            "rateOfFire": 40,
+            "rateOfFire": 2,
             "bulletSpeed": 7,
             "numberOfBullets": 6,
             "turns": false
@@ -80,7 +80,7 @@
             "seekRange": 3,
             "shootRange": 4,
             "damage": 12,
-            "rateOfFire": 50,
+            "rateOfFire": 1.2,
             "bulletSpeed": 5,
             "numberOfBullets": 3,
             "turns": true
@@ -117,7 +117,7 @@
             "seekRange": 3,
             "shootRange": 4,
             "damage": 14,
-            "rateOfFire": 45,
+            "rateOfFire": 1,
             "bulletSpeed": 4,
             "numberOfBullets": 1,
             "turns": true
@@ -154,7 +154,7 @@
             "seekRange": 6,
             "shootRange": 8,
             "damage": 70,
-            "rateOfFire": 100,
+            "rateOfFire": 0.25,
             "bulletSpeed": 8,
             "numberOfBullets": 1,
             "turns": true
@@ -191,7 +191,7 @@
             "seekRange": 3,
             "shootRange": 4,
             "damage": 4,
-            "rateOfFire": 4,
+            "rateOfFire": 10,
             "bulletSpeed": 3,
             "numberOfBullets": 1,
             "turns": true

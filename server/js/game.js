@@ -21,14 +21,15 @@ class Game {
 
         this.lives = 100
 
-        this.enemyFactory = new EnemyFactory(enemyConfig, this.map.path, this.map.subgridSize)
+        this.subgridSize = this.map.subgridSize
+        this.subgridMidpoint = Math.floor(this.subgridSize/2)
+        this.ticksPerSecond = settings.ticksPerSecond
+
+        this.enemyFactory = new EnemyFactory(enemyConfig, this.map.path, this.map.subgridSize, this.ticksPerSecond)
         this.enemyQueue = []
         this.enemyKillCount = 0
         this.enemiesRemaining = 0
         this.endOfPathEnemies = []  // Holds the enemies that have reached the end of the path without dying
-
-        this.subgridSize = this.map.subgridSize
-        this.subgridMidpoint = Math.floor(this.subgridSize/2)
     }
 
     moveEnemies() {
@@ -231,7 +232,7 @@ class Game {
 
     addTower(name, type, playerID, row, col) {
         let player = this.getPlayerByName(playerID)
-        let newTower = new towerImport.Tower(name, type, player, new point.Point(this.map.subgridSize, col, row, this.subgridMidpoint, this.subgridMidpoint), this.subgridSize)
+        let newTower = new towerImport.Tower(name, type, player, new point.Point(this.map.subgridSize, col, row, this.subgridMidpoint, this.subgridMidpoint), this.subgridSize, this.ticksPerSecond)
         newTower.calculateShootPath(this.map.mainPath)
         this.towers.push(newTower)
         player.reduceMoney(newTower.getCost()) // Keep player implementation simple and let client determine whether player can afford tower
@@ -344,14 +345,14 @@ class Game {
                     if (enemyType == "gap") {
                         this.enemyQueue.push({
                             "type": enemyType,
-                            "ticksUntilGo" : enemyData.enemiesPerSquarePerSecond*60
+                            "ticksUntilGo" : enemyData.enemiesPerSquarePerSecond*this.ticksPerSecond
                         })
                     } else {
                         this.enemyQueue.push({
                             "type": enemyType,
-                            // 60/speed is number of ticks to complete one square, so divide that by the number of enemies to introduce
+                            // this.ticksPerSecond/speed is number of ticks to complete one square, so divide that by the number of enemies to introduce
                             // per second to get the number of ticks between each enemy.
-                            "ticksUntilGo": Math.floor((1/enemyData.enemiesPerSquarePerSecond) * (60/this.enemyFactory.getSpeed(enemyType)))
+                            "ticksUntilGo": Math.floor((1/enemyData.enemiesPerSquarePerSecond) * (this.ticksPerSecond/this.enemyFactory.getSpeed(enemyType)))
                         })
                         enemiesThisRound += 1
                     }
