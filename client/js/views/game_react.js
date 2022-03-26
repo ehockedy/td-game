@@ -9,7 +9,7 @@ export class Game extends React.Component {
         super(props)
         this.state = {
             gameState : "active",
-            playerState: {},  // Holds game info such as money and score, is not updated regularly though - only when gameState
+            playerState: [],  // Holds game info such as money and score, is not updated regularly though - only when gameState
             width_px: this.props.config.APP_WIDTH,
             height_px: this.props.config.APP_HEIGHT,
             globalResizeMultiplier: 1
@@ -94,7 +94,7 @@ export class Game extends React.Component {
             <span className="game-canvas" style={{width: this.state.width_px, height: this.state.height_px}}>
                 <canvas id="gameCanvas" className="game-canvas" style={{width: this.state.width_px + "px", height:this.state.height_px + "px"}}/> 
                 { this.state.gameState != "active" &&
-                    <EndGameModal gameState={this.state.gameState} scale={this.state.globalResizeMultiplier} playerConfig={this.props.players} playerState={this.state.playerState}/>
+                    <EndGameModal gameState={this.state.gameState} scale={this.state.globalResizeMultiplier} playerConfig={this.props.players} playerState={this.state.playerState} returnToMainMenuFn={this.props.returnToMainMenuFn}/>
                 }
             </span>
         )
