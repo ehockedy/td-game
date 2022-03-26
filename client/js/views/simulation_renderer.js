@@ -50,14 +50,6 @@ export class SimulationRender {
         })
     }
 
-    loadAssets() { // TODO load tower json and pass through
-        return Promise.all([
-            this.loadData(),
-            this.ec.loadData(),
-            this.bc.loadData()
-        ])
-    }
-
     /**
      * Set up the events that the game shoud listen for
      * These events come from the server

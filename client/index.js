@@ -7,49 +7,45 @@ import { GameMapBackground } from "./js/components/ui_common/map.js"
 import React, { useEffect, useState } from "react";
 import { generateClientConfig } from "./js/constants.js"
 
-function loadAssets() {
+function loadAssets(enemyConfig) {
     return new Promise((resolve) => {
-       PIXI.Loader.shared
-        .add("client/assets/bullets/bullets.json")
-        .add("client/assets/towers/1-rock_thrower/rock_thrower.json")
-        .add("client/assets/towers/2-shrapnel_burst/shrapnel_burst.json")
-        .add("client/assets/towers/3-rock_scatter/rock_scatter.json")
-        .add("client/assets/towers/4-sniper/sniper.json")
-        .add("client/assets/towers/5-spear_launcher/spear_launcher.json")
-        .add("client/assets/towers/6-flamethrower/flamethrower.json")
-        .add("client/assets/towers/7-buzzsaw/buzzsaw.json")
-        .add("client/assets/map/base_tiles/base_tiles.json")
-        .add("client/assets/map/land_patterns/land_patterns.json")
-        .add("client/assets/map/land_decorations/land_decorations.json")
-        .add("client/assets/map/path_decorations/path_decorations.json")
-        .add("client/assets/map/path_sides/path_sides.json")
-        .add("client/assets/infoBoxes/infoBoxes.json")
-        .add("client/assets/infoBoxes/towerPopup/towerPopup.json")
-        .add("client/assets/collisions/collision1/collision1.json")
-        .add("client/assets/camp/flag1/flag1.json")
-        .add("client/assets/camp/tents/tents.json")
-        .add("client/assets/camp/tents/tent1.json")
-        .add("client/assets/camp/tents/tent2.json")
-        .load(resolve)
+        PIXI.Loader.shared
+            .add("client/assets/bullets/bullets.json")
+            .add("client/assets/towers/1-rock_thrower/rock_thrower.json")
+            .add("client/assets/towers/2-shrapnel_burst/shrapnel_burst.json")
+            .add("client/assets/towers/3-rock_scatter/rock_scatter.json")
+            .add("client/assets/towers/4-sniper/sniper.json")
+            .add("client/assets/towers/5-spear_launcher/spear_launcher.json")
+            .add("client/assets/towers/6-flamethrower/flamethrower.json")
+            .add("client/assets/towers/7-buzzsaw/buzzsaw.json")
+            .add("client/assets/map/base_tiles/base_tiles.json")
+            .add("client/assets/map/land_patterns/land_patterns.json")
+            .add("client/assets/map/land_decorations/land_decorations.json")
+            .add("client/assets/map/path_decorations/path_decorations.json")
+            .add("client/assets/map/path_sides/path_sides.json")
+            .add("client/assets/infoBoxes/infoBoxes.json")
+            .add("client/assets/infoBoxes/towerPopup/towerPopup.json")
+            .add("client/assets/collisions/collision1/collision1.json")
+            .add("client/assets/camp/flag1/flag1.json")
+            .add("client/assets/camp/tents/tents.json")
+            .add("client/assets/camp/tents/tent1.json")
+            .add("client/assets/camp/tents/tent2.json")
+        for (let type in enemyConfig) {
+            PIXI.Loader.shared.add(enemyConfig[type].textureAtlasFile)
+        }
+
+        // Load all queued assets, then call resolve when done
+        PIXI.Loader.shared.load(resolve)
     })
 }
 
-function loadGameConfig() {
+function loadConfig(configType) {
     return new Promise((resolve) => {
-        fetch("shared/json/gameConfig.json").then((response) => {
+        fetch(configType).then((response) => {
             response.json().then((data) => {
                 resolve(data)
           })
       })
-    })
-}
-
-function loadFonts() {
-    return new Promise((resolve) => {
-        var font = new FontFaceObserver('MarbleWasteland');
-        font.load().then(
-            resolve
-        )
     })
 }
 
@@ -116,7 +112,16 @@ function Application(props) {
                     <Lobby socket={socket} gameID={gameID} thisPlayer={playerID} players={players} config={config} mapStructure={map} gameSettings={gameSettings}></Lobby>
                 ) :
                 view === "game" ? (
-                    <Game socket={socket} config={config} thisPlayer={playerID} players={players} gameSettings={gameSettings} returnToMainMenuFn={returnToMainMenu}></Game>
+                    <Game
+                        socket={socket}
+                        config={config}
+                        enemyConfig={props.enemyConfig}
+                        bulletConfig={props.bulletConfig}
+                        thisPlayer={playerID}
+                        players={players}
+                        gameSettings={gameSettings}
+                        returnToMainMenuFn={returnToMainMenu}>
+                    </Game>
                 ) :
                 view === "simulation" ? (
                     <SimulationView socket={socket} config={config}></SimulationView>
@@ -128,16 +133,25 @@ function Application(props) {
     )
 }
 
+function renderApp(gameConfig, enemyConfig, bulletConfig) {
+    ReactDOM.render(
+        <Application config={gameConfig} enemyConfig={enemyConfig} bulletConfig={bulletConfig}/>,
+        document.getElementById('root')
+    );
+}
+
 function run() {
+    // Load config
     Promise.all([
-        loadAssets(),
-        loadGameConfig(),
-        // loadFonts(),
-    ]).then(([asset, gameConfig, font]) => {
-        ReactDOM.render(
-            <Application config={gameConfig}/>,
-            document.getElementById('root')
-          );
+        loadConfig("shared/json/gameConfig.json"),
+        loadConfig("shared/json/enemies.json"),
+        loadConfig("shared/json/bullets.json"),
+    ]).then(([gameConfig, enemyConfig, bulletConfig]) => {
+        // Queue then load assets
+        loadAssets(enemyConfig).then(() => {
+            // Start rendering the application
+            renderApp(gameConfig, enemyConfig, bulletConfig)
+        })
     })
 }
 

@@ -18,7 +18,7 @@ import { COLOURS } from "../components/ui_common/style.js"
  * It also takes updates from the server and passes the update data to the relevant components
  */
 export class GameRenderer {
-    constructor(socket, spriteHandler, config, thisPlayerID, players, gameSettings) {
+    constructor(socket, spriteHandler, config, enemyConfig, bulletConfig, thisPlayerID, players, gameSettings) {
         this.spriteHandler = spriteHandler
         this.socket = socket
         this.round = 1
@@ -44,8 +44,8 @@ export class GameRenderer {
         this.ut.y = top_bottom_gap
 
         this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_MAP)
-        this.ec = new EnemiesComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
-        this.bc = new BulletsComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
+        this.ec = new EnemiesComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP, enemyConfig)
+        this.bc = new BulletsComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP, bulletConfig)
         this.perRoundUpdateText = new OnScreenMessage(config.MAP_WIDTH/2, config.MAP_HEIGHT/2, "Round 1", 80)
         this.map = new MapComponent(config.SPRITE_SIZE_MAP)
 
@@ -93,14 +93,6 @@ export class GameRenderer {
                 })
             })
         })
-    }
-
-    loadAssets() { // TODO load tower json and pass through
-        return Promise.all([
-            this.loadData(),
-            this.ec.loadData(),
-            this.bc.loadData()
-        ])
     }
 
     /**

@@ -30,7 +30,7 @@ class Enemy extends BaseComponent {
 }
 
 export class EnemiesComponent extends BaseComponent {
-    constructor(spriteSize, spriteSizeMap) {
+    constructor(spriteSize, spriteSizeMap, enemyConfig) {
         super()
         this.spriteSize = spriteSize
         this.spriteSizeMap = spriteSizeMap
@@ -51,36 +51,20 @@ export class EnemiesComponent extends BaseComponent {
         for (const texture of Object.values(explosion1Textures)) {
             this.collisionTextures.push(texture)
         }
-        this.enemyConfig = {}
+        this.enemyConfig = enemyConfig
+        this.enemyTextures = this.loadEnemyTextures()
     }
 
-    loadData() {
-        return new Promise((resolve) => {
-            console.log("enemies")
-            fetch("shared/json/enemies.json").then((response) => {
-                response.json().then((enemyJson) => {
-                    this.enemyConfig = enemyJson
-                    // Load enemy sprite data once config loaded, instead of at start
-                    let loader = new PIXI.Loader()
-
-                    // Load textures using filename in config for each type of enemy
-                    for (let type in enemyJson) {
-                        console.log("adding ", enemyJson[type].textureAtlasFile)
-                        loader.add(enemyJson[type].textureAtlasFile)
-                    }
-
-                    loader.load(() => {
-                        for (let type in enemyJson) {
-                            this.enemyTextures[type] = []
-                            for (const textureValue of Object.values(loader.resources[enemyJson[type].textureAtlasFile].textures)) {
-                                this.enemyTextures[type].push(textureValue)
-                            }
-                        }
-                        resolve()
-                    })
-                })
-            })
-        })
+    // Cache a map of textures for a given enemy
+    loadEnemyTextures() {
+        let enemyTextures = {}
+        for (let type in this.enemyConfig) {
+            enemyTextures[type] = []
+            for (const textureValue of Object.values(PIXI.Loader.shared.resources[this.enemyConfig[type].textureAtlasFile].textures)) {
+                enemyTextures[type].push(textureValue)
+            }
+        }
+        return enemyTextures
     }
 
     /**

@@ -75,7 +75,7 @@ export class SimulationView extends React.Component {
 
         // View is the scene that user is currently on
         this.view = new SimulationRender(this.props.socket, this.spriteHandler, this.props.config)
-        this.view.loadAssets().then(()=>{
+        this.view.loadData().then(()=>{
             this.view.startRendering()
             this.props.socket.emit("server/simulation/visualise", this.state, () => {
                 this.setState({simulationInProgress: false})

@@ -2,35 +2,31 @@ import { BaseComponent } from "./base/baseComponent.js"
 import { gridPosToMapPos } from "../../tools.js"
 
 export class BulletsComponent extends BaseComponent {
-    constructor(spriteSize, spriteSizeMap) {
+    constructor(spriteSize, spriteSizeMap, bulletConfig) {
         super()
         this.spriteSize = spriteSize
         this.spriteSizeMap = spriteSizeMap
         this.bulletStateHashPrev = ""
-        this.bulletTextures = {}
+        this.bulletConfig = bulletConfig
+        this.bulletTextures = this.loadBulletTextures()
     }
 
-    loadData() {
-        let _this = this
-        return new Promise((resolve) => {
-            fetch("shared/json/bullets.json").then((response) => {
-                response.json().then((data) => {
-                    _this.bulletJson = data
-                    let textures = PIXI.Loader.shared.resources["client/assets/bullets/bullets.json"].textures
+    loadBulletTextures() {
+        let bulletTextures = {}
+        let textures = PIXI.Loader.shared.resources["client/assets/bullets/bullets.json"].textures
 
-                    // Load textures using keyword in each filename for each type of bullet
-                    for (let type in _this.bulletJson) this.bulletTextures[type] = []
+        // Load textures using keyword in each filename for each type of bullet
+        for (let type in this.bulletConfig) bulletTextures[type] = []
 
-                    // Identify if the texture file name is one of the types in the json config, add to the texture dictionary if so
-                    for (let textureName in textures) {
-                        for (let type in _this.bulletJson) {
-                            if (textureName.includes(_this.bulletJson[type].filenameKeyword)) this.bulletTextures[type].push(textures[textureName])
-                        }
-                    }
-                    resolve()
-                })
-            })
-        })
+        // Identify if the texture file name is one of the types in the json config, add to the texture dictionary if so
+        for (let textureName in textures) {
+            for (let type in this.bulletConfig) {
+                if (textureName.includes(this.bulletConfig[type].filenameKeyword)) {
+                    bulletTextures[type].push(textures[textureName])
+                }
+            }
+        }
+        return bulletTextures
     }
 
     addBullet(name, type, x, y) {
@@ -55,8 +51,8 @@ export class BulletsComponent extends BaseComponent {
                 if (bulletNew.name == bullet.name) {
                     bullet.x = newpos[0]
                     bullet.y = newpos[1]
-                    if (this.bulletJson[bulletNew.type].rotate) {
-                        bullet.angle += this.bulletJson[bulletNew.type].rotationSpeed
+                    if (this.bulletConfig[bulletNew.type].rotate) {
+                        bullet.angle += this.bulletConfig[bulletNew.type].rotationSpeed
                     } else {
                         bullet.rotation = bulletNew.angle
                         
