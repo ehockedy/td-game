@@ -11,7 +11,7 @@ import { COLOURS } from "../components/ui_common/style.js"
  * It also takes updates from the server and passes the update data to the relevant components
  */
 export class SimulationRender {
-    constructor(socket, spriteHandler, config) {
+    constructor(socket, spriteHandler, config, enemyConfig, bulletConfig) {
         this.spriteHandler = spriteHandler
         this.socket = socket
         this.round = 1
@@ -25,8 +25,8 @@ export class SimulationRender {
 
         this.tc = new TowersComponent(this.spriteHandler, config.SPRITE_SIZE_MAP)
         this.tc.setSimulation()
-        this.ec = new EnemiesComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
-        this.bc = new BulletsComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP)
+        this.ec = new EnemiesComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP, enemyConfig)
+        this.bc = new BulletsComponent(config.SPRITE_SIZE_TOWER, config.SPRITE_SIZE_MAP, bulletConfig)
         this.map = new MapComponent(config.SPRITE_SIZE_MAP)
 
 

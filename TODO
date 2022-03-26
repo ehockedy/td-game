@@ -34,3 +34,8 @@ Main features:
 
 Enemies:
  - golden beetle
+
+Next:
+ - adjust towers and finish upgrades
+ - make FE react to fast forwarding
+ - Fix issue with spear launcher (and priobably others) rendering bullet wront angle initially

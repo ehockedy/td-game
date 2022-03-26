@@ -68,13 +68,13 @@ export class SimulationView extends React.Component {
         if (this.chart) this.chart.dispose()
         this.setState({simulationsCompleted: 0})
     }
-    
+
     beginRenderingSimulation() {
         if (this.state.simulationInProgress) return
         this.cleanUpExistingState()
 
         // View is the scene that user is currently on
-        this.view = new SimulationRender(this.props.socket, this.spriteHandler, this.props.config)
+        this.view = new SimulationRender(this.props.socket, this.spriteHandler, this.props.config, this.props.enemyConfig, this.props.bulletConfig)
         this.view.loadData().then(()=>{
             this.view.startRendering()
             this.props.socket.emit("server/simulation/visualise", this.state, () => {
@@ -243,6 +243,8 @@ export class SimulationView extends React.Component {
             canvas.id = "game-canvas"
             canvas.classList.add("game-canvas-simulation")
             canvas.classList.add("display-box-shadowless")
+            canvas.style.width = `${this.props.config.APP_WIDTH*0.7}px`
+            canvas.style.height = `${this.props.config.APP_HEIGHT*0.7}px`
             this.pixi_cnt.appendChild(canvas)
         }
      };

@@ -124,7 +124,12 @@ function Application(props) {
                     </Game>
                 ) :
                 view === "simulation" ? (
-                    <SimulationView socket={socket} config={config}></SimulationView>
+                    <SimulationView
+                        socket={socket}
+                        config={config}
+                        enemyConfig={props.enemyConfig}
+                        bulletConfig={props.bulletConfig}
+                    ></SimulationView>
                 ) :
                 console.log("INVALID VIEW")
                 // TODO add page not found page

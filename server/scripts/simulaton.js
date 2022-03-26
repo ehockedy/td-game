@@ -378,9 +378,15 @@ class Simulator {
         this.roundConfig = roundConfig
         this.enemyConfig = enemyConfig
         this.towerConfig = towerConfig
+        this.ticksPerSecond = 1000
 
         this.gameSettings = {
-            "numRounds": roundConfig.rounds.length
+            "numRounds": roundConfig.rounds.length,
+            // This is not true, but for simulation it speeds it up. If used actual value, would run at normal speed which we do
+            // not want. As long as this value is same as actual game, the results will be the same. since speeds/ROF will be the same.
+            // A problem is they are not is that ceil functions will alter speeds slightly, due to the fact that speeds are multiplied
+            // based on subgrid size and this value (ticksPerSecond).
+            "ticksPerSecond": 40
         }
     }
 
@@ -397,7 +403,7 @@ class Simulator {
         // Run simulation with very infrequent timeout stops, and as short as possible. This is so that
         // simulations are run quickly, but still break to allow event loop to process
         // Pass socket as undefined
-        return gameSimulation.simulationLoop(towerPurchaseMethod, 1000, 0, undefined)
+        return gameSimulation.simulationLoop(towerPurchaseMethod, this.ticksPerSecond, 0, undefined)
     }
 
     async runSimulationWithView(seed, towerPurchaseMethod, socket) {
