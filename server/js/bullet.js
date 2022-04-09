@@ -11,7 +11,7 @@ const bulletSizeMap = {
 }
 
 class Bullet {
-    constructor(position, angle, damage, speedSquaresPerSecond, range, type, subgridSize) {
+    constructor(position, angle, damage, speedSquaresPerSecond, range, type, subgridSize, bulletModifiers) {
         this.position = position.getCopy()
         this.bulletPosStart = position.getCopy()  // TODO replace this with cumulative dist travelled
         this.positionPrev = position.getCopy()
@@ -20,7 +20,7 @@ class Bullet {
         this.damage = damage
         this.range = range
         this.type = type
-        this.piercingCount = bulletConfig[this.type].piercingCount
+        this.piercingCount = bulletConfig[this.type].piercingCount + bulletModifiers.extraPiercing
         this.name = crypto.randomBytes(20).toString('hex');
 
         this.bulletSizePorportion = bulletSizeMap[bulletConfig[this.type].radius]  // Proportion of a square on the map
@@ -31,6 +31,8 @@ class Bullet {
         this.ySpeed = this.speed * Math.sin(this.angle)
 
         this.hasMovedSquare = false
+
+        this.bulletModifiers = bulletModifiers
     }
 
     move() {
@@ -68,6 +70,7 @@ class Bullet {
 
     collide() {
         this.piercingCount -= 1
+        this.damage = this.bulletModifiers.stackDamageMultiplier
         return this.piercingCount <= 0
     }
 

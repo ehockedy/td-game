@@ -48,6 +48,12 @@ class Tower {
             "aimBehaviour": "first", // Which enemy to shoot at from all those in it's range
         }
 
+        // Passed to bullet when created to modifie the bullets behaviour
+        this.bulletModifiers = {
+            "extraPiercing": 0,  // Number of extra enemies to pierce through
+            "stackDamageMultiplier": 1, // Damage multiplied by this amount after each enemy pierced
+        }
+
         // Statistics about a tower that are sent to the client
         this.stats = {
             "kills": 0
@@ -145,6 +151,7 @@ class Tower {
             this.state.shootRange,
             this.bulletType,
             this.subgridSize,
+            this.bulletModifiers,
         )
         newBullet.setOriginTower(this)
         return newBullet
@@ -242,6 +249,14 @@ class Tower {
                 return () => {
                     this.bulletType = "rock-reinforced"
                 }
+            case "piercing-up":
+                return () => {
+                    this.bulletModifiers.extraPiercing = 1
+                }
+            case "dmg-stack":
+                return () => {
+                    this.bulletModifiers.stackDamageMultiplier = 1.2
+                }
             default:
                 return () => {}
         }
@@ -249,7 +264,7 @@ class Tower {
 
     _stateMultiplier(prop, multiplier) {
         // Increases a given property by given multiplication (minimum of 1)
-        this.state[prop] = Math.ceil(this.state[prop] * multiplier)
+        this.state[prop] = this.state[prop] * multiplier
     }
 }
 
