@@ -70,7 +70,7 @@ class Bullet {
 
     collide() {
         this.piercingCount -= 1
-        this.damage = this.bulletModifiers.stackDamageMultiplier
+        this.damage *= this.bulletModifiers.stackDamageMultiplier
         return this.piercingCount <= 0
     }
 
@@ -106,6 +106,10 @@ class Bullet {
     getPlayer() {
         if (!this.originTower) return ""
         return this.originTower.player
+    }
+
+    isFinisher() {
+        return this.bulletModifiers.isFinisher
     }
 }
 

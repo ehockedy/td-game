@@ -52,6 +52,7 @@ class Tower {
         this.bulletModifiers = {
             "extraPiercing": 0,  // Number of extra enemies to pierce through
             "stackDamageMultiplier": 1, // Damage multiplied by this amount after each enemy pierced
+            "isFinisher": false,
         }
 
         // Statistics about a tower that are sent to the client
@@ -256,6 +257,10 @@ class Tower {
             case "dmg-stack":
                 return () => {
                     this.bulletModifiers.stackDamageMultiplier = 1.2
+                }
+            case "finisher":
+                return () => {
+                    this.bulletModifiers.isFinisher = true
                 }
             default:
                 return () => {}
