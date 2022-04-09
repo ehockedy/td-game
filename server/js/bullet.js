@@ -111,6 +111,10 @@ class Bullet {
     isFinisher() {
         return this.bulletModifiers.isFinisher
     }
+
+    canPierceAll() {
+        return this.bulletModifiers.pierceAll
+    }
 }
 
 module.exports = {

@@ -196,10 +196,29 @@
             "numberOfBullets": 1,
             "turns": true
         },
-        "upgrades": [],
+        "upgrades": [
+            {
+                "type": "piercing-up",
+                "description": "More piercing",
+                "description_long": "Can pierce through one extra enemy",
+                "cost": 200
+            },
+            {
+                "type": "pierce-all",
+                "description": "Pierce everything",
+                "description_long": "Can even pierce slime enemies",
+                "cost": 600
+            },
+            {
+                "type": "bullets-up-dmg-down",
+                "description": "Wide flame",
+                "description_long": "Produces more fire, at slightly reduced damage",
+                "cost": 800
+            }
+        ],
         "cost": 1000,
         "bulletType": "flame",
-        "shootPattern": "single",
+        "shootPattern": "scatter",
         "textureAtlasFile": "client/assets/towers/6-flamethrower/flamethrower.json"
     },
     "buzzsaw": {

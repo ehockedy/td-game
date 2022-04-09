@@ -46,6 +46,7 @@ class Tower {
             "damage": towerJson[type]["gameData"]["damage"],
             "bulletCount": towerJson[type]["gameData"]["numberOfBullets"],
             "aimBehaviour": "first", // Which enemy to shoot at from all those in it's range
+            "bulletSpreadAngleScatter": Math.PI/8  // Angle between bullets for scatter shoot type
         }
 
         // Passed to bullet when created to modifie the bullets behaviour
@@ -53,6 +54,7 @@ class Tower {
             "extraPiercing": 0,  // Number of extra enemies to pierce through
             "stackDamageMultiplier": 1, // Damage multiplied by this amount after each enemy pierced
             "isFinisher": false,
+            "pierceAll": false,
         }
 
         // Statistics about a tower that are sent to the client
@@ -202,7 +204,7 @@ class Tower {
     // Starts with a middle shot then adds bullets going slowly outwards
     _spreadShot() {
         let bullets = []
-        let angleVariation = Math.PI/8
+        let angleVariation = this.state.bulletSpreadAngleScatter
         let angle = 0
         for (let i=0; i < this.state.bulletCount; i += 1) {
             let bullet = this._normalShot()[0] // TODO add a "make default bullet" private function to avoid this
@@ -236,9 +238,9 @@ class Tower {
                 }
             case "bullets-up":
                 return () => {
-                    if (this.type == 'shrapnel-burst') {
+                    if (this.type === 'shrapnel-burst') {
                         this.state.bulletCount = 8
-                    } else if (this.type == 'rock-scatter') {
+                    } else if (this.type === 'rock-scatter') {
                         this.state.bulletCount = 5
                     }
                 }
@@ -261,6 +263,19 @@ class Tower {
             case "finisher":
                 return () => {
                     this.bulletModifiers.isFinisher = true
+                }
+            case "pierce-all":
+                return () => {
+                    this.bulletModifiers.pierceAll = true
+                }
+            case "bullets-up-dmg-down":
+                return () => {
+                    if (this.type === 'flamethrower') {
+                        console.log("budd")
+                        this._stateMultiplier("damage", 0.8)
+                        this.state.bulletCount = 3
+                        this.state.bulletSpreadAngleScatter = Math.PI/16
+                    }
                 }
             default:
                 return () => {}
