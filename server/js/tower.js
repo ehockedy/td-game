@@ -55,6 +55,7 @@ class Tower {
             "stackDamageMultiplier": 1, // Damage multiplied by this amount after each enemy pierced
             "isFinisher": false,
             "pierceAll": false,
+            "isFirstBlood": false,
         }
 
         // Statistics about a tower that are sent to the client
@@ -271,11 +272,14 @@ class Tower {
             case "bullets-up-dmg-down":
                 return () => {
                     if (this.type === 'flamethrower') {
-                        console.log("budd")
                         this._stateMultiplier("damage", 0.8)
                         this.state.bulletCount = 3
                         this.state.bulletSpreadAngleScatter = Math.PI/16
                     }
+                }
+            case "first-blood":
+                return () => {
+                    this.bulletModifiers.isFirstBlood = true
                 }
             default:
                 return () => {}

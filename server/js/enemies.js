@@ -60,7 +60,7 @@ class Enemy {
     constructor(type, path, subgridSize, hp, speed, size, weaknesses, resistances, blockPiercing) {
         this.type = type
         this.hp = hp;
-        this.mapHp = hp
+        this.maxHp = hp
         this.speed = speed;
         this.weaknesses = weaknesses
         this.resistances = resistances
@@ -209,6 +209,11 @@ class Enemy {
         // Finisher bullets do extra damage to enemies that are low on health
         if (bullet.isFinisher() && this.hp <= (this.maxHp * 0.1)) {
             multiplier *= 2
+        }
+
+        // First blood bullets do extra damage to enemies on full health
+        if (bullet.isFirstBlood() && this.hp === this.maxHp) {
+            multiplier *= 3
         }
 
         const dmg = Math.floor(bullet.damage * multiplier)

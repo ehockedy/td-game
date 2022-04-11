@@ -115,6 +115,10 @@ class Bullet {
     canPierceAll() {
         return this.bulletModifiers.pierceAll
     }
+
+    isFirstBlood() {
+        return this.bulletModifiers.isFirstBlood
+    }
 }
 
 module.exports = {
