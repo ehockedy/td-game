@@ -21,7 +21,7 @@
             {
                 "type": "range-up",
                 "description": "Range up",
-                "description_long": "Range up by 20%",
+                "description_long": "Range up by 1 square",
                 "cost": 75
             },
             {
@@ -95,7 +95,7 @@
             {
                 "type": "range-up",
                 "description": "Range up",
-                "description_long": "Range up by 20%",
+                "description_long": "Range up by 1 square",
                 "cost": 100
             },
             {
@@ -132,7 +132,7 @@
             {
                 "type": "range-up",
                 "description": "Range up",
-                "description_long": "Range up",
+                "description_long": "Range up by 1 square",
                 "cost": 100
             },
             {

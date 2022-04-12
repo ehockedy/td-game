@@ -14,8 +14,8 @@ export class BaseInteractiveTower extends BaseTower {
 
         }
         // Add a circle that shows the range the tower can detect enemies in
-        let range = towerConfig[type].gameData.seekRange
-        this.rangeCircle = this.generateRangeSprite(range, this.textureSize)
+        this.range = towerConfig[type].gameData.seekRange
+        this.rangeCircle = this.generateRangeSprite(this.range, this.textureSize)
         this.addChildAt(this.rangeCircle, 0) // Add to front so rendered at bottom
     }
 
@@ -52,5 +52,19 @@ export class BaseInteractiveTower extends BaseTower {
 
     toggleRangeCircle() {
         this.rangeCircle.visible = !this.rangeCircle.visible
+    }
+
+    updateRange(newRange) {
+        // Update range value
+        this.range = newRange
+
+        // Remove existing circle
+        const oldRangeCircle = this.removeChild(this.rangeCircle)
+
+        // Add new range circle
+        this.rangeCircle = this.generateRangeSprite(this.range, this.textureSize)
+        this.rangeCircle.visible = oldRangeCircle.visible
+        this.addChild(this.rangeCircle)
+        oldRangeCircle.destroy()
     }
 }

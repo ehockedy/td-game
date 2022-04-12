@@ -234,8 +234,8 @@ class Tower {
                 return () => {this._stateMultiplier("rateOfFire", 0.5)}
             case "range-up":
                 return () => {
-                    this._stateMultiplier("seekRange", 1.2)
-                    this._stateMultiplier("shootRange", 1.2)
+                    this._stateAdder("seekRange", 1)
+                    this._stateAdder("shootRange", 1)
                 }
             case "bullets-up":
                 return () => {
@@ -297,6 +297,11 @@ class Tower {
     _stateMultiplier(prop, multiplier) {
         // Increases a given property by given multiplication (minimum of 1)
         this.state[prop] = this.state[prop] * multiplier
+    }
+
+    _stateAdder(prop, addition) {
+        // Increases a given property by given value (minimum of 1)
+        this.state[prop] = this.state[prop] + addition
     }
 }
 

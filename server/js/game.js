@@ -477,7 +477,8 @@ class Game {
                 "level": t.level,
                 "aim": t.state.aimBehaviour,
                 "sellPrice": t.sellPrice,
-                "upgrades": t.getPurchasedUpgrades()
+                "upgrades": t.getPurchasedUpgrades(),
+                "range": t.state.seekRange,
             })
             hash.update(t.name)
         })

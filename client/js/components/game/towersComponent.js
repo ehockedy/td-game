@@ -87,6 +87,10 @@ export class TowersComponent extends BaseComponent {
             towerToUpdate.level = tower.level
             towerToUpdate.aim = tower.aim
 
+            if (towerToUpdate.range !== tower.range) {
+                towerToUpdate.updateRange(tower.range)
+            }
+
             if (tower.hasShot) {
                 towerToUpdate.shoot()
             }
