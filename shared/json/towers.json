@@ -227,13 +227,32 @@
         "gameData": {
             "seekRange": 1.5,
             "shootRange": 1.5,
-            "damage": 30,
-            "rateOfFire": 5,
-            "bulletSpeed": 10,
+            "damage": 60,
+            "rateOfFire": 2,
+            "bulletSpeed": 6,
             "numberOfBullets": 1,
             "turns": true
         },
-        "upgrades": [],
+        "upgrades": [
+            {
+                "type": "finisher",
+                "description": "Finisher",
+                "description_long": "More damage to enemies on low health",
+                "cost": 800
+            },
+            {
+                "type": "first-blood",
+                "description": "First blood",
+                "description_long": "Bonus damage to full health enemies",
+                "cost": 800
+            },
+            {
+                "type": "bonus-sawblade",
+                "description": "Flying sawblades",
+                "description_long": "Flying. Sawblades.",
+                "cost": 800
+            }
+        ],
         "cost": 1500,
         "bulletType": "buzzsaw",
         "shootPattern": "single",

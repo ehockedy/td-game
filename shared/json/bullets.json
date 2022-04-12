@@ -54,5 +54,12 @@
         "rotationSpeed": 0,
         "piercingCount": 2,
         "radius": 2
+    },
+    "ranged-sawblade": {
+        "filenameKeyword": "sawblade",
+        "rotate": true,
+        "rotationSpeed": 10,
+        "piercingCount": 5,
+        "radius": 2
     }
 }

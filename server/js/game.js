@@ -267,6 +267,11 @@ class Game {
                 if (amountSpent !== 0) {
                     // Successful upgrade
                     player.reduceMoney(amountSpent)
+
+                    // Certain upgrades change the range, so need to recalculate the path of squares that can be hit
+                    if (upgradeType === "bonus-sawblade" || upgradeType === "range-up") {
+                        tower.calculateShootPath(this.map.mainPath)
+                    }
                     return true
                 }
                 return false

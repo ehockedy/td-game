@@ -281,6 +281,14 @@ class Tower {
                 return () => {
                     this.bulletModifiers.isFirstBlood = true
                 }
+            case "bonus-sawblade":
+                return () => {
+                    this._stateMultiplier("seekRange", 3)
+                    this._stateMultiplier("shootRange", 3)
+                    this.bulletModifiers.pierceAll = true
+                    this.bulletModifiers.extraPiercing = 3
+                    this.bulletType = "ranged-sawblade"
+                }
             default:
                 return () => {}
         }
