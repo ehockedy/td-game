@@ -156,7 +156,6 @@ class HorizontalMenuOption extends BaseComponent {
     _darken() {
         let colourDiff = "0x555555"
         this.menuSprite.tint = subtractColourHexValues(this.baseTint, colourDiff)
-        console.log(this.menuSprite.tint)
         this.text.children.forEach((text) => { text.style.fill = subtractColourHexValues(text.baseTint, colourDiff)})
     }
 

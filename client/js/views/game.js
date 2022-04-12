@@ -135,7 +135,6 @@ export class GameRenderer {
         })
 
         this.socket.on("client/game/round/toggleFastForward", () => {
-            console.log("Toggled")
             this.fastForwardButton.toggleFastForward()
         })
     }

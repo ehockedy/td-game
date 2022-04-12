@@ -17,7 +17,6 @@ export class FastForwardButton extends ButtonHorizontalMenuOption {
     }
 
     toggleFastForward() {
-        console.log(this.buttonText, this.buttonText.text)
         this.isFast = !this.isFast
         this.buttonText.text = this.isFast ? this.normalSpeedText : this.fastForwardText
     }
