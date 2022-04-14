@@ -263,7 +263,7 @@ export class GameRenderer {
             }
         })
         this.tc.update(serverUpdate.towers)
-        this.map.update(serverUpdate.towers)
+        //this.map.update(serverUpdate.towers)
         this.tm.update(serverUpdate.players)
         this.ut.update(serverUpdate.players)
         this.gameSpace.updateTowers(serverUpdate.towers, thisPlayerMoney)

@@ -142,6 +142,8 @@ class DeployedTowerUpgradeMenu extends ButtonMenu {
     constructor(x, y) {
         super("deployedTowerUpgradeMenu", x, y, "right", -20)
 
+        this.prevTowerType = undefined
+
         this.menuRoot = this.addRoot(520, COLOURS.INFO_LIGHT_GREY)
         const defaultMenuRootText = "Available upgrades"
         let style = plainTextStyle(COLOURS.BLACK, 28)
@@ -175,15 +177,21 @@ class DeployedTowerUpgradeMenu extends ButtonMenu {
         this.addBackAndCancelButtons()
     }
 
-    updateTowerInfo(upgradeState, playerMoney) {
+    updateTowerInfo(upgradeState, playerMoney, towerType) {
+        const updateText = this.prevTowerType != towerType
+        this.prevTowerType = towerType
+
         let upgradeIdx = 0
         for (const [upgradeType, {description, description_long, cost, purchased}] of Object.entries(upgradeState)) {
             let option = this.options[upgradeIdx]
-            option.updateText(description.toUpperCase())
-            option.autofitTextSize()
-            option.setParams({
-                "type": upgradeType
-            })
+            // Change in tower type, update the displayed text - don't do every time to save processing
+            if (updateText) {
+                option.updateText(description.toUpperCase())
+                option.autofitTextSize()
+                option.setParams({
+                    "type": upgradeType
+                })
+            }
             option.altText = 
                 `${description_long}\nCost: ${purchased ? "PURCHASED" : cost}`
             if (purchased || playerMoney < cost) {
@@ -280,14 +288,13 @@ export class DeployedTowerMenu extends BaseComponent {
         // Live updates of the towers state
         this.mainMenu.updateTowerInfo(towerUpdate)
         this.sellMenu.updateTowerInfo(towerUpdate)
-        this.upgradeMenu.updateTowerInfo(activeTower.getUpgradeState(), playerMoney)
+        this.upgradeMenu.updateTowerInfo(activeTower.getUpgradeState(), playerMoney, activeTower.type)
     }
 
     setSelectedTower(tower) {
         // This is data to update once when the tower is clicked on
         this.selectedTower = tower
         this.aimMenu.updateTowerInfo(tower)
-        //this.upgradeMenu.updateTowerInfo(tower)
     }
 
     show() {
