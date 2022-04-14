@@ -142,20 +142,23 @@ class DeployedTowerUpgradeMenu extends ButtonMenu {
     constructor(x, y) {
         super("deployedTowerUpgradeMenu", x, y, "right", -20)
 
-        this.menuRoot = this.addRoot(420, COLOURS.INFO_LIGHT_GREY)
+        this.menuRoot = this.addRoot(520, COLOURS.INFO_LIGHT_GREY)
         const defaultMenuRootText = "Available upgrades"
-        let menuRootText = new PIXI.Text(defaultMenuRootText, plainTextStyle(COLOURS.BLACK, 32))
+        let style = plainTextStyle(COLOURS.BLACK, 28)
+        style.lineHeight = 30
+        let menuRootText = new PIXI.Text(defaultMenuRootText, style)
         menuRootText.anchor.set(0, 0.5)
         this.menuRoot.addText(menuRootText, 0.02, 0.5)
 
         const numberOfUpgrades = 3
-        const width = 250
+        const buttonWidth = 200
         this.options = []
         for (let optIdx = 0; optIdx < numberOfUpgrades; optIdx += 1) {
-            let upgradeOption = this.addOption(width, COLOURS.UPGRADE_GREEN, "selected-upgrade-option")
+            let upgradeOption = this.addOption(buttonWidth, COLOURS.UPGRADE_GREEN, "selected-upgrade-option")
             let style = plainTextStyle(COLOURS.BLACK, 32)
             style.wordWrap = true
-            style.wordWrapWidth = width - 20
+            style.wordWrapWidth = buttonWidth - 40
+            style.align = 'center'
             upgradeOption.addTextCentral("", style)
             upgradeOption.altText = defaultMenuRootText  // Text to be displayed on the menu root when hovered over
 
@@ -177,6 +180,7 @@ class DeployedTowerUpgradeMenu extends ButtonMenu {
         for (const [upgradeType, {description, description_long, cost, purchased}] of Object.entries(upgradeState)) {
             let option = this.options[upgradeIdx]
             option.updateText(description.toUpperCase())
+            option.autofitTextSize()
             option.setParams({
                 "type": upgradeType
             })

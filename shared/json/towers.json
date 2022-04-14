@@ -101,7 +101,7 @@
             {
                 "type": "no-resistance",
                 "description": "No resistance",
-                "description_long": "Removes resistance against metal enemies",
+                "description_long": "Removes resistance vs metal enemies",
                 "cost": 350
             }
         ],
@@ -138,7 +138,7 @@
             {
                 "type": "dmg-stack",
                 "description": "Stacking damage",
-                "description_long": "Damage increases with each pierced enemy",
+                "description_long": "Damage stacks with each pierced enemy",
                 "cost": 350
             }
         ],
@@ -175,7 +175,7 @@
             {
                 "type": "finisher",
                 "description": "Finisher",
-                "description_long": "More damage to enemies on low health",
+                "description_long": "More damage to enemies near death",
                 "cost": 400
             }
         ],
@@ -212,7 +212,7 @@
             {
                 "type": "bullets-up-dmg-down",
                 "description": "Wide flame",
-                "description_long": "Produces more fire, at slightly reduced damage",
+                "description_long": "Fire spreads over larger area",
                 "cost": 800
             }
         ],
@@ -237,19 +237,19 @@
             {
                 "type": "finisher",
                 "description": "Finisher",
-                "description_long": "More damage to enemies on low health",
+                "description_long": "More damage to enemies near death",
                 "cost": 800
             },
             {
                 "type": "first-blood",
                 "description": "First blood",
-                "description_long": "Bonus damage to full health enemies",
+                "description_long": "More damage to full health enemies",
                 "cost": 800
             },
             {
                 "type": "bonus-sawblade",
                 "description": "Flying sawblades",
-                "description_long": "Flying. Sawblades.",
+                "description_long": "FLYING. SAWBLADES.",
                 "cost": 800
             }
         ],

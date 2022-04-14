@@ -39,6 +39,14 @@ class HorizontalMenuOption extends BaseComponent {
         this.text.getChildByName("text").text = message
     }
 
+    // Shrinks the text down untilit fits within the box comfortably
+    autofitTextSize() {
+        let textToUpdate = this.text.getChildByName("text")
+        while (textToUpdate.height > this.height*0.8 || textToUpdate.width > this.width*0.65) {
+            textToUpdate.style.fontSize -= 1
+        }
+    }
+
     // Given a string, render it in the given style in the middle of the element
     addTextCentral(message, style) {
         // Only display one message at a time
