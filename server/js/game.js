@@ -70,7 +70,7 @@ class Game {
                         break;
                     }
                 }
-            } else { // TODO if (tower.behaviour == "first") { // Tower aims at enemy earliest in the path
+            } else if (tower.state.aimBehaviour == "last") { // Tower aims at enemy earliest in the path
                 for (let i = 0; i < tower.shootRangePath.length; i++) {
                     let square = tower.shootRangePath[i]
                     let enemies = this.map.getEnemies(square.row, square.col)
@@ -79,6 +79,32 @@ class Game {
                         break;
                     }
                 }
+            } else if (tower.state.aimBehaviour == "closest") { // Tower aims at closest enemy in its range
+                console.log("choosing close")
+                let closestEnemy = {
+                    'enemy': null,
+                    'distance': 0
+                }
+                for (let i = 0; i < tower.shootRangePath.length; i++) {
+                    let square = tower.shootRangePath[i]
+                    let enemies = this.map.getEnemies(square.row, square.col)
+                    if (enemies.length > 0) {
+                        enemies.forEach((enemy) => {
+                            const distance = Math.sqrt(
+                                Math.pow(enemy.position.x - tower.position.x, 2) + 
+                                Math.pow(enemy.position.y - tower.position.y, 2)
+                            )
+                            if (closestEnemy.distance == 0 || distance < closestEnemy.distance) {
+                                // This enemy is first to be checked or is the closest so far
+                                closestEnemy = {
+                                    'enemy': enemy,
+                                    'distance': distance
+                                }
+                            }
+                        })
+                    }
+                }
+                chosenEnemy = closestEnemy.enemy
             }
 
             tower.tick()
