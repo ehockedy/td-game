@@ -138,7 +138,7 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
 function runSmulation(gameConfig, roundConfig, enemyConfig, towerConfig) {
   let simulation = new sim.Simulator(gameConfig, roundConfig, enemyConfig, towerConfig)
   for (let i=0; i < 10; i+=1) {
-    simulation.runSimulation(i, "mostExpensive")
+    simulation.runSimulation(i, "mostExpensive", "none")
   }
   console.dir(simulation.getResults(), {depth :100})
 }
@@ -165,9 +165,17 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
         }
       }
 
+      let firstUpgradeMethod = undefined
+      for (const [method, isSelected] of Object.entries(settings.selectedUpgradePurchaseMethods)) {
+        if (isSelected) {
+          firstUpgradeMethod = method
+          break
+        }
+      }
+
       if (firstTowerMethod) {
         let seed = crypto.createHash("sha256").update(settings.seed).digest('hex')
-        simulation.runSimulationWithView(seed, firstTowerMethod, socket).then(() => {
+        simulation.runSimulationWithView(seed, firstTowerMethod, firstUpgradeMethod, socket).then(() => {
           callback()
         })
       }
@@ -194,12 +202,17 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
       for (let run=0; run < settings.runs; run+=1) {
         // Use the same seed for each tower purchase type, but different one for each run
         let seed = crypto.createHash("sha256").update(lastSeed).digest('hex')
-        for (const [method, isSelected] of Object.entries(settings.selectedTowerPurchaseMethods)) {
+        for (const [towerPurchaseMethod, isSelected] of Object.entries(settings.selectedTowerPurchaseMethods)) {
           if (isSelected) {
-            runParams.push({
-              "seed": seed,
-              "towerPurchaseMethod": method
-            })
+            for (const [upgradePurchaseMethod, isAlsoSelected] of Object.entries(settings.selectedUpgradePurchaseMethods)) {
+              if (isAlsoSelected) {
+                runParams.push({
+                  "seed": seed,
+                  "towerPurchaseMethod": towerPurchaseMethod,
+                  'upgradePurchaseMethod': upgradePurchaseMethod,
+                })
+              }
+            }
           }
         }
         lastSeed = seed
@@ -213,12 +226,13 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
           })
           return
         }
-
         // Get the setup parameters for the given run index
         const seed = runParams[runIdx].seed
-        const method = runParams[runIdx].towerPurchaseMethod
-        simulation.runSimulation(seed, method).then((result) => {
+        const towerPurchaseMethod = runParams[runIdx].towerPurchaseMethod
+        const upgradePurchaseMethod = runParams[runIdx].upgradePurchaseMethod
+        simulation.runSimulation(seed, towerPurchaseMethod, upgradePurchaseMethod).then((result) => {
           // When finished, record the results and trigger the next simulation
+          const method = towerPurchaseMethod + '-' + upgradePurchaseMethod
           if (!(method in results)) {
             results[method] = []
           }

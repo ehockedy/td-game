@@ -57,28 +57,69 @@ class SimulatedGame {
             }
         }
 
+        this.upgradeBuyingMap = {
+            "none": {
+                "fn": () => [],
+                "purchaseBeforeTowers": true
+            },
+            "buyOneCheapestBeforeTowers": {
+                "fn": this._buyOneUpgradeCheapest,
+                "purchaseBeforeTowers": true
+            },
+            "buyOneCheapestAfterTowers": {
+                "fn": this._buyOneUpgradeCheapest,
+                "purchaseBeforeTowers": false
+            },
+        }
+
         // Members used by specific tower buying methods
         this.towerTypesBought = {}
         this.towersBoughtThisRound = []
+        this.upgradesBoughtThisRound = []
 
         // Holds all the important stats about this one game, added to master results list at end of simulation
         // Use arrays where each index is the round
         this.simulationSummary = {
             "seed": seed,
             "livesRemaining": new Array(this.game.maxRounds + 1).fill(0),  // Array that holds the number of lives at the start of each round. Add 1 because extra entry after final round is added.
-            "towersBought": new Array(this.game.maxRounds + 1).fill([]) // Array that holds an array for each round with the names of the towers purchased before the round started
+            "towersBought": new Array(this.game.maxRounds + 1).fill([]), // Array that holds an array for each round with the names of the towers purchased before the round started
+            "upgradesBought": new Array(this.game.maxRounds + 1).fill([]) // Array that holds an array for each round with the names of the upgrades purchased before the round started
         }
     }
 
-    recordCurrentState(lives, towers) {
+    recordCurrentState(lives, towers, upgrades) {
         this.simulationSummary.livesRemaining[this.round] = lives
         this.simulationSummary.towersBought[this.round] = towers
+        this.simulationSummary.upgradesBought[this.round] = upgrades
+    }
+
+    buyTowers(towerPurchaseMethod) {
+        let towersBought = this.towerBuyingMap[towerPurchaseMethod].fn.call(this)
+        towersBought.forEach((towerType) => {
+            let bestPlace = this.getBestPlaceForTower(towerType)
+            let towerName = Math.random().toString(36).substr(2, 5)
+            this.game.addTower(towerName, towerType, this.playerID, bestPlace.row, bestPlace.col)
+
+            // I think some towers are better when set to have specific aim properties
+            if (towerType == "spear-launcher") {
+                this.game.updateTower(towerName, "aimBehaviour", "last")
+            }
+            this.towersBoughtThisRound.push(towerType)
+        })
+    }
+
+    buyUpgrades(upgradePurchaseMethod) {
+        let upgradesBought = this.upgradeBuyingMap[upgradePurchaseMethod].fn.call(this)
+        upgradesBought.forEach(({upgradeType, towerName}) => {
+            this.game.upgradeTower(towerName, upgradeType)
+            this.upgradesBoughtThisRound.push(upgradeType)
+        })
     }
 
 
     // Checks if the round has changed and records the current state if so, does any tower buying,
     // and then immediately starts the next round
-    checkForRoundChange(towerPurchaseMethod) {
+    checkForRoundChange(towerPurchaseMethod, upgradePurchaseMethod) {
         // Buy towers if end of round, or mid-round purchase is triggered
         // If end of round, immediately start next one
         const isEndOfRound = !this.game.isRoundActive()
@@ -87,24 +128,20 @@ class SimulatedGame {
             this.loopTick = 0
 
             // Attempt to buy towers between rounds
-            let towersBought = this.towerBuyingMap[towerPurchaseMethod].fn.call(this)
-            towersBought.forEach((towerType) => {
-                let bestPlace = this.getBestPlaceForTower(towerType)
-                let towerName = Math.random().toString(36).substr(2, 5)
-                this.game.addTower(towerName, towerType, this.playerID, bestPlace.row, bestPlace.col)
-
-                // I think some tpwers are better when set to have specific aim properties
-                if (towerType == "spear-launcher") {
-                    this.game.updateTower(towerName, "aimBehaviour", "last")
-                }
-                this.towersBoughtThisRound.push(towerType)
-            })
+            if (upgradePurchaseMethod.purchaseBeforeTowers) {
+                this.buyUpgrades(upgradePurchaseMethod)
+                this.buyTowers(towerPurchaseMethod)
+            } else {
+                this.buyTowers(towerPurchaseMethod)
+                this.buyUpgrades(upgradePurchaseMethod)
+            }
 
             // Only need to record state is end of round
             if (isEndOfRound) {
                 // Record the state at the start of the round
-                this.recordCurrentState(this.game.getGameStateWorld().lives, this.towersBoughtThisRound)
+                this.recordCurrentState(this.game.getGameStateWorld().lives, this.towersBoughtThisRound, this.upgradesBoughtThisRound)
                 this.towersBoughtThisRound = []
+                this.upgradesBoughtThisRound = []
                 
                 // Start next round
                 this.round += 1
@@ -114,7 +151,7 @@ class SimulatedGame {
         this.loopTick += 1
     }
 
-    async simulationLoop(towerPurchaseMethod, perLoopIterations=1000, loopPeriod_ms=0, socket=undefined) {
+    async simulationLoop(towerPurchaseMethod, upgradePurchaseMethod, perLoopIterations=1000, loopPeriod_ms=0, socket=undefined) {
         // Starts a periodic loop that every iteration updates the game state, and possibly sends
         // an update to the client. The reason an update is not sent on every iteration
         // is becasue the game would move too fast that the client could not render fast enough.
@@ -124,7 +161,7 @@ class SimulatedGame {
         let loopIdx = 0
         let gameState = "active"
         while (gameState == "active") {
-            this.checkForRoundChange(towerPurchaseMethod)
+            this.checkForRoundChange(towerPurchaseMethod, upgradePurchaseMethod)
             this.game.update()
             gameState = this.game.getState()
 
@@ -159,6 +196,23 @@ class SimulatedGame {
             } else break
         }
         return availableTowers
+    }
+
+    // Search through all the purchased towers for the available upgrades and return which ones are available
+    getAvailableUpgrades() {
+        let availableUpgrades = []
+        this.game.towers.forEach((tower) => {
+            Object.entries(tower.upgrades).forEach(([upgradeType, {cost, purchased}]) => {
+                if (!purchased && cost <= this.player.getMoney()) {
+                    availableUpgrades.push({
+                        'towerName': tower.name,
+                        'upgradeType': upgradeType,
+                        'cost': cost,
+                    })
+                }
+            })
+        })
+        return availableUpgrades
     }
 
     getBestPlaceForRockScatter() {
@@ -366,6 +420,17 @@ class SimulatedGame {
     _buyMostRecentlyUnlockedMaxFive() {
         return this._buyMostRecentlyUnlockedMaxN(5)
     }
+
+    // Upgrade purchasing functions
+    _buyOneUpgradeCheapest() {
+        const availableUpgrades = this.getAvailableUpgrades()
+        if (availableUpgrades.length == 0) {
+            return []
+        }
+
+        const cheapest = availableUpgrades.reduce((cheapest, testValue) => testValue.cost < cheapest.cost ? testValue : cheapest)
+        return [cheapest]
+    }
 }
 
 
@@ -396,25 +461,25 @@ class Simulator {
     }
 
     // Sets up a game using the given seed. Having this seed ensures can re-run with the same maps and tower choices (if random) over and over again
-    async runSimulation(seed, towerPurchaseMethod) {
-        console.log("Starting simulation with seed:", seed, ", and tower purchase method:", towerPurchaseMethod)
+    async runSimulation(seed, towerPurchaseMethod, upgradePurchaseMethod) {
+        console.log("Starting simulation with seed:", seed, ", and tower purchase method:", towerPurchaseMethod, ', and upgrade purchase method:', upgradePurchaseMethod)
         let gameSimulation = new SimulatedGame(this.setupSimulation(seed), seed, this.gameConfig, this.towerConfig)
 
         // Run simulation with very infrequent timeout stops, and as short as possible. This is so that
         // simulations are run quickly, but still break to allow event loop to process
         // Pass socket as undefined
-        return gameSimulation.simulationLoop(towerPurchaseMethod, this.ticksPerSecond, 0, undefined)
+        return gameSimulation.simulationLoop(towerPurchaseMethod, upgradePurchaseMethod, this.ticksPerSecond, 0, undefined)
     }
 
-    async runSimulationWithView(seed, towerPurchaseMethod, socket) {
-        console.log("Starting simulation with seed:", seed, ", and tower purchase method:", towerPurchaseMethod)
+    async runSimulationWithView(seed, towerPurchaseMethod, upgradePurchaseMethod, socket) {
+        console.log("Starting simulation with seed:", seed, ", and tower purchase method:", towerPurchaseMethod, ', and upgrade purchase method:', upgradePurchaseMethod)
         let game = this.setupSimulation(seed)
         socket.emit("client/map/set", game.map.getMapStructure())
         let gameSimulation = new SimulatedGame(game, seed, this.gameConfig, this.towerConfig)
 
         // Have frequent, but very quick breaks when sending the update to client. Every 20 frames are sent with
         // this configuraition.
-        return gameSimulation.simulationLoop(towerPurchaseMethod, 20, 1, socket)
+        return gameSimulation.simulationLoop(towerPurchaseMethod, upgradePurchaseMethod, 20, 1, socket)
     }
 }
 
