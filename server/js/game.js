@@ -80,7 +80,6 @@ class Game {
                     }
                 }
             } else if (tower.state.aimBehaviour == "closest") { // Tower aims at closest enemy in its range
-                console.log("choosing close")
                 let closestEnemy = {
                     'enemy': null,
                     'distance': 0

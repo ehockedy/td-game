@@ -52,8 +52,8 @@ class DeployedTowerAimMenu extends SwitchMenu {
         super("deployedTowerAimMenu", x, y, "right", -20)
         this.menuRoot = this.addRoot(aimRootWidth, COLOURS.INFO_LIGHT_GREY)
 
-        const optionWidth = 190
-        const fontSize = 36
+        const optionWidth = 220
+        const fontSize = 34
         let textStyle = boldTextStyle(COLOURS.AIM_RED, fontSize)
 
         // Aim at the emeny closest to the end of the track and in range
@@ -66,11 +66,7 @@ class DeployedTowerAimMenu extends SwitchMenu {
 
         // Aim at the enemy closest to the tower and in range
         this.closestOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-closest", false)
-        this.closestOption.addTextCentral("CLOSE", textStyle)
-
-        // Aim at the enemy with the highest speed that is in range
-        this.fastestOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-fastest", false)
-        this.fastestOption.addTextCentral("FAST", textStyle)
+        this.closestOption.addTextCentral("CLOSEST", textStyle)
 
         this.addBackAndCancelButtons()
         this.setRootInfo()
@@ -97,9 +93,6 @@ class DeployedTowerAimMenu extends SwitchMenu {
                 break
             case "last":
                 newActiveButton = this.lastOption
-                break
-            case "fastest":
-                newActiveButton = this.fastestOption
                 break
             case "closest":
                 newActiveButton = this.closestOption
@@ -260,9 +253,6 @@ export class DeployedTowerMenu extends BaseComponent {
         })
         this.on("selected-aim-closest", () => {
             this.observers.forEach((observer) => { observer.emit("update-tower", this.selectedTower, "aim", "aimBehaviour", "closest") })
-        })
-        this.on("selected-aim-fastest", () => {
-            this.observers.forEach((observer) => { observer.emit("update-tower", this.selectedTower, "aim", "aimBehaviour", "fastest") })
         })
 
         this.on("selected-sell-yes", () => {
