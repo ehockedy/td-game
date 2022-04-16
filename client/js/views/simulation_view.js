@@ -6,7 +6,24 @@ import { SimulationRender} from "./simulation_renderer.js"
 import { SpriteHandler } from "../sprite_handler.js"
 import "../../css/simulation_view.css"
 
-//JSC.defaults({ baseUrl: '' });
+function TestParameterList({selectedParameters, handleParameterSelect, type}) {
+    return (<span className="holder simulation-view-parameter">
+        <h2 className="simulation-view-subtitle">{`${type == 'tower' ? 'Tower' : 'Upgrade'} purchase methods:`}</h2>
+        {Object.keys(selectedParameters).map((method) =>
+            <span key={method} className="noselect simulation-view-parameter-input">
+                <input
+                    className="simulation-view-parameter-checkbox"
+                    type="checkbox"
+                    id={method}
+                    name={method}
+                    checked={selectedParameters[method]}
+                    onChange={(event) => {handleParameterSelect(event, type)}}
+                ></input>
+                <label className="simulation-view-parameter-label" htmlFor={method}>{method}</label>
+            </span>
+        )}
+    </span>)
+}
 
 export class SimulationView extends React.Component {
     constructor(props) {
@@ -19,14 +36,19 @@ export class SimulationView extends React.Component {
             // These are the tower purchase methods copied from the simulation code server side
             selectedTowerPurchaseMethods: {
                 'mostExpensive': true,
-                'mostExpensiveEveryOtherRound': true,
+                'mostExpensiveEveryOtherRound': false,
                 'random': true,
                 'randomEveryOtherRound': false,
-                'mostRecentlyUnlockedMaxThree': true,
-                'mostRecentlyUnlockedMaxFour': true,
-                'mostRecentlyUnlockedMaxFive': true,
+                'mostRecentlyUnlockedMaxThree': false,
+                'mostRecentlyUnlockedMaxFour': false,
+                'mostRecentlyUnlockedMaxFive': false,
                 'mostRecentlyUnlockedMaxFourMidRound': true,
                 'mostRecentlyUnlockedMaxFiveMidRound': true
+            },
+            selectedUpgradePurchaseMethods: {
+                'none': true,
+                'buyOneCheapestBeforeTowers': false,
+                'buyOneCheapestAfterTowers': false,
             },
             seed: '1',
             runs: 3,
@@ -47,12 +69,16 @@ export class SimulationView extends React.Component {
         })
     }
 
-    handleTowerMethodSelect(event) {
+    handleTowerMethodSelect(event, parameterType) {
         const target = event.target;
         const name = target.name;
         const value = target.checked;
         this.setState((previousState) => {
-            previousState.selectedTowerPurchaseMethods[name] = value;
+            if (parameterType == 'tower') {
+                previousState.selectedTowerPurchaseMethods[name] = value;
+            } else if (parameterType == 'upgrade') {
+                previousState.selectedUpgradePurchaseMethods[name] = value;
+            }
             return previousState;
         })
     }
@@ -109,7 +135,7 @@ export class SimulationView extends React.Component {
 
             // Config to apply to each series
             defaultSeries: {
-                defaultPoint_tooltip: '<b>%seriesName:</b> {%yValue:n0}  %icon  %towersBought',
+                defaultPoint_tooltip: '<b>%seriesName:</b> {%yValue:n0}  %icon  %towersBought | %upgradesBought',
                 events: {
                     legendEntryClick: function() {
                         // No series is in focus, or different series has been chosen to be in focus
@@ -170,7 +196,8 @@ export class SimulationView extends React.Component {
                         'x': i,  // round
                         'y': run.livesRemaining[i],  // lives
                         attributes: [
-                            ['towersBought', run.towersBought[i]]
+                            ['towersBought', run.towersBought[i]],
+                            ['upgradesBought', run.upgradesBought[i]]
                         ]
                     })
                     livesSums[i] += run.livesRemaining[i]  // add to the total so avg can be calclulated
@@ -194,7 +221,8 @@ export class SimulationView extends React.Component {
                     'x': idx,
                     'y': totalLivesCount/results[towerPurchaseMethod].length,
                     attributes: [
-                        ['towersBought', '-']
+                        ['towersBought', '-'],
+                        ['upgradesBought', '-'],
                     ]
                 }
             })
@@ -221,10 +249,9 @@ export class SimulationView extends React.Component {
         this.setState({displayMode: "loadingView"})
 
         // Count how many simulations we are expecting to complete
-        let simsToDo = 0
-        Object.entries(this.state.selectedTowerPurchaseMethods).forEach(([method, isSelected]) => {
-            if (isSelected) simsToDo += parseInt(this.state.runs)
-        })
+        const towerPurchaseVariants = Object.values(this.state.selectedTowerPurchaseMethods).reduce((acc, isSelected) => isSelected ? ++acc : acc, 0)
+        const upgradePurchaseVariants = Object.values(this.state.selectedUpgradePurchaseMethods).reduce((acc, isSelected) => isSelected ? ++acc : acc, 0)
+        const simsToDo = towerPurchaseVariants * upgradePurchaseVariants * parseInt(this.state.runs)
         this.setState({simulationsToComplete: simsToDo})
 
         // Send command to server to start the simulations
@@ -281,7 +308,7 @@ export class SimulationView extends React.Component {
                                     onChange={this.handleInputChange}
                                 ></input>
                             </span>
-                            <span className="holder simulation-view-tower-method">
+                            {/* <span className="holder simulation-view-tower-method">
                                 <h2 className="simulation-view-subtitle">Tower purchase methods:</h2>
                                 {Object.keys(this.state.selectedTowerPurchaseMethods).map((method) =>
                                     <span key={method} className="noselect simulation-view-tower-method-input">
@@ -296,7 +323,9 @@ export class SimulationView extends React.Component {
                                         <label className="simulation-view-tower-method-label" htmlFor={method}>{method}</label>
                                     </span>
                                 )}
-                            </span>
+                            </span> */}
+                            <TestParameterList selectedParameters={this.state.selectedTowerPurchaseMethods} handleParameterSelect={this.handleTowerMethodSelect} type={'tower'}/>
+                            <TestParameterList selectedParameters={this.state.selectedUpgradePurchaseMethods} handleParameterSelect={this.handleTowerMethodSelect} type={'upgrade'}/>
                             <span className="holder simulation-view-buttons">
                                 <h2 className="simulation-view-subtitle">Start simulation:</h2>
                                 <Button

@@ -7,19 +7,19 @@
 .simulation-view-simulation-options {
     display: grid;
     grid-template-areas: 
-        "simulation-view-seed simulation-view-runs simulation-view-tower-method simulation-view-buttons";
-    grid-template-columns: 1fr 0.5fr 4fr 1.5fr;
+        "simulation-view-seed simulation-view-runs simulation-view-parameter simulation-view-parameter simulation-view-buttons";
+    grid-template-columns: 1fr 0.5fr 2fr 2fr 1fr;
 }
 
 .holder {
-    margin-left: 32px;
-    margin-right: 32px;
+    margin-left: 12px;
+    margin-right: 12px;
     display: inline-block;
     vertical-align: middle;
 }
 
 .simulation-view-button {
-    width: 200px;
+    width: 180px;
     height: 45px;
     display: block;
     font-size: 1.4vw;
@@ -40,19 +40,19 @@
     vertical-align: middle;
 }
 
-.simulation-view-tower-method-input {
+.simulation-view-parameter-input {
     margin-right: 20px;
     white-space: nowrap;
 }
 
-.simulation-view-tower-method-checkbox {
-    width: 30px;
-    height: 30px;
+.simulation-view-parameter-checkbox {
+    width: 20px;
+    height: 20px;
     vertical-align: middle;
 }
 
-.simulation-view-tower-method-label {
-    font-size: 1.5em;
+.simulation-view-parameter-label {
+    font-size: 1em;
     vertical-align: middle;
 }
 

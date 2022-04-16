@@ -128,7 +128,7 @@ class SimulatedGame {
             this.loopTick = 0
 
             // Attempt to buy towers between rounds
-            if (upgradePurchaseMethod.purchaseBeforeTowers) {
+            if (this.upgradeBuyingMap[upgradePurchaseMethod].purchaseBeforeTowers) {
                 this.buyUpgrades(upgradePurchaseMethod)
                 this.buyTowers(towerPurchaseMethod)
             } else {
