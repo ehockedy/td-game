@@ -70,6 +70,14 @@ class SimulatedGame {
                 "fn": this._buyOneUpgradeCheapest,
                 "purchaseBeforeTowers": false
             },
+            "buyAllCheapestToHighestBeforeTowers": {
+                "fn": this._buyAllUpgradesCheapestToHighest,
+                "purchaseBeforeTowers": true
+            },
+            "buyAllCheapestToHighestAfterTowers": {
+                "fn": this._buyAllUpgradesCheapestToHighest,
+                "purchaseBeforeTowers": false
+            },
         }
 
         // Members used by specific tower buying methods
@@ -212,6 +220,12 @@ class SimulatedGame {
                 }
             })
         })
+        return availableUpgrades
+    }
+
+    getAvailableUpgradesLowToHigh() {
+        let availableUpgrades = this.getAvailableUpgrades()
+        availableUpgrades.sort((a, b) => a.cost - b.cost)
         return availableUpgrades
     }
 
@@ -430,6 +444,23 @@ class SimulatedGame {
 
         const cheapest = availableUpgrades.reduce((cheapest, testValue) => testValue.cost < cheapest.cost ? testValue : cheapest)
         return [cheapest]
+    }
+
+    _buyAllUpgradesCheapestToHighest() {
+        const availableUpgrades = this.getAvailableUpgradesLowToHigh()
+        let money = this.player.stats.money
+        let upgradesToBuy = []
+        let upgrateToTryIdx = 0
+        while (money > 0 && upgrateToTryIdx < availableUpgrades.length) {
+            const costOfNextUpgrade = availableUpgrades[upgrateToTryIdx].cost
+            if (money >= costOfNextUpgrade) {
+                upgradesToBuy.push(availableUpgrades[upgrateToTryIdx])
+                money -= availableUpgrades[upgrateToTryIdx].cost
+            } else {
+                break
+            }
+        }
+        return upgradesToBuy
     }
 }
 

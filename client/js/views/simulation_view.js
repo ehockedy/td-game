@@ -49,6 +49,8 @@ export class SimulationView extends React.Component {
                 'none': true,
                 'buyOneCheapestBeforeTowers': false,
                 'buyOneCheapestAfterTowers': false,
+                'buyAllCheapestToHighestBeforeTowers': false,
+                'buyAllCheapestToHighestAfterTowers': false,
             },
             seed: '1',
             runs: 3,
