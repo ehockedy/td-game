@@ -16,19 +16,19 @@
                 "type": "dmg-up",
                 "description": "Damage up",
                 "description_long": "Damage up by 50%",
-                "cost": 100
+                "cost": 60
             },
             {
                 "type": "range-up",
                 "description": "Range up",
                 "description_long": "Range up by 1 square",
-                "cost": 75
+                "cost": 30
             },
             {
                 "type": "rof-up",
                 "description": "Rate up",
                 "description_long": "Rate of fire up 50%",
-                "cost": 150
+                "cost": 70
             }
         ],
         "cost": 100,
@@ -53,19 +53,19 @@
                 "type": "bullets-up",
                 "description": "More shrapnel",
                 "description_long": "Shoots 2 extra shrapnel",
-                "cost": 60
+                "cost": 40
             },
             {
                 "type": "bullet-size-up",
                 "description": "Bigger shrapnel",
                 "description_long": "More likely to hit enemies",
-                "cost": 60
+                "cost": 40
             },
             {
                 "type": "rof-up",
                 "description": "Rate up",
                 "description_long": "Range up by 50%",
-                "cost": 120
+                "cost": 90
             }
         ],
         "cost": 120,
@@ -90,19 +90,19 @@
                 "type": "bullets-up",
                 "description": "More rocks",
                 "description_long": "Increase to 5 rocks",
-                "cost": 150
+                "cost": 120
             },
             {
                 "type": "range-up",
                 "description": "Range up",
                 "description_long": "Range up by 1 square",
-                "cost": 100
+                "cost": 60
             },
             {
                 "type": "no-resistance",
                 "description": "No resistance",
                 "description_long": "Removes resistance vs metal enemies",
-                "cost": 350
+                "cost": 200
             }
         ],
         "cost": 300,
@@ -127,7 +127,7 @@
                 "type": "piercing-up",
                 "description": "More piercing",
                 "description_long": "Can pierce through one extra enemy",
-                "cost": 200
+                "cost": 150
             },
             {
                 "type": "range-up",
@@ -163,13 +163,13 @@
             {
                 "type": "rate-up",
                 "description": "Rate up",
-                "description_long": "Rate of fire up",
+                "description_long": "Rate of fire up by 50%",
                 "cost": 200
             },
             {
                 "type": "dmg-up",
                 "description": "Damage up",
-                "description_long": "Damage up",
+                "description_long": "Damage up by 50%",
                 "cost": 200
             },
             {
@@ -179,7 +179,7 @@
                 "cost": 400
             }
         ],
-        "cost": 750,
+        "cost": 550,
         "bulletType": "bullet",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"
@@ -207,13 +207,13 @@
                 "type": "pierce-all",
                 "description": "Pierce everything",
                 "description_long": "Can even pierce slime enemies",
-                "cost": 600
+                "cost": 500
             },
             {
                 "type": "bullets-up-dmg-down",
                 "description": "Wide flame",
                 "description_long": "Fire spreads over larger area",
-                "cost": 800
+                "cost": 500
             }
         ],
         "cost": 1000,
@@ -238,13 +238,13 @@
                 "type": "finisher",
                 "description": "Finisher",
                 "description_long": "More damage to enemies near death",
-                "cost": 800
+                "cost": 600
             },
             {
                 "type": "first-blood",
                 "description": "First blood",
                 "description_long": "More damage to full health enemies",
-                "cost": 800
+                "cost": 600
             },
             {
                 "type": "bonus-sawblade",
@@ -253,7 +253,7 @@
                 "cost": 800
             }
         ],
-        "cost": 1500,
+        "cost": 1400,
         "bulletType": "buzzsaw",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/7-buzzsaw/buzzsaw.json"

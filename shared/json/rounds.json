@@ -49,22 +49,22 @@
         [
             {
                 "enemies": ["boneheadBandit"],
-                "count": 10,
+                "count": 12,
                 "enemiesPerSquarePerSecond": 0.75
             },
             {
                 "enemies": ["boneheadBandit"],
-                "count": 10,
+                "count": 16,
                 "enemiesPerSquarePerSecond": 1
             },
             {
-                "enemies": ["boneheadBandit", "boneheadThug"],
-                "count": 10,
-                "enemiesPerSquarePerSecond": 0.75
+                "enemies": ["boneheadBandit"],
+                "count": 18,
+                "enemiesPerSquarePerSecond": 1.25
             },
             {
                 "enemies": ["boneheadThug"],
-                "count": 10,
+                "count": 5,
                 "enemiesPerSquarePerSecond": 0.5
             }
         ],

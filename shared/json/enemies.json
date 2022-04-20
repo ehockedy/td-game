@@ -16,7 +16,7 @@
         "hp": 60,
         "subEnemies": [],
         "size": "medium",
-        "reward": 1,
+        "reward": 2,
         "resistances": ["rock", "flame"],
         "weaknesses": [],
         "blockPiercing": false
@@ -82,7 +82,7 @@
         "hp": 600,
         "subEnemies": [],
         "size": "medium",
-        "reward": 3,
+        "reward": 4,
         "resistances": [],
         "weaknesses": ["flame"],
         "blockPiercing": false
@@ -93,7 +93,7 @@
         "hp": 1800,
         "subEnemies": [],
         "size": "medium",
-        "reward": 4,
+        "reward": 5,
         "resistances": [],
         "weaknesses": ["flame"],
         "blockPiercing": false
@@ -109,7 +109,7 @@
             "boneheadBandit"
         ],
         "size": "large",
-        "reward": 2,
+        "reward": 3,
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": false
@@ -120,7 +120,7 @@
         "hp": 200,
         "subEnemies": [],
         "size": "large",
-        "reward": 2,
+        "reward": 3,
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": false
@@ -164,7 +164,7 @@
         "hp": 80,
         "subEnemies": ["slimeMedium", "slimeMedium"],
         "size": "small",
-        "reward": 1,
+        "reward": 2,
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": true
@@ -175,7 +175,7 @@
         "hp": 360,
         "subEnemies": ["slimeLarge", "slimeLarge"],
         "size": "large",
-        "reward": 2,
+        "reward": 3,
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": true
