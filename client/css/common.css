@@ -43,7 +43,7 @@
 }
 
 /* Note, hover must appear first, since hover always comes before active when the button is interacted with */
-.button:hover, .button:focus {
+.button:hover {
     transform: skewX(-25deg) scale(1.05, 1.05);
 }
 
@@ -57,7 +57,7 @@
     cursor: pointer;
 }
 
-.button-inline:hover, .button-inline:focus {
+.button-inline:hover {
     transform: scale(1.05, 1.05);
 }
 
