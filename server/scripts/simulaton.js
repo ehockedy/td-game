@@ -47,13 +47,25 @@ class SimulatedGame {
                 "fn": this._buyMostRecentlyUnlockedMaxFive,
                 "purchaseMidRound": false
             },
+            "mostRecentlyUnlockedMaxTwoMidRound": {
+                "fn": this._buyMostRecentlyUnlockedMaxTwo,
+                "purchaseMidRound": true
+            },
+            "mostRecentlyUnlockedMaxThreeMidRound": {
+                "fn": this._buyMostRecentlyUnlockedMaxThree,
+                "purchaseMidRound": true
+            },
             "mostRecentlyUnlockedMaxFourMidRound": {
                 "fn": this._buyMostRecentlyUnlockedMaxFour,
                 "purchaseMidRound": true
             },
             "mostRecentlyUnlockedMaxFiveMidRound": {
                 "fn": this._buyMostRecentlyUnlockedMaxFive,
-                "purchaseMidRound": true
+                "purchaseMidRound": true,
+            },
+            "mostRecentlyUnlockedMaxFourMidRoundWithLimits": {
+                "fn": this._buyMostRecentlyUnlockedMaxFourWithLimits,
+                "purchaseMidRound": true,
             }
         }
 
@@ -365,7 +377,7 @@ class SimulatedGame {
         if (this.round % 2 == 0) {
             let mostExpensiveTower = this._buyTowersMostExpensive()
             let money = this.player.stats.money
-            while (mostExpensiveTower != [] && money >= this.towerConfig[mostExpensiveTower[0]].cost) {
+            while (mostExpensiveTower.length && money >= this.towerConfig[mostExpensiveTower[0]].cost) {
                 towers = towers.concat(mostExpensiveTower)
                 money -= this.towerConfig[mostExpensiveTower[0]].cost
                 mostExpensiveTower = this._buyTowersMostExpensive()
@@ -387,7 +399,7 @@ class SimulatedGame {
             // todo deduplicate code
             let mostExpensiveTower = this._buyTowersRandom()
             let money = this.player.stats.money
-            while (mostExpensiveTower != [] && money >= this.towerConfig[mostExpensiveTower[0]].cost) {
+            while (mostExpensiveTower.length && money >= this.towerConfig[mostExpensiveTower[0]].cost) {
                 towers = towers.concat(mostExpensiveTower)
                 money -= this.towerConfig[mostExpensiveTower[0]].cost
                 mostExpensiveTower = this._buyTowersRandom()
@@ -396,9 +408,16 @@ class SimulatedGame {
         return towers
     }
 
+    _getLimit(type, defaultMax, limits) {
+        if (type in limits) {
+            return limits[type]
+        }
+        return defaultMax
+    }
+
     // Saves for the next type of tower that has not been bought yet. If cannot afford it yet, will
     // buy the next most expensive, with a limit of two of each type.
-    _buyMostRecentlyUnlockedMaxN(max) {
+    _buyMostRecentlyUnlockedMaxN(max, limits={}) {
         let targetIdx = Math.min(Object.keys(this.towerTypesBought).length, Object.keys(this.towerConfig).length-1)  // Only up to the maximum possible tower idx
         const nextUnpurchasedTowerIdx = targetIdx
         let availableTowers = this.getAffordableTowers()
@@ -411,7 +430,7 @@ class SimulatedGame {
                         this.towerTypesBought[towerType] = 1
                         boughtTowers.push(towerType)
                         break
-                    } else if (this.towerTypesBought[towerType] < max) {  // The target tower is below the maximum number of purchases
+                    } else if (this.towerTypesBought[towerType] < this._getLimit(towerType, max, limits)) {  // The target tower is below the maximum number of purchases
                         this.towerTypesBought[towerType] += 1
                         boughtTowers.push(towerType)
                         break
@@ -421,6 +440,10 @@ class SimulatedGame {
             }
         }
         return boughtTowers
+    }
+
+    _buyMostRecentlyUnlockedMaxTwo() {
+        return this._buyMostRecentlyUnlockedMaxN(2)
     }
 
     _buyMostRecentlyUnlockedMaxThree() {
@@ -433,6 +456,12 @@ class SimulatedGame {
     
     _buyMostRecentlyUnlockedMaxFive() {
         return this._buyMostRecentlyUnlockedMaxN(5)
+    }
+
+    _buyMostRecentlyUnlockedMaxFourWithLimits() {
+        return this._buyMostRecentlyUnlockedMaxN(4, {
+            sniper: 2
+        })
     }
 
     // Upgrade purchasing functions
@@ -459,6 +488,7 @@ class SimulatedGame {
             } else {
                 break
             }
+            upgrateToTryIdx += 1
         }
         return upgradesToBuy
     }

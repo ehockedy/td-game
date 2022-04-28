@@ -2,7 +2,7 @@
     "boneheadBandit": {
         "textureAtlasFile": "client/assets/enemies/boneheads/boneheadBandit/boneheadBandit.json",
         "speed": 1.5,
-        "hp": 14,
+        "hp": 12,
         "subEnemies": [],
         "size": "medium",
         "reward": 1,
@@ -17,7 +17,7 @@
         "subEnemies": [],
         "size": "medium",
         "reward": 2,
-        "resistances": ["rock", "flame"],
+        "resistances": [],
         "weaknesses": [],
         "blockPiercing": false
     },
@@ -27,7 +27,7 @@
         "hp": 150,
         "subEnemies": [],
         "size": "medium",
-        "reward": 2,
+        "reward": 3,
         "resistances": ["rock", "flame"],
         "weaknesses": [],
         "blockPiercing": false
@@ -46,7 +46,7 @@
     "greenBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle/beetle_small/beetle_small.json",
         "speed": 3,
-        "hp": 5,
+        "hp": 4,
         "subEnemies": [],
         "size": "small",
         "reward": 1,
@@ -57,7 +57,7 @@
     "blueBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle/beetle_medium/beetle_medium.json",
         "speed": 2,
-        "hp": 25,
+        "hp": 40,
         "subEnemies": [],
         "size": "medium",
         "reward": 1,
@@ -68,10 +68,10 @@
     "redBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle/beetle_large/beetle_large.json",
         "speed": 2,
-        "hp": 125,
+        "hp": 160,
         "subEnemies": [],
         "size": "medium",
-        "reward": 2,
+        "reward": 3,
         "resistances": [],
         "weaknesses": ["flame"],
         "blockPiercing": false
@@ -79,7 +79,7 @@
     "purpleBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle/beetle_giant/beetle_giant.json",
         "speed": 1.5,
-        "hp": 600,
+        "hp": 400,
         "subEnemies": [],
         "size": "medium",
         "reward": 4,
@@ -90,10 +90,10 @@
     "blackBeetle": {
         "textureAtlasFile": "client/assets/enemies/beetle/beetle_uber/beetle_uber.json",
         "speed": 1.5,
-        "hp": 1800,
+        "hp": 1000,
         "subEnemies": [],
         "size": "medium",
-        "reward": 5,
+        "reward": 6,
         "resistances": [],
         "weaknesses": ["flame"],
         "blockPiercing": false
@@ -117,7 +117,7 @@
     "boneheadTruckEmpty": {
         "textureAtlasFile": "client/assets/enemies/bonehead_truck/bonehead_truck_empty.json",
         "speed": 1.2,
-        "hp": 200,
+        "hp": 350,
         "subEnemies": [],
         "size": "large",
         "reward": 3,
@@ -127,12 +127,12 @@
     },
     "boneheadTank": {
         "textureAtlasFile": "client/assets/enemies/boneheads/boneheadTank/boneheadTank.json",
-        "speed": 1.2,
-        "hp": 2500,
-        "subEnemies": ["boneheadShield", "boneheadShield", "boneheadShield", "boneheadShield", "bonelord"],
+        "speed": 1,
+        "hp": 1800,
+        "subEnemies": ["boneheadShield", "boneheadShield", "boneheadShield", "bonelord"],
         "size": "large",
         "reward": 10,
-        "resistances": [],
+        "resistances": ["rock"],
         "weaknesses": [],
         "blockPiercing": false
     },
@@ -172,10 +172,10 @@
     "slimeGiant": {
         "textureAtlasFile": "client/assets/enemies/slime/giant/slime.json",
         "speed": 0.9,
-        "hp": 360,
+        "hp": 160,
         "subEnemies": ["slimeLarge", "slimeLarge"],
         "size": "large",
-        "reward": 3,
+        "reward": 2,
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": true
@@ -183,10 +183,10 @@
     "slimeUber": {
         "textureAtlasFile": "client/assets/enemies/slime/uber/slime.json",
         "speed": 0.8,
-        "hp": 1080,
+        "hp": 400,
         "subEnemies": ["slimeGiant", "slimeGiant"],
         "size": "large",
-        "reward": 4,
+        "reward": 3,
         "resistances": [],
         "weaknesses": [],
         "blockPiercing": true

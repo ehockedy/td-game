@@ -382,7 +382,8 @@ class Game {
                             "type": enemyType,
                             // this.ticksPerSecond/speed is number of ticks to complete one square, so divide that by the number of enemies to introduce
                             // per second to get the number of ticks between each enemy.
-                            "ticksUntilGo": Math.floor((1/enemyData.enemiesPerSquarePerSecond) * (this.ticksPerSecond/this.enemyFactory.getSpeed(enemyType)))
+                            //"ticksUntilGo": Math.floor((1/enemyData.enemiesPerSquarePerSecond) * (this.ticksPerSecond/this.enemyFactory.getSpeed(enemyType)))
+                            "ticksUntilGo": Math.floor((1/enemyData.enemiesPerSquarePerSecond) * (this.ticksPerSecond))
                         })
                         enemiesThisRound += 1
                     }
@@ -416,7 +417,7 @@ class Game {
     }
 
     getEndOfRoundReward() {
-        return 100 + (this.round-1)*5
+        return 50 + (this.round)*10
     }
 
     isRoundActive() {

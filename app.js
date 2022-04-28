@@ -252,7 +252,7 @@ function runSimulationAndWatch(gameConfig, roundConfig, enemyConfig, towerConfig
 
 // Main entry point to server code
 let gameConfig = loadConfig('shared/json/gameConfig.json')
-let roundConfig = loadConfig('shared/json/rounds.json')
+let roundConfig = loadConfig('shared/json/rounds2.json')
 let enemyConfig = loadConfig('shared/json/enemies.json')
 let towerConfig = loadConfig('shared/json/towers.json')
 let argv = process.argv

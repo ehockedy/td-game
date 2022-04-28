@@ -35,25 +35,28 @@ export class SimulationView extends React.Component {
         this.state = {
             // These are the tower purchase methods copied from the simulation code server side
             selectedTowerPurchaseMethods: {
-                'mostExpensive': true,
+                'mostExpensive': false,
                 'mostExpensiveEveryOtherRound': false,
-                'random': true,
+                'random': false,
                 'randomEveryOtherRound': false,
                 'mostRecentlyUnlockedMaxThree': false,
                 'mostRecentlyUnlockedMaxFour': false,
                 'mostRecentlyUnlockedMaxFive': false,
+                'mostRecentlyUnlockedMaxTwoMidRound': false,
+                'mostRecentlyUnlockedMaxThreeMidRound': false,
                 'mostRecentlyUnlockedMaxFourMidRound': true,
-                'mostRecentlyUnlockedMaxFiveMidRound': true
+                'mostRecentlyUnlockedMaxFiveMidRound': false,
+                'mostRecentlyUnlockedMaxFourMidRoundWithLimits': true
             },
             selectedUpgradePurchaseMethods: {
-                'none': true,
+                'none': false,
                 'buyOneCheapestBeforeTowers': false,
                 'buyOneCheapestAfterTowers': false,
                 'buyAllCheapestToHighestBeforeTowers': false,
-                'buyAllCheapestToHighestAfterTowers': false,
+                'buyAllCheapestToHighestAfterTowers': true,
             },
-            seed: '1',
-            runs: 3,
+            seed: '5656',
+            runs: 8,
             displayMode: "emptyView", // This state is only used by the client
             simulationInProgress: false,
             simulationsCompleted: 0,

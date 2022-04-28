@@ -39,7 +39,7 @@ class Tower {
 
         // These values can change based on user actions
         this.state = {
-            "rateOfFire" : Math.ceil(this.ticksPerSecond / towerJson[type]["gameData"]["rateOfFire"]), // ticks between bullets = ticks per second / bullets per second
+            "rateOfFire" : this.calculateRateOfFire(towerJson[type]["gameData"]["rateOfFire"]), // ticks between bullets = ticks per second / bullets per second
             "seekRange": towerJson[type]["gameData"]["seekRange"],
             "shootRange": towerJson[type]["gameData"]["shootRange"], // How far bullet can travel once fired
             "bulletSpeed": towerJson[type]["gameData"]["bulletSpeed"],
@@ -85,6 +85,10 @@ class Tower {
                 this.shootRangePath.push(path[p])
             }
         }
+    }
+
+    calculateRateOfFire(rof) {
+        return Math.ceil(this.ticksPerSecond / rof)
     }
 
     setTarget(enemy) {
@@ -230,16 +234,16 @@ class Tower {
             case "dmg-up":
                 return () => {this._stateMultiplier("damage", 1.5)}
             case "rof-up":
-                return () => {this._stateMultiplier("rateOfFire", 0.5)}
+                return () => {this.state.rateOfFire = this.calculateRateOfFire(towerJson[this.type]["gameData"]["rateOfFire"] * 1.5 )}  // TODO I think this is a bit broken
             case "range-up":
                 return () => {
-                    this._stateAdder("seekRange", 1)
-                    this._stateAdder("shootRange", 1)
+                    this._stateAdder("seekRange", 2)
+                    this._stateAdder("shootRange", 2)
                 }
             case "bullets-up":
                 return () => {
                     if (this.type === 'shrapnel-burst') {
-                        this.state.bulletCount = 8
+                        this.state.bulletCount += 2
                     } else if (this.type === 'rock-scatter') {
                         this.state.bulletCount = 5
                     }
@@ -254,7 +258,9 @@ class Tower {
                 }
             case "piercing-up":
                 return () => {
-                    this.bulletModifiers.extraPiercing = 1
+                    let increase = 1
+                    if (this.type == 'spear-launcher' || this.type == 'flamethrower') increase = 2
+                    this.bulletModifiers.extraPiercing = increase
                 }
             case "dmg-stack":
                 return () => {

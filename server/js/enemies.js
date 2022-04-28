@@ -208,7 +208,7 @@ class Enemy {
 
         // Finisher bullets do extra damage to enemies that are low on health
         if (bullet.isFinisher() && this.hp <= (this.maxHp * 0.1)) {
-            multiplier *= 2
+            multiplier *= 3
         }
 
         // First blood bullets do extra damage to enemies on full health

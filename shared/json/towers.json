@@ -5,8 +5,8 @@
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
-            "damage": 7,
-            "rateOfFire": 1.2,
+            "damage": 4,
+            "rateOfFire": 1.5,
             "bulletSpeed": 5,
             "numberOfBullets": 1,
             "turns": true
@@ -16,22 +16,22 @@
                 "type": "dmg-up",
                 "description": "Damage up",
                 "description_long": "Damage up by 50%",
-                "cost": 60
+                "cost": 50
             },
             {
                 "type": "range-up",
                 "description": "Range up",
-                "description_long": "Range up by 1 square",
+                "description_long": "Range up by 2 squares",
                 "cost": 30
             },
             {
                 "type": "rof-up",
                 "description": "Rate up",
                 "description_long": "Rate of fire up 50%",
-                "cost": 70
+                "cost": 50
             }
         ],
-        "cost": 100,
+        "cost": 120,
         "shootPattern": "single",
         "bulletType": "rock",
         "textureAtlasFile": "client/assets/towers/1-rock_thrower/rock_thrower.json"
@@ -40,32 +40,32 @@
         "spriteSheetNum": 1,
         "displayInfo": "A tasty explosion of shrapnel in all directions.",
         "gameData": {
-            "seekRange": 1.5,
-            "shootRange": 1.5,
-            "damage": 3,
+            "seekRange": 2,
+            "shootRange": 2,
+            "damage": 2,
             "rateOfFire": 2,
             "bulletSpeed": 7,
-            "numberOfBullets": 6,
+            "numberOfBullets": 8,
             "turns": false
         },
         "upgrades": [
             {
-                "type": "bullets-up",
-                "description": "More shrapnel",
-                "description_long": "Shoots 2 extra shrapnel",
-                "cost": 40
-            },
-            {
                 "type": "bullet-size-up",
                 "description": "Bigger shrapnel",
-                "description_long": "More likely to hit enemies",
+                "description_long": "Bigger shrapnel with larger hitbox",
                 "cost": 40
             },
             {
-                "type": "rof-up",
-                "description": "Rate up",
-                "description_long": "Range up by 50%",
-                "cost": 90
+                "type": "piercing-up",
+                "description": "Piercing",
+                "description_long": "Can hit two enemies instead of one",
+                "cost": 40
+            },
+            {
+                "type": "dmg-up",
+                "description": "Damage up",
+                "description_long": "Damage up by 50%",
+                "cost": 50
             }
         ],
         "cost": 120,
@@ -79,7 +79,7 @@
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
-            "damage": 12,
+            "damage": 8,
             "rateOfFire": 1.2,
             "bulletSpeed": 5,
             "numberOfBullets": 3,
@@ -90,22 +90,22 @@
                 "type": "bullets-up",
                 "description": "More rocks",
                 "description_long": "Increase to 5 rocks",
-                "cost": 120
+                "cost": 80
             },
             {
-                "type": "range-up",
-                "description": "Range up",
-                "description_long": "Range up by 1 square",
-                "cost": 60
+                "type": "dmg-up",
+                "description": "Damage up",
+                "description_long": "Damage up by 50%",
+                "cost": 80
             },
             {
                 "type": "no-resistance",
                 "description": "No resistance",
-                "description_long": "Removes resistance vs metal enemies",
-                "cost": 200
+                "description_long": "Remove resistance vs shields and tanks",
+                "cost": 80
             }
         ],
-        "cost": 300,
+        "cost": 250,
         "bulletType": "rock",
         "shootPattern": "scatter",
         "textureAtlasFile": "client/assets/towers/3-rock_scatter/rock_scatter.json"
@@ -126,23 +126,23 @@
             {
                 "type": "piercing-up",
                 "description": "More piercing",
-                "description_long": "Can pierce through one extra enemy",
-                "cost": 150
+                "description_long": "Can pierce through two extra enemies",
+                "cost": 100
             },
             {
-                "type": "range-up",
-                "description": "Range up",
-                "description_long": "Range up by 1 square",
-                "cost": 100
+                "type": "pierce-all",
+                "description": "Pierce all",
+                "description_long": "Can even pierce slime enemies",
+                "cost": 400
             },
             {
                 "type": "dmg-stack",
                 "description": "Stacking damage",
                 "description_long": "Damage stacks with each pierced enemy",
-                "cost": 350
+                "cost": 250
             }
         ],
-        "cost": 550,
+        "cost": 450,
         "bulletType": "spear",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/5-spear_launcher/spear_launcher.json"
@@ -153,45 +153,45 @@
         "gameData": {
             "seekRange": 6,
             "shootRange": 8,
-            "damage": 70,
-            "rateOfFire": 0.25,
+            "damage": 80,
+            "rateOfFire": 0.5,
             "bulletSpeed": 8,
             "numberOfBullets": 1,
             "turns": true
         },
         "upgrades": [
             {
-                "type": "rate-up",
+                "type": "rof-up",
                 "description": "Rate up",
                 "description_long": "Rate of fire up by 50%",
-                "cost": 200
+                "cost": 150
             },
             {
                 "type": "dmg-up",
                 "description": "Damage up",
                 "description_long": "Damage up by 50%",
-                "cost": 200
+                "cost": 150
             },
             {
-                "type": "finisher",
-                "description": "Finisher",
-                "description_long": "More damage to enemies near death",
-                "cost": 400
+                "type": "first-blood",
+                "description": "First blood",
+                "description_long": "More damage to full health enemies",
+                "cost": 250
             }
         ],
-        "cost": 550,
+        "cost": 450,
         "bulletType": "bullet",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/4-sniper/sniper.json"
     },
     "flamethrower": {
         "spriteSheetNum": 5,
-        "displayInfo": "Continual flames that burn through all enemis in its path",
+        "displayInfo": "Continual flames that burn through all enemies in its path",
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
-            "damage": 4,
-            "rateOfFire": 10,
+            "damage": 6,
+            "rateOfFire": 8,
             "bulletSpeed": 3,
             "numberOfBullets": 1,
             "turns": true
@@ -200,23 +200,23 @@
             {
                 "type": "piercing-up",
                 "description": "More piercing",
-                "description_long": "Can pierce through one extra enemy",
-                "cost": 200
+                "description_long": "Can pierce through two extra enemies",
+                "cost": 100
             },
             {
                 "type": "pierce-all",
                 "description": "Pierce everything",
                 "description_long": "Can even pierce slime enemies",
-                "cost": 500
+                "cost": 300
             },
             {
                 "type": "bullets-up-dmg-down",
                 "description": "Wide flame",
                 "description_long": "Fire spreads over larger area",
-                "cost": 500
+                "cost": 400
             }
         ],
-        "cost": 1000,
+        "cost": 750,
         "bulletType": "flame",
         "shootPattern": "scatter",
         "textureAtlasFile": "client/assets/towers/6-flamethrower/flamethrower.json"
@@ -227,9 +227,9 @@
         "gameData": {
             "seekRange": 1.5,
             "shootRange": 1.5,
-            "damage": 60,
-            "rateOfFire": 2,
-            "bulletSpeed": 6,
+            "damage": 20,
+            "rateOfFire": 4,
+            "bulletSpeed": 5,
             "numberOfBullets": 1,
             "turns": true
         },
@@ -238,22 +238,22 @@
                 "type": "finisher",
                 "description": "Finisher",
                 "description_long": "More damage to enemies near death",
-                "cost": 600
+                "cost": 500
             },
             {
                 "type": "first-blood",
                 "description": "First blood",
                 "description_long": "More damage to full health enemies",
-                "cost": 600
+                "cost": 500
             },
             {
                 "type": "bonus-sawblade",
                 "description": "Flying sawblades",
                 "description_long": "FLYING. SAWBLADES.",
-                "cost": 800
+                "cost": 700
             }
         ],
-        "cost": 1400,
+        "cost": 1000,
         "bulletType": "buzzsaw",
         "shootPattern": "single",
         "textureAtlasFile": "client/assets/towers/7-buzzsaw/buzzsaw.json"
