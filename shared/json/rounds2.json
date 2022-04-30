@@ -11,11 +11,6 @@
             {
                 "enemies": ["greenBeetle"],
                 "count": 10,
-                "enemiesPerSquarePerSecond": 0.75
-            },
-            {
-                "enemies": ["greenBeetle"],
-                "count": 10,
                 "enemiesPerSquarePerSecond": 1
             }
         ],
@@ -137,7 +132,7 @@
             },
             {
                 "enemies": ["boneheadShield"],
-                "count": 10,
+                "count": 6,
                 "enemiesPerSquarePerSecond": 0.25
             }
         ],
@@ -176,8 +171,13 @@
             },
             {
                 "enemies": ["boneheadShield"],
-                "count": 10,
+                "count": 8,
                 "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["boneheadShield"],
+                "count": 6,
+                "enemiesPerSquarePerSecond": 1.5
             }
         ],
         [
@@ -372,13 +372,18 @@
             },
             {
                 "enemies": ["blackBeetle"],
-                "count": 20,
+                "count": 15,
                 "enemiesPerSquarePerSecond": 0.5
             },
             {
                 "enemies": ["blackBeetle"],
-                "count": 20,
-                "enemiesPerSquarePerSecond": 0.6
+                "count": 15,
+                "enemiesPerSquarePerSecond": 0.75
+            },
+            {
+                "enemies": ["blackBeetle"],
+                "count": 5,
+                "enemiesPerSquarePerSecond": 1
             }
         ],
         [
@@ -434,7 +439,7 @@
             {
                 "enemies": ["blackBeetle"],
                 "count": 10,
-                "enemiesPerSquarePerSecond": 1.5
+                "enemiesPerSquarePerSecond": 1.25
             },
             {
                 "enemies": ["boneheadTank"],
@@ -537,7 +542,17 @@
             },
             {
                 "enemies": ["boneheadTank"],
-                "count": 20,
+                "count": 10,
+                "enemiesPerSquarePerSecond": 0.25
+            },
+                        {
+                "enemies": ["gap"],
+                "count": 3,
+                "enemiesPerSquarePerSecond": 1
+            },
+            {
+                "enemies": ["boneheadTank"],
+                "count": 10,
                 "enemiesPerSquarePerSecond": 0.5
             }
         ]

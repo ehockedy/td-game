@@ -291,7 +291,7 @@ class Tower {
                     this._stateMultiplier("seekRange", 3)
                     this._stateMultiplier("shootRange", 3)
                     this.bulletModifiers.pierceAll = true
-                    this.bulletModifiers.extraPiercing = 3
+                    this.bulletModifiers.extraPiercing = 2
                     this.bulletType = "ranged-sawblade"
                 }
             default:

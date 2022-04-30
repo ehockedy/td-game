@@ -153,7 +153,7 @@
         "gameData": {
             "seekRange": 6,
             "shootRange": 8,
-            "damage": 80,
+            "damage": 70,
             "rateOfFire": 0.5,
             "bulletSpeed": 8,
             "numberOfBullets": 1,
@@ -186,7 +186,7 @@
     },
     "flamethrower": {
         "spriteSheetNum": 5,
-        "displayInfo": "Continual flames that burn through all enemies in its path",
+        "displayInfo": "Continual flames that burn through all enemies in their path",
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
@@ -213,10 +213,10 @@
                 "type": "bullets-up-dmg-down",
                 "description": "Wide flame",
                 "description_long": "Fire spreads over larger area",
-                "cost": 400
+                "cost": 500
             }
         ],
-        "cost": 750,
+        "cost": 700,
         "bulletType": "flame",
         "shootPattern": "scatter",
         "textureAtlasFile": "client/assets/towers/6-flamethrower/flamethrower.json"

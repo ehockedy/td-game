@@ -213,7 +213,7 @@ class Enemy {
 
         // First blood bullets do extra damage to enemies on full health
         if (bullet.isFirstBlood() && this.hp === this.maxHp) {
-            multiplier *= 3
+            multiplier *= 2
         }
 
         const dmg = Math.floor(bullet.damage * multiplier)
