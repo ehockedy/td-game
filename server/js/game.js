@@ -478,7 +478,8 @@ class Game {
                 "rotation": e.rotation,
                 "type": e.type,
                 "collisionAngles": e.collisionAngles,
-                "hasReachedEnd": e.hasReachedEnd
+                "hasReachedEnd": e.hasReachedEnd,
+                "hpProportion": e.hp / e.maxHp
             })
             hash.update(e.name)
         })

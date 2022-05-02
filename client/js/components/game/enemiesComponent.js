@@ -14,6 +14,39 @@ for (let i=-3; i <= 0; i++) {
     hitSequence.push(i)
 }
 
+
+// Health bar component that is shown above enemy to indicate remaining
+// HP
+class HealthBar extends BaseComponent {
+    constructor(name) {
+        super(name)
+        this.barWidthMax = 32
+        this.barHeight = 6
+        this.xPos = -this.barWidthMax/2
+        this.yPos = -this.barHeight
+        this.healthBarBackground = new PIXI.Graphics()
+        this.healthBarBackground.beginFill("0xFF0000")
+        this.healthBarBackground.drawRect(this.xPos, this.yPos, this.barWidthMax, this.barHeight)
+        this.healthBarBackground.endFill()
+        this.healthBarBackground.closePath()
+        this.healthBarBackground.cacheAsBitmap = true
+
+        this.healthBar = new PIXI.Graphics()
+        this.healthBar.beginFill("0x00FF00")
+        this.healthBar.drawRect(this.xPos, this.yPos, this.barWidthMax, this.barHeight)
+        this.healthBar.closePath()
+
+        this.addChild(this.healthBarBackground, this.healthBar)
+    }
+
+    update(percentageHpRemaining) {
+        this.healthBar.clear()
+        this.healthBar.beginFill("0x00FF00")
+        this.healthBar.drawRect(this.xPos, this.yPos, Math.ceil(this.barWidthMax * percentageHpRemaining), this.barHeight)
+        this.healthBar.closePath()
+    }
+}
+
 class Enemy extends BaseComponent {
     constructor(name, textures, type) {
         super(name)
@@ -25,7 +58,22 @@ class Enemy extends BaseComponent {
         this.animatedEnemySprite.play()
         this.addChild(this.animatedEnemySprite)
 
+        this.hitAnimations = new PIXI.Container()
+        this.addChild(this.hitAnimations)
+
+        this.healthBar = new HealthBar(`${name}_hp`)
+        this.healthBar.y = this.height*0.5
+        this.addChild(this.healthBar)
+
         this.tickCount = 0
+    }
+
+    addHitAnimation(anim) {
+        this.hitAnimations.addChild(anim)
+    }
+
+    update(hpProportion) {
+        this.healthBar.update(hpProportion)
     }
 }
 
@@ -88,6 +136,11 @@ export class EnemiesComponent extends BaseComponent {
         collisionAnimation.x = (10 + Math.random()*5) * Math.cos(angle)
         collisionAnimation.y = (10 + Math.random()*5) * Math.sin(angle)
         collisionAnimation.rotation = Math.random() * Math.PI * 2
+        collisionAnimation.onFrameChange = () => {
+            if (collisionAnimation.currentFrame > 3) {
+                collisionAnimation.alpha = 1 - Math.pow(collisionAnimation.currentFrame/collisionAnimation.totalFrames, 2)
+            }
+        }
         return collisionAnimation
     }
 
@@ -160,11 +213,12 @@ export class EnemiesComponent extends BaseComponent {
             enemyToUpdate.x = newpos[0]
             enemyToUpdate.y = newpos[1]
             enemyToUpdate.animatedEnemySprite.angle = enemy.rotation
+            enemyToUpdate.update(enemy.hpProportion)
 
             // Add an animation for each hit, if any
             enemy.collisionAngles.forEach((angle) => {
                 let anim = this.generateEnemyHitAnimation(angle)
-                enemyToUpdate.addChild(anim)
+                enemyToUpdate.addHitAnimation(anim)
             })
 
             // Trigger animation sequence if hit by bullet
