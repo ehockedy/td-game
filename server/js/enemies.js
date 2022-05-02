@@ -216,7 +216,7 @@ class Enemy {
             multiplier *= 2
         }
 
-        const dmg = Math.floor(bullet.damage * multiplier)
+        const dmg = bullet.damage * multiplier
         this.hp -= dmg
 
         // Keep track of how much damage each player has done to this enemy

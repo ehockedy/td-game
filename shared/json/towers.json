@@ -190,8 +190,8 @@
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
-            "damage": 6,
-            "rateOfFire": 8,
+            "damage": 3,
+            "rateOfFire": 16,
             "bulletSpeed": 3,
             "numberOfBullets": 1,
             "turns": true

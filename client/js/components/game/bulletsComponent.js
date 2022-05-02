@@ -1,6 +1,8 @@
 import { BaseComponent } from "./base/baseComponent.js"
 import { gridPosToMapPos } from "../../tools.js"
 
+const flameStartingScale = 0.6
+
 export class BulletsComponent extends BaseComponent {
     constructor(spriteSize, spriteSizeMap, bulletConfig) {
         super()
@@ -38,6 +40,12 @@ export class BulletsComponent extends BaseComponent {
         bulletSprite.x = x
         bulletSprite.y = y
         bulletSprite.rotation = angle
+        bulletSprite.updateTicks = 0
+
+        // Flame bullets grow as they move, this is the starting scale
+        if (type == "flame") {
+            bulletSprite.scale.set(flameStartingScale)
+        }
         this.addChild(bulletSprite)
         return bulletSprite
     }
@@ -58,6 +66,11 @@ export class BulletsComponent extends BaseComponent {
                         bullet.rotation = bulletNew.angle
                     }
                     bullet.toRemove = false
+                    bullet.updateTicks += 1
+                    if (bulletNew.type == "flame") {
+                        bullet.alpha = 1 - bullet.updateTicks*0.01
+                        bullet.scale.set(flameStartingScale + bullet.updateTicks*0.015)
+                    }
                     bulletFound = true
                     break
                 }
