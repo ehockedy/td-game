@@ -274,8 +274,9 @@ export class GameRenderer {
         this.tc.tick()
 
         // Check if the round has finished and therefor changed
-        if (serverUpdate.worldState.round != this.round) {
-            this.round = serverUpdate.worldState.round
+        const nextRound = serverUpdate.worldState.round
+        if (nextRound != this.round && nextRound <= this.maxRounds) {
+            this.round = nextRound
             this.startNextRound()
             this.roundCounter.update(this.round)
         }
