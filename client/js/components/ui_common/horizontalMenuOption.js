@@ -14,6 +14,7 @@ class HorizontalMenuOption extends BaseComponent {
         this.baseTint = tint
         this.selectionEventName = "selected"  // The event to emit when selected
         this.defaultScale = 1
+        this.defaultFontSize = 0
 
         this.baseContentOffsetX = 0
         this._generateSprites(width_px, tint, wallAttachment, verticalSize)
@@ -21,6 +22,10 @@ class HorizontalMenuOption extends BaseComponent {
         this.text = new PIXI.Container()
         this.text.x += this.baseContentOffsetX
         this.addChild(this.text)
+
+        // Keep track of the text size for a given string to avoid recomputing
+        // the adjusted size each time
+        this.memoizedTextSizes = {}
     }
 
     // ~~~ Public ~~~
@@ -41,9 +46,21 @@ class HorizontalMenuOption extends BaseComponent {
 
     // Shrinks the text down untilit fits within the box comfortably
     autofitTextSize() {
+        if (this.defaultFontSize == 0) return
         let textToUpdate = this.text.getChildByName("text")
-        while (textToUpdate.height > this.height*0.8 || textToUpdate.width > this.width*0.65) {
-            textToUpdate.style.fontSize -= 1
+        const content = textToUpdate.text
+        if (content in this.memoizedTextSizes) {
+            textToUpdate.style.fontSize = this.memoizedTextSizes[content]
+        } else {
+            // If this is the first time adjusting the given text, store the final font size
+            // so that do not have to recalculate next time, as it is very likely will need
+            // to re-render that specific string
+            let adjustedFontSize = this.defaultFontSize
+            while (textToUpdate.height > this.height*0.8 || textToUpdate.width > this.width*0.65) {
+                adjustedFontSize -= 1
+                textToUpdate.style.fontSize = adjustedFontSize
+            }
+            this.memoizedTextSizes[content] = adjustedFontSize
         }
     }
 
@@ -56,6 +73,7 @@ class HorizontalMenuOption extends BaseComponent {
             let text = new PIXI.Text(message, style)
             text.name = "text"
             text.anchor.set(0.5, 0.5)
+            this.defaultFontSize = style.fontSize
             this.addText(text, 0.5, 0.5)
         }
     }
