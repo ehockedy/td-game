@@ -18,9 +18,9 @@ export class Counter extends StaticHorizontalMenuOption {
 
     update(newValue) {
         if (this.value.text != newValue && !isNaN(newValue)) {
-            if (!isNaN(this.value.text) && !this.disableAnimation) {
-                this.valueChangeAnimation(parseInt(newValue) - parseInt(this.value.text))
-            }
+            // if (!isNaN(this.value.text) && !this.disableAnimation) {
+            //     this.valueChangeAnimation(parseInt(newValue) - parseInt(this.value.text))
+            // }
             this.value.text = newValue.toString()
         }
     }
