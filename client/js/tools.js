@@ -31,13 +31,22 @@ export function randomHexString(len) {
  * Generates a randomised string of letters of the given length
  * @param {Number} len Length of string to generate
  */
-export function randomAlphaCharString(len) {
-    let alphabet = "ABCDEFGHIJKLMNPQRSTWXYZ" // Exclude O to avoid confusion with zero
+function randomStringFromAlphabet(len, alphabet) {
     let randomString = ""
     for (let i=0; i < len; i++) {
         randomString += alphabet[Math.floor(Math.random() * alphabet.length)];
     }
     return randomString
+}
+
+export function randomAlphaCharString(len) {
+    let alphabet = "ABCDEFGHIJKLMNPQRSTUVWXYZ" // Exclude O to avoid confusion with zero
+    return randomStringFromAlphabet(len, alphabet)
+}
+
+export function randomAlphaCharNumericString(len) {
+    let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    return randomStringFromAlphabet(len, alphabet)
 }
 
 /**
