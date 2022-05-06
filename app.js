@@ -41,7 +41,7 @@ function parseGameConfig(config) {
   }
   if (config.MAP_WIDTH % 2 == 1) {
     return logError("MAP_WIDTH", "Must be an even positive integer")
-  } else if  (config.MAP_HEIGHT % 2 == 1) {
+  } else if  (config.MAP_HEIGHT % 2 == 0) {
     return logError("MAP_HEIGHT", "Must be an even positive integer")
   } else if  (config.SUBGRID_SIZE % 2 == 0) {
     return logError("SUBGRID_SIZE", "Must be an odd positive integer")

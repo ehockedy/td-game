@@ -52,7 +52,7 @@ div, button, input {
     grid-column-start: 2;
     justify-self: center;
     align-self: center;
-    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 /* The map canvas itself */

@@ -21,17 +21,14 @@ class MapGenerator {
      */
     resetGrid() {
         // First square on the path
-        this.row_start = Math.floor(1 * this.height / 4)
-        if (this.row_start % 2 == 1) this.row_start -= 1  // ensure is even
-
+        this.row_start = 4
         this.col_start = 0
 
         // The current position whilst generating the map
         this.row = this.row_start
         this.col = this.col_start
 
-        this.finalRow = Math.floor(3 * this.height / 4)
-        if (this.finalRow % 2 == 1) this.finalRow -= 1  // ensure is even
+        this.finalRow = this.height - 1 - this.row_start
 
         this.map = []
         for (var i = 0; i < this.height; i++) {
@@ -92,7 +89,7 @@ class MapGenerator {
         }
 
         // Number of rows from top and bottom that won't have path
-        var row_buffer = 1
+        var row_buffer = 2
 
         // Down moves
         var r = this.row
