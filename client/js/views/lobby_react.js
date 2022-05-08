@@ -4,12 +4,34 @@ import { GameMapSelection } from "../components/ui_common/map.js"
 import { randomAlphaCharString } from "../tools.js"
 import "./../../css/lobby.css"
 
+function OptionPicker({currentOption, onOptionChange}) {
+    return <span className="optionPicker">
+        <button className="optionPickerButton button-inline" onClick={() => {onOptionChange('next')}}>
+            <span className="optionPickerButtonText">
+                {"<"}
+            </span>
+        </button>
+        <span className="optionPickerValue">
+            {currentOption}
+        </span>
+        <button className="optionPickerButton button-inline" onClick={() => {onOptionChange('prev')}}>
+            <span className="optionPickerButtonText">
+                {">"}
+            </span>
+        </button>
+    </span>
+}
+
 export class Lobby extends React.Component {
     constructor(props) {
         super(props)
         this.getNewMap = this.getNewMap.bind(this);
+        this.livesOptions = ['1', '10', '50', '100', 'infinite']
+        this.difficultyOptions = ['easy', 'medium', 'hard']
         this.state = {
             seed: randomAlphaCharString(6),
+            livesOptionIdx: 3,
+            difficultyOptionIdx: 1,
         }
     }
 
@@ -19,6 +41,18 @@ export class Lobby extends React.Component {
 
     getNewMap() {
         this.props.socket.emit("server/map/regenerate", this.state.seed)
+    }
+
+    getNextOption(currentIdx, direction, options) {
+        if (direction === 'next') {
+            return (currentIdx + 1) % options.length
+        } else {
+            let newVal = currentIdx - 1
+            if (newVal < 0) {
+                newVal = options.length - 1
+            }
+            return newVal
+        }
     }
 
     render() {
@@ -70,6 +104,32 @@ export class Lobby extends React.Component {
                     </div>
                 </div>
                 <button className="start-game button display-box slanted noselect" onClick={()=>{this.props.socket.emit("server/game/start")}}>Start game</button>
+                <div className="options noselect">
+                    <div className="option">
+                        <span className="optionName">
+                            Lives
+                        </span>
+                        <OptionPicker currentOption={this.livesOptions[this.state.livesOptionIdx]} onOptionChange={
+                            (direction) => {
+                                this.setState({
+                                    livesOptionIdx: this.getNextOption(this.state.livesOptionIdx, direction, this.livesOptions)
+                                })
+                            }
+                        }/>
+                    </div>
+                    <div className="option">
+                        <span className="optionName">
+                            Difficulty
+                        </span>
+                        <OptionPicker currentOption={this.difficultyOptions[this.state.difficultyOptionIdx]} onOptionChange={
+                            (direction) => {
+                                this.setState({
+                                    difficultyOptionIdx: this.getNextOption(this.state.difficultyOptionIdx, direction, this.difficultyOptions)
+                                })
+                            }
+                        }/>
+                    </div>
+                </div>
             </div>
         )
     }
