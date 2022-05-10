@@ -27,6 +27,8 @@ class Session {
             // "numRounds": gameConfig.numRoundOptions[0]  // Default to lowest number of rounds
             "numRounds": roundConfig.rounds.length,  // TODO use actual numbers from config once enough rounds added
             "ticksPerSecond": this.ticksPerSecond,
+            "difficulty": "medium",
+            "lives": "100"
         }
         this.addSocket(socket, playerID)
     }
@@ -90,8 +92,10 @@ class Session {
             socket.to(this.gameID).emit("client/players/set", this.players)
         })
 
-        socket.on("server/game/start", ()=> {
+        socket.on("server/game/start", ({difficulty, lives})=> {
             if (!this.hasStarted) {
+                this.gameSettings.difficulty = difficulty
+                this.gameSettings.lives = lives
                 this.game = new game.Game(this.map, this.roundConfig.rounds, this.gameSettings, this.enemyConfig)
                 this.hasStarted = true
                 for (const [id, socket] of Object.entries(this.sockets)) {

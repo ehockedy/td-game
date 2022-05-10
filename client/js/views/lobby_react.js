@@ -4,6 +4,7 @@ import { GameMapSelection } from "../components/ui_common/map.js"
 import { randomAlphaCharString } from "../tools.js"
 import "./../../css/lobby.css"
 
+const INFINITY = 727272
 function OptionPicker({currentOption, onOptionChange}) {
     return <span className="optionPicker">
         <button className="optionPickerButton button-inline" onClick={() => {onOptionChange('next')}}>
@@ -22,11 +23,16 @@ function OptionPicker({currentOption, onOptionChange}) {
     </span>
 }
 
+function livesValueToString(value) {
+    if (value === INFINITY) return 'infinite' // todo return infinity symbol
+    return `${value}`
+}
+
 export class Lobby extends React.Component {
     constructor(props) {
         super(props)
         this.getNewMap = this.getNewMap.bind(this);
-        this.livesOptions = ['1', '10', '50', '100', 'infinite']
+        this.livesOptions = [1, 10, 50, 100, INFINITY]
         this.difficultyOptions = ['easy', 'medium', 'hard']
         this.state = {
             seed: randomAlphaCharString(6),
@@ -103,13 +109,23 @@ export class Lobby extends React.Component {
                         </button>
                     </div>
                 </div>
-                <button className="start-game button display-box slanted noselect" onClick={()=>{this.props.socket.emit("server/game/start")}}>Start game</button>
+                <button
+                  className="start-game button display-box slanted noselect"
+                  onClick={()=>{
+                      this.props.socket.emit("server/game/start", {
+                          lives: this.livesOptions[this.state.livesOptionIdx],
+                          difficulty: this.difficultyOptions[this.state.difficultyOptionIdx]
+                      })
+                    }
+                }>
+                    Start game
+                </button>
                 <div className="options noselect">
                     <div className="option">
                         <span className="optionName">
                             Lives
                         </span>
-                        <OptionPicker currentOption={this.livesOptions[this.state.livesOptionIdx]} onOptionChange={
+                        <OptionPicker currentOption={livesValueToString(this.livesOptions[this.state.livesOptionIdx])} onOptionChange={
                             (direction) => {
                                 this.setState({
                                     livesOptionIdx: this.getNextOption(this.state.livesOptionIdx, direction, this.livesOptions)

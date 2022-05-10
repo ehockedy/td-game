@@ -6,15 +6,22 @@ const sizeMap = {
     "large": 2
 }
 
+const difficultyMap = {
+    easy: 0.8,
+    medium: 1,
+    hard: 1.2,
+}
+
 // Simple factory class to produce an enemy of a given type without having to pass through
 // the config and path etc. each time, just the type
 class EnemyFactory {
-    constructor(enemyConfig, path, subgridSize, ticksPerSecond) {
+    constructor(enemyConfig, path, subgridSize, ticksPerSecond, difficulty) {
         this.enemyConfig = enemyConfig
         this.path = path
         this.subgridSize = subgridSize
         this.tickStepSize = Math.ceil(subgridSize/ticksPerSecond)   // Number of steps to take to mode through a square in ticksPerSecond ticks
         this.playerCount = 1 // Number of players, use this to scale HP
+        this.difficulty = difficulty
     }
 
     createEnemy(enemyType) {
@@ -22,7 +29,7 @@ class EnemyFactory {
             enemyType,
             this.path,
             this.subgridSize,
-            this.enemyConfig[enemyType].hp * this.playerCount,
+            this.enemyConfig[enemyType].hp * this.playerCount * difficultyMap[this.difficulty],
             Math.ceil(this.enemyConfig[enemyType].speed * this.tickStepSize),
             this.enemyConfig[enemyType].size,
             this.enemyConfig[enemyType].weaknesses,

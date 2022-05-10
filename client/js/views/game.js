@@ -13,6 +13,7 @@ import { OnScreenMessage } from "../components/ui_common/onScreenMessages.js"
 import { randomHexString } from "../tools.js"
 import { COLOURS } from "../components/ui_common/style.js"
 
+const INFINITY = 727272  // A special value to represent infinity
 /**
  * This class sets up what will appear in the game view.
  * It also takes updates from the server and passes the update data to the relevant components
@@ -270,8 +271,15 @@ export class GameRenderer {
         this.bc.update(serverUpdate.bullets)
         this.ec.update(serverUpdate.enemies)
         this.ec.updateEndOfPathEnemies(this.rightBoundary)
-        this.livesCounter.update(serverUpdate.worldState.lives)
         this.tc.tick()
+
+        const lives = serverUpdate.worldState.lives
+        if (lives !== INFINITY) {
+            this.livesCounter.update()
+        } else if (this.livesCounter.visible) {
+            this.livesCounter.visible = false
+        }
+
 
         // Check if the round has finished and therefor changed
         const nextRound = serverUpdate.worldState.round

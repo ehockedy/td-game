@@ -5,7 +5,7 @@ const point = require('./point.js');
 const fs = require('fs');
 const { EnemyFactory } = require('./enemies.js');
 
-
+const INFINITY = 727272  // An arbitrary number used to represent infinity because Infinity does nto travel well over socket io
 class Game {
     constructor(map, rounds, settings, enemyConfig) {
         this.map = map
@@ -18,14 +18,14 @@ class Game {
         this.round = 1
         this.maxRounds = settings.numRounds
         this.rounds = rounds
-
-        this.lives = 100
+        
+        this.lives = settings.lives
 
         this.subgridSize = this.map.subgridSize
         this.subgridMidpoint = Math.floor(this.subgridSize/2)
         this.ticksPerSecond = settings.ticksPerSecond
 
-        this.enemyFactory = new EnemyFactory(enemyConfig, this.map.path, this.map.subgridSize, this.ticksPerSecond)
+        this.enemyFactory = new EnemyFactory(enemyConfig, this.map.path, this.map.subgridSize, this.ticksPerSecond, settings.difficulty)
         this.enemyQueue = []
         this.enemyKillCount = 0
         this.enemiesRemaining = 0
@@ -164,7 +164,7 @@ class Game {
     }
 
     processEndOfPathEnemy(enemy) {
-        this.lives -= 1 // TODO dependent on enemy type?
+        if (this.lives !== INFINITY) this.lives -= 1 // TODO dependent on enemy type?
         this.removeEnemyDontProcessSubEnemies(enemy)
         this.endOfPathEnemies.push(enemy)
     }
@@ -429,7 +429,7 @@ class Game {
     }
 
     isLoss() {
-        return this.lives <= 0
+        return this.lives !== INFINITY && this.lives <= 0
     }
 
     updateGameObjects() {
