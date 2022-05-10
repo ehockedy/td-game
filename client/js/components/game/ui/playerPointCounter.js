@@ -11,7 +11,7 @@ export class PlayerPointCounter extends StaticHorizontalMenuOption {
         this.addText(this.label, 0.95, 0.25)
 
         // Scale the name so that it does not run over the end of the box
-        if (this.label.width > width*0.9) {  // *0.9 to account for margin around text
+        if (this.label.width > width*0.85) {  // *0.9 to account for margin around text
             this.label.scale.set(0.8*width/this.label.width)  // *0.8 to account for margin around text
         }
 

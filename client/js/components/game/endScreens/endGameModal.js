@@ -98,7 +98,7 @@ function PlayerScore(props) {
     const baseNamePaddingTops = 0 * props.scale * positionFontSizeMultipler
     const baseNameMarginTop = 20 * props.scale * positionFontSizeMultipler
     const baseNameBorderSize = 6 * props.scale * positionFontSizeMultipler
-    const baseNameWidth = 160 * props.scale * positionFontSizeMultipler
+    const baseNameWidth = 300 * props.scale * positionFontSizeMultipler
     return <div className="scoreContainer">
         <PlayerPosition position={props.position} fontSize={basePositionFontSize}/>
         <div
