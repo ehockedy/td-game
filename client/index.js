@@ -51,7 +51,7 @@ function loadConfig(configType) {
 
 function Application(props) {
     const [view, setView] = useState("main-menu")
-    const [socket, setSocket] = useState()
+    const [socket, setSocket] = useState(io())  // This creates socket io connection with server
     const [gameID, setGameID] = useState()
     const [playerID, setPlayerID] = useState()
     const [players, setPlayers] = useState()
@@ -60,7 +60,6 @@ function Application(props) {
     const config = generateClientConfig(props.config)
 
     useEffect(() => {
-        const socket = io()
         socket.on("client/view/lobby", () => {
             setView("lobby")
         })
@@ -81,7 +80,7 @@ function Application(props) {
         })
         setSocket(socket)
         return () => socket.close()
-    }, [])
+    }, [socket])
 
     const resetState = () => {
         setGameID()
@@ -93,8 +92,10 @@ function Application(props) {
 
     const returnToMainMenu = () => {
         setView("main-menu")
-        socket.emit("server/player/disconnect", playerID)
+        socket.emit("server/player/disconnect", playerID)  // remove player from the session
         resetState()
+        socket.close()
+        setSocket(io())  // Start fresh connection
     }
 
     return (

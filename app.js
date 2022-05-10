@@ -124,9 +124,9 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
     // TODO moveinto a store of disconnected players within the session, and then just mve back if the player comes back?
     socket.on('disconnect', function() {
       if (socket.playerID != undefined) {
-        console.log("DISCONNCETED", socket.playerID)
+        console.log("DISCONNECTED", socket.playerID)
 
-        // For now we leave the player in the game, but they are not used. This is becuase want to keep track of their scores etc if they come back later.
+        // Player is removed. They cannot rejoin the game.
         if (socket.gameID) {
           games[socket.gameID].removePlayer(socket.playerID)
         }
