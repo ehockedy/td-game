@@ -67,6 +67,12 @@ export class GameMapSelection extends GameMap {
         this.spriteHandler.registerContainer(this.map)
     }
 
+    componentDidMount() {
+        if (this.props.mapStructure) {
+            this.map.constructMap(this.props.mapStructure)
+        }
+    }
+
     // When the map stored in the root component has changed, update the displayed map
     componentDidUpdate(prevProps) {
         if (prevProps.mapStructure != this.props.mapStructure) {

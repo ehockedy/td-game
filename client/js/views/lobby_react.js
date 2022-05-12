@@ -31,22 +31,20 @@ function livesValueToString(value) {
 export class Lobby extends React.Component {
     constructor(props) {
         super(props)
-        this.getNewMap = this.getNewMap.bind(this);
         this.livesOptions = [1, 10, 50, 100, INFINITY]
         this.difficultyOptions = ['easy', 'medium', 'hard']
         this.state = {
-            seed: randomAlphaCharString(6),
             livesOptionIdx: 3,
             difficultyOptionIdx: 1,
         }
     }
 
-    componentDidMount() {
-        this.getNewMap()
+    generateNewRandomMap = () => {
+        return this.generateNewSeededMap(randomAlphaCharString(6))
     }
 
-    getNewMap() {
-        this.props.socket.emit("server/map/regenerate", this.state.seed)
+    generateNewSeededMap = (seed) => {
+        this.props.socket.emit("server/map/regenerate", seed)
     }
 
     getNextOption(currentIdx, direction, options) {
@@ -95,16 +93,15 @@ export class Lobby extends React.Component {
                                 className="slanted display-box noselect map-seed-input"
                                 type="text"
                                 maxLength="6"
-                                value={this.state.seed}
+                                value={this.props.mapSeed}
                                 spellCheck="false"
-                                onChange={(event) => {
-                                    this.setState({seed: event.target.value.toUpperCase()}, this.getNewMap)
-                                }}
+                                onChange={(event) => {this.generateNewSeededMap(event.target.value.toUpperCase())}}
                             ></input>  
                         </div>
-                        <button className="map-regenerate-button slanted display-box button noselect" onClick={()=> {
-                            this.setState({seed: randomAlphaCharString(6)}, this.getNewMap)
-                        }}>
+                        <button
+                            className="map-regenerate-button slanted display-box button noselect"
+                            onClick={this.generateNewRandomMap}
+                        >
                             Regenerate map
                         </button>
                     </div>

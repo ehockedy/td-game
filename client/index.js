@@ -56,6 +56,7 @@ function Application(props) {
     const [playerID, setPlayerID] = useState()
     const [players, setPlayers] = useState()
     const [map, setMap] = useState()
+    const [mapSeed, setMapSeed] = useState()
     const [gameSettings, setGameSettings] = useState()
     const config = generateClientConfig(props.config)
 
@@ -72,8 +73,9 @@ function Application(props) {
         socket.on("client/players/set", (players) => {
             setPlayers(players)
         })
-        socket.on("client/map/set", (map) => {
+        socket.on("client/map/set", (map, seed) => {
             setMap(map)
+            setMapSeed(seed)
         })
         socket.on("client/gameSettings/set", (gameSettings) => {
             setGameSettings(gameSettings)
@@ -110,7 +112,16 @@ function Application(props) {
                     <MainMenu socket={socket} setPlayerIDHandler={setPlayerID} setGameIDHandler={setGameID}></MainMenu>
                 ) :
                 view === "lobby" ? (
-                    <Lobby socket={socket} gameID={gameID} thisPlayer={playerID} players={players} config={config} mapStructure={map} gameSettings={gameSettings}></Lobby>
+                    <Lobby
+                        socket={socket}
+                        gameID={gameID}
+                        thisPlayer={playerID}
+                        players={players}
+                        config={config}
+                        mapStructure={map}
+                        mapSeed={mapSeed}
+                        gameSettings={gameSettings}
+                    />
                 ) :
                 view === "game" ? (
                     <Game

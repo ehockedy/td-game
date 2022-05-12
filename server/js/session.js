@@ -1,6 +1,20 @@
 const game = require('./game.js')
 const mapGenerator = require("./mapGenerator.js")
 
+// Use to generate map seed - same as client code
+function randomStringFromAlphabet(len, alphabet) {
+    let randomString = ""
+    for (let i=0; i < len; i++) {
+        randomString += alphabet[Math.floor(Math.random() * alphabet.length)];
+    }
+    return randomString
+}
+
+function randomAlphaCharString(len) {
+    let alphabet = "ABCDEFGHIJKLMNPQRSTUVWXYZ" // Exclude O to avoid confusion with zero
+    return randomStringFromAlphabet(len, alphabet)
+}
+
 class Session {
     constructor(socket, gameID, playerID, gameConfig, roundConfig, enemyConfig) {        
         this.gameID = gameID
@@ -10,7 +24,8 @@ class Session {
         this.enemyConfig = enemyConfig
 
         this.mapGenerator = new mapGenerator.MapGenerator(gameConfig.MAP_HEIGHT, gameConfig.MAP_WIDTH, gameConfig.SUBGRID_SIZE)
-        this.map = this.mapGenerator.generateMap()
+        const mapSeed = randomAlphaCharString(6)
+        this.map = this.mapGenerator.generateMap(mapSeed)
         
         this.hasStarted = false
         this.gameLoopActive = false
@@ -55,6 +70,7 @@ class Session {
             // Send to self and all others in room
             this.broadcast("client/players/set", this.players)
             this.broadcast("client/gameSettings/set", this.gameSettings)
+            this.broadcast("client/map/set", this.map.getMapStructure(), this.mapGenerator.seed)
 
             // Make socket just joined go to lobby
             socket.emit("client/view/lobby")
@@ -76,7 +92,7 @@ class Session {
 
         socket.on("server/map/regenerate", (seed)=> {
             this.map = this.mapGenerator.generateMap(seed)
-            this.broadcast("client/map/set", this.map.getMapStructure())
+            this.broadcast("client/map/set", this.map.getMapStructure(), seed)
         })
 
         socket.on("server/player/set/name", (playerID, playerName) => {
