@@ -47,15 +47,16 @@ export class Lobby extends React.Component {
         this.props.socket.emit("server/map/regenerate", seed)
     }
 
-    getNextOption(currentIdx, direction, options) {
+    getNextOption(currentVal, direction, options) {
+        const currentIdx = options.indexOf(currentVal)
         if (direction === 'next') {
-            return (currentIdx + 1) % options.length
+            return options[(currentIdx + 1) % options.length]
         } else {
             let newVal = currentIdx - 1
             if (newVal < 0) {
                 newVal = options.length - 1
             }
-            return newVal
+            return options[newVal]
         }
     }
 
@@ -109,10 +110,7 @@ export class Lobby extends React.Component {
                 <button
                   className="start-game button display-box slanted noselect"
                   onClick={()=>{
-                      this.props.socket.emit("server/game/start", {
-                          lives: this.livesOptions[this.state.livesOptionIdx],
-                          difficulty: this.difficultyOptions[this.state.difficultyOptionIdx]
-                      })
+                      this.props.socket.emit("server/game/start")
                     }
                 }>
                     Start game
@@ -122,25 +120,29 @@ export class Lobby extends React.Component {
                         <span className="optionName">
                             Lives
                         </span>
-                        <OptionPicker currentOption={livesValueToString(this.livesOptions[this.state.livesOptionIdx])} onOptionChange={
-                            (direction) => {
-                                this.setState({
-                                    livesOptionIdx: this.getNextOption(this.state.livesOptionIdx, direction, this.livesOptions)
-                                })
+                        <OptionPicker
+                            currentOption={livesValueToString(this.props.gameSettings.lives)}
+                            onOptionChange={
+                                (direction) => {
+                                    const newVal = this.getNextOption(this.props.gameSettings.lives, direction, this.livesOptions)
+                                    this.props.socket.emit("server/game/settings/set", "lives", newVal)
+                                }
                             }
-                        }/>
+                        />
                     </div>
                     <div className="option">
                         <span className="optionName">
                             Difficulty
                         </span>
-                        <OptionPicker currentOption={this.difficultyOptions[this.state.difficultyOptionIdx]} onOptionChange={
-                            (direction) => {
-                                this.setState({
-                                    difficultyOptionIdx: this.getNextOption(this.state.difficultyOptionIdx, direction, this.difficultyOptions)
-                                })
+                        <OptionPicker
+                            currentOption={this.props.gameSettings.difficulty}
+                            onOptionChange={
+                                (direction) => {
+                                    const newVal = this.getNextOption(this.props.gameSettings.difficulty, direction, this.difficultyOptions)
+                                    this.props.socket.emit("server/game/settings/set", "difficulty", newVal)
+                                }
                             }
-                        }/>
+                        />
                     </div>
                 </div>
             </div>

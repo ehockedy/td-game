@@ -108,10 +108,8 @@ class Session {
             socket.to(this.gameID).emit("client/players/set", this.players)
         })
 
-        socket.on("server/game/start", ({difficulty, lives})=> {
+        socket.on("server/game/start", ()=> {
             if (!this.hasStarted) {
-                this.gameSettings.difficulty = difficulty
-                this.gameSettings.lives = lives
                 this.game = new game.Game(this.map, this.roundConfig.rounds, this.gameSettings, this.enemyConfig)
                 this.hasStarted = true
                 for (const [id, socket] of Object.entries(this.sockets)) {
@@ -195,6 +193,13 @@ class Session {
                 this.updateFrequency_ms = this.fastForwardUpdateFrequency
             }
             this.broadcast("client/game/round/toggleFastForward")
+        })
+
+        socket.on("server/game/settings/set", (settingName, settingValue) => {
+            if (settingName in this.gameSettings) {
+                this.gameSettings[settingName] = settingValue
+            }
+            this.broadcast("client/gameSettings/set", this.gameSettings)
         })
     }
 
