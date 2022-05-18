@@ -139,7 +139,7 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
 
         // Player is removed. They cannot rejoin the game.
         if (socket.gameID) {
-          games[socket.gameID].removePlayer(socket.playerID)
+          games[socket.gameID].disconnectPlayer(socket.playerID)
         }
       }
     })

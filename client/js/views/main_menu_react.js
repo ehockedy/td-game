@@ -54,9 +54,8 @@ export class MainMenu extends React.Component {
                         <div>
                             <MenuOption text="Start Game" leftPos="33" topPos="66"
                                 onClick={() => {
-                                    this.props.socket.emit("server/session/start", (gameID, playerID) => {
+                                    this.props.socket.emit("server/session/start", (gameID) => {
                                         this.props.setGameIDHandler(gameID)
-                                        this.props.setPlayerIDHandler(playerID)
                                     })
                                 }}
                                 disabled={this.state.buttonsDisabled}
@@ -97,9 +96,8 @@ export class MainMenu extends React.Component {
                                             responseMessageTimeoutFn: timeoutFn,
                                         })
                                     } else if (response["response"] == "success") { // Game exists
-                                        this.props.socket.emit("server/session/join", { "gameID": this.state.joinGameText }, (gameID, playerID) => {
+                                        this.props.socket.emit("server/session/join", { "gameID": this.state.joinGameText }, (gameID) => {
                                             this.props.setGameIDHandler(gameID)
-                                            this.props.setPlayerIDHandler(playerID)
                                         })
                                     }
                                 })

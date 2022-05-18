@@ -69,7 +69,6 @@ export class GameRenderer {
         this.moneyCounter = new Counter(config.TOWER_MENU_WIDTH, toolbarY, counterWidth, "Money", 0, COLOURS.MENU_SANDY)
         this.livesCounter = new Counter(config.TOWER_MENU_WIDTH + this.moneyCounter.width, toolbarY, counterWidth, "Lives", 100, COLOURS.MENU_SANDY)
 
-        this.setServerEventListeners()
         this.localEventEmitter = this.setServerEventEmitter()
     }
 
@@ -88,8 +87,9 @@ export class GameRenderer {
         return new Promise((resolve) => {
             fetch("shared/json/towers.json").then((response) => {
                 response.json().then((towerData) => {
-                    this.tm.setData(towerData, this.thisPlayerID, this.players[this.thisPlayerID].colour),
-                    this.tc.setData(towerData, this.players, this.thisPlayerID),
+                    this.tm.setData(towerData, this.thisPlayerID, this.players[this.thisPlayerID].colour)
+                    this.tc.setData(towerData, this.players, this.thisPlayerID)
+                    this.setServerEventListeners()
                     resolve()
                 })
             })

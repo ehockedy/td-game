@@ -38,6 +38,8 @@ class Session {
         
         this.sockets = {}  // All the connected players/ TODO I dont think this actually needs to be a map. Just keep ID as socket property.
         this.players = {}
+        this.disconnectedPlayers = {}
+
         this.gameSettings = {
             // "numRounds": gameConfig.numRoundOptions[0]  // Default to lowest number of rounds
             "numRounds": roundConfig.rounds.length,  // TODO use actual numbers from config once enough rounds added
@@ -53,15 +55,27 @@ class Session {
     }
 
     addSocket(socket, playerID) {
+        // TODO tidy this function
         socket.join(this.gameID)
         this.sockets[playerID] = socket
-        this.players[playerID] = {
-            id: playerID,
-            displayName: "PLAYER " + (this.getPlayerCount() + 1).toString(),
-            colour: this.gameConfig.colours[this.getPlayerCount()].code,
+
+        // If player already exists, move back into the active players map
+        if (playerID in this.disconnectedPlayers) {
+            this.players[playerID] = this.disconnectedPlayers[playerID]
+            delete this.disconnectedPlayers[playerID]
+        } else {
+            this.players[playerID] = {
+                id: playerID,
+                displayName: "PLAYER " + (this.getPlayerCount() + 1).toString(),
+                colour: this.gameConfig.colours[this.getPlayerCount()].code,
+            }
         }
+
         if (this.hasStarted) {
             if (this.game.playerExists(playerID)) {
+                socket.emit("client/players/set", {...this.players, ...this.disconnectedPlayers})
+                socket.emit("client/gameSettings/set", this.gameSettings)
+                socket.emit("client/map/set", this.map.getMapStructure(), this.mapGenerator.seed)
                 socket.emit("client/view/game")
             } else {
                 socket.emit("client/player/notFound")
@@ -244,6 +258,17 @@ class Session {
             this.game.removePlayer(playerID)
         }
         if (playerID in this.players) {
+            delete this.players[playerID]
+            delete this.sockets[playerID]
+        }
+    }
+
+    disconnectPlayer(playerID) {
+        // This temporarily moves a player into a disconnected state. Moves back if they rejoin
+        // The player is stll part of the game
+        if (playerID in this.players) {
+            const playerInfo = this.players[playerID]
+            this.disconnectedPlayers[playerID] = playerInfo
             delete this.players[playerID]
             delete this.sockets[playerID]
         }
