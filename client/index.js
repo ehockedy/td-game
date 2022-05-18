@@ -6,6 +6,7 @@ import { io } from "socket.io-client";
 import { GameMapBackground } from "./js/components/ui_common/map.js"
 import React, { useEffect, useState } from "react";
 import { generateClientConfig } from "./js/constants.js"
+import { getCookie, setCookie } from "./js/cookieHelpers.js"
 
 function loadAssets(enemyConfig) {
     return new Promise((resolve) => {
@@ -80,7 +81,21 @@ function Application(props) {
         socket.on("client/gameSettings/set", (gameSettings) => {
             setGameSettings(gameSettings)
         })
-        setSocket(socket)
+
+        // Check if the user id is stored in a cookie
+        const id = getCookie("id")
+        if (id == "") {
+            // First time user has come, generate new id
+            socket.emit("server/player/getID", (id) => {
+                setPlayerID(id)
+                setCookie("id", id, 365)  // set for a year
+            })
+        } else {
+            // Use existing id
+            socket.emit("server/player/setID", id)
+            setPlayerID(id)
+        }
+
         return () => socket.close()
     }, [socket])
 
@@ -109,7 +124,11 @@ function Application(props) {
             }
             {
                 view === "main-menu" ? (
-                    <MainMenu socket={socket} setPlayerIDHandler={setPlayerID} setGameIDHandler={setGameID}></MainMenu>
+                    <MainMenu
+                        socket={socket}
+                        playerID={playerID}
+                        setGameIDHandler={setGameID}>
+                    </MainMenu>
                 ) :
                 view === "lobby" ? (
                     <Lobby

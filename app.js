@@ -91,10 +91,22 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
   }, 10000)
 
   web_sockets_server.on('connection', (socket) => {
+    // When a player first connects, they need to get an ID to identify them
+    // This id may be stored in a cookie if they have been here before, and is used if so
+    socket.on("server/player/getID", (callback) => {
+      const id = randomAlphaCharString(8)
+      console.log("New player joined, given ID: ", id)
+      socket.playerID = id
+      callback(id)
+    })
+    socket.on("server/player/setID", (id) => {
+      console.log("Existing player joined, ID: ", id)
+      socket.playerID = id
+    })
+
     // Player has started or joined game. Create a room with the game ID if one does not exist and send that client the game info.
     socket.on("server/session/join", (data, callback) => {
-      console.log("Client at " + socket.handshake.address + " joining game " + data.gameID)
-      socket.playerID = socket.handshake.address + data.gameID
+      console.log("Client at " + socket.handshake.address + " with ID " + socket.playerID + " joining game " + data.gameID)
       socket.gameID = data.gameID
       games[data.gameID].addSocket(socket, socket.playerID)
       callback(data.gameID, socket.playerID)
@@ -103,8 +115,7 @@ function runServer(gameConfig, roundConfig, enemyConfig) {
     socket.on("server/session/start", (callback) => {
       const gameID = randomAlphaCharString(4)
       while(gameID in games) gameID = randomAlphaCharString(4)  // Generate new ID if one already exists
-      console.log("Client at " + socket.handshake.address + " starting game " + gameID)
-      socket.playerID = socket.handshake.address + gameID
+      console.log("Client at " + socket.handshake.address + " with ID " + socket.playerID + " starting game " + gameID)
       socket.gameID = gameID
       games[gameID] = new session.Session(socket, gameID, socket.playerID, gameConfig, roundConfig, enemyConfig)
       callback(gameID, socket.playerID)
