@@ -67,7 +67,7 @@ export class GameRenderer {
         this.roundCounter.y -= (this.roundCounter.height + top_bottom_gap)
 
         this.moneyCounter = new Counter(config.TOWER_MENU_WIDTH, toolbarY, counterWidth, "Money", 0, COLOURS.MENU_SANDY)
-        this.livesCounter = new Counter(config.TOWER_MENU_WIDTH + this.moneyCounter.width, toolbarY, counterWidth, "Lives", 100, COLOURS.MENU_SANDY)
+        this.livesCounter = gameSettings.lives != INFINITY ? new Counter(config.TOWER_MENU_WIDTH + this.moneyCounter.width, toolbarY, counterWidth, "Lives", 100, COLOURS.MENU_SANDY) : null
 
         this.localEventEmitter = this.setServerEventEmitter()
     }
@@ -204,10 +204,12 @@ export class GameRenderer {
         this.spriteHandler.registerContainer(this.ut)
         this.spriteHandler.registerContainer(this.startRoundButton)
         this.spriteHandler.registerContainer(this.fastForwardButton)
-        this.spriteHandler.registerContainer(this.livesCounter)
         this.spriteHandler.registerContainer(this.moneyCounter)
         this.spriteHandler.registerContainer(this.perRoundUpdateText)
         this.spriteHandler.registerContainer(this.roundCounter)
+        if (this.livesCounter) {
+            this.spriteHandler.registerContainer(this.livesCounter)
+        }
 
         // Load towers into the menu
         this.tm.addTowers()
@@ -270,11 +272,8 @@ export class GameRenderer {
 
         const lives = serverUpdate.worldState.lives
         if (lives !== INFINITY) {
-            this.livesCounter.update()
-        } else if (this.livesCounter.visible) {
-            this.livesCounter.visible = false
+            this.livesCounter.update(lives)
         }
-
 
         // Check if the round has finished and therefor changed
         const nextRound = serverUpdate.worldState.round
