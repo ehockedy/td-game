@@ -76,7 +76,6 @@ export class GameRenderer {
         this.socket.off("client/player/add")
         this.socket.off("client/player/addSelf")
         this.socket.off("client/player/remove")
-        this.socket.off("client/player/ready")
         this.socket.off("client/map/update")
         this.socket.off("client/game/round/start")
         this.socket.off("client/game/round/toggleFastForward")
@@ -119,13 +118,6 @@ export class GameRenderer {
 
         this.socket.on("client/map/update", (grid) => {
             this.map.updateMapStructure(grid);
-        })
-
-        this.socket.on("client/player/ready", (playerData) => {
-            this.ut.setPlayerReady(playerData.playerID)
-            if (playerData.playerID == this.thisPlayerID) {
-                this.startRoundButton.stopInteraction()
-            }
         })
 
         this.socket.on("client/game/round/start", () => {
@@ -261,6 +253,9 @@ export class GameRenderer {
             if (player.playerID == this.thisPlayerID) {
                 thisPlayerMoney = player.stats.money
                 this.moneyCounter.update(player.stats.money)
+                if (player.isReady && this.startRoundButton.isClickable()) {
+                    this.startRoundButton.stopInteraction()
+                }
             }
         })
         this.tc.update(serverUpdate.towers)

@@ -11,6 +11,7 @@ export class StartRoundButton extends ButtonHorizontalMenuOption {
         this.addText(this.gameRoundText, 0.15, 0.5)
 
         this.setSelectEventName("start-round")
+        this.clickable = true
     }
 
     // Override
@@ -19,6 +20,7 @@ export class StartRoundButton extends ButtonHorizontalMenuOption {
         this.menuSprite.buttonMode = false
         let disabledTint = "0xAAAAAA"
         this.menuSprite.tint = disabledTint
+        this.clickable = false
     }
 
     // Override
@@ -26,5 +28,10 @@ export class StartRoundButton extends ButtonHorizontalMenuOption {
         this.menuSprite.interactive = true
         this.menuSprite.buttonMode = true
         this.menuSprite.tint = startMenuColour
+        this.clickable = true
+    }
+
+    isClickable() {
+        return this.clickable
     }
 }

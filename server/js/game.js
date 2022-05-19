@@ -335,7 +335,7 @@ class Game {
             let requestedPlayer = this.getPlayerByName(playerID)
             return {
                 "playerID": requestedPlayer.id,
-                "index": requestedPlayer.index
+                "index": requestedPlayer.index,
             }
         } catch (exception) {
             return {}
@@ -357,7 +357,8 @@ class Game {
     }
 
     ready() {
-        return this.players.every((player) => player.isReady())
+        // Ready only if all connected players are ready
+        return this.players.every((player) => player.isReady() || !player.isConnected())
     }
 
     startRound() {
@@ -540,7 +541,8 @@ class Game {
             state.objects.push({
                 "playerID": player.id,
                 "index": player.index,
-                "stats": player.stats
+                "stats": player.stats,
+                "isReady": player.isReady()
             })
         })
         return state

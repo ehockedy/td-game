@@ -63,6 +63,7 @@ class Session {
         if (playerID in this.disconnectedPlayers) {
             this.players[playerID] = this.disconnectedPlayers[playerID]
             delete this.disconnectedPlayers[playerID]
+            this.game.getPlayerByName(playerID).setConnected(true)
         } else {
             this.players[playerID] = {
                 id: playerID,
@@ -192,9 +193,6 @@ class Session {
                 // If all players ready, begin the game
                 this.game.startRound()
                 this.broadcast("client/game/round/start")
-            } else {
-                // If still some players not ready, alert all players that this player is ready
-                this.broadcast("client/player/ready", this.game.getPlayerInfo(socket.playerID))
             }
         })
 
@@ -271,6 +269,7 @@ class Session {
             this.disconnectedPlayers[playerID] = playerInfo
             delete this.players[playerID]
             delete this.sockets[playerID]
+            this.game.getPlayerByName(playerID).setConnected(false)
         }
     }
 

@@ -11,7 +11,6 @@ These are events that the client will receive and process.
 |client/map/update | Provides new map|
 |client/player/add | Provides new player to display|
 |client/player/addSelf | Provides new player to display, and register that this is the user|
-|client/player/ready | Confirms that this player's readiness to start the game has been acknowledged|
 |client/player/remove | Stop rendering info about this player as they have left the game|
 |client/player/notFound | Tells the player that they are not a member of the given game|
 |client/view/lobby | Tells the client to transition to the lobby view |

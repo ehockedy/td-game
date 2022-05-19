@@ -35,6 +35,9 @@ export class PlayersToolbar extends BaseComponent {
             let playerInfo = this.getChildByName(player.playerID)
             if (playerInfo != undefined) {
                 playerInfo.update(player.stats.points)
+                if (!playerInfo.isReady() && player.isReady) {
+                    playerInfo.setReady()
+                }
             }
 
             // Add to back of list

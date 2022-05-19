@@ -3,6 +3,7 @@ class Player {
         this.id = id;
         this.index = index // Which player number are they
         this.ready = false // Whether they are ready to start teh round i.e. have spent money, edited towers etc.
+        this.connected = true
 
         this.stats = {
             "points": 0,
@@ -20,6 +21,14 @@ class Player {
 
     isReady() {
         return this.ready
+    }
+
+    setConnected(isConnected) {
+        this.connected = isConnected
+    }
+
+    isConnected() {
+        return this.connected
     }
 
     reduceMoney(amount) {

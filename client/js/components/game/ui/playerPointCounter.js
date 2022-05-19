@@ -46,4 +46,8 @@ export class PlayerPointCounter extends StaticHorizontalMenuOption {
     unsetReady() {
         this.readyText.visible = false
     }
+
+    isReady() {
+        return this.readyText.visible
+    }
 }
