@@ -269,7 +269,9 @@ class Session {
             this.disconnectedPlayers[playerID] = playerInfo
             delete this.players[playerID]
             delete this.sockets[playerID]
-            this.game.getPlayerByName(playerID).setConnected(false)
+            if (this.game) {
+                this.game.getPlayerByName(playerID).setConnected(false)
+            }
         }
     }
 
