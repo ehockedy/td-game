@@ -33,10 +33,6 @@ export class Lobby extends React.Component {
         super(props)
         this.livesOptions = [1, 10, 50, 100, INFINITY]
         this.difficultyOptions = ['easy', 'medium', 'hard']
-        this.state = {
-            livesOptionIdx: 3,
-            difficultyOptionIdx: 1,
-        }
     }
 
     generateNewRandomMap = () => {

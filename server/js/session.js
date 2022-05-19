@@ -45,7 +45,7 @@ class Session {
             "numRounds": roundConfig.rounds.length,  // TODO use actual numbers from config once enough rounds added
             "ticksPerSecond": this.ticksPerSecond,
             "difficulty": "medium",
-            "lives": "100"
+            "lives": 100
         }
         this.addSocket(socket, playerID)
     }
