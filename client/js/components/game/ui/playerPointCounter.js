@@ -1,5 +1,5 @@
 import { StaticHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
-import { boldTextStyle, plainTextStyle, COLOURS } from "../../ui_common/style.js"
+import { plainTextStyle, COLOURS } from "../../ui_common/style.js"
 
 export class PlayerPointCounter extends StaticHorizontalMenuOption {
     constructor(x, y, width, label, defaultValue, colour=COLOURS.INFO_MID_GREY) {
@@ -29,6 +29,8 @@ export class PlayerPointCounter extends StaticHorizontalMenuOption {
         this.readyText.anchor.set(0.5)
         this.unsetReady()
         this.addText(this.readyText, 0.1, 0.5)
+
+        this.isPlayerDisconnected = false
     }
 
     update(newValue) {
@@ -49,5 +51,19 @@ export class PlayerPointCounter extends StaticHorizontalMenuOption {
 
     isReady() {
         return this.readyText.visible
+    }
+
+    setDisconnected(state) {
+        this.isPlayerDisconnected = state
+        if (this.isPlayerDisconnected) {
+            // Tint the colour darker
+            this._darken()
+        } else {
+            this._resetColour()
+        }
+    }
+
+    isDisconnected() {
+        return this.isPlayerDisconnected
     }
 }

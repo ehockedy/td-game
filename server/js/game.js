@@ -542,7 +542,8 @@ class Game {
                 "playerID": player.id,
                 "index": player.index,
                 "stats": player.stats,
-                "isReady": player.isReady()
+                "isReady": player.isReady(),
+                "isConnected": player.isConnected(),
             })
         })
         return state

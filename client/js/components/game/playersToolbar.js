@@ -35,8 +35,17 @@ export class PlayersToolbar extends BaseComponent {
             let playerInfo = this.getChildByName(player.playerID)
             if (playerInfo != undefined) {
                 playerInfo.update(player.stats.points)
+
+                // Display a "Ready!" if a player has clicked start game
                 if (!playerInfo.isReady() && player.isReady) {
                     playerInfo.setReady()
+                }
+
+                // Darken a players points counter if they have disconnected
+                if (!player.isConnected && !playerInfo.isDisconnected()) {
+                    playerInfo.setDisconnected(true)
+                } else if (player.isConnected && playerInfo.isDisconnected) {
+                    playerInfo.setDisconnected(false)
                 }
             }
 
