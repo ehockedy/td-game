@@ -22,7 +22,7 @@ export class GameRenderer {
     constructor(socket, spriteHandler, config, enemyConfig, bulletConfig, thisPlayerID, players, gameSettings) {
         this.spriteHandler = spriteHandler
         this.socket = socket
-        this.round = 1
+        this.round = gameSettings.currentRound
         this.maxRounds = gameSettings.numRounds
 
         this.thisPlayerID = thisPlayerID
@@ -228,8 +228,6 @@ export class GameRenderer {
 
         // Begin the rendering loop
         this.spriteHandler.render()
-
-        this.perRoundUpdateText.fadeInThenOut(1000, 2000)
     }
 
     startNextRound() {

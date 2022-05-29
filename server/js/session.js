@@ -41,11 +41,11 @@ class Session {
         this.disconnectedPlayers = {}
 
         this.gameSettings = {
-            // "numRounds": gameConfig.numRoundOptions[0]  // Default to lowest number of rounds
-            "numRounds": roundConfig.rounds.length,  // TODO use actual numbers from config once enough rounds added
+            "numRounds": roundConfig.rounds.length,
             "ticksPerSecond": this.ticksPerSecond,
             "difficulty": "medium",
-            "lives": 100
+            "lives": 100,
+            "currentRound": 1,  // Mainly used by front end to know which round starting at if player re-joins
         }
         this.addSocket(socket, playerID)
     }
@@ -234,6 +234,7 @@ class Session {
         // Round changed, reset the frequency
         if (round != this.game.getRound()) {
             this.updateFrequency_ms = this.baseUpdateFrequency_ms
+            this.gameSettings.currentRound =  this.game.getRound()
         }
     }
 
