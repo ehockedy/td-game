@@ -23,8 +23,8 @@ export class DraggableTower extends BaseInteractiveTower {
 
         // The buttons for confirming or declining placement
         this.placeTowerButtons = new PlaceTowerMenu(0, 0)
-        this.placeTowerButtons.x -= this.placeTowerButtons.width / 2
-        this.placeTowerButtons.y += this.towerSprite.height / 2
+        this.placeTowerButtons.x = this.towerSprite.width / 2
+        this.placeTowerButtons.y = -this.placeTowerButtons.height / 2
         this.placeTowerButtons.subscribe(this)
         this.addChild(this.placeTowerButtons)
 
@@ -71,7 +71,14 @@ export class DraggableTower extends BaseInteractiveTower {
         }
     }
 
-    showPlaceTowerButtons() {
+    showPlaceTowerButtons(flipSide) {
+        // If flip side enabled, switch the side of the tower the buttons are rendered on
+        // This lets them be shown in cases where they would appear under other UI components
+        this.placeTowerButtons.x = this.towerSprite.width / 2
+        if (flipSide) {
+            this.placeTowerButtons.x *= -1
+            this.placeTowerButtons.x -= this.placeTowerButtons.width
+        }
         this.placeTowerButtons.visible = true
     }
 

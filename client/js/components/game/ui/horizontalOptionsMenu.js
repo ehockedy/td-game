@@ -24,6 +24,10 @@ class Menu extends BaseComponent {
     _getNextXPosition(width) {
         return this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset + this.gap
     }
+
+    _getNextYPosition() {
+        return this.getLocalBounds().height * this.buildDirectionMultiplier + (this.children.length ? this.children[0].height : 0) * this.optionsOffset + this.gap
+    }
 }
 
 // A menu that has no interactive components
@@ -108,10 +112,11 @@ class InteractiveMenu extends Menu {
 
 // A group of independent buttons
 export class ButtonMenu extends InteractiveMenu {
-    addOption(width, tint, onSelectEventName) {
+    addOption(size, tint, onSelectEventName, isHorizonal=true) {
         let option = new ButtonHorizontalMenuOption(this.name + "_root",
-            this._getNextXPosition(width), 0,
-            width, tint, "none")
+        isHorizonal ? this._getNextXPosition(size) : 0,  // x
+        isHorizonal ? 0 : this._getNextYPosition(),  // y
+        size, tint, "none")
         option.onSelectEventName = onSelectEventName
         this.addChild(option)
         option.subscribe(this)

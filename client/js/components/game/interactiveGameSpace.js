@@ -89,7 +89,7 @@ export class InteractiveGameSpace extends BaseComponent {
         // If was dragging and let go of the tower
         // If over map, it stays where it is, else reset the position
         this.on("releaseTower", (tower)=>{
-            tower.showPlaceTowerButtons()
+            tower.showPlaceTowerButtons(tower.col == this.map.cols - 1)   // filp if in final col
             if (tower.y > this.towerMenu.height_px - this.towerMenu.height_menu_px) {
                 tower.reset()
             }
