@@ -26,16 +26,16 @@ class Session {
         this.mapGenerator = new mapGenerator.MapGenerator(gameConfig.MAP_HEIGHT, gameConfig.MAP_WIDTH, gameConfig.SUBGRID_SIZE)
         const mapSeed = randomAlphaCharString(6)
         this.map = this.mapGenerator.generateMap(mapSeed)
-        
+
         this.hasStarted = false
         this.gameLoopActive = false
-        
+
         // Update frequencies
-        this.ticksPerSecond = 40  // This does not affect the speed of the game, just the frequency of updates.
+        this.ticksPerSecond = 30  // This does not affect the speed of the game, just the frequency of updates.
         this.baseUpdateFrequency_ms = 1000 / this.ticksPerSecond
-        this.fastForwardUpdateFrequency = this.baseUpdateFrequency_ms / 5  // speed up
+        this.fastForwardUpdateFrequency = this.baseUpdateFrequency_ms / 3  // speed up
         this.updateFrequency_ms = this.baseUpdateFrequency_ms
-        
+
         this.sockets = {}  // All the connected players/ TODO I dont think this actually needs to be a map. Just keep ID as socket property.
         this.players = {}
         this.disconnectedPlayers = {}

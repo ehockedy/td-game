@@ -7,6 +7,7 @@ import { GameMapBackground } from "./js/components/ui_common/map.js"
 import React, { useEffect, useState } from "react";
 import { generateClientConfig } from "./js/constants.js"
 import { getCookie, setCookie } from "./js/cookieHelpers.js"
+import './css/index.css'
 
 function loadAssets(enemyConfig) {
     return new Promise((resolve) => {
