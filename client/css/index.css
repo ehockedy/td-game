@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "turtles";
+    src: url("../assets/fonts/turtles/turtles-webfont.woff2") format('woff2'),
+         url("../assets/fonts/turtles/turtles-webfont.woff") format('woff');
+    unicode-range: U+000-5FF;
+}
+
 body {
     background-color: #D38D5FAA;
+}
+
+div, button, input {
+    font-family: "turtles";
 }

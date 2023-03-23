@@ -117,7 +117,7 @@ function Application(props) {
     }
 
     return (
-        <div>
+        <>
             {
                 view == "main-menu" || view == "lobby" ? (
                     <GameMapBackground mapSpriteSize={config.SPRITE_SIZE_MAP}></GameMapBackground>
@@ -166,7 +166,7 @@ function Application(props) {
                 console.log("INVALID VIEW")
                 // TODO add page not found page
             }
-        </div>
+        </>
     )
 }
 

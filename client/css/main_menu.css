@@ -24,15 +24,24 @@
     }
 }
 
+.main-menu-options {
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
 /* Startgame or join game buttons */
 .button-main-menu {
     width: 300px;
     position: relative;
     font-size: 40px;
+    margin: 8px;
 }
 @media only screen and (max-width: 768px) {
     .button-main-menu {
-        width: 200px;
+        width: 240px;
         font-size: 32px;
     }
 }
@@ -112,6 +121,7 @@
 
 .join-game-response {
     height: 32px;
+    text-align: center;
 }
 
 /* The below makes the menu logo bounce

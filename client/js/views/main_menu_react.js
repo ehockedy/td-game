@@ -47,78 +47,74 @@ export class MainMenu extends React.Component {
         return (
             <div className="noselect main-menu">
                 <img className="main-menu-logo noselect main-menu-logo-bounce" src="client/assets/logo/logo.png"></img>
-                {
-                    !this.state.joinGameTextBoxVisible ?
-
-                    <div>
-                        <MenuOption text="Start Game" leftPos="33" topPos="66"
-                            onClick={() => {
-                                this.props.socket.emit("server/session/start", (gameID) => {
-                                    this.props.setGameIDHandler(gameID)
-                                })
-                            }}
-                            disabled={this.state.buttonsDisabled}
-                        ></MenuOption>
-
-                        <br/><br/>
-
-                        <MenuOption text="Join Game" leftPos="66" topPos="66"
-                            onClick={() => {
-                                this.setState({
-                                    joinGameTextBoxVisible : !this.state.joinGameTextBoxVisible,
-                                    buttonsDisabled: true,
-                                })
-                            }}
-                            disabled={this.state.buttonsDisabled}
-                        ></MenuOption>
-                    </div>
-                    :
-                    <TextBoxForm
-                        onSubmit={(event) => {
-                            event.preventDefault();  // Prevent page reloading after submit
-                            this.props.socket.emit("server/session/verify", { "gameID": this.state.joinGameText }, (response) => {
-                                if (response["response"] == "fail") { // Game does not exist
-                                    // Remove any existing timeout that may override new message output
-                                    if (this.state.responseMessageTimeoutFn) {
-                                        clearTimeout(this.state.responseMessageTimeoutFn)
-                                    }
-
-                                    // Set the new message to disappear after two seconds
-                                    let timeoutFn = setTimeout(() => {
-                                        this.setState({responseMessage: ""})
-                                        this.state.responseMessageTimeoutFn = null
-                                    }, 2000);
-
-                                    // Display that the game code did not match an existing game
-                                    this.setState({
-                                        responseMessage: "Game not found",
-                                        responseMessageTimeoutFn: timeoutFn,
-                                    })
-                                } else if (response["response"] == "success") { // Game exists
-                                    this.props.socket.emit("server/session/join", { "gameID": this.state.joinGameText }, (gameID) => {
+                <div className="main-menu-options">
+                    {!this.state.joinGameTextBoxVisible ?
+                        <>
+                            <MenuOption text="Start Game" leftPos="33" topPos="66"
+                                onClick={() => {
+                                    this.props.socket.emit("server/session/start", (gameID) => {
                                         this.props.setGameIDHandler(gameID)
                                     })
-                                }
-                            })
-                        }}
-                        onClose={() => {
-                            this.setState({
-                                joinGameTextBoxVisible : false,
-                                buttonsDisabled: false,
-                                joinGameText: "",
-                            })
-                        }}
-                        onChange={(val) => {
-                            this.setState({
-                                // Enforce upper case, less change of mistaking letters in game code
-                                joinGameText: val.toUpperCase(),
-                            })
-                        }}
-                        isVisible={this.state.joinGameTextBoxVisible}
-                        text={this.state.joinGameText}
-                        responseMessage={this.state.responseMessage}
-                    ></TextBoxForm>
-                }
+                                }}
+                                disabled={this.state.buttonsDisabled}
+                            />
+                            <MenuOption text="Join Game" leftPos="66" topPos="66"
+                                onClick={() => {
+                                    this.setState({
+                                        joinGameTextBoxVisible : !this.state.joinGameTextBoxVisible,
+                                        buttonsDisabled: true,
+                                    })
+                                }}
+                                disabled={this.state.buttonsDisabled}
+                            />
+                        </> :
+                        <TextBoxForm
+                            onSubmit={(event) => {
+                                event.preventDefault();  // Prevent page reloading after submit
+                                this.props.socket.emit("server/session/verify", { "gameID": this.state.joinGameText }, (response) => {
+                                    if (response["response"] == "fail") { // Game does not exist
+                                        // Remove any existing timeout that may override new message output
+                                        if (this.state.responseMessageTimeoutFn) {
+                                            clearTimeout(this.state.responseMessageTimeoutFn)
+                                        }
+
+                                        // Set the new message to disappear after two seconds
+                                        let timeoutFn = setTimeout(() => {
+                                            this.setState({responseMessage: ""})
+                                            this.state.responseMessageTimeoutFn = null
+                                        }, 2000);
+
+                                        // Display that the game code did not match an existing game
+                                        this.setState({
+                                            responseMessage: "Game not found",
+                                            responseMessageTimeoutFn: timeoutFn,
+                                        })
+                                    } else if (response["response"] == "success") { // Game exists
+                                        this.props.socket.emit("server/session/join", { "gameID": this.state.joinGameText }, (gameID) => {
+                                            this.props.setGameIDHandler(gameID)
+                                        })
+                                    }
+                                })
+                            }}
+                            onClose={() => {
+                                this.setState({
+                                    joinGameTextBoxVisible : false,
+                                    buttonsDisabled: false,
+                                    joinGameText: "",
+                                })
+                            }}
+                            onChange={(val) => {
+                                this.setState({
+                                    // Enforce upper case, less change of mistaking letters in game code
+                                    joinGameText: val.toUpperCase(),
+                                })
+                            }}
+                            isVisible={this.state.joinGameTextBoxVisible}
+                            text={this.state.joinGameText}
+                            responseMessage={this.state.responseMessage}
+                        />
+                    }
+                </div>
             </div>
         )
     }

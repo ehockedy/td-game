@@ -36,6 +36,14 @@ Enemies:
  - golden beetle
 
 Next:
- - adjust towers and finish upgrades
- - make FE react to fast forwarding
- - Fix issue with spear launcher (and priobably others) rendering bullet wront angle initially
+ - mark maps as easy/medium/hard
+ - incorporate money spent into final score
+ - test with multiple players
+ - multiple lives lost for stronger enemies
+ - some kind of in game menu with seed and game code
+ - tidy session addSocket function, and make it so does not actually add socket if not valid player etc.
+ - do not tidy up games as frequently as currently do - add some length of game
+ - dev/prod modew in webpack + AWS deployment
+
+Bugs:
+ - disconnecting client after no activity - I think only in menus?

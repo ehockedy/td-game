@@ -1,7 +1,3 @@
-div, button, input {
-    font-family: "turtles";
-}
-
 .lobby-grid {
     display: grid;
     grid-template-areas: 
