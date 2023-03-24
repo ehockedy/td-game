@@ -163,7 +163,7 @@ function Application(props) {
                         bulletConfig={props.bulletConfig}
                     ></SimulationView>
                 ) :
-                console.log("INVALID VIEW")
+                null
                 // TODO add page not found page
             }
         </>
