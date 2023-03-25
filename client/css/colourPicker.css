@@ -1,35 +1,39 @@
 /* Contains everyting in the colour picker */
 .colour-picker-container {
-    width: 20%;
-
     background-color: rgb(230, 230, 230);
-    padding: 1%;
+    padding: 4px;
     border-radius: 4px;
     border-style: ridge;
     border-color: rgb(118,118,118);
     border-width: 5px;
     box-shadow: 5px 3px;
 
-    margin-left: 5%;
     text-align: center; 
+
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+
+    margin-top: 8px;
 }
 
 /* Container for the colour squares */
 .colour-picker-colour-container {
-    display: inline-grid;
-    align-items: center;
     width: 100%;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-direction: row;
 }
 
 /* An individual colour square */
 .colour-picker-colour {
-    width: 100%;
-    padding-top: 100%;
-    align-self: top;
-    justify-self: center;
+    width: 28px;
+    height: 28px;
 }
 
 .colour-picker-colour-name {
-    font-size: 1vw;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 4px;
+    margin-right: 4px;
+    white-space: nowrap;
 }

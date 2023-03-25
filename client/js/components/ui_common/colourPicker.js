@@ -5,7 +5,7 @@ import  "../../../css/common.css"
 export class ColourPicker extends React.Component {
     constructor(props) {
         super(props)
-        this.activeColourName = "Pick a colour"
+        this.activeColourName = "Pick your colour:"
 
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -30,6 +30,7 @@ export class ColourPicker extends React.Component {
     render() {
         return (
             <span className="colour-picker-container">
+                <div className="colour-picker-colour-name">{this.activeColourName}</div>
                 <span className="colour-picker-colour-container">
                     {this.props.colours.map((colour) => {
                         return <div
@@ -42,7 +43,6 @@ export class ColourPicker extends React.Component {
                         </div>
                     })}
                 </span>
-                <div className="colour-picker-colour-name">{this.activeColourName}</div>
             </span>
         )
     }

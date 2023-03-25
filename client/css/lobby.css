@@ -6,7 +6,9 @@
     "options start";
     grid-template-columns: 1fr 1fr;
 
-    margin: 32px;
+    padding: 32px;
+    margin: auto;
+    max-width: 1400px;
 
     row-gap: 0px;
 }
@@ -153,24 +155,27 @@
 
 /* Generic name place styling */
 .name-place {
-    display: inline;
-    grid-column-start: 2;
-
-    font-size: 36px;
+    font-size: 32px;
     letter-spacing: 0.1em;
 
     text-align: center;
-    width: 70%;
+    width: 80%;
+}
+
+.name-place-container {
+    width: 100%;
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Name place for the user where they can enter their name an pick colour.
    Contains name place and colour picker */
 .name-place-user {
     display: flex;
-    grid-column-start: 2;
+    flex-direction: column;
     align-items: center;
-    justify-content: left;
-    width: 100%;
 }
 
 /* Styling for the text in a name place waiting for player to join */
@@ -181,20 +186,17 @@
 /* Container that holds all the name places */
 .player-names-container {
     grid-area: players;
-    display: grid;
-    grid-template-columns: 10% 90%;
-    grid-auto-rows: 1fr;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-items: left;
-    margin-top: 10%;
+    justify-items: center;
+    margin-top: 32px;
 }
 
 .start-game {
     grid-area: start;
-    width: 30%;
-    height: 2.2em;
     align-self: center;
     justify-self: center;
     font-size: 36px;
-    padding: 0;
+    padding: 8px 16px;
 }

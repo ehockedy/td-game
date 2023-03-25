@@ -4,7 +4,7 @@ import "../../../css/common.css"
 import "../../../css/lobby.css"
 
 export function NamePlace(props) {
-    return <div className="name-place-user">
+    return <div className="name-place-container">
             <input
                 className="name-place name-place-colour-active slanted display-box noselect"
                 type="text"
@@ -26,7 +26,9 @@ export function NamePlace(props) {
 }
 
 export function NamePlaceEmpty(props) {
-    return <div className="name-place name-place-colour-waiting slanted display-box noselect">
-        <span className="name-place-text-waiting">{props.initialValue}</span>
+    return <div className='name-place-container'>
+        <div className="name-place name-place-colour-waiting slanted display-box noselect">
+            <span className="name-place-text-waiting">{props.initialValue}</span>
+        </div>
     </div>
 }
