@@ -46,7 +46,7 @@ export class MainMenu extends React.Component {
     render() {
         return (
             <div className="noselect main-menu">
-                <img className="main-menu-logo noselect main-menu-logo-bounce" src="client/assets/logo/logo.png"></img>
+                <img className="main-menu-logo noselect main-menu-logo-bounce" alt="Game Logo" src="client/assets/logo/logo.png"></img>
                 <div className="main-menu-options">
                     {!this.state.joinGameTextBoxVisible ?
                         <>

@@ -9,9 +9,9 @@
 
 /* Game logo that sits on the main page */
 .main-menu-logo {
-    /* top: 20%; */
     width: 400px;
-    height:auto;
+    height: auto;
+    min-height: 300px;
 }
 @media only screen and (max-width: 768px) {
     .main-menu-logo {

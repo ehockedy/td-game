@@ -28,6 +28,17 @@ function livesValueToString(value) {
     return `${value}`
 }
 
+function GameCode({isMobile, gameID}) {
+    return <div className={`game-code ${!!isMobile ? 'smallScreenOnly' : 'largeScreenOnly'}`}>
+        Game code: <span className="game-code-code">{gameID}</span>
+    </div>
+}
+
+function MobileSectionTitle({titleText}) {
+    return <div className="section-title smallScreenOnly">{titleText}</div>
+}
+
+
 export class Lobby extends React.Component {
     constructor(props) {
         super(props)
@@ -59,7 +70,9 @@ export class Lobby extends React.Component {
     render() {
         return (
             <div className="lobby-grid">
+                <GameCode isMobile gameID={this.props.gameID} />
                 <div className="player-names-container noselect">
+                    <MobileSectionTitle titleText='Player settings:' />
                     { Object.keys(this.props.players).map((playerID) =>
                         <NamePlace
                             key={playerID}
@@ -74,7 +87,8 @@ export class Lobby extends React.Component {
                     { Array(this.props.config.MAX_PLAYERS - Object.keys(this.props.players).length).fill(0).map((_, idx) => <NamePlaceEmpty key={idx} initialValue="Waiting for players..."></NamePlaceEmpty>) }
                 </div>
                 <div className="map-regenerate-container">
-                    <div className="game-code">Game code: {this.props.gameID}</div>
+                    <GameCode gameID={this.props.gameID}/>
+                    <MobileSectionTitle titleText='Map settings:' />
                     <GameMapSelection
                         mapStructure={this.props.mapStructure} socket={this.props.socket}
                         height={this.props.config.MAP_HEIGHT}
@@ -112,6 +126,7 @@ export class Lobby extends React.Component {
                     Start game
                 </button>
                 <div className="options noselect">
+                    <MobileSectionTitle titleText='Game settings:' />
                     <div className="option">
                         <span className="optionName">
                             Lives
@@ -131,7 +146,7 @@ export class Lobby extends React.Component {
                             Difficulty
                         </span>
                         <OptionPicker
-                            currentOption={this.props.gameSettings.difficulty}
+                            currentOption={this.props.gameSettings.difficulty.toUpperCase()}
                             onOptionChange={
                                 (direction) => {
                                     const newVal = this.getNextOption(this.props.gameSettings.difficulty, direction, this.difficultyOptions)

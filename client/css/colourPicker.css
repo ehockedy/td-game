@@ -23,6 +23,12 @@
     display: flex;
     flex-direction: row;
 }
+@media only screen and (max-width: 768px) {
+    .colour-picker-colour-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
 
 /* An individual colour square */
 .colour-picker-colour {
@@ -36,4 +42,6 @@
     padding: 4px;
     margin-right: 4px;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
 }

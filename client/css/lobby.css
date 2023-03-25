@@ -9,19 +9,59 @@
     padding: 32px;
     margin: auto;
     max-width: 1400px;
-
-    row-gap: 0px;
+}
+@media only screen and (max-width: 768px) {
+    .lobby-grid {
+        grid-template-areas:
+            "gameCode"
+            "players"
+            "map"
+            "options"
+            "start";
+        grid-template-columns: 1fr;
+        padding: 4px;
+    }
+}
+/* @media only screen and (min-width: 1200px) {
+    .main-menu-logo {
+      width: 450px;
+    }
+} */
+@media only screen and (min-width: 768px) {
+    .smallScreenOnly {
+        display: none;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .largeScreenOnly {
+        display: none;
+    }
 }
 
 .game-code {
-    grid-area: gameCode;
     font-size: 42px;
     align-self: center;
     margin-left: 16px;
-    color: #784421;
-    text-shadow: 1px 2px black;
     letter-spacing: 0.05em;
     width: 80%;
+}
+
+.game-code-code {
+    color: gold;
+    text-shadow: 1px 1px black;
+    font-size: 48px;
+}
+
+@media only screen and (max-width: 768px) {
+    .game-code {
+        text-align: center;
+        width: initial;
+        font-size: 32px;
+        margin-top: 16px;
+    }
+    .game-code-code {
+        font-size: 36px;
+    }
 }
 
 /* Holds everything to do with the map generation */
@@ -50,7 +90,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
+    width: 150px;
 }
 
 .optionPicker {
@@ -84,13 +124,15 @@
 }
 
 .optionPickerValue {
-    padding-bottom: 6px;
+    padding-bottom: 4px;
+    color: gold;
+    text-shadow: 1px 1px black;
+    line-height: 24px;
 }
 
 
 /* Holds the map canvas */
 .map-container {
-    grid-column-start: 2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,7 +156,16 @@
     align-items: center;
     padding: 0 16px 16px 16px;
     width: 80%;
+}
 
+@media only screen and (max-width: 768px) {
+    .map-select {
+        margin: 4px;
+    }
+    .map-options-container {
+        /* width: 100%; */
+        flex-direction: column-reverse;
+    }
 }
 
 /* Button used to generate a new map layout */
@@ -124,6 +175,7 @@
     max-width: 180px;
     font-size: 20px;
     margin: 4px;
+    align-self: flex-end;
 }
 
 .map-seed-container {
@@ -170,6 +222,17 @@
     align-items: center;
 }
 
+@media only screen and (max-width: 768px) {
+    .name-place {
+        font-size: 24px;
+        width: 100%;
+    }
+
+    .name-place-container {
+        width: initial;
+    }
+}
+
 /* Name place for the user where they can enter their name an pick colour.
    Contains name place and colour picker */
 .name-place-user {
@@ -192,6 +255,11 @@
     justify-items: center;
     margin-top: 32px;
 }
+@media only screen and (max-width: 768px) {
+    .player-names-container {
+        margin-top: 0;
+    }
+}
 
 .start-game {
     grid-area: start;
@@ -199,4 +267,20 @@
     justify-self: center;
     font-size: 36px;
     padding: 8px 16px;
+}
+@media only screen and (max-width: 768px) {
+    .start-game {
+        margin-top: 64px;
+        margin-bottom: 48px;
+    }
+}
+
+/* Mobile only section titles */
+.section-title {
+    font-size: 24px;
+    align-self: flex-start;
+    text-decoration: underline;
+    margin-left: 24px;
+    letter-spacing: 1px;
+    margin-top: 64px;
 }
