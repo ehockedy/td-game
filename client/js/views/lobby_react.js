@@ -59,7 +59,6 @@ export class Lobby extends React.Component {
     render() {
         return (
             <div className="lobby-grid">
-                <div className="game-code">Game code: {this.props.gameID}</div>
                 <div className="player-names-container noselect">
                     { Object.keys(this.props.players).map((playerID) =>
                         <NamePlace
@@ -75,6 +74,7 @@ export class Lobby extends React.Component {
                     { Array(this.props.config.MAX_PLAYERS - Object.keys(this.props.players).length).fill(0).map((_, idx) => <NamePlaceEmpty key={idx} initialValue="Waiting for players..."></NamePlaceEmpty>) }
                 </div>
                 <div className="map-regenerate-container">
+                    <div className="game-code">Game code: {this.props.gameID}</div>
                     <GameMapSelection
                         mapStructure={this.props.mapStructure} socket={this.props.socket}
                         height={this.props.config.MAP_HEIGHT}

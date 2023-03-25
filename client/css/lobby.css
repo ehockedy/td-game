@@ -1,73 +1,62 @@
 .lobby-grid {
     display: grid;
     grid-template-areas: 
-    "gameCode players"
+    /* "gameCode players" */
     "map players"
     "options start";
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 3fr 2fr;
 
-    margin-left: 7%;
-    margin-right: 7%;
+    margin: 32px;
 
     row-gap: 0px;
 }
 
-.title {
-    grid-area: title;
-    font-size: 4em;
-    margin-left: 16%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    align-self: center;
-}
-
 .game-code {
     grid-area: gameCode;
-    font-size: 4vw;
-    justify-self: start;
+    font-size: 42px;
     align-self: center;
-    margin-top: 4%;
-    margin-left: 5%;
+    margin-left: 16px;
     color: #784421;
     text-shadow: 1px 2px black;
     letter-spacing: 0.05em;
+    width: 80%;
 }
 
 /* Holds everything to do with the map generation */
 .map-regenerate-container {
     grid-area: map;
-    display: grid;
-    grid-template-columns: 15% 80% 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .options {
     grid-area: options;
-}
-
-.option {
-    display: grid;
-    grid-template-areas: ". optionName optionPicker .";
-    grid-template-columns: 2fr 4fr 2fr 2fr;
-    width: 100%;
-    font-size: 2vw;
-    padding-bottom: 5%;
-}
-
-.optionName {
-    grid-area: optionName;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
+.option {
+    display: flex;
+    flex-direction: row;
+    font-size: 32px;
+    margin: 16px;
+}
+
+.optionName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+}
+
 .optionPicker {
-    font-size: 1.7vw;
-    line-height: 1.7vw;
-    display: inline-grid;
-    width: 100%;
-    justify-items: center;
-    grid-area: optionPicker;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
 }
 
 .optionPickerButton {
@@ -100,14 +89,16 @@
 /* Holds the map canvas */
 .map-container {
     grid-column-start: 2;
-    justify-self: center;
-    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* The map canvas itself */
 .map-select {
     display: block;
-    width: 90%;
+    width: 80%;
+    margin: 16px;
 
     border-color: rgb(118, 118, 118);
     border-style: ridge;
@@ -116,34 +107,38 @@
 }
 
 .map-options-container {
-    grid-column-start: 2;
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 16px 16px 16px;
+    width: 80%;
+
 }
 
 /* Button used to generate a new map layout */
 .map-regenerate-button {
     display: inline-block;
-    height: 2em;
-    width: 40%;
-    font-size: 1.5vw;
-    padding: 0;
+
+    max-width: 180px;
+    font-size: 20px;
+    margin: 4px;
 }
 
 .map-seed-container {
-    display: inline-block;
-    width: 50%;
+    display: flex;
+    align-items: center;
 }
 
 .seed-title {
-    font-size: 2vw;
-    padding-right: 5%;
+    padding-right: 8px;
+    font-size: 24px;
 }
 
 .map-seed-input {
-    height: 1.4em;
-    width: 50%;
+    width: 150px;
     text-align: center;
-    font-size: 1.6vw
+    font-size: 24px;
+    margin: 4px;
 }
 
 /* Colour to use for name place of player in the lobby */
@@ -161,7 +156,7 @@
     display: inline;
     grid-column-start: 2;
 
-    font-size: 2vw;
+    font-size: 36px;
     letter-spacing: 0.1em;
 
     text-align: center;
@@ -200,6 +195,6 @@
     height: 2.2em;
     align-self: center;
     justify-self: center;
-    font-size: 2vw;
+    font-size: 36px;
     padding: 0;
 }
