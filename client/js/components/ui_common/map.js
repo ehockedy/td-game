@@ -82,7 +82,7 @@ export class GameMapSelection extends GameMap {
 
     render() {
         return (
-            <span ref={this.updatePixiContainer} className="map-container"></span>
+            <div ref={this.updatePixiContainer} className="map-container"></div>
         )
     }
 }

@@ -1,19 +1,17 @@
 .lobby-grid {
     display: grid;
     grid-template-areas: 
-    /* "gameCode players" */
-    "map players"
-    "options start";
-    grid-template-columns: 1fr 1fr;
+        "map players"
+        "options start";
+    grid-template-columns: 1.2fr 1fr;
 
     padding: 32px;
     margin: auto;
     max-width: 1400px;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
     .lobby-grid {
         grid-template-areas:
-            "gameCode"
             "players"
             "map"
             "options"
@@ -22,17 +20,13 @@
         padding: 4px;
     }
 }
-/* @media only screen and (min-width: 1200px) {
-    .main-menu-logo {
-      width: 450px;
-    }
-} */
-@media only screen and (min-width: 768px) {
+
+@media only screen and (min-width: 901px) {
     .smallScreenOnly {
         display: none;
     }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
     .largeScreenOnly {
         display: none;
     }
@@ -52,7 +46,7 @@
     font-size: 48px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
     .game-code {
         text-align: center;
         width: initial;
@@ -158,7 +152,7 @@
     width: 80%;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
     .map-select {
         margin: 4px;
     }
@@ -208,7 +202,7 @@
 /* Generic name place styling */
 .name-place {
     font-size: 32px;
-    letter-spacing: 0.1em;
+    letter-spacing: 1px;
 
     text-align: center;
     width: 80%;
@@ -222,7 +216,7 @@
     align-items: center;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
     .name-place {
         font-size: 24px;
         width: 100%;
@@ -255,7 +249,7 @@
     justify-items: center;
     margin-top: 32px;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
     .player-names-container {
         margin-top: 0;
     }
@@ -268,7 +262,7 @@
     font-size: 36px;
     padding: 8px 16px;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
     .start-game {
         margin-top: 64px;
         margin-bottom: 48px;
