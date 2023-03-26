@@ -27,26 +27,43 @@ export class GameMapBackground extends GameMap {
     constructor(props) {
         const width = screen.width + props.mapSpriteSize
         const height = screen.height + props.mapSpriteSize
-
-        const cols = Math.floor(width / props.mapSpriteSize) + 1
-        const rows = Math.floor(height / props.mapSpriteSize) + 1
-
         super(props, width, height)
 
         this.pixi_container_classes = "pixi-bg"
 
         let grid = []  // 2d array that stores the row and column values
         // Adjust number of rows based on screen size.
-        // TODO a few cases to address in the future:
-        // - mobile browser does not seem to fill the screen
-        // - if zoomed out, does not fill the screen
 
+        const {cols, rows} = this.calculateDimensions()
         for (let row=0; row < rows; row++) {
             grid.push(new Array(cols).fill({"value":'x'}));
         };
-        let map = new MapComponent(props.mapSpriteSize)
-        map.constructMap(grid)
-        this.spriteHandler.registerDynamicContainer(map)
+        this.map = new MapComponent(props.mapSpriteSize)
+        this.map.constructMap(grid)
+        this.spriteHandler.registerDynamicContainer(this.map)
+        this.spriteHandler.setResizeToWindow()
+
+        window.addEventListener('resize', () => this.handleResize())
+    }
+
+    calculateDimensions() {
+        const mapSpriteSize = this.props.mapSpriteSize
+        const width = screen.width + mapSpriteSize
+        const height = screen.height + mapSpriteSize
+        const cols = Math.floor(width / mapSpriteSize) + 1
+        const rows = Math.floor(height / mapSpriteSize) + 1
+
+        return {
+            width,
+            height,
+            cols,
+            rows
+        }
+    }
+
+    handleResize() {
+        const {cols, rows} = this.calculateDimensions()
+        this.map.setRowsAndCols(rows, cols)
     }
 
     render() {

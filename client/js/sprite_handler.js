@@ -11,12 +11,12 @@ export class SpriteHandler {
             new PIXI.Application({
                 view: canvasElement,
                 width: this.width_px,
-                height: this.height_px
+                height: this.height_px,
             })
             :
             new PIXI.Application({
                 width: this.width_px,
-                height: this.height_px
+                height: this.height_px,
             })
 
         // Sprite that focus is currently on
@@ -25,6 +25,10 @@ export class SpriteHandler {
 
     getCanvas() {
         return this.app.view
+    }
+
+    setResizeToWindow() {
+        this.app.resizeTo = window
     }
 
     render() {
