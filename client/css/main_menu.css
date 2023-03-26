@@ -23,6 +23,11 @@
       width: 450px;
     }
 }
+@media only screen and (max-height: 500px) {
+    .main-menu-logo {
+      width: 200px;
+    }
+}
 
 .main-menu-options {
     height: 180px;

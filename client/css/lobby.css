@@ -12,6 +12,7 @@
 @media only screen and (max-width: 900px) {
     .lobby-grid {
         grid-template-areas:
+            "gameCode"
             "players"
             "map"
             "options"
@@ -48,6 +49,7 @@
 
 @media only screen and (max-width: 900px) {
     .game-code {
+        grid-area: gameCode;
         text-align: center;
         width: initial;
         font-size: 32px;
