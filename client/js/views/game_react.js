@@ -70,9 +70,12 @@ export class Game extends React.Component {
     getGameDimensions = () => {
         // We only want to resize if the browser window is made smaller than the game view. If not, then sprites become too big and look slightly blurry. 
         let resizeMultiplier = 1
-        if (window.innerHeight < this.height_px_original || window.innerWidth < this.width_px_original) {
+
+        const windowWidth = Math.min(window.outerWidth, window.innerWidth);
+        const windowHeight = Math.min(window.outerHeight, window.innerHeight);
+        if (windowHeight < this.height_px_original || windowWidth < this.width_px_original) {
             // Keep ratio the same, so see if width or height needs to be scaled the most to be visible
-            resizeMultiplier = Math.min((window.innerWidth - this.margin) / this.width_px_original, (window.innerHeight - this.margin) / this.height_px_original) * this.resizeFactor
+            resizeMultiplier = Math.min((windowWidth - this.margin) / this.width_px_original, (windowHeight - this.margin) / this.height_px_original) * this.resizeFactor
         }
 
         if (resizeMultiplier != this.state.globalResizeMultiplier) { // If a resize has occurred, scale the canvas and everything in it
