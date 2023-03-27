@@ -152,6 +152,7 @@ function Application(props) {
                         thisPlayer={playerID}
                         players={players}
                         gameSettings={gameSettings}
+                        gameID={gameID}
                         returnToMainMenuFn={returnToMainMenu}>
                     </Game>
                 ) :

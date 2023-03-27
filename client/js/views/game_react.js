@@ -12,12 +12,16 @@ export class Game extends React.Component {
             playerState: [],  // Holds game info such as money and score, is not updated regularly though - only when gameState
             width_px: this.props.config.APP_WIDTH,
             height_px: this.props.config.APP_HEIGHT,
-            globalResizeMultiplier: 1
+            globalResizeMultiplier: 1,
+            isFullscreen: false,
         }
         this.width_px_original = this.props.config.APP_WIDTH
         this.height_px_original = this.props.config.APP_HEIGHT
         this.margin = 24 // in px
         this.resizeFactor = 1  // todo pass in via props
+
+        this.gameContainerRef = React.createRef(null)
+        this.menuRef = React.createRef(null)
     }
 
     componentDidMount() {
@@ -57,6 +61,9 @@ export class Game extends React.Component {
 
         // Listen for window resize event
         window.addEventListener('resize', this.handleResize)
+        window.addEventListener("fullscreenchange", () => {
+            this.setState({isFullscreen: !!document.fullscreenElement})
+        });
 
         // Trigger the reisze so that intial render is right dimensions
         this.handleResize()
@@ -72,7 +79,7 @@ export class Game extends React.Component {
         let resizeMultiplier = 1
 
         const windowWidth = Math.min(window.outerWidth, window.innerWidth);
-        const windowHeight = Math.min(window.outerHeight, window.innerHeight);
+        const windowHeight = Math.min(window.outerHeight, window.innerHeight) - (this.menuRef?.current?.clientHeight || 0);
         if (windowHeight < this.height_px_original || windowWidth < this.width_px_original) {
             // Keep ratio the same, so see if width or height needs to be scaled the most to be visible
             resizeMultiplier = Math.min((windowWidth - this.margin) / this.width_px_original, (windowHeight - this.margin) / this.height_px_original) * this.resizeFactor
@@ -96,18 +103,52 @@ export class Game extends React.Component {
         })
     }
 
+    toggleFullscreen = (elem) => {
+        if (this.state.isFullscreen && !!document.fullscreenElement) {
+            document
+            .exitFullscreen()
+            .then(() => this.setState({isFullscreen: false}))
+            return
+        }
+
+        let fullscreenRequest
+        if (elem?.requestFullscreen) {
+            fullscreenRequest = elem.requestFullscreen();
+        } else if (elem?.webkitRequestFullscreen) { /* Safari */
+            fullscreenRequest = elem.webkitRequestFullscreen();
+        } else if (elem?.msRequestFullscreen) { /* IE11 */
+            fullscreenRequest = elem.msRequestFullscreen();
+        }
+
+        // If success, update state
+        fullscreenRequest?.then(() => this.setState({isFullscreen: true}))
+    }
+
     render() {
         // Return a span that is resized to the chosedn size based off handleResize(). It contains the game canvas, and any additional
         // overlays. All elements are fixed relative to this outer span. As such, when it is resized the child elements are too. The exception
         // (sort of) is the canvas. Whilst the width and height of it are resized automatically as a child, the contents are not. This must be
         // done using the style width/height properties, which are also directly updates by the relevant state.
         return (
-            <span className="game-canvas" style={{width: this.state.width_px, height: this.state.height_px}}>
-                <canvas id="gameCanvas" className="game-canvas" style={{width: this.state.width_px + "px", height:this.state.height_px + "px"}}/> 
+            <div className="game-canvas" ref={this.gameContainerRef} >
+                <div
+                    className={`game-options ${this.state.isFullscreen ? 'fullscreen' : ''}`}
+                    ref={this.menuRef}
+                    style={{width: this.state.width_px + "px"}}
+                >
+                    <div className="game-options-game-code">Game code: {this.props.gameID}</div>
+                    <button
+                        className="game-options-fullscreen-button"
+                        onClick={() => {
+                            this.toggleFullscreen(this.gameContainerRef.current)
+                        }}
+                    >{this.state.isFullscreen ? 'Exit Fullscreen' : 'Enable Fullscreen'}</button>
+                </div>
+                <canvas id="gameCanvas" style={{width: this.state.width_px + "px", height:this.state.height_px + "px"}}/>
                 { this.state.gameState != "active" &&
                     <EndGameModal gameState={this.state.gameState} scale={this.state.globalResizeMultiplier} playerConfig={this.props.players} playerState={this.state.playerState} returnToMainMenuFn={this.props.returnToMainMenuFn}/>
                 }
-            </span>
+            </div>
         )
     }
 }
