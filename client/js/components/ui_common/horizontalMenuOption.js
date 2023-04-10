@@ -31,17 +31,24 @@ class HorizontalMenuOption extends BaseComponent {
     // ~~~ Public ~~~
 
     // Add a PIXI.Text object onto the element
-    addText(text, x_percent=0.5, y_percent=0.5) {
+    addText(text, x_percent=0.5, y_percent=0.5, name="text") {
         // Position relative to the menu sprite
-        text.x = x_percent * this.menuSprite.width
+        text.x = x_percent * (this.width - 6) // minus shadow pixels
         text.y = y_percent * this.menuSprite.height
         text.baseTint = text.style.fill  // Add this property to record the original colour
-        text.name = "text"
+        text.name = name
         this.text.addChild(text)
     }
 
     updateText(message) {
         this.text.getChildByName("text").text = message
+    }
+
+    updateTextByName(name, message) {
+        const child = this.text.getChildByName(name)
+        if (child) {
+            child.text = message
+        }
     }
 
     // Shrinks the text down untilit fits within the box comfortably
@@ -92,6 +99,14 @@ class HorizontalMenuOption extends BaseComponent {
 
     // Based on where the menu option is places relative to the wall, determine the shape and shadow behaviour and generate those sprites
     _generateSprites(width_px, tint, wallAttachment, verticalSize) {
+        if (verticalSize == 'tall') {
+            this._generateGraphic(tint, width_px, 250)
+            return
+        } else if (verticalSize == 'medium') {
+            this._generateGraphic(tint, width_px, 150)
+            return
+        }
+
         // Components of the filenames in the texture atlas
         let basename = "slanted_infobox_greyscale_"
         let oneSidedSprite = "1"
@@ -102,7 +117,7 @@ class HorizontalMenuOption extends BaseComponent {
 
         // Construct the filename based on the options
         let filename = basename
-        filename += (wallAttachment == "none") ? doubleSidedSprite : oneSidedSprite
+        filename += (wallAttachment == "none" | wallAttachment == 'none-flipped') ? doubleSidedSprite : oneSidedSprite
         filename += (verticalSize == "full") ? fullHeight : halfHeight
         filename += filetype
 
@@ -141,6 +156,17 @@ class HorizontalMenuOption extends BaseComponent {
                 this.shadowSprite.scale.set(-1, 1)
                 this.baseContentOffsetX = -this.menuSprite.width
                 break
+            // _________
+            // \        \
+            //  \________\
+            //
+            case "none-flipped":
+                this._generateSprite(width_px, tint, filename, slopedEndSize_px, slopedEndSize_px, 0, 0)
+                this.menuSprite.scale.set(-1, 1)
+                this.shadowSprite.scale.set(-1, 1)
+                this.baseContentOffsetX = -this.menuSprite.width
+                this.menuSprite.x += this.menuSprite.width
+                break
             //   _________
             //  /        /
             // /________/
@@ -166,6 +192,34 @@ class HorizontalMenuOption extends BaseComponent {
         this.shadowSprite.x += xShift_px
         this.shadowSprite.y += 6  // Shift the shadow 6 pixels down for all types
         this.shadowSprite.width += xGrow_px
+
+        this.addChild(this.shadowSprite)  // Add shadow first so it appears beneath
+        this.addChild(this.menuSprite)
+    }
+
+    _generateGraphic(tint, width_px, height_px) {
+        const width = width_px
+        const height = height_px
+        const borderThickness = 7
+        const shadowOffset = 10
+        const xSkew = 0.1
+
+        this.menuSprite = new PIXI.Graphics();
+        this.menuSprite.beginFill(0xffffff);
+        this.menuSprite.lineStyle(borderThickness, 0xcccccc)
+        this.menuSprite.tint = tint
+        this.menuSprite.drawRect(0, 0, width, height);
+
+        this.menuSprite.skew.x = xSkew
+
+        this.shadowSprite = new PIXI.Graphics();
+        this.shadowSprite.beginFill(0x111111);
+        this.shadowSprite.lineStyle(borderThickness, 0x111111, 0)
+        this.shadowSprite.alpha = 0.7
+        this.shadowSprite.drawRect(0, 0, width, height);
+        this.shadowSprite.x += shadowOffset
+        this.shadowSprite.y += shadowOffset
+        this.shadowSprite.skew.x = xSkew
 
         this.addChild(this.shadowSprite)  // Add shadow first so it appears beneath
         this.addChild(this.menuSprite)
@@ -267,6 +321,7 @@ export class ButtonHorizontalMenuOption extends HorizontalMenuOption {
         if (this.clickEnabled) {
             this._darken()
             this.clickEnabled = false
+            this.menuSprite.buttonMode = false
         }
     }
 
@@ -274,7 +329,13 @@ export class ButtonHorizontalMenuOption extends HorizontalMenuOption {
         if (!this.clickEnabled) {
             this._resetColour()
             this.clickEnabled = true
+            this.menuSprite.buttonMode = true
         }
+    }
+
+    disableClickAndPush() {
+        this._press()
+        this.disableClick()
     }
 
     addInteractionEvent(eventName, fn) {
@@ -302,7 +363,7 @@ export class SwitchHorizontalMenuOption extends HorizontalMenuOption {
         this.menuSprite
             .on("mouseover", () => { this._lighten() })
             .on("mouseout", () => { if (!this.isSelected) this._resetColour() })
-            .on("mousedown", () => {
+            .on("pointerdown", () => {
                 if (!this.isSelected) {
                     this.isSelected = true
                     this._lighten()

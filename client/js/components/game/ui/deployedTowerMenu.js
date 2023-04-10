@@ -1,29 +1,71 @@
-import { SwitchMenu, ButtonMenu } from "./horizontalOptionsMenu.js"
+import { BigSwitchMenu, ButtonMenu, BigButtonMenu } from "./horizontalOptionsMenu.js"
 import { BaseComponent } from "../base/baseComponent.js"
 import { boldTextStyle, plainTextStyle, COLOURS } from "../../ui_common/style.js"
 
 const buttonFontSize = 40
+const optionButtonWidth = 260
 
 class DeployedTowerMainMenu extends ButtonMenu {
-    constructor(x, y) {
+    constructor(x, y, parentEventHandler) {
         super("deployedTowerMainMenu", x, y, "right", -20)
 
         this.menuRoot = this.addRoot(350, COLOURS.INFO_LIGHT_GREY)
 
         // Select this option to open the aiming menu
-        this.aimOption = this.addOption(260, COLOURS.AIM_RED, "selected-aim")
-        this.aimOption.addTextCentral("AIM", boldTextStyle(COLOURS.AIM_RED, buttonFontSize))
+        const aimOption = this.addOption(optionButtonWidth, COLOURS.AIM_RED, "selected-aim")
+        aimOption.addTextCentral("AIM", boldTextStyle(COLOURS.AIM_RED, buttonFontSize))
 
         // Select this option to open the upgrades menu
-        this.upgradeOption = this.addOption(260, COLOURS.UPGRADE_GREEN, "selected-upgrade")
-        this.upgradeOption.addTextCentral("UPGRADE", boldTextStyle(COLOURS.UPGRADE_GREEN, buttonFontSize))
+        const upgradeOption = this.addOption(optionButtonWidth, COLOURS.UPGRADE_GREEN, "selected-upgrade")
+        upgradeOption.addTextCentral("UPGRADE", boldTextStyle(COLOURS.UPGRADE_GREEN, buttonFontSize))
 
         // Select this option to open the selling menu
-        this.sellOption = this.addOption(260, COLOURS.MONEY, "selected-sell")
-        this.sellOption.addTextCentral("SELL", boldTextStyle(COLOURS.MONEY, buttonFontSize))
+        const sellOption = this.addOption(optionButtonWidth, COLOURS.MONEY, "selected-sell")
+        sellOption.addTextCentral("SELL", boldTextStyle(COLOURS.MONEY, buttonFontSize))
 
-        this.addCancelButton()
+        this.options = new Map([
+            ['aim', aimOption],
+            ['upgrade', upgradeOption],
+            ['sell', sellOption]
+        ])
+
+        this.cancel = this.addCancelButton()
         this.populateWithTowerInfo()
+
+        // Sub Menus
+        const upgradeSubMenu = new DeployedTowerUpgradeOptionsMenu(0, 0)
+        const aimSubMenu = new DeployedTowerAimMenu(0, 0)
+        const sellSubMenu = new DeployedTowerSellMenu(20, 0)
+
+        this.subMenus = new Map([
+            ['aim', aimSubMenu],
+            ['upgrade', upgradeSubMenu],
+            ['sell', sellSubMenu]
+        ])
+
+        // Set up all sub menus
+        for (let [subMenuType, subMenu] of this.subMenus) {
+            this.addChild(subMenu)
+            subMenu.visible = false
+
+            // Center above the option horizontally
+            const subMenuParent = this.options.get(subMenuType)
+            subMenu.x += subMenuParent.x + (subMenuParent.width/2) - (subMenu.width / 2)
+            subMenu.y += subMenuParent.y - (subMenu.height + 10)
+
+            if (parentEventHandler) {
+                subMenu.subscribe(parentEventHandler)
+            }
+        }
+
+        // Add click interaction to hide all other sub menus and show the selected
+        for (let [optionType, option] of this.options) {
+            option.addInteractionEvent('pointerdown', () => {
+                for (let [subMenuType, subMenu] of this.subMenus) {
+                    subMenu.visible = optionType === subMenuType
+                }
+            })
+        }
     }
 
     // Initialise the information displayed on the deployed tower menu
@@ -40,36 +82,54 @@ class DeployedTowerMainMenu extends ButtonMenu {
     }
 
     // Update just the contents of the info created in populateWithTowerInfo to ensure kill stats is up to date
-    updateTowerInfo(tower) {
-        this.nameAndLevel.text = "Level " + tower.level + " " + tower.type
-        this.kills.text = "Kills: " + tower.stats.kills
+    updateTowerInfo(towerUpdate, activeTower, playerMoney) {
+        this.nameAndLevel.text = "Level " + towerUpdate.level + " " + towerUpdate.type
+        this.kills.text = "Kills: " + towerUpdate.stats.kills
+
+        this.subMenus.get('aim').updateTowerInfo(activeTower)
+        this.subMenus.get('upgrade').updateTowerInfo(activeTower.getUpgradeState(), activeTower.type, playerMoney)
+        this.subMenus.get('sell').updateTowerInfo(towerUpdate)
+    }
+
+    close() {
+        for (let menuObject of this.subMenus.values()) {
+            menuObject.visible = false
+        }
+        this.visible = false
     }
 }
 
-let aimRootWidth = 400
-class DeployedTowerAimMenu extends SwitchMenu {
+function createAimOptionText(option, titleText, descriptionText, optionName) {
+    let textStyleTitle = plainTextStyle(COLOURS.BLACK, 44)
+    let textStyleDesc = plainTextStyle(COLOURS.BLACK, 28)
+    textStyleDesc.wordWrap = true
+    textStyleDesc.wordWrapWidth = optionButtonWidth - 10
+    textStyleDesc.align = 'center'
+
+    const title = new PIXI.Text(titleText, textStyleTitle)
+    title.anchor.set(0.5)
+    option.addText(title, 0.5, 0.2, `${optionName}Title`)
+
+    const desc = new PIXI.Text(descriptionText, textStyleDesc)
+    desc.anchor.set(0.5)
+    option.addText(desc, 0.5, 0.6, `${optionName}Desc`)
+}
+
+class DeployedTowerAimMenu extends BigSwitchMenu {
     constructor(x, y) {
-        super("deployedTowerAimMenu", x, y, "right", -20)
-        this.menuRoot = this.addRoot(aimRootWidth, COLOURS.INFO_LIGHT_GREY)
-
-        const optionWidth = 220
-        const fontSize = 34
-        let textStyle = boldTextStyle(COLOURS.AIM_RED, fontSize)
-
+        super("deployedTowerAimMenu", x, y, "right", 10)
+ 
         // Aim at the emeny closest to the end of the track and in range
-        this.firstOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-first", true)
-        this.firstOption.addTextCentral("FIRST", textStyle)
+        this.firstOption = this.addOption(optionButtonWidth, COLOURS.AIM_RED, "selected-aim-first", true, false)
+        createAimOptionText(this.firstOption, 'FIRST', 'Aim at the enemy closest to the end and in range', 'first')
 
         // Aim at the enemy closest to the start of the track and in range
-        this.lastOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-last", false)
-        this.lastOption.addTextCentral("LAST", textStyle)
+        this.lastOption = this.addOption(optionButtonWidth, COLOURS.AIM_RED, "selected-aim-last", false, false)
+        createAimOptionText(this.lastOption, 'LAST', 'Aim at the enemy furthest from the end and in range', 'last')
 
         // Aim at the enemy closest to the tower and in range
-        this.closestOption = this.addOption(optionWidth, COLOURS.AIM_RED, "selected-aim-closest", false)
-        this.closestOption.addTextCentral("CLOSEST", textStyle)
-
-        this.addBackAndCancelButtons()
-        this.setRootInfo()
+        this.closestOption = this.addOption(optionButtonWidth, COLOURS.AIM_RED, "selected-aim-closest", false, false)
+        createAimOptionText(this.closestOption, 'CLOSEST', 'Aim at the enemy closest to this tower and in range', 'closest')
     }
 
     // Initialise the information displayed on the root menu component of the aim menu
@@ -81,7 +141,6 @@ class DeployedTowerAimMenu extends SwitchMenu {
 
         this.aimDescription = new PIXI.Text("Aim determines which enemy the tower will shoot", style)
         this.aimDescription.anchor.set(0, 0.5)
-        this.menuRoot.addText(this.aimDescription, 0.02, 0.5)
     }
 
     // Update just the contents of the info created in populateWithTowerInfo to ensure kill stats is up to date
@@ -102,75 +161,64 @@ class DeployedTowerAimMenu extends SwitchMenu {
     }
 }
 
-class DeployedTowerSellMenu extends ButtonMenu {
+class DeployedTowerSellMenu extends BigButtonMenu {
     constructor(x, y) {
         super("deployedTowerSellMenu", x, y, "right", -20)
 
-        this.menuRoot = this.addRoot(350, COLOURS.INFO_LIGHT_GREY)
-
         // Confirm the selling of the tower in exchange for the displayed amount of money
-        this.yesOption = this.addOption(260, COLOURS.MONEY, "selected-sell-yes")
-        this.yesOption.addTextCentral("CONFIRM", boldTextStyle(COLOURS.MONEY, 42))
+        this.yesOption = this.addOption(360, COLOURS.MONEY, "selected-sell-yes", true, false)
 
-        this.addBackAndCancelButtons()
-        this.populateWithTowerInfo()
-    }
+        const textStyle = plainTextStyle(COLOURS.BLACK, 40)
+        const text = new PIXI.Text("Confirm sell for:", textStyle)
+        text.anchor.set(0.5)
+        
+        const boldStyle = boldTextStyle(COLOURS.MONEY, 45)
+        const price = new PIXI.Text("", boldStyle)
+        price.anchor.set(0.5)
 
-    // Initialise the information displayed on the deployed tower menu
-    populateWithTowerInfo() {
-        // Fill the menu to have info relevant to the specified tower
-        let fontSize = 40
-        this.sellPriceText = new PIXI.Text("", plainTextStyle(COLOURS.BLACK, fontSize))
-        this.sellPriceText.anchor.set(0, 0.5)
-        this.menuRoot.addText(this.sellPriceText, 0.02, 0.5)
+        this.yesOption.addText(text, 0.5, 0.3, 'confirm')
+        this.yesOption.addText(price, 0.5, 0.66, 'price')
+
     }
 
     // Update just the contents of the info created in populateWithTowerInfo to ensure kill stats is up to date
     updateTowerInfo(tower) {
-        this.sellPriceText.text = "Sell price:  " + tower.sellPrice.toString()
+        this.yesOption.updateTextByName('price', `${tower.sellPrice}`)
+        this.yesOption.autofitTextSize()
     }
 }
 
-class DeployedTowerUpgradeMenu extends ButtonMenu {
+
+const initText = (buttonWidth, fontSize) => {
+    let style = plainTextStyle(COLOURS.BLACK, fontSize)
+    style.wordWrap = true
+    style.wordWrapWidth = buttonWidth - 20
+    style.align = 'center'
+
+    const text = new PIXI.Text('', style)
+    text.anchor.set(0.5)
+    return text
+}
+
+class DeployedTowerUpgradeOptionsMenu extends BigButtonMenu {
     constructor(x, y) {
-        super("deployedTowerUpgradeMenu", x, y, "right", -20)
+        super("deployedTowerUpgradeOptionsMenu", x, y, "right", -10)
 
         this.prevTowerType = undefined
 
-        this.menuRoot = this.addRoot(520, COLOURS.INFO_LIGHT_GREY)
-        const defaultMenuRootText = "Available upgrades"
-        let style = plainTextStyle(COLOURS.BLACK, 28)
-        style.lineHeight = 30
-        let menuRootText = new PIXI.Text(defaultMenuRootText, style)
-        menuRootText.anchor.set(0, 0.5)
-        this.menuRoot.addText(menuRootText, 0.02, 0.5)
-
         const numberOfUpgrades = 3
-        const buttonWidth = 200
+        const buttonWidth = 300
         this.options = []
         for (let optIdx = 0; optIdx < numberOfUpgrades; optIdx += 1) {
             let upgradeOption = this.addOption(buttonWidth, COLOURS.UPGRADE_GREEN, "selected-upgrade-option")
-            let style = plainTextStyle(COLOURS.BLACK, 32)
-            style.wordWrap = true
-            style.wordWrapWidth = buttonWidth - 40
-            style.align = 'center'
-            upgradeOption.addTextCentral("", style)
-            upgradeOption.altText = defaultMenuRootText  // Text to be displayed on the menu root when hovered over
-
-            // Add hover behaviour
-            upgradeOption.addInteractionEvent("mouseover", () => {
-                this.menuRoot.updateText(upgradeOption.altText)
-            })
-            upgradeOption.addInteractionEvent("mouseout", () => {
-                this.menuRoot.updateText(defaultMenuRootText)
-            })
+            upgradeOption.addText(initText(buttonWidth, 32), 0.5, 0.2, 'title')
+            upgradeOption.addText(initText(buttonWidth, 32), 0.5, 0.5, 'description')
+            upgradeOption.addText(initText(buttonWidth, 32), 0.5, 0.8, 'cost')
             this.options.push(upgradeOption)
         }
-
-        this.addBackAndCancelButtons()
     }
 
-    updateTowerInfo(upgradeState, playerMoney, towerType) {
+    updateTowerInfo(upgradeState, towerType, playerMoney) {
         const updateText = this.prevTowerType != towerType
         this.prevTowerType = towerType
 
@@ -178,16 +226,18 @@ class DeployedTowerUpgradeMenu extends ButtonMenu {
         for (const [upgradeType, {description, description_long, cost, purchased}] of Object.entries(upgradeState)) {
             let option = this.options[upgradeIdx]
             // Change in tower type, update the displayed text - don't do every time to save processing
-            if (updateText) {
-                option.updateText(description.toUpperCase())
-                option.autofitTextSize()
+            // TODO fix this
+            // if (updateText) {
+                option.updateTextByName('title', description.toUpperCase())
+                option.updateTextByName('description', description_long)
+                option.updateTextByName('cost', purchased ? "PURCHASED" : `Cost: ${cost}`)
                 option.setParams({
                     "type": upgradeType
                 })
-            }
-            option.altText = 
-                `${description_long}\nCost: ${purchased ? "PURCHASED" : cost}`
-            if (purchased || playerMoney < cost) {
+            // }
+            if (purchased){
+                option.disableClickAndPush()
+            } else if (playerMoney < cost) {
                 option.disableClick()
             } else {
                 option.enableClick()
@@ -197,53 +247,19 @@ class DeployedTowerUpgradeMenu extends ButtonMenu {
     }
 }
 
+
 // This manages the transitions between the menus within the tower menu, and if a selection is made that afects the game, it emits
 // an event to its subscribers.
 export class DeployedTowerMenu extends BaseComponent {
     constructor(x, y) {
         super("DeployedTowerMenu")
-        this.mainMenu = new DeployedTowerMainMenu(x, y)
+        this.mainMenu = new DeployedTowerMainMenu(x, y, this)
         this.mainMenu.subscribe(this)
         this.addChild(this.mainMenu)
-
-        this.aimMenu = new DeployedTowerAimMenu(x, y)
-        this.aimMenu.subscribe(this)
-        this.addChild(this.aimMenu)
-
-        this.sellMenu = new DeployedTowerSellMenu(x, y)
-        this.sellMenu.subscribe(this)
-        this.addChild(this.sellMenu)
-
-        this.upgradeMenu = new DeployedTowerUpgradeMenu(x, y)
-        this.upgradeMenu.subscribe(this)
-        this.addChild(this.upgradeMenu)
-
         this.setUpEventListeners()
     }
 
     setUpEventListeners() {
-        // Transitions between different menus
-        this.on("selected-aim", () => {
-            this.mainMenu.visible = false
-            this.aimMenu.visible = true
-            this.sellMenu.visible = false
-            this.upgradeMenu.visible = false
-        })
-
-        this.on("selected-upgrade", () => {
-            this.mainMenu.visible = false
-            this.aimMenu.visible = false
-            this.sellMenu.visible = false
-            this.upgradeMenu.visible = true
-        })
-
-        this.on("selected-sell", () => {
-            this.mainMenu.visible = false
-            this.aimMenu.visible = false
-            this.sellMenu.visible = true
-            this.upgradeMenu.visible = false
-        })
-
         // Aim behaviour chosen, emit update event with the currently selected tower and the desired aim behaviour update
         this.on("selected-aim-first", () => {
             this.observers.forEach((observer) => { observer.emit("update-tower", this.selectedTower, "aim", "aimBehaviour", "first") })
@@ -275,16 +291,14 @@ export class DeployedTowerMenu extends BaseComponent {
     }
 
     updateTowerInfo(towerUpdate, activeTower, playerMoney) {
+        // TODO use hash to prevent continuous update
         // Live updates of the towers state
-        this.mainMenu.updateTowerInfo(towerUpdate)
-        this.sellMenu.updateTowerInfo(towerUpdate)
-        this.upgradeMenu.updateTowerInfo(activeTower.getUpgradeState(), playerMoney, activeTower.type)
+        this.mainMenu.updateTowerInfo(towerUpdate, activeTower, playerMoney)
     }
 
     setSelectedTower(tower) {
         // This is data to update once when the tower is clicked on
         this.selectedTower = tower
-        this.aimMenu.updateTowerInfo(tower)
     }
 
     show() {
@@ -295,6 +309,6 @@ export class DeployedTowerMenu extends BaseComponent {
 
     hide() {
         super.hide()
-        this.children.forEach((child) => { child.visible = false })
+        this.mainMenu.close()
     }
 }

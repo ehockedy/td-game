@@ -43,7 +43,7 @@ export class Game extends React.Component {
         gameCanvas.classList.add("display-box-shadowless")
 
         // This holds the PIXI application and all the sprites
-        const spriteHandler = new SpriteHandler(clientConfig.APP_WIDTH, clientConfig.APP_HEIGHT, 1, gameCanvas)
+        const spriteHandler = new SpriteHandler(clientConfig.APP_WIDTH, clientConfig.APP_HEIGHT, 1, gameCanvas, true)
 
         // View is the scene that user is currently on
         this.view = new GameRenderer(

@@ -12,16 +12,26 @@ class Menu extends BaseComponent {
         this.buildDirection = buildDirection
         this.buildDirectionMultiplier = this.buildDirection == "right" ? 1 : -1
         this.optionsOffset = this.buildDirection == "right" ? 0 : -1  // If the options go to the left when added, need to offset because pivot if top left corner of button sprite
+        this.hasRoot = false
     }
 
     addRoot(width, tint) {
         let wallAttachment = this.buildDirection == "right" ? "left" : "right"
         let option = new StaticHorizontalMenuOption(this.name + "_root", 0, 0, width, tint, wallAttachment)
         this.addChild(option)
+        this.hasRoot = true
         return option
     }
 
     _getNextXPosition(width) {
+        if (!this.hasRoot) {
+            if (this.children.length > 0) {
+                const prevChild = this.children[this.children.length - 1]
+                return prevChild.x + prevChild.width + this.gap
+            }
+            return 0
+        }
+        console.log('next x', width, this.gap, this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset + this.gap)
         return this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset + this.gap
     }
 
@@ -136,6 +146,18 @@ export class ButtonMenu extends InteractiveMenu {
     }
 }
 
+export class BigButtonMenu extends ButtonMenu {
+    addOption(size, tint, onSelectEventName, isHorizonal=true, isTall=true) {
+        let option = new ButtonHorizontalMenuOption(this.name + "_root",
+            isHorizonal ? this._getNextXPosition(size) : 0,  // x
+            isHorizonal ? 0 : this._getNextYPosition(),  // y
+            size, tint, 'none', isTall ? "tall" : 'medium')
+        option.onSelectEventName = onSelectEventName
+        this.addChild(option)
+        option.subscribe(this)
+        return option
+    }
+}
 
 // Holds a set of options, with one being able to be pressed at a time
 // Handles the interactions between the buttons
@@ -174,3 +196,19 @@ export class SwitchMenu extends InteractiveMenu {
     }
 }
 
+export class BigSwitchMenu extends SwitchMenu {
+    addOption(width, tint, onSelectEventName, isDefault=false, isTall=true) {
+        let option = new SwitchHorizontalMenuOption(this.name + "_root",
+            this._getNextXPosition(width), 0,
+            width, tint, "none", isTall ? "tall" : 'medium')
+        this.addChild(option)
+        option.onSelectEventName = onSelectEventName
+
+        // The default button is the one pressed down from the start
+        if (isDefault) this.setSelected(option)
+
+        // Set up interaction for if the button is pressed
+        option.subscribe(this)
+        return option
+    }
+}

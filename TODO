@@ -47,3 +47,4 @@ Next:
 
 Bugs:
  - disconnecting client after no activity - I think only in menus?
+ - main menu wait, game times out, press start game, user cannot chsnge namee

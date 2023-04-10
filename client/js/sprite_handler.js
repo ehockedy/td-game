@@ -2,7 +2,7 @@
  * This is the class that holds all the sprites and interaction with those sprites
  */
 export class SpriteHandler {
-    constructor(width_px, height_px, resizeFactor=1, canvasElement=undefined) {
+    constructor(width_px, height_px, resizeFactor=1, canvasElement=undefined, antialias=false) {
         this.width_px = width_px
         this.height_px = height_px
         this.resizeFactor = resizeFactor
@@ -12,11 +12,13 @@ export class SpriteHandler {
                 view: canvasElement,
                 width: this.width_px,
                 height: this.height_px,
+                antialias: antialias,
             })
             :
             new PIXI.Application({
                 width: this.width_px,
                 height: this.height_px,
+                antialias: antialias,  // TODO this affected background map a bit, but makes upgrade options good.
             })
 
         // Sprite that focus is currently on
