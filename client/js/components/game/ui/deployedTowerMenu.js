@@ -9,7 +9,7 @@ class DeployedTowerMainMenu extends ButtonMenu {
     constructor(x, y, parentEventHandler) {
         super("deployedTowerMainMenu", x, y, "right", -20)
 
-        this.menuRoot = this.addRoot(350, COLOURS.INFO_LIGHT_GREY)
+        this.menuRoot = this.addRoot(320, COLOURS.INFO_LIGHT_GREY)
 
         // Select this option to open the aiming menu
         const aimOption = this.addOption(optionButtonWidth, COLOURS.AIM_RED, "selected-aim")
@@ -82,8 +82,8 @@ class DeployedTowerMainMenu extends ButtonMenu {
     }
 
     // Update just the contents of the info created in populateWithTowerInfo to ensure kill stats is up to date
-    updateTowerInfo(towerUpdate, activeTower, playerMoney) {
-        this.nameAndLevel.text = "Level " + towerUpdate.level + " " + towerUpdate.type
+    updateTowerInfo(towerUpdate, activeTower, playerMoney, towerDisplayName) {
+        this.nameAndLevel.text = towerDisplayName
         this.kills.text = "Kills: " + towerUpdate.stats.kills
 
         this.subMenus.get('aim').updateTowerInfo(activeTower)
@@ -118,17 +118,17 @@ function createAimOptionText(option, titleText, descriptionText, optionName) {
 class DeployedTowerAimMenu extends BigSwitchMenu {
     constructor(x, y) {
         super("deployedTowerAimMenu", x, y, "right", 10)
- 
+        const buttonWidth = optionButtonWidth - 10
         // Aim at the emeny closest to the end of the track and in range
-        this.firstOption = this.addOption(optionButtonWidth, COLOURS.AIM_RED, "selected-aim-first", true, false)
+        this.firstOption = this.addOption(buttonWidth, COLOURS.AIM_RED, "selected-aim-first", true, false)
         createAimOptionText(this.firstOption, 'FIRST', 'Aim at the enemy closest to the end and in range', 'first')
 
         // Aim at the enemy closest to the start of the track and in range
-        this.lastOption = this.addOption(optionButtonWidth, COLOURS.AIM_RED, "selected-aim-last", false, false)
+        this.lastOption = this.addOption(buttonWidth, COLOURS.AIM_RED, "selected-aim-last", false, false)
         createAimOptionText(this.lastOption, 'LAST', 'Aim at the enemy furthest from the end and in range', 'last')
 
         // Aim at the enemy closest to the tower and in range
-        this.closestOption = this.addOption(optionButtonWidth, COLOURS.AIM_RED, "selected-aim-closest", false, false)
+        this.closestOption = this.addOption(buttonWidth, COLOURS.AIM_RED, "selected-aim-closest", false, false)
         createAimOptionText(this.closestOption, 'CLOSEST', 'Aim at the enemy closest to this tower and in range', 'closest')
     }
 
@@ -137,7 +137,7 @@ class DeployedTowerAimMenu extends BigSwitchMenu {
         let fontSize = 30
         let style =  plainTextStyle(COLOURS.BLACK, fontSize)
         style.wordWrap = true
-        style.wordWrapWidth = aimRootWidth - 10
+        style.wordWrapWidth = aimRootWidth - 5
 
         this.aimDescription = new PIXI.Text("Aim determines which enemy the tower will shoot", style)
         this.aimDescription.anchor.set(0, 0.5)
@@ -290,10 +290,10 @@ export class DeployedTowerMenu extends BaseComponent {
         })
     }
 
-    updateTowerInfo(towerUpdate, activeTower, playerMoney) {
+    updateTowerInfo(towerUpdate, activeTower, playerMoney, towerDisplayName) {
         // TODO use hash to prevent continuous update
         // Live updates of the towers state
-        this.mainMenu.updateTowerInfo(towerUpdate, activeTower, playerMoney)
+        this.mainMenu.updateTowerInfo(towerUpdate, activeTower, playerMoney, towerDisplayName)
     }
 
     setSelectedTower(tower) {

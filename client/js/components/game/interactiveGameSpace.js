@@ -142,7 +142,12 @@ export class InteractiveGameSpace extends BaseComponent {
         if (this.activeTower) {
             towers["objects"].forEach((tower) => {
                 if (tower.name == this.activeTower.name) {
-                    this.deployedTowerMainMenu.updateTowerInfo(tower, this.activeTower, playerMoney)
+                    this.deployedTowerMainMenu.updateTowerInfo(
+                        tower,
+                        this.activeTower,
+                        playerMoney,
+                        this.towersComponent?.towerConfig?.[tower.type].displayName || tower.name
+                    )
                 }
             })
         }

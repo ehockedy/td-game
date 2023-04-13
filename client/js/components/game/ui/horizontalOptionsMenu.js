@@ -1,6 +1,6 @@
 import { BaseComponent } from "../base/baseComponent.js"
 import { StaticHorizontalMenuOption, ButtonHorizontalMenuOption, SwitchHorizontalMenuOption } from "../../ui_common/horizontalMenuOption.js"
-import { COLOURS, boldTextStyle } from "../../ui_common/style.js"
+import { COLOURS, plainTextStyle } from "../../ui_common/style.js"
 
 // Base class for the game UI menu type
 class Menu extends BaseComponent {
@@ -70,18 +70,18 @@ class InteractiveMenu extends Menu {
     }
 
     addCancelButton() {
-        let width = 90
-        let tint = COLOURS.CANCEL_RED
+        let width = 120
+        let tint = COLOURS.DENY_RED
         let option = new ButtonHorizontalMenuOption(this.name + "_cancel",
             this._getNextXPosition(width) - (this.gap*0.5), 0,
             width, tint, "none", "half")
         option.setSelectEventName("cancel")
         this.addChild(option)
         option.subscribe(this)
-        option.addTextCentral("\u{2715}", boldTextStyle(COLOURS.BLACK, 32))
 
-        let scale = 0.8
-        option.setDefaultScale(scale)
+        const cancelX = new PIXI.Text("X", plainTextStyle(COLOURS.BLACK, 32))
+        cancelX.anchor.set(0.5)
+        option.addText(cancelX, 0.5, 0.45, 'cancel')
         return option
     }
 
