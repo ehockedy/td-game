@@ -20,11 +20,10 @@ export class DraggableTower extends BaseInteractiveTower {
 
         // Whether a tower can be bought
         this.availiableToBuy = true
+        this.disableInteractivity()
 
         // The buttons for confirming or declining placement
         this.placeTowerButtons = new PlaceTowerMenu(0, 0)
-        this.placeTowerButtons.x = this.towerSprite.width / 2
-        this.placeTowerButtons.y = -this.placeTowerButtons.height / 2
         this.placeTowerButtons.subscribe(this)
         this.addChild(this.placeTowerButtons)
 
@@ -71,14 +70,27 @@ export class DraggableTower extends BaseInteractiveTower {
         }
     }
 
-    showPlaceTowerButtons(flipSide) {
+    /**
+     * Tells the place tower buttons the position to render relative to the tower
+     * @param {boolean} flipY whether to flip in y axis so does not go off screen
+     * @param {number} offsetY direction to off set in y direction, +ve is up, -ve is down, 0 is no offset
+     */
+    showPlaceTowerButtons(flipY, offsetY) {
         // If flip side enabled, switch the side of the tower the buttons are rendered on
         // This lets them be shown in cases where they would appear under other UI components
         this.placeTowerButtons.x = this.towerSprite.width / 2
-        if (flipSide) {
+        this.placeTowerButtons.resetYPosition()
+        if (flipY) {
             this.placeTowerButtons.x *= -1
-            this.placeTowerButtons.x -= this.placeTowerButtons.width
+            this.placeTowerButtons.x -= Math.round(this.placeTowerButtons.width)
         }
+
+        if (offsetY > 0) {
+            this.placeTowerButtons.y += this.towerSprite.height/2
+        } else if (offsetY < 0) {
+            this.placeTowerButtons.y -= Math.round(this.towerSprite.height*1.5)
+        }
+
         this.placeTowerButtons.visible = true
     }
 
@@ -128,5 +140,12 @@ export class DraggableTower extends BaseInteractiveTower {
         this.towerColourSprite.children.forEach((sprite) => {
             sprite.tint = avgColourHexValues(sprite.baseTint, tint)
         })
+    }
+
+    setTowerInfo(towerConfig) {
+        if (towerConfig) {
+            this.placeTowerButtons.updateTowerInfo(towerConfig.displayInfo, towerConfig.cost?.toString(), towerConfig.displayName)
+        }
+
     }
 }

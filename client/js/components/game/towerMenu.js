@@ -68,7 +68,7 @@ export class TowerMenu extends BaseComponent {
             let icon = new MenuIconTower(towerType, towerType + "_icon", this.towerConfig)
 
             let x = getPositionWithinEquallySpacedObjects(numTowers, Object.keys(this.towerConfig).length, icon.width, this.width_menu_px)
-            let y = this.menuBackground.y + this.menuBackground.height / 2
+            let y = this.menuBackground.y + (this.menuBackground.height * 0.35)
 
             icon.x = x
             icon.y = y
@@ -159,10 +159,10 @@ export class TowerMenu extends BaseComponent {
 
     // ~~~ Events ~~~
     _onPointerOverTower(tower) {
-        this.infoBoxes.getChildByName(tower.name).visible = true
+        // this.infoBoxes.getChildByName(tower.name).visible = true
     }
 
     _onPointerOutTower(tower) {
-        this.infoBoxes.getChildByName(tower.name).visible = false
+        // this.infoBoxes.getChildByName(tower.name).visible = false
     }
 }

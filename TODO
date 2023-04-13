@@ -40,7 +40,6 @@ Next:
  - incorporate money spent into final score
  - test with multiple players
  - multiple lives lost for stronger enemies
- - some kind of in game menu with seed and game code
  - tidy session addSocket function, and make it so does not actually add socket if not valid player etc.
  - do not tidy up games as frequently as currently do - add some length of game
  - dev/prod modew in webpack + AWS deployment
@@ -48,3 +47,9 @@ Next:
 Bugs:
  - disconnecting client after no activity - I think only in menus?
  - main menu wait, game times out, press start game, user cannot chsnge namee
+
+
+Mobile:
+ - cancel tower menu and place tower confirm/cancel button sizes
+ - end game screen
+ - see price of tower/info about it

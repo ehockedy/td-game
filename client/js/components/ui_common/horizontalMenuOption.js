@@ -81,7 +81,7 @@ class HorizontalMenuOption extends BaseComponent {
             text.name = "text"
             text.anchor.set(0.5, 0.5)
             this.defaultFontSize = style.fontSize
-            this.addText(text, 0.5, 0.5)
+            this.addText(text, 0.5, 0.45)  // .45 for y to acount for shadow
         }
     }
 

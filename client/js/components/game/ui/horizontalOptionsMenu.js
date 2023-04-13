@@ -31,12 +31,19 @@ class Menu extends BaseComponent {
             }
             return 0
         }
-        console.log('next x', width, this.gap, this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset + this.gap)
         return this.getLocalBounds().width * this.buildDirectionMultiplier + width * this.optionsOffset + this.gap
     }
 
     _getNextYPosition() {
         return this.getLocalBounds().height * this.buildDirectionMultiplier + (this.children.length ? this.children[0].height : 0) * this.optionsOffset + this.gap
+    }
+
+    _getYPosition() {
+        if (this.children.length > 0) {
+            const prevChild = this.children[this.children.length - 1]
+            return prevChild.y
+        }
+        return 0
     }
 }
 
@@ -47,7 +54,7 @@ export class StaticMenu extends Menu {
     }
 
     addOption(width, tint) {
-        let option = new StaticHorizontalMenuOption(this.name + "_root",
+        let option = new StaticHorizontalMenuOption(this.name,
             this._getNextXPosition(width), 0,
             width, tint, "none")
         this.addChild(option)
@@ -125,11 +132,20 @@ export class ButtonMenu extends InteractiveMenu {
     addOption(size, tint, onSelectEventName, isHorizonal=true) {
         let option = new ButtonHorizontalMenuOption(this.name + "_root",
         isHorizonal ? this._getNextXPosition(size) : 0,  // x
-        isHorizonal ? 0 : this._getNextYPosition(),  // y
+        isHorizonal ? this._getYPosition() : this._getNextYPosition(),  // y
         size, tint, "none")
         option.onSelectEventName = onSelectEventName
         this.addChild(option)
         option.subscribe(this)
+        return option
+    }
+
+    addStaticOption(width, tint, isHorizonal=true) {
+        let option = new StaticHorizontalMenuOption(this.name,
+            isHorizonal ? this._getNextXPosition(width) : 0,  // x
+            isHorizonal ? this._getYPosition() : this._getNextYPosition(),  // y
+            width, tint, "none")
+        this.addChild(option)
         return option
     }
 

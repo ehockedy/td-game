@@ -1,7 +1,8 @@
 {
     "rock-thrower": {
         "spriteSheetNum": 0,
-        "displayInfo": "Simple tower that shoots rocks one at a time.",
+        "displayName": "Rock Thrower",
+        "displayInfo": "Launches rocks one at a time",
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
@@ -38,7 +39,8 @@
     },
     "shrapnel-burst": {
         "spriteSheetNum": 1,
-        "displayInfo": "A tasty explosion of shrapnel in all directions.",
+        "displayName": "Shrapnel Burst",
+        "displayInfo": "Blasts shrapnel in all directions",
         "gameData": {
             "seekRange": 2,
             "shootRange": 2,
@@ -75,7 +77,8 @@
     },
     "rock-scatter": {
         "spriteSheetNum": 2,
-        "displayInfo": "Multi-shot! Like three basic towers shoved together.",
+        "displayName": "Rock Scatter",
+        "displayInfo": "Shoots a cluster of rocks",
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
@@ -112,7 +115,8 @@
     },
     "spear-launcher": {
         "spriteSheetNum": 3,
-        "displayInfo": "Launches a sharp spear that pierces through enemies.",
+        "displayName": "Spear Launcher",
+        "displayInfo": "Fires a spear that pierces enemies",
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
@@ -149,7 +153,8 @@
     },
     "sniper": {
         "spriteSheetNum": 4,
-        "displayInfo": "Shoots infrequently, but hurts when it does. Also has a huge range.",
+        "displayName": "Sniper",
+        "displayInfo": "Slow but deadly sniper",
         "gameData": {
             "seekRange": 6,
             "shootRange": 8,
@@ -186,7 +191,8 @@
     },
     "flamethrower": {
         "spriteSheetNum": 5,
-        "displayInfo": "Continual flames that burn through all enemies in their path",
+        "displayName": "Flamethrower",
+        "displayInfo": "Spews flames across the enemy",
         "gameData": {
             "seekRange": 3,
             "shootRange": 4,
@@ -223,7 +229,8 @@
     },
     "buzzsaw": {
         "spriteSheetNum": 6,
-        "displayInfo": "Lethal buzzsaw that slices through anything in its reach",
+        "displayName": "Buzzsaw",
+        "displayInfo": "Deadly buzzsaw that slices through all",
         "gameData": {
             "seekRange": 1.5,
             "shootRange": 1.5,

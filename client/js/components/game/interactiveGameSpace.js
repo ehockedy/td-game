@@ -89,7 +89,19 @@ export class InteractiveGameSpace extends BaseComponent {
         // If was dragging and let go of the tower
         // If over map, it stays where it is, else reset the position
         this.on("releaseTower", (tower)=>{
-            tower.showPlaceTowerButtons(tower.col == this.map.cols - 1)   // filp if in final col
+            if (this.towersComponent.towerConfig) {
+                tower.setTowerInfo(this.towersComponent.towerConfig[tower.type])
+            }
+
+            const flipY = tower.col > Math.round((this.map.cols - 1) * 0.66) // flip if in final third
+            let offsetY = 0
+            if (tower.row == 0) {
+                offsetY = 1
+            }
+            else if (tower.row == this.map.rows - 1 || tower.row == this.map.rows - 2) {
+                offsetY = -1
+            }
+            tower.showPlaceTowerButtons(flipY, offsetY)   
             if (tower.y > this.towerMenu.height_px - this.towerMenu.height_menu_px) {
                 tower.reset()
             }
