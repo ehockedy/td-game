@@ -1,7 +1,7 @@
 import React from "react";
 import { GameRenderer} from "./game.js"
 import { SpriteHandler } from "../sprite_handler.js"
-import { EndGameModal } from "../components/game/endScreens/endGameModal.js"
+import { EndGameScreen } from "../components/game/endScreens/endGameModal.js"
 import "../../css/game.css"
 
 export class Game extends React.Component {
@@ -9,7 +9,27 @@ export class Game extends React.Component {
         super(props)
         this.state = {
             gameState : "active",
-            playerState: [],  // Holds game info such as money and score, is not updated regularly though - only when gameState
+            playerState: [
+            //     {
+            //     id: 'test1',
+            //     points: 123234,
+            //     money: 234
+            // },
+            // {
+            //     id: 'test2',
+            //     points: 555,
+            //     money: 55
+            // },{
+            //     id: 'test3',
+            //     points: 123234,
+            //     money: 234
+            // },
+            // {
+            //     id: 'test4',
+            //     points: 555,
+            //     money: 55
+            // }
+            ],  // Holds game info such as money and score, is not updated regularly though - only when gameState
             width_px: this.props.config.APP_WIDTH,
             height_px: this.props.config.APP_HEIGHT,
             globalResizeMultiplier: 1,
@@ -146,7 +166,7 @@ export class Game extends React.Component {
                 </div>
                 <canvas id="gameCanvas" style={{width: this.state.width_px + "px", height:this.state.height_px + "px"}}/>
                 { this.state.gameState != "active" &&
-                    <EndGameModal gameState={this.state.gameState} scale={this.state.globalResizeMultiplier} playerConfig={this.props.players} playerState={this.state.playerState} returnToMainMenuFn={this.props.returnToMainMenuFn}/>
+                    <EndGameScreen gameState={this.state.gameState} scale={this.state.globalResizeMultiplier} playerConfig={this.props.players} playerState={this.state.playerState} returnToMainMenuFn={this.props.returnToMainMenuFn}/>
                 }
             </div>
         )

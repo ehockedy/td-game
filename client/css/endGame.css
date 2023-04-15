@@ -1,6 +1,6 @@
 .end-game-modal-background {
-    display: inline-block;
-    position: absolute;
+    /* display: inline-block; */
+    /* position: absolute; */
     background-image: url("../assets/infoBoxes/metalBox.png");
     background-size: contain;
     background-repeat: no-repeat;
@@ -32,12 +32,12 @@
 /* These text colours must come before the other header text properties */
 .victory-text {
     background: -webkit-linear-gradient(#fcfbb6, #e6a80a);
-    transform: translateX(-50%);
+    /* transform: translateX(-50%); */
 }
 
 .defeat-text {
     background: -webkit-linear-gradient(#6c17a5, #af270f);
-    transform: translateX(-50%);
+    /* transform: translateX(-50%); */
 }
 
 .shadow-text {
@@ -62,10 +62,7 @@
     line-height: 0.8;
 }
 
-.nameDisplay{
-    transform: skewX(-15deg);
-    display: inline-block;
-}
+
 
 .first {
     background: -webkit-linear-gradient(#fcfbb6, #e6a80a);
@@ -85,10 +82,109 @@
 
 .finalScoreTextColour {
     color: #333333;
+    font-size: 40px;
 }
 
 .finalScoreValueColour {
     background: -webkit-linear-gradient(#fcfbb6, #e6a80a);
+    font-size: 64px;
+}
+
+@media only screen and (max-width: 768px) {
+    .finalScoreTextColour {
+        font-size: 32px;
+    }
+    .finalScoreValueColour {
+        font-size: 48px;
+    }
+}
+
+
+.finalScoreContainer {
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+.returnToMenuButton {
+    margin-top: 20%;
+    right: 80%;
+}
+
+/* End game screen */
+@keyframes fadeOut {
+    0% {
+        background-color: #bbbbbb00;
+    }
+    100% {
+        background-color: #bbbbbbbb;
+    }
+  }
+
+.endGameBackground {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow-y: auto;
+
+    animation: 1s linear 0s 1 forwards fadeOut;
+}
+
+.endGameScrollableContainer {
+    width: 100%;
+    height: 100%;
+    margin: 0 16px;
+    display: grid;
+    justify-content: center;
+}
+
+.endGameContentContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .endGameContentContainer {
+        width: 100%;
+        margin: 16px auto;
+
+    }
+}
+
+.endGameTitle {
+    font-size: 72px;
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter: drop-shadow(0px 4px #000);
+    margin-bottom: 32px;
+}
+
+.endGameSummary {
+    font-size: 24px;
+    text-align: justify;
+    line-height: 90%;
+    color: #333;
+    margin-bottom: 32px;
+}
+
+@media only screen and (max-width: 768px) {
+    .endGameTitle {
+        font-size: 56px;
+    }
+    .endGameSummary {
+        font-size: 20px;
+    }
 }
 
 .scoreGradientText {
@@ -102,15 +198,50 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: -2%;
+    font-size: 28px;
+    margin-bottom: 24px;
 }
 
-.finalScoreContainer {
-    flex-direction: column;
-    margin-top: 5%;
+.firstContainer {
+    font-size: 48px;
 }
 
-.returnToMenuButton {
-    margin-top: 20%;
-    right: 80%;
+.nameDisplay{
+    transform: skewX(-15deg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 24px;
+    width: 300px;
+}
+
+.firstContainer .nameDisplay {
+    width: 400px;
+}
+@media only screen and (max-width: 768px) {
+    .scoreContainer {
+        font-size: 22px;
+    }
+    .firstContainer {
+        font-size: 36px;
+    }
+    .nameDisplay {
+        width: 180px;
+    }
+    .firstContainer .nameDisplay {
+        width: 240px;
+    }
+}
+
+.endGameMenuButton {
+    font-size: 28px;
+    align-self: flex-end;
+    margin-top: 32px;
+    margin-bottom: 24px;
+}
+
+@media only screen and (max-width: 768px) {
+    .endGameMenuButton {
+        font-size: 22px;
+    }
 }
