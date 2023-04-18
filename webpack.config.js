@@ -28,7 +28,8 @@ module.exports = {
     mode: 'development',
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'index.html'
+            template: 'index.html',
+            favicon: './client/assets/favicon.png',
         }),
         new webpack.ProvidePlugin({
             React: "react",
