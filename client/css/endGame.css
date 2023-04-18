@@ -1,21 +1,3 @@
-.end-game-modal-background {
-    /* display: inline-block; */
-    /* position: absolute; */
-    background-image: url("../assets/infoBoxes/metalBox.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100%;
-    width: 100%;
-}
-
-.end-game-modal-content {
-    margin: 0 auto;
-    text-align: justify;
-    width: 55%;
-    position: relative;
-}
-
 .slide-up-animation {
     animation: grow 1s forwards;
     -webkit-animation: grow 1s forwards;
@@ -43,18 +25,6 @@
 .shadow-text {
     background: -webkit-linear-gradient(#222222, #222222);
     transform: translate(-50%, 3%);
-}
-
-.end-game-modal-header-text {
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    position: absolute;
-    left: 50%;
-}
-
-.end-game-modal-text-container {
-    position: relative;
 }
 
 .game-summary-text {

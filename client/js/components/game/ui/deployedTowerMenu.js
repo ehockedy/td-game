@@ -179,12 +179,15 @@ class DeployedTowerSellMenu extends BigButtonMenu {
         this.yesOption.addText(text, 0.5, 0.3, 'confirm')
         this.yesOption.addText(price, 0.5, 0.66, 'price')
 
+        this.currentSellPrice = 0
     }
 
     // Update just the contents of the info created in populateWithTowerInfo to ensure kill stats is up to date
     updateTowerInfo(tower) {
-        this.yesOption.updateTextByName('price', `${tower.sellPrice}`)
-        this.yesOption.autofitTextSize()
+        if (this.currentSellPrice !== tower.sellPrice) {
+            this.yesOption.updateTextByName('price', `${tower.sellPrice}`)
+            this.yesOption.autofitTextSize()
+        }
     }
 }
 

@@ -47,9 +47,3 @@ Next:
 Bugs:
  - disconnecting client after no activity - I think only in menus?
  - main menu wait, game times out, press start game, user cannot chsnge namee
-
-
-Mobile:
- - cancel tower menu and place tower confirm/cancel button sizes
- - end game screen
- - see price of tower/info about it

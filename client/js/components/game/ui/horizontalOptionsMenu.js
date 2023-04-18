@@ -205,8 +205,6 @@ export class SwitchMenu extends InteractiveMenu {
         // this means the buttons do not need any subscribers other than this menu
         // It also means the menu can have control over the switches when one is pressed
         this.on("selected", (option) => {
-            if (this.selected) this.selected.unsetActive()
-            this.selected = option
             this.observers.forEach((observer) => { observer.emit(option.onSelectEventName) })
         })
     }
