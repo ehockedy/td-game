@@ -152,7 +152,7 @@ export class Game extends React.Component {
         return (
             <div className="game-canvas" ref={this.gameContainerRef} >
                 <div
-                    className={`game-options ${this.state.isFullscreen ? 'fullscreen' : ''}`}
+                    className={`game-options noselect ${this.state.isFullscreen ? 'fullscreen' : ''}`}
                     ref={this.menuRef}
                     style={{width: this.state.width_px + "px"}}
                 >
