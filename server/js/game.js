@@ -527,13 +527,14 @@ class Game {
                 "name": t.name,
                 "type": t.type,
                 "stats": t.stats,
+                "sellPrice": t.sellPrice,
             }
             objects.push(updateData)
             hash.update(
                 t.sellPrice.toString() 
                 + t.name
                 + t.type
-                + t.aim
+                + t.state.aimBehaviour
                 + t.stats.kills
             )
             t.getPurchasedUpgrades().forEach((upgrade) => {

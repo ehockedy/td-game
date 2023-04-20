@@ -110,7 +110,9 @@ class Tower {
         this.level += 1
         this.upgrades[type].purchased = true
         this.purchased.push(type)
-        return this.upgrades[type].cost
+        const upgradeCost = this.upgrades[type].cost
+        this.sellPrice += Math.floor(upgradeCost / 2)
+        return upgradeCost
     }
 
     registerKill() {
