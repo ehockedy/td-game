@@ -91,6 +91,11 @@ class DeployedTowerMainMenu extends ButtonMenu {
         this.subMenus.get('sell').updateTowerInfo(towerUpdate)
     }
 
+    resetMenu() {
+        this.nameAndLevel.text = ''
+        this.kills.text = ''
+    }
+
     close() {
         for (let menuObject of this.subMenus.values()) {
             menuObject.visible = false
@@ -222,25 +227,18 @@ class DeployedTowerUpgradeOptionsMenu extends BigButtonMenu {
     }
 
     updateTowerInfo(upgradeState, towerType, playerMoney) {
-        const updateText = this.prevTowerType != towerType
         this.prevTowerType = towerType
 
         let upgradeIdx = 0
         for (const [upgradeType, {description, description_long, cost, purchased}] of Object.entries(upgradeState)) {
             let option = this.options[upgradeIdx]
-            // Change in tower type, update the displayed text - don't do every time to save processing
-            // TODO fix this
-            // if (updateText) {
-                option.updateTextByName('title', description.toUpperCase())
-                option.updateTextByName('description', description_long)
-                option.updateTextByName('cost', purchased ? "PURCHASED" : `Cost: ${cost}`)
-                option.setParams({
-                    "type": upgradeType
-                })
-            // }
-            if (purchased){
-                option.disableClickAndPush()
-            } else if (playerMoney < cost) {
+            option.updateTextByName('title', description.toUpperCase())
+            option.updateTextByName('description', description_long)
+            option.updateTextByName('cost', purchased ? "PURCHASED" : `Cost: ${cost}`)
+            option.setParams({
+                "type": upgradeType
+            })
+            if (purchased || playerMoney < cost) {
                 option.disableClick()
             } else {
                 option.enableClick()
@@ -294,9 +292,12 @@ export class DeployedTowerMenu extends BaseComponent {
     }
 
     updateTowerInfo(towerUpdate, activeTower, playerMoney, towerDisplayName) {
-        // TODO use hash to prevent continuous update
         // Live updates of the towers state
         this.mainMenu.updateTowerInfo(towerUpdate, activeTower, playerMoney, towerDisplayName)
+    }
+
+    resetMenu() {
+        this.mainMenu.resetMenu()
     }
 
     setSelectedTower(tower) {

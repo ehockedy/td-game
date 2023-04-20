@@ -32,6 +32,8 @@ export class InteractiveGameSpace extends BaseComponent {
         this.deployedTowerMainMenu.subscribe(this)
 
         this.draggableTowerIsActive = false  // Whether a tower from the tower menu is being dragged around
+
+        this.towersInfoHash = ''
     }
 
     // Assign all the actions that are triggered by interaction with the sub components
@@ -116,6 +118,7 @@ export class InteractiveGameSpace extends BaseComponent {
             this.deployedTowerMainMenu.setSelectedTower(tower)
             tower.setActive()
             this.activeTower = tower  // This is the tower currently being interacted with
+            this.towersInfoHash = ''  // Reset to that towers info is forced to update
         })
 
         this.on("clickOffDeployedTower", (tower) => {
@@ -123,6 +126,7 @@ export class InteractiveGameSpace extends BaseComponent {
             this.deployedTowerMainMenu.hide()
             tower.unsetActive()
             this.activeTower = undefined
+            this.deployedTowerMainMenu.resetMenu()
         })
 
         this.on("resetTower", (tower) => {
@@ -139,7 +143,7 @@ export class InteractiveGameSpace extends BaseComponent {
 
     updateTowers(towers, playerMoney) {
         // Get updates from the server so info displayed on the tower menu can be up to date
-        if (this.activeTower) {
+        if (this.activeTower && this.towersInfoHash != towers['hash']) {
             towers["objects"].forEach((tower) => {
                 if (tower.name == this.activeTower.name) {
                     this.deployedTowerMainMenu.updateTowerInfo(
@@ -150,6 +154,7 @@ export class InteractiveGameSpace extends BaseComponent {
                     )
                 }
             })
+            this.towersInfoHash = towers['hash']
         }
     }
 }

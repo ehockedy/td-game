@@ -490,6 +490,8 @@ class Game {
         }
     }
 
+    // Returns state of each tower. This data is stored in each tower object on the client
+    // So player can see the data when selecting different towers.
     getGameStateTowers() {
         let objects = []
         let hash = crypto.createHash("sha256")
@@ -502,13 +504,41 @@ class Game {
                 "type": t.type,
                 "stats": t.stats,
                 "hasShot": t.hasShot,
-                "level": t.level,
                 "aim": t.state.aimBehaviour,
                 "sellPrice": t.sellPrice,
                 "upgrades": t.getPurchasedUpgrades(),
                 "range": t.state.seekRange,
             })
             hash.update(t.name)
+        })
+        return {
+            "hash": hash.digest("hex"),
+            "objects": objects
+        }
+    }
+
+    getGameStateTowersInfo() {
+        // Creates a hash of the data about all the towers
+        // Prevent unecessary updates of tower info on the UI
+        let objects = []
+        let hash = crypto.createHash("sha256")
+        this.towers.forEach((t) => {
+            const updateData = {
+                "name": t.name,
+                "type": t.type,
+                "stats": t.stats,
+            }
+            objects.push(updateData)
+            hash.update(
+                t.sellPrice.toString() 
+                + t.name
+                + t.type
+                + t.aim
+                + t.stats.kills
+            )
+            t.getPurchasedUpgrades().forEach((upgrade) => {
+                hash.update(upgrade)
+            })
         })
         return {
             "hash": hash.digest("hex"),
@@ -568,6 +598,7 @@ class Game {
         let state = {}
         state.players = this.getGameStatePlayers()
         state.towers = this.getGameStateTowers()
+        state.towersInfo = this.getGameStateTowersInfo()
         state.worldState = this.getGameStateWorld()
         if (this.roundActive) {
             state.bullets = this.getGameStateBullets()

@@ -328,6 +328,7 @@ export class ButtonHorizontalMenuOption extends HorizontalMenuOption {
     enableClick() {
         if (!this.clickEnabled) {
             this._resetColour()
+            this._release()
             this.clickEnabled = true
             this.menuSprite.buttonMode = true
         }
