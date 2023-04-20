@@ -5,7 +5,7 @@ export class PlaceTowerMenu extends ButtonMenu {  // TODO make this not a buton 
     constructor(x, y) {
         super("placeTowerMenu", x, y, "right", 5)
 
-        this.towerInfo = this.addStaticOption(600, COLOURS.INFO_LIGHT_GREY, true)
+        this.towerInfo = this.addStaticOption(640, COLOURS.INFO_LIGHT_GREY, true)
         const infoStyle = plainTextStyle(COLOURS.BLACK, 30)
         this.towerInfo.addText(new PIXI.Text('', infoStyle), 0.07, 0.0, 'name')
         this.towerInfo.addText(new PIXI.Text('', infoStyle), 0.07, 0.45, 'description')

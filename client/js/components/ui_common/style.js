@@ -5,7 +5,7 @@ function generateBaseTextStyle(tint, fontSize=64) {
         "fontSize": fontSize,
         "fontFamily": "Turtles",
         "fontVariant": "small-caps",
-        "letterSpacing": 0,
+        "letterSpacing": 1,
         "lineHeight" : Math.floor(fontSize*0.8),
         "padding": 5,
     }

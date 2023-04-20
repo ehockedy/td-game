@@ -2,7 +2,7 @@ import { BigSwitchMenu, ButtonMenu, BigButtonMenu } from "./horizontalOptionsMen
 import { BaseComponent } from "../base/baseComponent.js"
 import { boldTextStyle, plainTextStyle, COLOURS } from "../../ui_common/style.js"
 
-const buttonFontSize = 40
+const buttonFontSize = 39
 const optionButtonWidth = 260
 
 class DeployedTowerMainMenu extends ButtonMenu {
@@ -123,7 +123,7 @@ function createAimOptionText(option, titleText, descriptionText, optionName) {
 class DeployedTowerAimMenu extends BigSwitchMenu {
     constructor(x, y) {
         super("deployedTowerAimMenu", x, y, "right", 10)
-        const buttonWidth = optionButtonWidth - 10
+        const buttonWidth = optionButtonWidth - 5
         // Aim at the emeny closest to the end of the track and in range
         this.firstOption = this.addOption(buttonWidth, COLOURS.AIM_RED, "selected-aim-first", true, false)
         createAimOptionText(this.firstOption, 'FIRST', 'Aim at the enemy closest to the end and in range', 'first')
