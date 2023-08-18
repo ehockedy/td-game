@@ -1,0 +1,8 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /opt/dokv
+hooks:
+  ApplicationStart:
+    - location: scripts/start_server.sh
