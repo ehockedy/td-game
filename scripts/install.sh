@@ -16,4 +16,5 @@ swapon /swapfile
 echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 
 # install dependencies
+npm ci
 npm install
