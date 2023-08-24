@@ -1,3 +1,4 @@
+#!/bin/bash
 # Setup for server to run DOKV on nano EC2 instance
 
 # Install node

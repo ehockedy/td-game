@@ -15,25 +15,14 @@ game screen, with a new, different game code.
 Remove any decorations on map that are below a tower when the tower is placed.
 Use volatile events for server -> client state updates - if miss one no need to buffer as just need the latest update
 
-Other towers:
- - support ones like money/points booster if enemy killed in its range?
- - slow
- - machine gun
-
 Main features:
- - game over/victory screen - React overlaid on canvas
  - specific enemy distribution per round
  - save game behaviour
  - player leaves game behaviour
- - game stats/graph
- - upgrades
  - different modes
     - survival - no individual points, just team with set number of lives
     - competitive - each player has points, no lives
     - competitive survival - each player gets indivdual points, and team lives
-
-Enemies:
- - golden beetle
 
 Next:
  - mark maps as easy/medium/hard
@@ -43,7 +32,23 @@ Next:
  - tidy session addSocket function, and make it so does not actually add socket if not valid player etc.
  - do not tidy up games as frequently as currently do - add some length of game
  - dev/prod modew in webpack + AWS deployment
+ - Don't delete game if single player leaves
 
 Bugs:
  - disconnecting client after no activity - I think only in menus?
  - main menu wait, game times out, press start game, user cannot chsnge namee
+
+EC2 initial set up:
+ - https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-linux.html
+ - https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-codecommit.html
+
+EC2 setup TO automate:
+ - yarn install npm
+ - https://repost.aws/knowledge-center/ec2-memory-swap-file - increase to 4gb
+ - npm install
+ - npm start
+ - Access directly at http://3.10.209.134:8000/ - Not HTTPS
+    - double check whether instance port setting is required
+
+to do: try not sending client and server packages
+ - also try prod mode build??
