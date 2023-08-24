@@ -4,5 +4,7 @@ files:
   - source: /
     destination: /opt/dokv
 hooks:
+  AfterInstall:
+    - location: scripts/install.sh
   ApplicationStart:
     - location: scripts/start_server.sh
