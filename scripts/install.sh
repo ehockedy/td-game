@@ -1,10 +1,11 @@
 #!/bin/bash
 # Setup for server to run DOKV on nano EC2 instance
-pwd
-echo EERH
+
+# Navigate to deployment dir
+cd /opt/dokv
+
 # Install node
 yum install npm
-echo $(pwd)
 
 # Allocate 4GB of swap memory. Nano instance has only 0.5GB of RAM, not enough to even withstand the
 # npm package installation.
@@ -18,5 +19,4 @@ swapon /swapfile
 echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 
 # install dependencies
-npm ci
 npm install
