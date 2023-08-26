@@ -1,0 +1,13 @@
+[Unit]
+Description=Service to start and stop Defence of Karragarra Valley application
+After=syslog.target network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/opt/dokv/scripts/start_server.sh
+User=root
+
+[Install]
+WantedBy=multi-user.target
