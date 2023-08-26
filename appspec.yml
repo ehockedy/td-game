@@ -5,6 +5,7 @@ files:
     destination: /opt/dokv
   - source: /scripts/dokv.service
     destination: /etc/systemd/system
+file_exists_behavior: OVERWRITE
 hooks:
   ApplicationStop:
     - location: scripts/stop_service.sh
