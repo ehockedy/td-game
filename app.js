@@ -64,8 +64,9 @@ function createServer() {
   app.use(express.static(path.resolve(__dirname, './')));  // TODO change?
   
   const http_server = http.createServer(app);
-  http_server.listen(8000, () => {
-    console.log('HTTP server listening on ' + getServerListeningPublicAddress() + ':8000');
+  const port = 80
+  http_server.listen(port, () => {
+    console.log('HTTP server listening on ' + getServerListeningPublicAddress() + ':' + port);
   });
   
   // From then on can connect over WebSocket using socket.io client
